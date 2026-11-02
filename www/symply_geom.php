@@ -1,0 +1,44 @@
+
+
+<?php
+
+# IMPORTANT VARIABLES, DIFFERENT FOR EACH PAGE
+	$ptr		= "./"; 		# pointer to the root directory
+	$pagetitle 	= "Welcome to <page name here>"; # title displayed below the banner
+	$menu_level	= "home";		# name of the menu position to be marked
+	$submenu_level	= "";			# name of submenu to be marked, "" (empty string) for item from main menu
+
+# include html formatting, banner and left menu
+
+
+
+?>
+
+
+
+<font size=2 face="Arial" color="#000000" style="font-size:16pt">
+<P>
+<ul>
+<li>
+<a href="https://www.jacobs-university.de/symplecticgeometry">Registration page</a>
+</li>
+
+<li>
+<a href="./workshop_schedule.html">Program</a>
+</li>
+
+<li>
+<a href="./poster3.html">Poster</a>
+</li>
+
+</ul>
+
+</font>
+
+
+<small class="footer">
+<br>
+
+<?php
+	include($ptr."include/latin-footer.inc");
+	?>

@@ -1,0 +1,2460 @@
+\documentclass{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[tbtags]{amsmath}
+\usepackage{amsfonts,amssymb,mathrsfs,amscd}
+\usepackage[all]{xy}
+
+%для подключения графики используются стандартные команды, но кроме файла *.eps
+%необходимо наличие в текущей директории соответствующего файла *.pdf
+%-------------------------------------------------
+\usepackage[hyper]{msb-a}
+\JournalName{МАТЕМАТИЧЕСКИЙ СБОРНИК}
+%\JournalName{}
+%Пустой аргумент приводит к исчезновению всех атрибутов журнала "Математический
+%сборник", файл можно представить в любой другой журнал
+%-------------------------------------------------
+\numberwithin{equation}{section}
+%-------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{propos}{Предложение}
+\newtheorem{corollary}{Следствие}
+%-------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{proof}{Доказательство}\def\theproof{}
+\newtheorem{remark}{Замечание}
+%-------------------------------------------------
+\def\Re{\operatorname{Re}}
+\def\Im{\operatorname{Im}}
+\def\const{\mathrm{const}}
+\def\RR{\mathbb R}
+\def\CC{\mathbb C}
+\def\NN{\mathbb N}
+\def\RS{\mathfrak R}
+\def\bz{\mathbf z}
+\def\sH{\mathscr H}
+\def\HH{\mathscr H}
+\def\mro{\widehat\rho}
+%-------------------------------------------------
+
+
+
+
+\begin{document}
+
+\title{О теореме Барта--Ван де Вена--Тюрина--Сато}
+
+
+\author[I.\,B.~Penkov]{И.\,Б.~Пенков}
+\address{Jacobs University Bremen, Campus Ring 1,\\ 28759 Bremen, Germany}
+\email{i.penkov@jacobs-university.de}
+
+\author[A.\,S.~Tikhomirov]{А.\,С.~Тихомиров}
+\address{Факультет математики, Высшая Школа Экономики\\
+ул. Вавилова, 7, 117312 Москва, Россия}
+\email{astikhomirov@mail.ru}
+
+
+
+\date{08.05.2014}
+\udk{512.723}
+
+
+\maketitle
+
+
+\begin{fulltext}
+
+
+
+
+\begin{abstract}
+Теорема Барта--Ван де Вена--Тюрина--Сато утверждает, что всякое
+векторное расслоение конечного ранга на комплексном 
+проективном инд-пространстве $\mathbf{P}^\infty$ изоморфно прямой сумме
+линейных расслоений. Мы устанавливаем достаточные условия на
+локально полное линейное инд-многообразие $\mathbf{X}$, при которых
+этот же результат выполняется на $\mathbf{X}$. Затем мы описывем
+естественные классы локально полных линейных инд-многообразий,
+для которых выполнены эти условия. 
+
+
+Библиография: 18 названий.
+\end{abstract}
+
+\begin{keywords} 
+инд-многообразие, векторное расслоение.
+\end{keywords}
+
+\markright{О теореме Барта--Ван де Вена--Тюрина--Сато}
+
+\footnotetext[0]{Авторы выражают благодарность за поддержку и гостеприимство
+Математическому Институту Макса Планка в Бонне, где была задумана настоящая статья,
+а также за частичную поддержку Немецкому Исследовательскому Обществу (DFG) через 
+приоритетную программу "Теория представлений"\ (SPP 1388). Второй автор также благодарит
+за частичную поддержку Министерство образования и науки России.}
+
+
+\section{Введение}\label{s1}
+
+Теорема Барта--Ван де Вена--Тюрина--Сато утверждает, что всякое
+векторное расслоение конечного ранга на  комплексном 
+проективном инд-пространстве $\mathbf{P}^\infty$ изоморфно прямой сумме
+линейных расслоений. Для расслоений ранга 2 она была установлена
+В.~Бартом и А.~Ван де Веном в \cite{BV}, а для расслоений конечного ранга
+А. Н. Тюриным в \cite{T} и Е.~Сато в \cite{S1}. Эта тематика  возродилась
+в недавних работах \cite{DP}, \cite{PT1}, \cite{PT2}, где, в частности, изучался случай скрученных инд-грассманианов.
+
+В настоящей статье рассматриваются инд-многообразия
+$\mathbf{X}=\underset{\longrightarrow}\lim\ X_m$, задаваемые цепочками вложений гладких полных алгебраических многообразий
+$$
+X_1\stackrel{\phi_1}{\hookrightarrow}X_2\stackrel{\phi_2}
+{\hookrightarrow}\dots\stackrel{\phi_{m-1}}{\hookrightarrow}X_m
+\stackrel{\phi_m}{\hookrightarrow}\dots.
+$$
+Мы называем такие инд-многообрзия \textit{локально полными}. Локально полное инд-многообразие 
+$\mathbf{X}=\underset{\longrightarrow}\lim\ X_m$ называется \textit{линейным}, если отображение групп Пикара, индуцированное вложениями $\varphi_i$ сюръективно для почти всех значений $i$.
+Наша основная цель - в разумной общности дать достаточные условия
+выполнимости теоремы Барта--Ван де Вена--Тюрина--Сато на локально полном инд-многообразии $\mathbf{X}$.
+
+В линейном случае помимо результатов из 1970-ых гг. и важных результатов Сато \cite{S2},\cite{S3}, в которых он рассматривает случай, когда теорема Барта--Ван де Вена--Тюрина--Сато не выполняется, некоторые недавние результаты принадлежат Донину и Пенкову \cite{DP}. В частности, в \cite{DP} показано, что теорема Барта--Ван де Вена--Тюрина--Сато
+верна для любого линейного прямого предела
+$\mathbf{G}(\infty)=\underset{\longrightarrow}\lim\ G(k_m,\mathbb{C}^{n_m})$, 
+где через
+$G(k_m,\mathbb{C}^{n_m})$ 
+обозначается грассманиан $k_m$-мерных подпространств в
+$\mathbb{C}^{n_m}$, в предположении, что
+$\underset{m\to\infty}\lim k_m=\underset{m\to\infty}\lim(n_m-k_m)=
+\infty$.
+Оказывается, что существует единственный класс изоморфизма таких инд-многообразий. Тем не менее, имеются другие естественные однородные
+инд-многообразия, для которых теорема Барта--Ван де Вена--Тюрина--Сато
+верна, но которые не рассматривались в литературе. Это относится, в
+частности, к линейным прямым пределам изотропных (ортогональных либо
+симплектических) грассманианов, равно как и к прямым произведениям таких прямых пределов. 
+
+По этой причине мы формулируем набор абстрактных условий на на линейное локально полное инд-многообразие $\mathbf{X}$, которые гарантируют выполнение на нем теоремы Барта--Ван де Вена--Тюрина--Сато (коротко:
+теоремы БВТС). Затем мы приводим много примеров инд-многообразий, удовлетворяющих этим достаточным условиям. Интересный новый пример 
+таких инд-многообразий состоит из прямых пределов $\mathbf{Y}$ линейных
+сечений $Y_m$ грассманианов
+$G(k_m,\mathbb{C}^{n_m})$, где
+$\underset{\longrightarrow}\lim\ G(k_m,\mathbb{C}^{n_m})=\mathbf{G}(\infty)$.
+Другой класс инд-многообразий, для которых теорема БВТС верна, представляют некоторые инд-многообразия обобщенных флагов, см. пункт 6.3.
+
+Возможно, существуют более общие условия справедливости теоремы БВТС
+на локально полных инд-многообразиях. Вдобавок, для нелинейных локально полных инд-многообразий, по-видимому, ничего не известно сверх результатов из \cite{PT2}. Поэтому нахождение достаточных условий для
+выполнения теоремы БВТС на произвольном локально полном инд-многообразии остается проблемой на будущее.
+
+
+
+
+\section{Линейные инд-многообразия. Формулировка основного
+результата}\label{linear ind-var}
+
+\subsection{}\label{subsec2.1}
+Основным полем является поле комплексных чисел $\mathbb{C}$. Мы
+используем термин "алгебраическое многообразие" как синоним приведенной нетеровой схемы. Если $E$ есть векторное расслоение
+(или просто векторное пространство), то $E^*$ обозначает двойственное расслоение (или двойственное пространство). Мы пользуемся стандартным обознчением
+$\mathcal{O}_{\mathbb{P}^n}(a)$ 
+для линейного расслоения
+$\mathcal{O}_{\mathbb{P}^n}(-1)^{\otimes-a}$, где
+$\mathcal{O}_{\mathbb{P}^n}(-1)$ есть тавтологическое расслоение на
+комплексном $n$-мерном проективном пространстве $\mathbb{P}^n$.
+
+Напомним, что \textit{инд-многообразие} есть прямой предел
+$\mathbf{X}=\underset{\longrightarrow}\lim X_m$ цепочки морфизмов алгебраических многообразий
+\begin{equation}\label{eq1}
+X_1\stackrel{\phi_1}{\to}X_2\stackrel{\phi_2}{\to}\dots\stackrel{\phi_{m-1}}{\to}X_m
+\stackrel{\phi_m}{\to}X_{m+1}\stackrel{\phi_{m+1}}{\to}\dots\ .
+\end{equation}
+Заметим, что прямой предел цепочки (\ref{eq1}) не меняется, если мы
+заменим последовательность $\{X_m\}_{m\ge1}$ на подпоследовательность $\{X_{i_m}\}_{m\ge1}$, а морфизмы $\phi_m$ на композиции
+$\tilde{\phi}_{i_m}:={\phi}_{i_{m+1}-1}\circ...\circ{\phi}_{i_m+1}\circ{\phi}_{i_m}$.
+
+Пусть $\mathbf{X}$ -- прямой предел цепочки (\ref{eq1}) и $\mathbf{X}'$ -- прямой предел цепочки
+$$
+X'_1\stackrel{\phi'_1}{\to}X'_2\stackrel{\phi'_2}{\to}\dots\stackrel{\phi'_{m-1}}{\to}X'_m\stackrel{\phi'_m}{\to}
+X'_{m+1}\stackrel{\phi'_{m+1}}{\to}\dots\ .
+$$
+\textit{Морфизм инд-многообразий} $\mathbf{f}:\mathbf{X}\to\mathbf{X}'$ -- это отображение из 
+$\mathbf{X}$ в $\mathbf{X}'$, индуцированное совокупностью морфизмов алгебраических многообразий 
+$\{f_m:X_m\to Y_{n_m}\}_{m\ge1}$ таких, что $\tilde{\phi}'_{n_m}\circ f_m=f_{m+1}\circ\phi_m$ для всех $m\ge1$. Тождественный морфизм $\mathrm{id}_\mathbf{X}$ -- это морфизм, который совпадает с тождественным как теоретико-множественное отображение из $\mathbf{X}$ в $\mathbf{X}$.
+Морфизм $\mathbf{f}:\mathbf{X}\to\mathbf{X}'$ называется \textit{изоморфизмом}, если существует морфизм 
+$\mathbf{g}:\mathbf{X}'\to\mathbf{X}$ такой, что $\mathbf{g}\circ\mathbf{f}=\mathrm{id}_\mathbf{X}$ и
+$\mathbf{f}\circ\mathbf{g}=\mathrm{id}_{\mathbf{X}'}$.
+
+В дальнейшем мы рассматриваем лишь такие цепочки (\ref{eq1}), в которых $X_m$ являются полными алгебраическими многообразиями, $\underset{m\to\infty}\lim(\dim X_m)=\infty$, а морфизмы $\phi_m$ 
+-- вложения. Мы называем такие инд-многообразия \textit{локально полными}. Более того, мы называем морфизм 
+$\mathbf{f}:\mathbf{X}=\underset{\to}\lim X_m\to\mathbf{X}'=\underset{\to}\lim X'_m$ 
+локально полных инд-многообразий \textit{вложением}, если все 
+морфизмы $f_m:X_m\to X'_{n_m}$ -- вложения.
+
+
+\textit{Векторное расслоение $\mathbf{E}$ ранга}
+$\mathbf{r}\in\mathbb{Z}_{>0}$ на $\mathbf{X}$ есть обратный предел
+$\underset{\leftarrow}\lim E_m$ обратной системы векторных расслоений
+$E_m$ ранга
+$\mathbf{r}$ на $X_m$, то есть совокупности векторных расслоений $E_m$ с фиксированными изоморфизмами
+$\psi_m: E_m\cong \phi^*_mE_{m+1}$; 
+здесь и ниже $\phi^*$ обозначает обратный образ векторных расслоений
+при морфизме $\phi$. Ясно, что
+$\mathbf{E}|_{X_m}\cong E_m,\ m\ge1$.
+В частности, \textit{структурный пучок} $\mathcal{O}_\mathbf{X}=\underset{\longleftarrow}\lim \mathcal{O}_{X_m}$ инд-многообразия
+$\mathbf{X}$ корректно определен. Под
+\textit{группой Пикара} $\text{Pic}\mathbf{X}$ понимается группа
+классов изоморфизма линейных расслоений на $\mathbf{X}$. Ясно, что $\text{Pic}\mathbf{X}$ есть обратный предел
+$\underset{\longleftarrow}\lim\text{Pic}X_m$ системы гомоморфизмов групп Пикара
+$\{\phi^*_m:\text{Pic}X_{m+1}\to\text{Pic}X_m\}_{m\ge1}$. Всюду ниже
+мы автоматически предполагаем, что все рассматриваемые векторные
+расслоения имеют конечный ранг. Если $\mathbf{E}$ -- векторное
+расслоение на $\mathbf{X}$, то $r\mathbf{E}$ обозначает прямую сумму $\mathbf{E}\oplus...\oplus\mathbf{E}$, то есть прямую сумму $r$ копий расслоения $\mathbf{E}$. Векторное  расслоение $\mathbf{E}$ называется \textit{тривиальным}, если оно изоморфно $\mathbf{r}\mathcal{O}_\mathbf{X},\ \mathbf{r}=\mathrm{rk}\mathbf{E}$.
+
+
+\textit{Линейное инд-многообразие} есть инд-многообразие $\mathbf{X}=\underset{\to}\lim X_m$ такое, что для всех достаточно больших $m\ge1$ индуцированные гомоморфизмы групп Пикара $\phi^*_m:\text{Pic}X_{m+1}\to\text{Pic}X_m$
+являются эпиморфизмами. Типичным примером линейного инд-многообразия
+является \textit{проективное инд-пространство} $\mathbf{P}^{\infty}$, 
+которое есть прямой предел цепочки линейных вложений
+$$
+\mathbb{P}^{n_1}\stackrel{\phi_1}{\hookrightarrow}\mathbb{P}^{n_2}
+\stackrel{\phi_2}{\hookrightarrow}\dots\stackrel
+{\phi_{m-1}}{\hookrightarrow}\mathbb{P}^{n_m}\stackrel{\phi_m}{\hookrightarrow}\dots,
+$$
+для произвольной возрастающей последовательности $\{n_m\}_{m\ge1}$ 
+неотрицательных целых чисел. (Легко видеть, что определение $\mathbf{P}^{\infty}$ не зависит, с точностью до изоморфизма инд-многообразий, от выбора последовательности $\{n_m\}_{m\ge1}$ и вложений $\varphi_m$.)
+Под \textit{проективным инд-подпространством} инд-многообразия
+$\mathbf{X}$ мы понимаем образ вложения
+$\psi:\mathbf{P}^{\infty}\hookrightarrow\mathbf{X}$.
+
+Другим примером линейного инд-многообразия является
+\textit{инд-грассманиан} $\mathbf{G}(\infty)$, 
+который есть прямой предел цепочки линейных вложений
+$$
+G(k_1,\mathbb{C}^{n_1})\stackrel{\phi_1}{\hookrightarrow}G(k_2,\mathbb{C}^{n_2})
+\stackrel{\phi_2}{\hookrightarrow}...\stackrel{\phi_{m-1}}{\hookrightarrow}G(k_m,
+\mathbb{C}^{n_m})\stackrel{\phi_m}{\hookrightarrow}...,
+$$
+где $G(k_m,\mathbb{C}^{n_m})$ -- грассманиан $k_m$-мерных
+подпространств в $n_m$-мерном векторном пространстве и
+$\underset{m\to\infty}\lim k_m=\underset{m\to\infty}\lim(n_m-k_m)=\infty$.
+
+
+
+\subsection{}\label{subsec2.2}
+Пусть $\mathbf{X}=\underset{\to}\lim X_m$ -- линейное инд-многообразие
+такое, что существует конечное или счетное множество $\Theta_{\bf X}$ и совокупность
+$\{{\bf L}_i=\underset{\leftarrow}\lim L_{im}\}_{i\in\Theta_{\bf X}}$
+нетривиальных линейных расслоений на ${\bf X}$ таких, что для любого $m$ имеем
+изоморфизмы $L_{im}\simeq\mathcal{O}_{X_m}$ для всех, кроме конечного
+числа индексов $i_1(m),...,i_{j(m)}(m)$, и образы расслоений 
+$L_{i_1(m)m},...,L_{i_{j(m)}(m)m}$ в Pic$X_m$ образуют базис группы 
+$\mathrm{Pic}X_m$, которая по предположению является свободной абелевой группой. Ясно, что в этом случае группа 
+$\mathrm{Pic}{\bf X}$ изоморфна прямому произведению бесконечных циклических групп с образующими -- образами расслоений ${\bf L}_i$. 
+Обозначим через
+$\underset{i\in\Theta_{\bf X}}\otimes\mathbf{L}_i^{\otimes a_i}$
+линейное расслоение на $\mathbf{X}$, ограничение которого на $X_m$ равно
+$\otimes_iL_{im}^{\otimes a_i}=L_{i_1(m)m}^{\otimes a_1}\otimes...\otimes L_{i_{j(m)}(m)m}^{\otimes a_{j(m)}}$.
+Будем говорить, что 
+$\mathbf{X}$ \textit{удовлетворяет свойству} Л, если вдобавок к 
+предыдущему условию
+$H^1(X_m,\otimes_iL^{\otimes a_i}_{im})=0$ для всех $m\ge1$ и хотя бы одного отрицательного $a_i$.
+
+Пусть $\mathbf{X}$ удовлетворяет свойству Л. Для данного
+$i\in\Theta_{\bf X}$ гладкая рациональная кривая
+$C\simeq\mathbb{P}^1$ в $\mathbf{X}$ называется
+\textit{проективной прямой i-го семейства на} $\mathbf{X}$ (или, просто, \textit{прямой i-го семейства}), если
+\begin{equation}\label{Li|Pj}
+\mathbf{L}_j|_C\cong\mathcal{O}_{\mathbb{P}^1}(\delta_{ij})\ \ \ for\  \ \ j\in\Theta_{\bf X}.
+\end{equation}
+%\subseteq
+Через $\mathbf{B}_i$ мы обозначаем множество всех
+проективных прямых i-го семейства на $\mathbf{X}$. Оно
+имеет естественную структуру инд-многообразия:
+$\mathbf{B}_i=\underset{\to}\lim B_{im}$, где
+$B_{im}:=\{C\in\mathbf{B}_i\ |\ C\subset X_m\}$ для $m\ge 1.$ Для любой точки $x\in\mathbf{X}$
+подмножество 
+$\mathbf{B}_i(x)=\{C\in \mathbf{B}_i\ |\ C\ni x\}$
+наследует индуцированную структуру инд-многообразия.
+
+Предположим, что $\mathbf{X}$ удовлетворяет свойству Л. 
+В этом случае будем говорить, что $\mathbf{X}$ \textit{удовлетворяет свойству} A, если для любого 
+$i\in\Theta_{\bf X}$
+существует инд-многообразие $\mathbf{\Pi}_i$,
+являющееся прямым пределом цепочки вложений
+$\{...\overset{\pi_{i,m-1}}\hookrightarrow\Pi_{im}
+\overset{\pi_{im}}\hookrightarrow\Pi_{i,m+1}
+\overset{\pi_{i,m+1}}\hookrightarrow...\}$,
+где точки многообразия 
+$\Pi_{im}$ - проективные подпространства $\mathbb{P}^{n_m}$ в $B_{im}$ вместе с линейными вложениями
+$\mathbb{P}^{n_m}\hookrightarrow\mathbb{P}^{n_{m+1}}={\pi_{im}}(\mathbb{P}^{n_m})$, индуцированными вложениями $B_{im}\hookrightarrow B_{i,m+1}$, так что каждая точка в $\mathbf{\Pi}_i$ является проективным инд-подпространством
+$\mathbf{P}^\infty=\underset{\to}\lim\mathbb{P}^{n_m}$ в $\mathbf{B}_i$,
+и для любого $x\in\mathbf{X}$ выполнены следующие условия:
+
+(A.i) для любого $m\ge1$ такого, что $x\in X_m$, каждый нетривиальный пучок $L_{im}$ определяет морфизм
+$\psi_{im}:X_m\to\mathbb{P}^{r_{im}}:=\mathbb{P}(H^0(X_m,L_{im})^*)$, отображающий семейство прямых $B_{im}(x)$ 
+изоморфно на подсемейство прямых в $\mathbb{P}^{r_{im}}$, 
+проходящих через точку $\psi_{im}(x)$;
+
+(A.ii) многообразие
+${\Pi}_{im}(x):=\{\mathbb{P}^{n_m}\in{\Pi}_{im}\ |\ \mathbb{P}^{n_m}\subset B_{im}(x)\}$
+связно для любого $m\ge 1;$
+
+(A.iii) проективные инд-подпространства
+$\mathbf{P}^\infty\in\mathbf{\Pi}_i(x):=\underset{\to}
+\lim\Pi_{im}(x)$ заметают $\mathbf{B}_i(x)$;
+
+(A.iv) для любого $d\in\mathbb{Z}_{\ge1}$ существует
+$m_0(d)\in\mathbb{Z}_{\ge1}$ такое, что для любого 
+$d$-мерного многообразия $Y$ и любого $m\ge m_0(d)$
+всякий морфизм $\Pi_{im}(x)\to Y$ есть постоянное
+отображение.\\
+В частности, из (A.ii) и (A.iii) следует, что многообразия
+$\Pi_{im},$ $B_{im},$ $B_{im}(x)$ связны.
+
+Пусть $\mathbf{X}$ удовлетворяют вышеуказанным свойствам Л и A. Векторное расслоение $\mathbf{E}$ на
+$\mathbf{X}$ называется 
+$\mathbf{B}_i$-\textit{равномерным}, если для любой
+проективной прямой
+$\mathbb{P}^1\in \mathbf{B}_i$ on $\mathbf{X}$, 
+ограниченное расслоение
+$\mathbf{E}|_{\mathbb{P}^1}$
+изоморфно
+$\oplus_{j=1}^{\mathrm{rk}\mathbf{E}}
+\mathcal{O}_{\mathbb{P}^1}(k_j)$
+для некоторых целых чисел $k_j$, не зависящих от выбора прямой $\mathbb{P}^1.$
+Если вдобавок все $k_j=0$, то $\mathbf{E}$ называется $\mathbf{B}_i$-\textit{линейно тривиальным}. Мы называем
+$\mathbf{E}$ \textit{равномерным} (соответственно, \textit{линейно тривиальным}), если оно является
+$\mathbf{B}_i$-равномерным (соответственно, $\mathbf{B}_i$-линейно тривиальным) для любого
+$i\in\Theta_{\mathbf{X}}$. Более того, будем говорить, что
+$\mathbf{X}$ {\it удовлетворяют свойству} T, любое линейно
+тривиальное расслоение на $\mathbf{X}$ тривиально.
+
+Наша общая версия теоремы БВТС такова.
+
+\begin{theorem}\label{E on linear X}
+Пусть $\mathbf{E}$ -- векторное расслоение на линейном
+инд-многообразии $\mathbf{X}$.
+
+(i) Если $\mathbf{X}$ удовлетворяет свойствам \rm{Л} и \rm{A} для некоторых фиксированных линейных расслоений
+$\{\mathbf{L}_i\}_{i\in\Theta_{\mathbf{X}}}$ и
+соответствующих семейств
+$\{\mathbf{B}_i\}_{i\in\Theta_{\mathbf{X}}}$ 
+проективных прямых на ${\mathbf{X}}$,
+то $\mathbf{E}$ обладает фильтрацией векторными подрасслоениями
+\begin{equation}\label{filtration0}
+0=\mathbf{E}_0\subset\mathbf{E}_1\subset...\subset\mathbf{E}_t=\mathbf{E}
+\end{equation}
+с равномерными соответствующими факторами
+$\mathbf{E}_k/\mathbf{E}_{k-1}$, $k=1,...,t.$
+
+(ii) Если вдобавок $\mathbf{X}$ удовлетворяет свойству
+T, то фильтрация (\ref{filtration0}) расщепляется, и ее 
+факторы имеют вид
+$$
+\mathbf{E}_k/\mathbf{E}_{k-1}\cong\mathrm{rk}(\mathbf{E}_k/\mathbf{E}_{k-1})
+(\underset{i\in\Theta_{\mathbf{X}}}\bigotimes\mathbf{L}_i^{\otimes a_{ik}}),
+\ \ \ \ a_{ik}\in\mathbb{Z},\ i\in\Theta_{\mathbf{X}},\ 1\le k\le t.
+$$
+В частности, $\mathbf{E}$ изоморфно прямой сумме линейных
+расслоений.
+\end{theorem}
+
+\vspace{1cm}
+
+
+
+\section{Доказательство основной теоремы}\label{sec2}
+\vspace{1cm}
+
+
+\subsection{Предварительные результаты о векторных расслоениях}\label{prelim}
+
+Если $C\subset X$ -- гладкая неприводимая рациональная кривая в алгебраическом многообразии $X$ и $E$ --векторное расслоение на $X$, то согласно классической теореме, часто приписываемой Гротендику,
+$\displaystyle E|_C$ is изоморфно $\bigoplus_i\mathcal{O}_C(\delta_i)$ для некоторых
+$\delta_1\geq \delta_2\geq...\geq \delta_{\mathrm{rk} E}$. 
+Мы называем упорядоченный набор $\mathrm{rk}E$ чисел
+$(\delta_1,...,\delta_{\mathrm{rk} E})$ \textit{типом расщепления} расслоения $E|_C$ и обозначаем его
+$\mathrm{Split}(E|_C)$. Мы упорядочиваем типы расщепления лексикографически, то есть
+$(\delta_1,...,\delta_{\mathrm{rk} E})>(\delta'_1,...,\delta'_{\mathrm{rk} E})$, если
+$\delta_1=\delta'_1,...,\delta_{k-1}=\delta'_{k-1},$ $ \delta_k>\delta'_k$ для некоторого
+$k,\ 1\le k\le\mathrm{rk} E$.
+
+
+Пусть $\mathbf{X}$ еть локально полное линейное инд-многообразие, удовлетворяющее свойствам Л и A, и пусть $x\in\mathbf{X}$ и $i\in\Theta_{\mathbf{X}}$. В обозначениях (A.i) пусть
+$\mathbb{P}^{r_{im}}=\mathbb{P}(H^0(X_m,L_{im})^*)$ и
+$y=\psi_{im}(x)=\mathbb{C}u,\ 0\ne u\in H^0(X_m,L_{im})^*$, 
+так что
+$B_{im}(x)\subset\mathbb{P}^{r_{im}-1}_y:=
+\mathbb{P}(H^0(X_m,L_{im})^*/\mathbb{C}u)$.
+Зафиксируем проективное подпространство  $\mathbb{P}^{n_m}\subset B_{im}(x)$, где
+$\mathbb{P}^{n_m}\in\Pi_{im}(x)$.
+Тогда
+$\mathcal{O}_{\mathbb{P}(H^0(X_m,
+L_{im})^*/\mathbb{C}u)}(1)|_{\mathbb{P}^{n_m}}\simeq
+\mathcal{O}_{\mathbb{P}^{n_m}}(N(i))$
+для некоторого $N(i)>0$. Рассмотрим локально замкнутое подмногообразие
+$Y_m:=\{(z,l)\in\mathbb{P}^{r_{im}}\times\mathbb{P}^{n_m}|z\in l\setminus\{y\}\}$ в
+$\mathbb{P}^{r_{im}}\times\mathbb{P}^{n_m}$, и пусть
+$Y_m\hookrightarrow\mathbb{P}^{r_{im}}$ --
+вложение, индуцированное проекцией
+$\mathbb{P}^{r_{im}}\times\mathbb{P}^{n_m}\to\mathbb{P}^{r_{im}}$.
+Тогда $Y_m$ изоморфно тотальному пространству линейного расслоения
+$\mathcal{O}_{\mathbb{P}^{n_m}}(N(i))$ (см., например, \cite[приложение B]{F}) и
+\begin{equation}\label{pi*N}
+\mathcal{O}_{\mathbb{P}^{r_{im}}}(1)|_{Y_m}\simeq\pi_m^*\mathcal{O}_{\mathbb{P}^{n_m}}(N(i)),
+\end{equation}
+где $\pi_m:Y_m\to\mathbb{P}^{n_m}$-- естественная проекция.
+Более того, по построению мы имеем коммутативную диаграмму морфизмов
+\begin{equation}\label{diag Sato}
+\xymatrix{
+\overline{Y}_m\ar@{_{(}->}[d] & Y_m\ar@{_{(}->}[d]\ar[l]_-{\tau_m}\ar[r]^-{\pi_m} &
+\mathbb{P}^{n_m}\ar@{_{(}->}[d] \\
+\mathbb{P}^{r_{im}} &
+\tilde{\mathbb{P}}^{r_{im}}\ar[l]_-{\phi_y}\ar[r]^-{\pi_y} &
+\mathbb{P}^{r_{im}-1}_y,}
+\end{equation}
+где $\tau_m:Y_m\hookrightarrow\overline{Y}_m:=Y_m\cup\{y\}$ --
+вложение,
+$\varphi_y:\tilde{\mathbb{P}}^{r_{im}}\to\mathbb{P}^{r_{im}}$ --
+раздутие $\mathbb{P}^{r_{im}}$ с центром в $y$, а
+$\pi_y$  -- естественная проекция, которая является
+$\mathbb{P}^1$-расслоением. Вдобавок имеем открытое вложение
+$$
+\iota_m:Y_m\hookrightarrow\tilde{Y}:=\tilde{\mathbb{P}}^{r_{im}}\times_{\mathbb{P}^{r_{im}-1}_y}\mathbb{P}^{n_m}
+$$
+и проекции
+$\overline{Y}_m\overset{\tilde{\tau}_m}\leftarrow\widetilde{Y}_m\overset{\tilde{\tau}_m}\to\mathbb{P}^{n_m}$
+такие, что
+\begin{equation}\label{iota}
+ \tau_m=\tilde{\tau}_m\circ\iota_m,\ \ \ \pi_m=\tilde{\pi}_m\circ\iota_m.
+\end{equation}
+Ввиду (A.i) $\psi_{im}:\psi_{im}^{-1}(\overline{Y}_m)\to\overline{Y}_m$ 
+является изоморфизмом. Поэтому мы можем рассматривать
+$\mathbf{E}|_{\psi_{im}^{-1}(\overline{Y}_m)}$ 
+как векторное расслоение на $\overline{Y}_m$ и обозначать его 
+$\mathbf{E}|_{\overline{Y}_m}$. Положим также $\mathbf{E}|_{Y_m}:=\tau_m^*(\mathbf{E}|_{\overline{Y}_m})$.
+
+Для произвольной проективной прямой
+$\mathbb{P}^1\subset\mathbb{P}^{n_m}$ рассмотрим поверхность $S=S(x,\mathbb{P}^1):=\pi_y^{-1}(\mathbb{P}^1)$ с естественными
+проекциями $ \pi_S:=\pi_y|_S:S\to\mathbb{P}^1$ и
+$\sigma_S:=\phi_y|_S:S\to\mathbf{X}$. Из (\ref{pi*N}) следует, что $S$ является поверхностью типа $F_{N(i)}$.
+
+Пусть $\mathbf{E}$ -- векторное расслоение ранга $\mathbf{r}$ на $\mathbf{X}.$ Для любого $i\in \Theta_{\mathbf{X}}$ и
+$x\in\mathbf{X}$ положим $C(i):=c_1(\mathbf{E}|_l)\in\mathbb{Z}$, где $c_1$ 
+обозначает первый класс Черна и
+$l\in\mathbf{B}_i(x).$ Поскольку $\mathbf{B}_i(x)$ 
+связно, число $C(i)$ корректно определено. Более того, имеем $\delta_1(\mathbf{E}|_l)\ge C(i)/\mathbf{r}\ge \delta_B(\mathbf{E}|_l)$. 
+Следовательно, корректно определены целые числа
+$$
+\delta_1^{\rm min}:=\underset{l\in\mathbf{B}_i(x)}\min\ \delta_1(\mathbf{E}|_l),\ \ \ \
+\delta_{\mathrm{rk}E}^{\rm max}:=\underset{l\in\mathbf{B}_i(x)}\max\ 
+\delta_{\mathrm{rk}E}(\mathbf{E}|_l),
+$$
+и существуют прямые 
+$l_{\min},l_{\max}\in\mathbf{B}_i(x)$ такие, что
+$\delta_1(\mathbf{E}|_{l_{\min}})=\delta_1^{\min},$
+$\delta_{{\rm rk}E}(\mathbf{E}|_{l_{\max}})=\delta_{{\rm rk}E}^{\max}.$
+Неравенство $C(i)\ge\delta_1^{\min}+(\mathbf{r}-1)\delta_{\mathrm{rk}E}(\mathbf{E}|_{l_{\min}})$ влечет
+\begin{equation}\label{ineq'}
+\delta_1^{\min}-\delta_{\mathrm{rk}E} (\mathbf{E}|_{l_{\min}})\le\delta_1^{\min}-C(i)/
+(\mathbf{r}-1),\ \ \
+\delta_1(\mathbf{E}|_{l_{\max}})-\delta_{\mathrm{rk}E}^{\max}\ge C(i)/(\mathbf{r}-1)-\delta_{\mathrm{rk}E}^{\max}.
+\end{equation}
+
+
+Зафиксируем $\mathbf{P}^{\infty}\in\mathbf{B}_i(x)$ и $l_{\min}\in\mathbf{P}^{\infty}$.
+Для произвольной точки $l_0\in\mathbf{P}^{\infty}\smallsetminus\{l_{\min}\}$
+рассмотрим прямую
+$\mathbb{P}^1=\mathrm{Span}(l_0,l_{\min})$ в $\mathbf{P}^{\infty}$ и соответствующую поверхность
+$S=S(x,\mathbb{P}^1)$ вместе с векторным расслоением
+$E_S:=\sigma_S^*\mathbf{E}$ на $S$.
+Для общей точки $l\in\mathbb{P}^1$ ($l$ -- прямая на 
+$ \mathbf{X}$) из первого неравенства в (\ref{ineq'}) вытекает неравенство
+\begin{equation}\label{ineq1'}
+\delta_{\mathrm{gen}}:=\delta_1(\mathbf{E}|_l)-
+\delta_{\mathrm{rk}E}(\mathbf{E}|_l) \le\delta_1^{\mathrm{ min}}-C(i)/(\mathbf{r}-1).
+\end{equation}
+
+Следующая лемма является прямым следствием результата Тюрина.
+
+\begin{lemma}\label{lemma31}
+Существуют многочлены $P_A$, $P_B\in\mathbb{Q}[x_1,...,x_6]$ 
+такие, что для любой прямой
+$l_0\in\mathbf{P}^{\infty}\smallsetminus\{l_{\min}\}$
+\begin{equation}\label{ineq A}
+\delta_1(\mathbf{E}|_{l_0})\le P_A(\mathbf{r},\delta_1^{\min},C(i),N(i),c_1^2(E_S),c_2(E_S))=:P_A(\mathbf{E},i),
+\end{equation}
+\begin{equation}\label{ineq B}
+\delta_{{\rm rk}E}(\mathbf{E}|_{l_0})\ge P_B(\mathbf{r},\delta_{\mathrm{rk}E}^{\max},C(i),N(i),c_1^2(E_S),c_2(E_S))=:P_B(\mathbf{E},i),
+\end{equation}
+где $c_1^2(E_S)$ и $c_2(E_S)$ 
+понимаются как целые числа.
+\end{lemma}
+
+\begin{proof}
+По построению $S$ является поверхностью типа $F_{N(i)}.$ 
+Следовательно, повторяя для векторного расслоения $E_S$ 
+доказательство леммы 5 из \cite[гл. 2, \S1]{T}
+получаем, что существует многочлен $f\in\mathbb{Q}[x_1,...,x_6]$ такой, что
+$\delta_1(\mathbf{E}|_{l_0})\le f(\mathbf{r},\delta_1^{\min},\delta_{\mathrm{gen}},N(i),c^2_1(E_S),c_2(E_S))$.
+Поэтому ввиду (\ref{ineq1'}) существует многочлен $P_A\in\mathbb{Q}[x_1,...,x_6]$, удовлетворяющий (\ref{ineq A}). Доказательство неравенства (\ref{ineq B}) аналогично.
+\end{proof}
+
+Следующее предложение использует существенным образом результаты Е.Сато.
+Зафиксируем $i\in \Theta_{\mathbf{X}}$, $x\in\mathbf{X}$
+и $\mathbb{P}^{n_m}\in\Pi_{im}(x)$
+для достаточно большого $m$. Ввиду (\ref{ineq A}) 
+существует максимальный (по отношению к лексикографическому упорядочению) тип расщепления
+$S_i(\mathbf{E},\mathbb{P}^{n_m}):=\max\limits_{l\in \mathbb{P}^{n_m}}\mathrm{Split}(\mathbf{E}|_l)$.
+
+
+\begin{propos}\label{proposition3.2}
+Максимальный тип расщепления
+$S_i(\mathbf{E},\mathbb{P}^{n_m})$
+зависит лишь от пары $(\mathbf{E},i)$, то есть $S_i(\mathbf{E},\mathbb{P}^{n_m})$
+не зависит от $x$ и от $\mathbb{P}^{n_m}\in\Pi_{im}(x)$.
+\end{propos}
+
+\begin{proof}
+Положим
+$$
+M_i(\mathbb{P}^{n_m}):=\{l\in\mathbb{P}^{n_m}\ |\ \mathrm{Split}(\mathbf{E}|_l)=S_i(\mathbf{E},\mathbb{P}^{n_m})\}.
+$$
+Из полунепрерывности $\mathrm{Split}(\mathbf{E}|_l)$ следует, что $M_i(\mathbb{P}^{n_m})$ -- замкнутое подмногообразие  в $\mathbb{P}^{n_m}$. Более того, лемма \ref{lemma31} вместе с \cite[гл. 2, \S2, леммы 3 и 4]{T} 
+приводят к неравенству
+\begin{equation}\label{codim A}
+\mathrm{codim}_{\mathbb{P}^{n_m}}M_i(\mathbb{P}^{n_m})\le\mathbf{r}(\mathbf{r}-1)(P_A(\mathbf{E},i)-
+P_B(\mathbf{E},i)).
+\end{equation}
+
+Рассмотрим верхнюю строку диаграммы (\ref{diag Sato}).
+Так как правая часть неравенства (\ref{codim A}) не
+зависит от $m$, для достаточно большого $m$ имеем
+\begin{equation}\label{codim<}
+\mathrm{codim}_{\mathbb{P}^{n_m}}M_i(\mathbb{P}^{n_m})<\min(n_m-\mathbf{r},(n_m-2\mathbf{r}^2)/2).
+\end{equation}
+Ясно также, что для достаточно большого $m$
+\begin{equation}\label{1codim<}
+\mathrm{codim}_{\overline{Y}_m}\{x\}=\mathrm{codim}_{\overline{Y}_m}(\overline{Y}_m\smallsetminus Y_m)>\mathbf{r}.
+\end{equation}
+
+Неравенство (\ref{1codim<}) показывает, что
+\begin{equation}\label{0ck=}
+c_k(\mathbf{E}|_{Y_m})=\tau_m^*c_k(\mathbf{E}|_{\overline{Y}_m}),\ \ \ 0\le k\le\mathbf{r},
+\end{equation}
+где $c_k(\cdot)$ означает $k$-ый класс Черна.
+Более того, поскольку группа Чжоу коразмерности $k$ базы произвольного векторного расслоения изоморфно отображается в группу Чжоу коразмерности $k$ тотального пространства этого расслоения, получаем
+\begin{equation}\label{ck=}
+c_k(\mathbf{E}|_{Y_m})=\pi_m^*(c_kH^k),\ \ 0\le k\le\mathbf{r},
+\end{equation}
+где $H$ есть класс дивизора гиперплоского сечения в $\mathbb{P}^{n_m}$, $c_0=1$, а
+$c_1,...,c_{\mathbf{r}}$ -- целые числа.
+Важно заметить, что из очевидной совместимости морфизмов $\pi_m$ для различных $m$ и функториальности классов Черна
+вытекает, что числа $c_1,...,c_{\mathbf{r}}$ не зависят от 
+$x$ и от $\mathbb{P}^{n_m}\in\Pi_{im}(x)$.
+Отметим также, что из (\ref{pi*N}), (\ref{iota}) и из равенств
+(\ref{0ck=}) и (\ref{ck=}) вытекает 
+\begin{equation}\label{again ck=}
+\begin{split}
+& \iota_m^*c_k(\tilde{\tau}_m^*(\mathbf{E}\otimes
+\mathbf{L}_i^{-a}|_{\overline{Y}_m}))=
+\tau_m^*c_k(\mathbf{E}\otimes
+\mathbf{L}_i^{-a}|_{\overline{Y}_m})=\\
+& c_k(\mathbf{E}|_{Y_m}\otimes
+\pi_m^*\mathcal{O}_{\mathbb{P}^{n_m}}(-N(i)aH)),\ \ \
+0\le k\le\mathbf{r},\ a\in\mathbb{Z}.
+\end{split}
+\end{equation}
+
+Далее, рассмотрим многочлен
+\begin{equation}\label{poly h}
+h(t)=\sum_{k=0}^{\mathbf{r}}c_k(-t)^{\mathbf{r}-k}\in
+\mathbb{Z}[t]
+\end{equation}
+где коэффициенты $c_k$ при $k\ge0$ суть введенные выше целые числа.
+Следуя идее Сато, покажем теперь, что корни $h(t)$ составляют с точностью до умножения на общую константу максимальный тип расщепления
+$S_i(\mathbf{E},\mathbb{P}^{n_m})$.
+Более точно, пусть $a_1>...>a_\alpha$, $\alpha\le\mathbf{r}$ -- различные элементы из
+$S_i(\mathbf{E},\mathbb{P}^{n_m})$, входящие в
+$S_i(\mathbf{E},\mathbb{P}^{n_m})$ с соответствующими кратностями $r_1,...,r_\alpha$. Тогда мы утверждаем, что
+корни многочлена $h(t)$ суть числа $N(i)a_1,...,N(i)a_{\alpha}$ с соответствующими кратностями $r_1,...,r_{\alpha}$.
+
+Рассуждение из \cite[с. 138-139]{S1} показывает, что для доказательства этого утверждения достаточно установить зануление чисел $c_k(\mathbf{E}|_{Y_m}\otimes\pi_m^*\mathcal{O}_{\mathbb{P}^{n_m}}(-N(i)a_jH))$ для
+$\mathbf{r}-r_j+1\le k\le\mathbf{r},\ 1\le j\le\alpha$.
+Ввиду (\ref{again ck=}) достаточно доказать зануление чисел
+$c_k(\tilde{\tau}_m^*(\mathbf{E}\otimes\mathbf{L}_i^{-a_j}|_{\overline{Y}_m}))$. Доказательство этого факта практически то же, что и в \cite{S1}. А именно, индуктивно определяются векторные расслоения
+$F_1:=\tilde{\phi}_m^*\mathbf{E}|_{\tilde{\pi}_m^{-1}(M_i(\mathbb{P}^{n_m}))},\
+F_2,...,F_{\alpha}$ на $\tilde{\pi}_m^{-1}(M_i(\mathbb{P}^{n_m}))$
+рангов $\mathrm{rk} F_j=\sum_{p=j}^{\alpha}r_p$
+входящие в точные тройки
+\begin{equation}\label{exact F}
+\begin{split}
+& 0\to r_j\mathcal{O}_{\tilde{\pi}_m^{-1}(M_i(\mathbb{P}^{n_m}))}\to
+F_j\otimes(\mathbf{L}_i^{a_{j-1}-a_j}|_{\tilde{\pi}_m^{-1}(M_i(\mathbb{P}^{n_m}))})\to F_{j+1}\to0, \\
+& 1\le j\le\alpha-1,
+\end{split}
+\end{equation}
+где $a_0:=0$. Используя (\ref{codim<}) и применяя рассуждение из \cite[с. 139]{S1} к тройкам  (\ref{exact F}), получаем
+$c_k(\tilde{\tau}_m^*(\mathbf{E}\otimes\mathbf{L}_i^{-a_j}|_{\overline{Y}_m}))=0$, что и требовалось.
+
+Поскольку $h(t)$ не зависит от $x$ и от $\mathbb{P}^{n_m}\in\Pi_{im}(x)$, это же справедливо и для
+$S_i(\mathbf{E},\mathbb{P}^{n_m})$, то есть предложение доказано.
+\end{proof}
+
+
+
+\vspace{5mm}
+\subsection{Доказательство теоремы \ref{E on linear X}} \label{proof Thm 2.2}
+\rm
+
+\vspace{2mm}
+
+\begin{proof}
+Согласно (\ref{codim<}) при $m\gg0$ размерность $M_i(\mathbb{P}^{n_m})$ 
+больше половины размерности пространства  $\mathbb{P}^{n_m}$, следовательно, многообразия 
+$M_i(\mathbb{P}^{n_m})$ связны для достаточно больших $m$.
+Рассмотрим многообразие $\Gamma_{im}(x):=\{(l,\mathbb{P}^{n_m})\in B_{im}(x)\times \Pi_{im}(x)\ |\ l\in
+M_i(\mathbb{P}^{n_m})\}$ с проекциями
+${B}_{im}(x)\overset{p_1}\leftarrow {\Gamma}_{im}(x)\overset{p_2}\to {\Pi}_{im}(x)$.
+Так как $M_i(\mathbb{P}^{n_m})=p_2^{-1}(\mathbb{P}^{n_m})$
+связно для любого $\mathbb{P}^{n_m}\in {\Pi}_{im}(x)$
+и ${\Pi}_{im}(x)$ связно согласно условию (A.ii), то, значит, $\Gamma_{im}(x)$ связно. По определению
+$\Gamma_{im}(x)$ описывается так:
+\begin{equation}\label{Aim(x)}
+\Gamma_{im}(x)=\underset{\mathbb{P}^{n_m}\in\Pi_{im}(x)}\sqcup M_i(\mathbb{P}^{n_m}),\ \ \ \ m\ge1.
+\end{equation}
+
+Аналогично, рассмотрим многообразия
+$\Gamma_{im}:=\{(x,l,\mathbb{P}^{n_m})\in X_m\times B_{im}\times\Pi_{im}\ |\ \ (l,\mathbb{P}^{n_m})\in\Gamma_{im}(x)\}$.
+По построению
+$$
+\Gamma_{im}=\underset{x\in X_m}\sqcup\Gamma_{im}(x),
+$$
+так что каждое $\Gamma_{im}$ связно. Более того, имеется
+корректно определенное инд-многообразие  $\mathbf{\Gamma}_i:=\underset{\to}\lim\Gamma_{im}$.
+
+Пусть $(x,l,\mathbb{P}^{n_m})\in\mathbf{\Gamma}_i$. Если $\delta_1^{\mathrm{max}}$ есть максимальный элемент в
+$\mathrm{Split}(\mathbf{E}|_l)=S_i(\mathbf{E},\mathbb{P}^{n_m})$, то корректно определено подрасслоение
+$\mathbf{E}_1(l)$ в $\mathbf{E}|_l$:
+\begin{equation}\label{E1(E,l)}
+\mathbf{E}_1(l):=\mathrm{im}(H^0(l,\mathbf{E}|_l(-\delta_1^{{\rm max}}))\otimes
+\mathcal{O}_l\overset{ev}\to\mathbf{E}|_l(-\delta_1^{{\rm max}}))\otimes
+\mathcal{O}_l(\delta_1^{{\rm max}}).
+\end{equation}
+Положим $\mathbf{r}_1:={\rm rk}\mathbf{E}_1(l)$ и рассмотрим относительный грассманиан
+$\rho_1:\ \mathbf{G}(\mathbf{r}_1,\mathbf{E})\to\mathbf{X}$.
+Согласно предложению \ref{proposition3.2} числа
+$\delta_1^{{\rm max}}$ и $\mathbf{r}_1$ 
+не зависят от точки
+$(x,l,\mathbb{P}^{n_m})\in\mathbf{\Gamma}_i$. 
+Поэтому существует морфизм инд-многообразий
+\begin{equation}\label{morphism f1}
+\mathbf{f}_{i1}:\mathbf{\Gamma}_i\to\mathbf{G}(\mathbf{r}_1,\mathbf{E}),\ \ \ (x,l)\mapsto\mathbf{E}_1(l)|_x,
+\ \ \ x\in\mathbf{X}.
+\end{equation}
+Поскольку $\mathbf{f}_{i1}(\Gamma_{im}(x))\subset\rho_1^{-1}(x)=G(\mathbf{r}_1,\mathbf{E}|_x)$,
+ввиду (\ref{Aim(x)}) имеем
+$$
+\mathbf{f}_{i1}(M_i(\mathbb{P}^{n_m}))\subset G(\mathbf{r}_1,\mathbf{E}|_x),\ \ \
+\mathbb{P}^{n_m}\in\Pi_{im}(x).
+$$
+
+Согласно (\ref{codim A})
+$\mathrm{codim}_{\mathbb{P}^{n_m}}M_i(\mathbb{P}^{n_m})$
+ограничено при $m\to\infty$. 
+Это означает, что для достаточно больших $m$ морфизм
+$\mathbf{f}_{i1}:M_i(\mathbb{P}^{n_m})\to G(\mathbf{r}_1,\mathbf{E}|_x)$ удовлетворяет условиям  предложения 3.2 из \cite{S1}, в котором мы полагаем
+$n=n_m,\ X=M_i(\mathbb{P}^{n_m}),\ Y=G(\mathbf{r}_1,\mathbf{E}|_x)$
+и $f=\mathbf{f}_{i1}$. Согласно этому предложеению
+$\mathbf{f}_{i1}|_{M_i(\mathbb{P}^{n_m})}$
+является постоянным отображением, а значит, оно индуцирует
+морфизм
+$$
+\phi_{i1}(x):\ \Pi_{im}(x)\to G(\mathbf{r}_1,\mathbf{E}|_x),\ \ \
+\mathbb{P}^{n_m}\mapsto\mathbf{f}_{i1}(M_i(\mathbb{P}^{n_m})),\ \ \ \ x\in\mathbf{X}.
+$$
+Теперь из условия (A.iv) 
+следует, что существует положительное целое число $m_1$ 
+такое, что морфизм $\phi_{i1}(x)$ -- постоянное отображение
+для любого $m\ge m_1.$ Таким образом, получаем, что
+(\ref{morphism f1}) индуцирует постоянный морфизм
+$$
+\boldsymbol{\phi}_{i1}(x):\mathbf{\Pi}_i(x)\to G(\mathbf{r}_1,\mathbf{E}|_x).
+$$
+
+Рассмотрим инд-многообразие
+$\mathbf{\Sigma}_i=\underset{\to}\lim \Sigma_{im}$,
+где
+$\Sigma_{im}:=\{(x,\mathbb{P}^{n_m})\in X_m\times\Pi_{im}\ |\ \mathbb{P}^{n_m}\in\Pi_{im}(x)\}$,
+и пусть
+$\mathbf{p}_i:\mathbf{\Sigma}_i\to\mathbf{X}$ 
+-- естественная проекция со слоем
+$\mathbf{\Pi}_i(x)$, $x\in\mathbf{X}$.
+Рассмотренные выше постоянные морфизмы
+$\boldsymbol{\phi}_{i1}(x)$
+продолжаются до морфизма
+$\boldsymbol{\phi}_{i1}:\mathbf{\Sigma}_i\to\mathbf{G}(\mathbf{r}_1,\mathbf{E})$,
+который постоянен на слоях проекции $\mathbf{p}_i$.
+Вдобавок морфизм
+$\mathbf{f}_{i1}|_{\mathbf{M}_i(x)}$ 
+является постоянным отображением. Таким образом, мы получаем
+корректно определенный морфизм
+\begin{equation}\label{morphism Fi10}
+\boldsymbol{\Phi}_{i1}:\ \mathbf{X}\to\mathbf{G}(\mathbf{r}_1,\mathbf{E}),\ \
+x\mapsto\mathbf{f}_{i1}(\mathbf{\Gamma}_i(x)).
+\end{equation}
+
+Пусть $\boldsymbol{\mathcal{S}}$ -- тавтологическое расслоение ранга $\mathbf{r}_1$ на
+$\mathbf{G}(\mathbf{r}_1,\mathbf{E})$. Положим
+$\mathbf{E}_{1i}:=\boldsymbol{\Phi}^*_{i1}\boldsymbol{\mathcal{S}}$.
+Из  (\ref{E1(E,l)}), (\ref{morphism f1}) и (\ref{morphism Fi10}) следует, что $\mathbf{E}_{1i}$ есть подрасслоение в $\mathbf{E}$ такое, что
+$$
+\mathbf{E}_{1i}|_l=\mathbf{E}_1(l)\simeq\mathbf{r}_1\mathcal{O}_{l}(\delta_1^{{\rm max}}),
+\ \ \ \ l\in\mathbf{M}_i.
+$$
+Используя полунепрерывность $\dim H^0(l,\mathbf{E}_{1i}(-\delta_1^{{\rm max}})|_l),$ немедленно проверяем, что последнее равенство выполняется для всех $l\in\mathbf{B}_i.$
+
+Применяя предыдущее рассуждение к фактору
+$\mathbf{E}'=\mathbf{E}/\mathbf{E}_{1i}$ и так далее, получаем фильтрацию расслоения $\mathbf{E}$
+$$
+0\subset \mathbf{E}_{1i}\subset \mathbf{E}_{2i}\subset ... \subset \mathbf{E}_{\alpha i}=\subset \mathbf{E}_{1i}
+$$
+с $\mathbf{B}_i$-равномерными последовательными факторами
+$\mathbf{F}_{ki}=\mathbf{E}_{ki}/\mathbf{E}_{k-1,i}.$
+
+Зафиксируем теперь $j\in\Theta_{\mathbf{X}},$ $i\ne j$.
+Применяя предыдущую процедуру ко всем расслоениям
+$\mathbf{F}_{ki},$ получаем фильтрацию расслоения $\mathbf{E}$, все факторы в которой $\mathbf{B}_i$-равномерны и $\mathbf{B}_j$-равномерны.
+После конечного числа итераций мы наконец получим фильтрацию
+\begin{equation}\label{*}
+0=\mathbf{E}_0\subset\mathbf{E}_1\subset...\subset\mathbf{E}_s=\mathbf{E}
+\end{equation}
+расслоения $\mathbf{E}$ с равномерными последовательными факторами. Это доказывает (i).
+
+Заметим, что всякое равномерное векторное расслоение на $\mathbf{X}$ становится линейно тривиальным после подкрутки на подходящее линейное расслоение. Это означает, что каждое
+последовательное факторрасслоение $\mathbf{E}_k/\mathbf{E}_{k-1}$ 
+изоморфно
+$\mathbf{M}_k\otimes\mathbf{F}_k$, где
+$\mathbf{M}_k$ -- линейное расслоение и $\mathbf{F}_k$ линейно тривиально.
+Предположим вдобавок, что выполнено свойство T. Тогда
+расслоения $\mathbf{F}_k$ тривиальны, то есть 
+$$
+\mathbf{E}_k/\mathbf{E}_{k-1}\simeq
+\mathrm{rk}(\mathbf{E}_k/\mathbf{E}_{k-1})\mathbf{M}_k,\ \ \ 1\le k\le s.
+$$
+Более того, для $p<k$
+$$
+\mathrm{Ext}^1(\mathbf{M}_k,\mathbf{M}_p)=
+H^1(\mathbf{X},\mathbf{M}_k^*\otimes\mathbf{M}_p),
+$$
+и, согласно хорошо известному факту \cite[теорема 4.5]{H3} (см. также \cite[предложение 10.3]{DPW}),
+$$
+H^1(\mathbf{X},\mathbf{M}_k^*\otimes\mathbf{M}_p)=
+\underset{\leftarrow}\lim H^1(X_m,(\mathbf{M}_k^*\otimes\mathbf{M}_p)|_{X_m}).
+$$
+Однако, предыдущая конструкция показывает, что
+$$
+(\mathbf{M}_k^*\otimes\mathbf{M}_p)|_{X_m}\simeq\otimes_iL_{im_i}^{\otimes a_i}
+$$
+для некоторых отрицательных $a_i$. Поэтому часть свойства Л, касающаяся обращения в нуль, дает
+$$
+H^1(X_m,(\mathbf{M}_k^*\otimes\mathbf{M}_p)|_{X_m})=0
+$$
+для $m\ge1$, и, следовательно, $\mathrm{Ext}^1(\mathbf{M}_k,\mathbf{M}_p)=0$
+для $1\le p\le k\le s$. Этого достаточно, чтобы заключить,
+что фильтрация (\ref{*}) расщепляется, то есть выполнено (ii).
+\end{proof}
+
+Оставшаяся часть работы (за исключением приложения)
+посвящена примерам линейных инд-многообразий, удовлетворяющих свойствам Л, A и T.
+
+
+%\end{subsection}
+
+
+\vspace{1cm}
+
+
+
+\section{Линейные инд-грассманианы со свойствами Л,\ A,\ T} \label{sect4}
+\vspace{0.5cm}
+
+\subsection{Конечномерные ортогональные и симплектические грассманианы}\label{subsection 2.1}
+Пусть $V$ -- конечномерное векторное пространство. В дальнейшем мы будем рассматривать как симметрические, так и симплектические
+билинейные формы $\Phi$ на $V$. В предположении, что $\Phi$  
+фиксирована, для произвольного подпространства $W\subset V$ 
+положим $W^\perp:=\{v\in V\ |\ \Phi(v,w)=0$ 
+для любого $w\in W\}.$ Напомним, что $W$ называется \textit{изотропным} (или $\Phi$-\textit{изотропным}), если $W\subset W^\perp.$
+
+Пусть $\Phi\in S^2V^*$ -- невырожденная симметрическая форма на $V$. Для $\dim V\ge3$ и
+$1\le k\le\left[\frac{\dim V}{2}\right]$, \textit{ортогональный грассманиан} $GO(k,V)$ определяется как подмногообразие в $G(k,V)$, состоящее из всех $\Phi$-изотропных $k$-мерных подпространств в $V$. За исключением случая
+$\dim V=2n,$ $k=n,$ многообразие $GO(k,V)$ гладко и неприводимо.
+При $\dim V=2n,$ $k=n,$ многообразие $GO(k,V)$ -- гладкое и имеет
+две неприводимые компоненты, обе из которых изоморфны
+$GO(n-1,\tilde{V})$ для $\dim\tilde{V}=2n-1$.
+
+Если $\Phi\in\wedge^2V^*$ -- невырожденная симплектическая форма на $V$, $\dim V=2n,$ то {\it симплектический грассманиан} $GS(k,V)$ есть гладкое неприводимое подмногообразие в $G(k,V)$, состоящее из всех $\Phi$-изотропных $k$-мерных подпространств в $V$.
+
+
+
+\subsection{Определение линейных инд-грассманианов} \label{subsection 4.2}
+
+
+Начнем с напоминания определения стандартного расширения грассманианов \cite{PT3}.
+
+
+Назовем \textit{стандартным расширением грассманианов} вложение грассманианов
+$f:G(k,V)\to G(k,V')$ для $\dim V\ge\dim V,$ $k'\ge k$, 
+задаваемое формулой
+\begin{equation}\label{for21}
+f:V_k\mapsto V_k\oplus W,
+\end{equation}
+для некоторого фиксированного изоморфизма $V'\simeq V\oplus \hat{W}$ и фиксированного подпространства $W\subset\hat{W}$ 
+размерности $k'-k.$
+Соответственно, под \textit{стандартным расширением ортогональных}, соответственно, \textit{симплектических грассманианов} мы понимаем вложение изотропных грассманианов $f:GO(k,V)\to GO(k,V')$ (соответственно, $f:GS(k,V)\to GS(k,V')$),
+задаваемое формулой (\ref{for21}) для некоторого фиксированного 
+ортогонального (соответственно, симплектического) изоморфизма $V'\simeq V\oplus \hat{W}$ и фиксированного изотропного 
+подпространства $W\subset\hat{W}$ размерности $k'-k$, ср. \cite[определения 3.2. и 3.5]{PT3}. Заметим, что стандартные расширения являются линейными морфизмами.
+
+Далее, напомним определение стандартных инд-грассманианов \cite{PT3}.
+
+\begin{definition}\label{G(k)}
+Зафиксируем бесконечную цепочку векторных пространств\begin{equation}\label{for22}
+V_{n_1}\subset V_{n_2}\subset...\subset V_{n_m}\subset V_{n_{m+1}}\subset...
+\end{equation}
+размерностей $n_m,\ n_m< n_{m+1}$.
+
+a) Для целого $k$, $1\le k< n_1$, положим $\mathbf{G}(k):=\underset{\to}\lim G(k,V_{n_m})$, где
+$$
+G(k,V_{n_1})\hookrightarrow G(k,V_{n_2})\hookrightarrow...\hookrightarrow G(k,V_{n_m})\hookrightarrow
+G(k,V_{n_{m+1}})\hookrightarrow...
+$$
+-- цепочка канонических включений грассманианов, индуцированная
+цепочкой (\ref{for22}).
+
+b) Для последовательности целых чисел $1\le k_1< k_2<...$ таких, что $ k_m< n_m,$  $\underset{m\to\infty}\lim(n_m-k_m)=\infty$,
+положим
+$\mathbf{G}(\infty):=\underset{\to}\lim G(k_m,V_{n_m})$, где
+$$
+G(k_1,V_{n_1})\hookrightarrow G(k_2,V_{n_2})\hookrightarrow...\hookrightarrow G(k_m,V_{n_m})\hookrightarrow
+G(k_{m+1},V_{n_{m+1}})\hookrightarrow...
+$$
+-- произвольная цепочка стандартных расширений грассманианов.
+
+c) Предположим, что пространства $V_{n_m}$ снабжены совместимыми
+невырожденными симметрическими (соответственно, симплектическими)
+формами $\Phi_m$. В симметрическом случае $\frac{n_m}{2}\in\mathbb{Z}_+$. Для целого $k,\ 1\le k\le [\frac{n_1}{2}]$, положим
+ $\mathbf{G}\mathrm{O}(k,\infty):=\underset{\to}\lim GO(k,V_{n_m})$ (соответственно,
+ $\mathbf{G}\mathrm{S}(k,\infty):=\underset{\to}\lim GS(k,V_{n_m})$), где
+$$
+GO(k,V_{n_1})\hookrightarrow GO(k,V_{n_2})\hookrightarrow...\hookrightarrow GO(k,V_{n_m})\hookrightarrow
+GO(k,V_{n_{m+1}})\hookrightarrow...
+$$
+(соответственно,
+$$
+GS(k,V_{n_1})\hookrightarrow GS(k,V_{n_2})\hookrightarrow...\hookrightarrow GS(k,V_{n_m})\hookrightarrow
+GS(k,V_{n_{m+1}})\hookrightarrow...)
+$$
+есть цепочка вложений изотропных грассманианов, индуцированная цепочкой (\ref{for22}).
+
+d) Для последовательности целых чисел $1\le k_1< k_2<...$ такой, что $k_m<[\frac{n_m}{2}],$
+$\underset{m\to\infty}\lim([\frac{n_m}{2}]-k_m)=\infty$,
+положим $\mathbf{G}\mathrm{O}(\infty,\infty)=\underset{\to}\lim G\mathrm{O}(k_m,V_{n_m})$
+(соответственно, $\mathbf{G}\mathrm{S}(\infty,\infty):=\underset{\to}\lim GS(k_m,V_{n_m})$)
+где
+\begin{equation}\label{chain O}
+GO(k_1,V_{n_1})\hookrightarrow GO(k_2,V_{n_2})\hookrightarrow...\hookrightarrow GO(k_m,V_{n_m})\hookrightarrow
+GO(k_{m+1},V_{n_{m+1}})\hookrightarrow...
+\end{equation}
+(соответственно,
+\begin{equation}\label{chain S}
+GS(k_1,V_{n_1})\hookrightarrow GS(k_2,V_{n_2})\hookrightarrow...\hookrightarrow GS(k_m,V_{n_m})\hookrightarrow
+GS(k_{m+1},V_{n_{m+1}})\hookrightarrow...)
+\end{equation}
+-- произвольная цепочка стандартных расширений изотропных грассманианов.
+
+e) В симплектическом случае рассмотрим последовательность целых чисел $1\le k_1< k_2<...$ such that $k_m\le\frac{n_m}{2}$,
+$\underset{m\to\infty}\lim(\frac{n_m}{2}-k_m)=k\in\mathbb{N}$, и положим
+$\mathbf{G}\mathrm{S}(\infty,k):=\underset{\to}\lim GS(k_m,V_{n_m})$
+для произвольной цепочки стандартных расширений (\ref{chain S}). 
+ В ортогональном случае предположим, что $\dim V_{n_m}$ четны.
+Тогда положим $\mathbf{G}\mathrm{O}^0(\infty,k):=\underset{\to}\lim GO(k_m,V_{n_m})$ для цепочки (\ref{chain O}), где
+$k_m<\frac{n_m}{2}$, $\underset{m\to\infty}\lim(\frac{n_m}{2}-k_m)=k\in\mathbb{N},\ k\ge2$. Наконец, рассмотрим ортогональный случай в предположении, что $\dim V_{n_m}$ нечетны. Тогда положим
+$\mathbf{G}\mathrm{O}^1(\infty,k):=\underset{\to}\lim GO(k_m,V_{n_m})$ для цепочки (\ref{chain O}), где
+$k_m\le[\frac{n_m}{2}]$, $\underset{m\to\infty}\lim([\frac{n_m}{2}]-k_m)=k\in\mathbb{N}$.
+\end{definition}
+
+В частности,
+$\mathbf{P}^{\infty}=\mathbf{G}(1)\simeq \mathbf{G}\mathrm{S}(1)$.
+Заметим, что вышерассмотренные стандартные инд-грассманианы 
+определены корректно, то есть стандартные инд-грассманианы не зависят, с точностью до изоморфизма инд-многообразий, от конкретной цепочки стандартных расширений, используемых в их определении. Более того, основной результат в \cite{PT3} гласит, 
+что, за исключением изоморфизма
+$\mathbf{P}^{\infty}\simeq \mathbf{G}\mathrm{S}(1)$,
+стандартные инд-грассманианы попарно неизоморфны как инд-многообразия.
+
+Во всех случаях максимальная внешняя степень тавтологического
+расслоения на $X_m$, порожденного глобальными сечениями, дает обильное линейное расслоение $\mathcal{O}_{X_m}(1)$, где
+$X_m=G(k_m,V_{n_m}),$ $GO(k_m,V_{n_m}),$ $GS(k_m,V_{n_m})$.
+Как известно, класс изоморфизма расслоения $\mathcal{O}_{X_m}(1)$ порождает
+$\mathrm{Pic}X_m$. Более того, если
+$i_m:X_m\hookrightarrow X_{m+1}$
+есть одно из вложений в определении \ref{G(k)}, имеется изоморизм
+$i_m^*\mathcal{O}_{X_{m+1}}(1)\simeq\mathcal{O}_{X_m}(1)$.
+Это позволяет заключить, что $\mathbf{X}=\underset{\to}\lim X_m$ 
+есть линейное многообразие и группа $\mathrm{Pic}\mathbf{X}$ порождена классом изоморфизма расслоения
+$\mathcal{O}_{\mathbf{X}}(1):=\underset{\leftarrow}\lim
+\mathcal{O}_{X_m}(1)$.
+
+
+
+
+\subsection{Теорема БВТС для $\mathbf{G}(\infty),$
+$\mathbf{G}\mathrm{O}(\infty,\infty)$, $\mathbf{G}\mathrm{S}(\infty,\infty)$,
+$\mathbf{G}\mathrm{O}^1(\infty,0)$ и $\mathbf{G}\mathrm{S}(\infty,0)$}\label{section 4.3}
+Сначала заметим, что если
+$\mathbf{X}=\mathbf{G}(k)$, $\mathbf{G}\mathrm{O}(k,\infty)$,
+$\mathbf{G}\mathrm{S}(k,\infty)$, на $\mathbf{X}$ имеется
+тавтологическое векторное расслоение $\mathbf{S}$ ранга $k$. 
+Если $k\ge2$, это расслоение не изоморфно прямой сумме линейных
+расслоений, поэтому теорема БВТС не верна для этих инд-грассманианов. Более того, из \cite{S2} известно, что для $\mathbf{X}=\mathbf{G}(k)$, $\mathbf{G}\mathrm{O}(k,\infty)$,
+$\mathbf{X}=\mathbf{G}\mathrm{S}(k,\infty)$, всякое простое
+векторное расслоение конечного ранга, то есть векторное расслоение на $\mathbf{X}$, не имеющее нетривиального векторного подрасслоения, есть прямое слагаемое в тензорной степени расслоения $\mathbf{S}$.
+
+
+\begin{theorem}\label{theorem4.3}
+Всякое векторное расслоение $ \mathbf{E}$ на $ \mathbf{X}\simeq \mathbf{G}(\infty),$ $\mathbf{G}\mathrm{O}(\infty,\infty)$, $\mathbf{G}\mathrm{S}(\infty,\infty)$, $\mathbf{G}\mathrm{O}^1(\infty,0),$ $\mathbf{G}\mathrm{S}(\infty,0)$
+изоморфно
+$\underset{i}\oplus\mathcal{O}_{\mathbf{X}}(k_i)$
+для некоторых $k_i\in\mathbb{Z}$.
+\end{theorem}
+
+Для $ \mathbf{X}=\mathbf{G}(\infty)$ это доказано в \cite{DP} (см. также \cite[\S 4]{PT1}. Для остальных стандартных инд-грассманианов утверждение теоремы \ref{theorem4.3} следует из теоремы \ref{E on linear X} и следующей теоремы.
+
+\begin{theorem}\label{theorem4.4}
+Пусть $ \mathbf{X}\simeq \mathbf{G}\mathrm{O}(\infty,\infty)$,
+$\mathbf{G}\mathrm{S}(\infty,\infty)$, $\mathbf{G}\mathrm{O}^1(\infty,0)$ или
+$\mathbf{G}\mathrm{S}(\infty,0).$ Тогда $\mathbf{X}$ удовлетворяет свойствам \rm{Л}, \rm{A} и \rm{T}.\footnote{Читатель может проверить, что $\mathbf{G}(\infty)$ также удовлетворяет свойствам Л, A, T.}
+\end{theorem}
+
+\begin{proof}
+$\mathbf{X}$ удовлетворяет свойству Л, поскольку $\mathcal{O}_{\mathbf{X}}(1)$ порождает
+$\mathrm{Pic}\mathbf{X}$ и $H^1(X_m,\mathcal{O}_{X_m}(a))$ 
+обращается в нуль для всех $a$ и достаточно больших $m$ по теореме
+Бореля-Вейля-Ботта. Более того, свойство Т следует из предложения
+\ref{proposition7.4} ниже.
+
+Остается установить свойство A. Часть (A.i) свойства А выполнена здесь просто потому, что
+$\mathcal{O}_{\mathbf{X}}(1)$ очень обильно. Поэтому рассмотрим
+свойства (A.ii)-(A.iv).
+
+Пусть $\mathbf{X}=\mathbf{G}\mathrm{O}(\infty,\infty)=\underset{\to}\lim GO(k_m,V_{n_m})$.
+Для $m\ge1,$ база $B_m$ семейства проективных прямых на $GO(k_m,V_{n_m})$ совпадает с многообразием изотропных флагов типа
+$(k_m-1,k_m+1)$ в $V_{n_m}$:
+\begin{equation}\label{FlO}
+B_m=\{(V_{k_m-1},V_{k_m+1})\in GO(k_m-1,V_{n_m})\times GO(k_m+1,V_{n_m})\ |\ V_{k_m-1}\subset V_{k_m+1}\}
+\end{equation}
+\cite[лемма 2.2(i)]{PT3}. Более того, положим 
+\begin{equation}\label{Pim}
+\Pi_m:=\{(V_{k_m},V_{k_m+1})\in GO(k_m,V_{n_m})\times GO(k_m+1,V_{n_m})\ |\ V_{k_m}\subset V_{k_m+1}\}.
+\end{equation}
+Точка $y=(V_{k_m},V_{k_m+1})\in\Pi_m$ 
+соответствует проективному подпространству
+$G(k_m-1,V_{k_m})\times\{V_{k_m+1}\}\subset B_m.$
+
+Легко видеть, что $\mathbf{\Pi}:=\underset{\to}\lim \Pi_m$ является корректно определенным инд-многообразием, и что точка многообразия $\mathbf{\Pi}$ представляет проективное инд-подпространство в
+$\mathbf{B}:=\underset{\to}\lim B_m.$
+
+Далее, (\ref{FlO}) вместе с \cite[лемма 2.2(iv)]{PT3} влечет, что для любой точки
+$x=\{V_{k_m}\}\in GO(k_m,V_{n_m})$
+\begin{equation}\label{Bm(x)}
+B_{\tilde m}(x):=\{\mathbb{P}^1\in B_{\tilde m}\ |\ \mathbb{P}^1\ni x\}\simeq\mathbb{P}((\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^*)\times 
+\end{equation}
+$$
+GO(1,(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^\perp/(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})),\ \ \tilde{m}\ge m,
+$$
+и
+\begin{equation}\label{Pim(x)}
+\Pi_{{\tilde m}}(x):=\{((\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m}),
+V_{k_{\tilde m+1}})\in\Pi_{{\tilde m}}\}\simeq
+\end{equation}
+$$
+GO(1,V_{k_{\tilde m}}^\perp/V_{k_{\tilde m}}),\ \ \ \tilde{m}\ge m.
+$$
+
+Поскольку квадрики
+$GO(1,(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^\perp/(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m}))$ связны, (A.ii) следует из (\ref{FlO}). Более того, так как для любого $\tilde{m}\ge1$ многообразие $GO(1,V_{k_{\tilde m}}^\perp/V_{k_{\tilde m}})$ есть  
+гладкая квадратичная гиперповерхность в проективном пространстве
+$\mathbb{P}^{n_{\tilde m}-2k_{\tilde m}-1}$,
+из (\ref{Bm(x)}) и (\ref{Pim(x)}) непосредственно следуют (A.iii) и (A.iv).
+
+В остальных случаях то же самое рассуждение проходит при условии,
+что сделаны следующие изменения.
+
+Если $ \mathbf{X}=\mathbf{G}\mathrm{S}(\infty,\infty)$, формулы для $B_m$, $\Pi_m$ и
+$\Pi_{{\tilde m}}(x)$ -- те же, что и (\ref{FlO}), (\ref{Pim}), (\ref{Bm(x)}) и
+(\ref{Pim(x)}) соответственно, с заменой $GO$ на $GS$ (использовать \cite[Lemma 2.5]{PT3}).
+Заметим также, что $GS(1,V_{k_{\tilde m}}^\perp/V_{k_{\tilde m}})$
+изоморфно проективному пространству
+$\mathbb{P}(V_{k_{\tilde m}}^\perp/V_{k_{\tilde m}})$.
+
+Для
+$\mathbf{X}=\mathbf{G}\mathrm{O}^1(\infty,0)=\underset{\to}\lim GO(k_m,V_{2k_m+1})$
+мы сначала отождествим $GO(k_m,V_{2k_m+1})$
+с неприводимой компонентой 
+$GO(k_m+1,V_{2k_m+2})^*$ многообразия $GO(k_m+1,V_{2k_m+2})$ - см. \cite[\S 2.3]{PT3}.
+Следовательно,
+$ \mathbf{X}\simeq\underset{\to}\lim GO(k_m,V_{2k_m})^*$.
+Далее, вместо (\ref{FlO})-(\ref{Pim}) имеем
+$B_m\simeq GO(k_m-2,V_{2k_m}),$ $\Pi_m\simeq GO(k_m-1,V_{2k_m}),$ $m\ge1.$ Соответственно, вместо (\ref{Bm(x)})-(\ref{Pim(x)}) имеем
+$B_{\tilde m}(x)\simeq G(k_{\tilde m}-2,
+(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m}))$ для $x=\{V_{k_m}\}$.
+Последний факт доказывается рассуждением, аналогичным приведенному
+в \cite[лемма 2.2]{PT3}.
+Вдобавок,
+$\Pi_{{\tilde m}}(x)\simeq \mathbb{P}((\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^*),$ $\tilde{m}\ge m$.
+
+Для $ \mathbf{X}=\mathbf{G}\mathrm{S}(\infty,0)=\underset{\to}\lim GS(k_m,V_{2k_m})$ можно показать, что (\ref{FlO})-(\ref{Pim})
+можно заменить на
+$B_m\simeq GS(k_m-1,V_{2k_m}),$ $\Pi_m\simeq GS(k_m,V_{2k_m})$.
+Соответственно, (\ref{Bm(x)})-(\ref{Pim(x)}) для $x=\{V_{k_m}\}\in GS(k_m,V_{2k_m})$
+можно заменить на
+$B_{\tilde m}(x)\simeq G(k_{\tilde m}-1,(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m}))$,
+и $\Pi_{{\tilde m}}(x)\simeq \{\mathbb{P}((\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^*)\}$ является точкой при $\tilde{m}\ge m$.
+\end{proof}
+
+
+
+
+
+
+\section{Линейные сечения инд-грассманианов $\mathbf{G}(\infty)$, $\mathbf{G}\mathrm{O}(\infty,\infty)$,
+$\mathbf{G}\mathrm{S}(\infty,\infty)$}\label{sec5}
+
+\vspace{0.5cm}
+
+\subsection{Линейные сечения конечномерных грассманианов}\label{5.1}
+Пусть $G=G(k,V)$, $GO(k,V)$, $GS(k,V)$.
+Предположим, что $1\le k<\dim V-1$ для $G=G(k,V)$, и $1\le k<[\frac{\dim V}{2}]$ для $G=GO(k,V)$, $GS(k,V)$.
+Положим
+$N:=\dim H^0(\mathcal{O}_G(1))$ и
+$V_N:=H^0(\mathcal{O}_G(1))^*.$
+Ниже мы рассматриваем $G$ как помногообразие в $\mathbb{P}(V_N)$
+посредством отображения Плюккера. Для заданного целого числа $c$, $1\le c\le k-1$, положим
+$$
+X:=G\cap\mathbb{P}(U),
+$$
+где $U\subset V_N$ -- подпространство коразмерности $c$. Назовем $X$ \textit{линейным сечением коразмерности $c$ грассманиана $G$.}
+
+
+Заметим, что на $G$ имеется единственное семейство максимальных проективных подпространств размерности $k$ с базой $\tilde{G},$ где
+$\tilde{G}=G(k+1,V)$ если $G=G(k,V)$, соответственно, $\tilde{G}=GO(k+1,V)$ если $G=GO(k,V)$, и
+$\tilde{G}=GS(k+1,V)$ если $G=GS(k,V)$ (см. \cite[леммы 2.2(i) и 2.5(i)]{PT3}).  
+Рассмотрим график инциденции
+$\Sigma:=\{(V_k,V_{k+1})\in G\times\tilde{G}\ |\ V_k\subset V_{k+1}\}$ с проекциями
+$\tilde{G}\overset{p}\leftarrow\Sigma\overset{q}\to G$ 
+и положим
+$\pi:=p|_{q^{-1}(X)}:q^{-1}(X)\rightarrow \tilde{G}.$ Из условия $1\le c\le k-1$ следует, что $\pi$ -- сюръективный проективный
+морфизм.
+\begin{propos}\label{proposition5.1}
+Для подпространства $U\subset V_N$ коразмерности $c$ в общем положении справедливы следующие утверждения.
+
+(i) Многообразия $X$ и $q^{-1}(X)$ являются гладкими и
+\begin{equation}\label{equation30}
+\pi_*\mathcal{O}_{q^{-1}(X)}=\mathcal{O}_{\tilde{G}}.
+\end{equation}
+
+(ii) $Z(U):=\{x\in \tilde{G}\ |\ \dim \pi^{-1}(x)>k-c\}$ является собственным замкнутым подмножеством в $\tilde{G}$ и
+\begin{equation}\label{equation31}
+{\rm codim}_{\tilde{G}}Z(U)\ge3,\ \ \ {\rm codim}_{q^{-1}(X)}\pi^{-1}(Z(U))\ge2.
+\end{equation}
+
+(iii) Проекция 
+$\pi:q^{-1}(X)\setminus\pi^{-1}(Z(U))\rightarrow \tilde{G}\setminus Z(U)$ является проективным $\mathbb{P}^{k-c}$-расслоением.
+\end{propos}
+
+\begin{proof}
+Мы дадим доказательство для случая $G=GO(k,V)$. Остальные случаи вполне аналогичны, и мы оставляем их читателю.
+
+(i) Так как проективное подпространство
+$\mathbb{P}(U)$ находится в общем положении в $\mathbb{P}(V_N)$, то ${\rm codim}_G X=c$, и поэтому имеет место резольвента Кошуля $\mathcal{O}_G$-пучка $\mathcal{O}_X$
+\begin{equation}\label{equation32}
+0\rightarrow \mathcal{O}_G(-c)\rightarrow ...\rightarrow\left(c\atop i\right)
+\mathcal{O}_G(-i)\rightarrow ...\rightarrow c\mathcal{O}_G(-i)\rightarrow
+\mathcal{O}_G\rightarrow \mathcal{O}_X\rightarrow 0.
+\end{equation}
+Обратный образ (\ref{equation32}) относительно проекции $q$ является $\mathcal{O}_\Sigma$-резольвентой пучка $\mathcal{O}_{q^{-1}(X)}=\pi^*\mathcal{O}_{\tilde{G}}$ вида
+\begin{equation}\label{equation33}
+0\rightarrow \mathcal{L}_c\rightarrow ...\rightarrow\mathcal{L}_1\rightarrow
+\mathcal{O}_{\Sigma}\rightarrow \pi^*\mathcal{O}_{\tilde{G}} \rightarrow 0,
+\end{equation}
+где $\mathcal{L}_i:=q^*(\left(c\atop i\right)\mathcal{O}_G(-i))$, $i=1,...,c$.
+
+Для любого $x\in \tilde{G}$ выполнено $p^{-1}(x)\simeq \mathbb{P}^k$, так что условие $c\le k-1$ влечет
+$H^j(p^{-1}(x),\mathcal{L}_i|_{p^{-1}(x)})\simeq
+H^j(\mathbb{P}^k,\mathcal{O}_{\mathbb{P}^k}(-i))=0$ для $j\ge0$, $i=1,...,c.$ Поэтому из теоремы о замене базы \cite[гл. III, теорема 12.11]{H1} для плоского проективного морфизма
+$p$ вытекает, что $R^jp_*\mathcal{L}_i=0$.
+Вдобавок, по той же причине 
+$R^jp_*\mathcal{O}_\Sigma=0$ при $j>0$,
+и, очевидно, $p_*\mathcal{O}_{\Sigma}=\mathcal{O}_{\tilde{G}}.$
+Поэтому, применяя функтор $R^\cdot p_*$ к (\ref{equation33}),
+получаем (\ref{equation30}).
+
+(ii) Теперь докажем (\ref{equation31}). Зафиксируем произвольную
+точку $V_{k+1}\in\tilde{G}.$ Так как $p^{-1}(x)=\mathbb{P}(V^*_{k+1})$ (см. \cite[лемма 2.2(i)]{PT3}), 
+то имеем индуцированное инъективное линейное отображение \begin{equation}\label{equation34}
+0\rightarrow V^*_{k+1}\rightarrow V_N.
+\end{equation}
+Рассмотрим многообразия
+$$
+\Gamma_i:=\{(W,V_{k+1})\in G(N-c, V_N)\times \tilde{G}\ |\ \dim(W\cap V^*_{k+1})\ge k-c+i+2\},\ \ 0\le i\le c-1,
+$$
+вместе с естественными проекциями
+$$
+G(N-c, V_N)\overset{p_i}\leftarrow\Gamma_i\overset{q_i}\to \tilde{G}.
+$$
+Для произвольного $U\in G(N-c, V_N)$ обозначим
+$$
+Z_i(U):=q_i(p_i^{-1}(U)),
+\ \ 0\le i\le c-1.
+$$
+
+По построению $Z_0(U)=Z(U)$, $Z_i(U)$ -- замкнутые подмногообразия в $\tilde{G}$, образующие фильтрацию
+\begin{equation}\label{equation38}
+\emptyset=:Z_c(U)\subset Z_{c-1}(U)\subset ...\subset Z_{0}(U)=Z(U)
+\end{equation}
+такую, что 
+$Z_i(U)':=Z_i(U)\setminus Z_{i+1}(U)$) 
+суть локально замкнутые подмногообразия в $\tilde{G}$.
+Следовательно, $B_i(U)':=\pi^{-1}(Z_i(U)')$ -- локально замкнутые подмногообразия в $q^{-1}(X)$.
+Более того, $\pi|_{B_i(U)'}:B_i(U)'\rightarrow Z_i(U)'$ есть $\mathbb{P}^{k+1-c+i}$-расслоение, так что
+$\dim B_i(U)'=\dim Z_i(U)'+k+1-c+i$.
+Это равносильно равенству
+\begin{equation}\label{equation39}
+{\rm codim}_{q^{-1}(X)}B_i(U)'={\rm codim}_{\tilde{G}}Z_i(U)'-(i+1).
+\end{equation}
+Заметим также, что $Z(U)=\cup_{i=0}^{c-1}Z_i(U)'$, а значит,
+\begin{equation}\label{equation40}
+\pi^{-1}(Z(U))=\pi^{-1}\left( \cup_{i=0}^{c-1}Z_i(U)'\right)=\cup_{i=0}^{c-1}B_i(U)'.
+\end{equation}
+
+Теперь подсчитаем размерности множеств $Z_i(U)$ в предположении, что $U$ находится в общем положении. Для этого пусть
+$Y:=q_i^{-1}(x)$ -- слой проекции $q_i$ над точкой $x=V_{k+1}\in Z_i(U)$. Рассмотрим многообразие
+$\tilde{Y}=\{(W,V_{k-c+i+2})\in G(N-c, V_N)\times G(k-c+i+2, V_{k+1}^*)\ |\ W\supset V_{k-c+i+2}\subset V_{k+1}^*\}$.
+Естественная проекция
+$\tilde{Y}\rightarrow G(k-c+i+2,V_{k+1}^*)$
+есть расслоение со слоем грассманиан $G(N-k-i-2,\mathbb{C}^{N-k-i-2+c})$. 
+С другой стороны, имеем сюръективный бирациональный морфизм
+$\tilde{Y}\to Y,\ (W,V_{k-c+i+2})\mapsto W$.
+Поэтому ввиду (\ref{equation34}) получаем
+$\dim Y=\dim \tilde{Y}=\dim G(k-c+i+2, V_{k+1}^*)+
+\dim G(N-k-i-2,\mathbb{C}^{N-k-i-2+c})=cN-c^2+(i+1)(c-k-i-2)$.
+Поскольку $q_i$ сюръективно, из этого вытекает
+$$
+\dim\Gamma_i=\dim \tilde{G}+\dim Y=\dim \tilde{G}+cN-c^2+(i+1)(c-k-i-2).
+$$
+Поскольку $p_i$ также сюръективно, для точки $U\in G(N-c,V_N)$ 
+в общем положении имеем
+$\dim Z_i(U)=\dim\Gamma_i-\dim G(N-c, V_N)=\dim \tilde{G}-(i+1)(k+i+2-c),$ то есть
+\begin{equation}\label{equation42}
+{\rm codim}_{\tilde{G}}Z_i(U)=(i+1)(k+i+2-c),\ \ 0\le i\le c-1.
+\end{equation}
+Это вместе с (\ref{equation39}) дает
+${\rm codim}_{q^{-1}(X)}B_i(U)'=(i+1)(k+i+1-c),$ $0\le i\le c-1.$
+Поэтому ввиду (\ref{equation40}) и предположения $c\le k-1$ получаем
+\begin{equation}\label{equation43}
+{\rm codim}_{q^{-1}(X)}\pi^{-1}(Z(U))=
+\underset{0\le i\le c-1}{\rm min}{\rm codim}_{q^{-1}(X)}B_i(U)'=k+1-c\ge2.
+\end{equation}
+Неравенство $\mathrm{codim}_{\tilde{G}}Z(U)\ge3$ вытекает теперь из (\ref{equation39}), и предложение доказано.
+\end{proof}
+
+\begin{corollary}\label{corollary1}
+\textit{В условиях предложения \ref{proposition5.1} пусть $\mathcal{E}$ -- векторное расслоение на $q^{-1}(X)$, тривиальное на слоях морфизма
+$\pi:q^{-1}(X)\to \tilde{G}$. Тогда имеет место изоморфизм
+$ev:\pi^*\pi_*\mathcal{E} \overset{\simeq}\to \mathcal{E}$.}
+\end{corollary}
+
+\begin{proof}
+Применяем предложение \ref{proposition7.2} из параграфа 7 ниже к морфизму $\pi:q^{-1}(X)\to\tilde{G}$, подмногообразию $Z(U)$ в $\tilde{G}$ и векторному расслоению $\mathcal{E}$ на $q^{-1}(X)$.
+\end{proof}
+
+\begin{lemma}\label{lemma5.3}
+Пусть $X=G\cap\mathbb{P}(U)$ -- линейное сечение коразмерности $c$ грассманиана $G$ для
+$1\le c\le(k-1)/2,$ и пусть $\mathbb{P}^1$ -- проективная прямая в $\tilde{G}$. Тогда существует рациональная кривая
+$C\subset q^{-1}(X)$ такая, что $\pi|_C$ -- изоморфизм $C$ с $\mathbb{P}^1$, а $q|_C$ -- либо изоморфизм, либо постоянное отображение.
+\end{lemma}
+
+\begin{proof} Мы рассмотрим только случай $G=GO(k,V)$. Ясно, что
+$$
+\mathbb{P}^1=\{V_{k+1}\in \tilde{G}\ |\ V_k\subset V_{k+1}\subset V_{k+2}\}
+$$
+для единственного изотропного флага $V_k\subset V_{k+2}$ в $V$. 
+Если $V_k\in X,$ положим
+$C:=\{(V_k,V_{k+1})\in\Sigma\ |\ V_k\subset V_{k+1}\subset V_{k+2}\}$.
+Тогда $\pi|_C:C\to\mathbb{P}^1$ -- изоморфизм и $q(C)$ -- точка $\{V_k\}\in G$.
+
+Предположим, что $V_k\notin X.$ Непосредственно проверяется, что 
+если $\mathbb{P}^{N-2}\subset \mathbb{P}(V_N)$ -- гиперплоскость такая, что $V_k\notin \mathbb{P}^{N-2}$, то пересечение
+$q(p^{-1}(\mathbb{P}^1))\cap \mathbb{P}^{N-2}$ изоморфно прямому произведению
+$\mathbb{P}(V_k^*)\times \mathbb{P}(V_{k+2}/V_k)$, 
+вложенному по Сегре $\mathbb{P}^{N-2}$. Пусть
+$\mathbb{P}^{k-1}_a$, $\mathbb{P}^{k-1}_b$ 
+суть слои в
+$\mathbb{P}(V_k^*)\times \mathbb{P}(V_{k+2}/V_k)$
+над двумя точками
+$a,b\in  \mathbb{P}(V_{k+2}/V_k).$
+Проекция
+$pr_1:\mathbb{P}(V_k^*)\times \mathbb{P}(V_{k+2}/V_k)\to\mathbb{P}(V_k^*)$ 
+индуцирует изоморфизм
+$f:\mathbb{P}^{k-1}_a\overset{\sim}\to\mathbb{P}^{k-1}_b.$
+
+Положим
+$\mathbb{P}^{k-c-1}_a:=\mathbb{P}^{k-1}_a\cap \mathbb{P}(U)$,
+$\mathbb{P}^{k-c-1}_b:=\mathbb{P}^{k-1}_b\cap
+\mathbb{P}(U)$. Так как $1\le c\le(k-1)/2$, то пересечение
+$\mathbb{P}^{k-c-1}_b\cap f(\mathbb{P}^{k-c-1}_a)\subset\mathbb{P}^{k-1}_b$
+непусто. Рассмотрим точку $x$ из этого последнего пересечения.
+По построению слой
+$\mathbb{P}^1_x:=pr_1^{-1}(x)$ лежит в
+$q(p^{-1}(\mathbb{P}^1))\cap X$. Наконец, прообраз прямой
+$\mathbb{P}^1_x$ в
+$p^{-1}(\mathbb{P}^1)$ есть искомая рациональная кривая $C$.
+\end{proof}
+
+\begin{propos}\label{proposition5.4}
+Пусть $X$ -- линейное сечение коразмерности $c$ грассманиана $G$ при $1\le c\le(k-1)/2.$ Тогда линейно тривиальное векторное расслоение $E$ на $X$ тривиально.
+\end{propos}
+
+
+\begin{proof}
+Рассмотрим векторное расслоение $\mathcal{E}:=q^*E$ на $q^{-1}(X)$.
+Поскольку $E$ линейно тривиально, для любого $x\in \tilde{G}$ $\mathcal{E}|_{\pi^{-1}(x)}$
+является линейно тривиальным расслоением на проективном пространстве $\pi^{-1}(x)$. В этом случае хорошо известная теорема 
+\cite[гл. I, теорема 3.2.1]{OSS} гласит, что $\mathcal{E}|_{\pi^{-1}(x)}$ тривиально. Поэтому 
+$ev:\pi^*\pi_*\mathcal{E}\to\mathcal{E}$
+является изоморфизмом по следствию \ref{corollary1}. 
+
+Далее, лемма \ref{lemma5.3} позволяет заключить, что $\pi_*\mathcal{E}$ линейно тривиально. В самом деле, если  $\mathbb{P}^1\subset \tilde{G}$ -- проективная прямая и
+$C\subset q^{-1}(X)$ -- рациональная кривая, как и в лемме \ref{lemma5.3}, то
+$\pi_*\mathcal{E}|_{\mathbb{P}^1}\simeq \mathcal{E}|_C$,
+и, значит,
+$\mathcal{E}|_C$ тривиально ввиду линейной тривиальности $E$.
+
+Следовательно, $\pi_*\mathcal{E}$ тривиально по предложению  \ref{proposition7.4} ниже.
+Тогда $\mathcal{E}\simeq\pi^*\pi_*\mathcal{E}$ также тривиально.
+Наконец, поскольку $q: q^{-1}(X)\to X$ -- плоский проективный морфизм с неприводимыми слоями, 
+$E=q_*\mathcal{E}$ тривиально по предложению \ref{trivial on fibres} ниже.
+\end{proof}
+
+
+
+\subsection{Линейные сечения малой коразмерности инд-грассманианов
+$\mathbf{G}(\infty),$ $\mathbf{G}\mathrm{O}(\infty,\infty)$,
+$\mathbf{G}\mathrm{S}(\infty,\infty)$}\label{subsec5.2}
+
+Пусть $\mathbf{G}=\mathbf{G}(\infty),$ $\mathbf{G}\mathrm{O}(\infty,\infty)$, $\mathbf{G}\mathrm{S}(\infty,\infty)$, в частности, 
+$\mathbf{G}=\underset{\to}\lim G(k_m,V_{n_m})$,
+$\underset{\to}\lim GO(k_m,V_{n_m}),$ $\underset{\to}\lim GS(k_m,V_{n_m})$, см. определение
+\ref{G(k)}. Зафиксируем неубывающую последовательность $\{c_m\}_{m\ge1}$ целых чисел, удовлетворяющих условию
+\begin{equation}\label{equation45}
+1\le c_m\le(k_m-1)/2.
+\end{equation}
+Рассмотрим инд-многообразие $\mathbf{X}=\underset{\to}\lim X_m$ такое, что для любого $m\ge1$ $X_m$ -- гладкое линейное сечение коразмерности $c_m$ одного из грассманианов $G_m=G(k_m,V_{n_m})$, $GO(k_m,V_{n_m})$, $GS(k_m,V_{n_m})$, а вложение
+$\phi_m:X_m\hookrightarrow X_{m+1}$ индуцировано вложением
+$G_m\hookrightarrow G_{m+1}$. В дальнейшем мы называем такие инд-многообразия \textit{ линейными сечениями $\mathbf{G}$
+малой коразмерности.}
+
+Существование линейных сечений $\mathbf{X}$ инд-грассманиана $\mathbf{G}$ малой коразмерности есть следствие теоремы Бертини.
+Более того, такое линейное сечение $\mathbf{X}$ 
+является инд-многообразием и группа
+$\mathrm{Pic}\mathbf{X}$ порождена классом пучка
+$\mathcal{O}_{\mathbf{X}}(1):=\underset{\leftarrow}\lim \mathcal{O}_{X_m}(1)$.
+Это следует из наблюдения о том, что $\mathcal{O}_{X_m}(1)$ порождает
+$\mathrm{Pic} X_m$ по теореме Лефшеца,
+и из линейности вложений 
+$G_m\hookrightarrow G_{m+1}.$
+
+
+\begin{propos}\label{theorem5.5}
+Пусть $\mathbf{G}=\mathbf{G}(\infty)$, $\mathbf{G}\mathrm{O}(\infty,\infty)$, $\mathbf{G}\mathrm{S}(\infty,\infty)$.
+Существует линейное сечение $\mathbf{X}$
+инд-грассманиана $\mathbf{G}$ малой коразмерности, которое не
+изоморфно ни одному из инд-многообразий
+$\mathbf{G}(\infty)$, $\mathbf{G}\mathrm{O}(\infty,\infty)$ или
+$\mathbf{G}\mathrm{S}(\infty,\infty)$.
+\end{propos}
+
+\begin{proof}
+Пусть $\mathbf{G}=\underset{\to}\lim G_m$, где
+$G_m=G(k_m,V_{n_m})$, $GO(k_m,V_{2n_m+1})$, $GS(k_m,V_{2n_m})$. Зафиксируем $m\ge1$, и пусть
+$\mathbb{P}^1$ -- проективная прямая на $G_m$.
+Тогда существуют единственные максимальные проективные подпространства
+$\mathbb{P}^{k_m}$ и $\mathbb{P}^{s_m}$ на
+$G_m$, пересекающиеся вдоль $\mathbb{P}^1$, где
+$s_m=n_m-k_m$ для $G_m=G(k_m,V_{n_m})$ и, соответственно, $s_m=[\frac{n_m}{2}]-k_m$ для $G_m=GO(k_m,V_{n_m})$, $GS(k_m,V_{n_m})$, см. \cite[леммы 2.3(iii) и 2.6(ii)]{PT3}.
+
+
+
+При $\tilde{m}\ge m$ вложения
+$\phi_{\tilde{m}}:G_{\tilde{m}}\hookrightarrow G_{\tilde{m}+1}$ 
+в прямом пределе
+$\underset{\to}\lim G_m$
+задаются формулой (\ref{for21}),
+с помощью которой легко проверить, что
+$\mathbb{P}^{k_m}$ и $\mathbb{P}^{s_m}$ 
+допускают расширения
+$\mathbb{P}^{k_{\tilde{m}}}\subset G_{\tilde{m}}$,
+$\mathbb{P}^{s_{\tilde{m}}}\subset G_{\tilde{m}}$
+такие, что
+$\mathbb{P}^{k_m}\subset\mathbb{P}^{k_{\tilde{m}}}$,
+$\mathbb{P}^{s_m}\subset\mathbb{P}^{s_{\tilde{m}}}$
+и
+$$
+\mathbb{P}^1=\mathbb{P}^{k_{\tilde{m}}}\cap\mathbb{P}^{s_{\tilde{m}}},\ \ {\tilde{m}}\ge m.
+$$
+Обозначая
+$\mathbf{P}^\infty_\alpha:=\underset{\to}\lim \mathbb{P}^{k_{\tilde{m}}}$,
+$\mathbf{P}^\infty_\beta:=\underset{\to}\lim \mathbb{P}^{s_{\tilde{m}}}$,
+имеем
+\begin{equation}\label{equation50}
+\mathbb{P}^1=\mathbf{P}^\infty_\alpha\cap\mathbf{P}^\infty_\beta.
+\end{equation}
+
+Теперь выберем $n_{\tilde{m}}$ и $k_{\tilde{m}}$ надлежащим образом. А именно, предположим, что  $n_{\tilde{m}}=3t_{\tilde{m}}$ для $G_m=G(k_m,V_{n_m})$,
+и $[\frac{n_{\tilde{m}}}{2}]=3t_{\tilde{m}}$ для
+$G_m=GO(k_m,V_{n_m})$, $GS(k_m,V_{n_m})$,\ $k_{\tilde{m}}=2t_{\tilde{m}}$, $t_{\tilde{m}}\in\mathbb{Z}_{\ge1}$.
+Пусть $c_{\tilde{m}}:=t_{\tilde{m}}-1$.
+Тогда
+\begin{equation}\label{=1}
+s_{\tilde{m}}-c_{\tilde{m}}=1
+\end{equation}
+и удовлетворяютя неравенства (\ref{equation45}) вместе с условиями
+$\underset{{\tilde{m}}\to\infty}\lim k_{\tilde{m}}=
+\underset{{\tilde{m}}\to\infty}\lim s_{\tilde{m}}=\infty$. Далее, используя (\ref{=1}) и теорему Бертини, выберем башню проективных подпространств
+$\mathbb{P}^{N_{\tilde{m}}-c_{\tilde{m}}-1}\subset\mathbb{P}(V_{N_{\tilde{m}}})$ для ${\tilde{m}}\ge m$
+в общем положении, так что
+$\mathbb{P}^{N_{\tilde{m}}-c_{\tilde{m}}-1}\cap\mathbb{P}^{s_{\tilde{m}}}=\mathbb{P}^1$
+и
+$\mathbb{P}^{N_{\tilde{m}}-c_{\tilde{m}}-1}\cap\mathbb{P}^{k_{\tilde{m}}}=
+\mathbb{P}^{(k_{\tilde{m}}/2)+1}$
+для некоторых проективных подпространств
+$\mathbb{P}^{(k_{\tilde{m}}/2)+1}\subset G_{{\tilde{m}}}$.
+В результате получим линейное сечение
+$\mathbf{X}:=\underset{\to}\lim(\mathbb{P}^{N_{\tilde{m}}-c_{\tilde{m}}-1}\cap G_{{\tilde{m}}})$
+инд-грассманиана $\mathbf{G}$ малой коразмерности и проективную прямую $\mathbb{P}^1\subset\mathbf{X}$ такие, что
+$\mathbb{P}^1$ 
+содержится в единственном линейном инд-проективном подпространстве
+$\mathbf{P}^\infty$
+в $\mathbf{X}$, а именно,
+$\mathbf{P}^\infty:=\underset{\to}\lim \mathbb{P}^{(k_{\tilde{m}}/2)+1}$.
+Если бы $\mathbf{X}$ было изоморфно  
+$\mathbf{G}(\infty)$, $\mathbf{G}\mathrm{O}(\infty,\infty)$,
+$\mathbf{G}\mathrm{S}(\infty,\infty)$, то это противоречило бы (\ref{equation50}).
+\end{proof}
+
+
+
+
+Покажем теперь, что линейное сечение $\mathbf{X}$ инд-грассманиана $\mathbf{G}$ малой коразмерности удовлетворяет
+свойствам Л, A и T. Свойство Л следует из того, что группа $\mathrm{Pic}\mathbf{X}$ порождена классом пучка
+$\mathcal{O}_{\mathbf{X}}(1)$, и $H^1(X_m,\mathcal{O}_{X_m}(a))$ обращается в нуль при $\dim X_m>1$ и $a<0$ 
+по теореме Кодаиры. Свойство T установлено в предложении \ref{proposition5.4}.
+Осталось установить свойство A. Часть (A.i) вытекает из того, что пучок $\mathcal{O}_{X_m}(1)$
+очень обилен. Что касается частей (A.ii)-(A.iv), то рассмотрим подробно лишь случай, когда
+$\mathbf{X}$ есть линейное сечение $\mathbf{G}\mathrm{O}(\infty,\infty)$.
+
+Пусть $B(G_m)$ -- семейство проективных прямых в $G_m=GO(k_m,V_{n_m})$, и пусть $B_m$ -- его подсемейство, состоящее
+из тех проективных прямых, которые лежат в $X_m$. По определению $X_m$ есть пересечение $G_m$ с подпространством
+$\mathbb{P}(U_m)$ в $\mathbb{P}(V_{N_m})$ для фиксированного пространства $U_m\in G(N_m-c_m,V_{N_m})$ в общем положении.
+Грассманианы $G(2,V_{N_m})$  $G(2,U_m)$ можно рассматривать как грассманианы проективных прямых в
+$\mathbb{P}(V_{N_m})$ и $\mathbb{P}(U_m)$ соответственно. Тем самым, $B_m=B(G_m)\cap G(2,U_m)$, 
+где пересечение берется в $G(2,V_{N_m})$. Покажем далее, что $B_m$ неприводимо.
+
+Пусть $B$ -- неприводимая компонента $B_m$. Так как $G(2,V_{N_m})$ гладко, субаддитивность коразмерности
+\cite[теорема 17.24]{Ha}) влечет неравенство
+\begin{equation}\label{equation46}
+{\rm codim}_{B(G_m)}B\le{\rm codim}_{G(2,V_{N_m})}G(2,U_{m})=2c_m.
+\end{equation}
+Рассмотрим график инциденции
+$\Sigma_m:=\{(x,\mathbb{P}^{k_m})\in G_m\times \tilde{G}_m\ |\ x\in\mathbb{P}^{k_m}\}$
+с проекциями
+$\tilde{G}_m\overset{p_m}\leftarrow\Sigma_m\overset{q_m}\to G_m$,
+где $\tilde{G}_m:=GO(k_m+1,V_{n_m})$. Пусть $B(\Sigma_m)$ -- семейство всех проективных прямых на $\Sigma_m$,
+лежащих в слоях проекции $p_m$.
+Обозначим через $B(q_m^{-1}(X_m))$ подсемейство в $B(\Sigma_m)$, состоящее из тех проективных
+прямых, которые лежат в $q_m^{-1}(X_m)$. Проекция $q_m:\Sigma_m\to G_m$ индуцирует морфизм 
+$r_{G_m}:B(\Sigma_m)\to B(G_m)$, который биективен, поскольку всякая проективная прямая на $G_m$ лежит
+в единственном максимальном проективном пространстве $\mathbb{P}^{k_m}$
+(см. \cite[\S 2]{PT3}). Пространство $\mathbb{P}^{k_m}$ является изоморфным образом при проекции
+$q_m$ некоторого слоя проекции $p_m$. Соответственно, морфизм
+$r_{X_m}:=r_{G_m}|_{B(q_m^{-1}(X_m))}:B(q_m^{-1}(X_m))\to B_m$
+-- биекция. Поэтому для любой неприводимой компоненты $B'$ в $B(q_m^{-1}(X_m))$
+(\ref{equation46}) приводит к неравенству
+\begin{equation}\label{equation47}
+{\rm codim}_{B(\Sigma_m)}B'\le{\rm codim}_{G(2,V_{N_m})}G(2,U_{m})=2c_m.
+\end{equation}
+
+Проекция $p_m$ индуцирует проекцию $\rho_m:B(\Sigma_m)\to \tilde{G}_m$. Пусть
+$$
+\emptyset=Z_{c_m}(U_m)\subset Z_{c_m-1}(U_m)\subset...\subset Z_0(U_m)\subset \tilde{G}_m
+$$ 
+-- фильтрация (\ref{equation38}) грассманиана $\tilde{G}_m$ 
+замкнутыми подмногообразиями
+$Z_i(U_m)$ коразмерностей в $\tilde{G}_m$, указанных в  (\ref{equation42}), где мы полагаем $c=c_m,$ $k=k_m$.
+Эта фильтрация приводит к разложению $B(q_m^{-1}(X_m))=\underset{0\le i\le c_m}\sqcup B_i$,
+где
+$B_0:=B(q_m^{-1}(X_m))\cap\rho^{-1}_m(\tilde{G}_m\setminus Z_0(U_m))$,
+$B_i:=B(q_m^{-1}(X_m))\cap\rho^{-1}_m(Z_{i-1}(U_m)\setminus Z_i(U_m))$, $i=1,...,c_m$. Из формулы (\ref{equation42})
+вытекает, что ${\rm codim}_{B(\Sigma_m)}B_0=2c_m$, ${\rm codim}_{B(\Sigma_m)}B_i>2c_m$ для $i=1,...,c_m$. Отсюда и из (\ref{equation47}) следует неприводимость многообразия $B(q_m^{-1}(X_m))$, а значит, и многообразия $B_m$.
+
+Пусть теперь $\Pi(G_m)$ -- семейство проективных пространств  $\mathbb{P}^{k_m-1}$, лежащих в $B(G_m)$ и определяемых правыми
+частями (\ref{Pim}). Положим
+\begin{equation}\label{equation48}
+\mathbf{\Pi}:=\underset{\to}\lim\Pi_m,
+\end{equation}
+где $\Pi_m:=\{\mathbb{P}^{k_m-c_m-1}\subset B_m\ |\ \mathbb{P}^{k_m-c_m-1}$ -- проективное подпространство некоторого пространства $\mathbb{P}^{k_m-1}\in\Pi(G_m)\}$.
+
+
+
+Зафиксируем $m$, и пусть $\pi:=p_m|_{q_m^{-1}(X_m)}:q_m^{-1}(X_m)\to \tilde{G}_m$ -- 
+проекция. Рассмотрим относительный грассманиан
+$G_\pi:=\{\mathbb{P}^1\subset q_m^{-1}(X_m)\ |\ \mathbb{P}^1$
+линейно вложено в слой проекции $\pi\}$ с индуцированными проекциями
+$\rho:G_\pi\to \tilde{G}_m$ и $q_\pi:G_\pi\to B_m$.
+По определению слой $\rho^{-1}(x)$ над произвольной точкой 
+$x\in \tilde{G}_m$ есть грассманиан проективных прямых в проективном пространстве $\pi^{-1}(x)$.
+(Заметим, что для точки $x\in \tilde{G}_m$ в общем положении слой $\pi^{-1}(x)$ -- это проективное пространство
+$\mathbb{P}^{k_m-c_m}$, а следовательно, $\rho^{-1}(x)\simeq G(2,\mathbb{C}^{k_m-c_m+1})$.)
+Кроме того, проекция $q_{\pi}$ бирациональна.
+
+По построению проективные пространства $\mathbb{P}^{k_m-c_m-1}\in\Pi_m$ являются изоморфными образами при
+проекции $q_\pi$ проективных пространств $\mathbb{P}^{k_m-c_m-1}$,
+лежащих линейно в слоях проекции $\rho:G_\pi\to\tilde{G}_m$.
+Рассматривая многообразие
+$G_{\rho}:=\{\mathbb{P}^{k_m-c_m}\subset q_m^{-1}(X_m)\ |\ \mathbb{P}^{k_m-c_m}$ лежит линейно в слое проекции
+$\pi:q_m^{-1}(X_m)\to \tilde{G}_m\}$, получаем
+$\mathbb{P}^{k_m-c_m}$-расслоение $q_{\rho}:\Pi_m\to G_{\rho}$ со слоем
+$q_{\rho}^{-1}(y)=\mathbb{P}^{k_m-c_m}$ над произвольной точкой $y=\{\mathbb{P}^{k_m-c_m}\}\in G_{\rho}$.
+Поэтому для проверки неприводимости $\Pi_m$ достаточно проверить неприводимость $G_{\rho}$. Заметим, что $\pi$ индуцирует проекцию $\tau:G_\rho\to \tilde{G}_m$, слой 
+которой над точкой $V_{k_m+1}\in \tilde{G}_m$ совпадает с грассманианом $G(k_m-c_m+1,W)$, где $W\subset V_{k_m+1}$ подпространство,
+определяемое условием $\mathbb{P}(W)=\pi^{-1}(x)$. Как и выше,
+из (\ref{equation42}) следует, что при $i\ge1$ локально замкнутые подмножества $\tau^{-1}(Z_i(W))$ в $G_{\rho}$ имеют размерности
+строго меньшие, чем размерность открытого подмножества $\tau^{-1}(Z(W)\setminus Z_i(W))$. Это доказывает неприводимость $G_{\rho}$, а значит, и неприводимость $\Pi_m$.
+
+Далее, из (\ref{Bm(x)}) вытекает, что для любой точки $x=V_{k_m}\in X_m$ при условии $\tilde{m}\ge m$ база 
+$B_{\tilde{m}}(x)$ 
+семейства проективных прямых на $X_{\tilde{m}}$, проходящих через
+$x$, является линейным сечением подмногообразия
+$\mathbb{P}((\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^*)\times
+GO(1,(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m})^\perp/(\phi_{{\tilde m}-1}\circ...\circ\phi_m)(V_{k_m}))
+$ в $\mathbb{P}(V^*_{k_{\tilde{m}}}\otimes V^\perp_{k_{\tilde{m}}}/V_{k_{\tilde{m}}})$
+проективным подпространством коразмерности $c_{{\tilde{m}}}$ в
+$\mathbb{P}(V^*_{k_{\tilde{m}}}\otimes V^\perp_{k_{\tilde{m}}}/V_{k_{\tilde{m}}})$.
+Пусть $b_{{\tilde{m}}}(x):B_{{\tilde{m}}}(x)\to Q_{(\tilde{m})}(x):=
+GO(1,V^\perp_{k_{\tilde{m}}}/V_{k_{\tilde{m}}})$
+-- естественная проекция. Заметим, что слои морфизма $b_{\tilde{m}}(x)$ -- 
+проективные пространства размерности не меньше, чем 
+$k_{\tilde{m}}-c_{\tilde{m}}-1$,
+и для точек $x$ в $X_m$ и
+$z\in Q_{(\tilde{m})}(x)$ в общем положении слой  $b_{\tilde{m}}(x)^{-1}(z)$ --
+это проективное пространство
+$\mathbb{P}^{k_{\tilde{m}}-c_{\tilde{m}}-1}$
+по теореме Бертини. Более того, инд-многообразие
+$\mathbf{B}(x)=\underset{\to}\lim B_{\tilde{m}}(x)$, ${\tilde{m}}\ge m$ корректно определено.
+
+Аналогичным образом получаем, что
+$\mathbf{\Pi}(x):=\{\mathbf{P}^\infty\in \mathbf{\Pi}\ |\ \mathbf{P}^\infty\ni x\}$
+-- это инд-многообразие 
+$\underset{\to}\lim \Pi_{\tilde{m}}(x),$ ${\tilde{m}}\ge m$,
+где
+$\Pi_{\tilde{m}}(x):=\{\mathbb{P}^{k_{\tilde{m}}-c_{\tilde{m}}-1}\subset B_m|$ $\mathbb{P}^{k_{\tilde{m}}-c_{\tilde{m}}-1}$ 
+лежит как линейное проективное подпространство в слое проекции $b_{\tilde{m}}(x)\}$. Пусть $p(x):\Pi_{\tilde{m}}(x)\to Q_{(\tilde{m})}(x)$
+-- индуцированная проекция. По конструкции для любой точки
+$z\in Q_{(\tilde{m})}(x)$ слой $p(x)^{-1}(z)$ -- грассманиан $G(k_{\tilde{m}}-c_{\tilde{m}},\mathbb{C}^{\dim(b_{\tilde{m}}(x)^{-1}(z))+1}).$
+(В частности, этот грассманиан является точкой, если
+$x\in X_{\tilde{m}}$ и $z\in Q_{(\tilde{m})}(x)$ находятся в общем положении.) Отсюда вытекает свойство (A.ii), поскольку 
+$Q_{(\tilde{m})}(x)$ -- неприводимая гиперквадрика.
+
+Свойство (A.iii) очевидно. Что касается свойства (A.iv), пусть $Y$
+-- многообразие и $f:\Pi_{\tilde{m}}(x)\to Y$ -- морфизм. При
+$\tilde{m}\to\infty$ слои проекции $p(x)$ являются
+либо грассманианами, размерность которых стремится к бесконечности, либо точками.
+Поэтому $f$ отображает каждый слой проекции $p(x)$ в точку, то есть $f$ пропускается через индуцированный морфизм $g:Q_{(\tilde{m})}(x)\to Y$.
+Так как $Q_{(\tilde{m})}(x)$ -- гладкая гиперквадрика, размерность которой стремится к бесконечности при ${\tilde{m}}\to\infty$, то для достаточно большого ${\tilde{m}}$ 
+морфизм $g$ является постоянным отображением. Поэтому $f$ -- также постоянное отображение, и (A.iv) доказано.
+
+Из теоремы \ref{E on linear X} теперь вытекает следующая теорема.
+
+\begin{theorem}\label{theorem5.6}
+Векторное расслоение на линейном сечении $\mathbf{X}$ инд-грассманиана
+$\mathbf{G}(\infty),$ $\mathbf{G}\mathrm{O}(\infty,\infty)$, $\mathbf{G}\mathrm{S}(\infty,\infty)$ малой коразмерности
+изоморфно прямой сумме линейных расслоений
+$\mathcal{O}_{\mathbf{X}}(a_i)$, где
+$a_i\in\mathbb{Z}$.
+\end{theorem}
+
+
+
+
+
+\vspace{1cm}
+\section{Инд-произведения и их подмногообразия со свойствами Л, A, T}\label{section6}
+
+
+\subsection{ Конечные либо счетные инд-произведения со свойствами  Л, A, T}\label{subsection 6.1}
+
+
+Пусть $\mathbf{X}^{\xi}=\underset{\to}\lim X_m^{\xi}$, ${\xi}\in\Xi$ -- счетная совокупность инд-многообразий.
+Будем предполагать, что для каждого ${\xi}\in\Xi$ и любого $m\ge1$
+зафиксировано включение
+$X_m^{\xi}\subset X_{m+1}^{\xi}$.
+В каждом $\mathbf{X}^{\xi}$ выберем точку $x_0^{\xi}$.
+Без ограничения общности можно считать, что
+$x_0^{\xi}\in X_1^{\xi}$.
+Зафиксируем биекцию
+$\nu:\mathbb{N}\overset{\sim}\to\Xi$ 
+и обозначим 
+$\underline{m}:=\{1,2,...,m\}$.
+Положим
+$$
+{}_{\nu}X_m:=\underset{\xi\in\nu(\underline{m})}\times X_m^{\xi}
+$$
+и рассмотрим вложения
+$$
+{}_{\nu}X_m\hookrightarrow{}_{\nu}X_{m+1}={}_{\nu}X_m\times X_m^{\nu(m+1)},\ \
+x\mapsto\big(x,x_0^{\nu(m+1)}\big),\ m\ge1.
+$$
+Назовем инд-многообразие $\mathbf{X}:=\underset{\to}\lim{}_{\nu}X_m$
+\textit{инд-произведением} инд-многообразий
+$\{\mathbf{X}^{\xi}\}_{\xi\in\Xi}$
+и обозначим его через
+\begin{equation}\label{def prod}
+\mathbf{X}=\underset{\xi\in\Xi}\times\mathbf{X}^{\xi}.
+\end{equation}
+
+Заметим, что $\mathbf{X}$ не зависит, с точностью до изоморфизма
+инд-многообразий, от выбора биекции
+$\nu:\mathbb{N}\overset{\sim}\to\Xi$,
+и поэтому обозначение (\ref{def prod}) корректно.
+В самом деле, пусть
+$\nu':\mathbb{N}\overset{\sim}\to\Xi$
+-- другая биекция, и пусть
+$\psi:=\nu'^{-1}\circ\nu:\mathbb{N}\overset{\sim}\to\mathbb{N}$
+-- индуцированная биекция. Изоморфизм
+$\mathbf{f}:\lim{}_{\nu}X_m\overset{\sim}\to\lim{}_{\nu'}X_m$,
+$\mathbf{f}=\{f_m:{}_{\nu}X_m\to{}_{\nu'}X_{\tilde{m}(m)}\}$,
+и обратный к нему
+$\mathbf{g}=\mathbf{f}^{-1}:\lim{}_{\nu'}X_m\overset{\sim}\to\lim{}_{\nu}X_m$,
+$\mathbf{g}=\{g_m:{}_{\nu'}X_m\to{}_{\nu}X_{\tilde{m}(m)}\}$,
+где
+$\tilde{m}(m):=\underset{m'>m}\min\{m'\ |\ \psi(\underline{m})\subset\underline{m}'\}$,
+задаются формулами
+$$
+f_m:{}_{\nu}X_m=\underset{\xi\in\nu(\underline{m})}\times X_m^{\xi}\to{}_{\nu'}X_{\tilde{m}(m)}=
+(\underset{\xi\in\nu(\underline{m})}\times X_{\tilde{m}(m)}^{\xi})\times
+(\underset{\xi\in\nu'(\underline{\tilde{m}(m)})\setminus\nu(\underline{m})}\times X_{\tilde{m}(m)}^{\xi}),
+$$
+$$
+x\mapsto\big(x,\{x_0^{\xi}\}_{\xi\in\nu'(\underline{\tilde{m}(m)})
+\setminus\nu(\underline{m})}\big),
+$$
+$$
+g_m:{}_{\nu'}X_m=\underset{\xi\in\nu'(\underline{m})}\times X_m^{\xi}\to{}_{\nu}X_{\tilde{m}(m)}=
+(\underset{\xi\in\nu'(\underline{m})}\times X_{\tilde{m}(m)}^{\xi})\times
+(\underset{\xi\in\nu(\underline{\tilde{m}(m)})\setminus\nu'(\underline{m})}\times X_{\tilde{m}(m)}^{\xi}),
+$$
+$$
+x\mapsto\big(x,\{x_0^{\xi}\}_{\xi\in\nu(\underline{\tilde{m}(m)})
+\setminus\nu'(\underline{m})}\big).
+$$
+Заметим вдобавок, что, вообще говоря, $\mathbf{X}$ зависит от выбора точек $x_0^{\xi}$, однако мы опускаем эту зависимость в обозначении (\ref{def prod}).
+
+Причина, по которой мы называем $\mathbf{X}$ инд-произведением, а
+не произведением, состоит в том, что
+$\mathbf{X}$ не является прямым произведением в категории инд-многообразий. Конечно, корректно определены проекции инд-многообразий
+$\mathbf{p}_{\xi}: \mathbf{X}\to\mathbf{X}^{\xi}$,
+$\mathbf{p}_{\xi}=\underset{\to}\lim p_{\xi m}$,
+где
+$p_{\xi m}:{}_{\nu}X_m\to X_m^{\xi}$
+-- проекция на ${\xi}$-сомножитель для ${\xi}\in\nu(\underline{m})$, 
+и постоянное отображение
+$p_{\xi m}:{}_{\nu}X_m\to x_0^{\nu(m)}$ для ${\xi}\not\in\nu(\underline{m})$.
+Однако, $\mathbf{X}$  
+не удовлетворяет свойству универсальности произведения.
+
+Если $\Xi$ конечно, то мы определим инд-произведение
+$\underset{\xi\in\Xi}\times\mathbf{X}^{\xi}$
+как теоретико-множественное прямое произведение инд-многообразий
+$\mathbf{X}^{\xi}$.
+Тогда $\underset{\xi\in\Xi}\times\mathbf{X}^{\xi}$
+совпадает с прямым пределом
+$\underset{\to}\lim(\underset{\xi\in\Xi}\times{X}_m^{\xi})$, тем самым, являясь инд-многообразием. 
+Далее, $\underset{\xi\in\Xi}\times\mathbf{X}^{\xi}$, очевидно, удовлетворяет свойству универсальности прямого произведения в категории инд-многообразий.
+
+Пусть теперь $\Xi$ конечно либо счетно, и пусть инд-многообразия
+$\mathbf{X}^{\xi}=\underset{\to}\lim X_m^{\xi}$
+удовлетворяют свойствам Л, A и T. Это означает, что на каждом $\mathbf{X}^{\xi}$
+имеется совокупность
+$\mathbf{L}^{\xi}:=\{\mathbf{L}_{\theta}^{\xi}\ |\ \theta\in\Theta_{\mathbf{X}^{\xi}}\}$
+линейных расслоений и совокупность
+$\mathbf{B}^{\xi}:=\{\mathbf{B}_{\theta}^{\xi}=
+\underset{\to}\lim B_{\theta m}^{\xi}\ |\ \theta\in\Theta_{\mathbf{X}^{\xi}}\}$
+инд-мнообразий проективных прямых такие, что $\mathbf{X}^{\xi}$ 
+удовлетворяет свойствам Л, A и T. Совокупности 
+$\{\mathbf{L}^{\xi}\}_{\xi\in\Xi}$
+определяют следующую счетную совокупность линейных расслоений на $\mathbf{X}$:
+\begin{equation}\label{equation55}
+\mathbf{L}=\{\mathbf{p}_{\xi}^*\mathbf{L}_{\theta}^{\xi}\ |\
+\theta\in\Theta_{\mathbf{X}^{\xi}},\ \xi\in\Xi\}.
+\end{equation}
+Более того, любая проективная прямая $\mathbb{P}^1$ на $\mathbf{X}^{\xi}$ определяет проективную прямую
+$\mathbb{P}^1_{\mathbf{X}}$ на $\mathbf{X}$ такую, что
+$\mathbf{p}_{\xi}(\mathbb{P}^1_{\mathbf{X}})=\mathbb{P}^1$
+и
+$\mathbf{p}_{\xi'}(\mathbb{P}^1_{\mathbf{X}})=\{x_0^{\xi'}\}$ для $\xi'\ne\xi$.
+Поэтому каждое инд-многообразие $\mathbf{B}_{\theta}^{\xi}$
+проективных прямых на $\mathbf{X}^{\xi}$ "поднимается" до инд-многообразия проективных проективных прямых на $\mathbf{X}$. 
+Таким образом мы получаем совокупность $\mathbf{B}$
+инд-многообразий проективных прямых на $\mathbf{X}$. 
+Так как каждое $\mathbf{X}^{\xi}$ удовлетворяет свойствам 
+Л, A и T, то легко проверить, что $\mathbf{X}$ удовлетворяет тем же свойствам по отношению к совокупностям $\mathbf{L}$ и $\mathbf{B}$.
+
+Это вместе с теоремой \ref{E on linear X} приводит к следующей теореме.
+
+\begin{theorem}\label{theorem6.1}
+Векторное расслоение на $\mathbf{X}=\underset{\xi\in\Xi}\times \mathbf{X}^{\xi}$, где каждое инд-многообразие $\mathbf{X}^{\xi}$ удовлетворяет свойствам \rm{Л}, \rm{A} и \rm{T}, изоморфно прямой сумме линейных
+расслоений.
+\end{theorem}
+
+
+
+
+\subsection{Линейные сечения инд-произведений}
+\label{multilin secns}
+В этом пункте мы предполагаем, что $\Xi$ конечно, $\Xi=\{1,2,...,l\}$, и что инд-многообразия
+$\mathbf{X}^i=\underset{\to}\lim X_m^i$, $i\in\Xi$,
+являются копиями стандартных инд-грассманианов
+$\mathbf{G}(\infty),$ $\mathbf{G}\mathrm{O}(\infty,\infty)$,
+$\mathbf{G}\mathrm{S}(\infty,\infty)$. По предыдущему,
+$\underset{i\in\Xi}\times\mathbf{X}^i$
+есть не что иное как прямой предел 
+$\underset{\to}\lim(\underset{i\in\Xi}\times X_m^i)$.
+Каждое ${X}_m^i$ является (возможно, изотропным) грассманианом,
+лежащим по Плюккеру в проективном пространстве
+$\mathbb{P}^{N_{im}-1}=\mathbb{P}(V_{N_{im}})$,
+а вложения
+$\underset{i\in\Xi}\times X_m^i\hookrightarrow\underset{i\in\Xi}\times X_{m+1}^i$
+индуцированы стандартными расширениями
+${X}_m^i \hookrightarrow {X}_{m+1}^i$.
+Предположим также, что
+$\underset{i\in\Xi}\times X_m^i$ лежит в проективном пространстве $\mathbb{P}^{N_{m}-1}$ посредством вложения Сегре
+$\underset{i\in\Xi}\times \mathbb{P}^{N_{im}-1}\hookrightarrow \mathbb{P}^{N_{m}-1}.$
+
+
+Для каждого $m\ge1$ и $i\in\Xi$ положим
+$$
+\widehat{X}_m^i:=X_m^1\times... \times X_m^{i-1}\times X_m^{i+1}\times ...\times X_m^l,
+$$
+и для $X_m^i=G(k_{im},V_{n_{im}})$ (соответственно, $X_m^i=GO(k_{im},V_{n_{im}})$ либо
+$X_m^i=GS(k_{im},V_{n_{im}})$), положим ${X_m^i}^+:=G(k_{im}+1,V_{n_{im}})$ (соответственно,
+${X_m^i}^+=GO(k_{im}+1,V_{n_{im}})$ либо ${X_m^i}^+=GS(k_{im}+1,V_{n_{im}})$).
+Рассмотрим многообразие флагов
+$\Sigma_{im}:=\{(V_{k_{im}}, V_{k_{im}+1})\in X_m^i\times {X_m^i}^+\ |\ V_{k_{im}}\subset V_{k_{im}+1}\}$
+с естественными проекциями
+${X_m^i}^+{\leftarrow}\Sigma_{im}\to X_m^i$.
+Имеем естественные проекции
+\begin{equation}\label{equation58}
+{X_m^i}^+\times\widehat{X}_m^i\overset{p_{im}}{\leftarrow}
+\Sigma_{im}\times\widehat{X}_m^i\overset{q_{im}}\to X_m^i\times \widehat{X}_m^i\simeq \widehat{X}_{m},\ \
+i\in\Xi,
+\end{equation}
+и полагаем
+\begin{equation}\label{equation59}
+\pi_{im}:= p_{im}|_{q^{-1}_{im}(X_m)}:q^{-1}_{im}(X_m)\to
+{X_m^i}^+\times\widehat{X}_m^i,\ \ i\in\Xi.
+\end{equation}
+
+Теперь положим, что $\{c_m\}_{m\ge1}$ -- неубывающая последовательность целых чисел, удовлетворяющая условиям
+\begin{equation}\label{equation56}
+1\le c_m\le {\rm min}\{\frac{k_{im}-1}{2}\ |\ i\in\Xi\},
+\end{equation}
+где
+$X_m^i=G(k_{im},V_{n_{im}}),$ $GO(k_{im},V_{n_{im}}),$  $GS(k_{im},V_{n_{im}}).$
+Для каждого $m\ge1$ рассмотрим линейное сечение $X_m$ многообразия $\underset{i\in\Xi}\times X_m^i$,
+$$
+X_m:=(\underset{i\in\Xi}\times X_m^i)\cap \mathbb{P}^{N_{m}-c_m-1},
+$$
+где
+$\mathbb{P}^{N_{m}-c_m-1}=\mathbb{P}(U_m)$ для $U_m\in G(N_{m}-c_m,V_{N_{m}})$. Назовем $X_m$ \textit{линейным сечением коразмерности} $c_m$ многообразия $\underset{i\in\Xi}\times X_m^i$.
+
+\begin{propos}\label{proposition6.2}
+Для заданного $m\ge 1$ такого, что $k_{im}\ge2$ для всех $i\in\Xi,$
+зафиксируем целое число $c_m$, удовлетворяющее \textrm{(\ref{equation56})}. Тогда для проективного подпространства
+$\mathbb{P}^{N_{m}-c_m-1}=\mathbb{P}(U_m)$
+общего положения в
+$\mathbb{P}^{N_{m}-1},$ $U_m\in G(N_{m}-c_m,V_{N_{m}})$, и любого $i\in\Xi$ выполнены следующие утверждения:
+
+(i) многообразия $X_m$ и $q^{-1}_{im}(X_m)$ -- гладкие;
+
+(ii) $\mathrm{codim}_{\underset{i\in\Xi}\times X_m^i} X_m=
+\mathrm{codim}_{\Sigma_{im}\times\widehat{X}_m^i}
+q^{-1}_{im}(X_m)
+=c_m$, 
+$\pi_{im*} \mathcal{O}_{q^{-1}_{im}(X_m)}=
+\mathcal{O}_{{X_m^i}^+\times\widehat{X}_m^i}$,
+и для точки 
+$x=(x_1,x_2)\in{X_m^i}^+\times\widehat{X}_m^i$ общего положения проективное подпространство
+$\mathbb{P}^{k_{im}}=q_{im} p_{im}^{-1}(x)$ многообразия $X_m^i\times\{x_2\}$
+удовлетворяет условию
+$$
+{\rm codim}_{\mathbb{P}^{k_{im}}}(\mathbb{P}^{k_{im}}\cap \mathbb{P}^{N_{m}-c_m-1})=c_m;
+$$
+следовательно,  $Z_m^i(U_m):=\{x\in{X_m^i}^+\times\widehat{X}_m^i\ |\ \dim\pi_{im}^{-1}(x)> k_{im}-c_m\}$ -- собственное
+замкнутое подмножество в ${X_m^i}^+\times\widehat{X}_m^i$;
+
+(iii) пусть $B_m^i(U_m):=\pi_{im}^{-1}(Z_m^i(U_m));$
+тогда
+${\rm codim}_{q^{-1}_{im}(X_m)} B_m^i(U_m)\ge 2$,\\
+${\rm codim}_{{X_m^i}^+\times\widehat{X}_m^i}Z_m^i(U_m)\ge 3$;
+
+(iv) проекция
+$\pi_{im}:q^{-1}_{im}(X_m)\setminus B_m^i(U_m)\to
+{X_m^i}^+\times\widehat{X}_m^i\setminus Z_m^i(U_m)$
+является проективным $\mathbb{P}^{k_{im}-c_m}$-расслоением.
+\end{propos}
+
+\begin{proof}
+Аналогично доказательству предложения \ref{proposition5.1}.
+\end{proof}
+
+\begin{corollary}\label{corollary6.3}
+\textit{В условиях предложения {\ref{proposition6.2}}
+пусть $i\in\Xi$ и пусть $\mathcal{E}$ -- векторное расслоение на $q_{im}^{-1}(X_m)$,
+тривиальное вдоль слоев морфизма
+$\pi_{im}:q_{im}^{-1}(X_m)\to{X_m^i}^+\times\widehat{X}_m^i$.
+Тогда пучок $\pi_{im*}\mathcal{E}$ локально свободен и канонический морфизм
+$ev:\pi_{im}^*\pi_{im*}\mathcal{E}\overset{\simeq}\to \mathcal{E}$ -- изоморфизм.}
+\end{corollary}
+
+\begin{proof}
+Из предложения \ref{proposition6.2} следует, что
+$X={X_m^i}^+\times\widehat{X}_m^i$, $Y=q_{im}^{-1}(X_m)$,
+$B=B_m^i(U_m)$, $Z=Z_m^i(U_m)$ и $E=\mathcal{E}$
+удовлетворяют условиям предложения \ref{proposition7.2} ниже, из которого вытекает настоящее следствие.
+\end{proof}
+
+В дальнейшем нам потребуется следующая лемма, доказательство которой
+аналогично доказательству леммы \ref{lemma5.3}.
+
+\begin{lemma}\label{lemma6.4}
+Для $i=1,2$ пусть $X_i=G(k_i,V_i),$ $GO(k_i,V_i),$ $GS(k_i,V_i)$ и пусть $X$ линейное сечение коразмерности  $c$ многообразия $X_1\times X_2$, где $1\le c\le {\rm min}\{\frac{k_1+1}{2},\frac{k_2+1}{2}\}$. Тогда для любой
+проективной прямой $\mathbb{P}^1_i\subset X_i$ существует
+проективная прямая $\mathbb{P}^1$ такая, что $pr_i|_{\mathbb{P}^1}$ -- изоморфизм $\mathbb{P}^1$ с $\mathbb{P}^1_i$. Здесь $pr_i$ обозначает естественную проекцию $X_1\times X_2\to X_i.$
+\end{lemma}
+
+Рассмотрим инд-многообразие $\mathbf{X}=\underset{\to}\lim X_m$ такое, что для каждого
+$m\ge1$ многообразие $X_m$ -- линейное сечение коразмерности $c_m$ многообразия $\underset{i\in\Xi}\times X_{im}$, где $c_m$ удовлетворяет (\ref{equation56}),
+а вложения
+$\phi_m:X_m \hookrightarrow X_{m+1}$
+индуцированы соответствующими вложениями
+$\underset{i\in\Xi}\times X_m^i\hookrightarrow\underset{i\in\Xi}\times X_{m+1}^i$.
+Ниже мы будем называть $\mathbf{X}$ \textit{линейным     
+сечением малой коразмерности инд-многообразия} $\underset{i\in\Xi}\times \mathbf{X}^i$.
+Существование линейных сечений ${\mathbf{X}}$ малой коразмерности инд-многообразия $\underset{i\in\Xi}\times \mathbf{X}^i$ непосредственно следует из теоремы Бертини.
+
+\begin{theorem}\label{theorem6.5}
+Пусть $\mathbf{X}$ -- линейное сечение малой коразмерности инд-многообразия $\underset{i\in\Xi}\times \mathbf{X}^i$. Тогда векторное расслоение на $\mathbf{X}$ является прямой суммой 
+линейных расслоений.
+\end{theorem}
+
+\begin{proof}
+Дадим доказательство для случая, когда все $\mathbf{X}^i$
+изоморфны $\mathbf{G}\mathrm{O}(\infty,\infty)$.
+Случай, когда некоторые $\mathbf{X}^i$ изоморфны $\mathbf{G}(\infty)$ либо $\mathbf{G}\mathrm{S}(\infty,\infty)$,
+рассматривается аналогично.
+
+Сначала построим семейства $\mathbf{B}_i$, $i\in\Xi$, на $\mathbf{X}$. Для каждого $m\ge1$ и каждого $i$,
+$1\le i\le l$, рассмотрим естественную проекцию
+$p_{im}:X_m\to \hat{X}_m^i$, и положим $X_m^i(y):=p^{-1}_{im}(y)$ 
+для переменной точки $y\in \hat{X}_m^i$.
+По определению $X_m^i(y)$ есть линейное сечение грассманиана
+$GO(k_{im},V_{n_{im}})$. Пусть $B_i(m)(y)$ -- семейство проективных прямых на
+$GO(k_{im},V_{n_{im}})$, лежащих в $X_m^i(y)$,
+и пусть
+$B_i(m):=\underset{y\in \hat{X}_m^i}\cup B_i(m)(y)$.
+Тогда
+$\mathbf{B}_i:=\underset{\to}\lim B_i(m)$, $i\in\Xi$.
+Кроме того, инд-многообразия $\mathbf{\Pi}_i$, $i\in\Xi,$
+параметризующие подходящие семейства инд-проективных пространств
+$\mathbb{P}^\infty$ в $\mathbf{B}_i$, определяются
+таким же образом, как и инд-многообразие $\mathbf{\Pi}$
+из пункта 5.2 -- см. (\ref{equation48}).
+
+Далее, напомним, что на 
+$\underset{i\in\Xi}\times\mathbf{X}^i$ 
+имеется совокупность линейных расслоений (\ref{equation55}).
+В нашем случае $\Theta_{\mathbf{X}^{\xi}}$ состоит из
+единственной точки для каждого $i$, поэтому мы можем
+записать эту совокупность как
+$\mathbf{L}=\{\mathbf{L}_i\}_{i\in\Xi}$. Определим теперь совокупность линейных расслоений
+$\mathbf{L}_{\mathbf{X}}$, полагая
+$\mathbf{L}_{\mathbf{X}}:=\{\mathbf{L}_i|_{\mathbf{X}}\}_{i\in\Xi}$.
+Тогда по теореме Лефшеца $\mathbf{L}_{\mathbf{X}}$ свободно порождает $\mathrm{Pic}\mathbf{X}$; вдобавок очевидным образом удовлетворяется соотношение (\ref{Li|Pj}). Чтобы увидеть, что $\mathbf{X}$ удовлетворяет свойству Л, осталось заметить, что
+$H^1(X_m,\underset{i\in\Xi}\otimes\mathbf{L}_i^{\otimes a_i}|_{X_m})=0$ для всех $a_i$. В самом деле, зануление
+$H^1(\underset{i\in\Xi}\times X_m^i,
+\underset{i\in\Xi}\otimes\mathbf{L}_i^{\otimes a_i}|_{\underset{i\in\Xi}\times X_m^i})$ вытекает из формул
+Кюннета и Ботта. Поскольку
+$\underset{i\in\Xi}\otimes\mathbf{L}_i^{\otimes a_i}|_{X_m}$ 
+допускает резольвенту Кошуля, аналогичную (\ref{equation32}),
+этого достаточно, чтобы заключить, что
+$H^1(X_m,\underset{i\in\Xi}\otimes\mathbf{L}_i^{\otimes a_i}|_{X_m})=0$.
+
+Используя предложение \ref{proposition6.2} и повторяя рассуждение из пункта \ref{subsec5.2}, легко проверяем, что $\mathbf{X}$ 
+удовлетворяет свойству A. Покажем, что $\mathbf{X}$ 
+удовлетворяет свойству T. Случай $|\Xi|=1$ был рассмотрен в  доказательстве теоремы \ref{theorem5.6}. Достаточно дать доказательство для случая $|\Xi|=2$; доказательство для $|\Xi|\ge 3$ проводится
+подобным же образом. Поэтому предположим, что $X_m$ -- 
+линейное сечение многообразия $X_m^1 \times X_m^2$. 
+В соответствии с (\ref{equation58}) и (\ref{equation59}) мы
+имеем коммутативную диаграмму
+\begin{equation}\label{diag1}
+\xymatrix{
+q^{-1}_{im}(X_m)\ar[d]_{\pi_{1m}}\ar[r]^-{q_{1m}}&
+X_m\ar[d]^{\rho}\\
+{X_m^1}^+\times X_m^2\ar[r]_-{\lambda} & X_m^2, }
+\end{equation}
+где $l=2$, $i=1$, так что $\hat{X}_m^1=X_m^2$, а $\lambda$ и $\rho$ -- естественные проекции.
+
+Пусть $\underset{\leftarrow}\lim E_m$ -- $\mathbf{B}_i$-тривиальное векторное расслоение на
+$\mathbf{X}=\underset{\to}\lim X_m$ для $i=1,2$.
+Это означает, что каждое векторное расслоение $E_m$ является $B_i(m)$-тривиальным расслоением на $X_m$, то есть
+$E_m|_{\mathbb{P}^1}$ тривиально для любого $\mathbb{P}^1\in B_i(m)$, $i=1,2$. Рассмотрим векторное расслоение
+$$
+\tilde{E}_m:=q^*_{1m}E_m.
+$$
+Поскольку $E_m$ является $B_1(m)$-тривиальным, то есть линейно тривиальным на слоях проекции $\rho$, расслоение $E_m$ тривиально по предложению \ref{proposition5.4}. Отсюда следует, что $\tilde{E}_m$ тривиально вдоль слоев проекции $\pi_{1m}$. Поэтому по следствию \ref{corollary6.3} имеется изоморфизм
+$$
+ev:\pi^*_{1m}\pi_{1m*}\tilde{E}_m\overset{\simeq}\to \tilde{E}_m.
+$$
+Более того, как и в доказательстве предложения \ref{proposition5.4} мы получаем, что расслоение
+$\pi_{1m*}\tilde{E}_m|_{\lambda^{-1}(y)}$ тривиально для любого $y\in X_m^2$.
+ 
+Тем самым, из предложения \ref{trivial on fibres} ниже и диаграммы (\ref{diag1}) следует, что
+$E_m^{\lambda}:=\lambda_*\pi_{1m*}\tilde{E}_m$ -- векторное
+расслоение на $X_m^2$ такое, что
+$\tilde{E}_m\simeq\pi^*_{1m}\lambda^*E_m^{\lambda}\simeq q^*_{1m}\rho^*E_m^{\lambda}$.
+Применяя снова предложение \ref{trivial on fibres}, мы получаем
+\begin{equation}\label{equation64}
+E_m\simeq q_{1m*}\tilde{E}_m\simeq q_{1m*}q^*_{1m}\rho^*E_m^{\lambda}\simeq \rho^*E_m^{\lambda}.
+\end{equation}
+Поскольку $E_m$ $B_2(m)$-тривиально, из  (\ref{equation64}) и леммы \ref{lemma6.4} следует, что $E_m^{\lambda}$ -- линейно тривиальное расслоение на $X_m^2$. Следовательно, $E_m^{\lambda}$ тривиально в силу предложения \ref{proposition7.4} ниже, и $E_m$ также тривиально. Таким
+образом, мы показали, что $\mathbf{X}$ удовлетворяет свойству T.
+\end{proof}
+
+
+
+
+
+
+\subsection{Инд-многообразия обобщенных флагов}\label{gen flags}
+
+Напомним сначала несколько основных определений, относящихся к обобщенным флагам в векторном пространстве, см.
+\cite[\S\S 3-5]{DiP}. Пусть $V$ -- счетномерное векторное
+пространство. Множество $\mathcal{C}$ попарно различных подпространств в $V$ называется \textit{цепочкой}, если оно линейно упорядочено по включению. Цепочка $\mathcal{F}$ подпространств в $V$ называется \textit{обобщенным флагом} в $V$, если она удовлетворяет следующим условиям:
+
+(i) каждое подпространство $F\in\mathcal{F}$ имеет непосредственного последователя либо непосредственного предшественника, то есть
+$\mathcal{F}=\mathcal{F}'\cup\mathcal{F}''$, где $\mathcal{F}'\subset\mathcal{F}$
+(соответственно, $\mathcal{F}''\subset\mathcal{F}$) -- множество подпространств из $\mathcal{F}$, имеющих непосредственного последователя (соответственно, предшественника);
+
+(ii) $V\setminus\{0\}=\sqcup_{F'\in\mathcal{F}'}
+(F''\setminus F')$, где $F''\in\mathcal{F}''$ -- непосредственный последователь подпространства $F'\in\mathcal{F}'$.
+
+Определим \textit{флаг} в $V$ как обобщенный флаг в $V$,
+изоморфный как упорядоченное множество подмножеству в $\mathbb{Z}$. Эквивалентным образом флаг можно определить как цепочку подпространств в $V$ таких, что
+$\cap_{F\in\mathcal{F}}F=0$, $\cup_{F\in\mathcal{F}}F=V$
+и существует строго монотонное отображение упорядоченных множеств $\phi:\mathcal{F}\to\mathbb{Z}$.
+
+
+Если $\mathcal{F}$ -- обобщенный флаг в $V$ и $\{e_{\alpha}\}_{\alpha\in A}$ -- базис в $V$ (где $A$ -- счетное множество), то будем говорить, что $\mathcal{F}$ и
+$\{e_{\alpha}\}_{\alpha\in A}$
+\textit{согласованы}, если существует строгий частичный порядок $\prec$ на $A$ такой, что для любого $F'\in\mathcal{F}'$ справедливо равенство
+$F'=\mathrm{Span}\{e_{\beta}\ |\ \beta\prec\alpha\}$ для некоторого $\alpha\in A$ и
+$F''=F'\oplus\mathrm{Span}\{e_{\gamma}\ |\ \gamma$
+не является $\prec$-сравнимым с $\alpha\}$.
+
+В оставшейся части этого параграфа зафиксируем базис $E=\{e_n\}$ в $V$. Назовем обобщенный флаг $\mathcal{F}$ \textit{слабо согласованным с} $E$, если $\mathcal{F}$
+согласован с базисом $L$ в $V$ таким, что $E\setminus(E\cap L)$ -- конечное множество. Далее, будем называть два обобщенных флага $\mathcal{F}$ и $\mathcal{G}$ в $V$  $E$-\textit{соизмеримыми}, если оба флага $\mathcal{F}$ и
+$\mathcal{G}$ слабо согласованы с $E$ и существует сохраняющая включение биекция $\phi:\mathcal{F}\to\mathcal{G}$ и конечномерное подпространство $U$ в $V$ такие, что для любого $F\in\mathcal{F}$ 
+
+(i) $F\subset\phi(F)+U,\ \phi(F)\subset F+U$,\\  
+и
+
+(ii) $\dim(F\cap U)=\dim(\phi(F)\cap U)$.
+
+Пусть $\mathcal{F}l(\mathcal{F},E)$ -- множество всех обобщенных флагов в $V$, $E$-соизмеримых с $\mathcal{F}$. Следуя \cite[предл. 5.2]{DiP}), снабдим 
+$\mathcal{F}l(\mathcal{F},E)$ структурой инд-многообразия следующим образом. Для каждого
+$m\ge 1$ обозначим $E_m:=\{e_\alpha\}_{\alpha\le m}$,
+$V_m:=\mathrm{Span}(E_m)$, $E_m^c:=\{e_\alpha\}_{\alpha>m}$, $V_m^c:=\mathrm{Span}(E_m^c)$.
+Далее, для каждого $\mathcal{G}\in \mathcal{F}l(\mathcal{F},E)$ выберем положительное целое число $m_{\mathcal{G}}$ такое, что $\mathcal{F}$ и $\mathcal{G}$ согласованы с базисами, содержащими $E^c_{m_{\mathcal{G}}}$, и
+$V_{m_{\mathcal{G}}}$ содержит конечномерное подпространство
+$U$, которое вместе с соответствующей сохраняющей включение биекцией $\phi_{\mathcal{G}}:\mathcal{F}\overset{\sim}\to \mathcal{G}$ делает 
+$\mathcal{F}$ и $\mathcal{G}$ $E$-соизмеримыми. Мы можем выбрать целое число $n_{\mathcal{F}}$ такое, что
+$n_{\mathcal{F}}\le m_{\mathcal{G}}$ для любого $\mathcal{G}\in\mathcal{F}l(\mathcal{F},E)$. Положим
+$$
+\mathcal{G}_m:=\{G\cap V_m\ |\ G\in \mathcal{G}\},\quad m\ge m_{\mathcal{G}}.
+$$
+Тип флага $\mathcal{F}_m$ определяет последовательность целых чисел
+$$
+0<d_{m,1}<...<d_{m,s_{m-1}}< d_{m,s_m}=m,
+$$
+и пусть $\mathcal{F}l(d_m,V_m)$ -- обычное многообразие флагов типа $d_m=(d_{m,1},...,d_{m,s_{m-1}})$ в $V_m$.
+Заметим, что $s_{m+1}=s_m$ либо $s_{m+1}=s_m+1$. 
+Далее, в обоих случаях определим целое число $j_m$
+следующим образом: в первом случае
+$d_{m+1,i}=d_{m,i}$ для $0\le i<j_m$ и $d_{m+1,i}=d_{m,i}+1$ для $j_m\le i<s_m$, а в последнем случае $d_{m+1,i}=d_{m,i}$ для $0\le i<j_m$ и $d_{m+1,i}=d_{m,i-1}+1$ для $j_m\le i<s_m$.
+
+Теперь определим отображение $\iota_m:\mathcal{F}l(d_m,V_m)\to \mathcal{F}l(d_{m+1},V_{m+1})$
+для любого $m\ge m_{\mathcal{F}}$. Для заданного флага
+${\mathcal{G}}_m=\{0=G_0^m\subset G_1^m\subset... \subset G_{s_m}^m=V_m\}\in \mathcal{F}l(d_m,V_m)$,
+положим
+$\iota_m(\mathcal{G}_m)=\mathcal{G}_{m+1}:=\{0=G_0^{m+1}\subset G_1^{m+1}\subset...\subset G_{s_m+1}^{m+1}
+=V_{m+1}\}$,
+где
+$$
+G_i^{m+1}=\begin{cases}
+G_i^m, &\textrm{если}\ \ 0\le i<j_m,\cr
+G_i^m\oplus ke_{m+1}, &\textrm{если}\ j_m\le i\le s_{m+1}\ \ \textrm{и}\ \ s_{m+1}=s_m,\cr
+G_{i-1}^m\oplus ke_{m+1}, &\textrm{если}\ j_m\le i\le s_{m+1}\ \ \textrm{и}\ \ s_{m+1}=s_m+1.\cr
+\end{cases}
+$$
+Отображения $\iota_m$ -- замкнутые вложения алгебраических многообразий, поэтому
+$\underset{\to}\lim\mathcal{F}l(d_m,V_m)$ является инд-многообразием. Биекция между $\mathcal{F}l(\mathcal{F},E)$ и $\underset{\to}\lim\mathcal{F}l(d_m,V_m)$ задается так:
+$$
+\tau: \mathcal{F}l(\mathcal{F},E)\overset{\sim}\to \underset{\to}\lim\mathcal{F}l(d_m,V_m),\quad \mathcal{G}\mapsto
+\underset{\to}\lim\mathcal{G}_m
+$$
+-- см. \cite[предл. 5.2]{DiP}.
+
+Предположим теперь, что $\mathcal{F}$ -- флаг подпространств в $V$. Тогда $\mathcal{F}=\{...\subset F_i\subset F_{i+1}\subset...\}_{i\in\Theta}$, где $\Theta$ -- одно из четырех линейно упорядоченных множеств
+$\{1,...,n\}$, $\mathbb{Z}$, $\mathbb{Z}_{>0}$, $\mathbb{Z}_{<0}$.
+Предположим вдобавок, что
+\begin{equation}\label{assumptn inf}
+\dim(F''/F')=\infty
+\end{equation}
+для всех $i\in\Theta$ таких, что
+$i+1\in\Theta$. Обозначим через $\mathcal{\hat{F}}(i)$ флаг
+$\mathcal{\hat{F}}\setminus\{F_i\}=\{...\subset F_{i-1}\subset F_{i+1}\subset...\}$.
+Имеется естественная проекция
+$\pi_i:\mathcal{F}l(\mathcal{F},E)\to\mathcal{F}l(\mathcal{\hat{F}}(i),E)$.
+Пусть $\mathcal{\hat{G}}=\{...\subset G_{i-1}\subset G_{i+1}\subset...\}\in\mathcal{F}l(\mathcal{\hat{F}}(i),E)$
+и $\mathcal{G}=\{...\subset G_{i-1}\subset G_i\subset G_{i+1}\subset...\}\in\pi_i^{-1}(\mathcal{\hat{G}})$.
+Тогда слой $\pi_i^{-1}(\mathcal{\hat{G}})$ есть инд-многообразие флагов $\mathcal{F}l(G_i/G_{i-1},E(i))$, где $E(i)=(E\cap G_{i+1})\setminus(E\cap G_{i-1})$. 
+Заметим, что инд-многообразие флагов $\mathcal{F}l(G_i/G_{i-1},E(i))$ изоморфно инд-грассманиану
+$\mathbf{G}({\infty})$.
+
+Более того, корректно определено линейное расслоение
+$\mathbf{L}_i:=\mathcal{O}_{\pi_i}(1):=\underset{\leftarrow}\lim\mathcal{O}_{\pi_{im}}(1)$ на $\mathcal{F}l(\mathcal{F},E)$,
+где
+$\pi_{im}:\mathcal{F}l(d_m,V_m)\to\mathcal{F}l(\hat{d}_m(i),V_m)$ -- естественная проекция, а целое число $\hat{d}_m(i)$ определяется таким же образом, как и $d_m$ с использованием флага $\mathcal{\hat{F}}(i)$ вместо флага $\mathcal{F}$. Тот факт, что линейные расслоения $\mathcal{O}_{\pi_{im}}(1)$
+определяют корректно линейное расслоение $\mathcal{O}_{\pi_i}(1)$, устанавливается прямой проверкой, использующей явный вид вложений $\iota_m$.
+
+Обозначим через $\mathbf{B}_i(\mathcal{G})$ инд-многообразие проективных прямых на $\mathcal{F}l(\mathcal{F},E)$, проходящих через точку $\mathcal{G}\in\mathcal{F}l(\mathcal{F},E)$ и лежащих в слое проекции $\pi_i$, содержащем $\mathcal{G}$. Наконец, определим инд-многообразие $\mathbf{\Pi}_i(\mathcal{G})$ как инд-многообразие
+$\mathbf{\Pi}(\mathcal{G})$ для инд-грассманиана $\mathcal{F}l(G_i/G_{i-1},E(i))\simeq\mathbf{G}({\infty})$, определенное в пункте \ref{section 4.3}.
+
+Легко проверить, что $\mathcal{F}l(\mathcal{F},E)$ удовлетворяет свойствам Л, A и T по отношению к данным
+$\Theta_{\mathcal{F}l(\mathcal{F},E)}:=\Theta$, $\mathbf{L}_i$,
+$\mathbf{B}_i:=\underset{\mathcal{G}\in\mathcal{F}l(\mathcal{F},E)}\cup\mathbf{B}_i(\mathcal{G})$,
+$\mathbf{\Pi}_i:=\underset{\mathcal{G}\in\mathcal{F}l(\mathcal{F},E)}\cup\mathbf{\Pi}_i(\mathcal{G})$.
+В результате из теоремы \ref{E on linear X} вытекает следующая теорема.
+
+\begin{theorem}\label{BVTS for flags}
+Пусть $V$ -- счетномерное векторное пространство с базисом $E$. Пусть $\mathcal{F}$ -- флаг в $V$, удовлетворяющий (\ref{assumptn inf}) и слабо согласованный с $E$. Тогда любое векторное расслоение на $\mathcal{F}l(\mathcal{F},E)$ изоморфно прямой сумме линейных расслоений.
+\end{theorem}
+
+Интересен вопрос о том, выполняется ли теорема БВТС для любого инд-многообразия обобщенных флагов $\mathcal{F}l(\mathcal{F},E)$ в предположении, что обобщенный флаг $\mathcal{F}$ удовлетворяет (\ref{assumptn inf}) для всех $F'\in\mathcal{F}'$ и их соответствующих последователей $F''$.
+
+
+
+
+
+\vspace{0.5cm}
+\section{Приложение}\label{Appendix}
+
+В этом приложении собраны некоторые общие факты о когерентных пучках на проективных многообразиях и их поведении при плоских проективных морфизмах, используемые в статье.
+
+\begin{propos}\label{trivial on fibres}
+Пусть $p:Y\to X$ -- гладкий проективный морфизм проективных многообразий с неприводимыми слоями.
+
+1) Если $E$ -- векторное расслоение на $Y$, тривиальное на слоях проекции $p$, то канонический морфизм 
+$ev:p^*p_* E\to E$ -- изоморфизм.
+
+2) Если $F$ -- векторное расслоение на $X$, то канонический морфизм $F\overset{\sim}\to p_*p^*F$ -- изоморфизм.
+\end{propos}
+
+\begin{proof}
+1) Это легко следует из теоремы о замене базы 
+\cite[гл.~III, следствие.~12.9]{H1}.
+
+2) Рассмотрим разложение Штейна
+$p:Y\overset{p'}\to X'\overset{g}\to X$ морфизма $p$,
+где
+$X'=\mathbf{Spec}(p_*\mathcal{O}_{Y})$ и
+$p'_*\mathcal{O}_{Y}= \mathcal{O}_{X'}$
+(см. \cite[гл. III, следствие.12.9]{H1}). Поскольку $p_*\mathcal{O}_{Y}$ -- обратимый пучок по 1), то, следовательно, $g$ -- изоморфизм. Поэтому
+$p_*\mathcal{O}_{Y}=\mathcal{O}_{X}$. Это вместе с формулой проекции \cite[гл. III, упр. 8.3]{H1} приводит к требуемому  утверждению.
+\end{proof}
+
+\begin{propos}\label{proposition7.2}
+Пусть $\pi:{Y}\to {X}$ -- сюръективный морфизм гладких неприводимых проективных многообразий, такой, что:
+
+(i) слои проекции $\pi$ -- проективные пространства;
+
+(ii) многообразие ${Z}:=\{x \in {X}\ |\  \dim \pi^{-1}(x)>\dim {Y}-\dim {X}\}$ имеет коразмерность по крайней мере $3$ в ${X}$, а многообразие $B:=\pi^{-1}(Z)$ имеет коразмерность по крайней мере $2$ в $Y$;
+
+(iii) существует векторное расслоение $F$ на $X\setminus Z$ такое, что
+$\pi:Y\setminus B\simeq \mathbb{P}(F)\to X\setminus Z$
+совпадает со структурным морфизмом проективизированного векторного расслоения $F$.
+
+Далее, пусть $E$ -- векторное расслоение на $Y$, тривиальное на слоях проекции $\pi.$ Тогда $\mathcal{O}_{X}$-пучок $\pi_*E$ локально свободен, и канонический морфизм $ev:\pi^*\pi_* E\to E$ -- изоморфизм.
+\end{propos}
+
+\begin{proof}
+Покажем сначала, что $ev:\pi^*\pi_* E\to E$ -- изоморфизм.
+Для этого рассмотрим произвольное открытое подмножество $U\subset X$ и его замкнутое подмногообразие $A\subset U$ такое, что
+\begin{equation}\label{equation88}
+\mathrm{codim}_U A\ge2.
+\end{equation}
+Так как $X$ гладко и $Z$ имеет коразмерность $\ge3$ в $X$, то $\textrm{codim}_U(Z\cap A)\ge3$ и
+$\mathrm{codim}_{\pi^{-1}(U)}\pi^{-1}(Z\cap A)\ge2$. Далее, из условия (iii) и (\ref{equation88}) вытекает, что
+$\mathrm{codim}_{\pi^{-1}(U)}\pi^{-1}(Z\setminus Z\cap A)\ge2.$ Следовательно,
+\begin{equation}\label{equation89}
+\mathrm{codim}_{\pi^{-1}(U)}\pi^{-1}( A)\ge2.
+\end{equation}
+
+Пусть $s\in H^0(U\setminus A,\pi_* E|_{U\setminus A})$ и пусть $\tilde{s}:=\phi(s)$,
+где
+$\phi: H^0(U\setminus A,\pi_* E|_{U\setminus A})\overset{\simeq}\to
+H^0(\pi^{-1}(U\setminus A),E|_{\pi^{-1}(U\setminus A)})$
+-- канонический изоморфизм. Поскольку $E$ -- локально свободный пучок на гладком многообразии $Y$, то $E$ нормален в силу \cite[предл. 1.6(ii)]{H2}, так что из (\ref{equation89}) следует, что $\tilde{s}$ единственным обазом продолжается до сечения
+$\tilde{s}'\in H^0(\pi^{-1}(U),E|_{\pi^{-1}(U)})$.
+Тогда $s$ продолжается до сечения $s':=\psi(\tilde{s}')\in H^0(U,\pi_* E|_U)$, где
+$\psi:H^0(\pi^{-1}(U),E|_{\pi^{-1}(U)}) \overset{\simeq}\to H^0(U,\pi_* E|_U)$ -- канонический изоморфизм. Ввиду (\ref{equation88}) это означает, что пучок $\pi_* E$ нормален.
+
+Заметим, что $\pi_* E$ не имеет кручения. В самом деле, если бы подпучок кручения $Tors(\pi_* E)$ пучка $\pi_* E$ был ненулевым, то поскольку $E$ локально свободен, в силу условия (iii) любое сечение
+$0\ne s\in H^0(Y,Tors(\pi_* E))$
+имело бы носитель в $Z$. Тогда сечение $0\ne \tilde{s}:=\psi^{-1}(s)$ имело бы носитель в $B$, то есть $Tors(E)\ne 0$. Но это противоречило бы тому, что $E$ локально свободен и $Y$ гладко и неприводимо.
+
+Следовательно, $\pi_* E$ рефлексивен согласно \cite[предл. 1.6]{H2}.
+Положим
+$$
+\tilde{E}:=\pi^*\pi_*E/Tors(\pi^*\pi_*E).
+$$
+Предложение \ref{trivial on fibres} вместе с условием (iii)
+показывает, что существует изоморфизм
+\begin{equation}\label{equation91}
+\alpha:\tilde{E}|_{Y\setminus B}\overset{\simeq}\to
+E|_{Y\setminus B}.
+\end{equation}
+Теперь в силу \cite[предл. 1.1]{H2} пучок $\pi_* E$ включается локально по $X$ в точную последовательность
+\begin{equation}\label{equation90}
+0\to\pi_*E\to L_1\to L_2,
+\end{equation}
+с локально свободными пучками $L_1$ и $L_2$. Применяя к (\ref{equation90}) функтор $\pi^*$, мы получаем последовательность
+$$
+0\to\tilde{E}\to\pi^*L_1\to\pi^*L_2,
+$$
+которая является точной, будучи ограниченной на $Y\setminus B$. Следовательно, сама эта последовательность точна, так как $\tilde{E}$ -- пучок без кручения, а пучки $\pi^*L_1$ и
+$\pi^*L_2$ локально свободны. В силу \cite[предл. 1.1]{H2} 
+отсюда следует, что $\tilde{E}$ рефлексивен. Поэтому, обозначая через $i$ вложение 
+$Y\setminus B \hookrightarrow Y$ 
+и используя изоморфизм (\ref{equation91}) и \cite[предл. 1.6(iii)]{H2}, получаем изоморфизм
+$$
+\pi^*\pi_*E=\tilde{E}\cong i_*(\tilde{E}|_{Y\setminus
+B})\overset{i_*\alpha}{\underset{\simeq}\to} i_*({E}|_{Y
+\setminus B})\cong E.
+$$
+Этот изоморфизм есть не что иное как канонический морфизм $ev$.
+
+Осталось показать, что $\pi_* E$ локально свободен. Изоморфизм $ev$ показывает, что пучок $\pi^*\pi_*E$ локально свободен. Поэтому для любого $y\in Y$ 
+$r:=\dim_{\mathbb{C}(y)}(\pi^*\pi_*E\otimes\mathbb{C}(y))$ не зависит от $y$, а значит, $\dim_{\mathbb{C}(x)}(\pi_*E\otimes\mathbb{C}(x))=r,\ x\in X$. Так как $X$ гладко, то согласно \cite[\S5, лемма 1]{M},  
+из условия, что
+$\dim_{\mathbb{C}(x)}(\pi_*E\otimes\mathbb{C}(x))$ не зависит от $x\in X$ вытекает, что $\pi_*E$ локально свободен.
+\end{proof}
+
+\begin{propos}\label{trivial on lines}
+Пусть $Q_n$ -- гладкая $n$-мерная квадрика в $\mathbb{P}^{n+1}$ при $n\ge2$, и пусть $E$ -- линейно тривиальное векторное расслоение на $Q_n$. Тогда $E$ тривиально.
+\end{propos}
+\begin{proof}
+Проведем рассуждение индукцией по $n$. Для $n=2$ доказательство легкое и совпадает с доказательством
+для случая проективного пространства, данным в \cite[гл. I, теорема 3.2.1]{OSS}. Поэтому предположим, что $n\ge3$.
+Рассмотрим подпространство $\mathbb{P}^{n-1}$ коразмерности 2 в $\mathbb{P}^{n+1}$ такое, что
+$Q_{n-2}:=Q_n\cap \mathbb{P}^{n-1}$ -- гладкая квадрика размерности $n-2$. Если $n\ge4$, то $E|_l$ тривиально для любой проективной прямой $l\subset Q_{n-2}$, а следовательно, $E|_{Q_{n-2}}$ тривиально по предположению индукции. Для $n=3$ квадрика $Q_{n-2}$ -- гладкая коника $C$. По теореме Бертини существует гладкая квадратичная поверхность $Q_2$ на $Q_3$, содержащая конику $C$. Поскольку $E|_{Q_2}$ тривиально (будучи линейно тривиально), $E|_C$ также тривиально, то есть наше утверждение выполняется для $n=3$.
+
+Теперь воспользуемся тривиальностью расслоения $E|_{Q_{n-2}}$ при $n\ge4$, чтобы доказать тривиальность $E$.
+Пусть $\sigma_Q:\tilde{Q}_n\to Q_n$ -- раздутие $Q_n$ с центром в $Q_{n-2}$, и пусть $D:=\sigma_Q^{-1}(Q_{n-2})$ -- исключительный дивизор. Ясно, что 
+$D\simeq Q_{n-2}\times\mathbb{P}^1$ и существует плоский сюръективный морфизм $\pi:\tilde{Q}_n\to\mathbb{P}^1$, входящий в коммутативную диаграмму
+\begin{equation}\label{Lefschetz pencil}
+\xymatrix{D=Q_{n-2}\times\mathbb{P}^1\ar[dr]_{\mathrm{pr}_2}
+\ar@{^{(}->}[r]^-{i} & \tilde{Q}_n\ar[d]^-{\pi}\\
+& \mathbb{P}^1,}
+\end{equation}
+где $i$ -- вложение исключительного дивизора. По построению найдутся две различные точки $t_1,t_2\in\mathbb{P}^1$ такие, что слой $Q_{n-1}(t)=\pi^{-1}(t)$ -- гладкая квадрика для  $t\in U:=\mathbb{P}^1\smallsetminus\{t_1\cup t_2\}$,
+а $Q_{n-1}(t_j):=\pi^{-1}(t_j)$ для $j=1,2$ - квадратичный конус с вершиной в точке.
+
+Рассмотрим векторное расслоение $\tilde{E}:=\sigma_Q^*E$ на $\tilde{Q}_n$. По конструкции $\tilde{E}$ тривиально на любой проективной прямой $l\subset Q_{n-1}(t),\ t\in U$.
+Отсюда по предположению индукции получаем
+тривиальность расслоения $E|_{Q_{n-1}(t)},\ t\in U$. Как следствие,
+\begin{equation}\label{h^i=}
+H^i(Q_{n-1}(t),\tilde{E}(-D)|_{Q_{n-1}(t)})=0,\ \ \ \ i\ge0,
+\end{equation}
+$$
+\dim H^i(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)})=
+\left\{\begin{array}{cc}
+r, & \textrm{если}\ i=0,\\
+0, & \textrm{если}\ i\ge1,
+\end{array}\right.
+\ \ \ t\in U.
+$$
+
+Далее, для $j=1,2$, пусть $\sigma:K_j\to Q_{n-1}(t_j)$ -- раздутие конуса
+$Q_{n-1}(t_j)$ с центром в особой точке. Пусть $f_j:K_j\to Q_{n-2}$ -- индуцированное $\mathbb{P}^1$-расслоение, слои которого отображаются в проективные прямые на $Q_{n-1}(t_j)$ при морфизме $\sigma$. Так как
+$\tilde{E}_{t_j}:=\tilde{E}|_{Q_{n-1}(t_j)}$
+тривиально вдоль проективных прямых на $Q_{n-1}(t_j)$, то, следовательно, расслоение
+$\tilde{E}_{K_j}:=\sigma^*\tilde{E}_{t_j}$
+тривиально вдоль слоев проекции $f_j$. Поэтому для
+произвольной точки $x\in Q_{n-2}$ получаем
+$$
+H^i(Q_{n-2},\tilde{E}_{K_j}\otimes\mathbb{C}_x)=
+H^i(\mathbb{P}^1,r\mathcal{O}_{\mathbb{P}^1})=0,\ \ i\ge1,
+$$
+$$
+H^i(Q_{n-2},\tilde{E}_{K_j}(-\sigma^*D)\otimes\mathbb{C}_x)=
+H^i(\mathbb{P}^1,r\mathcal{O}_{\mathbb{P}^1}(-1))=0,\ \ i\ge0.
+$$
+Это вместе с теоремой о замене базы для $f_j$ показывает, что
+$R^if_{j*}\tilde{E}_{K_j}=0$ при $i\ge1$, и $
+R^if_{j*}(\tilde{E}_{K_j}(-\sigma^*D))=0$ при $i\ge0$.
+Таким образом, из спектральной последовательности для проекции $f_j$ находим
+\begin{equation}\label{H^iEKj}
+H^i(K_j,\tilde{E}_{K_j})=0,\ \ i\ge1,\ \ \
+H^i(K_j,\tilde{E}_{K_j}(-\sigma^*D))=0,\ \ i\ge0,\ \ \ j=1,2.
+\end{equation}
+
+
+Далее, рассмотрев раздутие вложенного в $\mathbb{P}^n$ конуса $Q_{n-1}(t_j)$, можно показать, что
+$\sigma_*\mathcal{O}_{K_j}=\mathcal{O}_{Q_{n-1}(t_j)}$ и $R^i\sigma_*\mathcal{O}_{K_j}=0,\ i\ge1$.
+Поэтому, полагая
+$\tilde{E}_{t_j}:=\tilde{E}|_{Q_{n-1}(t_j)}$
+и пользуясь формулой проекции, получаем:
+$\sigma_*\tilde{E}_{K_j}=\tilde{E}_{t_j}$,\
+$R^i\sigma_*\tilde{E}_{K_j}=0,\ i\ge1$,
+и
+$\sigma_*(\tilde{E}_{K_j}(-\sigma^*D))=\tilde{E}_{t_j}(-D)$,\
+$R^i\sigma_*(\tilde{E}_{K_j}(-\sigma^*D))=0,\ i\ge1$.
+Теперь спектральная последовательность Лере, примененная к $\sigma$, с учетом (\ref{H^iEKj}) показывает, что
+\begin{equation}\label{again h^i=}
+\begin{array}{cc}
+H^i(Q_{n-1}(t_j),\tilde{E}_{t_j})=H^i(K_j,\tilde{E}_{K_j})=0, \ & i\ge1,\\
+H^i(Q_{n-1}(t_j),\tilde{E}_{t_j}(-D))=H^i(K_j,\tilde{E}_{K_j}(-\sigma^*D))=0, &
+\ \ \ \ i\ge0,\ \ \ j=1,2.
+\end{array}
+\end{equation}
+Из равенств (\ref{h^i=}) и (\ref{again h^i=}) следует ввиду
+замены базы для плоского морфизма $\pi$, что
+\begin{equation}\label{2 relations}
+R^i\pi_*\tilde{E}=0,\ i\ge1,\ \ \
+R^i\pi_*(\tilde{E}(-D))=0,\ \ i\ge0.
+\end{equation}
+Это же рассуждение дает изоморфизмы замены базы
+\begin{equation}\label{1base ch}
+b_t:\ \pi_*\tilde{E}\otimes\mathbb{C}_t\overset{\simeq}\to
+H^0(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)}),\ \ \ t\in\mathbb{P}^1.
+\end{equation}
+
+Рассмотрим дивизор $D=Q_{n-2}\times\mathbb{P}^1$ на $\tilde{Q}_n$ (см. диаграмму (\ref{Lefschetz pencil})) 
+и проекции
+$Q_{n-2}\overset{\mathrm{pr}_1}\leftarrow Q_{n-2}\times\mathbb{P}^1\overset{\mathrm{pr}_2}\to\mathbb{P}^1$.
+По определению
+$\tilde{E}|_D=\mathrm{pr}_1^*(\tilde{E}|_{Q_{n-2}})$, а значит, поскольку $\tilde{E}|_{Q_{n-2}}$ тривиально, замена базы для плоского морфизма $\mathrm{pr}_2$ дает изоморфизмы
+\begin{equation}\label{b'}
+b':\ \mathrm{pr}_{2*}(\tilde{E}|_D)\overset{\simeq}\to H^0(Q_{n-2},E|_{Q_{n-2}})\otimes\mathcal{O}_{\mathbb{P}^1}
+\simeq\mathbb{C}^r\otimes\mathcal{O}_{\mathbb{P}^1},
+\end{equation}
+\begin{equation}\label{2base ch}
+b'_t:\ \mathrm{pr}_{2*}(\tilde{E}|_D)\otimes\mathbb{C}_t\overset{\simeq}\to
+H^0(Q_{n-2},E|_{Q_{n-2}})\simeq\mathbb{C}^r,\ \ \ t\in\mathbb{P}^1.
+\end{equation}
+Теперь рассмотрим точную тройку
+\begin{equation}\label{triple D}
+0\to\tilde{E}(-D)\to\tilde{E}\to E|_D\to0
+\end{equation}
+и ее ограничение 
+\begin{equation}\label{triple D res t}
+0\to\tilde{E}(-D)|_{Q_{n-1}(t)}\to\tilde{E}|_{Q_{n-1}(t)}\to
+(E|_{Q_{n-2}})\otimes\mathbb{C}_t\to0.
+\end{equation}
+на слой $Q_{n-1}(t)$ проекции $\pi$ над произвольной точкой $t\in\mathbb{P}^1$. Применяя функтор $R^i\pi_*$ к (\ref{triple D}) и используя (\ref{2 relations}) и (\ref{b'}), получаем изоморфизм пучков
+\begin{equation}\label{rD}
+r_D:\ \pi_*\tilde{E}\overset{\sim}\to \mathrm{pr}_{2*}(\tilde{E}|_D)\simeq
+\mathbb{C}^r\otimes\mathcal{O}_{\mathbb{P}^1}.
+\end{equation}
+В частности, $\pi_*\tilde{E}$ -- тривиальное расслоение. Соответственно, переходя к когомологиям в точной последовательности (\ref{triple D res t}) и пользуясь (\ref{h^i=}), (\ref{again h^i=}) и (\ref{2base ch}), получаем изоморфизмы
+\begin{equation}\label{res t}
+res_t:H^0(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)})\overset{\sim}\to
+H^0(Q_{n-2},E|_{Q_{n-2}}),\ \ \ t\in\mathbb{P}^1.
+\end{equation}
+По построению изоморфизмы (\ref{1base ch}), (\ref{2base ch}), (\ref{rD}) и (\ref{res t}) образуют коммутативную диаграмму
+\begin{equation}\label{bch diagram}
+\xymatrix{
+\pi_*\tilde{E}\otimes\mathbb{C}_t\ar[d]_{b_t}^{\simeq}
+\ar[r]^-{r_D\otimes\mathbb{C}_t}_-{\simeq} &
+\mathrm{pr}_{2*}(\tilde{E}|_D)\otimes\mathbb{C}_t
+\ar[d]_-{b'_t}^{\simeq}\\
+H^0(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)})
+\ar[r]^-{\mathrm{res}_t}_-{\simeq} &
+H^0(Q_{n-2},E|_{Q_{n-2}})=\mathbb{C}^r
+}
+\end{equation}
+для $t\in\mathbb{P}^1$.
+Далее, так как $E|_{Q_{n-2}}$ тривиально, каноническое отображение $H^0(Q_{n-2},E|_{Q_{n-2}})\otimes\mathcal{O}_{Q_{n-2}}\to E|_{Q_{n-2}}$ -- изоморфизм, так что его композиция
+$e_t$ с ограничением
+$H^0(Q_{n-2},E|_{Q_{n-2}})\otimes\mathcal{O}_{Q_{n-1}(t)}
+\twoheadrightarrow
+H^0(Q_{n-2},E|_{Q_{n-2}})\otimes\mathcal{O}_{Q_{n-2}}$ 
+эпиморфна для любого $t\in\mathbb{P}^1$ и входит в коммутативную диаграмму
+\begin{equation}\label{2bch diagram}
+\xymatrix{
+H^0(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)})\otimes\mathcal{O}_{Q_{n-1}(t)}\ar[d]_{ev_t}
+\ar[r]^-{\pi^*\mathrm{res}_t}_-{\simeq} &
+H^0(Q_{n-2},E|_{Q_{n-2}})\otimes\mathcal{O}_{Q_{n-1}(t)}\ar@{>>}[d]_-{e_t}\\
+\tilde{E}|_{Q_{n-1}(t)}\ar@{>>}[r]^-{\mathrm{res}_{Q_{n-2}}} & E|_{Q_{n-2}}.}
+\end{equation}
+Здесь квадрика $Q_{n-2}$ понимается как дивизор в $Q_{n-1}(t)$. В частности, через любую точку в $Q_{n-1}(t)\smallsetminus Q_{n-2}$ проходит прямая, скажем, $l$, пересекающая $Q_{n-2}$ в точке, скажем, $y$. Поэтому, так как расслоение $\tilde{E}|_l$ тривиально, имеем коммутативную диаграмму отображений ограничения
+$$
+\xymatrix{
+H^0(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)})\ar[d]_{\rho}
+\ar[r]^-{\mathrm{res}_t}_-{\simeq} &
+H^0(Q_{n-2},E|_{Q_{n-2}})\ar[d]^-{\simeq}\\
+H^0(l,\tilde{E}|_l)\ar[r]^-{\simeq} & H^0(y,\tilde{E}|_y).}
+$$
+Следовательно, $\rho$ -- изоморфизм, и поэтому каноническое отображение $ev_t$ в (\ref{2bch diagram}) -- изоморфизм пучков.
+Беря его композицию с изоморфизмом
+$\pi^*b_t:\pi^*\pi_*\tilde{E}|_{Q_{n-1}(t)}\overset{\simeq}\to
+H^0(Q_{n-1}(t),\tilde{E}|_{Q_{n-1}(t)})\otimes
+\mathcal{O}_{Q_{n-1}(t)}$, вытекающим из левого вертикального изоморфизма в (\ref{bch diagram}), получаем канонический изоморфизм 
+$ev|_{Q_{n-1}(t)}:\ \pi^*\pi_*\tilde{E}|_{Q_{n-1}(t)}\overset{\simeq}\to\tilde{E}|_{Q_{n-1}(t)}$.
+Так как этот изоморфизм имеет место для любого $t\in\mathbb{P}^1$, то
+имеем изоморфизм
+$ev:\ \pi^*\pi_*\tilde{E}\overset{\simeq}\to\tilde{E}$, который вместе с (\ref{rD}) дает тривиальность расслоения $\tilde{E}$.
+Поскольку, очевидно, $\sigma_{Q*}\mathcal{O}_{\tilde{Q}}=\mathcal{O}_Q$, 
+то отсюда следует, что $E=\sigma_{Q*}\tilde{E}=
+\sigma_{Q*}(r\mathcal{O}_{\tilde{Q}})=r\mathcal{O}_Q$, то есть получаем утверждение предложения.
+\end{proof}
+
+\begin{propos}\label{proposition7.4}
+Пусть $E$ -- линейно тривиальное векторное расслоение на $GO(k,V)$ либо $GS(k,V)$. Тогда $E$ тривиально.
+\end{propos}
+
+\begin{proof}
+Рассмотрим случай $GO(k,V)$. Дадим доказательство по индукции в предположении, что $n:=\frac{\dim V}{2}\in \mathbb{Z}_{>0}.$ Случай, когда $\dim V$ нечетно, рассматривается аналогично.
+
+Для $n=2$ имеем $GO(1,V)\simeq\mathbb{P}^1\times\mathbb{P}^1$, $GO(2,V)\simeq\mathbb{P}^1$, и для этих многообразий наше утверждение, очевидно, выполнено. Поэтому предположим, что $n\ge3$, и проведем рассуждение индукцией по $k$. Если
+$k=1$, то $GO(k,V)$ -- $(2n-2)$-мерная квадрика в $\mathbb{P}^{2n-1}$, так что наше утверждение выполняется в силу предложения \ref{trivial on lines}. Теперь предположим, что $1\le k\le n-2$, и рассмотрим график инциденции $\Sigma$ с естественными проекциями
+\begin{equation}\label{equation108}
+GO(k,V)\overset{q}\leftarrow\Sigma\overset{p}\to GO(k+1,V)
+\end{equation}
+(см. пункт \ref{5.1}).
+
+Пусть $E$ -- линейно тривиальное векторное расслоение на $GO(k+1,V)$. Тогда расслоение $p^*E$ линейно тривиально на слоях проекции $q$. Поскольку эти слои являются квадриками, из предложения \ref{trivial on lines} следует, что $p^*E$ тривиально на слоях проекции $q$. Кроме того, из предложения \ref{trivial on fibres} вытекает изоморфизм $q^*q_*p^*E\overset{\simeq}\to p^* E$. Следовательно, поскольку $p^*E$ тривиально на слоях проекции $p$, отображаемых проекцией $q$ изоморфно на проективные пространства $\mathbb{P}^k$ на $GO(k,V)$, расслоение $q_*p^*E$ тривиально вдоль этих проективных подпространств $\mathbb{P}^k$ на $GO(k,V)$. Тем самым, $q_*p^*E$ линейно тривиально на $GO(k,V)$. Таким образом, по предположению индукции расслоение $q_*p^*E$ тривиально. Поэтому $p^*E$ и $E=p_* p^* E$ тривиальны.
+
+Осталось рассмотреть случай $GO(n,V)$. Здесь мы проведем индукцию по $n$. При $n=3$ $GO(n,V)\simeq\mathbb{P}^3$, а следовательно, утверждение в этом случае выполнено. При $n\ge4$ рассмотрим график инциденции
+$\Pi_n:=\{(V_1,V_n)\in Q_{2n-2}\times GO(n,V)\ |\ V_1\subset V_{n}\}$ с естественными проекциями\begin{equation}\label{equation109}
+Q_{2n-2}\overset{p}\leftarrow\Pi_n\overset{q}\to GO(n,V).
+\end{equation}
+
+Пусть $E$ -- линейно тривиальное векторное расслоение на $GO(n,V)$. Тогда $q^* E$ тривиально вдоль прямых, лежащих в слоях проекции $p$, изоморфных $GO(n-1,\mathbb{C}^{2n-2})$.
+Следовательно, $q^* E$ тривиально вдоль слоев проекции $p$ по предположению индукции. 
+Далее, из предложения \ref{trivial on fibres} вытекает изоморфизм $p^*p_*q^*E\overset{\simeq}\to q^*E$.
+Поскольку $q^* E$ тривиально на слоях проекции $p$, то, значит, расслоение $p_*q^*E$ тривиально на проективных подпространствах $\mathbb{P}^{n-1}$ на квадрике $Q_{2n-2}$. Поэтому  $p_* q^* E$ тривиально на прямых в $Q_{2n-2}$, так что оно тривиально по предложению \ref{trivial on lines}. Наконец, $q^*E\simeq p^*p_*q^*E$ и $E= q_* q^* E$ также тривиальны.
+
+Перейдем к случаю $GS(k,V)$. Заменяя $GO$ на $GS$ в диаграмме (\ref{equation108}), получаем диаграмму
+$GS(k,V)\overset{q}\leftarrow\Sigma'\overset{p}\to GS(k+1,V)$,
+где $p$ -- $\mathbb{P}^k$-расслоение, а $q$ -- $\mathbb{P}^{2n-2k-1}$-расслоение. Соответственно, заменяя $GO$ на $GS$ и $Q_{2n-2}$ на $\mathbb{P}(V_n)$ в диаграмме (\ref{equation109}), получаем диаграмму
+$\mathbb{P}(V_n) \overset{p}\leftarrow\Pi'_n\overset{q}\to GS_n$.
+Это позволяет провести рассуждение, вполне аналогичное проведенному выше для случая $GO(k,V)$.
+\end{proof}
+
+
+
+
+
+\end{fulltext}
+
+\begin{thebibliography}{99}
+
+
+
+\RBibitem{BV} 
+\by W. Barth, A. Van de Ven  
+\paper A Decomposability Criterion for Algebraic 2-Bundles on Projective Spaces
+\jour Inventiones math.
+\yr 1974
+\vol 25
+\pages 91-106
+
+\RBibitem{T}
+\by А.~Н.~Тюрин
+\paper Конечномерные расслоения на бесконечных многообразиях
+\jour Изв. АН СССР. Сер. матем.
+\yr 1976
+\vol 40
+\issue 6
+\pages 1248--1268
+\morerref English translation:
+\by A. N. Tyurin 
+\paper Vector bundles of finite rank over infinite varieties
+\jour Math. USSR Izvestija
+\yr 1976
+\vol 10
+\issue 6
+\pages 1187-1204
+
+\RBibitem{S1} 
+\by E. Sato
+\paper On the decomposability of infinitely extendable vector bundles on
+projective spaces and Grassmann varieties
+\jour  J. Math. Kyoto Univ. 
+\yr 1977
+\vol 17 
+\pages 127-150
+
+\RBibitem{DP} 
+\by J. Donin, I. Penkov 
+\paper Finite rank vector bundles on inductive limits of grassmannians
+\jour Inventiones math.
+\yr 2003
+\vol 34
+\pages 1871-1887
+
+\RBibitem{PT1}
+\by I. Penkov, A. S. Tikhomirov
+\paper Rank-2 vector bundles on ind-Grassmannians
+\inbook Algebra, arithmetic, and geometry: in honor of Yu. I. Manin, vol. II
+\yr 2009
+\publ Progress Math. 270, Birkh\"auser
+\publaddr Boston-Basel-Berlin
+\pages 555-572
+
+\RBibitem{PT2}  
+\by И. Б. Пенков, А. С. Тихомиров 
+\paper Тривиальность векторных расслоений на скрученных инд-грассманианах
+\jour Матем. сборник
+\yr 2011
+\vol 202
+\issue  1
+\pages  65-104
+\morerref English translation:
+\by I. Penkov, A. S. Tikhomirov
+\paper Triviality of vector bundles on twisted ind-Grassmannians
+\jour Sbornik: Mathematics 
+\yr 2011
+\vol 202 
+\issue 1
+\pages 61-99 
+
+\RBibitem{S2} 
+\by E. Sato 
+\paper On infinitely extendable vector bundles on $G/P$
+\jour  J. Math. Kyoto Univ. 
+\yr 1979
+\vol 19 
+\pages 171-189
+
+\RBibitem{S3} 
+\by E. Sato 
+\paper The decomposability of an infinitely extendable vector bundle
+on the projective space, vol. II  
+\inbook Intern. Symp. on Algebraic Geometry 
+\yr 1977
+\publaddr Kyoto
+\pages 663-672.
+
+\RBibitem{F} 
+\by W. Fulton
+\book Intersection Theory, Second Ed.
+\yr 1998
+\publ Springer-Verlag
+\publaddr New York
+
+\RBibitem{H3} 
+\by R. Hartshorne 
+\paper On the de Rham cohomology of algebraic varieties
+\jour Inst. Hautes \'Etudes Sci. Publ. Math.
+\yr 1976
+\vol 45
+\pages 5-99
+
+\RBibitem{DPW}  
+\by I. Dimitrov, I. Penkov, J. A. Wolf 
+\paper A Bott-Borel-Weil theory for direct limits of algebraic groups
+\jour Amer. J. Math.
+\yr 2002
+\vol 124
+\pages 955-998
+
+\RBibitem{PT3} 
+\by I. Penkov, A. S. Tikhomirov
+\paper Linear ind-Grassmannnians
+\jour Pure and Appl. Math. Quarterly
+\yr 2014
+\vol 10
+\issue 2
+\pages 289-323
+
+\RBibitem{H1} 
+\by R. Hartshorne
+\book Algebraic Geometry
+\yr 1977
+\publ Springer
+\publaddr New York
+
+\RBibitem{OSS} 
+\by C. Okonek, M. Schneider, H. Spindler
+\book Vector Bundles on Complex Projective Spaces
+\yr 1980
+\publ Birkh\"auser
+\publaddr Boston-Basel-Stuttgart
+
+\RBibitem{Ha} 
+\by J. Harris
+\book Algebraic Geometry: a first course
+\yr 2000
+\publ Springer-Verlag
+\publaddr New York
+
+\RBibitem{DiP}  
+\by I. Dimitrov, I. Penkov 
+\paper Ind-varieties of generalized flags as homogeneous spaces for classical ind-groups
+\jour IMRN
+\yr 2004
+\vol 55
+\pages 2935-2953
+
+\RBibitem{H2} R. Hartshorne. 
+\paper Stable reflexive sheaves
+\jour Math. Ann.
+\yr 1980
+\vol 254
+\pages 121-176
+ 
+\RBibitem{M} 
+\by D. Mumford
+\book Abelian varieties. Second edition
+\yr 1985
+\publ Oxford Univ. Press
+\publaddr Oxford
+
+
+\end{thebibliography}
+\end{document}

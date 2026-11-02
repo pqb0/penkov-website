@@ -1,0 +1,322 @@
+\newbox\mymatrixAbox
+\newbox\mymatrixBbox
+\newbox\mymatrixCbox
+\newbox\mymatrixDbox
+\newbox\mymatrixEbox
+\newbox\mymatrixFbox
+\newcount\mymatrixAcnt
+\newcount\mymatrixBcnt
+\newcount\mymatrixCcnt
+\newcount\mymatrixDcnt
+\newdimen\mymatrixvsep
+\newdimen\mymatrixhsep
+\newdimen\mymatrixindent
+\newdimen\mymatrixlft
+\newdimen\mymatrixrt
+\newdimen\mymatrixbot
+\newdimen\mymatrixtop
+\newdimen\mymatrixtmpdim
+\newdimen\mymatrixwdmax
+\newdimen\mymatrixcellwd
+\newdimen\mymatrixcellht
+\newdimen\mymatrixcelldp
+\newif\ifmymatrixgray\mymatrixgrayfalse
+\def\matrixnotesize{\footnotesize}
+
+\newtoks\mymatrixLnote
+\newtoks\mymatrixRnote
+\newtoks\mymatrixTnote
+\newtoks\mymatrixBnote
+\newif\ifmymatrixLnotes
+\newif\ifmymatrixTnotes
+\newif\ifmymatrixRnotes
+\newif\ifmymatrixBnotes
+
+\newif\ifLines\Linesfalse
+\newif\ifAutonum\Autonumfalse
+
+\mymatrixvsep=2pt
+\mymatrixhsep=2.5pt
+\mymatrixindent=0pt
+
+\def\MyMatrixwithdelims#1#2#3{{\mathsurround0pt\tabskip0pt\let\\\cr
+\mymatrixRnotesfalse
+\mymatrixLnotesfalse
+\mymatrixTnotesfalse
+\mymatrixBnotesfalse
+\everycr{}%
+\let\@Fbox\fbox
+\fboxsep=.5pt
+\def\Fbox{\scriptspace=0pt\@Fbox}%
+\def\fbox{\Rr\Br\Lr\Tr}%
+\edef\empty{}%
+\def\Rr{\Rt{\the\fontdimen8\textfont3}}%
+\def\Br{\Bot{\the\fontdimen8\textfont3}}%
+\def\Tr{\Top{\the\fontdimen8\textfont3}}%
+\def\Lr{\Lft{\the\fontdimen8\textfont3}}%
+\def\Lft##1{\global\mymatrixlft=##1\relax}%
+\def\Rt##1{\global\mymatrixrt=##1\relax}%
+\def\Bot##1{\global\mymatrixbot=##1\relax}%
+\def\Top##1{\global\mymatrixtop=##1\relax}%
+\def\Note##1{\global\mymatrixTnote={##1}\relax}%
+\def\lNote##1{\global\mymatrixLnote={##1}\relax}%
+\def\rNote##1{\global\mymatrixRnote={##1}\relax}%
+\def\bNote##1{\global\mymatrixBnote={##1}\relax}%
+\def\gray{\global\mymatrixgraytrue}%
+\def\process##1{\global\advance\mymatrixBcnt by 1\relax
+\global\mymatrixTnote{}\global\mymatrixLnote{}%
+\global\mymatrixBnote{}\global\mymatrixRnote{}%
+\setbox0\hbox{\hskip\mymatrixhsep${##1}\mathstrut$\hskip\mymatrixhsep}%
+\mymatrixtop=\ht0\advance\mymatrixtop by \mymatrixvsep\ht0=\mymatrixtop
+\mymatrixtop=\dp0\advance\mymatrixtop by \mymatrixvsep\dp0=\mymatrixtop
+\global\edef\mymatrixwdlist{\mymatrixwdlist!\number\mymatrixAcnt,\number\mymatrixBcnt!\the\wd0;}%
+\global\edef\mymatrixhtlist{\mymatrixhtlist!\number\mymatrixAcnt,\number\mymatrixBcnt!\the\ht0;}%
+\global\edef\mymatrixdplist{\mymatrixdplist!\number\mymatrixAcnt,\number\mymatrixBcnt!\the\dp0;}%
+\edef\test{\the\mymatrixTnote}\ifx\test\empty\else\global\mymatrixTnotestrue\fi
+\global\edef\mymatrixTnoteslist{\mymatrixTnoteslist!\number\mymatrixBcnt!\the\mymatrixTnote;}%
+\edef\test{\the\mymatrixBnote}\ifx\test\empty\else\global\mymatrixBnotestrue\fi
+\global\edef\mymatrixBnoteslist{\mymatrixBnoteslist!\number\mymatrixBcnt!\the\mymatrixBnote;}%
+\edef\test{\the\mymatrixLnote}\ifx\test\empty\else\global\mymatrixLnotestrue\fi
+\global\edef\mymatrixLnoteslist{\mymatrixLnoteslist!\number\mymatrixAcnt!\the\mymatrixLnote;}%
+\edef\test{\the\mymatrixRnote}\ifx\test\empty\else\global\mymatrixRnotestrue\fi
+\global\edef\mymatrixRnoteslist{\mymatrixRnoteslist!\number\mymatrixAcnt!\the\mymatrixRnote;}%
+}%
+\global\edef\mymatrixTnoteslist{}%
+\global\edef\mymatrixBnoteslist{}%
+\global\edef\mymatrixLnoteslist{}%
+\global\edef\mymatrixRnoteslist{}%
+\global\edef\mymatrixwdlist{}%
+\global\edef\mymatrixhtlist{}%
+\global\edef\mymatrixdplist{}%
+\global\mymatrixAcnt=0\relax
+\setbox\mymatrixAbox\vbox{
+\ifx\matrixsize\undefined\else\matrixsize\fi\offinterlineskip
+\halign{%
+\global\advance\mymatrixAcnt by 1\relax
+\global\mymatrixBcnt=0\relax
+\process{##}\hfil&&\process{##}\hfil\crcr #3}}%
+\Makeemptylist\relax
+%\show\emptylist
+%\show\mymatrixwdlist
+\ifAutonum\makeAutonum\fi
+%\show\mymatrixLnoteslist
+\global\edef\mymatrixwdlist{\mymatrixwdlist\emptylist}%
+\global\edef\mymatrixhtlist{\mymatrixhtlist\emptylist}%
+\global\edef\mymatrixdplist{\mymatrixdplist\emptylist}%
+\global\edef\mymatrixWDlist{}%
+\global\edef\mymatrixHTlist{}%
+\global\edef\mymatrixDPlist{}%
+\mymatrixDcnt=1\relax
+\Aloop
+\mymatrixlft=0pt\relax
+\mymatrixCcnt=1\relax
+\Bloop
+\edef\tmp{(\number\mymatrixCcnt,\number\mymatrixDcnt)}%
+\expandafter\mymatrixWD\tmp
+\ifdim\mymatrixtmpdim>\mymatrixlft\mymatrixlft=\mymatrixtmpdim\fi
+\advance\mymatrixCcnt by 1\relax\ifnum\mymatrixCcnt>\mymatrixAcnt\else\Brepeat
+\global\edef\mymatrixWDlist{\mymatrixWDlist!\number\mymatrixDcnt!\the\mymatrixlft;}%
+\advance\mymatrixDcnt by 1\relax\ifnum\mymatrixDcnt>\mymatrixBcnt\else\Arepeat
+\mymatrixCcnt=1\relax
+\Aloop
+\mymatrixtop=0pt\relax
+\mymatrixbot=0pt\relax
+\mymatrixDcnt=1\relax
+\Bloop
+\edef\tmp{(\number\mymatrixCcnt,\number\mymatrixDcnt)}%
+\expandafter\mymatrixHT\tmp
+\ifdim\mymatrixtmpdim>\mymatrixtop\mymatrixtop=\mymatrixtmpdim\fi
+\edef\tmp{(\number\mymatrixCcnt,\number\mymatrixDcnt)}%
+\expandafter\mymatrixDP\tmp
+\ifdim\mymatrixtmpdim>\mymatrixbot\mymatrixbot=\mymatrixtmpdim\fi
+\advance\mymatrixDcnt by 1\relax\ifnum\mymatrixDcnt>\mymatrixBcnt\else\Brepeat
+\global\edef\mymatrixHTlist{\mymatrixHTlist!\number\mymatrixCcnt!\the\mymatrixtop;}%
+\global\edef\mymatrixDPlist{\mymatrixDPlist!\number\mymatrixCcnt!\the\mymatrixbot;}%
+\advance\mymatrixCcnt by 1\relax\ifnum\mymatrixCcnt>\mymatrixAcnt\else\Arepeat
+\setbox\mymatrixAbox\vbox{
+\ifx\matrixsize\undefined\else\matrixsize\fi\offinterlineskip
+\offinterlineskip
+\def\process##1{\global\advance\mymatrixBcnt by 1\relax
+\edef\tmp{(\number\mymatrixAcnt,\number\mymatrixBcnt)}%
+\expandafter\mymatrixgetsizes\tmp%
+\mymatrixtop=0pt\mymatrixbot=0pt
+\mymatrixlft=0pt\mymatrixrt=0pt
+\ifLines\fbox\fi
+\setbox0\hbox to \mymatrixcellwd{\hss$##1$\hss}%
+\ht0=\mymatrixcellht\dp0=\mymatrixcelldp
+\setbox0\hbox{\hbox to 0pt{\hss\vrule width \mymatrixlft
+height \mymatrixcellht depth \mymatrixcelldp\hss}%
+\raise\mymatrixcellht\rlap{\kern-.5\mymatrixlft\vrule width .5\mymatrixlft
+\vrule width \mymatrixcellwd height .5\mymatrixtop depth .5\mymatrixtop
+\vrule width .5\mymatrixrt}%
+\lower\mymatrixcelldp\rlap{\kern-.5\mymatrixlft\vrule width .5\mymatrixlft
+\vrule width \mymatrixcellwd height .5\mymatrixbot depth .5\mymatrixbot
+\vrule width .5\mymatrixrt}%
+\box0\hbox to 0pt{\hss\vrule width \mymatrixrt
+height \mymatrixcellht depth \mymatrixcelldp\hss}}%
+\ht0=\mymatrixcellht\dp0=\mymatrixcelldp\relax\box0\relax}%
+\global\mymatrixAcnt=0\relax
+\halign{%
+\global\advance\mymatrixAcnt by 1\relax
+\global\mymatrixBcnt=0\relax
+\process{##}&&\process{##}\crcr #3}}%
+\setbox\mymatrixBbox\vbox{
+\ifx\matrixsize\undefined\else\matrixsize\fi\offinterlineskip
+\offinterlineskip
+\def\process##1{\global\advance\mymatrixBcnt by 1\relax
+\edef\tmp{(\number\mymatrixAcnt,\number\mymatrixBcnt)}%
+\expandafter\mymatrixgetsizes\tmp\global\mymatrixgrayfalse
+\setbox0\hbox{$##1$}\ifmymatrixgray\special{ps:gsave .8 setgray}\vrule
+width \mymatrixcellwd height \mymatrixcellht depth \mymatrixcelldp
+\special{ps:grestore}\else\vrule width 0pt height \mymatrixcellht
+depth \mymatrixcelldp\kern\mymatrixcellwd\fi}%
+\global\mymatrixAcnt=0\relax
+\halign{%
+\global\advance\mymatrixAcnt by 1\relax
+\global\mymatrixBcnt=0\relax
+\process{##}&&\process{##}\crcr #3}}%
+\ifmymatrixTnotes\mymatrixMakeCbox\fi
+\ifmymatrixBnotes\mymatrixMakeFbox\fi
+\ifmymatrixTnotes\mymatrixMakeCbox\fi
+\ifmymatrixLnotes\mymatrixMakeDbox\setbox\mymatrixDbox
+\hbox{$\vcenter{\offinterlineskip\hbox{\box\mymatrixDbox}}$}\fi
+\ifmymatrixRnotes\mymatrixMakeEbox\setbox\mymatrixEbox
+\hbox{$\vcenter{\offinterlineskip\hbox{\box\mymatrixEbox}}$}\fi
+\setbox0\hbox{\rlap{\box\mymatrixBbox}\box\mymatrixAbox}%
+\setbox1\hbox{\ensuremath{\vcenter{\copy0}}}%
+\mymatrixcellht=\ht1\relax\mymatrixcelldp=\dp1\relax
+\setbox\mymatrixAbox\hbox{$\left#1\vcenter{\kern-\mymatrixvsep\box0\kern-\mymatrixvsep}\right#2$}%
+\ifmymatrixTnotes\ht\mymatrixAbox=\mymatrixcellht\fi
+\ifmymatrixBnotes\dp\mymatrixAbox=\mymatrixcelldp\fi
+%\copy\mymatrixEbox
+%\copy\mymatrixAbox
+\hbox{\ifmymatrixLnotes\kern\mymatrixhsep\box\mymatrixDbox\kern\mymatrixhsep\fi
+\vtop{\offinterlineskip
+  \halign{\hfil ##\hfil\cr
+  \vbox{\offinterlineskip
+    \halign{\hfil ##\hfil\cr
+    \ifmymatrixTnotes\box\mymatrixCbox\fi\cr
+    \noalign{\ifmymatrixTnotes\vskip\mymatrixvsep\vskip2pt\fi}%
+    \box\mymatrixAbox\cr}}\cr
+  \noalign{\ifmymatrixBnotes\vskip\mymatrixvsep\vskip2pt\fi}%
+  \hfill\ifmymatrixBnotes\box\mymatrixFbox\fi\hfill
+  \ifvoid\mymatrixlrtNotebox\else
+  \rlap{\kern\mymatrixhsep\hbox to \mymatrixlrtNotewd
+  {\hss\copy\mymatrixlrtNotebox\hss}}\fi\cr}}%
+\ifmymatrixRnotes\kern\mymatrixhsep\box\mymatrixEbox\kern\mymatrixhsep\fi
+\ifdim\mymatrixlrtNotewd>0pt\kern.5\wd\mymatrixlrtNotebox
+\kern-.5\mymatrixlrtNotewd
+\global\setbox\mymatrixlrtNotebox\copy\voidb@x
+\global\mymatrixlrtNotewd=0pt\fi
+}}}
+
+\def\Makeemptylist{\edef\emptylist{}%
+\mymatrixCcnt=1\relax\Aloop
+\mymatrixDcnt=1\relax\Bloop
+\edef\emptylist{\emptylist!\number\mymatrixCcnt,\number\mymatrixDcnt!0pt;}%
+\advance\mymatrixDcnt by 1\relax
+\ifnum\mymatrixDcnt>\mymatrixBcnt\else\Brepeat
+\advance\mymatrixCcnt by 1\relax
+\ifnum\mymatrixCcnt>\mymatrixAcnt\else\Arepeat
+}
+
+\def\mymatrixMakeCbox{%\show\mymatrixTnoteslist%
+\setbox\mymatrixCbox\hbox{\global\mymatrixCcnt=1\relax\Aloop
+\edef\tmp{(1,\number\mymatrixCcnt)}\expandafter\mymatrixgetsizes\tmp%
+\edef\tmp{(\number\mymatrixCcnt)}\expandafter\mymatrixTN\tmp%
+\hbox to \mymatrixcellwd{\hss\matrixnotesize
+\ifx\Tnotesize\undefined\else\Tnotesize\fi\the\mymatrixTnote\hss}%
+\global\advance\mymatrixCcnt by 1\relax
+\ifnum\mymatrixCcnt>\mymatrixBcnt\else\Arepeat}}
+
+\def\mymatrixMakeFbox{%\show\mymatrixBnoteslist%
+\setbox\mymatrixFbox\hbox{\global\mymatrixCcnt=1\relax\Aloop
+\edef\tmp{(1,\number\mymatrixCcnt)}\expandafter\mymatrixgetsizes\tmp%
+\edef\tmp{(\number\mymatrixCcnt)}\expandafter\mymatrixBN\tmp%
+\hbox to \mymatrixcellwd{\hss\matrixnotesize
+\ifx\Bnotesize\undefined\else\Bnotesize\fi\the\mymatrixBnote\hss}%
+\global\advance\mymatrixCcnt by 1\relax
+\ifnum\mymatrixCcnt>\mymatrixBcnt\else\Arepeat}}
+
+\def\mymatrixMakeDbox{%\show\mymatrixLnoteslist%
+\setbox\mymatrixDbox\vbox{\global\mymatrixCcnt=1\relax\offinterlineskip\Aloop
+\edef\tmp{(\number\mymatrixCcnt,1)}\expandafter\mymatrixgetsizes\tmp%
+\edef\tmp{(\number\mymatrixCcnt)}\expandafter\mymatrixLN\tmp%
+\hbox{\matrixnotesize
+\ifx\Lnotesize\undefined\else\Lnotesize\fi
+\the\mymatrixLnote\vrule width 0pt height \mymatrixcellht
+depth \mymatrixcelldp}%
+\global\advance\mymatrixCcnt by 1\relax
+\ifnum\mymatrixCcnt>\mymatrixAcnt\else\Arepeat}}
+
+\def\mymatrixMakeEbox{%\show\mymatrixRnoteslist%
+\setbox\mymatrixEbox\vbox{\global\mymatrixCcnt=1\relax\offinterlineskip\Aloop
+\edef\tmp{(\number\mymatrixCcnt,1)}\expandafter\mymatrixgetsizes\tmp%
+\edef\tmp{(\number\mymatrixCcnt)}\expandafter\mymatrixRN\tmp%
+\hbox{\matrixnotesize
+\ifx\Rnotesize\undefined\else\Rnotesize\fi
+\the\mymatrixRnote\vrule width 0pt height \mymatrixcellht
+depth \mymatrixcelldp}%
+\global\advance\mymatrixCcnt by 1\relax
+\ifnum\mymatrixCcnt>\mymatrixAcnt\else\Arepeat}}
+
+\def\Aloop#1\Arepeat{\def\Aiterate{#1\relax\expandafter\Aiterate\fi}\Aiterate\let\Aiterate\relax}
+\def\Bloop#1\Brepeat{\def\Biterate{#1\relax\expandafter\Biterate\fi}\Biterate\let\Biterate\relax}
+
+\def\mymatrixTN(#1){\def\tmp##1!#1!##2;##3\endlist{\mymatrixTnote={##2}\relax}%
+\expandafter\tmp\mymatrixTnoteslist\endlist}
+\def\mymatrixBN(#1){\def\tmp##1!#1!##2;##3\endlist{\mymatrixBnote={##2}\relax}%
+\expandafter\tmp\mymatrixBnoteslist\endlist}
+\def\mymatrixRN(#1){\def\tmp##1!#1!##2;##3\endlist{\mymatrixRnote={##2}\relax}%
+\expandafter\tmp\mymatrixRnoteslist\endlist}
+\def\mymatrixLN(#1){\def\tmp##1!#1!##2;##3\endlist{\mymatrixLnote={##2}\relax}%
+\expandafter\tmp\mymatrixLnoteslist\endlist}
+\def\mymatrixWD(#1,#2){\def\tmp##1!#1,#2!##2;##3\endlist{\mymatrixtmpdim=##2\relax}%
+\expandafter\tmp\mymatrixwdlist\endlist}
+\def\mymatrixHT(#1,#2){\def\tmp##1!#1,#2!##2;##3\endlist{\mymatrixtmpdim=##2\relax}%
+\expandafter\tmp\mymatrixhtlist\endlist}
+\def\mymatrixDP(#1,#2){\def\tmp##1!#1,#2!##2;##3\endlist{\mymatrixtmpdim=##2\relax}%
+\expandafter\tmp\mymatrixdplist\endlist}
+\def\mymatrixgetsizes(#1,#2){%
+\def\tmp##1!#2!##2;##3\endlist{\mymatrixcellwd=##2\relax}\expandafter\tmp\mymatrixWDlist\endlist
+\def\tmp##1!#1!##2;##3\endlist{\mymatrixcellht=##2\relax}\expandafter\tmp\mymatrixHTlist\endlist
+\def\tmp##1!#1!##2;##3\endlist{\mymatrixcelldp=##2\relax}\expandafter\tmp\mymatrixDPlist\endlist
+}
+
+\newbox\mymatrixlrtNotebox
+\newdimen\mymatrixlrtNotewd
+\newtoks\mymatrixlrtNotetoks
+\def\lrtNote{\afterassignment\lrtNotejob\mymatrixlrtNotetoks=}
+\def\lrtNotejob{{\matrixnotesize\fboxsep=\mymatrixvsep
+{\let\fbox\relax
+\setbox\mymatrixlrtNotebox\hbox{\the\mymatrixlrtNotetoks}%
+\global\mymatrixlrtNotewd=\wd\mymatrixlrtNotebox}%
+\global\setbox\mymatrixlrtNotebox\hbox{\the\mymatrixlrtNotetoks}}}
+
+\def\arT{\hbox{\kern-\mymatrixhsep\ensuremath{\gets}}\kern-2\fontdimen8\textfont3
+\vrule width .8\fontdimen8\textfont3
+height .8\fontdimen22\textfont2 depth \mymatrixcelldp}
+\def\arB{\hbox{\kern-\mymatrixhsep\ensuremath{\gets}}\kern-2\fontdimen8\textfont3
+\vrule width .8\fontdimen8\textfont3
+depth -.8\fontdimen22\textfont2 height \mymatrixcellht}
+\def\arM{\setbox0\hbox{\ensuremath{\gets}}\kern\wd0
+\kern-\mymatrixhsep\kern-2\fontdimen8\textfont3
+\vrule width .8\fontdimen8\textfont3
+depth \mymatrixcelldp height \mymatrixcellht}
+
+\def\makeAutonum{%
+\global\mymatrixLnotestrue
+\global\mymatrixTnotestrue
+\global\mymatrixCcnt=0\relax
+\global\edef\mymatrixTnoteslist{}%
+\Aloop\global\advance\mymatrixCcnt by 1\relax
+\global\edef\mymatrixTnoteslist{\mymatrixTnoteslist!\number\mymatrixCcnt!\number\mymatrixCcnt;}%
+\ifnum\mymatrixCcnt>\mymatrixAcnt\else\Arepeat
+\global\mymatrixDcnt=0\relax
+\global\edef\mymatrixLnoteslist{}%
+\Aloop\global\advance\mymatrixDcnt by 1\relax
+\global\edef\mymatrixLnoteslist{\mymatrixLnoteslist!\number\mymatrixDcnt!\number\mymatrixDcnt;}%
+\ifnum\mymatrixDcnt>\mymatrixBcnt\else\Arepeat
+}
+
+\endinput

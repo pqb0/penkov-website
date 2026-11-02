@@ -1,0 +1,587 @@
+\documentclass[11pt]{amsart} 
+\usepackage{amsthm,amsbsy,amsfonts,amssymb,amscd}
+\usepackage{bbm}
+\usepackage[enableskew]{youngtab}
+\usepackage[mathscr]{euscript} 
+
+% \usepackage[french]{babel}
+%\usepackage[T1]{fontenc} 
+%\usepackage{sidenotes} 
+
+% \usepackage{titlesec} 
+\usepackage{enumerate} 
+\usepackage{tikz} 
+\usetikzlibrary{calc,intersections,through, backgrounds,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri} 
+\usetikzlibrary{calc}
+
+\usepackage{tikz-cd} 
+\usepackage[all]{xy}
+\xyoption{knot}
+\xyoption{poly}
+
+%\usepackage{mathtools}
+\usepackage{hyperref}
+
+\usepackage[margin=1.1in]{geometry}
+
+\setcounter{tocdepth}{1}
+
+\newcommand{\CCC}{\mathsf{C}}
+
+\newcommand{\Ffun}{\mathscr{F}}
+\newcommand{\Kfun}{\mathscr{K}}
+\newcommand{\Hfun}{\mathscr{H}}
+\newcommand{\Gfun}{\mathscr{G}}
+
+\newcommand{\Ab}{\mathbf{A\hspace{-0.5mm}b}}
+\newcommand{\lbra}{[\![}
+\newcommand{\rbra}{]\!]}
+\newcommand{\CL}{\mathcal{C}\hspace{-0.15mm}\mathcal{L}}
+\newcommand{\PL}{\mathcal{P}\hspace{-0.15mm}\mathcal{L}}
+\newcommand{\IL}{\mathcal{I}\hspace{-0.15mm}\mathcal{L}}
+
+\newcommand{\rank}{{\mathrm{rk}}}
+
+\newcommand{\dbC}{{\mathbb{C}}} 
+
+\newcommand{\ext}{\mathrm{ext}}
+
+\newcommand{\bbl}{[\![\lambda]\!]}
+
+\newcommand{\III}{\mathsf{I}}
+\newcommand{\JJJ}{\mathsf{J}}
+\newcommand{\SSS}{\mathsf{S}}
+
+\newcommand{\fcs}{\mathsf{fcs}}
+
+\newcommand{\pe}{\mathfrak{pe}}
+
+\newcommand{\DA}{\mathcal{P}\hspace{-0.25mm}\mathcal{D}}
+
+\newcommand{\LL}{{\mathbf{L}}}
+
+
+
+\newcommand{\htt}{\mathsf{ht}}
+\newcommand{\TT}{\mathscr{T}}
+\newcommand{\FF}{\mathscr{F}}
+\newcommand{\GG}{\mathscr{G}}
+\newcommand{\RR}{\mathscr{R}}
+\newcommand{\DD}{\mathscr{D}}
+\newcommand{\ideal}{\mathscr{I}}
+\newcommand{\KK}{\mathscr{K}}
+\newcommand{\rad}{{\rm rad}} 
+\newcommand{\LLL}{\mathsf{L}}
+\newcommand{\NNN}{\mathsf{N}}
+
+\newcommand{\KKK}{\mathsf{K}}
+
+\newcommand{\sve}{\mathsf{svec}_{\mk}}
+
+%Blackboard Bold
+\newcommand{\dbA}{{\mathbb{A}}} 
+\newcommand{\dbE}{{\mathbb{E}}}
+\newcommand{\cF}{{\mathcal{F}}} 
+\newcommand{\dbF}{{\mathbb{F}}} 
+\newcommand{\dbG}{{\mathbb{G}}} 
+\newcommand{\dbH}{{\mathbb{H}}} 
+\newcommand{\dbQ}{{\mathbb{Q}}} 
+\newcommand{\mR}{{\mathbb{R}}}
+\newcommand{\dbR}{{\mathbb{R}}} 
+\newcommand{\dbZ}{{\mathbb{Z}}}
+\newcommand{\HH}{{\mathrm{H}}}
+\newcommand{\AAA}{{A^{\rm o}(R)}}
+\newcommand{\supp}{\mathrm{supp}}
+
+\newcommand {\supplus}{\mathop{{\subset}\llap{\raise 0.5pt\hbox{\normalfont\small+}\hskip 0.5pt}}} 
+
+\newcommand{\codim}{{\rm{codim}}}
+
+\newcommand{\leeg}{\mbox{{\color{white} Test}}}
+
+\newcommand{\Par}{{\mathscr{P}}}
+\newcommand{\gd}{\mathrm{gd}}
+\newcommand{\dd}{\mathbf{d}}
+\newcommand{\bb}{\mathsf{b}}
+\newcommand{\cc}{\mathsf{c}}
+\newcommand{\aac}{\mathsf{a}}
+
+\newcommand{\rR}{\Phi}
+
+\newcommand{\PA}{\mathsf{Par}}
+
+\newcommand\bluedot[1]{\filldraw[blue] #1 circle (2pt)}
+
+\newcommand{\TL}{{\mathrm{TL}}} 
+
+\newcommand{\II}{\mathrm{I}}
+\newcommand{\XX}{\mathrm{X}}
+
+\newcommand{\Span}{{\rm{Span}}}
+
+\newcommand{\fHom}{{\mathsf{Hom}}}
+\newcommand{\fEnd}{{\mathsf{End}}}
+\newcommand{\fnul}{{0}}
+\newcommand{\cM}{\mathcal{M}}
+
+\newcommand{\MM}{\mathrm{MM}}
+
+\newcommand{\tto}{\twoheadrightarrow}
+
+\newcommand{\uk}{{\mathbf K}}
+%\newcommand{\cA}{\mathcal A}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\cbO}{\check{\mathbf{O}}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\ccO}{\hat{\cO}}
+\newcommand{\PLa}{\mathrm{P}\hspace{-0.8mm}\Lambda}
+
+\newcommand{\scrE}{{\mathscr{E}}}
+
+%\newcommand{\scrF}{{\mathscr{F}}}
+%\newcommand{\scrG}{{\mathscr{G}}}
+\newcommand{\scrH}{{\mathscr{H}}}
+
+%\newcommand{\scrL}{{\mathscr{L}}}
+\newcommand{\scrM}{{\mathscr{M}}}
+
+\newcommand{\scrO}{{\mathscr{O}}} 
+\newcommand{\scrP}{{\mathscr{P}}} 
+\newcommand{\scrR}{{\mathscr{R}}} 
+
+\newcommand{\bB}{\mathscr{B}}
+\newcommand{\bBN}{\mathscr{B}\hspace{-0.3mm}\mathscr{N}}
+
+%\newcommand{\scrS}{{\mathscr{S}}}
+\newcommand{\scrT}{{\mathscr{T}}}
+
+\newcommand{\scrV}{{\mathscr{V}}} 
+\newcommand{\scrW}{{\mathscr{W}}}
+
+\newcommand{\bfa}{\mathbf{a}} 
+\newcommand{\bfe}{\mathbf{e}} 
+\newcommand{\bfg}{\mathbf{g}} 
+\newcommand{\bfl}{\mathbf{l}} 
+\newcommand{\bfr}{\mathbf{r}} 
+\newcommand{\bfV}{\mathbf{V}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\fa}{\mathfrak{a}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\plus}{\scalebox{0.6}{{\rm+}}}
+
+\newcommand{\gO}{\mathcal{O}^{\rm g}}
+
+\newcommand{\AAAA}{\mathscr{A}}
+
+\newcommand{\Tr}{{\rm{Tr}}}
+
+\newcommand{\tr}{{\rm{tr}}}
+
+\newcommand{\kbar}{\bar{k}}
+\newcommand{\im}{{\rm{im}\,}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Id}{\mathrm{Id}}
+
+%\newcommand{\Kbar}{\overline{K}}
+%\newcommand{\Pbar}{\bar{P}}
+%\newcommand{\Xbar}{\bar{X}}
+%\newcommand{\dbQbar}{\overline{\dbQ}}
+\newcommand{\ad}{\mathrm{ad}} 
+\newcommand{\ev}{\mathrm{ev}} 
+\newcommand{\GL}{\mathrm{GL}} 
+\newcommand{\Rad}{\mathrm{Rad}} 
+\newcommand{\Top}{\mathrm{Top}} 
+\newcommand{\Gr}{\mathrm{Gr}} 
+\newcommand{\SL}{\mathrm{SL}} 
+\newcommand{\Hom}{\mathrm{Hom}} 
+\newcommand{\Ext}{\mathrm{Ext}} 
+\newcommand{\Tor}{\mathrm{Tor}} 
+\newcommand{\Ann}{\mathrm{Ann}} 
+\newcommand{\rang}{\mathrm{rang}} 
+\newcommand{\uRep}{\underline{\mathrm{Rep}}} 
+\newcommand{\scrHom}{\scrH{om}}
+\newcommand{\unit}{{\mathbbm{1}}}
+
+\DeclareMathOperator{\spec}{Spec} 
+\newcommand{\minus}{\scalebox{0.9}{{\rm -}}}
+\DeclareMathOperator{\vol}{vol} 
+
+
+
+\newcommand{\End}{\mathrm{End}} 
+\newcommand{\coker}{\mathrm{coker}} 
+\newcommand{\Ker}{\mathrm{Ker}} 
+\newcommand{\aut}{\mathrm{Aut}} 
+\newcommand{\rrad}{\mathrm{rrad}} 
+
+% Tony added this on 8/26/2013
+%\newcommand{\iemes}{\text{i\`emes}}
+%\newcommand{\ieme}{\text{i\`eme}}
+\newcommand{\Lie}{\mathrm{Lie}} 
+\newcommand{\red}{\mathrm{r\Acute{e}d}} 
+\newcommand{\Fil}{\mathrm{Fil}} 
+
+\DeclareMathOperator{\sym}{Sym} 
+
+\DeclareMathOperator{\sch}{sch}
+
+\newtheorem*{Examp}{\bf Example}
+
+% \overfullrule=5pt
+\newcommand{\grl}{\Lambda} 
+\newcommand{\pgl}{\mathrm{PGL}} 
+\newcommand{\diag}{\mathrm{diag}} 
+\newcommand{\tU}{\widetilde U} 
+\newcommand{\tu}{\widetilde u} 
+\newcommand{\dfs}{{/\kern-2pt/}}
+
+\newcommand{\mmA}{\mathscr{A}}
+%\newcommand{\JJJ}{\mathscr{J}}
+\newcommand{\op}{{\rm op}}
+\newcommand{\mk}{\Bbbk}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\Ob}{{\rm{Ob}\,}}
+\newcommand{\add}{{\rm{add}}}
+\newcommand{\Pind}{{\rm{PInd}}}
+\newcommand{\Pres}{{\rm{PRes}}}
+\newcommand{\Mod}{{\rm{Mod}}}
+\newcommand{\FI}{{\rm{FI}}}
+\newcommand{\charr}{{\rm{char}}}
+
+\newcommand{\FFF}{\overline{\mathcal{F}}}
+\newcommand{\Fun}{\mathrm{Fun}}
+\newcommand{\Str}{\mathrm{Str}}
+\newcommand{\St}{\mathrm{St}}
+%\newcommand{\dd}{\mathbf{d}}
+\newcommand{\fn}{\mathfrak{n}}
+\newcommand{\fg}{\mathfrak{g}}
+\newcommand{\fz}{\mathfrak{z}}
+\newcommand{\fc}{\mathfrak{c}}
+\newcommand{\fk}{\mathfrak{k}}
+\newcommand{\fp}{\mathfrak{p}}
+\newcommand{\fq}{\mathfrak{q}}
+\newcommand{\fl}{\mathfrak{l}}
+\newcommand{\fu}{\mathfrak{u}}
+\newcommand{\fv}{\mathfrak{v}}
+\newcommand{\fh}{\mathfrak{h}}
+\newcommand{\fb}{\mathfrak{b}}
+\newcommand{\mN}{\mathbb{N}}
+\newcommand{\mC}{\mathbb{C}}
+\newcommand{\mZ}{\mathbb{Z}}
+\newcommand{\mS}{\mathbb{S}}
+\newcommand{\mI}{\mathbb{I}}
+\numberwithin{equation}{section}
+
+\newcommand{\oa}{\bar{0}}
+
+\newcommand{\ob}{\bar{1}}
+
+\newcommand{\con}{{\rm con}}
+\newcommand{\cQ}{\mathcal{Q}}
+
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\Rep}{{\rm Rep}}
+\newcommand{\Del}{\underline{\Rep}(O_\delta)}
+
+% \titleformat{\subsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+% \theoremstyle{plain}
+% \newtheorem{dfn}[subsection]{D\'efinition}
+% \newtheorem{prop}[subsection]{Proposition}
+% \newtheorem{cor}[subsection]{Corollaire}
+% \newtheorem{thm}[subsection]{Th\'eor\`eme}
+% \newtheorem{lemma}[subsection]{Lemme}
+% \newtheorem{corconst}[subsection]{Corollaire-construction}
+\newtheoremstyle{notes} {} {} {} {} {\bfseries} {.} {.5em} {}
+
+\theoremstyle{plain}
+
+\newtheorem{prop}{Proposition}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{lemma2}[subsection]{Lemma}
+
+
+\newtheorem{cor}[subsubsection]{Corollary}
+
+\newtheorem{thm}[subsubsection]{Theorem}
+
+\newtheorem{conj}[subsubsection]{Conjecture}
+
+\newtheorem{que}[subsubsection]{Question}
+
+\newtheorem{thmA}{Theorem}
+\newtheorem{thmB}{Theorem}
+\newtheorem{CorA}{Corollary}
+
+\theoremstyle{remark}
+
+\newtheorem{rems}[subsubsection]{Remarks} 
+
+\newtheorem{qu}[subsubsection]{Question} 
+
+\newtheorem{rem}[subsubsection]{Remark} 
+
+\newtheorem{ddef}[subsubsection]{Definition} 
+
+\swapnumbers
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+
+\renewcommand\thepart{\Roman{part}}
+
+\usepackage{etoolbox}
+
+\usepackage{ytableau}
+\usepackage{youngtab}
+
+\makeatletter
+\pretocmd{\appendix}{\addtocontents{toc}{\protect\addvspace{10\p@}}}{}{}
+\makeatother
+
+
+\theoremstyle{remark} 
+\newtheorem{notation}[subsection]{Notation} 
+\newtheorem*{nota}{Notation} 
+\newtheorem{ex}[subsubsection]{Example}
+
+\newtheorem{pf34}[subsection]{Proof of~\ref{3.4}}
+
+\newtheorem{pf54}[subsection]{Proof of~\ref{5.4}}
+
+\newtheoremstyle{construction} {} {} {} {} {\bfseries} { } {0pt} {}
+
+\theoremstyle{construction} 
+\newtheorem{const}[subsection]{Construction} 
+
+
+
+%\renewcommand\cftchapafterpnum{\vskip10pt}
+
+% \newtheoremstyle{example} {} {} {\normalfont} {} {\bfseries} {.} {.5em} {}
+
+\author[Ivan Penkov]{\;Ivan Penkov}
+
+\address{
+Ivan Penkov
+\newline Jacobs University Bremen
+\newline Campus Ring 1
+\newline 28759 Bremen, Germany}
+\email{i.penkov@jacobs-university.de}
+
+
+
+\usepackage[mathscr]{euscript}
+\usepackage{enumerate,color}
+
+%\theorembodyfont{\rm}
+\begin{document}
+\bibliographystyle{amsplain}
+
+\ifx\useHugeSize\undefined
+\else
+\Huge
+\fi
+
+\relax
+
+
+\title{ examples of automorphism groups of ind-varieties of generalized flags}
+\begin{center}
+\it To the memory if Vasil Tsanov
+\end{center}
+
+\date{ \today }
+
+
+\begin{abstract} We compute the automorphism groups of finite and cofinite ind-grassmannians, as well as of the ind-variety of maximal flags indexed by $\mathbb Z_{>0}$. We pay special attention to differences with the case of ordinary flag varieties. 
+\end{abstract}
+\maketitle
+
+
+
+
+
+
+
+
+
+
+
+
+
+\medskip\noindent {\footnotesize 2010 AMS Subject classification: 14L30, 14M15, 14M17} \\
+\noindent {\footnotesize Keywords: ind-grassmannian, automorphism group, flag ind-variety.}
+
+\section{Introduction}
+The flag varieties of the classical Lie groups are central objects of study both in geometry and representation theory. In a sense, they are a hub for many directions of research in both fields. Several different infinite-dimensional analogues of the ordinary flag varieties have been studied in the literature, one such analogue being the ind-varieties of generalized flags introduced in \cite{DP} and further investigated in \cite{PT}, \cite{IPW}, \cite{FP1}, \cite{FP2}; see also the survey \cite{IP}. The latter ind-varieties are direct limits of classical flag varieties and are homogeneous ind-spaces for the simple ind-groups $SL(\infty)$, $SO(\infty)$, $Sp(\infty)$. Without doubt, some of these ind-varieties, in particular the ind-grassmannians, have been known long before the paper \cite{DP}. 
+
+A natural question of obvious importance is the question of finding the automorphism groups of the ind-varieties of generalized flags. The purpose of the present note is to initiate a discussion in this direction and to point out some differences with the case of ordinary flag varieties: see Section 4. The topic is very close to Vasil's interests and expertise, and for sure I would have discussed it with him if he were still alive.
+
+
+
+{\bf Acknowledgments.} This work has been supported in part by DFG grant PE 980/7-1. 
+
+\section{Automorphisms of finite and cofinite ind-grassmannians}
+
+The base field is $\mathbb C$. Let $V$ be a fixed countable-dimensional complex vector space.  We fix a basis $E=\{e_1,\dots,e_n,\dots\}$ of $V$ and set $V_n:=\operatorname{span}_{\mathbb C}\{e_1,\dots,e_n\}$. Then $V=\cup_n V_n$. Fix $k\in \mathbb{Z}_{>0}$. By definition, $\operatorname{Gr}(k,V)$ is the set of all $k$-dimensional subspaces in $V$ and has an obvious ind-variety structure:
+$$\operatorname{Gr}(k,V)=\lim_{\longrightarrow}\operatorname{Gr}(k,V_n).$$
+
+The projective ind-space $\mathbb{P}(V)$ equals $\operatorname{Gr}(1,V)$. Note that the basis $E$ plays no role in this construction. We think  of the ind-varieties $\operatorname{Gr}(k,E)$ for $k\in\mathbb{Z}_{>0}$ as the "finite ind-grassmannians."
+
+The basis $E$ plays a role when defining the "cofinite" ind-grassmannians. Fix a subspace $W\subset V$ of finite codimension in $V$ and such that $E\cap W$ is a basis of $W$. Let $\operatorname{Gr}(W,E,V)$ be the set of all subspaces $W'\subset V$ which have the same codimension in $V$ as $W$ and in addition contain almost all elements of $E$. Then $\operatorname{Gr}(W,E,V)$ has the following ind-variety structure:
+$$\operatorname{Gr}(W,E,V)=\lim_{\longrightarrow}\operatorname{Gr} (\operatorname{codim}_V W, \bar V_n)$$
+where $\{\bar V_n\}$ is any set of finite-dimensional spaces with the properties that $\bar V_n\supset\operatorname{span}\{E\backslash \{E\cap W\}\}$, $\operatorname{dim}\bar V_n=n>\operatorname{codim}_V W$, $E\cap \bar V_n$ is a basis of $\bar V_n$, and $\cup \bar V_n=V$.
+
+
+It is clear that the ind-varieties $\operatorname{Gr}(W,E,V)$ and $\operatorname{Gr}(k,V)$ are isomorphic: the isomorphism is given by
+
+
+
+\begin{equation}\label{new}\tag{1}
+\operatorname{Gr}(W,E,V)\ni W'  \to \operatorname{Ann}W'\subset V_* := \operatorname{span}\{E^*\},
+\end{equation}	
+where $E^*=\{e_1^*,e_2^*,\dots\}$ is the system of linear functionals dual to the basis $E$: i.e. $e^*_i(e_j)=\delta_{ij}$. The map (\ref{new}) is an obvious analogue of finite-dimensional duality. Therefore the automorphism groups $\operatorname{Aut}\operatorname{Gr}(k,V)$ and $\operatorname{Aut}\operatorname{Gr}(W,E,V)$ for $\operatorname{codim}_W V=k$ are isomorphic; by an automorphism we mean of course an automorphism of ind-varieties.
+
+The following result should in principle be known. We present a proof which shows a connection with the work \cite{PT}.
+
+\begin{prop}
+$\operatorname{Aut} \operatorname{Gr}(k,V)=PGL(V)$ where $GL(V)$ denotes the group of all invertible linear operators on $V$ and $PGL(V):= GL(V)/\mathbb{C}_{mult}Id$ (where $\mathbb C_{mult}$ is the multiplicative group of $\mathbb C$).
+\end{prop}
+
+\begin{proof} An automorphism $\phi: \operatorname{Gr}(k,V)\to \operatorname{Gr}(k,V)$ induces embeddings $\phi_n: \operatorname{Gr}(k,V_n)\hookrightarrow\operatorname{Gr}(k,V_{N(n)})$ for appropriate $N(n)\geq n$. These embeddings are linear in the sense that \\$\phi^*_n( \mathcal O_{\operatorname{Gr}(k,V_{N(n)})}(1))$ is isomorphic to $\mathcal O_{\operatorname{Gr}(k,V_n)}(1)$, where by $\mathcal{O}_{\cdot}(1)$ we denote the positive generator of the respective Picard group. According to Theorem 1 in \cite{PT}, $\phi_n$ is one of the following:
+
+
+\begin{enumerate}[(i)]
+\item an embedding induced by the choice of an $n$-dimensional subspace $W_n\subset V_{N(n)}$ for some $N(n)\geq n$,
+\item an embedding factoring through  a linearly embedded projective space $\mathbb{P}^{M(n)}\subset  \operatorname{Gr}(k, V_{N(n)})$ for some $M(n)<N(n)$.
+\end{enumerate}
+
+
+
+If $k>2$, option (ii) may hold only for  finitely many $n$ as the contrary implies that the image of $\phi_n$ is contained in a projective ind-subspace $$\mathbb{P}:=\lim_{\longrightarrow} \mathbb{P}^{M(n)}\subset  \operatorname{Gr}(k,V).$$ Then, since $\mathbb{P}$ is not isomorphic to $ \operatorname{Gr}(k,V)$ by Theorem 2 in \cite{PT}, the image of $\phi_n$ would necessarily be a proper ind-subvariety of $ \operatorname{Gr}(k,V)$, which is a contradiction.
+
+For $k=1$, options (i) and (ii) are the same, and therefore without loss of generality we can now assume that for our fixed $k$ option (i) holds for all $n$. The embeddings $\phi_n: \operatorname{Gr}(k,V_n)\hookrightarrow  \operatorname{Gr}(k,V_{N(n)})$ determine injective linear operators $\tilde{\phi_n}:V_n\to V_{N(n)}$. Moreover, the operators $\tilde \phi_n$ are defined up to multiplicative constants which can be chosen so that $\tilde{\phi}_{n}|_{V_{n-1}}=\tilde{\phi}_{n-1}$ for any $n$. Therefore, we obtain a well-defined linear operator
+$$\tilde{\phi}: V=\lim_{\longrightarrow} V_n\to V=\lim_{\longrightarrow}V_{N(n)}$$
+which induces our automorphism $\phi$. Since $\phi$ is invertible, $\tilde \phi$ is also invertible, and since $\tilde \phi$ depends on a multiplicative constant, we conclude that $\phi$ determines a unique element $ \bar{\phi}\in PGL(V)$.
+
+In this way we have constructed an injective homomorphism
+$$ \operatorname{Aut}\operatorname{Gr}(k,V)\to PGL(V),\: \phi \mapsto \bar\phi.$$
+The inverse homomorphism $$ PGL(V)\to \operatorname{Aut}\operatorname{Gr}(k,V)$$ is obvious because of the natural action of $PGL(V)$ on $\operatorname{Gr}(k,V)$. The statement follows.
+\end{proof}
+
+
+\section{Ind-variety of  maximal ascending flags}
+We now consider a particular ind-variety of maximal generalized flags, in fact the simplest case of maximal generalized flags. Let $V$ and $E$ be as above. Define
+$Fl(F_E, E, V)$ as the set of all infinite chains $F_E'$ of subspaces of $V$
+$$0\subset(F_E')^1\subset\dots\subset(F'_E)^k\subset\dots$$
+where $\operatorname{dim}(F'_E)^k=k$ and $(F'_E)^n= F_E^n:=\operatorname{span}\{e_1,\dots,e_n\}$ for large enough $n$. This set has an obvious structure of ind-variety as
+$$Fl(F_E,E,V)=\lim_{\longrightarrow}Fl(F_E^n)$$ 
+where $Fl(F_E^n)$ stands for the variety of maximal flags in the finite-dimensional vector space $F_E^n$.
+
+Denote by $GL(E,V)$ the subgroup of $GL(V)$  of automorphisms of $V$ which keep all but finitely many elements of $E$ fixed. The elements of $GL(E,V)$ are the $E$-{\it finitary} automorphisms of $V$.
+
+\begin{prop}
+$$\operatorname{Aut}Fl(F_E,E,V)=P(GL(E,V)\cdot B_E)$$
+where $B_E\subset GL(V)$ is the stabilizer of the chain $F_E$ in $GL(V)$ and $GL(E,V)\cdot B_E$ is the subgroup of $GL(V)$ generated by $GL(E,V)$ and $B_E$.
+\end{prop}
+
+We start with a lemma.
+
+\begin{lemma}
+Fix $k\geq2$. Let $\psi_{k-1},$ $ \psi_k:V\to V$ be invertible linear operators such that $\psi_{k-1}(W_{k-1})\subset\psi_k(W_k)$ for any pair of subspaces $W_{k-1}\subset W_k$ of $V$ with $\operatorname{dim}W_{k-1}=k-1$, $\operatorname{dim}W_k=k$. Then $\psi_{k-1}=c\psi_k$ for some $0\neq c\in\mathbb C$.
+
+\end{lemma}
+
+\begin{proof}
+Assume the contrary. Let $v$ be a vector in $V$ such that the space  $Z:=\operatorname{span}_{\mathbb{C}}\{\psi_{k-1}(v), \psi_k(v)\}$ has dimension 2. Extend $v$ to a basis $v=v_1,v_2,\dots$ of $V$. Then, setting $W_k=\operatorname{span}_{\mathbb C}\{v_1,\dots, v_k\}$ and $W_{k-1}=\operatorname{span}_{\mathbb C}\{v_1,\dots, v_{k-1}\}$, we see that the condition $\psi_{k-1}(W_{k-1})\subset\psi_k(W_k)$ implies $Z\subset\psi_k(W_k) $. Similarly, setting $W'_{k}=\operatorname{span}_{\mathbb C}\{v_1,v_{k+1}, v_{k+2}\dots,v_{2k-1}\}$ and $W'_{k-1}=\operatorname{span}_{\mathbb C}\{v_1,v_{k+1}, v_{k+2}\dots,v_{2k-2}\}$ we have $Z\subset \psi_k(W'_{k})$.
+ However clearly
+ $$\operatorname{dim}(W_k \cap W'_k)=1,$$
+ hence the dimension of the intersection $\psi_k(W_k)\cap\psi_k(W'_{k})$ must also be $1$ due to the invertibility of $\psi_k$.
+Contradiction.
+
+
+
+
+
+
+
+\end{proof} 
+
+\begin{proof}[Proof of Proposition 2.] We first embed $A:=\operatorname{Aut}Fl(F_E,E,V)$ into the group $PGL(V)$. For this we consider the obvious embedding $$A\hookrightarrow\Pi_{i=1}^{\infty}\operatorname{Aut} \operatorname{Gr}(i,V)$$
+arising from the diagram of surjective morphisms of ind-varieties
+
+
+
+
+
+$$
+\xymatrix{
+&{}Fl(F_E,E,V)\ar[dl]\ar[d]\ar[dr]\\
+\mathbb{P}(V)=\operatorname{Gr}(1,V)&{}\operatorname{Gr}(2,V)\:\:\:\:\:\:\:\:\dots&{}\operatorname{Gr}(k,V)\dots\:\:\:.&{}
+}
+$$
+
+By Proposition 1, the groups $\operatorname{Aut}\operatorname{Gr}(k,V)$ are isomorphic to $PGL(V)$ for all $k\in\mathbb Z_{>0}$. Moreover, it is clear that the injective homomorphism $A\to\Pi_k PGL(V)$ factors through the diagonal of $\Pi_k PGL(V)$ since Lemma $1$ shows that an automorphism from $A$ induces necessarily the same element in $PGL(V)$ via any projection $Fl(F_E,E,V)\to\operatorname{Gr}(k,V)$.
+
+It remains to determine which elements of the group $PGL(V)$ arise as images of elements of $A$. It is clear that this image contains both $PGL(E,V)$ and $PB_E$ as each of these groups acts faithfully on $Fl(F_E,E,V)$. Indeed, the fact that $PGL(E,V)$ acts on $Fl(F_E,E,V)$ is clear. To see that $PB_E$ acts on $Fl(F_E,E,V)$ one notices that  for any $F'_E\in Fl(F_E,E,V)$ and any $\gamma\in PB_E$, the flag $\gamma(F'_E)$ differs from $F_E$ only in finitely many positions, hence is a point on $Fl(F_E,E,V).$ 
+
+On the other hand, it is clear that the image $\bar\phi\in PGL(V)$ of $\phi\in A$ is contained in $P(GL(E,V)\cdot B_E)$. Indeed the composition $\psi\circ\bar\phi$ with a suitable element of $PGL(E,V)$ will fix the point $F_E$ on $Fl(F_E,E,V)$. This means that $\psi\circ\bar\phi\in PB_E$. Therefore the image of $A$ in $PGL(V)$ is contained in $P(GL(E,V)\cdot B_E)$,                  and we are done.
+
+
+
+\end{proof}
+    
+
+\section{Discussion}
+ First, Proposition $1$ can be generalized to ind-varieties of the form $Fl(F,E,V)$ where $F$ is a finite chain consisting only of finite-dimensional subspaces of $V$, or only of subspaces of finite codimension of $V$. The precise definition of the ind-varieties $Fl(F,E,V)$ is given in \cite{DP}. In these cases, the respective automorphism groups are always isomorphic to $PGL(V)$, however in the case of finite codimension there is a natural isomorphism with $PGL(V_*)$.
+
+
+We now point out some differences with the case of ordinary flag varieties. A first obvious difference is the following. Despite the fact that $\operatorname{Gr}(k,V)=PGL(E,V)/P_k$, where $P_k$ is the stabilizer in $PGL(E,V)$ of a $k$-dimensional subspace of $V$, the automorphism group of $\operatorname{Gr}(k,V)$ is much larger than $PGL(E,V)$. Therefore $\operatorname{Gr}(k,V)$ is a quotient of any subgroup $G$ satisfying $PGL(E,V)\subset G\subset PGL(V)$, and there is quite a variety of such subgroups. Similar comments apply to the other examples we consider.
+
+Next, we note that the automorphism group of an ind-variety of generalized flags is in general not naturally embedded into $PGL(V)$. Indeed, the case of the cofinite ind-grassmannian $\operatorname{Gr}(W,E,V)$ shows that the natural isomorphism $\operatorname{Aut}\operatorname{Gr}(W,E,V)= PGL(V_*)$ does not embed $\operatorname{Aut}\operatorname{Gr}(W,E,V)$ into $PGL(V)$ by duality, but only embeds $\operatorname{Aut}\operatorname{Gr}(W,E,V)$ into the much larger group $PGL((V_*)^*)$ in a way that its image does not keep the subspace $V\subset(V_*)^*$ invariant. This is  clearly an infinite-dimensional phenomenon.
+
+
+Finally, recall that the automorphism groups of all flag varieties of the group $GL(n)$ are isomorphic, and inclusions of parabolic subgroups induce isomorphisms of automorphism groups. This note shows that the latter statement is not true for the group $GL(E,V)$  as the injection $\operatorname{Aut}Fl(F_E,E,V)\hookrightarrow \operatorname{Aut}\operatorname{Gr}(k,V)$ constructed in the proof of Proposition $2$ is proper (and both   $\operatorname{Gr}(k,V)$ and $Fl(F_E,E,V)$ are homogeneous ind-varieties for $GL(E,V)$). 
+
+We hope that the above differences motivate a more detailed future study of the automorphism groups of arbitrary ind-varieties of generalized flags.
+
+
+
+\begin{thebibliography}{20}
+
+\bibitem[DP]{DP} I. Dimitrov, I. Penkov,  {Ind-varieties of generalized flags as homogeneous spaces for classical ind-groups}, IMRN 2004, no. 55, 2935-2953.
+
+\bibitem[PT]{PT} I. Penkov, A. Tikhomirov, {Linear ind-Grassmannians}, Pure and Applied Math. Quarterly {\bf 10} (2014), 289-323.
+\bibitem[IPW]{IPW} M. Ignatyev. I. Penkov, J. Wolf, {Real group orbits on flag ind-varieties of $SL(\infty,\mathbb C)$}. In: Lie Theory and Its Applications in Physics, Springer Proceedings in Mathematics and Statistics, vol. 191, Springer Verlag, 2016, 111-135.	
+\bibitem[FP1]{FP1} L. Fresse, I. Penkov, {Schubert decompositions for ind-varieties of generalized flags}, Asian Journal of Mathematics {\bf 21} (2017), 599-630.
+\bibitem[FP2]{FP2} L. Fresse, I. Penkov, {Orbit duality in ind-varieties of maximal generalized flags}, Transactions of the Moscow Mathematical Society {\bf 78} (2017), 131-160.
+
+\bibitem[IP]{IP} M. Ignatyev, I. Penkov, {Ind-varieties of generalized flags: a survey of results, } arXiv:1701.08478.
+
+
+
+
+
+
+
+\end{thebibliography}
+
+
+
+
+
+\end{document}
+
+	

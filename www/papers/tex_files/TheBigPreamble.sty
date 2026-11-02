@@ -1,0 +1,346 @@
+
+\ifx \processToSlides \undefined
+  \ifx\usepackage\RequirePackage	% documentclass already done...  Assume
+    \let\usingAmsArtXII\usepackage	% this file is processed by amsart
+  \fi
+\else
+  \documentclass[12pt]{amsart}
+  \usepackage{amssymb,amscd}
+  \usepackage[letterpaper,margin=2cm,includeheadfoot]{geometry}
+  \def \useHugeSize {}
+  \def \numberingIsThrough {}
+\fi
+\ifx \labelsONmargin\undefined
+  \def\germ#1{{\mathfrak{#1}}}
+  \def\scr#1{{\mathcal{\uppercase{#1}}}}
+  \ifx\RequirePackage\undefined
+    \expandafter\ifx\csname amsart.sty\endcsname\relax
+        \documentstyle[12pt,amssymb,amscd]{amsart}
+    \fi
+
+    \def\atSign{@@}
+
+    \def\mathbb{\Bbb}
+    \def\mathfrak{\frak}
+    \def\mathbf{\bold}
+    \ifx\boldsymbol\undefined	% I *think* some very old AMS* did not have it
+      \def\boldsymbol#1{{\bold #1}}
+    \fi
+
+    \def\mathbit{\boldsymbol}
+
+    \def\my@proof[#1]{\@nameuse{pf*}{#1}}
+    \makeatother
+
+    \def\xrightarrow[#1]#2{@>{#2}>{#1}>}
+    \def\xleftarrow[#1]#2{@<{#2}<{#1}<}
+
+    \def\providecommand#1{\def#1}
+    \def\emph#1{{\em #1}}
+    \def\textbf#1{{\bf #1}}
+
+    \def\mathring{\overset{\,\,{}_\circ}}% For slanted letters only, sub too high
+  \else
+      \ifx\usepackage\RequirePackage
+      \else
+        \documentclass[12pt]{amsart}
+        \usepackage{amssymb,amscd}
+	\let\usingAmsArtXII\usepackage
+      \fi
+      \ifx \mathring\undefined		% Not AmS-LaTeX 2
+        \DeclareMathAccent{\mathring}{\mathalpha}{operators}{"17}
+      \fi
+
+      \long\def\FAKEendPROOF{\endtrivlist}
+      \ifx\endproof\FAKEendPROOF
+	  \def\endproof{\qed\endtrivlist}
+      \fi
+
+      \ifx\mathbit\undefined	% They can collect their senses and define it
+        \DeclareMathAlphabet{\mathbit}{OML}{cmm}{b}{it}
+      \fi
+
+      \def\atSign{@}
+
+      \ifx \usingAmsArtXII \undefined
+      \else				% We loaded this package ourselves
+	\advance\oddsidemargin -0.1\textwidth
+	\evensidemargin\oddsidemargin
+	\textwidth=1.2\textwidth % Advance in 12pt as in version 1.1
+      \fi
+
+      \def\Sb#1\endSb{_{\substack{#1}}}
+      \def\Sp#1\endSp{^{\substack{#1}}}
+
+  \fi
+
+\makeatletter
+
+\@ifundefined{DeclareFontShape} 
+     {\@ifundefined{selectfont}
+             {
+                \message{We need AmS-LaTeX, this version of LaTeX does not 
+                        support it}\@@end
+             }{%  Here we are in  NFSS1
+                \def\mathcal{\cal}
+                \def\cyr{\protect\pcyr}
+                \def\pcyr{%
+                        \def\default@family{UWCyr}%
+                        \let\oldSl@\sl
+                        \def\sl{\def\default@shape{it}\oldSl@}%
+                        \cyracc
+                        \language\Russian\family{UWCyr}\selectfont
+                }
+             }}{% Here we are in  NFSS2
+                \DeclareFontEncoding{OT2}{}{\noaccents@}
+                \DeclareFontSubstitution{OT2}{cmr}{m}{n}
+                \DeclareFontFamily{OT2}{cmr}{\hyphenchar\font45 }
+                \DeclareFontShape{OT2}{cmr}{m}{n}{%
+                     <5><6><7><8><9><10>gen*wncyr %
+                     <10.95><12><14.4><17.28><20.74><24.88> wncyr10 %
+                }{}
+                \DeclareFontShape{OT2}{cmr}{m}{it}{%
+                     <5><6><7><8><9><10> gen * wncyi%
+                     <10.95><12><14.4><17.28><20.74><24.88> wncyi10%
+                }{}
+                \DeclareFontShape{OT2}{cmr}{bx}{n}{%
+                     <5><6><7><8><9><10> gen * wncyb%
+                     <10.95><12><14.4><17.28><20.74><24.88> wncyb10%
+                }{}
+                \DeclareFontShape{OT2}{cmr}{m}{sl}{%
+                     <-> ssub * cmr/m/it%
+                }{}
+                \DeclareFontShape{OT2}{cmr}{m}{sc}{%
+                     <5><6><7><8><9><10>%
+                     <10.95><12><14.4><17.28><20.74><24.88> wncysc10%
+                }{}
+                \DeclareFontFamily{OT2}{cmss}{\hyphenchar\font45 }
+                \DeclareFontShape{OT2}{cmss}{m}{n}{%
+                     <8><9><10> gen * wncyss%
+                     <10.95><12><14.4><17.28><20.74><24.88> wncyss10%
+                }{}
+                \def\cyr{\protect\pcyr}
+                \def\cyrencodingdefault{OT2}
+                \def\pcyr{%
+                        \cyracc
+                        \let\encodingdefault\cyrencodingdefault
+                        \language\Russian\fontencoding{OT2}\selectfont
+                }
+             }   
+
+\@ifundefined{theorembodyfont} 
+     {
+        %% Make fake \theorembodyfont
+        \def\theorembodyfont#1{\relax}
+        %% Make theorems slanted instead of italic
+        \makeatletter
+          \let\@@th@plain\th@plain
+          \def\th@plain{ \@@th@plain \slshape }
+        \makeatother
+        \let\normalshape\relax
+     }{}   
+
+\ifx\cprime\undefined
+     \def\cprime{$'$}
+\fi
+
+\makeatletter
+
+  \def\@sect@my#1#2#3#4#5#6[#7]#8{%
+\ifnum #2>\c@secnumdepth
+   \let\@svsec\@empty
+ \else
+   \refstepcounter{#1}%
+\edef\@svsec{\ifnum#2<\@m
+             \@ifundefined{#1name}{}{\csname #1name\endcsname\ }\fi
+\noexpand\rom{\csname the#1\endcsname.}\enspace}\fi
+ \@tempskipa #5\relax
+ \ifdim \@tempskipa>\z@ % then this is not a run-in section heading
+   \begingroup #6\relax
+   \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty\@M #8\par}%
+   \endgroup
+   \if@article\else\csname #1mark\endcsname{%
+        \ifnum \c@secnumdepth >#2\relax\csname the#1\endcsname. \fi#7}\fi
+\ifnum#2>\@m \else
+       \let\@tempf\\ \def\\{\protect\\}\addcontentsline{toc}{#1}%
+{\ifnum #2>\c@secnumdepth \else
+             \protect\numberline{%
+               \ifnum#2<\@m
+               \@ifundefined{#1name}{}{\csname #1name\endcsname\ }\fi
+               \csname the#1\endcsname.}\fi
+           #8}\let\\\@tempf
+     \fi
+ \else
+  \def\@svsechd{#6\hskip #3\@svsec
+    \@ifnotempty{#8}{\ignorespaces#8\unskip
+       \ifnum\spacefactor<1001.\fi}%
+        \ifnum#2>\@m \else
+          \let\@tempf\\ \def\\{\protect\\}\addcontentsline{toc}{#1}%
+            {\ifnum #2>\c@secnumdepth \else
+              \protect\numberline{%
+                \ifnum#2<\@m
+                \@ifundefined{#1name}{}{\csname #1name\endcsname\ }\fi
+                \csname the#1\endcsname.}\fi
+             #8}\let\\\@tempf\fi}%
+ \fi
+\@xsect{#5}}
+  \ifx\RequirePackage\undefined
+  \let\@sect\@sect@my             % Cannot just comment the above
+                                  % definition, it probably contains
+                                  % some unbalanced \if's.
+  \fi
+
+  \ifx\RequirePackage\undefined	%              Not under LaTeX2e
+  \def\th@remark@my{\theorempreskipamount6\p@\@plus6\p@
+    \theorempostskipamount\theorempreskipamount
+    \def\theorem@headerfont{\it}\normalshape}
+    \let\th@remark\th@remark@my
+  \else				%              Under LaTeX2e
+    \let\o@@remark\th@remark
+
+    \ifx\theorempostskipamount\undefined		% AmS-art
+    \else						% Transformation groups
+      \def\th@remark{\o@@remark
+	\ifdim\theorempostskipamount < 2pt\relax
+	  \theorempostskipamount\theorempreskipamount
+	  %\ifdim\theorempostskipamount < 4pt\else
+	     \multiply\theorempostskipamount\tw@
+	     \divide\theorempostskipamount\thr@@
+	  %\fi
+	\fi
+      }
+    \fi
+  \fi
+%
+%       Label work
+\let\myLabel\@gobble
+\def\labelsONmargin{\@mparswitchfalse\def\myLabel##1{\@bsphack\marginpar
+                                  {\normalshape\tiny\rm Label ##1}\@esphack}}
+\ifx \url\undefined
+  \def\url#1{{\tt #1}}%
+\fi
+%
+%               Version-independent Cyrillic stuff
+%
+\def\cyracc{\def\u##1{%\if \i##1\accent"24 i%
+                \if \i##1\char"1A%
+                \else \if I##1\char"12%
+                \else \accent"24 ##1\fi\fi }%
+\def\"##1{\if e##1{\char"1B}%
+                \else \if E##1{\char"13}%
+                \else \accent"7F ##1\fi\fi }%
+\def\9##1{\if##1z\char"19 
+\else\if##1Z\char"11 
+\else\if##1E\char"03 
+\else\if##1e\char"0B 
+\else\if##1u\char"18 
+\else\if##1U\char"10 
+\else\if##1A\char"17 
+\else\if##1a\char"1F 
+\else\if##1p\char"7E 
+\else\if##1P\char"5E 
+\else\if##1Q\char"5F 
+\else\if##1q\char"7F 
+\else\if##1i\char"1A 
+\else\if##1I\char"12 
+\else\if##1N\char"7D 
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+\fi
+}%
+\def\cydot{{\kern0pt}}}%
+\def\cydot{$\cdot$}
+%\tracingmacros=1
+%\tracingcommands=2
+\def\cyrm{\cyr\rm}
+\def\cyit{\cyr\it}
+\def\cysc{\cyr\sc}
+\def\cysl{\cyr\sl}
+\def\cybf{\cyr\bf}
+\ifx\Russian\undefined
+        \def\Russian{0\relax
+    \message{Don't know the hyphenation rules for Russian^^J
+                        Please do INITeX with `input  russhyph' in the 
+                        command line}%
+                \gdef\Russian{0\relax}%
+        }
+\fi
+%       Undefined references modification
+%
+\ifx\RequirePackage\undefined			% for 209
+  \def\@putname#1#2#3#4{\def\@@ref{#3}\let\old@bf\bf
+        \def\bf##1{\old@bf\if?\noexpand##1?{#4}\else##1\fi}%
+	#1{#2}%
+        \let\bf\old@bf}
+\else						% for 2e
+  \def\@putname#1#2#3#4{\def\@@ref{#3}\let\old@bf\bf	% for 209???
+	\let\old@reset@font\reset@font			% for 2e
+        \def\bf##1{\old@bf\if?\noexpand##1?{#4}\else##1\fi}%
+	\def\reset@font##1##2{\old@reset@font##1\if?\noexpand##2?{#4}\else##2\fi}#1{#2}%
+        \let\bf\old@bf\let\reset@font\old@reset@font}
+\fi
+\let\my@ref=\ref
+\def\ref#1{\@putname\my@ref{#1}{#1}{\tiny\rm\@@ref}}
+\let\my@pageref=\pageref
+\def\pageref#1{\@putname\my@pageref{#1}{#1}{\tiny\rm\@@ref}}
+\let\my@cite=\cite
+%\def\cite#1{\@putname\my@cite{#1}{\@citeb}{\tiny\rm\@@ref}}
+\makeatother
+\tracingstats=2 \relax 
+\fi
+%\bibliography{ref,outref,mathsci}
+\relax 
+\theoremstyle{plain} % for references in unnumbered theorems
+\theorembodyfont{\sl}
+
+\ifx\useDoubleSpacing\undefined
+\else
+  \usepackage{setspace}\doublespacing
+\fi
+
+\ifx \numberingIsThrough \undefined
+\numberwithin{equation}{section}
+\fi
+
+% theorem style plain --- default
+\theorembodyfont{\rm}
+\theoremstyle{definition}
+
+\ifx \numberingIsThrough \undefined
+\newtheorem{definition}{Definition}[section]
+\else
+\newtheorem{definition}{Definition}
+\fi
+
+\newtheorem{conjecture}[definition]{Conjecture}
+\newtheorem{example}[definition]{Example}
+\newtheorem{exercise}[definition]{Exercise}
+\newtheorem{problem}[definition]{Problem}
+
+%\theoremstyle{remark}
+
+\newtheorem{remark}[definition]{Remark} %\renewcommand{\theremark}{}
+\renewenvironment{proof}{ \textbf {Proof.}}{$\Box$}
+
+\ifx \numberingIsThrough \undefined
+\newtheorem{note}{Note}[section] \renewcommand{\thenote}{}
+\newtheorem{summary}{Summary}[section] \renewcommand{\thesummary}{}
+\else
+\newtheorem{note}{Note} \renewcommand{\thenote}{}
+\newtheorem{summary}{Summary} \renewcommand{\thesummary}{}
+\fi
+
+\newtheorem{case}[definition]{Case} %\renewcommand{\thecase}{}
+\newtheorem{acknowledgement}{Acknowledgement} \renewcommand{\theacknowledgement}{}

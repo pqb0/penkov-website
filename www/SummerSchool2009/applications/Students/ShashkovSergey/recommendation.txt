@@ -1,0 +1,25 @@
+> From: Ernest B. Vinberg <vinberg@zebra.ru>
+> Subject: Re[4]: recommendation
+> To: "Ivan Penkov" <ivanpenkov@yahoo.com>
+> Date: Thursday, April 16, 2009, 5:19 AM
+> Dear Ivan,
+> The last remaining graduate student of mine, Sergei
+> Shashkov, also
+> wants to participate in your Summer School in
+> representation theory.
+> I recommend him as well. He is a graduate student of the
+> first year,
+> but he has already obtained some nice results. Namely, he
+> classified
+> homogeneous spaces X=G/H with dim H=1, for which the action
+> of G:T*X
+> is coisotropic, and proved that, for each such space, every
+> invariant
+> regular function on T*X, which is homogeneous of degree m
+> on each
+> fiber, is the symbol of some invariant differential
+> operator of
+> order m.
+>   With best regards, E.B.Vinberg.
+> 
+> ----------------------

@@ -1,0 +1,145 @@
+\newcommand{\arxiv}[1]{\href{http://arxiv.org/abs/#1}{\tt
+  arXiv:\nolinkurl{#1}}}\newcommand{\doi}[1]{DOI:
+  \href{http://dx.doi.org/#1}{\tt \nolinkurl{#1}}}
+\begin{thebibliography}{VdJHKTM90}
+
+\bibitem[Bar99]{Bar99}
+A.~Baranov.
+\newblock Finitary simple {L}ie algebras.
+\newblock {\em J. Algebra}, 219(1):299--329, 1999.
+
+\bibitem[CP19]{CP19}
+K.~Coulembier and I.~Penkov.
+\newblock On an infinite limit of {BGG} categories {$\mathcal{O}$}.
+\newblock {\em Mosc. Math. J.}, 19(4):655--693, 2019.
+
+\bibitem[D{\relax -C}PS07]{D-CPS07}
+E.~Dan~{\relax -C}ohen, I.~Penkov, and N.~Snyder.
+\newblock Cartan subalgebras of root-reductive {L}ie algebras.
+\newblock {\em J. Algebra}, 308(2):583--611, 2007.
+
+\bibitem[D{\relax -C}PS16]{D-CPS16}
+E.~Dan~{\relax -C}ohen, I.~Penkov, and V.~Serganova.
+\newblock A {K}oszul category of representations of finitary {L}ie algebras.
+\newblock {\em Adv. Math.}, 289:250--278, 2016.
+
+\bibitem[DP98]{DP98}
+I.~Dimitrov and I.~Penkov.
+\newblock Partially integrable highest weight modules.
+\newblock {\em Transform. Groups}, 3(3):241--253, 1998.
+
+\bibitem[FSS00]{FSS00}
+L.~Frappat, A.~Sciarrino, and P.~Sorba.
+\newblock {\em Dictionary on {L}ie algebras and superalgebras}.
+\newblock Academic Press, Inc., San Diego, CA, 2000.
+
+\bibitem[Fuk86]{Fuk86}
+D.~B. Fuks.
+\newblock {\em Cohomology of infinite-dimensional {L}ie algebras}.
+\newblock Contemporary Soviet Mathematics. Consultants Bureau, New York, 1986.
+\newblock Translated from the Russian by A. B. Sosinski\u{\i}.
+
+\bibitem[GP20]{GP20}
+D.~Grantcharov and I.~Penkov.
+\newblock Simple bounded weight modules of {$\mathfrak{sl}(\infty)$},
+  {$\mathfrak{o}(\infty)$}, {$\mathfrak{sp}(\infty)$}.
+\newblock {\em Transform. Groups}, 25(4):1125--1160, 2020.
+
+\bibitem[GS20]{GS20}
+N.~Grantcharov and V~Serganova.
+\newblock Extension quiver for {L}ie superalgebra $\mathfrak{q}(3)$.
+\newblock Preprint, 2020.
+
+\bibitem[Kac78]{Kac78}
+V.~Kac.
+\newblock Representations of classical {L}ie superalgebras.
+\newblock In {\em Differential geometrical methods in mathematical physics,
+  {II}, ({P}roc. {C}onf., {U}niv. {B}onn, {B}onn, 1977)}, volume 676 of {\em
+  Lecture Notes in Math.}, pages 597--626. Springer, Berlin, 1978.
+
+\bibitem[Lan02]{Lan02}
+S.~Lang.
+\newblock {\em Algebra}.
+\newblock Graduate Texts in Mathematics. Springer, 2002.
+
+\bibitem[MS11]{MS11}
+I.~Musson and V.~Serganova.
+\newblock Combinatorics of character formulas for the {L}ie superalgebra
+  {${\mathfrak{gl}}(m,n)$}.
+\newblock {\em Transform. Groups}, 16(2):555--578, 2011.
+
+\bibitem[Mus12]{Mus12}
+I.~Musson.
+\newblock {\em {L}ie superalgebras and enveloping algebras}, volume 131 of {\em
+  Graduate Studies in Mathematics}.
+\newblock American Mathematical Society, Providence, RI, 2012.
+
+\bibitem[Nam17]{Nam17}
+T.~Nampaisarn.
+\newblock On categories $\mathcal{O}$ for root-reductive {L}ie algebras.
+\newblock arXiv:1711.11234, 2017.
+
+\bibitem[Pen86]{Pen86}
+I.~Penkov.
+\newblock Characters of typical irreducible finite-dimensional
+  $\mathfrak{q}(n)$-modules.
+\newblock {\em Functional Anal. Appl.}, 20(1):30--37, 1986.
+
+\bibitem[Pen04]{Pen04}
+I.~Penkov.
+\newblock Classically semisimple locally finite {L}ie superalgebras.
+\newblock {\em Forum Math.}, 16(3):431--446, 2004.
+
+\bibitem[PS94]{PS94}
+I.~Penkov and V.~Serganova.
+\newblock Generic irreducible representations of finite-dimensional {L}ie
+  superalgebras.
+\newblock {\em Internat. J. Math.}, 5(3):389--419, 1994.
+
+\bibitem[PS11]{PS11}
+I.~Penkov and V.~Serganova.
+\newblock Categories of integrable {$sl(\infty)$}-, {$o(\infty)$}-,
+  {$sp(\infty)$}-modules.
+\newblock In {\em Representation theory and mathematical physics}, volume 557
+  of {\em Contemp. Math.}, pages 335--357. Amer. Math. Soc., Providence, RI,
+  2011.
+
+\bibitem[PS19]{PS19}
+I.~Penkov and V.~Serganova.
+\newblock Large annihilator category {$\cO$} for {$\frak{sl}(\infty)$},
+  {$\frak{o}(\infty)$}, {$\frak{sp}(\infty)$}.
+\newblock {\em J. Algebra}, 532:152--182, 2019.
+
+\bibitem[P{\relax Sty}11]{PSty11}
+I.~Penkov and K.~{\relax Sty}rkas.
+\newblock Tensor representations of classical locally finite {L}ie algebras.
+\newblock In {\em Developments and trends in infinite-dimensional {L}ie
+  theory}, volume 288 of {\em Progr. Math.}, pages 127--150. Birkh\"{a}user
+  Boston, Inc., Boston, MA, 2011.
+
+\bibitem[Ser83]{Ser83}
+A.~Sergeev.
+\newblock The centre of enveloping algebra for {L}ie superalgebra {$Q(n,\,{\bf
+  C})$}.
+\newblock {\em Lett. Math. Phys.}, 7(3):177--179, 1983.
+
+\bibitem[Ser11]{Ser11}
+V.~Serganova.
+\newblock Kac-{M}oody superalgebras and integrability.
+\newblock In {\em Developments and trends in infinite-dimensional {L}ie
+  theory}, volume 288 of {\em Progr. Math.}, pages 169--218. Birkh\"auser
+  Boston, Inc., Boston, MA, 2011.
+\newblock \doi{10.1007/978-0-8176-4741-4_6}.
+
+\bibitem[SS15]{SS15}
+S.~V. Sam and A.~Snowden.
+\newblock Stability patterns in representation theory.
+\newblock {\em Forum of Mathematics, Sigma}, 3:e11, 2015.
+
+\bibitem[VdJHKTM90]{VHKT90}
+J.~Van~der Jeugt, J.~W.~B. Hughes, R.~C. King, and J.~Thierry-Mieg.
+\newblock A character formula for singly atypical modules of the {L}ie
+  superalgebra {${\rm sl}(m/n)$}.
+\newblock {\em Comm. Algebra}, 18(10):3453--3480, 1990.
+
+\end{thebibliography}

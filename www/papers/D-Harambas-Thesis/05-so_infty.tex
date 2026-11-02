@@ -1,0 +1,34 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+In the papers \cite{dancohen2012koszulcategoryrepresentationsfinitary} 
+and \cite{Serganova2017}, it has been proven that the category of tensor $\mathfrak{sp}_\infty-$modules is equivalent to the category of  tensor $\mathfrak{so}_\infty-$modules. Under this equivalence,  the $\mathfrak{sp}_\infty-$modules $\Gamma_{<\lambda>}$ and $\Gamma_\lambda$ are mapped to the $\mathfrak{so}_\infty-$modules $\Gamma_{[\lambda^T]}$ and $\Gamma_{\lambda^T}$, respectively. Hence all results transfer to the $\mathbf{so}_\infty-$case by simply transposing Young diagrams. \\
+
+Using the theory in \cite{penkov2007tensorrepresentationsclassicallocally} and \cite{SAM_2015} and our results from section 3 and 4, we give the following analogues of propositions \ref{socle-filtr-height}, \ref{prop-soc-last-term-general}, \ref{prop-last-res-term}, and of corollary \ref{res-length}: 
+
+\begin{prop}
+    \label{so-socle-filtr-height}
+    For any partition $\lambda$, the last nonzero socle layer in the socle filtration of the $\mathfrak{so}_\infty$-module $\Gamma_\lambda$ is:
+    $$
+    \soc{k+1}\Gamma_\lambda = \bigoplus\limits_{\mu} \left( \sum\limits_{|\gamma|=k} \LR{\lambda}{\mu}{2\gamma} \right) \Gamma_{[\mu]}
+    \hspace{0.7cm} \text{ for } k = |\lambda^T|^{even}.
+    $$
+    In particular, the module $\Gamma_{[\eta]}$ with $\eta = \underbrace{(1,1,...,1)}_{|\lambda| - 2|\lambda^T|^{even}\text{ times}}$ is always a simple constituent of the last nonzero socle layer, and the module appears with multiplicity one.
+\end{prop}
+\bigskip
+\begin{prop}
+    \label{so-soc-last-term-general}
+     Let $\lambda$ be a partition and $\lambda^T= ((\lambda^T)_1, (\lambda^T)_2, ..., (\lambda^T)_{r})$ be its conjugate partition. If $r=2m$ for some positive integer $m,$ we pick the nonzero values among the set of differences $\{(\lambda^T)_1-(\lambda^T)_2, (\lambda^T)_3-(\lambda^T)_4, ..., (\lambda^T)_{2m-1}-(\lambda^T)_{2m}\}.$ If $r=2m+1$ for some positive integer $m$, we pick the nonzero values from $\{(\lambda^T)_1-(\lambda^T)_2, (\lambda^T)_3-(\lambda^T)_4, ..., (\lambda^T)_{2m-1}-(\lambda^T)_{2m}, (\lambda^T)_{2m+1}\}.$ Rearranging these  values in descending order, we obtain a partition $(y_1, y_2, ..., y_l)$. 
+     Then for any partition $\mu$ with $\mu\geq_{lex}(y_1, y_2, ..., y_l), \; |\mu|=|(y_1, y_2, ..., y_l)|$, and of length at most $l$, the $\mathfrak{so}_\infty-$module $\Gamma_{[\mu^T]}$ appears in the last term of the socle filtration of the $\mathfrak{so}_\infty$-module $\Gamma_\lambda$. 
+\end{prop}
+\bigskip
+\begin{prop}
+\label{so-last-res-term}
+    For any partition $\lambda$, let $\delta_{\text{max}}$ be its maximal RQS-subpartition. Let $l$ be the number of boxes in the longest column of the semistandard skew tableau of shape $\lambda/\delta_{\text{max}}$. 
+    Then the last nonzero term of a minimal injective resolution of the $\mathfrak{so}_\infty-$module $\Gamma_{[\lambda]}$ has the form \\$\Gamma_\mu\oplus(\bigoplus\limits_{\eta}\Gamma_\eta)$ for some partition $\mu$ of length $l$ and possibly further partitions $\eta$ of length at least $l$ such that $|\mu| = |\eta|=|\lambda|-|\delta_{max}|$.
+\end{prop}
+\bigskip
+\begin{crl}
+    For any partition $\lambda$, let $\delta_{max}$ be its maximal row-quasi-symmetric subpartition. The length of a minimal injective resolution of the corresponding $\mathfrak{so}_\infty-$module $\Gamma_{[\lambda]}$ is equal to $\frac{|\delta_{max}|}{2}+1.$
+\end{crl}
+\end{document}
+

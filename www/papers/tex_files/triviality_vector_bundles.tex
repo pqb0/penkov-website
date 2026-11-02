@@ -1,0 +1,2592 @@
+\documentclass[12pt]{amsart}
+\usepackage{amsthm,amsfonts,amssymb,amscd,mathrsfs}
+\usepackage{bezier,longtable,amstext}
+\usepackage{amssymb}
+
+\sloppy \topmargin-10mm \oddsidemargin-5mm \evensidemargin-5mm
+
+\setlength{\textwidth}{17cm} \setlength{\textheight}{25cm}
+\usepackage[all]{xy}
+%\usepackage[pagebackref,colorlinks]{hyperref}
+%\usepackage{showkeys}
+
+
+\newcommand{\EXT}{{\mathcal Ext}}
+\newcommand\uC{{\underline{C}}}
+\newcommand\Aut{\text{Aut}}
+\newcommand\codim{\text{codim}}
+\newcommand\coker{\operatorname{coker}\nolimits}
+\newcommand{\const}{\operatorname{const}\nolimits}
+\newcommand\ev{\text{ev}}
+\newcommand\ext{\text{ext}}
+\newcommand\Ext{\operatorname{Ext}\nolimits}
+\newcommand\GL{\text{GL}}
+\newcommand{\Hilb}{\operatorname{Hilb}\nolimits}
+\newcommand\hhom{\text{hom}}
+\newcommand\Hom{\operatorname{Hom}\nolimits}
+\newcommand\id{\text{id}}
+\newcommand\im{\operatorname{Im}\nolimits}
+\newcommand\Ker{\operatorname{Ker}\nolimits}
+\newcommand\length{\text{length}}
+\newcommand\mult{\text{mult}}
+\newcommand\odd{\text{odd}}
+\newcommand{\Pic}{\operatorname{Pic}\nolimits}
+\newcommand\pr{\text{pr}}
+\newcommand{\Proj}{\operatorname{Proj}\nolimits}
+\newcommand\red{\text{red}}
+\newcommand\res{\text{res}}
+\newcommand\rk{\text{rk}}
+\newcommand\Fl{\text{Fl}}
+\newcommand{\Sing}{\operatorname{Sing}\nolimits}
+\newcommand\Span{\text{Span}}
+\newcommand\Stab{\text{Stab}}
+\newcommand\Sym{\operatorname{Sym}\nolimits}
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\refle}[1]{Lemma \ref{#1}}
+\newcommand{\refth}[1]{Theorem \ref{#1}}
+\newcommand{\refcor}[1]{Corollary \ref{#1}}
+\newcommand{\refprop}[1]{Proposition \ref{#1}}
+\newcommand{\refsec}[1]{Section~ \ref{#1}}
+\newcommand{\refeq}[1]{(\ref{#1})}
+
+\newcommand {\eqdef} {:=}
+\newcommand {\eqdefrev} {=:}
+
+\newcommand\elm{{\operatorname{elm}\nolimits}}
+\newcommand\Supp{{\operatorname{Supp}\nolimits}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{sub}[subsection]{}
+\newtheorem{subsub}{}[subsection]
+\newtheorem{subsubsub}{}[subsubsection]
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{notation}[theorem]{Notation}
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{proposition-definition}[theorem]{Proposition-Definition}
+
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+
+\title{Triviality of vector bundles on twisted ind-Grassmannians}
+
+\author[I.Penkov]{\;Ivan~Penkov}
+
+\address{
+Jacobs University Bremen \\
+School of Engineering and Science, Campus Ring 1, 28759 Bremen, Germany}
+\email{i.penkov@jacobs-university.de}
+
+\author[Tikhomirov]{\;Alexander S.~Tikhomirov}
+
+
+\address{
+Department of Mathematics\\
+State Pedagogical University\\
+Respublikanskaya Str. 108
+\newline 150 000 Yaroslavl, Russia}
+\email{astikhomirov@mail.ru}
+
+
+
+
+
+
+
+\maketitle
+
+
+\thispagestyle{empty}
+
+\begin{abstract}
+Twisted ind-Grassmannians are ind-varieties $\mathbf{G}$ obtained as direct limits of
+Grassmannians $G(i_m,V^{n_m})$ for $m\in\mathbb{Z}_{>0}$, under embeddings
+$\phi_m:G(i_m,V^{n_m})\to G(i_{m+1}, V^{n_{m+1}})$ of degree greater than one. It has
+been conjectured by J.~Donin and I.~Penkov \cite{DP}, and by I.~Penkov and  A.~Tikhomirov
+\cite{PT}, that any vector bundle of finite rank on a twisted ind-Grassmannian is trivial.
+We prove this conjecture.
+
+2000 Mathematics Subject Classification, Primary 14M15 (Secondary 14J60, 32L05).
+
+\keywords{Keywords: ind-varieties, twisted ind-Grassmannians, vector bundles.}
+
+%\thanks{Partially supported by grant DFG PE980/3-1.}
+\end{abstract}
+
+
+\markright{Triviality of vector bundles on twisted ind-Grassmannians}
+
+
+%\thanks
+
+
+
+\section{Introduction and statement of the main result}\label{sec1}
+\label{Introduction} An {\it ind-Grassmannian} $\mathbf{G}=\underset{\to}\lim
+G(i_m,V^{n_m})$ is an ind-variety obtained as the direct limit of a chain of
+embeddings
+\begin{equation}\label{eq1}
+G(i_1,V^{n_1})\stackrel{\phi_1}{\hookrightarrow}G(i_2,V^{n_2})
+\stackrel{\phi_2}{\hookrightarrow}\dots\stackrel{\phi_{m-1}}{\hookrightarrow}G(i_m,V^{n_m})
+\stackrel{\phi_m}{\hookrightarrow}\dots,
+\end{equation}
+where $G(i,V)$ denotes the Grassmanian of $i$-dimensional subspaces in a finite
+dimensional vector space $V$. Each embedding $\phi_m$ has a well defined degree $\deg
+\phi_m$, and the ind-Grassmannian $\mathbf{G}$ is {\it twisted} if $\deg\phi_m>1$ for
+infinitely many $m$. A {\it vector bundle $\mathbf{E}$ of rank}
+$\mathbf{r}\in\mathbb{Z}_{>0}$ on $\mathbf{G}$ is the inverse limit
+$\underset{\leftarrow}\lim E_m$ of an inverse system of vector bundles $E_m$ or rank
+$\mathbf{r}$ on $G(i_m,V^{n_m})$ (i.e. a system of vector bundles $E_m$ with fixed
+isomorphisms $\psi_m: E_m\cong \phi^*_mE_{m+1}$).
+
+In the special case when $i_m=1$ and $\deg\phi_m=1$ for all $m$,  the study of finite
+rank vector bundles on ind-Grassmannians goes back to W. Barth, A. Van de Ven and A.
+N. Tyurin, \cite{BV}, \cite{T}. In this case $\mathbf{G}$ is just the infinite
+projective space $\mathbf{P}^\infty$, and the remarkable Barth-Van de Ven-Tyurin
+Theorem claims that any vector bundle of finite rank on $\mathbf{P}^\infty$ is
+isomorphic to a direct sum of line bundles. Historically this is the first
+manifestation of a general phenomenon that seems to take place for ind-varieties
+defined via sequences of embeddings similar to (\ref{eq1}) with $G(i_m,V_m)$ replaced
+by arbitrary flag varieties: in all cases known, the restriction of any finite rank
+vector bundle on the ind-variety to a large enough finite-dimensional flag subvariety
+is equivariant. Around the same time this phenomenon occured also in the work of E.
+Sato who gave an independent proof of the Barth-Van de Ven-Tyurin Theorem, \cite{S1}.
+Shortly after that Sato established a more general result which applies in particular
+to the ind-Grassmannian $\mathbf{G}(i,V)$ of $i$-dimensional subspaces in a
+countable-dimensional vector space $V$ \cite{S2}.
+
+More recently the subject has been revisited in the papers \cite{DP}, \cite{CT} and
+\cite{PT}. In particular, in \cite{PT} a general conjecture about finite rank vector
+bundles on ind-Grassmannians $\mathbf{G}$ has been stated. In fact, as we show in
+\cite{PT}, if $\mathbf{G}$ is not twisted (which is equivalent to assuming that
+$\deg\phi_m=1$ for all $m$), this conjecture is a relatively straightforward corollary
+of Sato's result. This leaves open the case of a twisted ind-Grassmannian
+$\mathbf{G}$, where the conjecture claims simply that a finite-rank vector bundle on
+$\mathbf{G}$ is trivial. So far this latter conjecture was established in the
+following three cases: for a rank-two bundle on any twisted ind-Grassmannian
+\cite{PT}, for any finite-rank bundle on any twisted projective ind-space (a twisted
+projective ind-space can be defined via the sequence (\ref{eq1}) for $i_m=1$ and
+$\deg\phi_m>1$ for all $m$) \cite{DP}, and for an arbitrary finite-rank bundle on some
+special twisted ind-Grassmannians (for which the embeddings $\phi_m$ are twisted
+extensions as defined in \cite{DP}).
+
+In the present paper we prove the conjecture, i.e. the following theorem.
+
+\begin{theorem}\label{main}
+A finite-rank vector bundle $\mathbf{E}=\underset{\leftarrow}\lim~E_m$ on any twisted
+ind-Grassmannian $\mathbf{G}=\underset{\rightarrow}\lim~G(i_m,V^{n_m})$ is trivial.
+\end{theorem}
+
+Here is a brief description of the main ingredients in the proof of Theorem
+\ref{main}. First of all, without loss of generality we can assume that $\mathbf{E}$
+is self-dual. This is achieved by possibly replacing of $\mathbf{E}$ with
+$\mathcal{E}nd\mathbf{E}$. The ultimate goal of the proof is to construct, for large
+$m$, subsheafs $\mathcal{F}_m$ of the vector bundles $E_m$ with $c_1(\mathcal{F}_m)>0$
+under the assumption that $E_m$ is nontrivial. This then easily leads to a
+contradiction since the facts that $\mathbf{G}$ is twisted and $E_m$ is infinitely
+extendable force $c_1(\mathcal{F}_m)$ to be infinite. The general idea of such a
+construction goes back to Barth-Van de Ven and Tyurin in the case of
+$\mathbf{P}^\infty$.
+
+The construction of $\mathcal{F}_m$ combines several ideas and is based on a study of
+the variety of maximal jumping lines of the vector bundle $\mathbf{E}$. In our case we
+investigate the variety of maximal jumping lines of $E_m$ on $G(i_m,V^{n_m})$. We
+reduce the problem to the study of a similar variety for projective space by using a
+birational isomorphism of $G(i_m,V^{n_m})$ with a fibred space $X_m$ with fibre a
+projective space. A key result in this connection is the existence of universal bounds
+for the degree and codimension of the variety of maximal jumping lines through a point
+of a vector bundle on a projective space.
+
+The paper is organized as follows. Section \ref{bound in Pn} is a study of varieties
+of bounded degree and codimension in projective spaces of growing dimension. The main
+result here is that any two points of such a variety can be connected by chain of
+projective subspaces of growing dimension. This result is close in spirit to a
+classical result of A. Predonzan, and is part of the present paper due to the lack of
+a suitable reference.
+
+In section \ref{m-reg} we give a sufficient condition on an integer $m$ for a given
+vector bundle $E$ on $\mathbb{P}^n$ to be $m$-regular in the sense of
+Mumford-Castelnuovo, i.e. that $H^i(E(m-i))=0$ for $i\ge1$. This condition on $m$ is
+needed for the estimate of the degree of the variety of maximal jumping lines through
+a point of a vector bundle on a projective space, given in section \ref{bounded
+degree}. This estimate (see Theorem \ref{restricted degree}) is given in terms of
+rank, second Chern class, maximal jump and dimension of the projective space, under
+the assumption that the first Chern class vanishes.
+
+The final section \ref{proof} is devoted to the construction of the subsheaf
+$\mathcal{F}_m$ of $E_m$, where $\mathbf{E}=\underset{\leftarrow}\lim~E_m$ is a
+self-dual vector bundle on $\mathbf{G}$. Here we replace $G(i_m,V^{n_m})$ by a fibred
+space $X_m$, to the fibres of which we apply all above results on vector bundles on
+projective spaces. The construction of $\mathcal{F}_m$ then quickly leads to a
+contradiction with the nontriviality of $E_m$ as explained above.
+
+We conclude this introduction with an example of a twisted ind-Grassmannian for
+which our theorem provides a nontrivial statement.
+In this example a twisted ind-Grassmannian arises naturally as a homogeneous space
+of a locally linear ind-group. Various further examples of twisted
+ind-Grassmannians can be found in the papers \cite{DP} and \cite{PT}.
+
+An interesing ind-group is the ind-group $\mathbf{SL}(n,{\rm Adj})$. Fix $n$ and
+consider the embedding
+$$
+\ SL(n)\to SL(n^2-1)
+$$
+defined by the requirement that the natural representation of $SL(n^2-1)$ becomes the
+adjoint representation when restricted to $SL(n)$. Setting $\mathcal{G}_1:=SL(n),\
+\mathcal{G}_2:=SL(n^2-1)$, and iterating this construction we obtain the ind-group
+$\mathbf{SL}(n,{\rm Adj})$ as the direct limit $\underset{\to}\lim\ \mathcal{G}_m$.
+Fix a subspace $V_1\subset\mathbb{C}^n$. Then
+$V_2:=V_1\otimes(\mathbb{C}^n/V_1)^{\vee}$ ( ${}^\vee$ indicates dual space) is a
+well-defined subspace of the adjoint representation of $\mathcal{G}_2$.
+Iteration of this construction yields a subspace $V_m$ of the natural
+representation of $\mathcal{G}_m$ for each $m$. The stabilizers $\mathcal{P}_m\subset
+\mathcal{G}_m$ of the spaces $V_m$ form a direct system of parabolic subgroups
+$\mathcal{P}_1\subset \mathcal{P}_2\subset...$ with the property $\mathcal{P}_m\cap
+\mathcal{G}_{m-1}=\mathcal{P}_{m-1}$. This defines closed embeddings
+$\zeta_{m-1}:\mathcal{G}_{m-1}/\mathcal{P}_{m-1}\hookrightarrow
+\mathcal{G}_m/\mathcal{P}_m$, and hence an ind-variety
+$\underset{\to}\lim\ \mathcal{G}_m/\mathcal{P}_m$. Since
+each $\mathcal{G}_m/\mathcal{P}_m$ is a Grassmannian,
+$\underset{\to}\lim\ \mathcal{G}_m/\mathcal{P}_m$
+is an ind-Grassmannian. Moreover, the restriction of
+the tautological bundle on $\mathcal{G}_m/\mathcal{P}_m$ to
+$\mathcal{G}_{m-1}/\mathcal{P}_{m-1}$ is isomorphic the cotangent bundle of
+$\mathcal{G}_{m-1}/\mathcal{P}_{m-1}$. This shows that the degree of $\zeta_m$ equals
+the dimension of the natural representation of $\mathcal{G}_m$. Hence
+$\underset{\to}\lim\ \mathcal{G}_m/\mathcal{P}_m$ is a twisted ind-Grassmannian. It
+is an exercise to check that the ind-group
+$\underset{\to}\lim \mathcal{P}_m$ has no non-trivial finite-dimensional
+representations. Therefore $\underset{\to}\lim\ \mathcal{G}_m/\mathcal{P}_m
+=\mathbf{SL}(n,{\rm Adj})/(\underset{\to}\lim \mathcal{P}_m)$ admits
+no non-trivial $\mathbf{SL}(n,{\rm Adj})$-equivariant vector bundles of finite rank.
+Theorem \ref{main}, however, yields the much stronger result that any finite rank
+vector bundle on $\underset{\to}\lim\ \mathcal{G}_m/\mathcal{P}_m$ is trivial.
+
+
+\textbf{Acknowledgements.} We thank F. L. Zak for pointing out to us the work of R.
+Braun and S. M\"uller-Stach. We acknowledge the support and hospitality of the Max
+Planck Institute for Mathematics in Bonn where the present paper was conceived. This paper
+was completed at Jacobs University Bremen and A. S. T. has been partially supported by ICTS at Jacobs University Bremen, as well as by DFG grant PE980/3-1.
+
+
+\section{Notation and Conventions}\label{sec2}
+Our notation is mostly standard. The ground field is $\mathbb{C}$. All vector bundles
+considered are assumed to have finite rank. We do not make a distinction between
+locally free sheaves of finite rank and vector bundles. We use the term {\it algebraic
+variety} or simply {\it variety} as shorthand for a reduced noetherian scheme.
+If $\mathcal{F}$ is a sheaf of
+$\mathcal{O}_X$-modules on an algebraic variety or a scheme $X$, $\mathcal{F}^j$
+denotes the direct sum of $j$ copies of $\mathcal{F}$, $H^j(\mathcal{F})$ denotes the
+$j^{th}$ cohomology group of $\mathcal{F}$, $h^j(\mathcal{F}):=\dim H^j(\mathcal{F})$,
+and $\mathcal{F}^\vee$ stands for the dual sheaf, i. e. $\mathcal{F}^\vee:=
+\mathcal{H}om_{\mathcal{O}_X}(\mathcal{F},\mathcal{O}_X)$. $Sym^j$ and $\wedge^j$
+denote respectively j-th symmetric and exterior power. If $Z\subset X$ is a
+subvariety, $\mathcal{I}_{Z,X}$ denotes the sheaf of ideals corresponding to $Z$. By
+$\mathbb{P}(E)$ we denote the projectivization of a vector bundle $E$ (in particular,
+of a vector space).
+
+By a \emph{projective subspace} $\mathbb{P}^k$ in $G(i,V)$ we mean linearly embedded
+projective subspace, i.e. the set of $i$-dimensional subspaces $W$ of $V$ with
+$V_0\subset W\subset V_1$, where $V_0\subset V_1$ is a fixed flag of subspaces of $V$
+of dimensions $i-1$ and $i+k$, or $i-k$ and $i+1$ respectively. In particular, a
+\emph{line} in $G(i,V)$ is determined by a flag $V_1\subset V_2$ of subspaces in $V$
+with $\dim V_1=i-1$, $\dim V_2=i+1$.
+
+If $C\subset X$ is a smooth irreducible rational curve in an algebraic variety $X$ and
+$E$ is a vector bundle on $X$, then by a classical theorem of Grothendieck,
+$\displaystyle E|_C$ is isomorphic to $\bigoplus_i\mathcal{O}_C(\delta_i)$ for some
+$\delta_1\geq \delta_2\geq\dots\geq \delta_{\rk E}$. We call the ordered $\rk E$-tuple
+$(\delta_1,\dots,\delta_{\rk E})$ \emph{the splitting type} of $E|_C$.
+
+Let $E$ be a vector bundle on $G(i,V)$. For an arbitrary rational curve $C$ in
+$G(i,V)$ consider the splitting type $(\delta_1,\dots,\delta_{\rk E})$ of the bundle
+$E|_C$ and set
+$$
+\delta_A(E|_C):=\delta_1,\ \ \ \delta_B(E|_C):=\delta_{\rk E},\ \ \
+\delta(E|_C):=\delta_A(E|_C)-\delta_B(E|_C),
+$$
+$$
+\kappa_A(E|_C):=\max\{k|1\le k\le\rk E,\ \delta_k=\delta_A(E|_C)\}.
+$$
+Furthermore, set
+$$
+\delta_A(E):=\underset{l}\max~ \delta_A(E|_l),\ \ \ \ \delta_B(E):=\underset{l}\min~
+\delta_B(E|_l),\ \ \ \
+$$
+where $l$ runs over all lines in $G(i,V)$,
+$$
+\delta(E):=\delta_A(E)-\delta_B(E),
+$$
+$$
+\kappa_A(E):= \max\{ \kappa_A(E|_l)\ |\ l\ {\rm is\ a\ line\ in}\ G(i,V)\ {\rm such\
+that}\ \delta_A(E|_l)=\delta_A(E)\}.
+$$
+It is essential to note that $\delta_A(E|_C)$ and $\kappa_A(E|_C)$ are semicontinuous
+functions of $C$, where $C$ belongs to any fixed flat family of rational curves in
+$G(i,V)$ \cite[Ch. III, Thm. 12.8]{H}.
+
+We need also a notation concerning polynomials. For an arbitrary nonzero polynomial
+$f(y_1,...,y_q)=\sum \frac{a_{i_1...i_q}}{b_{i_1...i_q}}y_1^{i_1}...y_q^{i_q}\in
+\mathbb{Q}[y_1,...,y_q]$ with coprime $a_{i_1...i_q}\in\mathbb{Z}$ and
+$b_{i_1...i_q}\in\mathbb{Z}$ for all $i_1,...,i_q$, we denote by
+$f(y_1,...,y_q)^+\in\mathbb{Z}[y_1,...,y_q]$ the polynomial $\sum
+a^2_{i_1...i_q}y_1^{2i_1}...y_q^{2i_q}$. Note that $-f(y_1,...,y_q)^+\le
+f(y_1,...,y_q)\le f(y_1,...,y_q)^+$ for all $y_1,...,y_q\in\mathbb{Z}$.
+
+
+\vspace{1cm}
+
+\section{Projective subspaces in varieties of bounded codimension and degree}\label{bound in Pn}
+\vspace{0.5cm}
+
+In this section we prove that any two points of a subvariety of bounded codimension
+and degree in a projective space of growing dimension can be connected by a chain of
+projective subspaces of growing dimension lying on this subvariety. This is a chapter
+of the theory of Fano schemes in the spirit of Altman and Kleiman \cite{AK}, and is
+also close to Predonzan's Theorem (1948), a modern presentation of which can be found
+in \cite{BM}. Thoughout the section $d\in\mathbb{Z}_{\ge2}$ is fixed and
+$n\in\mathbb{Z}_{\ge6}$ is variable. The integer $k\in\mathbb{Z}_{\ge1}$ is variable
+and satisfies
+\begin{equation}\label{k(n-k)>...}
+n\ge d\binom{k+d}{d}+k,
+\end{equation}
+for instance, one may set $k=k(n):=\big[\sqrt[d+1]{n/d}\ \big]$.
+\begin{sub}{\bf Projective subspaces in hypersurfaces of bounded degree and growing dimension.}
+\label{hypersurf} \rm Consider the projective space $\mathbb{P}^n=\mathbb{P}(V)$ where
+$V$ is a vector space of dimension $n+1$. Let
+$$
+\mathbb{P}^s:=|\mathcal{O}_{\mathbb{P}^n}(d)|,\ \ \ s=\binom{n+d}{d}-1,
+$$
+be the complete linear series of hypersurfaces of given degree $d$ in $\mathbb{P}^n$.
+Consider the natural diagram
+\begin{equation}\label{p,q}
+G(k+1,V)\overset{\tilde{p}}\leftarrow\Gamma\overset{\tilde{q}}\rightarrow\mathbb{P}^s,
+\end{equation}
+where $\Gamma=\{(\mathbb{P}^k,H)\in G(k+1,V)\times\mathbb{P}^s\ |\ \mathbb{P}^k\subset
+H\}$ and we interpret $G(k+1,V)$ as the Grassmannian of k-dimensional projective
+subspaces in $\mathbb{P}^n$. For each pair $(\mathbb{P}^k,H)\in\Gamma$ choose
+homogeneous coordinates $(x_0:x_1:...:x_n)$ in $\mathbb{P}^n$ such that
+$\mathbb{P}^k=\{x_{k+1}=...=x_n=0\}$. Let $H=\{f(x_0,...,x_n)=0\},\ \ f\in
+H^0(\mathcal{O}_{\mathbb{P}^n}(d))$, and
+$$
+\Phi_i(x_0,x_1,...,x_k):=\frac{\partial f}{\partial
+x_{k+i}}(x_0,x_1,...,x_k,0,...,0),\ \ \ 1\le i\le n-k.
+$$
+Assume that $H$ is smooth. Then
+$\overset{n-k}{\underset{i=1}\cap}\{\Phi_i(x_0,x_1,...,x_k)=0\}=\emptyset$ and we have
+an exact sequence of normal bundles on $\mathbb{P}^k$
+\begin{equation}\label{normal bdls}
+0\to N_{\mathbb{P}^k/H}\to \mathcal{O}_{\mathbb{P}^k}(1)^{n-k}
+\overset{\epsilon_k}\to\mathcal{O}_{\mathbb{P}^k}(d)\to0,\ \ \ \ \ \
+\epsilon_k=(L_1,...,L_{n-k})\mapsto\sum_{i=1}^{n-k}L_i\Phi_i.
+\end{equation}
+Assume $H$ is generic in the sense that
+\begin{equation}\label{SpanPhi=}
+\Span(\Phi_1,...,\Phi_{n-k})=H^0(\mathcal{O}_{\mathbb{P}^k}(d-1)).
+\end{equation}
+Then the exact sequence obtained from (\ref{normal bdls}) via twisting by
+$\mathcal{O}_{\mathbb{P}^k}(-1)$ induces a surjective homomorphism
+$H^0(\mathcal{O}_{\mathbb{P}^k}^{n-k})\to H^0(\mathcal{O}_{\mathbb{P}^k}(d-1))$, and
+it is easy to see that, after twisting back by $\mathcal{O}_{\mathbb{P}^k}(1)$, we get
+a surjective homomorphism $h^0(\epsilon_k):H^0(\mathcal{O}_{\mathbb{P}^k}(1)^{n-k})\to
+H^0(\mathcal{O}_{\mathbb{P}^k}(d))$. Therefore
+
+\begin{equation}\label{h0(N)}
+h^0(N_{\mathbb{P}^k/H}) =(k+1)(n-k)-\binom{k+d}{d}>0,\ \ \
+h^1(N_{\mathbb{P}^k/H})=h^1(N_{\mathbb{P}^k/H}(-1))=0
+\end{equation}
+(the inequality follows from (\ref{k(n-k)>...})).
+
+Note that $\tilde{p}:\Gamma\to G(k+1,V)$ is a projective bundle with fibre
+$\mathbb{P}(H^0(\mathcal{I}_{\mathbb{P}^k,\mathbb{P}^n}(d)))$, hence $\Gamma$ smooth
+and irreducible. Therefore $\dim \tilde{q}^{-1}(H)\ge\dim\Gamma-s=\dim G(k+1,V)+
+\dim\mathbb{P}(H^0(\mathcal{I}_{\mathbb{P}^k,\mathbb{P}^n}(d)))-s=
+(k+1)(n-k)+(s-\binom{k+d}{d})-s=(k+1)(n-k)-\binom{k+d}{d}$. From this and
+(\ref{h0(N)}) we obtain by deformation theory that
+$$
+B_H:=\tilde{p}(\tilde{q}^{-1}(H))
+$$
+has dimension
+\begin{equation}\label{dim BX}
+\dim B_H=h^0(N_{\mathbb{P}^k/H})=(k+1)(n-k)-\binom{k+d}{d}
+\end{equation}
+and is smooth at the point $\mathbb{P}^k$ for a generic smooth $H\in\mathbb{P}^s$.
+Moreover, the projective morphism $\tilde{q}$ is dominant. Since the image of a
+projective morphism is closed \cite[Ch. II, \S4, Thm. 4.9]{H}, this implies that
+$\tilde{q}$ is surjective.
+
+\begin{lemma}\label{BXirreducible}
+For a smooth generic (in the sense of (\ref{SpanPhi=})) hypersurface
+$H\in\mathbb{P}^s$, $B_H$ is a smooth irreducible variety of dimension
+$(k+1)(n-k)-\binom{k+d}{d}$.
+\end{lemma}
+\begin{proof}
+The smoothness of $B_H$ follows from the fact that $B_H$ is a generic fibre of the
+surjective morphism $\tilde{q}:\Gamma\to\mathbb{P}^s$ of smooth varieties \cite[Ch.
+III, \S10, Cor.10.7]{H}.
+
+Let $S_{k+1}$ be the rank-$(k+1)$ tautological bundle on $G(k+1,V)$. By \cite[Thm.
+1.3]{AK} $B_H$ is the zero-scheme of a regular section $\sigma\in H^0(T^\vee)$, where
+$T:=Sym^dS_{k+1}$. Moreover, we have the standard Koszul resolution of the sheaf
+$\mathcal{O}_{B_H}$
+\begin{equation}\label{resolutionOBX}
+0\to\wedge^{\rk T}T\to...\to\wedge^2T\to
+T\overset{\sigma^\vee}\to\mathcal{O}_{G(k+1,V)}\to \mathcal{O}_{B_H}\to0.
+\end{equation}
+We will show that
+\begin{equation}\label{vanishHj}
+H^0(T)=H^j(\wedge^jT)=0,\ \ \ 1\le j\le \rk T.
+\end{equation}
+For this, consider the incidence diagram
+\begin{equation}\label{G(i+1,V)}
+G(i+1,V)\overset{p_i}\leftarrow Fl(i,i+1,V)\overset{q_i}\rightarrow G(i,V),\ \ \ 1\le
+i\le k.
+\end{equation}
+On $Fl(i,i+1,V)$ one has an exact sequence of vector bundles
+\begin{equation}\label{taut}
+0\to q_i^*S_i\overset{\theta_i}\to p_i^*S_{i+1}\to q_i^*\mathcal{O}_{G(i,V)}(1)\otimes
+p_i^*\mathcal{O}_{G(i+1,V)}(-1)\to0,
+\end{equation}
+where $S_i$ be the rank-$i$ tautological bundle on $G(i,V)$. Restricting (\ref{taut})
+to a fibre $\mathbb{P}^{n-i}_y:=q_i^{-1}(y)$ for $y\in G(i,V)$, we obtain an exact
+triple
+$$
+0\to  q_i^*S_i|_{\mathbb{P}^{n-i}_y}\overset{\theta_i|_{\mathbb{P}^{n-i}_y}}\to
+p_i^*S_{i+1}|_{\mathbb{P}^{n-i}_y}\to \mathcal{O}_{\mathbb{P}^{n-i}_y}(-1)\to0,\ \ \ \
+\ \ q_i^*S_i|_{\mathbb{P}^{n-i}_y}\simeq (\mathcal{O}_{\mathbb{P}^{n-i}_y})^i.
+$$
+Passing to symmetric powers and setting $s_i:=\binom{d+i}{d-1},\
+t_i:=\binom{d+i-1}{d}$, we have
+\begin{equation}\label{sym powers1}
+0\to  q_i^*Sym^dS_i|_{\mathbb{P}^{n-i}_y}\to
+p_i^*Sym^dS_{i+1}|_{\mathbb{P}^{n-i}_y}\to
+\overset{s_i}{\underset{p=1}\oplus}\mathcal{O}_{\mathbb{P}^{n-i}_y}(a_p)\to0,\ \ \
+-d\le a_p\le-1,\ \ 1\le p\le s_i,
+\end{equation}
+\begin{equation}\label{sym powers2}
+q_i^*Sym^dS_i|_{\mathbb{P}^{n-i}_y}\simeq (\mathcal{O}_{\mathbb{P}^{n-i}_y})^{t_i} \ .
+\end{equation}
+
+Consider the exact triples
+\begin{equation}\label{skew sym powers1}
+0\to  q_i^*\wedge^j(Sym^dS_i)\overset{\Theta_{ij}}\to
+p_i^*\wedge^j(Sym^dS_{i+1})\to\Lambda_{ij}\to0, \ \ \
+\Lambda_{ij}:=\coker\Theta_{ij},\ \ \ 1\le j\le \rk T,
+\end{equation}
+where $\Theta_{ij}$ are the monomorphisms induced by $\theta_i$ in (\ref{taut}). After
+restriction to $\mathbb{P}^{n-i}_y$, using (\ref{sym powers1}) and (\ref{sym powers2})
+we obtain
+\begin{equation}\label{skew sym powers4}
+\Lambda_{ij}|_{\mathbb{P}^{n-i}_y}\simeq
+\overset{u_{ij}}{\underset{q=1}\oplus}\mathcal{O}_{\mathbb{P}^{n-i}_y}(b_q),\ \ \
+-jd\le b_q\le-1,\ \ \ 1\le q\le u_{ij},
+\end{equation}
+where $u_{ij}:=\binom{s_i+t_i}{j}-\binom{t_i}{j}$. The key observation is that
+(\ref{k(n-k)>...}) and (\ref{skew sym powers4}) imply that
+$H^a(\Lambda_{ij}|_{\mathbb{P}^{n-i}_y})=0,\ a\ge0,\ 1\le j\le \rk T,\ 1\le i\le k$.
+This shows that the Leray spectral sequence
+$E_2^{aa'}=H^a(R^{a'}q_{i*}\Lambda_{ij})\Rightarrow H^{\cdot}(\Lambda_{ij})$
+degenerates and thus gives
+\begin{equation}\label{Leray vanish}
+H^a(\Lambda_{ij})=0,\ a\ge0,\ 1\le j\le \rk T,\ 1\le i\le k.
+\end{equation}
+Since (it is well known that) $H^a(\wedge^j(Sym^dS_i))=H^a(q_i^*\wedge^j(Sym^dS_i)),\
+H^a(\wedge^j(Sym^dS_{i+1}))=H^a(p_i^*\wedge^j(Sym^dS_{i+1})),\ a\ge0$, we derive from
+(\ref{Leray vanish}) and (\ref{skew sym powers1}) that
+\begin{equation}\label{Leray vanish2}
+H^a(\wedge^j(Sym^dS_{i+1}))=H^a(\wedge^j(Sym^dS_i)),\ \ \ 1\le i\le k.
+\end{equation}
+Moreover, setting $j_i:=\rk Sym^dS_i$, we obtain
+$\wedge^{j_i}(Sym^dS_i)\simeq\mathcal{O}_{G(i,V)}(-\binom{d+i-1}{i})$, so that,
+similarly to (\ref{Leray vanish}), $H^a(\wedge^{j_i}(Sym^dS_i))=0,\ \ a\ge0, \ 1\le
+i\le k$. This together with (\ref{Leray vanish2}) yields (\ref{vanishHj}).
+
+Now (\ref{resolutionOBX}) and (\ref{vanishHj}) show that
+$h^0(\mathcal{O}_{B_H})=h^0(\mathcal{O}_{G(k+1,V)})=1$. Hence, $B_H$ is connected.
+This together with the smoothness of $B_H$ yields its irreducibility.
+\end{proof}
+
+
+Consider the graph of incidence $\Sigma_H=\{(x,\mathbb{P}^k)\in H\times B_H\ |\
+x\in\mathbb{P}^k\}$ with projections
+\begin{equation}\label{pi1,pi2}
+H\overset{\pi_1}\leftarrow\Sigma_H\overset{\pi_2}\rightarrow B_H.
+\end{equation}
+Since the fibers of $\pi_2$ are isomorphic to $\mathbb{P}^k$, the irreducibility of
+$B_H$ implies the irreducibility of $\Sigma_H$.
+\begin{lemma}\label{filled}
+Let $H\subset\mathbb{P}^n$ be a smooth hypersurface which is generic in the sense of
+(\ref{SpanPhi=}). Then
+
+(i) $H$ is filled by the subspaces $\mathbb{P}^k$ of the family $B_H$, and for an
+arbitrary $x\in H$ the set $B_H(x):=\pi_2(\pi_1^{-1}(x))$ is equidimensional of
+dimension
+\begin{equation}\label{dim BX(x)}
+\dim B_H(x)=k(n-k)-\binom{k+d}{d}+1;
+\end{equation}
+moreover, for a generic $x\in H$ $B_H(x)$ is an irreducible subvariety of $B_H$;
+
+(ii) the subset $K_{H,k}(x):=\pi_1(\pi_2^{-1}(B_H(x)))= \underset{\mathbb{P}^k\in
+B_H(x)}\cup\mathbb{P}^k$ of $H$ has dimension
+\begin{equation}\label{dim KX(x)}
+\dim K_{H,k}(x)\ge n-d;
+\end{equation}
+moreover, for a generic $x\in H$ $K_{H,k}(x)$ is an irreducible subvariety of $H$.
+\end{lemma}
+\begin{proof}
+(i) Let $(x,\mathbb{P}^k)\in\Sigma_H$. Consider the standard Koszul resolution of the
+ideal sheaf $\mathcal{I}_{x,\mathbb{P}^k}$
+\begin{equation}\label{Koszul0}
+0\to\mathcal{O}_{\mathbb{P}^k}(-k)\to...\to
+\mathcal{O}_{\mathbb{P}^k}(-i)^{\binom{k}{i}}\to... \to
+\mathcal{O}_{\mathbb{P}^k}(-1)^k\to\mathcal{I}_{x,\mathbb{P}^k}\to0.
+\end{equation}
+Twisting (\ref{Koszul0}) by $N_{\mathbb{P}^k/H}$, we obtain the exact sequence
+\begin{equation}\label{Koszul}
+0\to N_{\mathbb{P}^k/H}(-k)\to...\to N_{\mathbb{P}^k/H}(-i)^{\binom{k}{i}}\to... \to
+N_{\mathbb{P}^k/H}(-1)^k\to \mathcal{I}_{x,\mathbb{P}^k}\otimes
+N_{\mathbb{P}^k/H}\to0.
+\end{equation}
+Since $h^i(N_{\mathbb{P}^k/H}(-i))=0,\ \ 1\le i\le k$ (for $i>1$ this follows
+immediately from (\ref{normal bdls}); for $i=1$ see (\ref{h0(N)})), (\ref{Koszul})
+gives
+\begin{equation}\label{h1(Ix)}
+h^1(\mathcal{I}_{x,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H})=0.
+\end{equation}
+
+Next, consider the exact triple
+\begin{equation}\label{triple(Ix)}
+0\to\mathcal{I}_{x,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H}\to N_{\mathbb{P}^k/H}\to
+\mathbb{C}_x\otimes N_{\mathbb{P}^k/H}\to0.
+\end{equation}
+Since $\mathbb{C}_x\otimes N_{\mathbb{P}^k/H}\simeq\mathbb{C}^{n-1-k}$, it follows
+from (\ref{h0(N)}), (\ref{triple(Ix)}) and (\ref{h1(Ix)}) that
+\begin{equation}\label{h0(Ix)}
+h^0(\mathcal{I}_{x,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H})=k(n-k)-\binom{k+d}{d}+1.
+\end{equation}
+Note that $H^0(\mathcal{I}_{x,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H})$ is the Zariski
+tangent space to $B_H(x)$ at the point $\mathbb{P}^k$. Moreover, (\ref{h1(Ix)}) and
+(\ref{h0(Ix)}) imply via deformation theory the smoothness of $B_H(x)$ at
+$\mathbb{P}^k$ and the equidimensionality of $B_H(x)$ together with the equality
+(\ref{dim BX(x)}). This latter equality shows that $\dim\pi_1(\Sigma_H)=\dim H$. Since
+$H$ is irreducible, $\pi_1:\Sigma_H\to H$ is surjective as it is a projective morphism
+of projective varieties. This means that $H$ is filled by the spaces $\mathbb{P}^k\in
+B_H$.
+
+(ii) Now let $y$ be an arbitrary point of $\mathbb{P}^k$ distinct from $x$ and let
+$\mathbb{P}^1$ be a projective line in $\mathbb{P}^k$ joining the points $x$ and $y$.
+Twisting (\ref{normal bdls}) by the sheaves $\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}$
+and $\mathcal{O}_{\mathbb{P}^1}(-2)$ yields the exact triples
+\begin{equation}\label{normal bdls1}
+0\to\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H}
+\to\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(1)^{n-k}
+\overset{\epsilon_k}\to
+\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(d)\to0,
+\end{equation}
+\begin{equation}\label{normal bdls2}
+0\to N_{\mathbb{P}^k/H}\otimes\mathcal{O}_{\mathbb{P}^1}(-2)\to
+\mathcal{O}_{\mathbb{P}^1}(-1)^{n-k}\to\mathcal{O}_{\mathbb{P}^1}(d-2)\to0.
+\end{equation}
+
+Consider the morphism $\epsilon_k$ in (\ref{normal bdls1}). Passing to sections, we
+obtain the homomorphism
+$H^0(\epsilon_k):H^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes
+\mathcal{O}_{\mathbb{P}^k}(1)^{n-k})\to
+H^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes \mathcal{O}_{\mathbb{P}^k}(d))$. To
+show that $H^0(\epsilon_k)$ is an epimorphism, consider the standard Koszul resolution
+of the sheaf
+$\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(1)$
+$$
+0\to\mathcal{O}_{\mathbb{P}^k}(2-k)\to...\to\mathcal{O}_{\mathbb{P}^k}(-1)^{\binom{k-1}{2}}\to
+\mathcal{O}_{\mathbb{P}^k}^{k-1}\overset{e_1}\to
+\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(1)\to0.
+$$
+Passing to cohomology, we obtain the epimorphism in sections
+$H^0(e_1):H^0(\mathcal{O}_{\mathbb{P}^k}^{k-1})\to
+H^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(1))$.
+Twisting the above resolution by $\mathcal{O}_{\mathbb{P}^k}(d-1)$ and again passing
+to cohomology, we obtain an epimorphism
+$H^0(e_d):H^0(\mathcal{O}_{\mathbb{P}^k}(d-1)^{k-1})\to
+H^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(d))$. Now
+the homomorphisms $H^0(\epsilon_k)$, $H^0(e_1)$ and $H^0(e_d)$ fit in a commutative
+diagram
+$$
+\xymatrix{ H^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes
+\mathcal{O}_{\mathbb{P}^k}(1)^{n-k})\ar[r]^{\ \ H^0(\epsilon_k)} &
+H^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes\mathcal{O}_{\mathbb{P}^k}(d))\\
+H^0(\mathcal{O}_{\mathbb{P}^k}^{(k-1)(n-k)})\ar@{->>}[r]^{H^0(\epsilon_k)^{k-1}}
+\ar@{->>}[u]^{H^0(e_1)^{n-k}} &
+H^0(\mathcal{O}_{\mathbb{P}^k}(d-1)^{k-1}),\ar@{->>}[u]_{H^0(e_d)} }
+$$
+in which the surjectivity of the lower horizontal map $H^0(\epsilon_k)^{k-1}$ follows
+from (\ref{SpanPhi=}). Hence $H^0(\epsilon_k)$ is an epimorphism. Thus the cohomology
+sequence of (\ref{normal bdls1}) yields
+\begin{equation}\label{h^0(JN)}
+h^0(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H})=
+(k-1)(n-k)-\binom{k+d}{d}+d+1,\ \ \ h^1(\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes
+N_{\mathbb{P}^k/H})=0.
+\end{equation}
+Next, (\ref{normal bdls2}) implies
+$h^0(N_{\mathbb{P}^k/H}\otimes\mathcal{O}_{\mathbb{P}^1}(-2))=0, \
+h^1(N_{\mathbb{P}^k/H}\otimes\mathcal{O}_{\mathbb{P}^1}(-2))=d-1$. This together with
+(\ref{h^0(JN)}) and the exact triple
+\begin{equation}\label{exactP1}
+0\to\mathcal{I}_{\mathbb{P}^1,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H}
+\to\mathcal{I}_{x\cup y,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H}
+\to\mathcal{O}_{\mathbb{P}^1}(-1)\otimes N_{\mathbb{P}^k/H}\to0.
+\end{equation}
+yields
+\begin{equation}\label{hi(Ixy)}
+h^0(\mathcal{I}_{x\cup y,\mathbb{P}^k}\otimes
+N_{\mathbb{P}^k/H})=(k-1)(n-k)-\binom{k+d}{d}+d+1, \ \ \ h^1(\mathcal{I}_{x\cup
+y,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H})=d-1.
+\end{equation}
+
+Put $\Sigma_H(x):=\pi_2^{-1}(B_H(x)),\ \ \pi_1(x):=\pi_1|_{\Sigma_H(x)},$ and let
+$$
+K_{H,k}(x)\overset{\pi_1(x)}\leftarrow\Sigma_H(x)\overset{\pi_2(x)}\rightarrow B_H(x)
+$$
+be the diagram of projections. For any $y\in K_{H,k}(x),\ y\ne x$, consider the fibre
+$B_{H,x}(y):=\pi_1(x)^{-1}(y)$ as lying in $B_H(x)$. The Zariski tangent space to
+$B_{H,x}(y)$ at the point $\mathbb{P}^k$ coincides with $H^0(\mathcal{I}_{x\cup
+y,\mathbb{P}^k}\otimes N_{\mathbb{P}^k/H})$, hence by (\ref{hi(Ixy)}) and deformation
+theory we have
+\begin{equation}\label{dim BXx(y)}
+(k-1)(n-k)-\binom{k+d}{d}+d+1\ge\dim B_{H,x}(y)\ge(k-1)(n-k)-\binom{k+d}{d}+2.
+\end{equation}
+Clearly $\dim B_{H,x}(y)>0$, hence $\pi_1(x)$ is surjective. Since the fibre of
+$\pi_2(x)$ is $\mathbb{P}^k$, this, together with (\ref{dim BX(x)}), (\ref{dim
+BXx(y)}) and the irreducibility of $B_H(x)$, implies (\ref{dim KX(x)}) and the
+irreducibility of $K_{H,k}(x)$.
+\end{proof}
+
+As a corollary of this lemma we obtain the following theorem.
+\begin{theorem}\label{any X is filled}
+Any hypersurface $H$ of degree $d$ in $\mathbb{P}^n$ is filled by subspaces
+$\mathbb{P}^k\subset\mathbb{P}^n$.
+\end{theorem}
+
+\begin{proof}
+Consider the graphs of incidence $\Pi:=\{(\mathbb{P}^k,x)\in
+G(k+1,V)\times\mathbb{P}^n\ |x\in\mathbb{P}^k\}$ and $\tilde{H}:=\{(H,x)\in
+\mathbb{P}^s\times\mathbb{P}^n\ |\ x\in H\}$ fitting in the commutative diagram
+\begin{equation}\label{graph Pi}
+\xymatrix{ \Pi\ar@{_{(}->}[d] & \Pi_\Gamma\ar@{_{(}->}[d]\ar[r]^{pr_2}\ar[l]_{pr_1} &
+\tilde{H}\ar@{_{(}->}[d]\\
+G(k+1,V)\times\mathbb{P}^n & \Gamma\times\mathbb{P}^n \ar[r]^{\tilde{q}\times id\ \
+}\ar[l]_{\ \ \ \ \ \ \tilde{p}\times id} & \mathbb{P}^s\times\mathbb{P}^n,}
+\end{equation}
+where $\Gamma,\ \tilde{p}$ and $\tilde{q}$ were defined in (\ref{p,q}),
+$\Pi_\Gamma=(\tilde{p}\times id)^{-1}(\Pi)$ and $pr_1$ and $pr_2$ are the induced
+projections. Since a generic smooth $H\in\mathbb{P}^s$ is filled by projective
+subspaces $\mathbb{P}^k\subset\mathbb{P}^n$ (Lemma \ref{filled}(i)), $pr_2$ is
+dominant. Hence $pr_2$ is surjective since all varieties and morphisms in (\ref{graph
+Pi}) are projective. This implies the statement.
+\end{proof}
+
+
+
+\end{sub}
+
+
+\begin{sub}{\bf Projective subspaces in varieties of bounded codimension and degree and of
+growing dimension.}\label{varieties} \rm Let $X\subset\mathbb{P}^n$ be an irreducible
+projective variety satisfying the conditions
+\begin{equation}\label{codimX,degX}
+1\le c:=\codim_{\mathbb{P}^n}X, \ \ \ \ \deg X\le d,
+\end{equation}
+where $c$ is a constant. Assume that $\mathbb{P}^n=\Span X$. Then it is well known
+that $\deg X\ge c+1$. If $c\ge2$, starting with $X_0:=X$ one can construct inductively
+a sequence of projective varieties $X_i\subset\mathbb{P}^{n-i}, \ 0\le i\le c-1,$ of
+respective codimensions $c-i$, together with linear projections
+$$
+p_{x_i}:\mathbb{P}^{n-i}\dasharrow\mathbb{P}^{n-i-1}, \ \ \ 0\le i\le c-2,
+$$
+with centers at points $x_i\in X_i\smallsetminus\Sing X_i$ such that each restriction
+\begin{equation}\label{bir pi}
+p_i:=p_{x_i}|_{X_i}:X_i\dasharrow X_{i+1}, \ \ \ 0\le i\le c-2.
+\end{equation}
+is a birational isomorphism. For this, it suffices to fix $x_i\in
+X_i\smallsetminus\Sing X_i$ and let $X_{i+1}$ be the closure of $p_{x_i}(X_i)$ in
+$\mathbb{P}^{n-i}$. Then $\deg X_{i+1}=\deg X_i-1$. The fact that $p_i$ is birational
+is standard.
+
+
+Next, using the notation (\ref{k(n-k)>...}), we set
+$$
+k_{c-1}(n):=k(n-c+1),\ \ \ k_{c-1-i}(n):=\underset{i}{\underbrace{\Big[\frac{1}{2}...
+\Big[\frac{1}{2}\Big[\frac{1}{2}k_{c-1}(n)\Big]\Big]...\Big]}},\ \ \ 1\le i\le c-1.
+$$
+
+We now argue by reverse induction that $X=X_0$ is filled by projective subspaces of
+dimension $k_0(n)$. By definition, $X_{c-1}$ is a hypersurface in
+$\mathbb{P}^{n-(c-1)}$ of degree
+\begin{equation}\label{Xc-1}
+\deg X_{c-1}=\deg X-(c-1)\le d.
+\end{equation}
+Hence, by Theorem \ref{any X is filled}, $X_{c-1}$ is filled by subspaces
+$\mathbb{P}^{k_{c-1}(n)}$ of $\mathbb{P}^{n-(c-1)}$. This settles the base of
+induction.
+
+For the induction step, consider the birational map (\ref{bir pi}). Assume that
+$X_{i+1}$ is filled by subspaces $\mathbb{P}^{k_{i+1}(n)}\subset\mathbb{P}^{n-i-1}$.
+Let $B$ be an irreducible component of the base of all such subspaces, with the
+property that the subspaces in $B$ fill $X_{i+1}$. Take a generic space
+$\mathbb{P}^{k_{i+1}(n)}\in B$ and consider the closure
+$Y_{i+1}:=\overline{p_i^{-1}(\mathbb{P}^{k_{i+1}(n)})}. $ Since $\mathbb{P}^{k_{i+1}}$
+is a generic point of $B$, the rational map
+$\tilde{p}:=p_i|_{Y_{i+1}}:Y_{i+1}\dasharrow\mathbb{P}^{k_{i+1}(n)}$ is a linear
+projection from the point $x_i\in Y_{i+1}$, and one of the following alternatives
+holds.
+
+(i) $Y_{i+1}$ is an irreducible quadric and
+$$
+\tilde{p}:Y_{i+1}\dasharrow\mathbb{P}^{k_{i+1}(n)}
+$$
+is a birational (stereographic) projection from the point $x_i\in Y_{i+1}$.
+
+(ii) $Y_{i+1}$ is a reducible quadric containing as a component a certain
+$k_{i+1}(n)$-dimensional space $\tilde{\mathbb{P}}^{k_{i+1}(n)}$ mapping
+isomorphically onto $\mathbb{P}^{k_{i+1}(n)}$,
+$$
+\tilde{p}:\tilde{\mathbb{P}}^{k_{i+1}(n)}\overset{\sim}\to\mathbb{P}^{k_{i+1}(n)}.
+$$
+Consider these two cases.
+
+In case (i) $Y_{i+1}$ is an irreducible quadric of dimension $k_{i+1}(n)$ filled by
+projective spaces of dimension $\Big[\frac{1}{2}k_{i+1}(n)\Big]=k_i(n)$. Since
+$\mathbb{P}^{k_{i+1}(n)}$ is a generic point of $B$, the quadrics
+$Y_{i+1}(\mathbb{P}^{k_{i+1}(n)}),\ \ \mathbb{P}^{k_{i+1}(n)}\in B,$ fill the variety
+$X_i$. Hence, the subspaces $\mathbb{P}^{k_i(n)}$ fill $X_i$.
+
+In case (ii) the irreducibility of $X_i$ and the birationality of $p_i$ imply that the
+subspaces $\tilde{\mathbb{P}}^{k_{i+1}(n)}$ fill $X_i$. Moreover, each
+$\tilde{\mathbb{P}}^{k_{i+1}(n)}$ is filled by subspaces $\mathbb{P}^{k_i(n)}$. Hence
+$X_i$ is filled by these $\mathbb{P}^{k_i(n)}$'s as well.
+
+Finally note that  $\underset{n\to\infty}\lim k_0(n)=\infty$. We have thus proved the
+following theorem.
+
+\begin{theorem}\label{X is filled II}
+Let $X\subset\mathbb{P}^n$ be an irreducible projective variety satisfying the
+conditions (\ref{codimX,degX}) and ${\rm Span} X=\mathbb{P}^n$. Then $X$ is filled by
+projective subspaces $\mathbb{P}^{k_0(n)}\subset\mathbb{P}^n$ with
+$\underset{n\to\infty}\lim k_0(n)=\infty$.
+\end{theorem}
+
+\end{sub}
+
+
+
+\begin{sub}{\bf Chains of projective subspaces connecting the points of varieties of bounded
+codimension and degree.}\label{chains} \rm Let again $H$ be a smooth hypersurface of
+degree $d\ge2$ in $\mathbb{P}^n$ and $x\in H$. Denote by $\mathbb{P}^{n-1}(x)$ the
+hyperplane in $\mathbb{P}^n$ tangent to $H$ at the point $x$. Take an affine subspace
+$\mathbb{A}^{n-1}(x)$ of $\mathbb{P}^{n-1}(x)$ containing $x$, together with affine
+coordinates $(y_1,...,y_{n-1})$ around $x$ in $\mathbb{A}^{n-1}(x)$. The intersection
+$Y_H(x):=H\cap\mathbb{A}^{n-1}(x)$ is a hypersurface in $\mathbb{A}^{n-1}(x)$ and is
+given by an equation $\Psi_x=0$ for some polynomial $\Psi_x=\Psi_x(y_1,...,y_{n-1})$
+of degree $d$. Decompose $\Psi_x$ into a sum of its homogeneous components
+\begin{equation}\label{homog}
+\Psi_x={\underset{p=2}{\overset{d}\sum}}\Psi_p(y_1,...,y_{n-1}),\ \ \ \deg\Psi_p=p.
+\end{equation}
+Consider $(y_1:y_2:...:y_{n-1})$ as homogeneous coordinates in $\mathbb{P}^{n-2}$;
+respectively, consider $\Psi_p$ as forms $\Psi_p\in
+H^0(\mathcal{O}_{\mathbb{P}^{n-2}}(p))$. Define the closed subset
+$$
+X_x={\underset{p=2}{\overset{d}\bigcap}}\{\Psi_p(y_1,...,y_{n-1})=0\},\ \ \
+\deg\Psi_p=p.
+$$
+in $\mathbb{P}^{n-2}$. Then Bezout's Theorem implies
+\begin{equation}\label{codimZ, degZ}
+\codim_{\mathbb{P}^{n-2}}X\le d-1,\ \ \ \deg X\le d!
+\end{equation}
+for any irreducible component $X$ of $X_x$. Therefore $n-2\ge\dim\Span X\ge n-d-1$. In
+particular, the codimension and degree of $X$ are bounded by constants not depending
+on $n$, hence Theorem \ref{X is filled II} applies to $X$. This proves the following
+lemma.
+\begin{lemma}\label{Z}
+There exists $n(d)\in\mathbb{Z}_{>0}$ such that, for $n\ge n(d)$, the variety $X_x$ is
+connected and any irreducible component $X$ of $X_x$ is filled by subspaces
+$\mathbb{P}^{\tilde{k}(n)}\subset\mathbb{P}^{n-2}$ with
+$\underset{n\to\infty}\lim\tilde{k}(n)=\infty$.
+\end{lemma}
+Let $K_H(x)$ be the cone in $\mathbb{A}^{n-1}(x)$ over $X_x$. By Lemma \ref{Z} the
+closure $\overline{K_H(x)}$ of $K_H(x)$ in $\mathbb{P}^{n-1}(x)$ is filled by
+subspaces $\mathbb{P}^{\tilde{k}(n)}$. Now consider the subvariety $K_{H,k}(x)$ of $H$
+defined in Lemma \ref{filled}(ii). By definition, $K_{H,k}(x)$ is filled by those
+subspaces $\mathbb{P}^k$ filling $H$ which pass through $x$. Clearly,
+\begin{equation}\label{KXk(x) in KX(x)}
+K_H(x)\supset K_{H,k}(x)\ \ \ {\rm for}\ \ \ k=\tilde{k}(n).
+\end{equation}
+
+Assume that $H\subset\mathbb{P}^n$ is a generic smooth hypersurface of degree $d$ and
+$x$ is a generic point of $H$. In particular, the forms $\Psi_p$ are generic points of
+the spaces $H^0(\mathcal{O}_{\mathbb{P}^{n-2}}(p))$. Hence, in this case $X=X_x$ is a
+smooth and irreducible complete intersection of $d-1$ hypersurfaces $\{\Psi_p=0\},\
+p=2,...,d$ in $\mathbb{P}^{n-2}$, and the inequalities (\ref{codimZ, degZ}) become
+equalities. This together with (\ref{KXk(x) in KX(x)}) and (\ref{dim KX(x)}) implies
+$K_H(x)=K_{H,k}(x)$. In addition, the sheaf $\mathcal{O}_{X}$ has a standard Koszul
+resolution $0\to\mathcal{O}_{\mathbb{P}^{n-1}}(2-d(d+1)/2)\to...\to
+\overset{d}{\underset{p=2}\oplus}\mathcal{O}_{\mathbb{P}^{n-2}}(1-p)
+\to\mathcal{O}_{\mathbb{P}^{n-2}}(1)\overset{res}\to\mathcal{O}_{X}(1)\to0.$ This
+resolution together with (\ref{k(n-k)>...}) shows that the restriction map
+$H^0(res):H^0(\mathcal{O}_{\mathbb{P}^{n-2}}(1))\to H^0(\mathcal{O}_{X}(1))$ is an
+isomorphism. Therefore $\Span X=\mathbb{P}^{n-2}$ and, consequently,
+\begin{equation}\label{Span K}
+\Span K_{H,k}(x)=\mathbb{P}^{n-1}(x).
+\end{equation}
+
+We now define a sequence of irreducible subvarieties $x\in X_1\subset
+X_2\subset...\subset X_i\subset...\subset H$ by induction:
+
+1) $X_1:=K_{H,k}(x)$;
+
+2) $X_{i+1}:=\pi_1(\pi_2^{-1}(Y_i))$ for $i\ge1$,  $Y_i$ being any irreducible
+component of $\pi_2(\pi_1^{-1}(X_i))$, where $\pi_1$ and $\pi_2$ are introduced in
+diagram (\ref{pi1,pi2}).
+
+Since $X$ is irreducible, this sequence stabilizes, i.e.
+\begin{equation}\label{again Xi's}
+X_1\subset X_2\subset...\subset X_{i_0}=X_{i_0+1}...\subset H.
+\end{equation}
+for some $i_0$. Consider the dense open subset $U:=\{x'\in H\ |\ K_{H,k}(x')$ is
+irreducible and $\Span(K_{H,k}(x'))=\mathbb{P}^{n-1}(x')\}\subset H$. By construction,
+$x\in U$, hence $X_{i_0}\cap U$ is a dense open subset of $X_{i_0}$. Moreover, by the
+definition of $X_{i_0}$  we have
+\begin{equation}\label{KX,k(x')}
+K_{H,k}(x')\subset X_{i_0}
+\end{equation}
+for $x'\in X_{i_0}\cap U$. Denote by $H(x')$ the projective subspace of $\mathbb{P}^n$
+tangent to $X_{i_0}$ at the point $x'\in(X_{i_0}\smallsetminus\Sing X_{i_0})\cap U$.
+Since $K_{H,k}(x')$ is by definition filled by projective subspaces on $H$ through
+$x'$, it follows from (\ref{KX,k(x')}) that $K_{H,k}(x')\subset
+H(x')\subset\mathbb{P}^{n-1}(x')$. On the other hand, since $x'\in U$, it follows that
+$\Span K_{H,k}(x)=H(x')$. As $H(x')$ is a subspace of $\mathbb{P}^{n-1}(x')$, by
+(\ref{Span K}) we have $H(x')=\mathbb{P}^{n-1}(x')$. Hence, since $x'$ is a
+nonsingular point of $X_{i_0}$, we obtain $\dim X_{i_0}=\dim H$, so that
+\begin{equation}\label{Xi0=X}
+X_{i_0}=H.
+\end{equation}
+This equality and the construction of the chain (\ref{again Xi's}) shows that the
+point $x\in H$ can be joined with any point $x'\in H$ by a chain of subspaces
+$\mathbb{P}^k_1,\mathbb{P}^k_2,...,\mathbb{P}^k_{i_0}$. We thus have
+\begin{equation}\label{join xx'}
+x\in\mathbb{P}^k_1\subset\mathbb{P}^k_1\cup\mathbb{P}^k_2\cup...\cup\mathbb{P}^k_{i_0}
+\supset\mathbb{P}^k_{i_0}\ni x'.
+\end{equation}
+
+Finally, we will show that (\ref{join xx'}) holds also without the genericness
+assumption on $H$ and $x$. This is done by essentially the same argument as in the
+proof of Theorem \ref{any X is filled}. Indeed, consider the Grassmannian
+$G:=G(k+1,V)$, the incidence variety
+$$
+Inc^{i_0}(G):=\{(\mathbb{P}^k_1,...,\mathbb{P}^k_{i_0})\in G^{\times i_0}\ |\
+\mathbb{P}^k_1,...,\mathbb{P}^k_{i_0}\ {\rm is\ a\ chain\ of\ subspaces\ of}\
+\mathbb{P}^n\},
+$$
+and the graphs of incidence
+$$
+\Pi_{i_0}:=\{(\mathbb{P}^k_1,...,\mathbb{P}^k_{i_0},x,x')\in
+Inc^{i_0}(G)\times\mathbb{P}^n\times\mathbb{P}^n\ | x\in\mathbb{P}^k_1,\
+x'\in\mathbb{P}^k_{i_0}\},
+$$
+$$
+\widetilde{\widetilde{H}}:=\{(H,x,x')\in
+\mathbb{P}^s\times\mathbb{P}^n\times\mathbb{P}^n\ | \ x,x'\in H\},
+$$
+$$
+\Gamma_{i_0}:=\{(\mathbb{P}^k_1,...,\mathbb{P}^k_{i_0},G)\in
+Inc^{i_0}(G)\times\mathbb{P}^s\ |\ \mathbb{P}^k_1,...,\mathbb{P}^k_{i_0}\subset H\}
+$$
+with natural projections
+$$
+Inc^{i_0}(G)\overset{\tilde{p}_{i_0}}\leftarrow\Gamma_{i_0}
+\overset{\tilde{q}_{i_0}}\to\mathbb{P}^s.
+$$
+We have the commutative diagram
+\[\xymatrix{
+\Pi_{i_0}\ar@{_{(}->}[d] & \Pi_{\Gamma_{i_0}}\ar@{_{(}->}[d]\ar[r]^{pr_2}\ar[l]_{pr_1}
+&
+\widetilde{\widetilde{H}}\ar@{_{(}->}[d]\\
+Inc^{i_0}(G)\times\mathbb{P}^n\times\mathbb{P}^n &
+\Gamma_{i_0}\times\mathbb{P}^n\times\mathbb{P}^n \ar[r]^{\tilde{q}_{i_0}\times id\ \
+}\ar[l]_{\ \ \ \ \ \ \tilde{p}_{i_0}\times id} &
+\mathbb{P}^s\times\mathbb{P}^n\times\mathbb{P}^n,}
+\]
+where $pr_1$ and $pr_2$ are the induced projections. As a generic smooth
+$H\in\mathbb{P}^s$ is filled by projective subspaces $\mathbb{P}^k\subset\mathbb{P}^n$
+(Lemma \ref{filled}(i)), the morphism $pr_2$ is dominant. Hence $pr_2$ is surjective
+since all varieties and morphisms in the above diagram are projective. This is
+equivalent to ( \ref{join xx'}) for any $H\in\mathbb{P}^s$ and any $x,x'\in H$.
+
+We thus have proved the following lemma.
+
+\begin{lemma}\label{join xx' II}
+Let $H$ be a hypersurface of degree $d$ in $\mathbb{P}^n$. Any two distinct points
+$x,x'\in H$ can be joined by a chain (\ref{join xx'}) of subspaces $\mathbb{P}^k$ of
+$H$.
+\end{lemma}
+
+Finally, Lemma \ref{join xx' II} together with Theorem \ref{X is filled II} leads to
+our main result in section 3.
+\begin{theorem}\label{join xx' III}
+Under the assumptions of Theorem \ref{X is filled II}, any two distinct points
+$x,x'\in X$ can be joined by a chain (\ref{join xx'}) of subspaces
+$\mathbb{P}^{k_0(n)}$ of $X$ with $\underset{n\to\infty}\lim k_0(n)=\infty$.
+\end{theorem}
+
+\end{sub}
+
+
+
+\vspace{1cm}
+
+\section{A sufficient condition on $m$ for a vector bundle on $\mathbb{P}^N$ to be $m$-regular}
+\label{m-reg} \vspace{0.5cm}
+
+Recall that a vector bundle $E$ on a scheme $Y$ is called {\it ample} if the
+invertible Grothendieck sheaf $\mathcal{O}_{\mathbb{P}(E^\vee)}(1)$ on
+$\mathbb{P}(E^\vee)$ is ample. The following result is well known - see, e.g.,
+\cite[Prop. 6.3.56]{L}.
+\begin{lemma}\label{ample}
+Let $E$ be a vector bundle on $\mathbb{P}^N$. Then $E(a)$ is ample for any
+$a\in\mathbb{Z}_{\ge a_0}$, $a_0$ being some fixed integer.
+\end{lemma}
+
+\begin{lemma}\label{ample on P1}
+Let $E$ be a vector bundle on $\mathbb{P}^1$. Then $E(a)$ is ample for
+$a\ge1-\delta_B(E)$.
+\end{lemma}
+\begin{proof}
+By Grothendieck's theorem,
+$E\simeq\overset{r}{\underset{j=1}\oplus}\mathcal{O}_{\mathbb{P}^1}(a_j)$, where
+$\delta_B(E)=a_1\le a_2\le...\le a_r$, $r=\rk E$. Hence, for $a\ge1-\delta_B(E)$, the
+bundle $E(a)$ is a direct sum of ample line bundles. By \cite [Prop. 6.1.12(i)]{L}
+$E(a)$ is itself ample.
+\end{proof}
+
+We now recall the notion of {\it degree} of a vector bundle $\mathcal{E}$ on a
+1-dimensional scheme $Y$. If $Y$ is a smooth irreducible curve,
+$\deg\mathcal{E}:=\chi(\mathcal{E})-\chi(\mathcal{O}_Y)\rk\mathcal{E}$. If $Y$ is
+irreducible, but not necessarily smooth, the degree $\deg\mathcal{E}$ is defined as
+the degree of the pullback of $\mathcal{E}$ to the normalization of $Y$. If $Y$ is a
+general 1-dimensional scheme with irreducible components $Y_1,...,Y_q$, then the
+multiplicities $k_i\in\mathbb{Z}_{>0}$ of $Y_i$ in $Y$ are well defined (see
+\cite[1.5]{F}), and we set
+\begin{equation}\label{degE}
+\deg\mathcal{E}=\underset{i}\sum k_i\deg(\mathcal{E}|_{Y_i}).
+\end{equation}
+
+\begin{lemma}\label{deg>0}
+Let $E$ be a vector bundle on $\mathbb{P}^N$ and let
+$pr:\mathbb{P}(E^\vee)\to\mathbb{P}^N$ be the projection. Let $Y$ be a 1-dimensional
+subscheme of $\mathbb{P}(E^\vee)$ such that $Y_{red}\subset pr^{-1}(\mathbb{P}^1)$ for
+some line $\mathbb{P}^1\subset\mathbb{P}^N.$ Consider the line bundle
+$L_0=\mathcal{O}_{\mathbb{P}(E^\vee)}(1)\otimes pr^*\mathcal{O}_{\mathbb{P}^1}(a)$ on
+$\mathbb{P}(E^\vee)$ for $a\ge1-\delta_B(E)$. Then
+\begin{equation}\label{L0|Y}
+\deg(L_0|_Y)>0.
+\end{equation}
+\end{lemma}
+\begin{proof}
+By (\ref{degE}),
+\begin{equation}\label{again L0|Y}
+\deg(L_0|_Y)=\underset{i}\sum k_i\deg(L_0|_{Y_i}),\ \ k_i>0,
+\end{equation}
+where $Y_i$ are the irreducible components of $Y$. Since
+$\delta_B(E|_{\mathbb{P}^1})\ge \delta_B(E)$, it follows from Lemma \ref{ample on P1}
+that the sheaf $L_0|_{pr^{-1}(\mathbb{P}^1)}$ is ample. Hence $\deg(L_0|_{Y_i})>0$ for
+each $Y_i$ above, and (\ref{again L0|Y}) implies (\ref{L0|Y}).
+\end{proof}
+
+Let $Z_1$ be an arbitrary reduced irreducible curve in $\mathbb{P}^N$ with $N\ge3$.
+Pick a projective line $l_0\subset\mathbb{P}^N$ and a subspace
+$\mathbb{P}^{N-2}\subset\mathbb{P}^N$ such that
+\begin{equation}\label{empty}
+l_0\cap Z_1=\mathbb{P}^{N-2}\cap Z_1=\emptyset.
+\end{equation}
+Fix homogeneous coordinates $(x_0:...:x_N)$ in $\mathbb{P}^N$ so that
+$l_0=\{x_2=...=x_N=0\},\ \mathbb{P}^{N-2}=\{x_0=x_1=0\}$, and fix the isomorphism
+$$
+\Lambda:\mathbb{C}^*\times\mathbb{P}^N\overset{\sim}\to\mathbb{C}^*\times\mathbb{P}^N,
+(t,(x_0:...:x_N))\mapsto(t,(x_0:x_1:tx_2:...:tx_N)),
+$$
+where $\mathbb{C}^*=\mathbb{C}\smallsetminus\{0\}$. Set
+$\Gamma^*:=\Lambda(\mathbb{C}^*\times Z_1)$ and consider the Hilbert scheme
+$\mathcal{H}:={\rm Hilb}^{P_{Z_1}}(\mathbb{P}^N)$, where $P_{Z_1}$ is the Hilbert
+polynomial $P_{Z_1}(n)=\chi(\mathcal{O}_{\mathbb{P}^N}(n)|_{Z_1})$. By construction
+$\Gamma^*\to\mathbb{C}^*$ is a flat family of curves over $\mathbb{C}^*$, hence it
+defines a morphism $g:\mathbb{C}^*\to\mathcal{H}$ such that $\Gamma^*=
+\Gamma_\mathcal{H}\times_\mathcal{H}\mathbb{C}^*$, where
+$\Gamma_\mathcal{H}\subset\mathbb{P}^N\times \mathcal{H}$ is the universal family of
+curves. The coordinate $t$ on $\mathbb{C}^*$ identifies $\mathbb{C}^*$ with
+$\mathbb{P}^1\smallsetminus\{z_0,z_\infty\}$, where $z_0=\{t=0\},\ \
+z_\infty=\{t=\infty\},$ and since the Hilbert scheme $\mathcal{H}$ is projective, the
+morphism $g$ extends to a morphism $\tilde{g}:\mathbb{P}^1\to H$. We thus obtain a
+flat family
+$\phi:\Gamma=\Gamma_\mathcal{H}\times_\mathcal{H}\mathbb{P}^1\to\mathbb{P}^1$ of
+curves over $\mathbb{P}^1$ such that $Z_1=\phi^{-1}(z_1)$ for $z_1:=\{t=1\}$, and
+$(\phi^{-1}(z_0))_{red}=l_0$.
+
+
+Let again $E$ be a vector bundle of rank $\rk E\ge2$ on $\mathbb{P}^N$ and let
+$pr:\mathbb{P}(E^\vee)\to\mathbb{P}^N$ be the projection. Consider the projection
+$q:\Gamma\to\mathbb{P}^N$ and the scheme
+$\Gamma^E:=\mathbb{P}(q^*E^\vee)=\mathbb{P}(E^\vee)\times_{\mathbb{P}^N}\Gamma$ with
+projections $\mathbb{P}(E^\vee)\overset{q'}\leftarrow \Gamma^E\overset{pr'}\to\Gamma$
+and $\rho=\phi\circ pr':\Gamma^E\to\mathbb{P}^1.$ Note that, by Lemma \ref{ample}
+there exists $a_0\in\mathbb{Z}$ such that the line bundle
+$A=\mathcal{O}_{\mathbb{P}(E^\vee)}(1)\otimes pr^*O_{\mathbb{P}^N}(a_0)$ is ample on
+$\mathbb{P}(E^\vee)$; hence the line bundle $q'^*A$ is $\rho$-ample on $\Gamma^E$.
+
+
+Fix an irreducible curve $Y_1$ in $\Gamma^E$ such that $pr'(Y_1)=Z_1$, and denote by
+$P_{Y_1}$ the Hilbert polynomial $P_{Y_1}(n):=\chi(q'^*A^{\otimes n}|_{Y_1})$.
+Consider the relative Hilbert scheme $\mathcal{H}_{\mathbb{P}^1}={\rm
+Hilb}^{P_{Y_1}}(\Gamma^E/\mathbb{P}^1)$, together with the natural surjective
+projective morphism $f:\mathcal{H}_{\mathbb{P}^1}\to\mathbb{P}^1$ and the universal
+family $\Sigma\hookrightarrow \Gamma^E\times_{\mathbb{P}^1}\mathcal{H}_{\mathbb{P}^1}$
+with projections
+$\Gamma^E\overset{p''}\leftarrow\Sigma\overset{q''}\to\mathcal{H}_{\mathbb{P}^1}$. By
+definition, there is a point $y_1\in\mathcal{H}_{\mathbb{P}^1}$ such that
+\begin{equation}\label{y1}
+q''^{-1}(y_1)\overset{p''}{\underset{\sim}\longrightarrow}Y_1
+\end{equation}
+and  $f(y_1)=a_1$. Next, consider the normalization $\nu:Z\to Z_1$ of $Z_1$ and the
+surfaces $\mathcal{S}=\mathbb{P}(\nu^*(E^\vee|_{Z_1}))$ and
+$\mathcal{S}_1=\mathbb{P}(E^\vee|_{Z_1})\subset X_\Gamma$ with their projections
+$pr_\mathcal{S}:\mathcal{S}\to Z$ and $pr_{\mathcal{S}_1}:\mathcal{S}_1\to Z_1$. By
+construction, the morphism $\nu$ lifts to the normalization
+$\tilde{\nu}:\mathcal{S}\to \mathcal{S}_1$ such that
+$pr_{\mathcal{S}_1}\circ\tilde{\nu}=\nu\circ pr_\mathcal{S}$, and the curve
+$Y=\tilde{\nu}^{-1}(Y_1)$ is a multisection of the projection $pr_\mathcal{S}$.
+
+Consider the Hilbert polynomial $P_Y(n):=\chi(\tilde{\nu}^*q'^*A^{\otimes n}|_{Y_1})$.
+Since $\mathcal{S}$ is a smooth surface, the Hilbert scheme ${\rm
+Hilb}^{P_Y}(\mathcal{S})$ coincides with the linear series
+$|\mathcal{O}_\mathcal{S}(Y)|\simeq\mathbb{P}^h,\ \
+h=h^0(\mathcal{O}_\mathcal{S}(Y))-1$, and there is a bijective morphism
+$\mathbb{P}^h={\rm Hilb}^{P_Y}(\mathcal{S})\to{\rm
+Hilb}^{P_{Y_1}}(\mathcal{S}_1)=f^{-1}(a_1): C\mapsto\tilde{\nu}(C)$. Thus the fibre
+$f^{-1}(a_1)$ is irreducible.
+
+Since the morphism $f:\mathcal{H}_{\mathbb{P}^1}\to\mathbb{P}^1$ is projective, the
+scheme $\mathcal{H}_{\mathbb{P}^1}$ is projective as well. Therefore, in view of the
+surjectivity and flatness of $f$ and the irreducibility of the fibre $f^{-1}(a_1)$,
+there exists a smooth irreducible curve $T$ and a morphism
+$\theta:T\to\mathcal{H}_{\mathbb{P}^1}$ such that
+$\theta_T=f\circ\theta:T\to\mathbb{P}^1$ is surjective. Hence
+\begin{equation}\label{t0}
+\theta_T(t_0)=z_0
+\end{equation}
+for some $t_0\in T$, and, since $f(y_1)=z_1$,
+\begin{equation}\label{t1}
+\theta(t_1)=y_1,\ \ \ \theta_T(t_1)=z_1
+\end{equation}
+for some $t_1\in T$.
+
+Consider the fibre product $\Sigma_T=\Sigma\times_{\mathbb{P}^1}T$ with projections
+$p_T:\Sigma_T\to T$, $q_T:\Sigma_T\to\Sigma\overset{p''}\to X_\Gamma\overset{q''}\to
+\mathbb{P}(E^\vee)$, and the embedding $i=(q_T,p_T):\Sigma\hookrightarrow
+\mathbb{P}(E^\vee)\times T$. The family $p_T:\Sigma_T\to T$ is a flat family of curves
+in $\mathbb{P}(E^\vee)$ with base $T$ such that the fibre $p_T^{-1}(t_1)$ coincides
+with $Y_1$, and the reduced fibre $(Y_0)_{red}:=(p_T^{-1}(t_0))_{red}$ lies in
+$pr^{-1}(l_0)$. Next, consider the line bundle $L_T=i^*(L_0\boxtimes\mathcal{O}_T)$ on
+$\Sigma_T$, where $L_0$ is the line bundle on $X$ defined in Lemma \ref{deg>0}. The
+degree $\deg(L_T|_{p_T^{-1}(t)})$ does not depend on $t\in T$ by the principle of
+continuity \cite[Thm. 10.2]{F}. In particular, since $\deg(L_0|_{Y_0})>0$ by Lemma
+\ref{deg>0}, we obtain
+\begin{equation}\label{deg(L0|Y1)>0}
+\deg(L_0|_{Y_1})>0.
+\end{equation}
+
+
+
+\begin{lemma}\label{ample on PN}
+Let $E$ and $pr$ be as in Lemma \ref{deg>0}.
+
+(i) The line bundle $L:=\mathcal{O}_{\mathbb{P}(E^\vee)}(1)\otimes
+pr^*\mathcal{O}_{\mathbb{P}^N}(2-\delta_B(E))$ on $\mathbb{P}(E^\vee)$ is ample.
+
+(ii) The line bundle
+\begin{equation}\label{sheafAi}
+A_i:=L^{r+1}\otimes pr^*\mathcal{O}_{\mathbb{P}^N}(i)\simeq
+\mathcal{O}_{\mathbb{P}(E^\vee)}(r+1)\otimes
+pr^*\mathcal{O}_{\mathbb{P}^N}((r+1)((2-\delta_B(E))+i)),
+\end{equation}
+where $r={\rm rk}E$, is also ample for any $i\ge0$.
+\end{lemma}
+\begin{proof}
+(i) We note first that the line bundle $L_0:=L\otimes
+pr^*\mathcal{O}_{\mathbb{P}^N}(-1)$ is numerically effective, i.e. the degree of its
+restriction to any curve in $\mathbb{P}(E^\vee)$ is positive. Indeed, let $Y$ be an
+irreducible curve in $\mathbb{P}(E^\vee)$. If $pr(Y)$ is a curve, then our claim
+follows from (\ref{deg(L0|Y1)>0}). If $pr(Y)$ is a point $z$, then $Y\subset
+pr^{-1}(z)\simeq\mathbb{P}^{r-1}$ and
+$\deg(L_0|_{Y})=\deg(\mathcal{O}_{\mathbb{P}^{r-1}}(1)|_{Y})$ is again positive.
+
+The numerically effective divisor class $c_1(L_0)$ equals $W+(1-\delta_B(E))H$, where
+$W:=c_1(\mathcal{O}_{\mathbb{P}(E^\vee)}(1)),\
+H:=pr^*c_1(\mathcal{O}_{\mathbb{P}^N}(1))$. By Lemma \ref{ample} the divisor class
+$W+a_0H$ on $\mathbb{P}(E^\vee)$ is ample for $a_0-2+\delta_B(E)$ large enough.
+Moreover, a corollary of Kleiman's Theorem \cite[Cor. 1.4.9]{L} implies that the
+divisor class
+$(a_0-2+\delta_B(E))c_1(L_0)+W+a_0H=(a_0-1+\delta_B(E))(W+(2-\delta_B(E))H)$ is ample.
+Hence $W+(2-\delta_B(E))H$ is also ample.
+
+(ii) is a direct corollary of (i).
+\end{proof}
+
+
+
+Recall that a coherent sheaf $\mathcal{F}$ on $\mathbb{P}^N$ is $m-regular$  in the
+sense of Mumford-Castelnuovo if $H^i(\mathcal{F}(m-i))=0$ for $i\ge1$.
+
+\begin{theorem}\label{m-regularity}
+Let $E$ be a vector bundle of rank $r$ on $\mathbb{P}^N$.
+
+(i) $E$ is $m$-regular for $m\ge m_0:=c_1(E)+(1+r)(2-\delta_B(E))-1$. Furthermore,
+$E(m)$ is generated by global sections for $m\ge m_0$.
+
+(ii) For any hyperplane $\mathbb{P}^{N-1}$ in $\mathbb{P}^N$ the vector bundle
+$E(m)|_{\mathbb{P}^{N-1}},\ m\ge m_0,$ is generated by global sections and
+\begin{equation}\label{h0(E(m0))}
+h^0(E(m)|_{\mathbb{P}^{N-1}})\le\frac{r}{(N-1)!} \big(\delta_A(E)+m+N-1\big)^{N-1}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We keep the notations of Lemmas \ref{deg>0} and \ref{ample on PN}. The dualizing sheaf
+$\omega_{\mathbb{P}(E^\vee)}$ of $\mathbb{P}(E^\vee)$ is given by the standard formula
+\begin{equation}\label{omegaX}
+\omega_{\mathbb{P}(E^\vee)}\simeq\mathcal{O}_{\mathbb{P}(E^\vee)}(-r)\otimes
+pr^*\mathcal{O}_{\mathbb{P}^N}(c_1(E)-N-1).
+\end{equation}
+Therefore (\ref{sheafAi}) and (\ref{omegaX}) imply $\omega_{\mathbb{P}(E^\vee)}\otimes
+A_i\simeq\mathcal{O}_{\mathbb{P}(E^\vee)}(1)\otimes
+pr^*\mathcal{O}_{\mathbb{P}^N}(m_0-N+i)$. Since $A_i$ is ample for $i\ge0$ by Lemma
+\ref{ample on PN}, the Kodaira vanishing theorem yields
+\begin{equation}\label{Kodaira}
+0=H^j(\omega_{\mathbb{P}(E^\vee)}\otimes
+A_i)=H^j(\mathcal{O}_{\mathbb{P}(E^\vee)}(1)\otimes
+pr^*\mathcal{O}_{\mathbb{P}^N}(m_0-N+i)),\ \ \ i\ge0,\ \ j\ge1.
+\end{equation}
+In addition, clearly
+$$
+pr_*(\omega_{\mathbb{P}(E^\vee)}\otimes A_i)\simeq E(m_0-N+i),\ \ \ \
+R^jpr_*(\omega_{\mathbb{P}(E^\vee)}\otimes A_i)=0,\ \ j\ge1, i\ge0.
+$$
+Thus the Leray spectral sequence
+$E_2^{aa'}=H^a(R^{a'}pr_*(\omega_{\mathbb{P}(E^\vee)}\otimes A_i)) \Rightarrow
+H^{a+a'}(\omega_{\mathbb{P}(E^\vee)}\otimes A_i)$ degenerates and yields (via
+(\ref{Kodaira})) $H^j(E(m_0-N+i))=0,\ \ \ i\ge0,\ \ j\ge1$. This shows that $E$ is
+$m$-regular for $m\ge m_0$. The fact that, if $E$ is $m$-regular then $E(m)$ is
+generated by global sections, is well known \cite[Lem. 1.7.2]{HL}. Assertion (i) is
+proved.
+
+Assertion (ii) follows from Le Potier-Simpson's Theorem - see \cite[Lem. 3.3.2]{HL}
+and substitute $X=\mathbb{P}^N$, $\deg(X)=1$, $F=E(m)$, $\nu=N-1$,
+$X_\nu=\mathbb{P}^{N-1}$, $X_1=\mathbb{P}^1$,
+$\mu_{max}(E(m)|_{\mathbb{P}^1})=\delta_A(E(m))=\delta_A(E)+m$.
+\end{proof}
+
+
+
+
+\vspace{1cm}
+
+\section{An upper bound for the degree of the variety of maximal jumping lines through a point
+of a vector bundle $E$ on $\mathbb{P}^N$}\label{bounded degree}
+
+\vspace{0.5cm}
+
+\begin{sub}{\bf The transformation $L_0$ of a vector bundle $E$ under a linear projection.}
+\label{Induction} \rm Let
+$$
+p_x:\mathbb{P}^N\dashrightarrow\mathbb{P}^{N-1}
+$$
+be the rational linear projection with center at a point $x\in\mathbb{P}^N$ and let
+$\mathbb{\tilde{P}}^N$ be the closure in $\mathbb{P}^N\times\mathbb{P}^{N-1}$ of the
+graph of $p_x$. We have the following obvious diagram of projections
+\begin{equation}\label{linpr}
+\mathbb{P}^N\overset{\sigma}\leftarrow\mathbb{\tilde{P}}^N\overset{\pi}\to\mathbb{P}^{N-1}.
+\end{equation}
+
+In this section $E$ will denote a vector bundle of rank $r$ on $\mathbb{P}^N$ with the
+additional condition
+\begin{equation}\label{dB=0}
+\delta_B(E)=0.
+\end{equation}
+Set $L_0:=\pi_{*}\sigma^*E.$
+\begin{theorem}\label{first relations}
+(i) $L_0$ is a vector bundle of rank
+\begin{equation}\label{rankEN-1}
+\rho_0:=\rk L_0=c_1(E)+r
+\end{equation}
+on $\mathbb{P}^{N-1}$, and its construction is compatible with base change, i.e. for
+any cartesian square
+\begin{equation}\label{square}
+\xymatrix{
+\mathcal{X}\ar[d]_{\tilde{\pi}}\ar[r]^{\tilde{g}}&\mathbb{\tilde{P}}^N\ar[d]^{\pi}\\
+\mathcal{Y}\ar[r]^g&\mathbb{P}^{N-1}}
+\end{equation}
+there is a base change isomorphism
+$$
+\beta_0:\tilde{\pi}_*\tilde{g}^*\sigma^*E \overset{\sim}\to g^*\pi_*\sigma^*E=g^*L_0;
+$$
+moreover, the natural evaluation map $ev:\pi^*L_0\to\sigma^*E$ is an epimorphism.
+
+(ii) $c_1(L_0)=P(c_1(E),c_2(E))$, where
+$P(x,y):=\frac{1}{2}x(x+1)-y\in\mathbb{Q}[x,y]$.
+
+(iii) $\delta_A(E)\ge \delta_A(L_0)$.
+
+(iv) The following inequalities hold:
+\begin{equation}\label{ineqty1a}
+\delta_A(L_0)\ge-(P(c_1(E),c_2(E)))^2,
+\end{equation}
+\begin{equation}\label{dBEN-1}
+\delta_B(L_0)\ge Q(r,\delta_A(E),c_1(E),c_2(E)),
+\end{equation}
+where $Q(x,y,z,t):=-(x+z)y+P(z,t)-(P(z,t))^2\in\mathbb{Q}[x,y]$ and the polynomial $P$
+is defined in (ii).
+\end{theorem}
+
+\begin{proof}
+(i) Consider an arbitrary point $y\in\mathbb{P}^{N-1}$ and set
+$\mathbb{P}^1_y:=\pi^{-1}(y)$. It follows immediately from (\ref{dB=0}) that
+$h^1(E|_{\mathbb{P}^1_y})=0$, hence
+$h^0(E|_{\mathbb{P}^1_y})=\chi(E|_{\mathbb{P}^1_y})=c_1(E)+r$. These equalities and
+the Base Change Theorem \cite [Ch. 3, Thm. 12.11]{H} imply (\ref{rankEN-1}), the
+equality $R^1\pi_*\sigma^*E=0$ and the existence of the isomorphism $\beta_0$.
+Moreover, by (\ref{dB=0}) the sheaf $\sigma^*E|_{\mathbb{P}^1_y}$ is generated by
+global sections. This means that there is an epimorphism
+$ev_y:H^0(\sigma^*E|_{\mathbb{P}^1_y})\otimes\mathcal{O}_{\mathbb{P}^1_y}\twoheadrightarrow
+\sigma^*E|_{\mathbb{P}^1_y}$. Moreover, the evaluation map $ev:\pi^*L_0\to\sigma^*E$
+is compatible with base change, i.e. we have a commutative diagram
+\begin{equation}\label{square with evalmaps}
+\xymatrix{ \pi^*L_0\otimes\mathbb{C}_y\ar[d]_{\pi^*\beta_0}
+\ar[r]^{\ \ \ \ ev\otimes\mathbb{C}_y}&\sigma^*E\otimes\mathbb{C}_y\ar@{=}[d]\\
+H^0(\sigma^*E|_{\mathbb{P}^1_y})\otimes\mathcal{O}_{\mathbb{P}^1_y} \ar@{>>}[r]^{\ \ \
+\ \ \ ev_y}&\sigma^*E|_{\mathbb{P}^1_y},}
+\end{equation}
+where $\pi^*\beta_0$ is an isomorphism; whence the evaluation map
+$ev:\pi^*L_0\to\sigma^*E$ is epimorphic.
+
+(ii) For the duration of the proof, fix an arbitrary line
+$\mathbb{P}^1\subset\mathbb{P}^{N-1}$ and consider the surface
+$S:=\pi^{-1}(\mathbb{P}^1)$ and the projective plane
+$\mathbb{P}^2:=\sigma(S)\subset\mathbb{P}^N$. This plane passes through the center $x$
+of the projection $p_x:\mathbb{P}^N\dashrightarrow\mathbb{P}^{N-1}$, and diagram
+(\ref{linpr}) extends to the commutative diagram
+\begin{equation}\label{twosquares}
+\xymatrix{ \mathbb{P}^2\ar[d]& S\ar[d]\ar[r]^{\tilde{\pi}}\ar[l]_{\tilde{\sigma}}
+&\mathbb{P}^1\ar[d]\\
+\mathbb{P}^N&\mathbb{\tilde{P}}^N\ar[r]^{\pi}\ar[l]_{\sigma}&\mathbb{P}^{N-1},}
+\end{equation}
+where $\tilde{\pi}=\pi|_S$, $\tilde{\sigma}=\sigma|_S:S\to\mathbb{P}^2$ is the blowing
+up of $\mathbb{P}^2$ at the point $x$, and the vertical arrows are the inclusions.
+
+Set $\mathcal{O}_S(\tau):=\tilde{\sigma}^*\mathcal{O}_{\mathbb{P}^2}(1),\ \ \
+\mathcal{O}_S(h):=\tilde{\pi}^*\mathcal{O}_{\mathbb{P}^1}(1).$ Note that the relations
+\begin{equation}\label{tau^2,htau}
+\tau^2=\tau h=[pt]
+\end{equation}
+hold in the Chow ring $A(S)$. Furthermore, $R^1\pi_*\sigma^*E=0$ implies via base
+change $R^1\tilde{\pi}_*\tilde{\sigma}^*E|_{\mathbb{P}^2}=0$. Hence Riemann-Roch (see,
+e.g., \cite[Ex. 15.2.8]{F}) yields
+\begin{equation}\label{Chern1}
+{\rm ch}(L_0|_{\mathbb{P}^1})= \tilde{\pi}_*({\rm td}(T_{S/\mathbb{P}^1})\cdot{\rm
+ch}(\tilde{\sigma}^*E|_{\mathbb{P}^2})).
+\end{equation}
+Here $T_{S/\mathbb{P}^1}\simeq\mathcal{O}_S(2\tau-h)$. Therefore, setting
+$c_i:=c_i(E),\ i=1,2,$ and using the relations (\ref{tau^2,htau}), we obtain in $A(S)$
+\begin{equation}\label{Chern2}
+{\rm td}(T_{S/\mathbb{P}^1})\cdot{\rm
+ch}(\tilde{\sigma}^*E|_{\mathbb{P}^2})= 1+(r+c_1)\tau-\frac{1}{2}rh+
+P(c_1,c_2)[pt].
+\end{equation}
+In $A(\mathbb{P}^1)$ we have, respectively,
+\begin{equation}\label{RR}
+\tilde{\pi}_*({\rm td}(T_{S/\mathbb{P}^1})\cdot{\rm
+ch}(\tilde{\sigma}^*E|_{\mathbb{P}^2}))= (r+c_1)\cdot1+P(c_1,c_2)[pt].
+\end{equation}
+Whence (ii) follows.
+
+(iii) Set $\tilde{E}:=E(-\delta_A(E)-1)$. Then $\delta_A(\tilde{E})=-1$ and
+\begin{equation}\label{h^0EN=0}
+\pi_*\sigma^*\tilde{E}=0,\ \ \ h^0(\tilde{E})=h^0(\sigma^*\tilde{E})=0.
+\end{equation}
+In addition, (\ref{dB=0}) and the condition $-1=\delta_A(\tilde{E})\ge
+\delta_B(\tilde{E})$ give
+\begin{equation}\label{d>0}
+D:=\delta_A(E)+1=-\delta_B(\tilde{E})>0.
+\end{equation}
+Let $l_0=\tilde{\sigma}^{-1}(x)$ be the exceptional line on $S$. Since
+$\mathcal{O}_S(l_0)=\mathcal{O}_S(\tau-h)$, there is an exact triple
+\begin{equation}\label{exact1}
+0\to\mathcal{O}_S\to\mathcal{O}_S(D(\tau-h))\to\mathcal{O}_{Dl_0}(Dl_0)\to0.
+\end{equation}
+Here $Dl_0$ is the standard multiplicity $D$ scheme structure on $l_0$ as a divisor in
+$S$, and we have the following exact triples of sheaves of
+$\mathcal{O}_{Dl_0}$-modules for $D\ge2$:
+$$
+0\to\mathcal{O}_{l_0}(-1)\to\mathcal{O}_{Dl_0}(Dl_0)\to\mathcal{O}_{(D-1)l_0}(Dl_0)\to0,
+$$
+\begin{equation}\label{exact2}
+0\to\mathcal{O}_{l_0}(-2)\to\mathcal{O}_{(D-1)l_0}(Dl_0)\to\mathcal{O}_{(D-2)l_0}(Dl_0)\to0,
+\end{equation}
+$$
+.\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\
+.\ .\
+$$
+$$
+0\to\mathcal{O}_{l_0}(1-D)\to\mathcal{O}_{2l_0}(Dl_0)\to\mathcal{O}_{l_0}(-D)\to0.
+$$
+
+Note that, similarly to (\ref{h^0EN=0}),
+\begin{equation}\label{3)h^0=0}
+h^0(\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2})=0.
+\end{equation}
+Next, $l_0=\tilde{\sigma}^{-1}(x)$ implies
+$(\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2})|_{ml_0}\simeq\mathcal{O}^r_{ml_0}$ for
+$m\ge1$. Thus, twisting the triples (\ref{exact2}) by
+$\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}$, we obtain for $D\ge2$
+\begin{equation}\label{4)h^0=0}
+h^0(\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}\otimes\mathcal{O}_{Dl_0}(Dl_0))=0.
+\end{equation}
+Moreover, (\ref{4)h^0=0}) is evident for $D=1$, hence it holds for $D\ge1$.
+
+Twisting (\ref{exact1}) by $\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}$ we obtain the
+exact triple $0\to\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}\to
+\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}(D(\tau-h))\to
+\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}\otimes\mathcal{O}_{Dl_0}(Dl_0)\to0$, and
+(\ref{3)h^0=0}) and (\ref{4)h^0=0}) imply
+\begin{equation}\label{5)h^0=0}
+0=h^0(\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2})(D(\tau-h))=
+h^0(\tilde{\pi}_*\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}(D(\tau-h))).
+\end{equation}
+Applying the base change isomorphism $\beta_0$ to the right square of the diagram
+(\ref{twosquares}) and using the projection formula, we get
+$\tilde{\pi}_*(\tilde{\sigma}^*\tilde{E}|_{\mathbb{P}^2}(D(\tau-h)))\simeq
+(\pi_*\sigma^*\tilde{E}(D)|_{\mathbb{P}^1})(-D)\simeq
+(\pi_*\sigma^*E|_{\mathbb{P}^1})(-D)\simeq L_0(-D)|_{\mathbb{P}^1}$. Therefore
+(\ref{5)h^0=0}) implies $h^0(L_0(-D)|_{\mathbb{P}^1})=0$, or equivalently
+$\delta_A(L_0)< D$ as $\mathbb{P}^1$ is an arbitrary line in $\mathbb{P}^{N-1}$. This
+together with (\ref{d>0}) yields (iii).
+
+(iv) Let $L_{0}|_{\mathbb{P}^1}\simeq\underset{i=1}{\overset{\rho_0}\oplus}
+\mathcal{O}_{\mathbb{P}^1}(a_i)$. Clearly, $\delta_A(L_0)\ge c_1(L_0)/\rho_0$ as
+$a_i\le \delta_A(L_0)$ for $1\le i\le \rho_0$. It is clear also that
+$c_1(L_0)/\rho_0\ge-(c_1(L_0))^2$. Therefore $\delta_A(L_0)\ge-(c_1(L_0))^2$. On the
+other hand, by (ii), $-(c_1(L_0))^2=-(P(c_1,c_2))^2$. Hence (\ref{ineqty1a}) holds.
+
+Finally, set $\tilde{L}_0:=L_0(-\delta_A(L_0)-1)$. We have
+\begin{equation}\label{deltaA= etc}
+\delta_A( \tilde{L}_0)=-1,\ \ \ \delta_B(L_0)=\delta_B(\tilde{L}_0)+\delta_A(L_0)+1.
+\end{equation}
+Assume in addition that the line $\mathbb{P}^1$ in $\mathbb{P}^{N-1}$ is chosen in
+such a way that $\delta_B(\tilde{L}_{0}|_{\mathbb{P}^1})=\delta_B(\tilde{L}_0)$. Then
+$h^0(\tilde{L}_{0}|_{\mathbb{P}^1})=0$, hence Riemann-Roch yields
+\begin{equation}\label{h1(EN-1)}
+h^1(\tilde{L}_{0}|_{\mathbb{P}^1})=-c_1(\tilde{L}_0)-\rk\tilde{L}_0=
+-c_1(\tilde{L}_0)-\rho_0.
+\end{equation}
+On the other hand, since $\delta_B(\tilde{L}_0)\le \delta_A(\tilde{L}_0)=-1$, we have
+$-\delta_B( \tilde{L}_0)-1=h^1(\mathcal{O}_{\mathbb{P}^1}(\delta_B( \tilde{L}_0))) \le
+h^1( \tilde{L}_0|_{\mathbb{P}^1})$. The last two inequalities, together with
+(\ref{h1(EN-1)}), imply
+\begin{equation}\label{ineqty1b}
+-1\ge \delta_B( \tilde{L}_0)\ge c_1( \tilde{L}_0)+\rho_0-1.
+\end{equation}
+In addition, the definition of $\tilde{L}_0$ and statements (ii) and (iii) imply
+$c_1(\tilde{L}_0)+\rho_0-1=-\rho_0(\delta_A(L_0)+1)+c_1(L_0)+\rho_0-1\ge
+-\rho_0(\delta_A(E)+1)+P(c_1,c_2)+\rho_0-1.$ Substituting this together with
+(\ref{ineqty1b}) into (\ref{deltaA= etc}), and using (\ref{ineqty1a}) and
+(\ref{rankEN-1}), we obtain
+$$
+\delta_B(L_0)\ge-\rho_0\delta_A(E)+P(c_1,c_2)+\delta_A(L_0)
+\ge-(r+c_1)\delta_A(E)+P(c_1,c_2)-(P(c_1,c_2))^2,
+$$
+i.e. (\ref{dBEN-1}).
+\end{proof}
+
+
+
+\end{sub}
+
+\vspace{0.5cm}
+
+\begin{sub}{\bf An estimate for the transformed kernel of the evaluation map
+$\pi^*L_0\to\sigma^*E$.} \label{Ker Eval map} \rm Assume in addition
+\begin{equation}\label{integer D}
+\delta_A(E)=2\delta,\ \ \ c_1(E)=r\delta
+\end{equation}
+for some $\delta\in\mathbb{Z}_{>0}$. Set
+\begin{equation}\label{gamma}
+\gamma:=c_2(E)-\frac{1}{2}r(r-1)\delta^2.
+\end{equation}
+Then Theorem \ref{first relations} yields
+\begin{equation}\label{rho0}
+\rho_0=\rk L_0=r(1+\delta),
+\end{equation}
+\begin{equation}\label{c1L0}
+c_1(L_0)=P_1(r,\gamma,\delta),
+\end{equation}
+\begin{equation}\label{dAL0,dBL0}
+Q_1(r,\gamma,\delta)\le \delta_B(L_0)\le \delta_A(L_0)\le2\delta,
+\end{equation}
+where $P_1(r,\gamma,\delta):=P(r\delta, \gamma+r(r-1)\delta^2/2)$,\ \
+$Q_1(r,\gamma,\delta):=Q(r,\ 2\delta,\ r\delta,\ \gamma+r(r-1)\delta^2/2)$.
+
+By Theorem \ref{first relations}(i) we have an exact triple of vector bundles
+\begin{equation}\label{exact4}
+0\to F\overset{\iota}\to\pi^*L_0\overset{ev}\to\sigma^*E\to0,
+\end{equation}
+where $F:=\Ker ev$. Restriction to $S$ yields an exact triple
+\begin{equation}\label{exact5}
+0\to F|_{S}\to\tilde{\pi}^*(L_{0}|_{\mathbb{P}^1})\to\tilde
+{\sigma}^*E|_{\mathbb{P}^2}\to0
+\end{equation}
+and its twisted version
+\begin{equation}\label{exact5(kh)}
+0\to (F|_{S})(jh)\to\tilde{\pi}^*(L_{0}|_{\mathbb{P}^1}(j))\to\tilde
+{\sigma}^*E|_{\mathbb{P}^2}(jh)\to0.
+\end{equation}
+Base change implies
+$L_{0}|_{\mathbb{P}^1}\simeq\tilde{\pi}_*\tilde{\sigma}^*E|_{\mathbb{P}^2}$. Therefore
+$L_{0}|_{\mathbb{P}^1}(j)\simeq(\tilde{\pi}_*\tilde{{\sigma}}^*E|_{\mathbb{P}^2})(jh),\
+j\in\mathbb{Z}$. Since
+$H^1({\tilde{\pi}}^*(L_{0}|_{\mathbb{P}^1}(j)))=H^1(L_{0}|_{\mathbb{P}^1}(j))=0,\ \ \
+j\ge-\delta_B(L_0)$, and the morphism $\ H^0(\tilde{\pi}^*(L_{0}|_{\mathbb{P}^1}(j)))
+\to H^0(\tilde{{\sigma}}^*E|_{\mathbb{P}^2})(jh)),\ j\in\mathbb{Z}$, induced by
+(\ref{exact5(kh)}) is an isomorphism, we obtain
+\begin{equation}\label{h1FS(kh)}
+h^1(F|_{S}(jh))=0,\ \ \ j\ge-Q_1(r,\gamma,\delta)
+\end{equation}
+(see (\ref{dAL0,dBL0})).
+
+Next, the triple (\ref{exact5}) implies via (\ref{rho0})-(\ref{c1L0})
+$$
+\rk F=\rk(F|_{S})=r\delta,
+$$
+\begin{equation}\label{ciFS}
+c_1(F|_{S})=(r\delta)\tau-P_1(r,\gamma,\delta)h,\ \ \
+c_2(F|_{S})=P_2(r,\gamma,\delta)[pt],
+\end{equation}
+where $P_2(r,\gamma,\delta):=-\gamma-r(r-1)\delta^2/2- r^2\delta^2+r\delta
+P_1(r,\gamma,\delta)$ and we use the relations (\ref{tau^2,htau}).
+
+Set
+\begin{equation}\label{beta}
+b:=-\min\{\delta_B(F|_{\mathbb{P}^1_y})\ |\ y\in\mathbb{P}^{N-1}\}
+\end{equation}
+and observe that $b\ge0$ in view of the monomorphism $\iota$ in (\ref{exact4}). To
+obtain an upper bound for $b$, take a point $y\in\mathbb{P}^{N-1}$ such that
+$\delta_B(F|_{\mathbb{P}^1_y})=-b$. Then
+\begin{equation}\label{F|P1y}
+F|_{\mathbb{P}^1_y}\simeq\overset{r\delta}{\underset{i=1}\oplus}
+\mathcal{O}_{\mathbb{P}^1}(b_i)=\mathcal{O}_{\mathbb{P}^1}(-b)\oplus
+\overset{r\delta}{\underset{i=2}\oplus}\mathcal{O}_{\mathbb{P}^1}(b_i),
+\end{equation}
+where $-b=b_1\le b_2\le......\le b_{r\delta}\le0$. Restricting (\ref{exact4}) onto
+$\mathbb{P}^1_y$ and using (\ref{rho0}), we obtain the triple
+$$
+0\to F|_{\mathbb{P}^1_y}\to\mathcal{O}_{\mathbb{P}^1_y}^{r(1+\delta)}\to
+\sigma^*E|_{\mathbb{P}^1_y}\to0.
+$$
+Moreover, (\ref{integer D})  yields $\chi(\sigma^*E|_{\mathbb{P}^1_y})=\rk
+E+c_1(E)=r(1+\delta)$. Therefore
+$0=\chi(F|_{\mathbb{P}^1_y})=-b+\overset{r\delta}{\underset{i=2}\sum}b_i+r(1+\delta)$.
+Since $\overset{r\delta}{\underset{i=2}\sum}b_i\le0$, this gives the following upper
+bound for $b$:
+\begin{equation}\label{beta le}
+b=\overset{r\delta}{\underset{i=2}\sum}b_i+ r(1+\delta)\le r(1+\delta).
+\end{equation}
+
+Consider the vector bundles
+$$
+\mathcal{O}_\pi(1):=\sigma^*\mathcal{O}_{\mathbb{P}^N}(1),\ \ \
+F_{b}:=F\otimes\mathcal{O}_\pi(b),\ \ \ L_1:=\pi_*F_{b}.
+$$
+Note that
+\begin{equation}\label{R1FN=0}
+R^1\pi_*F_{b}=0.
+\end{equation}
+Furthermore, (\ref{ciFS}) implies
+\begin{equation}\label{c1FN|S}
+c_1(F_{b}|_S)=r\delta(1+b)\tau-hP_1(r,\gamma,\delta),\ \ \
+\end{equation}
+\begin{equation}\label{c2FN|S}
+c_2(F_{b}|_S)=c_2(F|_S)+(r\delta-1)(r\delta\tau-hP_1(r,\gamma,\delta))b\tau+
+\frac{1}{2}rb^2\delta(r\delta-1)[pt].
+\end{equation}
+Base change, together with (\ref{R1FN=0}), yields
+\begin{equation}\label{R1FN|S}
+\tilde{\pi}_*(F_{b}|_{S})=L_1|_{\mathbb{P}^1},\ \ \ R^1\tilde{\pi}_*(F_{b}|_{S})=0.
+\end{equation}
+Hence, by Riemann-Roch (cf. (\ref{Chern1}))
+\begin{equation}\label{Chern}
+{\rm ch}(L_1|_{\mathbb{P}^1})= \tilde{\pi}_*({\rm td}(T_{S/\mathbb{P}^1})\cdot{\rm
+ch}(F_{b}|_{S})).
+\end{equation}
+Substituting (\ref{c1FN|S}) and (\ref{c2FN|S}) into (\ref{Chern}) and proceeding as in
+(\ref{Chern2}) and (\ref{RR}), we obtain
+\begin{equation}\label{rkL1}
+\rk L_1=r\delta(2+b),
+\end{equation}
+\begin{equation}\label{c1L1}
+c_1(L_1)=F_1(r,b,\gamma,\delta):=\binom{r\delta(1+b)+1}{2}-
+(r\delta(1+b)+1)P_1(r,\gamma,\delta)-F(r,b,\gamma,\delta).
+\end{equation}
+Moreover, (\ref{R1FN|S}) implies
+$$
+\tilde{\pi}_*(F_{b}|_{S}(jh))=L_1(j)|_{\mathbb{P}^1},\ \ \
+R^1\tilde{\pi}_*(F_{b}|_{S}(jh))=0, \ \ \ j\in\mathbb{Z}.
+$$
+Therefore the Leray spectral sequence
+$E^{aa'}_2=H^a(R^{a'}\tilde{\pi}_*(F_{b}|_{S}(jh))\Rightarrow
+H^{a+a'}(F_{b}|_{S}(jh))$ degenerates and
+\begin{equation}\label{Leray}
+H^1(F_{b}|_{S}(jh))=H^1(L_1(j)|_{\mathbb{P}^1}), \ \ \ j\in\mathbb{Z}.
+\end{equation}
+
+We are now ready to prove the following lemma.
+\begin{lemma}\label{estimate for dABL1}
+There exist polynomials $R(x,y,z)$ and $S(x,y,z)$ in $\mathbb{Z}[x,y,z]$ such that
+\begin{equation}\label{dAL1,dBL1}
+-R(r,\gamma,\delta)\le \delta_B(L_1)\le \delta_A(L_1)\le S(r,\gamma,\delta).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Fix a line $l\subset\mathbb{P}^2$ not passing through $x$ (recall that $x$ is the
+center of the blow-up $\tilde{\sigma}:S\to\mathbb{P}^2$), and let
+$\mathbb{P}^1_{\tau}:=\tilde{\sigma}^{-1}(l)$. Then
+$\mathcal{O}_S(\mathbb{P}^1_{\tau})\simeq\mathcal{O}_S(\tau)$. Restricting the triple
+(\ref{exact5(kh)}) onto $\mathbb{P}^1_{\tau}$, we obtain an exact triple on
+$\mathbb{P}^1_{\tau}\simeq\mathbb{P}^1$
+$$
+0\to F|_{\mathbb{P}^1_{\tau}}(j)\to
+\tilde{\pi}^*(L_0|_{\mathbb{P}^1}(j))|_{\mathbb{P}^1_\tau}\to
+\tilde{\sigma}^*(E(j)|_{l})\to0.
+$$
+Since $\tilde{\pi}^*(L_0|_{\mathbb{P}^1}(j))|_{\mathbb{P}^1_\tau}\simeq
+L_0|_{\mathbb{P}^1}(j)$, we have $\chi(E(j)|_{l})=r(1+\delta+j)$. Moreover,
+(\ref{rho0}), (\ref{c1L0}) and Riemann-Roch yield $\chi(L_0|_{\mathbb{P}^1}(j))=
+P_1(r,\gamma,\delta)+r(1+\delta)(j+1)$. Hence
+\begin{equation}\label{chiF(k)|P1tau}
+\chi(F|_{\mathbb{P}^1_{\tau}}(j))=P_1(r,\gamma,\delta)+r\delta j.
+\end{equation}
+Next, (\ref{dAL0,dBL0}) implies
+\begin{equation}\label{dAL0+k,dBL0+k}
+Q_1(r,\gamma,\delta)+j\le \delta_B(L_0|_{\mathbb{P}^1}(j)) \le
+\delta_A(L_0|_{\mathbb{P}^1}(j))\le2\delta+j.
+\end{equation}
+On the other hand,
+$F|_{\mathbb{P}^1_{\tau}}(j)\simeq\overset{r\delta}{\underset{i=1}\oplus}
+\mathcal{O}_{\mathbb{P}^1}(e_i),$ where $\delta_B(F|_{\mathbb{P}^1_{\tau}}(j))=e_1\le
+e_2\le......\le e_{r\delta}$. Therefore (\ref{chiF(k)|P1tau}) yields
+\begin{equation}\label{2chiF(k)|P1tau}
+P_1(r,\gamma,\delta)+r\delta j=\chi(F|_{\mathbb{P}^1_{\tau}}(j))=
+\delta_B(F|_{\mathbb{P}^1_{\tau}}(j))+r\delta+
+\overset{r\delta}{\underset{i=2}\sum}e_i.
+\end{equation}
+
+Note that, since $F|_{\mathbb{P}^1_{\tau}}(j)$ is a subbundle of
+$\tilde{\pi}^*(L_0|_{\mathbb{P}^1}(j))|_{\mathbb{P}^1_\tau}\simeq
+L_0|_{\mathbb{P}^1}(j)$, (\ref{dAL0+k,dBL0+k}) implies $e_2\le......\le e_{r\delta}\le
+\delta_A(L_0(j)|_{\mathbb{P}^1})\le2\delta+j$, so that
+$\overset{r\delta}{\underset{i=2}\sum}e_i\le(2\delta+j)(r\delta-1)$. This together
+with (\ref{2chiF(k)|P1tau}) shows that
+$$
+\delta_B(F|_{\mathbb{P}^1_{\tau}}(j))=P_1(r,\gamma,\delta)+r\delta(j-1)-
+\overset{r\delta}{\underset{i=2}\sum}e_i\ge \delta(r-2r\delta+2\delta)-
+P_1(r,\gamma,\delta)+j.
+$$
+Hence
+\begin{equation}\label{dBF|P1tau(k)}
+\delta_B(F|_{\mathbb{P}^1_{\tau}}(j))\ge0,\ \ \ j\ge
+P_2(r,\gamma,\delta):=P_1(r,\gamma,\delta)+\delta(-r+2r\delta-2\delta),
+\end{equation}
+and this establishes the implication
+\begin{equation}\label{againk ge}
+j\ge P_2(r,\gamma,\delta)\ \ \Rightarrow\ \ h^1((F|_{\mathbb{P}^1_{\tau}})(j))=0.
+\end{equation}
+
+Consider now the sequence of exact triples
+$$
+0\to F|_S(jh)\to F|_S(jh+\tau)\to F|_{\mathbb{P}^1_{\tau}}(jh+\tau)\to0,
+$$
+$$
+0\to F|_S(jh+\tau)\to F|_S(jh+2\tau)\to F|_{\mathbb{P}^1_{\tau}}(jh+2\tau)\to0,
+$$
+$$
+\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ . \
+.\ .\ .\ .\ .\ .\ .\ .
+$$
+$$
+0\to F|_S(jh+(b-1)\tau)\to F|_S(jh+b\tau)\to F|_{\mathbb{P}^1_{\tau}}(jh+b\tau)\to0,
+$$
+where
+\begin{equation}\label{k ge max}
+j\ge\max\{-Q_1(r,\gamma,\delta),\ P_2(r,\gamma,\delta)\}.
+\end{equation}
+Since $\mathcal{O}_S(\tau)|_{\mathbb{P}^1_{\tau}}\simeq
+\mathcal{O}_S(\tau)|_{\mathbb{P}^1_{\tau}}\simeq\mathcal{O}_{\mathbb{P}^1_{\tau}}(1)$,
+it follows from (\ref{h1FS(kh)}) and (\ref{againk ge}) that
+$$
+h^1(F|_{S}(jh))=h^1(F|_{\mathbb{P}^1_{\tau}}(jh+i\tau))=0,\ \ 0\le i\le b,
+$$
+for $j$ as in (\ref{k ge max}). Substituting these equalities subsequently into the
+triples in the above sequence and keeping in mind that
+$(F|_S)(jh+b\tau)=(F_{b}|_S)(jh)$, we eventually obtain
+\begin{equation}\label{h1=0 a}
+h^1(F_{b}|_S(jh))=0,\ \ \ j\ge\max\{-Q_1(r,\gamma,\delta), \ P_2(r,\gamma,\delta)\}.
+\end{equation}
+
+Set $R(x,y,z):=(-Q_1(x,y,z)^+)+P_2(x,y,z)^+$ (the notation $(\cdot)^+$ is introduced
+in section 2). Then (\ref{Leray}) and (\ref{h1=0 a}) imply
+$h^1(L_1(j)|_{\mathbb{P}^1})=0,\ \ \ j\ge R(r,\gamma,\delta)$. Hence, since
+$\mathbb{P}^1$ is an arbitrary line in $\mathbb{P}^{N-1}$, it follows that
+\begin{equation}\label{dBL1}
+-R(r,\gamma,\delta)\le \delta_B(L_1).
+\end{equation}
+This establishes the left-hand side of the inequality (\ref{dAL1,dBL1}).
+
+To obtain the right-hand side, consider a line $\mathbb{P}^1\subset\mathbb{P}^{N-1}$
+in diagram (\ref{twosquares}) with $\delta_A(L_1|_{\mathbb{P}^1})=\delta_A(L_1)$ and
+$$
+L_1|_{\mathbb{P}^1}\simeq\overset{r\delta(2+b)}{\underset{i=1}\oplus}
+\mathcal{O}_{\mathbb{P}^1}(a_i),
+$$
+where $\delta_A(L_1)=a_1\ge a_2\ge...\ge a_{r\delta(2+b)}\ge \delta_B(L_1)$ and $\rk
+L_1=r\delta(2+b)$ by (\ref{rkL1}). Note that (\ref{rkL1}), (\ref{c1L1}) and
+Riemann-Roch yield
+\begin{equation}\label{chi(L1|P1)}
+\chi(L_1|_{\mathbb{P}^1})=\rk L_1+c_1(L_1)=r\delta(2+b)+F_1(r,b,\gamma,\delta)
+=:F_2(r,b,\gamma,\delta).
+\end{equation}
+On the other hand, $\chi(L_1|_{\mathbb{P}^1})=\delta_A(L_1)+
+\overset{r\delta(2+b)}{\underset{i=2}\sum}a_i$. Whence, in view of (\ref{dBL1}), we
+obtain $\delta_A(L_1)=\chi(L_1|_{\mathbb{P}^1})-
+\overset{r\delta(2+b)}{\underset{i=2}\sum}a_i
+\le\chi(L_1|_{\mathbb{P}^1})-(r\delta(2+b)-1)\delta_B(L_1)
+\le\chi(L_1|_{\mathbb{P}^1})+(r\delta(2+b)-1)R(r,\gamma,\delta)$. Combined with
+(\ref{chi(L1|P1)}), this yields
+\begin{equation}\label{dAL1}
+\delta_A(L_1)\le R_1(r,b,\gamma,\delta):= F_2(r,b,\gamma,\delta)+
+(r\delta(2+b)-1)R(r,\gamma,\delta).
+\end{equation}
+Recall that, according to (\ref{beta le}),
+\begin{equation}\label{0le beta le}
+0\le b\le r(1+\delta).
+\end{equation}
+Setting $S(x,y,z):=R_1(r,r(1+\delta),\gamma,\delta)^+$, we obtain from (\ref{dAL1})
+the desired right-hand side of (\ref{dAL1,dBL1}).
+
+\end{proof}
+
+
+\end{sub}
+
+
+\vspace{0.5cm}
+
+\begin{sub}{\bf An estimate for the degree of the variety of maximal jumping lines
+$B_\delta^\kappa(E^0,x,\mathbb{P}^{N-1})$.}\label{Deg Jump} \rm Note that
+(\ref{F|P1y}) and (\ref{beta}) imply that $F_b|_{\mathbb{P}^1_y}$ is generated by
+global sections for any $y\in\mathbb{P}^{N-1}$. Hence base change yields an
+epimorphism $\pi^*L_1\twoheadrightarrow F_{b}$ and its twist
+\begin{equation}\label{evalmap4}
+ev_1:\pi^*L_1\otimes\mathcal{O}_\pi(-b)\twoheadrightarrow F.
+\end{equation}
+Combining (\ref{exact5}) with (\ref{evalmap4}) we get the exact sequence
+\begin{equation}\label{exact6}
+\pi^*L_1\otimes\mathcal{O}_\pi(-b)\overset{\Psi}\to\pi^*L_0\to\sigma^*E\to0,
+\end{equation}
+where $\Psi:=i\circ ev_1$. Twisting (\ref{exact6}) by the $\pi$-relative dualizing
+sheaf
+$\omega_\pi\simeq\mathcal{O}_\pi(-2)\otimes\pi^*\mathcal{O}_{\mathbb{P}^{N-1}}(1)$,
+and applying $R^1\pi_{*}$ we obtain the exact sequence
+\begin{equation}\label{exact7}
+L_1\otimes A_b\overset{\Phi}\to L_0\to R^1\pi_*(\sigma^*E\otimes\omega_\pi)\to0,
+\end{equation}
+where
+\begin{equation}\label{Ab}
+A_b:=(\pi_*\mathcal{O}_\pi(b))^{\vee}\simeq
+S^b(\mathcal{O}_{\mathbb{P}^{N-1}}(-1)\oplus\mathcal{O}_{\mathbb{P}^{N-1}})=
+\mathcal{O}_{\mathbb{P}^{N-1}}(-b)\oplus\mathcal{O}_{\mathbb{P}^{N-1}}(-b+1)\oplus...
+\oplus\mathcal{O}_{\mathbb{P}^{N-1}}.
+\end{equation}
+
+Set $E^0:=E(-\delta)$. Then (\ref{integer D}) and (\ref{gamma}) yield
+\begin{equation}\label{D,gamma}
+c_1(E^0)=0,\ \ \ c_2(E^0)=\gamma,\ \ \ \delta_A(E^0)=\delta=-\delta_B(E^0).
+\end{equation}
+We set also
+\begin{equation}\label{2 Bkd(x)}
+B^\kappa_\delta(E^0,x,\mathbb{P}^{N-1}):=\{y\in\mathbb{P}^{N-1}\ |\
+\dim_{\mathbb{C}_y}(\mathbb{C}_y\otimes R^1\pi_*(\sigma^*E\otimes\omega_\pi))=\kappa\}
+\end{equation}
+for $x\in\mathbb{P}^N$.
+
+
+\vspace{0.4cm} Note that $\kappa\le\rk E=r$. Hence in view of (\ref{rho0}),
+\begin{equation}\label{rho0-alpha}
+r(1+\delta)=\rho_0\ge \rho_0-\kappa\ge r\delta\ge0.
+\end{equation}
+Next, denote
+\begin{equation}\label{rho1}
+\rho_1:=\rk(L_1\otimes A_b)= \rk L_1\cdot\rk A_b=r\delta(2+b)(1+b)
+\end{equation}
+(we use (\ref{rkL1}) and (\ref{Ab}) here). Observe that (\ref{Ab}) implies
+$\delta_A(L_1\otimes A_b)=\delta_A(L_1)-b,\ \ \delta_B(L_1\otimes
+A_b)=\delta_B(L_1)-b$, so that \ \
+$$
+j\delta_B(L_1)-jb=j\delta_B(L_1\otimes A_b)\le \delta_B(\wedge^j(L_1\otimes A_b)) \le
+\delta_A(\wedge^j(L_1\otimes A_b)) \le j\delta_A(L_1\otimes A_b)=j\delta_A(L_1)-jb
+$$
+for any $j\in\mathbb{Z}_{>0}$. This, together with Lemma \ref{estimate for dABL1} and
+(\ref{0le beta le}), gives the inequalities
+\begin{equation}\label{le dA le}
+-jR(r,\gamma,\delta)-jr(1+\delta)\le \delta_B(\wedge^j(L_1\otimes A_b)) \le
+\delta_A(\wedge^j(L_1\otimes A_b))\le jS(r,\gamma,\delta).
+\end{equation}
+In a similar way (\ref{dAL0,dBL0}) gives
+\begin{equation}\label{dAwedge p L0}
+jQ_1(r,\gamma,\delta)\le j\delta_B(L_0)\le \delta_B(\wedge^jL_0) \le
+\delta_A(\wedge^jL_0)\le j\delta_A(L_0)\le2j\delta.
+\end{equation}
+
+Notice now that the locally free resolution (\ref{exact7}) of the sheaf
+$R^1\pi_*(E\otimes\omega_\pi)$ shows that the $\kappa$-th Fitting ideal sheaf
+\footnote{For the definition of Fitting ideals see for instance \cite[p. 492]{E}.} $
+\mathcal{I}:=\mathcal{F}itt_{\kappa}(R^1\pi_*(\sigma^*E\otimes\omega_\pi)) $ of the
+sheaf $R^1\pi_*(E\otimes\omega_\pi)$ coincides with the image of the morhism
+$$
+\Lambda:\ \mathcal{E}:= \wedge^{(\rho_0-\kappa)}(L_1\otimes
+A_b)\otimes\wedge^{(\rho_0-\kappa)}L_0^{\vee} \to\mathcal{O}_{\mathbb{P}^{N-1}}
+$$
+induced by the morphism $\Phi$ in (\ref{exact7}). We thus have an epimorphism
+\begin{equation}\label{surjn on I}
+\mathcal{E}\twoheadrightarrow\mathcal{I}.
+\end{equation}
+Denote by $V^{\kappa}_\delta(x)$ the subscheme of $\mathbb{P}^{N-1}$ defined by the
+ideal sheaf $\mathcal{I}$, i.e.
+\begin{equation}\label{3 BKd(x)}
+\mathcal{O}_{V^{\kappa}_\delta(x)}:=
+\mathcal{O}_{\mathbb{P}^{N-1}}/\mathcal{I}=\coker\Lambda.
+\end{equation}
+Now (\ref{2 Bkd(x)}) implies
+\begin{equation}\label{4 BKd(x)}
+B^{\kappa}_\delta(E^0,x,\mathbb{P}^{N-1})={\rm Supp}(\coker\Lambda)
+=V^{\kappa}_\delta(x)_{red}.
+\end{equation}
+
+Clearly,
+$$
+\delta_B(\wedge^{(\rho_0-\kappa)}(L_1\otimes A_b))
++\delta_B(\wedge^{(\rho_0-\kappa)}L_0^{\vee})\le \delta_B(\mathcal{E})\le
+\delta_A(\mathcal{E})\le \delta_A(\wedge^{(\rho_0-\kappa)}(L_1\otimes A_b))
++\delta_A(\wedge^{(\rho_0-\kappa)}L_0^{\vee}).
+$$
+Substituting here (\ref{le dA le}) and (\ref{dAwedge p L0}) with $j=\rho_0-\kappa$ and
+using (\ref{rho0-alpha}), we obtain
+\begin{equation}\label{T12}
+T_1(r,\gamma,\delta) \le \delta_B(\mathcal{E})\le \delta_A(\mathcal{E})\le
+T_2(r,\gamma,\delta),
+\end{equation}
+where
+$$
+T_1(r,\gamma,\delta)=-r(1+\delta)(Q_1(r,\gamma,\delta)-
+R(r,\gamma,\delta)-r(1+\delta))^+,
+$$
+$$
+T_2(r,\gamma,\delta)=r(1+\delta)(S(r,\gamma,\delta)+2p\delta)^+.
+$$
+Furthermore, taking into account (\ref{rho0}) and (\ref{rho1}), we obtain
+\begin{equation}\label{rk(E)}
+\rk\mathcal{E}=I_0(r,b,\rho_0-\kappa,\delta):=\binom{r\delta(2+b)(1+b)}{\rho_0-\kappa}
+\binom{r(1+\delta)}{\rho_0-\kappa}.
+\end{equation}
+Therefore, using (\ref{0le beta le}) and (\ref{rho0-alpha}) we obtain
+\begin{equation}\label{tilde rk(E)}
+\rk\mathcal{E}\le I(r,\delta):=I_0(r,r(1+\delta),r(1+\delta),\delta)^+.
+\end{equation}
+Similarly, (\ref{c1L0}) and (\ref{c1L1}) yield
+$$
+c_1(\wedge^{(\rho_0-\kappa)}L_0^{\vee})=U_0(r,\gamma,\delta):=P_1(r,\gamma,\delta)
+\binom{r(1+\delta)-1}{\rho_0-\kappa-1},
+$$
+$$
+c_1(\wedge^{(\rho_0-\kappa)}L_1\otimes A_b)=U_1(r,b,\gamma,\delta):=
+(b+1)\left(F_1(r,b,\gamma,\delta)+ \binom{r(1+\delta)-1}{\rho_0-\kappa-1}r\delta
+b(b+1)(b+2)/2\right);
+$$
+hence
+$$
+c_1(\mathcal{E})=J_0(r,b,\gamma,\delta):=U_0(r,\gamma,\delta)r\delta(2+b)
+(1+b)+U_1(r,\gamma,\delta)r(1+\delta).
+$$
+Then
+\begin{equation}\label{tilde c1(E)}
+c_1(\mathcal{E})\le J(r,\gamma,\delta):=J_0(r,r(1+\delta),\gamma,\delta)^+.
+\end{equation}
+
+Apply now Theorem \ref{m-regularity} to the bundle $\mathcal{E}$. From (\ref{T12}),
+(\ref{tilde rk(E)}) and (\ref{tilde c1(E)}) we obtain that $\mathcal{E}(m_0)$ is
+globally generated for
+\begin{equation}\label{m0}
+m_0=m_0(r,\gamma,\delta):=J(r,\gamma,\delta)+(1+I(r,\delta))(2-T_1(r,\gamma,\delta))-1.
+\end{equation}
+We thus have an epimorphism
+$\mathcal{O}^{t_0}_{\mathbb{P}^{N-1}}\twoheadrightarrow\mathcal{E}(m_0)$, where
+\begin{equation}\label{h0}
+t_0=t_0(r,\gamma,\delta,N):=I(r,\delta)\big(T_2(r,\gamma,\delta)+m+N-1\big)^{N-1}.
+\end{equation}
+Hence, by (\ref{surjn on I}), we have an epimorphism
+$\mathcal{O}^{t_0}_{\mathbb{P}^{N-1}}\twoheadrightarrow\mathcal{I}(m_0)$. This
+epimorphism and the Bezout Theorem show that the degree\footnote{By the degree of a
+closed reduced subscheme of $\mathbb{P}^{N-1}$ we mean the sum of degrees of its
+irreducible components.} of the reduced closed subscheme
+\begin{equation}\label{VKd(x)}
+B^{\kappa}_\delta(E^0,x,\mathbb{P}^{N-1})=V^{\kappa}_\delta(x)_{red}.
+\end{equation}
+of $\mathbb{P}^{N-1}$ satisfies the inequality
+$$
+\deg B^{\kappa}_\delta(E^0,x,\mathbb{P}^{N-1}) \le\deg V^{\kappa}_\delta(x) \le
+m_0^{t_0}.
+$$
+Substituting here (\ref{m0}) and (\ref{h0}) and using the relations (\ref{D,gamma}),
+we obtain the following main result of this section.
+
+\begin{theorem}\label{restricted degree} Let $E^0$ be a rank-$r$
+vector bundle on $\mathbb{P}^N$ with $c_1(E^0)=0$,
+$\delta_A(E^0)=\delta=-\delta_B(E^0)$ and $\kappa_A(E^0)=\kappa$. Let $l$ be a line in
+$\mathbb{P}^N$ with $\delta_A(E^0|_l)=\delta$ and $\kappa_A(E^0|_l)=\kappa$ and let
+$x$ be any point on $l$. Let $\mathbb{P}^{N-1}$ be the base of the family of lines
+through $x$ in $\mathbb{P}^N$. Then the degree of the reduced closed subscheme
+$B^{\kappa}_\delta(E^0,x,\mathbb{P}^{N-1})$ of $\mathbb{P}^{N-1}$ satisfies the
+inequality
+\begin{equation}\label{degVKd(x)}
+\deg B^{\kappa}_\delta(E^0,x,\mathbb{P}^{N-1})\le
+m_0(r,c_2(E^0),\delta)^{t_0(r,c_2(E^0),\delta,N)},
+\end{equation}
+where $m_0(x_1,x_2,x_3)$ and $t_0(x_1,x_2,x_3,x_4)$ are given by (\ref{m0}) and
+(\ref{h0}), respectively.
+\end{theorem}
+
+
+\end{sub}
+
+
+\vspace{1cm}
+
+\section{Proof of Theorem \ref{main}}\label{proof}
+\vspace{0.5cm} In the rest of the paper we fix a twisted ind-Grassmannian
+$\mathbf{G}=\underset{\to}\lim G(i_m,V^{n_m})$ given by a sequence of embeddings
+(\ref{eq1}), and assume that $1<i_m\le n_m-i_m$ for all $m$. We set
+$G_m:=G(i_m,V^{n_m})$ and $\tilde{\phi}_m:=\phi_{m-1}\circ...\circ\phi_1$. We fix also
+a self-dual vector bundle $\mathbf{E}=\underset{\leftarrow}\lim E_m$ on $\mathbf{G}$
+(this means that $E_m\simeq E_m^\vee$ for each $m$) of rank
+$\mathbf{r}\in\mathbb{Z}_{>0}$. Then
+\begin{equation}\label{d=2dA}
+c_1(E_m)=0,\ \ \ \delta(E_m)=2\delta_A(E_m),\ \ \ m\ge1.
+\end{equation}
+
+Note that it suffices to prove Theorem \ref{main} for self-dual bundles $\mathbf{E}$.
+Indeed, consider an arbitrary finite-rank vector bundle
+$\mathbf{E}'=\underset{\leftarrow}\lim E'_m$ on $\mathbf{G}$. Set
+$\mathbf{E}=\mathcal{E}nd~\mathbf{E}'$. Since $\mathbf{E}$ is self-dual, we can assume
+that Theorem \ref{main} holds for $\mathbf{E}$. Therefore, for any $m$ and any line
+$l$ in $G(i_m,V^{n_m})$, $(\mathcal{E}ndE'_m)|_{l}$ is a trivial bundle.
+Grothendieck's theorem for vector bundles on $\mathbb{P}^1$ implies immediately that
+$E'_m|_l\otimes L_{m,l}$  is a trivial bundle for a suitable line bundle $L_{m,l}$ on $l$.
+Since $c_1(L_{m,l})=-c_1(E'_m)/\rk E'_m$ does not depend on $l$, the line bundles $L_{m,l}$
+define a line bundle $L_m$ on $G_m$.
+Now a standard result in \cite{PT}
+(Prop. 1.4.1) shows that $E'_m\otimes L_m$ is trivial for any $m$.
+Thus
+$\underset{\leftarrow}\lim(E'_m\otimes L_m)$ is trivial.
+To see that $\mathbf{E}'$ itself is trivial, note that the line bundles $L_m$ define a line bundle
+$\mathbf{L}=\underset{\leftarrow}\lim L_m$ on $\mathbf{G}$. As $\mathbf{G}$ is twisted,
+for every $m$ the Chern class $c_1(\mathbf{L}|_{G_m})=c_1(L_m)$ must be divisible by
+$\deg(\phi_n\circ...\circ\phi_m)$ for all $n>m$. Since
+$\lim_{n\to\infty}\deg(\phi_n\circ...\circ\phi_m)=\infty$, it follows that $c_1(L_m)=0$, and hence $\mathbf{L}$
+is trivial. Therefore $\mathbf{E}'\simeq\underset{\leftarrow}\lim(E'_m\otimes L_m)$ is trivial.
+
+
+\begin{sub}{\bf A first observation on $c_2(\mathbf{E})$.}
+\rm Note that the embeddings $\phi_m:G_m\to G_{m+1}$ define homomorphisms
+$\phi_m^*:A^2(G_{m+1})\to A^2(G_m)$, and the second Chern class of $\mathbf{E}$ is, by
+definition, the projective system $\{c_2(E_m)=\phi_m^*c_2(E_{m+1})\}_{m\ge1}$. Here
+$A(G_m)=\underset{i\ge0}\oplus A^i(G_m)$ stands for the Chow ring of $G_m$, and we
+recall some standard facts about $A(G_m)$ - cf \cite[14.7]{F}:
+\begin{itemize}
+\item[(i)] $A^1(G_m)=\Pic(G_m)=\mathbb{Z}[\mathbb{V}_m]$,
+$A^2(G_m)=\mathbb{Z}[\mathbb{W}_{1,m}]\oplus\mathbb{Z}[\mathbb{W}_{2,m}]$, where
+$\mathbb{\mathbb{V}}_m,\mathbb{W}_{1,m},\mathbb{W}_{2,m}$ are the Schubert varieties
+of the form $\mathbb{V}_m=\{V^{i_m}\in G_m|\ \dim(V^{i_m}\cap V_0^{n_m-i_m-1})\ge1$
+for a fixed subspace $V_0^{n_m-i_m-1}$ of $V^{n_m}\}$, $\mathbb{W}_{1,m}=\{V^{i_m}\in
+G_m| $ $\dim (V^{i_m}\cap V_0^{n_m-i_m-1})\ge1$ for a fixed subspace $V_0^{n_m-i_m-1}$
+in $V^{n_m}\}$, $\mathbb{W}_{2,m}=\{{V}^{i_m}\in G_m|\ \dim({V}^{i_m}\cap
+V_0^{n_m-i_m+1})\ge2$ for a fixed subspace $V_0^{n_m-i_m+1}$ of $V^{n_m}\}$;
+\item[(ii)] $[\mathbb{V}_m]^2=[\mathbb{W}_{1,m}]+[\mathbb{W}_{2,m}]$ in $A^2(G_m)$;
+\item[(iii)] there exist integers $a_{ij}(m)\ge0,\ \ i,j=1,2,$ such that
+\begin{equation}\label{abcd}
+\phi_m^*[\mathbb{W}_{1,m+1}]=a_{11}(m)[\mathbb{W}_{1,m}]+a_{21}(m)[\mathbb{W}_{2,m}],\
+\
+\phi_m^*[\mathbb{W}_{2,m+1}]=a_{12}(m)[\mathbb{W}_{1,m}]+a_{22}(m)[\mathbb{W}_{2,m}],
+\end{equation}
+\begin{equation}\label{aij}
+\ a_{11}(m)+a_{12}(m)=a_{21}(m)+a_{22}(m)=(\deg\phi_m)^2,\  \ \ m\ge1.
+\end{equation}
+\end{itemize}
+
+\begin{lemma}\label{limits-of-lambdas}
+Given $\mathbf{E}=\underset{\leftarrow}\lim E_m$, there exists an infinite subsequence
+of the sequence of Grassmannians $G_m$ such that the coordinates of  $c_2(E_m)$ in the
+basis $\{[\mathbb{W}_{1,m}],[\mathbb{W}_{2,m}]\}$ are constants
+$\lambda_1\in\mathbb{Z}$ and $\lambda_2\in\mathbb{Z}$. Moreover, if
+$\lambda_1\lambda_2\ne0$, then $\lambda_1\lambda_2<0$.
+\end{lemma}
+\begin{proof}
+Let
+\begin{equation}\label{c_2(E_m)}
+c_2(E_m)=\lambda_{1m}[\mathbb{W}_{1,m}]+\lambda_{2m}[\mathbb{W}_{2,m}].
+\end{equation}
+Consider the $2\times2$-matrix $A(m)=(a_{ij}(m))$ and the column vector
+$\Lambda_m=(\lambda_{1m},\lambda_{2m})^t.$ Relations (\ref{c_2(E_m)}) and (\ref{abcd})
+give
+\begin{equation}\label{lambdas}
+\Lambda_m=A(m)\Lambda_{m+1}.
+\end{equation}
+Set $\gamma_m:=\lambda_{1m}-\lambda_{2m}$. Then, substituting (\ref{aij}) in
+(\ref{lambdas}) we compute
+\begin{equation}\label{m to_m+1}
+\gamma_m=(a_{11}(m)-a_{21}(m))\gamma_{m+1}=
+\gamma_{m+m'+1}\prod_{i=1}^{m'}(a_{11}(m+i)-a_{21}(m+i)),\ \ \ m,m'\ge1.
+\end{equation}
+
+Assume that $\gamma_{m_0}\ne0$ for some $m_0\ge1$. Then (\ref{m to_m+1}) implies
+$a_{11}(m)-a_{21}(m)\ne0,\ \ \gamma_m\ne0,\ \ m\ge m_0$. Furthermore, if
+$|a_{11}(m)-a_{21}(m)|>1$ for an infinite number of values of $m\ge m_0$, then the the
+right-hand side of (\ref{m to_m+1}) grows to infinity when $m'\to\infty$, a
+contradiction. Hence $|a_{11}(m)-a_{21}(m)|>1$ for at most a finite number of values
+of $m\ge m_0$. Removing the Grassmannians $G_m$ with these values of $m$ from our
+ind-Grassmannian $\mathbf{G}$ (and taking as new embeddings the corresponding
+compositions of old embeddings) we may assume that $|a_{11}(m)-a_{21}(m)|=1$ for all
+$m\ge m_0$. Since for an infinite number of values of $m$ the numbers
+$a_{11}(m)-a_{21}(m)$ have the same sign, the sequence $\{\gamma_m\}$ has an infinite
+constant subsequence. Hence, again by removing appropriate $m$'s in the construction
+of $\mathbf{G}$, we may assume
+\begin{equation}\label{gamma1}
+\gamma:=\gamma_m=\lambda_{1m}-\lambda_{2m}\ne0,\ \ \ m\ge m_0.
+\end{equation}
+
+Let $\gamma>0$. (The case $\gamma<0$ is treated similarly.) As it was shown in
+\cite[section 5]{PT}, for $m$ large enough, say, for $m\ge m_0$, $\lambda_{1m}$ and
+$\lambda_{2m}$ cannot be both nonzero of the same sign. (The argument is carried out
+in \cite{PT} for rank-2 bundles but applies to bundles $E_m$ of any rank.) This
+property and (\ref{gamma1}) imply that
+$$
+\gamma\ge\lambda_{1m}\ge0,\ \ 0\ge\lambda_{2m}\ge-\gamma,\ \ m\ge m_0.
+$$
+Thus, there exist infinite constant subsequences
+$\{\lambda_{1,m'}=:\lambda_1\ge0\}_{m'\ge m_0}$ and
+$\{\lambda_{2,m'}=:\lambda_2\le0\}_{m'\ge m_0}$, of the sequences
+$\{\lambda_{1m}\}_{m\ge m_0}$ and $\{\lambda_{2m}\}_{m\ge m_0}$, respectively. Thus,
+again without loss of generality we may assume that the sequences
+$\{\lambda_{1m}\}_{m\ge m_0}$ and $\{\lambda_{2m}\}_{m\ge m_0}$ are constant:
+\begin{equation}\label{lambda1,2}
+0\le\lambda_1=\lambda_{1m},\ \ \ 0\ge\lambda_2=\lambda_{2m},\ \ \ m\ge m_0.
+\end{equation}
+\end{proof}
+
+In what follows we assume that the coordinates of $c_2(E_m)$ in the basis
+$\{[\mathbb{W}_{1,m}],[\mathbb{W}_{2,m}]\}$ are constant for our fixed sequence of
+Grassmannians $G_m$.
+
+Recall that there are two families of projective subspaces of maximal dimension in
+$G_m$: family I consisting of subspaces $\mathbb{P}^{i_m}=\{V^{i_m}\in G_m\ |\
+V^{i_m}\subset V_0^{i_m+1}\},\ \ \ \ \ V_0^{i_m+1}\in G(i_m+1,V^{n_m})$, and family II
+consisting of subspaces $\mathbb{P}^{n_m-i_m}=\{V^{i_m}\in G_m\ |\ V^{i_m}\supset
+V_0^{i_m-1}\},\ \ \ \ \ V_0^{i_m-1}\in G(i_m-1,V^{n_m})$. Lemma
+\ref{limits-of-lambdas} implies therefore the following.
+
+\begin{corollary}\label{cor limits}
+In the notations of Lemma \ref{limits-of-lambdas}, we have
+$$
+c_2(E_m|_{\mathbb{P}^{i_m}})=\lambda_2\ \ \ \ \ {\rm for\ any}\ \mathbb{P}^{i_m}\ {\rm
+in\ family}\ {\rm I},
+$$
+\begin{equation}\label{restrII}
+c_2(E_m|_{\mathbb{P}^{n_m-i_m}})=\lambda_1\ \ \ \ \ {\rm for\ any}\
+\mathbb{P}^{n_m-i_m}\ {\rm in\ family}\ {\rm II}.
+\end{equation}
+\end{corollary}
+
+\end{sub}
+
+
+\vspace{0.5cm}
+\begin{sub}{\bf The variety of maximal jumping lines of $E_m$ passing through a point.}
+\rm For a fixed $m$, consider the natural diagram
+\begin{equation}\label{Gamma(m)}
+G_m=G(i_m,V^{n_m})\overset{\pi_1}\leftarrow\Gamma_{m}\overset{\pi_2}\rightarrow
+Fl_{m},
+\end{equation}
+where $\Gamma_{m}:=Fl(i_m-1,i_m,i_m+1,V^{n_m})$, and $Fl_{m}:=Fl(i_m-1,i_m+1,V^{n_m})$
+is the base of the family of (projective) lines on $G_m$. Set
+$$
+Z_a(E_m):=\{l\in Fl_{m}\ |\ \delta_A(E_m|_{l})\ge a\},\ \ \
+B_a(E_m):=\pi_2^{-1}(Z_a(E_m)),\ \ \ a\in\mathbb{Z}_{>0}.
+$$
+The semicontinuity of $\delta_A(E_m|_l)$ as a function of $l$ implies that $Z_a(E_m)$
+is closed in $Fl_m$; respectively, $B_a(E_m)$ is closed in $\Gamma_m$. Next, set
+\begin{equation}\label{dm}
+{\Delta}:=\min\{a\ |\ \im(\pi_1(B_a(E_m))\ne G_m\}-1.
+\end{equation}
+We then have $Y:=\pi_1(B_{{\Delta}+1}(E_m))\ne G_m,\ \pi_1(B_{\Delta}(E_m))=G_m$, and
+$$
+G'_m:=G_m\smallsetminus Y= \Bigl\{x\in G_m\ \Big|\ {\Delta}=\max\{\delta_A(E_m|_{l})|\
+l\ {\rm is\ a\ line\ on}\ G_m\ {\rm through}\ x\}\Bigr\}
+$$
+is a dense open subset of $G_m$.
+
+Denote $p_{{\Delta},E_m}:=\pi_1|_{B_{\Delta}(E_m)}$. Then
+$B_{\Delta}(E_m)':=p_{{\Delta},E_m}^{-1}(G'_m)$ is closed in $\pi_1^{-1}(G'_m)$ and
+the morphism $p_{{\Delta},E_m}:B_{\Delta}(E_m)'\to G'_m$ is projective and surjective.
+Similarly, for each $a,\ 1\le a\le \mathbf{r}$,
+$$
+B_{{\Delta}}^a(E_m):=\{(x,l)\in B_{{\Delta}}(E_m)\ |\ l\in Z_{{\Delta}}(E_m),\ \
+\kappa_A(E_m|_l)\ge a\},
+$$
+is a closed subset in $B_{{\Delta}}(E_m)$; respectively,
+$p_{{\Delta},E_m}(B_{{\Delta}}^a(E_m))$ is closed in $G_m$. Since
+$\kappa_A(E_m|_l)\ge1$ for any $l\in Z_{{\Delta}}(E_m)$, it follows that
+$\pi_1(B_{{\Delta}}^1(E_m))=G_m$.
+
+
+If $\pi_1(B_{{\Delta}}^{\mathbf{r}}(E_m))\ne G_m$, we put
+\begin{equation}\label{km}
+K:=\min\{2\le a\le \mathbf{r}\ |\ \pi_1(B_{{\Delta}}^a(E_m))\ne G_m\}-1,\ \ \
+T:=\pi_1(B_{{\Delta}}^{K+1}(E_m)),
+\end{equation}
+\begin{equation}\label{Gm0}
+G^0_m:=G'_m\smallsetminus T, \ \ \ B_{{\Delta}}^{K}(E_m)^0:=\pi_1^{-1}(G^0_m)\cap
+B_{{\Delta}}^{K}(E_m);
+\end{equation}
+if $\pi_1(B_{{\Delta}}^{\mathbf{r}}(E_m))=G_m$, we put
+\begin{equation}\label{km etc}
+K:=\mathbf{r},\ \ \ G^0_m:=G'_m,\ \ \ B_{{\Delta}}^{K}(E_m)^0:=B_{{\Delta}}(E_m).
+\end{equation}
+By definition, $G^0_m$ is a dense open subset of $G'_m$, hence of $G_m$, and the
+morphism
+$p_{{\Delta},E_m}^{K}:=\pi_1|_{B_{{\Delta}}^{K}(E_m)^0}:B_{{\Delta}}^{K}(E_m)^0\to
+G^0_m$ is projective and surjective.
+
+
+
+
+\vspace{0.5cm}
+
+\end{sub}
+
+
+
+\vspace{0.5cm}
+
+\begin{sub}{\bf A bound for the codimension of $B_{\Delta}^K(E_m)$.}\label{codim bounded}
+\rm The semicontinuity of $\delta_A(E_m|_l)$ (respectively, of $\delta(E_m|_l)$)
+forces the minimal value of of $\delta_A(E_m|_l)$ (respectively, of $\delta(E_m|_l)$)
+to be attained on a dense open set of lines $l\in Fl_m$. In what follows we denote
+this minimal value by $\delta_A^{gen}(E_m)$ (respectively, by $\delta^{gen}(E_m)$).
+
+\begin{lemma}\label{Descent-Lemma}
+Assume $ \delta_A^{gen}(E_m)>\frac{1}{2}\mathbf{r}. $ Then there exists a subsheaf
+$\mathcal{F}_m$ of $E_m$ with $c_1(\mathcal{F}_m)>0$.
+\end{lemma}
+\begin{proof} The inequality $\delta_A^{gen}(E_m)>\frac{1}{2}\mathbf{r}$
+and the vanishing of $c_1(E_m)$ imply, for any line $l\subset G_m$ with splitting type
+$(\delta_1,...,\delta_\mathbf{r})$ of $E|_l$, that $\delta_s-\delta_{s+1}\ge2$ for
+some $s,\ 1\le s\le \mathbf{r}-1$. Thus, the assumption of Theorem 1.4.2 in \cite{PT}
+(which is version of the Descent Lemma of \cite[Ch. II, Lemma 2.1.2]{OSS} for a Grassmannian) is
+satisfied, and this theorem yields a subsheaf $\mathcal{F}_m$ of $E_m$. Since $E_m$ is
+self-dual, the vanishing of $c_1(E_m)$ forces the integer $\delta_s$ to be positive,
+hence by the construction of $\mathcal{F}_m$ we have
+$c_1(\mathcal{F}_m)=\delta_1+...+\delta_s>0$.
+\end{proof}
+\begin{lemma}\label{No-subsheaves}
+For sufficiently large $m$ there are no subsheaves $\mathcal{F}_m\subset E_m$ with
+$c_1(\mathcal{F}_m)>0$.
+\end{lemma}
+\begin{proof}
+Set $\tilde{d}_m:=\deg\tilde{\phi}_m$. Consider the polynomial
+$P_m(t):=\tilde{d}_mt+1$ and let
+$$
+\mathcal{H}_m:=\{C\in\Hilb^{P_m(t)}G_m\ |\ C\ {\rm is\ a\ smooth\ irreducible\
+rational\ curve\ of\ degree}\ \tilde{d}_m\ {\rm on}\ G_m\}.
+$$
+It is well known after Str\o mme [St] that $\mathcal{H}_m$ is a smooth irreducible
+variety of dimension $n_m\tilde{d}_m+i_m(n_m-i_m)-3$.
+
+Assume that $\mathcal{F}_m$ is a subsheaf of $E_m$ with $c_1(\mathcal{F}_m)>0$. Then
+${\rm codim}_{G_m}\Sing \mathcal{F}_m\ge2$ as $E_m$ is locally free \cite[Ch. II, Cor.
+1.1.9]{OSS}. Furthermore, since $G_m$ is a homogeneous space, $\mathcal{H}_m^*:=\{C\in
+\mathcal{H}_m\ |\ C\cap{\rm Sing}\mathcal{F}_m=\emptyset\}$ is a dense open subset of
+$\mathcal{H}_m$.
+
+Set $a_m:=\underset{C\in\mathcal{H}_m}\min\{\delta_A(E_m|_C\}$. Since
+$\delta_A(E_m|_C)$ is semicontinuous as a function of $C$, $\mathcal{H}_m^0:=\{C\in
+\mathcal{H}_m\ |\ \delta_A(E_m|_C)=a_m\}$ is a dense open subset of $\mathcal{H}_m$,
+and, for any projective line $l\subset G_1$,
+\begin{equation}\label{dA(E1)}
+\delta_A(E_1|_l)=\delta_A(E_m|_{C_1})\ge a_m,
+\end{equation}
+where $C_1:=\tilde{\phi}_m(l)\in\mathcal{H}_m$. Now assume that
+$c_1(\mathcal{F}_m)\ge1$ and consider any curve
+$C\in\mathcal{H}_m^*\cap\mathcal{H}_m^0$ such that $\delta_A(E_m|_C)=a_m$. Since
+$\mathcal{F}_m|_C$ is a locally free subsheaf of $E_m|_C$ with
+$c_1(\mathcal{F}_m)\ge1$, it follows that $a_m=\delta_A(E_m|_C)\ge
+\delta_A(\mathcal{F}_m|_C)\ge
+c_1(\mathcal{F}_m|C)/\mathbf{r}=\tilde{d}_mc_1(\mathcal{F}_m)/\mathbf{r}\ge
+\tilde{d}_m/\mathbf{r}$. Combining this with (\ref{dA(E1)}) we obtain
+$\delta_A(E_1|_l)\ge\tilde{d}_m/\mathbf{r}$, in particular,
+$$
+b_1:=\underset{l'\in\mathcal{H}_1}\max\{\delta_A(E_1|_{l'})\}\ge\tilde{d}_m/\mathbf{r}.
+$$
+If $\mathcal{F}_m$ exists for infinitely many values of $m$, the right-hand side of
+the last inequality tends to infinity for $m\to\infty$ as $\underset{m\to\infty}\lim
+\tilde{d}_m=\infty$, a contradiction.
+\end{proof}
+
+
+
+\begin{corollary}\label{bounded-jump}
+For sufficiently large $m$, \ $\delta_A^{gen}(E_m)\le\frac{1}{2}\mathbf{r}$.
+\end{corollary}
+
+Fix $x\in G_m$ and for any $d\in\mathbb{Z}_{>0}$ consider the locally closed subset
+$$
+B^0_a(x):=\{l\in \pi_1^{-1}(x)\ |\ \delta(E_m|_{l})=a\}
+$$
+of $\pi_1^{-1}(x)$. Let $B_a(x)$ be its closure in $\pi_1^{-1}(x)$. The semicontinuity
+of $\delta(E_m|_{l})$ implies $B^0_a(x)=B_a(x)\smallsetminus(\underset{a'>a}\cup
+B_{a'}(x)),\ \ a>0$. Denote
+$$
+\delta:=\delta_A(E_m),\ \ \ \kappa:=\kappa_A(E_m).
+$$
+Then
+\begin{equation}
+B_\delta(x)=B^0_\delta(x).
+\end{equation}
+Furthermore, put
+\begin{equation}\label{Bdk(x)}
+B^{\kappa}_\delta(x):=\{l\in B_{\delta}(x)\ |\ \kappa_A(E_m|_l)=\kappa\}
+\end{equation}
+and note that $B^{\kappa}_\delta(x)$ is a closed subset of $B_{\delta}(x)$. The
+following result is proved by A.Tyurin \cite[Ch. 2, \S2, Lemmas 3 and 4]{T}.
+\begin{lemma}\label{Tyurin0}
+If $B^{\kappa}_\delta(x)\ne\emptyset$, then ${\rm codim}_{\pi_1^{-1}(x)}B\le
+\mathbf{r}(\mathbf{r}-1)\delta(E_m)$ for any irreducible component $B$ of
+$B^{\kappa}_\delta(x)$.
+\end{lemma}
+Since $E_m$ is self-dual, it follows that $\delta(E_m)=2\delta$, hence Lemma
+\ref{Tyurin0} implies
+\begin{equation}\label{2codim}
+{\rm codim}_{\pi_1^{-1}(x)}B\le2\mathbf{r}(\mathbf{r}-1)\delta
+\end{equation}
+whenever $B^{\kappa}_\delta(x)\ne\emptyset$.
+
+Consider the closed subset
+$$
+W:=\{x\in G_m\ |\ B_{\delta_A^{gen}(E_m)}^0(x)=\emptyset\}
+$$
+and set
+$$
+G_m^*:=(G_m\smallsetminus W)\cap G^0_m,
+$$
+where $G^0_m$ was defined in (\ref{Gm0}) and (\ref{km etc}).
+
+Clearly, $W\cap l=\emptyset$ for a generic line $l\subset G_m$, hence $G_m^*$ is a
+dense open subset of $G_m$ and for any $x\in G_m^*$ there exists a line $l\subset G_m$
+through $x$ with $\delta_A(E_m|_l)=\delta_A^{gen}(E_m)$.
+
+We need one more result of Tyurin. Lemma 5 in \cite[Ch. 2, \S 2]{T} implies directly
+the following.
+\begin{corollary}\label{Tyurin2}
+There exists a polynomial $F\in\mathbb{Q}[x_1,x_2]$ such that, if $E$ is a self-dual
+vector bundle on $\mathbb{P}^3$ and $P$ is an arbitrary plane on $\mathbb{P}^3$, then
+$$
+\delta_A(E|_l)\le F(\delta^{\rm gen}(E),\chi(E|_{P}))
+$$
+for any line $l\subset\mathbb{P}^3$.
+\end{corollary}
+
+Now fix a point $x\in G_m$ and let $K_m(x)$ be the subvariety of $G_m$ filled by
+projective subspaces of maximal dimension in $G_m$ passing through $x$. It is well
+known that $K_m(x)$ is a cone over the cartesian product
+$\mathbb{P}^{i_m-1}\times\mathbb{P}^{n_m-i_m-1}$. Corollary \ref{Tyurin2} implies
+that, for any line $l\in p_1^{-1}(x)$,
+\begin{equation}\label{d1|l<poly}
+\delta_A(E_m|_{l})\le F(\delta^{\rm gen}(E_m),\chi(E_m|_{P}))
+\end{equation}
+for some polynomial $F\in\mathbb{Q}[x_1,x_2]$ and some projective plane plane
+$P\subset K_m(x)$. The class of $P$ in the Chow ring $A(G_m)$ coincides with the class
+of a plane contained in a projective subspace of family I or II. Hence, since
+$c_1(E_m)=0$, the Riemann-Roch theorem and Corollary \ref{cor limits} imply that
+$\chi(E|_P)$ coincides with $\mathbf{r}-\lambda_1$ or $\mathbf{r}-\lambda_2$.
+Substituting this, together with Corollary \ref{bounded-jump}, into (\ref{d1|l<poly})
+we see that there exists a constant ${\Delta}$ not depending on $m$ which bounds
+$\delta_A(E_{m}|_{l})$ from above for any line $l\in p_1^{-1}(x)$ and any $x\in
+G_m^*$.
+
+Passing from the sequence $(G_{m},E_{m})_{m\ge1}$ to its appropriate subsequence
+$(G_{m'},E_{m'})_{m'\ge1}$, and replacing the original sequence by this subsequence,
+we obtain in view of (\ref{dm}), (\ref{km})-(\ref{km etc}), Lemma \ref{Tyurin0} and
+(\ref{2codim}), the following result.
+\begin{proposition}\label{subseq}
+There exist constants ${\Delta}$, $K$ and $m_0\ge1$ such that for any $m\ge m_0$ there
+is a dense open subset $G^*_m$ of $G_m$
+such that the following statements hold for any $x\in G^*_m$.
+
+(1) $\delta_A(E_m|_{l})\le {\Delta},\ \ \kappa_A(E_m|_{l})\le K$ for any $l\in
+B_m(x)$, and
+$$
+\delta_A(E_m|_{l})={\Delta},\ \ \ \ \kappa_A(E_m|_{l})=K
+$$
+for some $l\in B_m(x)$. Therefore, $B^K_{{\Delta}}(x)\ne\emptyset$ and
+$$
+{\rm codim}_{\pi_1^{-1}(x)}B\le 2\mathbf{r}(\mathbf{r}-1){\Delta}
+$$
+for any irreducible component $B$ of $B^K_{\Delta}(x)$ according to Lemma
+\ref{Tyurin0}.
+
+(2) Set $B_{{\Delta}}^K(E_m)^*:=(p_{{{\Delta}},E_m}^K)^{-1}(G^*_m)$. Then
+$p_{{{\Delta}},E_m}^K:B_{{\Delta}}^K(E_m)^*\to G^*_m$ is a projective surjective
+morphism such that
+\begin{equation}\label{fibre of piDK}
+(p_{{{\Delta}},E_m}^K)^{-1}(x)=B_{{\Delta}}^K(x).
+\end{equation}
+\end{proposition}
+
+\end{sub}
+
+
+
+
+\vspace{0.5cm}
+
+\begin{sub}{\bf Final arguments.}\label{final}
+\rm It remains to prove the following.
+\begin{theorem}\label{subsheaf-F}
+In the framework of Proposition \ref{subseq} assume ${\Delta}>0$. Then there exists a
+subsheaf $\mathcal{F}_m$ of $E_m$ with $c_1(\mathcal{F}_m)>0$.
+\end{theorem}
+
+\begin{proof}
+
+Consider the relative Grassmannian $g:G(K,E_m)\to G_m$ with fibre
+$g^{-1}(x)=G(K,E_m|_x)$ for $x\in G_m$. Set $G(K,E_m)^*:=g^{-1}(G^*_m)$. According to
+Proposition \ref{subseq} for any point $(x,l)\in B_{{\Delta}}^K(E_m)^*$ there is a
+subbundle
+\begin{equation}\label{F(x,l)}
+F(x,l)\simeq\mathcal{O}_{\mathbb{P}^1}({\Delta})^K.
+\end{equation}
+ of $E|_l$. This yields a morphism
+\begin{equation}\label{morphism Phi}
+\Phi:B_{{\Delta}}^K(E_m)^*\to G(K,E_m)^*,(x,l)\mapsto F(x,l)|_x
+\end{equation}
+which clearly fits in the commutative diagram
+\begin{equation}\label{Phi fits}
+\xymatrix{
+B_{{\Delta}}^K(E_m)^*\ar[dr]_{p_{{{\Delta}},E_m}^K}\ar[r]^{\Phi} & G(K,E_m)^*\ar[d]^{g}\\
+& {\ \ G^*_m}\ .}
+\end{equation}
+
+In the rest of the proof we assume that $i_m\ge2$. The remaining case is the case of a
+twisted ind-projective space, and we leave it as an exercise to the reader. Note that
+(as $i_m\ge2$) $G_m=G(i_m,V^{n_m})$ fits into the diagram (\ref{G(i+1,V)}) for
+$V=V^{n_m},\ i=i_m-1$, and set $p:=p_{i_m-1},\ q:=q_{i_m-1}$:
+\begin{equation}\label{diagram(10)}
+G_m\overset{p}\leftarrow Fl(i_m-1,i_m,V^{n_m})\overset{q}\rightarrow G(i_m-1,V^{n_m}).
+\end{equation}
+Furthermore, fix a subspace $V^{n_m-1}_0$ in $V^{n_m}$ and put
+$Y:=q^{-1}(G(i_m-1,V^{n_m-1}_0))$. The projection $\sigma:=p|_Y:Y\to G_m$ is nothing
+but a blow-up of $G_m$ with center at the subvariety
+\begin{equation}\label{centerZ}
+Z_0:=G(i_m,V^{n_m-1}_0),\ \ \ \ {\rm codim}_{G_m}Z_0=i_m\ge2.
+\end{equation}
+Fix an arbitrary point $x\in G_m^*\smallsetminus Z_0$ and consider the projective
+subspace
+\begin{equation}\label{Px}
+\mathbb{P}^{n_m-i_m}_x:=\sigma (q^{-1}(q(\sigma^{-1}(x))))\subset G_m
+\end{equation}
+passing through $x$. Note that the fibre
+$B_{{\Delta}}^K(x)=(p_{\Delta,E_m}^K)^{-1}(x)$ of the projection
+$p_{\Delta,E_m}^K:B_{{\Delta}}^K(E_m)^*\to G_m^*$ lies in $p_1^{-1}(x)$. Next, setting
+$\mathbb{P}^{n_m-i_m-1}(x):=\{\mathbb{P}^{i_m}\ {\rm belongs\ to\ family}\ {\rm I}\ |\
+x\in\mathbb{P}^{i_m}\}$ and $\mathbb{P}^{i_m-1}(x):=\{\mathbb{P}^{n_m-i_m}\ {\rm
+belongs\ to\ family}\ {\rm II}\ |\ x\in\mathbb{P}^{n_m-i_m}\}$ we obtain the
+isomorphism
+$$
+\mathbb{P}^{i_m-1}(x)\times\mathbb{P}^{n_m-i_m-1}(x)\overset{\simeq}\to
+\pi_1^{-1}(x),\ (\mathbb{P}^{n_m-i_m},\mathbb{P}^{i_m})\mapsto
+l=\mathbb{P}^{n_m-i_m}\cap\mathbb{P}^{i_m}.
+$$
+Consider the projections
+$$
+\mathbb{P}^{n_m-i_m-1}(x)\overset{pr_1}\leftarrow
+\pi_1^{-1}(x)\overset{pr_2}\rightarrow \mathbb{P}^{i_m-1}(x).
+$$
+By the construction of $\sigma$, the base $\mathbb{P}^{n_m-i_m-1}_x$ of the family of
+lines through $x$ lying in the subspace $\mathbb{P}^{n_m-i_m}_x$ is a fibre of the
+projection $\pi_1^{-1}(x)\overset{pr_2}\rightarrow\mathbb{P}^{i_m-1}(x)$ over a
+certain point determined by $x$.
+
+Consider the closed subset
+\begin{equation}\label{fibre subset}
+B^K_{{\Delta},x}:=B_{{\Delta}}^K(x)\cap\mathbb{P}^{n_m-i_m-1}_x
+\end{equation}
+in $\mathbb{P}^{n_m-i_m-1}_x$. Proposition \ref{subseq}  implies
+\begin{equation}\label{codim bounded 1}
+{\rm codim}_{\mathbb{P}^{n_m-i_m-1}_x}X\le2\mathbf{r}(\mathbf{r}-1){{\Delta}}
+\end{equation}
+for any fixed irreducible component $X$ of $B^K_{{{\Delta}},x}.$ Set
+\begin{equation}\label{N=}
+N:=2\mathbf{r}(\mathbf{r}-1){{\Delta}}+1.
+\end{equation}
+Take an arbitrary projective subspace $\mathbb{P}^{N-1}\subset\mathbb{P}^{n_m-i_m-1}_x$ and let
+$\mathbb{P}^{N}\subset\mathbb{P}^{n_m-i_m}_x$ be the subspace filled by the lines from
+$\mathbb{P}^{N-1}$. Put $E^0:=E_m|_{\mathbb{P}^{N}}$. Then $\delta_A(E^0)={\Delta}$,
+$\kappa_A(E^0)=K$ by Proposition \ref{subseq} and $c_2(E^0)=\lambda_1$ by
+(\ref{restrII}). In addition, comparing (\ref{2 Bkd(x)}) with (\ref{fibre subset}) and
+(\ref{fibre of piDK}), we obtain
+$$
+B^K_{{\Delta}}(E^0,x,\mathbb{P}^{N-1})=B^K_{{\Delta},x}\cap\mathbb{P}^{N-1},
+$$
+and (\ref{codim bounded 1}) and (\ref{N=}) imply that
+$$
+\deg B^K_{{\Delta}}(E^0,x,\mathbb{P}^{N-1})=\deg B^K_{{\Delta},x}
+$$
+for a generic choice of the subspace $\mathbb{P}^{N-1}$ in $\mathbb{P}^{n_m-i_m-1}_x$.
+Applying Theorem \ref{restricted degree} to the vector bundle $E^0$ with
+$\delta_A(E^0)={\Delta}$ and $\kappa_A(E^0)=K$, we obtain $\deg
+B^{K}_{{\Delta}}(E^0,x,\mathbb{P}^{N-1})\le d$, where $d$ is a constant not depending
+on $m$. We thus obtain
+\begin{equation}\label{C again}
+\deg B^K_{{\Delta},x}\le d.
+\end{equation}
+
+Suppose next that $m$ is large enough so that the estimate (\ref{codim bounded 1}) for
+any irreducible component of $B^K_{{{\Delta}},x}$ together with the condition
+$\underset{m\to\infty}\lim(n_m-i_m)=\infty$ ensure that $B^K_{{{\Delta}},x}$ is
+connected. Then $\deg X\le d$ by (\ref{C again}).
+We can assume without loss of generality that $\mathbb{P}^{n_m-i_m-1}_x=\Span X$.
+Therefore, Theorem \ref{join xx' III} applied to $X$ implies that the following
+statement holds. For large enough $m$ any two points of $X$ can be joined by a chain
+of subspaces $\mathbb{P}^{\mathbf{k}_0}\subset X$, where $\mathbf{k}_0>\dim
+G(K,E_m|_x)$. Thus all such subspaces $\mathbb{P}^{\mathbf{k}_0}$ are mapped by $\Phi$
+into the same point. Consequently $\Phi(X)$ is a point, and since $B^K_{{{\Delta}},x}$
+is connected, $\Phi(B^K_{{\Delta},x})=\Phi(X)$. This defines a morphism
+$$
+G^*_m\smallsetminus Z_0\to G(K,E_m|_x), x\mapsto\Phi(B^K_{{\Delta},x}),
+$$
+hence a subbundle $\mathcal{F}'_m$ of $E_m|_{G^*_m\smallsetminus Z_0}$.
+
+
+The following well-known construction shows that $\mathcal{F}'_m$ extends to a
+subsheaf $\mathcal{F}_m$ of $E_m$. The epimorphism of locally free sheaves
+$E_m^\vee|_{G^*_m\smallsetminus Z_0}\twoheadrightarrow (\mathcal{F}'_m)^\vee$ defines
+the following composition of embeddings
+$\zeta:\mathbb{P}(\mathcal{F}'_m)\hookrightarrow \mathbb{P}(E_m|_{G^*_m\smallsetminus
+Z_0})\hookrightarrow \mathbb{P}(E_m)$. Let $U$ be the closure of
+$\zeta(\mathbb{P}(\mathcal{F}'_m))$ in $\mathbb{P}(E_m)$. Set
+$A:=\mathcal{O}_{\mathbb{P}(E_m)/G_m}(1)$ and let $\theta:\mathbb{P}(E_m)\to G_m$ be
+the structure morphism. Applying the functor $R^\cdot\theta_*$ to an exact triple
+$0\to\mathcal{I}_{U,\mathbb{P}(E_m)}\otimes A\to A\to A|_U\to0$ we obtain the exact
+sequence $E_m^\vee\overset{\epsilon}\to\theta_*(A|_U)\to
+R^1\theta_*(\mathcal{I}_{U,\mathbb{P}(E_m)}\otimes A)$. The morphism
+$\epsilon|_{G^*_m\smallsetminus Z_0}$ is an epimorphism, hence
+$\epsilon^\vee:\mathcal{F}_m:=(\theta_*(A|_U))^\vee\to E_m$ is a monomorphim and
+$\mathcal{F}_m|_{G^*_m\smallsetminus Z_0}\simeq \mathcal{F}'_m$.
+
+It remains to show that $c_1(\mathcal{F}_m)>0$. By (\ref{F(x,l)}), if $x\in
+G^*_m\smallsetminus Z_0$, for any point $(x,l_0)\in B^K_{{\Delta},x}$ we have a
+subbundle $\mathcal{F}(x,l_0)\simeq\mathcal{O}_{\mathbb{P}^1}({\Delta})^K$ of
+$E_m|_l$. Hence $c_1(\mathcal{F}(x,l_0))>0$ as ${\Delta}>0$. The line $l_0$ lies in
+the projective subspace $\mathbb{P}^{n_m-i_m}_x$ of $G_m$ defined in (\ref{Px}), so
+the definition (\ref{fibre subset}) shows that $(y,l_0)\in B^K_{{\Delta},y}$ for any
+$y$ in the dense open subset $U:=l_0\cap(G^*_m\smallsetminus Z_0)$ of $l_0$. Therefore
+$\mathcal{F}(x,l_0)|_U=\mathcal{F}_m|_U$, and consequently $\mathcal{F}(x,l_0)$ is
+isomorphic to a locally free quotient of $\mathcal{F}_m|_{l_0}$, i.e.
+$\mathcal{F}(x,l_0)\simeq(\mathcal{F}_m|_{l_0})/{\rm Torsion}(\mathcal{F}_m|_{l_0})$.
+
+Since $\mathcal{F}_m$ is torsion free being a subsheaf of $E_m$, it follows that
+$\codim_{G_m}\Sing \mathcal{F}_m\ge2$, so that  $\codim_{Fl_m}\ \pi_2(\pi_1^{-1}(\Sing
+\mathcal{F}_m))\ge1$. We thus can find a smooth affine curve $C\subset Fl_m$ with a
+marked point $c\in C$ such that $\pi_1(\pi_2^{-1}(c))=l_0$ and
+$(C\smallsetminus\{c\})\subset(Fl_m\smallsetminus\pi_2(\pi_1^{-1}(\Sing
+\mathcal{F}_m)))$. Consider the ruled surface $S:=\pi_2^{-1}(C)\overset{\pi_2}\to C$
+and set $\mathcal{F}_S:=(\pi_1^*\mathcal{F}_m|_S)/{\rm
+Torsion}(\pi_1^*\mathcal{F}_m|_S),\ \tilde{l}_0:=\pi_2^{-1}(c),\
+\mathcal{F}_{\tilde{l}_0}:=(\mathcal{F}_S|_{\tilde{l}_0})/{\rm
+Torsion}(\mathcal{F}_S|_{\tilde{l}_0}),\ \tilde{l}_t:=\pi_2^{-1}(t),\ t\in
+C\smallsetminus\{c\}$. The condition $\pi_1(\pi_2^{-1}(c))=l_0$ implies that
+$\pi_1|_{\tilde{l}_0}:\tilde{l}_0\to l_0$ is an isomorphism,  hence
+$(\pi_1|_{\tilde{l}_0})^*\mathcal{F}(x,l_0)\simeq \mathcal{F}_{\tilde{l}_0}$.
+Consequently,
+\begin{equation}\label{c_1=A}
+c_1(\mathcal{F}(x,l_0))=c_1(\mathcal{F}_{\tilde{l}_0}).
+\end{equation}
+Furthermore, as $\mathcal{F}_m|_{\pi_1(\tilde{l}_t)}$ is locally free for $t\in
+C\smallsetminus\{c\}$ by the inclusion
+$(C\smallsetminus\{c\})\subset(Fl_m\smallsetminus\pi_2(\pi_1^{-1}(\Sing
+\mathcal{F}_m)))$, it follows that
+\begin{equation}\label{c_1=B}
+c_1(\mathcal{F}_S|_{\tilde{l}_t})=c_1(\mathcal{F}_m),\ \ \ \ t\in
+C\smallsetminus\{c\}.
+\end{equation}
+
+We claim that
+\begin{equation}\label{c_1 le}
+c_1(\mathcal{F}_{\tilde{l}_0})\le c_1(\mathcal{F}_S|_{\tilde{l}_t}),\ \ \ \ t\in
+C\smallsetminus\{c\}.
+\end{equation}
+Indeed, as $\mathcal{F}_S$ is torsion free, using a filtration of $\mathcal{F}_S$ with
+rank-1 torsion free consequtive quotients, and removing, if necessary, a finite number
+of points from $C\smallsetminus\{c\}$, we reduce the proof of (\ref{c_1 le}) to the
+case when $\rk \mathcal{F}_S=1$. Here $\mathcal{F}_S\simeq\mathcal{I}_{Y,S}\otimes L$
+for some line bundle $L$ on $S$ and for some subscheme $Y$ of $S$ of dimension $\le0$.
+Consider the scheme $Y_0:=Y\cap\tilde{l}_0$ of length $\chi(\mathcal{O}_{Y_0})\ge0$
+with support on $\tilde{l}_0$. Then $\mathcal{F}_{\tilde{l}_0}\simeq
+L|_{\tilde{l}_0}(-\chi(\mathcal{O}_{Y_0}))$, hence
+$c_1(\mathcal{F}_{\tilde{l}_0})=c_1(L|_{\tilde{l}_0})-\chi(\mathcal{O}_{Y_0})=
+c_1(L|_{\tilde{l}_t})-\chi(\mathcal{O}_{Y_0})=c_1(\mathcal{F}_S|_{\tilde{l}_t})-\chi(\mathcal{O}_{Y_0})\le
+c_1(\mathcal{F}_S|_{\tilde{l}_t}),\ t\in C\smallsetminus\{c\}$.
+
+Finally, (\ref{c_1=A})-(\ref{c_1 le}) imply $c_1(\mathcal{F}_m)\ge
+c_1(\mathcal{F}(x,l_0))>0$.
+\end{proof}
+
+\begin{corollary}
+For all $m>0$ $E_m$ is a trivial vector bundle on $G_m$, and Theorem \ref{main}
+follows.
+\end{corollary}
+\begin{proof} If for sufficiently large $m$, $\Delta>0$, then Theorem \ref{subsheaf-F} contradicts
+to Lemma \ref{No-subsheaves}. Hence $\Delta=0$. We are going to show now that this
+implies the triviality of $E_m$.
+
+Consider diagram (\ref{diagram(10)}). Note that for any $x\in G_m$ the projective
+subspace $\mathbb{P}^{i_m-1}(x)$ of $G(i_m-1,V^{n_m})$ introduced in the proof of
+Theorem \ref{subsheaf-F} equals $q(p^{-1}(x))$. Similarly,
+$\mathbb{P}^{n_m-i_m}(y):=p(q^{-1}(y))$ is a projective subspace of $G_m$ for $y\in
+G(i_m-1,V^{n_m})$. Moreover, it is easy to see that the cone
+$K(x):=\underset{y\in\mathbb{P}^{i_m-1}(x)}\cup\mathbb{P}^{n_m-i_m}(y)$ with vertex at
+$x$, considered as a reduced subscheme of $G_m$, has the same Zariski tangent space at
+$x$ as $G_m$:
+\begin{equation}\label{tangent}
+T_xK(x)=T_xG_m.
+\end{equation}
+Since $\Delta=0$, in the notations of the proof of Theorem \ref{subsheaf-F} we have
+$B_{{\Delta}}^K(x)=\pi^{-1}(x)$ and $K=\mathbf{r}$ for any $x\in G_m^*$, i.e. $E_m|_l$
+is trivial for any projective line $l\subset G_m$ passing through $x$. This implies
+that $E_m|_{\mathbb{P}^{n_m-i_m}(y)}$ is trivial for any point
+$y\in\mathbb{P}^{i_m-1}(x)$ (see, e.g., \cite[Ch. I, Thm. 3.2.1]{OSS}), and hence
+$\mathbb{P}^{n_m-i_m}(y)\subset G_m^*$.
+
+We claim that $G^*_m=G_m$.  Indeed, if $G^*_m\ne G_m$, then for any
+$x\in(G_m\smallsetminus G^*_m)$ and any $y\in\mathbb{P}^{i_m-1}(x)$ we have
+$\mathbb{P}^{n_m-i_m}(y)\subset(G_m\smallsetminus G^*_m)$. Hence
+$K(x)\subset(G_m\smallsetminus G^*_m)$, and by (\ref{tangent}), $T_xG_m=T_xK(x)\subset
+T_x(G_m\smallsetminus G^*_m)$, where we consider $(G_m\smallsetminus G^*_m)$ as a
+reduced subscheme of $G_m$. Whence $(G_m\smallsetminus G^*_m)=G_m$, contrary to the
+fact that $G^*_m$ is a dense open subset of $G_m$.
+
+We have shown that $G^*_m=G_m$ for sufficiently large $m$. As $\Delta=0$, this means
+that $E_m|_l$ is trivial for any line $l$ in $G_m$. By \cite[Prop. 1.4.1]{PT} this is
+sufficient to conclude that $E_m$ is trivial for large enough $m$, and hence for all
+$m>0$.
+\end{proof}
+
+\end{sub}
+
+
+
+
+\vspace{2cm}
+
+\begin{thebibliography}{MMMMM}
+
+\bibitem[AK]{AK} A. Altman, S. Kleiman. {\it Foundations of the theory of Fano schemes.}
+Compos. math. $\mathbf{34}$ (1977), 3-47.
+
+\bibitem[BM]{BM}R. Braun, S. Muller-Stach. {\it Effective bounds for Nori's connectivity theorem}.
+In: Higher dimensional complex varieties, Proc. Int. Conf. Trento, Italy, Walter de
+Gruyter 1996, pp. 83–-88.
+
+\bibitem[BV]{BV} W. Barth, A. Van de Ven. {\it On the geometry in codimension 2 in Grassmann
+manifolds.} In: Lecture Notes in Math. 412, Springer-Verlag 1974, pp. 1-35.
+
+\bibitem[CT]{CT} I. Coanda, G. Trautmann. {\it The splitting criterion of Kempf and the Babylonian
+tower theorem}. Communications of Algebra 34 (2006), 2485-2488.
+%
+%\bibitem[DiP]{DiP} I. Dimitrov, I. Penkov. {\it Ind-varieties of generalized flags as homogeneous
+%spaces for classical ind-groups}. IMRN  No. 55 (2004), 2935-2953.
+
+\bibitem[DP]{DP} J. Donin, I. Penkov. {\it Finite rank vector bundles on inductive limits of
+grassmannians}. IMRN No. 34 (2003), 1871-1887.
+
+\bibitem[E]{E} D. Eisenbud. {\it Commutative algebra with a view toward algebraic geometry}.
+Springer-Verlag, New York, 1995.
+
+\bibitem[F]{F} W. Fulton. {\it Intersection Theory.} Springer-Verlag, Berlin, 1998.
+
+\bibitem[H]{H} R. Hartshorne. {\it Algebraic Geometry.} Springer-Verlag, New York, 1977.
+
+\bibitem[HL]{HL} D. Huybrechts, M. Lehn. {\it The Geometry of Moduli Spaces of Sheaves}.
+Aspects of Math., Vol. E 31, Friedr. Vieweg \&\ Sohn, Braunschweig, 1997.
+
+\bibitem[L]{L} R. Lazarsfeld. {\it Positivity in algebraic geometry,} I–-II.  Ergebnisse der
+Mathematik und ihrer Grenzgebiete. 3. Folge, Springer-Verlag, Berlin, 2004.
+
+\bibitem[OSS]{OSS}{ C. Okonek, M. Schneider, H. Spindler.} {\it Vector Bundles on Complex
+Projective Spaces.} Birkh\"auser, 1980.
+
+\bibitem[PT]{PT} I. Penkov, A. S. Tikhomirov. {\it Rank 2 vector bundles on ind-Grassmannians}.
+Manin's Festschrift, in: Progress in Mathematics 269, Birkhaeuser Boston, 2010, pp. 555-572.
+
+\bibitem[S1]{S1} E. Sato. {\it On the decomposability of infinitely extendable vector bundles on
+projective spaces and Grassmann varieties}.  J. Math. Kyoto Univ. $\mathbf{17}$
+(1977), 127-150.
+
+\bibitem[S2]{S2} E. Sato. {\it On infinitely extendable vector bundles on $G/P$.} J. Math. Kyoto
+Univ. $\mathbf{19}$ (1979), 171-189.
+
+\bibitem[St]{St} S. A. Str\o mme. {\it On parametrized rational curves in Grassmann varieties}.
+In: Lecture Notes in Math. 1266,  Springer-Verlag 1987, pp. 251-272.
+
+\bibitem[T]{T} A. N. Tyurin. {\it Vector bundles of finite rank over infinite varieties.} Math.
+USSR Izvestija $\mathbf{10}$ (1976), 1187-1204.
+
+\end{thebibliography}
+
+
+
+
+\end{document}

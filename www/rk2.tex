@@ -1,0 +1,1761 @@
+\documentclass[12pt]{amsart}
+\usepackage{TheBigPreamble}
+
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+
+\theoremstyle{plain} % for future references
+\theorembodyfont{\sl}
+
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{amplification}[definition]{Amplification}
+\newtheorem{criterion}[definition]{Criterion}
+\newtheorem{algorithm}[definition]{Algorithm}
+\newtheorem{claim}[definition]{Claim} %\renewcommand{\theclaim}{}
+%\newtheorem{conjecture}[definition]{Conjecture}
+
+\newcommand{\Ker}{\mathrm{ker}}
+\newcommand{\End}{\mathrm{End}}
+\renewcommand{\Re}{\mathrm{Re }}
+\newcommand{\im}{\mathrm{im }}
+\newcommand{\ann}{\mathrm{Ann}}
+\newcommand{\Ann}{\mathrm{Ann}}
+\newcommand{\ad}{\mathrm{ad}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\rk}{\mathrm{rk }}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\GL}{{GL}}
+\newcommand{\id}{\mathrm{id}}
+\renewcommand{\sl}{\mathrm{sl}}
+\newcommand{\gl}{\mathrm{gl}}
+\renewcommand{\sp}{\mathrm{sp}}
+\newcommand{\so}{\mathrm{so}}
+\newcommand{\sign}{\mathrm{sign}}
+\renewcommand{\span}{\mathrm{span}}
+
+\newcommand {\ZZ} {\mathbb {Z}}
+\newcommand {\CC} {\mathbb {C}}
+\newcommand {\EE} {\mathbf {E}}
+\newcommand {\RR} {\mathbb {R}}
+\newcommand {\PP} {\mathbb {P}}
+\newcommand {\HH} {\mathcal {H}}
+\newcommand {\NN} {\mathbb {N}}
+\renewcommand{\ss}{\mathfrak{s}}
+\newcommand{\kk}{\mathfrak{k}}
+\renewcommand{\aa}{\mathfrak{a}}
+\newcommand{\hh}{\mathfrak{h}}
+\renewcommand{\gg}{\mathfrak{g}}
+\newcommand{\bb}{\mathfrak{b}}
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand {\BB} {\mathfrak {B}}
+\newcommand {\DD} {\mathscr {D}}
+\newcommand {\OO} {\mathscr {O}}
+\newcommand {\MM} {\mathscr {M}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\epsilon}
+\newcommand{\del}{\partial}
+\renewcommand{\mod}{\mathrm{mod~}}
+
+\newcommand{\doublebrace}[4]{\left\{\begin{array}{ll}#1 & #2 \\ #3 & #4\end{array}\right.}
+\newcommand{\triplebrace}[6]{\left\{\begin{array}{ll}#1 & #2 \\ #3 & #4\\ #5 & #6\end{array}\right.}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\threehalfs}{\frac{3}{2}}
+%\newcommand {\eqdef} {\stackrel {def}{=}}
+\newcommand {\eqdef} {:=}
+\newcommand {\eqdefrev} {=:}
+
+\newcommand{\refle}[1]{Lemma \ref{#1}}
+\newcommand{\refth}[1]{Theorem \ref{#1}}
+\newcommand{\refcor}[1]{Corollary \ref{#1}}
+\newcommand{\refse}[1]{Section~ \ref{#1}}
+\newcommand{\refsec}[1]{Section~ \ref{#1}}
+\newcommand{\refeq}[1]{(\ref{#1})}
+%\theorembodyfont{\rm}
+%-----------------document specific commands----------------%
+\newcommand {\univ} {U}
+\newcommand {\gkdim} {\mathrm{GKdim }}
+\newcommand {\gkm} {$(\gg,\kk)$-module}
+\newcommand {\kkm} {$(\kk,\kk)$-module}
+\newcommand{\Fou}{\mathrm{Fou}}
+%---------------------------------%
+
+
+\begin{document}
+
+\bibliographystyle{amsplain}
+
+\ifx\useHugeSize\undefined
+\else
+\Huge
+\fi
+
+\relax
+
+\title{ Bounded Simple $\left(\mathfrak g,\sl(2)\right)$-modules for $\rk \mathfrak g=2$}
+
+\author{Ivan Penkov}
+\address{
+Jacobs University Bremen \\
+School of Engineering and Science,
+Campus Ring 1,
+28759 Bremen, Germany}
+\email{i.penkov@jacobs-university.de}
+
+\author{Vera Serganova}
+\address{Department of Mathematics, University of California Berkeley, Berkeley
+  CA 94720, USA}
+\email{serganov@math.berkeley.edu}
+
+\subjclass[2000]{Primary 17B10, Secondary 22E46}
+\begin{abstract}
+This paper is a continuation of our work [PS2] in which we prove some general results about simple $\left(\mathfrak g, \mathfrak k \right)$-modules with bounded $\mathfrak k$-multiplicities (or bounded simple $\left(\mathfrak g, \mathfrak k \right)$-modules). In the absence of a classification of bounded simple $\left(\mathfrak g, \mathfrak k \right)$-modules in general, it is important to understand some special cases as best as possible. Here we consider the case $\mathfrak k=\sl(2)$. It turns out that in order for an infinite-dimensional bounded simple $\left(\mathfrak g, \sl(2) \right)$-module to exist, $\mathfrak g$ must have rank 2, and, up to conjugation, there are five possible embeddings $\sl(2)\rightarrow \mathfrak g$ which yield infinite-dimensional bounded simple $\left(\mathfrak g, \sl(2) \right)$-modules.
+
+Our main result is a detailed description of the bounded simple $\left(\mathfrak g, \sl(2)\right)$-modules in all five cases. When $\gg \simeq \sl(2)\oplus\sl(2)$ we reproduce in modern terms some classical results from the 1940's. When $\gg \simeq \sl(3)$ and $\sl(2)$ is a principal subalgebra, bounded simple $\left( \sl(3), \sl(2)\right)$-modules are Harish-Chandra modules and our result singles out all Harish-Chandra modules with bounded $\sl(2)$-multiplicities. A case where the result is entirely new is the case of a principal $\sl(2)$-subalgebra of $\gg=\sp(4)$. 
+
+
+\end{abstract}
+\maketitle
+\section{Introduction}
+
+The classification of simple Harish-Chandra modules is a celebrated result and there is an extensive literature on the general topic of Harish-Chandra modules, see for instance [KV] and the references therein. Algebraically, Harish-Chandra modules are $\left(\gg, \kk \right)$-modules for a symmetric subalgebra $\kk$ of a semisimple Lie algebra $\gg$, and in the last decade an intense exploration of more general $(\gg, \kk)$-modules for not necessarily symmetric subalgebras $\kk$ has begun, [PS1],[PSZ], [PZ1], [PZ2], [PZ3]. A most notable result in this direction is the classification of simple $(\gg, \kk)$-modules of finite type and a generic minimal $\kk$-type carried out in [PZ2]. Nevertheless, the classification problem for $(\gg, \kk)$-modules of finite type with an arbitrary minimal $\kk$-type  is still open even when $\rk \gg=2$ and $\rk\kk=1$.
+
+In the recent paper [PS2] we concentrated on the interesting subclass of bounded $(\gg, \kk)$-modules (the definition see in Section 1 below) and proved some general results regarding the existence of such modules.  In particular, we established sufficient and necessary conditions on a reductive in $\gg$ subalgebra $\kk$ for the existence of a simple infinite-dimensional bounded $(\gg, \kk)$-module. If $\kk \simeq \sl(2)$, simple $(\gg, \sl(2))$-modules of finite type exist for any simple $\gg$, see for instance [PSZ] or [PZ3]. It turns out however, that bounded $(\gg, \sl(2))$-modules are very special and exist only for $\rk\gg=2$. The classification of such modules is rather intriguing as they are the "smallest", and thus highly non-generic, $(\gg,\sl(2))$-modules.
+
+This classification is carried out in the present paper. We show first that, up to conjugation, there are precisely five possibilities for embedding $\sl(2)$ into a Lie algebra of $\gg$ of rank 2 so that bounded infinite-dimensional $(\gg, \sl(2))$-modules exist:
+ $\sl(2)$ as the diagonal subalgebra of $\sl(2)\oplus\sl(2)$, $\sl(2)$ as a root subalgebra or a principal $\sl(2)$ subalgebra of $\sl(3)$, and $\sl(2)$ as a root subalgebra corresponding to a short root or as a principal subalgebra of $\sp(4)$. 
+
+We then give a classification and a detailed description (we compute characters and minimal $\sl(2)$-types) of all bounded $(\gg, \sl(2))$-modules. In the case when $\gg\simeq \sl(2)\oplus\sl(2)$ our results are just a modern reproduction of classical results, in all other cases they are new. The most interesting new case is that of a principal $\sl(2)$-subalgebra of $\sp(4)$.
+
+
+\textbf{Acknowledgement.} This paper has been written in close contact
+with Gregg Zuckerman who has supported us on several occasions with
+valuable advice. David Vogan, Jr. has also generously shared his
+knowledge of Harish-Chandra modules with us. We thank T. Milev for
+reading the manuscript carefully and checking some of the
+calculations. Finally, we acknowledge the hospitality and support of the Max Planck Institute for Mathematics in Bonn.
+
+\section{General definitions and preliminary results}
+
+The ground field is $\CC$. 
+
+Let $\gg$ be a semisimple (finite-dimensional) Lie algebra and
+$\kk\subset\gg$ be a reductive in $\gg$ subalgebra. $U(\cdotp)$ stands
+for enveloping algebra, $U=U(\gg)$ and $Z_U$ is the center of $U$. A $(\gg, \kk)$\textit{-module}  $M$ is a $\gg$-module  $M$ on which $\kk$ acts locally finitely, i.e. $\dim U(\kk) \cdotp m <\infty$, $\forall m\in M$. A $(\gg, \kk)$-module $M$ has \textit{finite type over} $\kk$ if the Jordan--H\"{o}lder multiplicity of any fixed simple finite-dimensional $\kk$-module $V$ (such a $V$ is called a $\kk$\textit{-type}) in arbitrary finite-dimensional $\kk$-submodules of $M$ is bounded. A $(\gg, \kk)$-module is \textit{bounded} if the above multiplicities are bounded by a constant not depending on the $\kk$-type $V$. A reductive in $\gg$ subalgebra $\kk\subset \gg$ is \textit{bounded} if there exists an infinite-dimensional simple bounded $(\gg, \kk)$-module $M$.
+A bounded subalgebra $\kk\subset\gg$ is \textit{strictly bounded} if there is a simple bounded $(\gg,\kk)$-module $M$ on which no simple ideal of $\gg$ acts locally finitely. The following necessary conditions on a subalgebra $\kk$ to be bounded, or strictly bounded, are proved in [PS2] (Theorem 4.1 and Corollary 4.6).
+
+\begin{theorem}\label{1}
+ Let $\kk$ be a bounded reductive subalgebra of a semisimple Lie algebra $\displaystyle \gg=\oplus_i \gg_i$ ($\gg_i$ being the simple ideals of $\gg$).
+
+
+a) If $M$ is a simple bounded $(\gg, \kk)$-module and the algebra of $\kk$-invariants $\gg_{i_0}^{\kk}$ is not abelian for some $i_0$, then $M \simeq M_{i_0}\otimes \overline{M_{i_0}}$, where $M_{i_0}$ is a simple finite-dimensional $\gg_{i_0}^{\kk}$-module and $\overline{M_{i_0}}$ is a simple bounded $(\oplus_{i\neq {i_0}}\gg_i,(\oplus_{i\neq {i_0}}\gg_i)\bigcap\kk)$-module.
+
+
+b) If $r_\gg$ is the half-dimension of a nilpotent orbit of minimal positive dimension in $\gg$, then
+\begin{equation}\label{1}
+r_{\gg}\leq b_{\kk},
+\end{equation}
+where $b_\kk$ is the dimension of a Borel subalgebra of $\gg$.
+
+
+
+c) If $\kk$ is strictly bounded, then
+
+$$\sum_i r_{\gg_i}\leq b_{\kk}.$$
+
+
+
+\end{theorem}
+
+In [PS2] we also established the following sufficient condition for a reductive in $\gg$ subalgebra $\kk\subset\gg$ to be bounded. Recall that a finite-dimensional module $W$ over an algebraic group $H$ is \textit{spherical} if a Borel subgroup $B_{H}$ has an open orbit in $W$. 
+
+\begin{theorem}\label{2}
+Let $K\subset G\subset GL(V)$ be a chain of reductive algebraic
+groups, and let $V'\subset V$ be a 1-dimensional space whose
+stabilizers in $G$ and $K$ are parabolic subgroups $P\subset G$ and
+$Q\subset K$. Then, if $(V')^*\otimes(\gg\cdot V'/\kk\cdot V')$ is a
+spherical module over a reductive part $Q_0$ of $Q$, $\kk$ is a bounded subalgebra of $\gg$.
+\end{theorem} 
+
+
+\section{Bounded subalgebras of a rank-2 Lie Algebra}\label{secRank2Case}
+
+Our main interest in this paper are infinite-dimensional bounded $(\gg, \kk)$-modules for $\kk\simeq\sl(2)$. \refth{1} implies that if $\kk\simeq\sl(2)$ is a strictly bounded subalgebra of $\gg=\oplus_i \gg_{i}$, then $\sum_i r_{\gg_i}\leq 2$. This is easily seen to imply $\rk \gg=2$. Therefore, in the rest of the paper we restrict ourselves to the case when $\rk\gg=2$. The following theorem classifies more generally all reductive in $\gg$ bounded subalgebras $\kk\subset\gg$ under the assumption that $\rk\gg=2$.
+
+
+\begin{theorem}\label{thPairsList}
+Let $\gg$ be a semisimple Lie algebra of rank 2 and $\kk\subset\gg$ be a reductive in $\gg$ bounded subalgebra. The following is a complete list of such pairs up to conjugation by inner automorphisms.
+\begin{itemize}
+\item[(1)] $\gg\simeq\sl(2)\oplus\sl(2)$: $\kk\simeq \gl(2)$ is a direct sum of a simple ideal and a Cartan subalgebra of the other simple ideal,
+$\kk\simeq\sl(2)$ is a
+  diagonal subalgebra, or $\kk$ is any non-trivial toral subalgebra;
+\item[(2)] $\gg\simeq\sl(3)$: $\kk$ is a root subalgebra isomorphic to $\sl(2)$ or $\gl(2)$, $\kk$ is a principal   $\sl(2)$-subalgebra, or $\kk$ is a Cartan subalgebra;
+\item[(3)] $\gg\simeq\sp(4)$: $\kk \simeq \sl(2)\oplus \sl(2)$ is the subalgebra generated by the long roots, $\kk \simeq \gl(2)$ is any root subalgebra, $\kk\simeq \sl(2)$ is a root   subalgebra corresponding to a short root, $\kk$ is a principal $\sl(2)$-subalgebra, or $\kk$ is a Cartan subalgebra;
+\item[(4)] $\gg\simeq G_2$: $\kk$ is any subalgebra containing a Cartan subalgebra, in this case $\kk\simeq \sl(3)$, $\kk\simeq\sl(2)\oplus\sl(2)$, or $\kk\simeq \gl(2)$.
+\end{itemize}
+\end{theorem}
+\begin{proof} The inequality \refeq{1} implies that a 1-dimensional toral subalgebra is not bounded in all cases but (1). In (1) any 1-dimensional
+  toral subalgebra $\mathfrak {t}$ is bounded as the outer tensor
+  product of a Verma module over a suitable ideal of $\gg$ with the
+  trivial module of the complementary ideal of $\gg$ is always bounded as a
+  $(\gg,\mathfrak t)$-module.
+
+Similarly, \refeq{1} implies that a Cartan subalgebra is not bounded in $G_2$. In all other cases it is well known to be bounded, see for instance \cite{F}.
+
+If $\kk \simeq \sl(2)$ then $\kk$ is not bounded in $G_2$ again by
+\refeq{1}, and if $\kk$ is an ideal of $\gg=\sl(2)\oplus \sl(2)$, it
+is not bounded by  \refth{1} a). Furthermore, if $\kk \simeq \sl(2)$ is
+a root subalgebra of $\gg=\sp(4)$ corresponding to a long root, then
+$\kk$ is not bounded by \refth{1} a). For the remaining five possible embeddings of $\sl(2)$ into a Lie algebra of rank 2, the image
+$\kk$ is always a bounded subalgebra. This follows for instance from
+the explicit description of bounded $(\gg,\kk)$-modules which we present in
+Sections 4-7 of this paper.
+
+For any embedding of $\gl(2)$ into a Lie algebra $\gg$ of rank 2,
+$\gg\ncong G_2$, any generalized Verma module, corresponding to
+a parabolic subalgebra $\pp$ which contains the image $\kk$ of
+$\gl(2)$, is a bounded $(\gg,\kk)$-module.
+
+Consider next the case $\kk\simeq \sl(2)\oplus \sl(2)\subset \gg$ for $\gg=\sp(4)$
+or $G_2$. Here the pair $(\gg,\kk)$ is symmetric. In
+\cite{V1} and \cite{V3} ladder $(\gg,\kk)$-modules are
+constructed. Fix a Borel subalgebra $\bb_{\kk}\subset \kk$. By
+definition, a ladder module $M$ has the $\kk$
+decomposition $M=\bigoplus_{n\in \ZZ_{\geq 0}}V_{\mu + n\beta}$, where
+$\mu$ is some integral $\bb_{\kk}$-dominant weight and $\beta$ is
+the $\bb_{\kk}$-highest weight of $\gg/{\kk}$. Clearly, a ladder
+module is multiplicity-free and hence bounded. Moreover, it remains bounded with respect to any
+$\gl(2)$-subalgebra of $\kk$. Hence any image of $\gl(2)$ in $\sp(4)$
+or $G_2$ is bounded.
+
+The only remaining case is $\gg=G_2, \kk\simeq \sl(3)$. To show that $\kk$ is bounded we use \refth{2} with $V$ being the 7-dimensional $G_2$-module. Then as a $\kk$-module $V$ is isomorphic to $V_{\omega_1}\oplus V^*_{\omega_1}\oplus \CC$. One can fix a Borel subalgebra $\bb\subset \gg$ so that there exists a $\bb$-stable one-dimensional subspace $V'\subset
+V_{\omega_1}^*$. Then $Q_0\simeq \GL(2)$ and
+$$(V')^*\otimes (\gg\cdot V'/\kk\cdot V')\simeq \Lambda^2(E)\otimes (E^*\oplus \mathbb C)$$
+where $E$ is the standard $GL(2)$-module. It is easy to check that it 
+is a spherical $Q_0$-module.
+\end{proof}
+
+In the rest of this paper $\gg$ will be of rank 2, and $\kk$ will be isomorphic to $\sl(2)$. By $V_k$ we denote the $k+1-$dimensional $\kk$-module, and we write $c(M)$ for the $\kk$-character of any  $(\gg,\kk)$-module $M$ of finite type over $\kk$:
+\[
+c(M):=\sum_{k\geq 0} (\dim M^k)z^k,
+\]
+where $M^k=\Hom_\kk(V_k,M)$.
+By definition, $c(M)$ is a formal power series in $z$. The
+\emph{minimal $\kk$-type} of $M$ is $V_t$ where $t\in\ZZ_{\geq 0}$ is
+minimal with $M^t\neq 0$. A $(\gg,\kk)$-module of finite type $M$ is
+\emph{even} (respectively, \emph{odd}) if $M^t=0$ for all $t\in 1+2\ZZ$ (resp., $t\in 2\ZZ$).
+
+Let $\CC((z))$ be the algebra of Laurent series and $\CC ((z))'$ be the span of vectors in $\CC((z))$ of the form $z^j+z^{-j-2}$ for $j\in\ZZ$ ($\CC((z))'$ is not a subalgebra). Note that $\CC((z))'$ is a complement to the subspace $\CC[[z]]$ of $\CC((z))$. In what follows we denote by $\pi$ the projection onto the second summand in the direct sum $\CC((z))=\CC((z))'\oplus\CC[[z]]$, and we set $z^p\otimes z^q:=\sum_{0\leq k\leq q}z^{p+q-2k}$ for $p\geq q$ and $z^p\otimes z^q:=z^q\otimes z^p$ for $p<q$.
+
+\begin {lemma}\label{le202}~
+\begin{itemize}
+\item[(a)] For any $f(z)\in \CC((z))$ and any $j\in \ZZ$,  $\pi(f(z)(z^j+z^{-j}))=\pi(\pi(f(z)(z^j+z^{-j})))$.
+\item[(b)] For any $(\kk,\kk)$-module $M$ of finite type over $\kk$
+\[
+c(M\otimes V_i)=\pi(c(M)\sum_{0\leq k\leq i}z^{i-2k}),
+\]
+for all $i\in \NN$.
+\end{itemize}
+\end{lemma}
+\begin {proof}~
+\begin {itemize}
+\item [(a)] It suffices to check that for any $\psi(z)\in C((z))'$, $\psi(z)(z^j+z^{-j})\in \CC((z))'$, and this is obvious.
+\item [(b)] It suffices to check that, for any $s\in \ZZ_{\geq 0}$
+\[
+\pi(z^s\otimes(\sum_{0\leq k\leq i}z^{i-2k}))=\sum_{0\leq k\leq \frac{|i-s|}{2}}z^{s+i-2k},
+\]
+which is also obvious.
+\end{itemize}
+\end{proof}
+
+Finally, by $\Gamma_\kk$ we denote the functor of $\kk$-finite vectors:
+\[
+\Gamma_\kk:\gg-\text{mod}\leadsto(\gg,\kk)-\text{mod},
+\]
+\[
+M\mapsto\{m\in M|\dim(U(\kk)\cdot m)<\infty\}.
+\]
+
+\section{Classification and $\kk$-characters of simple $(\sl(2)\oplus\sl(2),\sl(2))$-modules}\label{secKchars}
+
+\refth{thPairsList} singles out the cases when $\kk\simeq\sl(2)$ is a bounded subalgebra of a rank-2 Lie algebra. The simplest case is when $\gg=\sl(2)\oplus\sl(2)$ and $\kk\subset\gg$ is the diagonal subalgebra. Here all simple $(\gg,\kk)$-modules are bounded and are moreover multiplicity-free. This follows, for instance, from
+the algebraic subquotient theorem, see \cite{Dix}, Ch.~9. These $(\gg,\kk)$-modules are historically among the first examples of $(\gg,\kk)$-modules studied. They have been classified already in 1947 by Gelfand and Naimark
+\cite{GN} and by Bargmann \cite{B}, and have been constructed also by Harish-Chandra
+around the same time, \cite{HC}.
+A fundamental more modern and much more general
+reference is the article \cite{BG}, where however this explicit
+example is not written in detail.
+In the present section we give a quick self-contained description of
+all simple $(\gg,\kk)$-modules based on the approach of \cite{BG}.
+
+\begin{lemma}\label{lmc}
+Let $\Omega_1, \Omega_2\in U(\gg)$ be the Casimir elements of the two $\sl(2)$-direct summands of $\gg$, and $\Omega\subset U(\kk)\subset U(\gg)=U$ be the Casimir element of $\kk$. Then $\Omega_1, \Omega_2$ and $\Omega$ generate $U(\gg)^{\kk}$.
+\end{lemma}
+\begin{proof}
+Straightforward computation. A more general result is proved by F. Knop in \cite{Kn1}.
+\end{proof}
+
+\begin{corollary}
+Every simple $(\gg,\kk)$-module is multiplicity-free.
+\end{corollary}
+
+Denote by $\chi(a,b)$ the central character of the Verma $\gg$-module
+with highest weight $(a-1,b-1)$, where the notation $(c,d)$ is shorthand for the weight $c\omega_{\mathrm{left}}+d\omega_{\mathrm{right}}$, $\omega_{\mathrm{left}}$ (respectively, $\omega_{\mathrm{right}}$) being the fundamental weight of the first (respectively, second) direct summand of $\gg$.
+
+
+
+\begin{lemma}\label{lmch}
+If $V_n$ is the minimal $\kk$-type of a simple infinite-dimensional $(\gg,\kk)$-module $M$, then
+\begin{equation}\label{eqChar1}
+c(M)=z^n+z^{n+2}+z^{n+4}+\dots\quad .
+\end{equation}
+\end{lemma}
+\begin{proof}
+To prove \refeq{eqChar1} it suffices to show that $V_n$, $V_{n+2}$,
+$V_{n+4}$, etc. are precisely all $\kk$-types of $M$. The absence of
+other $\kk$-types follows from the fact that as a $\kk$-module $\gg$
+is isomorphic to $V_2\oplus V_2$, hence when acting by $\gg$ on
+$V_{n+2i}$ one can only obtain $\kk$-constituents of $(V_2\oplus
+V_2)\otimes V_{n+2i}$, i.e. $V_{n+2(i-1)}$, $V_{n+2i}$ and
+$V_{n+2(i+1)}$. To show that for each $i>0$ $V_{n+2i}$ is a
+$\kk$-constituent of $M$, note that if $V_{n+2i}$ were not a
+constituent of $M$, then  when acting by $\gg$ on $V_{n+2(i-t)}$ for $t\geq 1$ one would not be able to obtain a constituent of the from $V_{n+2(i+r)}$ for $r\geq 1$. Hence $M$ would turn being finite-dimensional, a contradiction.
+\end{proof}
+
+\begin{lemma}
+Let $M$ be a simple $(\gg,\kk)$-module with minimal $\kk$-type $V_0$. Then the central character of $M$ equals $\chi(a,a)$ for some $a\in \CC$.
+\end{lemma}
+\begin{proof}
+Since $\gg\simeq \kk\oplus\kk$, the $\gg$-module  $U\otimes_{U(\kk)}V_0$ is isomorphic to $U(\kk)$. The latter is endowed with a $U\simeq U(\kk)\otimes U(\kk)$-module structure via left multiplication by elements of $U(\kk)\otimes 1$ and right
+ multiplication by elements of $1\otimes U(\kk)$.
+Moreover, the action of $\Omega_1$ and $\Omega_2$ coincides on $U(\kk)$. Since $M$ is a quotient of the $\gg$-module $U(\kk)$, the action of $\Omega_1$ and $\Omega_2$ coincides on $M$, hence the Lemma.
+\end{proof}
+\begin{lemma}
+Let $M$ be a simple $(\gg,\kk)$-module. Then the central character of $M$ equals $\chi (a,a+n)$ for some $a\in \CC$ and some $n\in\ZZ$. Moreover, the parity of $n$ equals the parity of $k$ where $V_k$ is the minimal $\kk$-type of $M$.
+\end{lemma}
+\begin{proof}
+Let $M$ have central character $\chi(\alpha,\beta)$.
+Consider the $\gg$-module $M\otimes (V_0\boxtimes V_k)$, where
+the $\gg=\kk\oplus\kk$-module
+$V_0\boxtimes V_k$ is endowed with a $\gg$-module structure via
+the isomorphism $\gg\simeq \kk\oplus\kk$. Then
+$\hom_\kk(V_0,M\otimes(V_0\boxtimes V_k))\neq 0$, hence a simple
+subquotient of $M\otimes (V_0\boxtimes V_k)$ has central character
+$\chi (a,a)$ for some $a$. On the other hand, the central characters
+of all simple subquotients of $M\otimes(V_0\boxtimes V_k)$ are of the
+form $\chi(\alpha,\beta-n)$ for $n$ running over the set of weights of
+$V_k$.
+Therefore $\alpha=a$, $\beta-n=a$, i.e. the Lemma follows.
+\end{proof}
+
+\begin{lemma}\label{le00}
+For any central character $\chi$, up to isomorphism there is at most one infinite
+dimensional simple $(\gg,\kk)$-module with this central character.
+\end{lemma}
+\begin{proof}
+Let $M',M''$ be two simple $(\gg,\kk)$-modules with central character
+$\chi$. Then, by \refle{lmch}, for some $m$
+$\hom_\kk(V_m,M')=\hom_\kk(V_m,M'')=\CC$. Therefore $M'$ and $M''$ are
+isomorphic to simple quotients of the $\gg$-module $U\otimes_{Z_U
+  U(\kk)}V_m$, where $Z_U$ acts on $V_m$ via the central character
+$\chi$. The fact that $U^\kk\subset Z_U U(\kk)$ (\refle{lmc}) implies
+that $\hom_\kk(V_m, U\otimes_{Z_U U(\kk)}V_m)=\CC$ for every $m\geq
+0$. Hence $U\otimes_{Z_U U(\kk)}V_m$ has a unique proper maximal
+submodule, and in this way also a unique simple quotient. Therefore $M'\simeq M''$.
+\end{proof}
+
+In the rest of this section  we only consider central characters of
+the form $\chi(a,a-n)$ for $n\in\mathbb Z_{\geq 0}$. If $a\in \ZZ$, we assume in addition that $a\geq 0$ and $a-n \leq 0$. By $M_c$ denote the Verma module over $\kk$ with highest weight $c-1$. Note that
+for $a,a-n$ as above, $\hom_{\CC}(M_{a},M_{a-n})$ is a $\gg$-module with central character $\chi(a,a-n)$. Define
+\[
+W_{a,a-n}:=\Gamma_{\kk}(\hom_{\CC} (M_{a},M_{a-n})).
+\]
+\begin{theorem}\label{thMainSCT}~
+\begin{itemize}
+\item[(a)] Fix $a\in\CC\backslash \ZZ_{< 0}$ and $n\in \ZZ_{\geq 0}$ such that $a-n\leq 0$ for integer $a$. The $\gg$-module $W_{a,a-n}$ is the unique (up to isomorphism) simple infinite-dimensional $(\gg,\kk)$-module with central character $\chi(a,a-n)$.
+\item[(b)] $c(W_{a,a-n})=z^n+z^{n+2}+z^{n+4}+\dots\quad .$
+\end{itemize}
+\end{theorem}
+\begin{proof} Note that to compute the
+$\kk$-character of
+$\Gamma_{\kk}(\hom_{\CC}(M_a,M_{a-n}))$ it suffices to compute
+  $\hom_\kk(V_m,\hom_{\CC}(M_a,M_{a-n}))$ for all $m\in \ZZ_{\geq 0}$. However,
+\[
+\hom_\kk(V_m,\hom_{\CC}(M_a,M_{a-n}))=\hom_\kk(M_a,M_{a-n}\otimes V_m^*),
+\]
+and
+\[
+\hom_\kk(M_a, M_{a-n}\otimes V_m^*)=\left\{\begin{array}{cc}\CC&\text{for~}m-n\in2\ZZ_{\geq 0}\\0&\text{otherwise}\end{array}\right. .
+\]
+Hence
+\[
+c(W_{a,a-n})=z^n+z^{n+2}+z^{n+4}+\dots\quad .
+\]
+The simplicity of $W_{a,a-n}$ follows from the observation that if reducible, $W_{a,a-n}$ would have a finite-dimensional subquotient, but
+there is no finite-dimensional $\gg$-module with central character
+$\chi(a,a-n)$ for $a\in \CC\backslash \ZZ$ or $a=0$.  If $a\in
+\ZZ $, the finite-dimensional $\gg$-module with central
+character $\chi(a,a-n)$ is isomorphic to $V_{a-1}\boxtimes V_{n-a-1}$
+whose $\kk$-character is $z^{n-2}+z^{n-4}+...+z^{|n-2a-2|}$, and
+hence it can not be a subquotient of $W_{a,a-n}$.
+\end{proof}
+
+\section{Classification and $\kk$-characters of simple bounded $(\sl(3),\sl(2))$-modules}\label{secKchars3-2}
+
+Throughout this section $\gg=\sl(3)$ and $\kk\simeq\sl(2)\subset\gg$.
+
+\subsection{The root case.}\label{subsecTheRootCase}
+In this subsection we fix a Cartan subalgebra $\hh\subset\gg$ and simple roots $\alpha_1,\alpha_2\in\hh^*$ which define a Borel subalgebra $\bb^+\subset\gg$. We also fix $\kk$ to be the $\sl(2)$-subalgebra generated by the root spaces $\gg^{\pm\alpha_1}$. There are two parabolic subalgebras containing $\kk$ and $\hh$: $\pp^+:=(\hh+\kk)\oplus\gg^{\alpha_2}\oplus\gg^{\alpha_1+\alpha_2}$, $\pp^-:=(\hh+\kk)\oplus\gg^{-\alpha_2}\oplus\gg^{-\alpha_1-\alpha_2}$. Note that $\bb^+\subset\pp^+$ and define $\bb^-$ to be the Borel subalgebra with simple roots $\alpha_1,-\alpha_1-\alpha_2$. Then $\bb^-\subset\pp^-$. In addition, we fix generators $h_i\in[\gg^{\alpha_i},\gg^{-\alpha_i}]$ and denote by $\omega_i$, for $i=1,2$, the corresponding dual basis of $\hh^*$. Then $\rho_{\bb^+}=\omega_1+\omega_2$, $\rho_{\bb^-}=\omega_1-2\omega_2$.
+
+\begin{lemma}\label{le81}
+Let $M$ be a simple bounded infinite-dimensional $(\gg,\kk)$-module. Then $\gg[M]=\pp^\pm$.
+\end{lemma}
+\begin{proof}
+Since $\hh\subset\gg^\kk\oplus\kk$, we have $\hh\subset\gg[M]$. Put $M_0:=\{m\in M| \gg^{\alpha_1}\cdot m=0\}$ and choose generators $x$ and $y$ of the respective root spaces $\gg^{-\alpha_2}$ and $\gg^{\alpha_1+\alpha_2}$. A straightforward computation shows that for any $i,j\in \ZZ_{\geq 0}$, $(x^iy^j)\cdot v\in M_0$ if $v$ is any non-zero vector in $M_0$ such that $h_1\cdot v= \nu(h_1) v$ for some $\nu\in(\hh\cap\kk)^*$. Therefore the assumption that $x,y\notin \gg[M]$ implies that the multiplicity of $V_{\nu+i+j}$ is at least $i+j$, which contradicts the boundedness of $M$. Hence $\gg^{-\alpha_2}\in\gg[M]$ or $\gg^{\alpha_1+\alpha_2}\in\gg[M]$, and consequently $\gg[M]=\pp^\pm$.
+\end{proof}
+
+Let $F_{a,b}^\pm$ be the simple finite-dimensional $\pp^\pm$-module with $\bb^\pm$-highest weight $a\omega_1+b\omega_2$. Define $L^\pm_{a,b}$ as the unique simple quotient of $U(\gg)\otimes_{U(\pp^\pm)}F^\pm_{a,b}$. Then $L^\pm_{a,b}$ are bounded $(\gg,\kk)$-modules, and the existence of an isomorphism $L^\pm_{a,b}\simeq L^\mp_{a',b'}$ implies $\dim L_{a,b}^\pm<\infty$.
+
+\begin{theorem}\label{th82}
+Let, as above, $\kk\simeq \sl(2)$ be a root subalgebra of $\gg=\sl(3)$.
+\begin{itemize}
+\item[(a)] Any infinite-dimensional bounded $(\gg,\kk)$-module is isomorphic either to $L_{a,b}^+$ for $a\in\ZZ_{\geq 0}$, $b\in\CC\backslash\ZZ_{\geq 0}$ or to $L^-_{a,b}$ for $a\in\ZZ_{\geq 0}$, $-a-b\in\CC\backslash\ZZ_{\geq 0}$.
+\item[(b)]
+\begin{equation}\label{eq81}
+c(L_{a,b}^\pm)=1+2z+\dots+az^{a-1}+(a+1)(z^a+z^{a+1}+\dots)
+\end{equation}
+for all $a\geq 0$ and for those $b$ which do not satisfy the conditions $-b\in\ZZ_{\geq 2}$, $a+b\in\ZZ_{\geq -1}$ for $L_{a,b}^+$, and respectively the conditions $a+b\in\ZZ_{\geq 2}$, $-b\in\ZZ_{\geq-1}$ for $L_{a,b}^-$.
+\item[(c)] If $-b \in \ZZ_{\geq 2}$, $a+b\in\ZZ_{\geq -1}$, then
+\begin{equation}\label{eq82}
+c(L_{a,b}^+)=z^{-b-1}+2z^{-b}+\dots+(a+b+1)z^{a-1}+(a+b+2)(z^a+z^{a+1}+\dots),
+\end{equation}
+and if $a+b\in\ZZ_{\geq 2}$, $-b\in \ZZ_{\geq -1}$, then
+\begin{equation}\label{eq83}
+c(L_{a,b}^-)=z^{a+b-1}+2z^{a+b}+\dots+(1-b)z^{a-1}+(2-b)(z^a+z^{a+1}+\dots).
+\end{equation}
+\end{itemize}
+\end{theorem}
+\begin{proof}
+Let $M$ be a simple infinite-dimensional bounded
+$(\gg,\kk)$-module. Then, by \refle{le81}, $\gg[M] =\pp^\pm$. If
+$\gg[M]=\pp^+$, let $M^+$ be a simple finite-dimensional
+$\pp^+$-submodule of $M$. Then $M^+\simeq F^{+}_{a,b}$ for some
+$a\in\ZZ_{\geq 0}$ and some $b\in \CC$, and there is an obvious
+surjection of $\gg$-modules $U(\gg)\otimes_{U(\pp^+)}F^+_{a,b}\to
+M$. Hence $M$ is isomorphic to the unique simple quotient $L_{a,b}^+$
+of $U(\gg)\otimes_{U(\pp^+)} F_{a,b}^+$. However, $L_{a,b}^+$ is
+finite-dimensional iff $b\in\ZZ_{\geq 0}$, therefore (a) follows for
+the case when $\gg[M]=\pp^+$. The case $\gg[M]=\pp^-$ is obtained by replacing $b$ with $-a-b$ which corresponds to the replacement of the simple root $\alpha_2$ of $\bb^+$ by the simple root $-\alpha_1-\alpha_2$ of $\bb^-$.
+
+Statements (b) and (c) follow from a non-difficult reducibility
+analysis for the induced module $U(\gg)\otimes_{U(\pp^\pm)} F_{a,b}^\pm$. Note first of all that $\ch_\kk(U(\gg)\otimes_{U(\pp^\pm)} F_{a,b}^\pm)$ is always given by the right-hand side of \refeq{eq81}. Indeed as $\kk$-modules $\gg/\pp^\pm$ and $F_{a,b}^\pm$ are isomorphic respectively to $V_1$ and $V_a$, therefore
+\[
+c(U(\gg)\otimes_{U(\pp^\pm)} F_{a,b}^\pm)=c(S^\cdot(V_1)\otimes V_a).
+\]
+A straightforward computation shows that $c(S^\cdot(V_1)\otimes V_a)$ is nothing but the right hand side of \refeq{eq81}.
+
+We claim now that $U(\gg)\otimes_{U(\pp^\pm)} F_{a,b}^\pm$ is irreducible precisely when $b$ does not satisfy the respective conditions stated in (b). Consider first the case of $\pp^+$. Then $U(\gg)\otimes_{U(\pp^+)} F_{a,b}^+$ is irreducible if and only if there exists $w\in W\backslash W_\kk$ such that
+\begin{equation}\label{eq84}
+(w((a+1)\omega_1+(b+1)\omega_2)-(\omega_1+\omega_2))(h_1)\in \ZZ_{\geq 0}
+\end{equation}
+and
+\begin{equation}\label{eq85}
+(w((a+1)\omega_1+(b+1)\omega_2)-(\omega_1+\omega_2))=a\omega_1+b\omega_2-m_1\alpha_1-m_2\alpha_2
+\end{equation}
+for some $m_1,m_2\in \ZZ_{\geq 0}$. The only non $\bb^+$-dominant solution of \refeq{eq84} and \refeq{eq85} is $w=w_{\alpha_1+\alpha_2}$ and $-b\in \ZZ_{\geq 2}, a+b\in\ZZ_{\geq -1}$. Moreover, in the latter case $L_{a,b}^+\simeq(U(\gg)\otimes_{U(\pp^+)} F_{a,b}^+)/L_{-b-2,-a-2}^+$, where $c(L^+_{-b-2,-a-2})$ is given by the right hand side of \refeq{eq81} with $a$ replaced by $-b-2$. An immediate computation shows that $c( L_{a,b}^+)$ is given in this case by the right hand side of \refeq{eq82}, therefore (b) and (c) are proved for the case of $\pp^+$. The case of $\pp^-$ is obtained by interchanging the parameter $b$ in \refeq{eq82} with $-a-b$.
+\end{proof}
+
+\begin{corollary}
+Let $\gg$ and $\kk$ be as above.
+\begin{itemize}
+\item[(a)] The minimal $\kk$-type of a simple bounded infinite-dimensional $(\gg,\kk)$-module can be arbitrary. The multiplicity of the minimal $\kk$-type is always 1.
+\item[(b)] The following is a complete list of multiplicity-free simple infinite-dimensional $(\gg,\kk)$-modules:
+\begin{itemize}
+\item $L_{0,b}^+$ for $b\in\CC\backslash \ZZ_{\geq 0}$,
+\item $L_{0,b}^-$ for $-b\in\CC\backslash \ZZ_{\geq 0},$
+\item $L_{a,b}^+$ for $a+b=-1$, $-b\in \ZZ_{\geq 2}$,
+\item $L_{a,b}^-$ for $b=1$, $a+b\in \ZZ_{\geq 2}$.
+\end{itemize}
+\end{itemize}
+\end{corollary}
+
+\subsection{The principal case.}
+Let now $\kk$ be a principal $\sl(2)$-subalgebra of $\gg=\sl(3)$. 
+The pair $(\gg,\kk)$ is well known to be symmetric and 
+the simple $(\gg,\kk)$-modules have been studied extensively, see for
+instance \cite{Fo} and \cite{Sp}. In principle one should be able to
+identify all simple bounded modules in the known classification of
+simple Harish-Chandra modules. However, we propose an alternative
+approach which leads directly to all bounded simple
+$(\gg,\kk)$-modules and their $\kk$-characters.  This is the first
+case in which the richness of the theory of bounded (generalized)
+Harish-Chandra modules becomes apparent.
+
+
+We keep the notations $\hh,\bb^+, \alpha_1, \alpha_2$ from Subsection
+\ref{subsecTheRootCase}. By $L_{a,b}$ we denote the simple
+$\gg$-module with $\bb^+$-highest weight
+$(a-1)\omega_1+(b-1)\omega_2$, by $V_{p,q}$ we denote the simple
+finite-dimensional $\gg=\sl(3)$-module with $\bb^+$-highest weight
+$p\omega_1+q\omega_2$ ($p,q\in\ZZ_{\geq 0}$), and $\chi(a,b)$ stands
+for the central character of $L_{a,b}$. By $A$ we denote the Weyl algebra in the indeterminates $t,x,y$.
+
+We first describe the primitive ideals of all simple bounded
+$(\gg,\kk)$-modules. Let $\mathrm{GKdim}M$ denote the Gelfand-Kirillov
+dimension of a $\gg$-module $M$ and $X_M$ denote the associated
+variety of $M$.
+
+\begin{lemma}\label{le100sl}
+Let $M$ be an infinite-dimensional bounded simple $(\gg,\kk)$-module.
+Then $\Ann M=\Ann L_{a,b}$, where $\dim L_{a,b}=\infty$, $a\in\ZZ_{>0}$, $b\in \ZZ_{>0}$ or $a+b\in\ZZ_{>0}$.
+\end{lemma}
+\begin{proof}
+By Duflo's Theorem $\Ann M=\Ann L_{a,b}$ for some $a,b$. By Theorem
+4.4 in [PS2],  
+$\mathrm{GKdim}M\leq 2$. Since
+$\mathrm{GKdim}M\geq\frac{1}{2}\mathrm{dim}X_M$ and
+$\mathrm{GKdim}L_{a,b}=\frac{1}{2}\mathrm{dim}X_M$, we have
+$\mathrm{GKdim}L_{a,b}\leq 2$. A straightforward computation shows that this latter
+condition is equivalent to the condition on $(a,b)$ in the statement
+of the Lemma.
+\end{proof}
+
+Let $\BB_\kk^{\chi}$ be the category of bounded $(\gg,\kk)$-modules which afford the central character $\chi$, see [PS2], Section 4.
+
+\begin{corollary}\label{corPrimIdeal}
+If $\BB^\chi_\kk$ is not empty, then $\chi=\chi(u+1-n,n+1)$ for some $n\in\ZZ_{\geq 0}$, where $u\in\CC\backslash \ZZ_{<n-1}$ or $u=-2$.
+\end{corollary}
+
+Note that the natural embedding of $\gl(3)$ into $A$ maps the center of
+$\gl(3)$ to the line $\CC \EE$ for
+$\EE:=t\partial_t+x\partial_x+y\partial_y$, and that the adjoint
+action of the central element $\EE$ on $A$ defines a $\ZZ$-grading
+$A:=\bigoplus _{i\in \ZZ}A_i$. Let $u\in\mathbb C$. Define the (associative) algebra $D^u$ as the
+quotient of $A_0$ by the ideal generated by $\EE-u$. The embedding of
+$\gg\to A_0$ induces a surjective homomorphism $\gamma_u: U(\gg)\to
+D^u$. It is not difficult to show that if $u\in\ZZ$, $D^u$ is
+isomorphic to the algebra of globally defined differential
+endomorphisms of the line bundle $\OO_{\PP^2}(u)$ ($\PP^2$ being the
+projective space with homogeneous coordinates $(x,y,z)$).
+
+\begin{lemma}\label{le1021sl} Consider $D^u$ with its adjoint $\gg$-module structure. Then
+\[
+D^u\simeq \bigoplus_{m\geq 0}V_{m\rho}.
+\]
+\end{lemma}
+\begin{proof} Let $\CC =A^0\subset A^1 \subset \dots \subset A$
+  denote the standard filtration of $A$. A direct computation shows
+  that as a $\gg$-module $A_0^m/A_0^{m-1}$ is
+  isomorphic to
+\[
+V_{m,0}\otimes V_{0,m}=\oplus_{k=0}^m V_{k \rho}. 
+\]
+ After factorization by $\EE-u$, one obtains
+\[
+(D^u)^m/(D^u)^{m-1}\simeq V_{m \rho}. 
+\]
+\end{proof}
+
+It is not difficult to see that the restriction of $\gamma_u$ to $U(\kk)$ is injective. Slightly abusing notation we identify $U(\kk)$ with its image in $D^u$. We will use the following expression for the standard basis $E,H,F$ of $\kk$:
+\begin{equation}\label{princ}
+E=t\partial_x+x\partial_y, H=2t\partial_t-2y\partial_y, F=2x\partial_t+2y\partial_x.
+\end{equation}
+
+\begin{lemma}\label {le102sl} The centralizer of $\kk$ in $D^u$ coincides with the center of $U(\kk)\subset D^u$.
+\end{lemma}
+\begin{proof}
+As $V_{m\rho}^{\kk}=0$ for odd $m$ and  $V_{m\rho}^{\kk}=\CC$ for even
+$m$ it is clear that the centralizer of $\kk$ in $D^u$ is generated by
+the quadratic Casimir element $\Omega \in V_{2\rho}^{\kk}$.
+\end{proof}
+
+\begin{corollary}\label{cor98}
+Every simple $(D^u,\kk)$-module is multiplicity-free. For any non-negative
+ $m$, there exists at most one (up to isomorphism) 
+simple $(D^u,\kk)$-module $M$ with $\hom_{\kk}(V_m,M)\neq 0$.
+\end{corollary}
+\begin{proof} It is well known that if $M$ is a simple $(\gg, \kk)$-module, then $M^{V}=\Hom_\kk(V, M)$ is a simple $U(\gg)^{\kk}$-module for every $\kk$-type $V$, see for instance Lemma 3.3 in [PS2]. Therefore Lemma 5.7 implies the first statement. The proof of the second statement is very similar to the proof of \refle{le00}.
+\end{proof}
+
+We now introduce the functors
+\begin{eqnarray*}
+\Ind: D^u-\mod &\hookrightarrow &A-\mod \\
+M&\mapsto&A\otimes_{A_0}M,\\
+\res_u:A-\mod&\hookrightarrow & D^u-\mod\\
+M&\mapsto& D^u\otimes_{A_0}M.
+\end{eqnarray*}
+Obviously, $\res_u\circ\Ind=\id_{D^u-\mod}$.
+
+\begin{lemma}\label{le95}
+\[
+\ker\gamma_u=\triplebrace{\Ann L_{u+1,1}=\Ann L_{-u-1,u+2}=\Ann L_{1,-u-2}}{\mathrm{~for~}u\notin \ZZ}{\Ann L_{-u-1,u+2}=\Ann L_{1,-u-2}}{\mathrm{~for~} u\in \ZZ_{\geq-1}}{\Ann L_{u+1,1}=\Ann L_{-u-1,u+2}}{\mathrm{~for~}u\in \ZZ_{\leq-2}}.
+\]
+\end{lemma}
+\begin{proof}
+First we prove that $\ker\gamma_u\subset\Ann L_{a,b}$ with $a,b$ as
+in the statement.  Note that
+$\res_u(t^u\CC[t^{\pm 1},x,y])$ contains a submodule generated by
+$t^u$ isomorphic to $L_{u+1,1}$, $\res_u(x^u\CC[t^{\pm 1},x^{\pm
+  1},y])/\res_u(x^u\CC[t,x^{\pm 1},y])$ contains a submodule with
+highest vector $t^{-1}x^{u+1}$ isomorphic to $L_{-u-1,u+2}$ and
+$\res_u(y^u\CC[t^{\pm 1},x^{\pm 1},y^{\pm 1}])/(\res_u(y^u\CC[t^{\pm
+  1},x,y^{\pm 1}])+\res_u(y^u\CC[t,x^{\pm 1},y^{\pm 1}]))$ contains a
+submodule with highest vector $t^{-1}x^{-1}y^{u+2}$ isomorphic to
+$L_{1,-u-2}$. Hence $\ker\gamma_u \subset \ann L_{a,b}$. Next we see
+from \refle{le1021sl} that all proper two-sided ideals of $D^u$ have
+finite codimension. Thus, $\gamma_u (\Ann L_{a,b})$ is either $0$ or
+has finite codimension in $D^u$. The latter is impossible because
+$L_{a,b}$ is infinite-dimensional. Hence $\ker\gamma_u=\Ann L_{a,b}$.
+\end{proof}
+
+Since the eigenvalues of $\ad_H$ in $U(\gg)$ are all even, every
+simple $(\gg,\kk)$-module is either odd or even.
+
+As follows from \refle{le95}, all simple bounded $(\gg,\kk)$-modules with
+central character $\chi(u+1,u)$ are $(D^u,\kk)$-modules. This allows us to first classify the simple $(D^u,\kk)$-modules and then use translation
+functors to classify the bounded simple modules with arbitrary possible central character, see \refcor{corPrimIdeal}. 
+
+Note that the functor $\ind$ maps $(D^u,\kk)$-mod into $\displaystyle \widetilde{(A, \kk)}$-mod, the latter being defined as the full subcategory of $A-\mod$ consisting of $\kk$-locally finite $A$-modules with semisimple action of $\EE$.
+\begin{lemma}\label{le89}
+For any simple $(D^u,\kk)$-module $M$ there exists a simple $\widetilde{(A, \kk)}$-module $\hat M$ with $\res_u(\hat M)\simeq M$.
+\end{lemma}
+\begin{proof}
+Let $N$ be a maximal proper $A$-submodule of $\ind(M)$. Then $\res_u(N)\ncong M$ as $M$ generates $\ind(M)$. Therefore $\res_u(N)=0$ and one defines $\hat M$ as $\ind(M)/N$.
+\end{proof}
+
+Set $f:=x^2-2ty$, $\Delta:=\partial_x^2-2\partial_y\partial_t$ and note that $f,\Delta\in A^\kk$. For every fixed $p\in\CC$,we put $R^p:=f^p\CC[t,x,y,f^{-1}]$. Then clearly $R^p$ is an $(A,\tilde\kk)$-module and $\res_u (R^p)=0$ if $u-2p\notin\ZZ$. Otherwise,
+\begin{equation}\label{eqle89}
+\res_u(R^p)=\doublebrace{\CC f^{\frac{u}{2}}\oplus f^{\frac{u-2}{2}}\HH_2\oplus f^{\frac{u-4}{2}}\HH_4\oplus\dots}{\text{~for~} u-2p\in2\ZZ}{\CC f^{\frac{u-1}{2}}\HH_1\oplus f^{\frac{u-3}{2}}\HH_3\oplus f^{\frac{u-5}{2}}\HH_4\oplus\dots}{\text{~for~} u-2p\in2\ZZ+1,}
+\end{equation}
+where $\HH_n$ denotes the space of homogeneous polynomials of degree $n$ in $\CC[t,x,y]$ annihilated by $\Delta$ (as a $\kk$-module $\HH_n$ is isomorphic to $V_{2n}$).
+\begin{lemma}\label{le910}
+\item[(a)] For $u\notin\ZZ$ and for $u=-1,-2$, $\res_u(R^{\frac{u}{2}})$ and $\res_u(R^{\frac{u+1}{2}})$ are simple $D^u$-modules.
+\item[(b)] For $u\in 2\ZZ_{\geq 0}$, $\res_u(R^{\frac{u+1}{2}})$ is a simple $D^u$-module and there is an exact sequence
+\begin{equation}\label{eqle910+even}
+0\to V_{u,0}\to\res_u(R^{\frac{u}{2}})\to I^{+}_{u,0}\to 0
+\end{equation}
+for some simple $D^u$-module $I^+_{u,0}$.
+\item[(c)] For $u\in 1+2\ZZ_{\geq 0}$, $\res_u(R^{\frac{u}{2}})$ is a simple $D^u$-module and there is an exact sequence
+\begin{equation*}\label{eqle910+odd}
+0\to V_{u,0}\to\res_u(R^{\frac{u+1}{2}})\to I^{-}_{u,0}\to 0
+\end{equation*}
+for some simple $D^u$-module $I^-_{u,0}$.
+\item[(d)] For $u\in 2\ZZ_{\leq -2}$, $\res_u(R^{\frac{u}{2}})$ is a simple $D^u$-module and there is an exact sequence
+\begin{equation*}\label{eqle910-even}
+0\to I^-_{u,0}\to\res_u(R^{\frac{u+1}{2}})\to V_{0,-3-u}\to 0
+\end{equation*}
+for some simple $D^u$-module $I^-_{u,0}$.
+\item[(e)] For $u\in 1+2\ZZ_{\leq -1}$, $\res_u(R^{\frac{u+1}{2}})$ is a simple $D^u$-module and there is an exact sequence
+\begin{equation*}\label{eqle910-odd}
+0\to I^+_{u,0}\to\res_u(R^{\frac{u}{2}})\to V_{0,-3-u}\to 0
+\end{equation*}
+for some simple $D^u$-module $I^+_{u,0}$.
+\end{lemma}
+\begin{proof}
+The isomorphism \refeq{eqle89} yields
+\begin{equation}\label{eqle910res}
+c(\res_u (R^{\frac{u}{2}}))=1+z^4+z^8+\dots,\quad c(\res_u (R^{\frac{u+1}{2}}))=z^2+z^6+z^{10}+\dots\quad.
+\end{equation}
+Thus, if $\res_u(R^{\frac{u}{2}})$ (respectively $\res_u(R^{\frac{u+1}{2}})$) is not simple it has a unique simple finite-dimensional submodule or a unique simple finite-dimensional quotient. By \refle{le95} the latter can happen only if $u\in \ZZ_{\geq 0}$ or $u\in \ZZ_{\leq-3}$. Hence (a).
+
+Let $u\in 2\ZZ_{\geq 0}$. Then $\res_u(R^{\frac{u}{2}})$ contains $\res_u(\CC[t,x,y])\simeq V_{u,0}$ as a finite-dimensional simple submodule, hence \refeq{eqle910+even}. The $\gg$-module $\res_u(R^{\frac{u+1}{2}})$ has the same central character as $\res_u(R^{\frac{u}{2}})$ and, since $V_{n,0}$ is not a subquotient of $\res_u(R^{\frac{u+1}{2}})$ by \refeq{eqle910res}, $\res_u(R^{\frac{u+1}{2}})$ is a simple $D^u$-module. Hence (b).
+
+As $\Delta(f^{-\half})=0$, $f^{-\half}$ generates a proper $A$-submodule $M\subset f^{\half}\CC[t,x,y,f^{-1}]$. A direct computation shows that $\dim\res_u(M)=\infty$ for any $u\in1+2\ZZ_{\geq -2}$. Furthermore, the only finite-dimensional module, whose central character coincides with that of $D^u$ is $V_{0,-3-u}$. Therefore one necessarily has
+\[
+0\to I_{u,0}^+\to\res_u(R^{\frac{u}{2}})\to V_{0,-3-u}\to 0
+\]
+where $I^+_{u,0}:=\res_u(M)$. $\res_u(R^{\frac{u+1}{2}})$ is simple by the same reason as in (b). Hence (e).
+
+(c) and (d) are similar to (b) and (e).
+\end{proof}
+
+For any $u\in\CC$ we define now $I^+_{u,0}$ (respectively, $I^-_{u,0}$) as the unique simple infinite-dimensional constituent of $\res_u(R^{\frac{u}{2}})$ (resp., $\res_u(R^{\frac{u+1}{2}})$).
+
+\begin{corollary}\label{cor103sl}
+Every simple even infinite-dimensional $(D^u,\kk)$-module is isomorphic to $I^\pm_{u,0}$.
+\end{corollary}
+\begin{proof}
+For every fixed $u$ and any sufficiently large $m\in 2\ZZ_{\geq 0}$ (such that $V_m$ is not a $\kk$-type of $V_{u,0}$ or $V_{0,-3-u}$ for $u\in\ZZ$), \refle{le910} implies $\hom_\kk(V_m,I^\pm_u)\neq 0$. The statement follows now from \refcor{cor98}.
+\end{proof}
+
+\begin{lemma}\label{le104sl}
+If $u\notin \frac {1}{2}+\ZZ$, then every $(D^u,\kk)$-module is even.
+\end{lemma}
+\begin{proof}
+Assume that $M$ is an odd simple $(D^u,\kk)$-module and $u\notin \frac {1}{2}+\ZZ $. Let $\hat M$ be as in \refle{le89}, $A_f$ denote the localization of $A$ in $f$, $\hat{M}_f=A_f\otimes_A \hat{M}$. First, we claim that if  $u\notin \frac
+{1}{2}+\ZZ$, then $\hat{M}_f\neq 0$. Indeed, $\hat{M}_f=0$ implies
+that $f$ acts
+locally nilpotently on $\hat{M}$.
+Then $M^0:=\Ker f$ is a $\kk$-submodule of $\hat{M}$ and a
+straightforward calculation using \refeq{princ} shows
+$\Omega_{| M^0}=2(\EE+3)(\EE+2)_{| M^0}$. Thus $\hom_{\kk}(V_m,M^0)\neq 0$ only if $2(d+3)(d+2)=\frac{m^2}{2}+m$ or equivalently $(d+\frac{5}{2})^2=(\frac{m+1}{2})^2$, where $d$ is the eigenvalue of $\EE$ on $M^0$. Since $d\in u+\ZZ$, $u\notin \frac{1}{2}+\ZZ $ implies $M^0=0$.
+
+Our next observation is that $\hat{M}_f$ is an odd $(A,\kk)$-module
+and that $t$ does not act locally nilpotently on $\hat{M}_f$. Indeed, if $t$ acts locally nilpotently, by $\kk$-invariance $x$ and $y$ act locally nilpotenly, and therefore $f$ acts locally
+nilpotently. Contradiction. Therefore  $\hat{M}_f$ is a submodule of its localization in $t$, $\hat{M}_{f,t}$. Furthermore, for some odd $m$ there
+exists a non-zero vector $v\in \hat{M}_{f,t}$ such that $H\cdot v=m
+v$, $E\cdot v=0$
+and  $\EE\cdot v=uv$. The expressions for $E,H$ and $\EE$ imply
+\[
+\partial_t v=\frac{-(u+m/2)ty+mx^2/2}{tf} v, \partial_x v=\frac{(u-m/2)x}{f} v, \partial_y v=\frac{(m/2-u)t}{f} v.
+\]
+Thus, every vector in $\hat{M}_{f,t}$ can be obtained from $v$ by 
+applying elements of $\CC[t^{\pm 1},x,y,f^{-1}]$, i.e.
+$\hat{M}_{f,t}=\CC[t^{\pm 1},x,y,f^{-1}]v$. It is not difficult to see
+that $v=t^{\frac{m}{2}}f^{\frac{2u-m}{4}}$ satisfies the above
+relations. The $A_{f,t}$-module 
+$\CC[t^{\pm 1},x,y,f^{-1}]v$ is simple and free over
+$\CC[t^{\pm 1},x,y,f^{-1}]$. Hence
+$\hat{M}_{f,t}\simeq \CC[t^{\pm 1},x,y,f^{-1}]v$ and it is
+obvious that $\hat{M}_{f,t}$ has no non-zero $\kk$-finite
+vectors. As we pointed out above, $\hat{M}_f\subset
+\hat{M}_{f,t}$. Therefore $\hat{M}_f=0$.
+\end{proof}
+
+We now turn to odd simple $(D^u,\kk)$-modules.
+
+\begin{lemma}\label{le105odd} Let $u\in \frac {1}{2}+\ZZ$. Up to isomorphism, there exists exactly one odd simple $(D^u,\kk)$-module $J_{u,0}$. Moreover,
+\begin{equation}\label{eqcJu0}
+c(J_{u,0})=\doublebrace{z^{2-2u}+z^{6-2u}+z^{10-2u}+\dots}{\text{~for~}u<0}{z^{4+2u}+z^{8+2u}+z^{12+2u}+\dots}{\text{~for~}u>0}.
+\end{equation}
+
+\end{lemma}
+\begin{proof} Let $P\subset G=SL(3)$ be the maximal parabolic subgroup whose Lie algebra $\pp$ equals $\bb\oplus\gg^{-\alpha_1}$, $K\subset G$ be the algebraic subgroup with Lie algebra $\kk$, and $Z$ be the closed $K$-orbit on $G/P\simeq\PP^2$. Then $Z\simeq \PP^1$ and the embedding $i:Z \to \PP^2$ is a Veronese embedding of degree 2. It is not difficult to verify that the relative tangent bundle $\mathcal{T}_P$ of the projection $p:G/B\to G/P$ is a $\OO_{G/B}$-submodule of the twisted sheaf of differential operators $\DD_{G/B}^{(u+1)\omega_1+\omega_2}$(the definition of $\DD_{G/B}^{\zeta}$ see in [PS2], Section 5). Furthermore, the direct image $p_*(\DD_{G/B}^{(u+1)\omega_1+\omega_2}/\mathcal{I}_P)$, where $\mathcal{I}_P$ is the left ideal in $\DD_{G/B}^{(u+1)\omega_1+\omega_2}$ generated by $\mathcal{T}_P$, is a well-defined twisted sheaf of differential operators on $G/P$. We denote this sheaf by $\DD_{G/P}^{(u+1)\omega_1+\omega_2}$.
+
+Our next observation is that, similarly to the equivalence of categories $i_\bigstar$ discussed in Section 5 of [PS2], Kashiwara's theorem yields an equivalence of categories
+\[
+i_\bigstar^u:\OO_Z(2u)\otimes_{\OO_{G/P}}\DD_{G/P}\otimes_{\OO_{G/P}} \OO_Z(-2u)~-~\mod\to (\DD_{G/P}^{(u+1)\omega_1+\omega_2}~-~\mod)^Z,
+\]
+where $(\DD_{G/P}^{(u+1)\omega_1+\omega_2}~-~\mod)^Z$ denotes the full subcategory of $\DD_{G/P}^{(u+1)\omega_1+\omega_2}$- mod supported on $Z$, and $\OO_Z(2u)$ is the line bundle on $Z$ with Chern class $2u$. Therefore we can put
+\[
+J_{u,0}:=\Gamma(\PP^2,i_\bigstar^u\OO_Z(2u)).
+\]
+It is clear that $J_{u,0}$ is a $(\gg,\kk)$-module, and furthermore, using the facts that $\mathcal N\simeq\OO_Z(4)$ and that $i_\bigstar^u\OO_Z(2u)$ has a filtration with successive quotients $\OO_Z(2u+4(i+1))$, one easily verifies that $c({J_{u,0}})$ is given by the right-hand side of \refeq{eqcJu0}. Since there are no finite-dimensional modules with central character $\chi(u+1,1)$ for $u\in\half+\ZZ$, $J_{u,0}$ is a simple $\gg$-module.
+
+It remains to prove that every simple odd $(D^u,\kk)$-module is
+isomorphic to $J_{u,0}$ for some $u\in\half+\ZZ$. Let $M$ be a simple
+odd $(D^u,\kk)$-module and $\hat M$ be a simple $(A,\tilde\kk)$-module
+such that $\res_u (\hat M)=M$. Then by the proof of \refle{le105odd}
+$\hat{M}_f=0$. For every $\bb_\kk$-highest vector $v\in \res_u(\hat
+M)$ there exists $k$ such that $f^k\cdot v=0$. Let $v$ have weight
+$m$. Then by the relation $(d+\frac{5}{2})^2=(\frac{m+1}{2})^2$ from
+the proof of \refle{le105odd}, $\frac{m+1}{2}=\pm(u+2k+\frac{5}{2})$,  
+as $\EE f^k\cdot v=(2k+u)f^k\cdot v$. Without loss of generality we
+may assume that $m$ is very large and then 
+$\frac{m+1}{2}=(u+2k+\frac{5}{2})$. 
+Therefore $\Hom_\kk(V_m, M)\neq 0$ implies $m=2u+4k+4$. Hence if $M$ and $M'$ are two odd $(D^u,\kk)$-modules one can find $m$ such that $\Hom_\kk(V_m,M)\neq 0$, $\Hom_\kk(V_m, M')\neq 0$. But then $M\simeq M'$ by \refcor{cor98}.
+\end{proof}
+
+Let $M$ be some $A$-module with semisimple $\EE$-action. Consider the 
+$U(\gg)$-modules $M^{(n)}:=M\otimes S^n(\span\{x,y,t\})$ for
+$n\in\mathbb Z_{\geq 0}$, together with the linear operators
+\begin{eqnarray*}
+\bar d: M^{(n)}&\to &M^{(n-1)}\\
+\bar d&=&t\otimes\partial_t+x\otimes\partial_x+y\otimes\partial_y\\
+\bar \delta: M^{(n)}&\to &M^{(n+1)}\\
+\bar\delta&=&\partial_t\otimes t+\partial_x\otimes x+\partial_y\otimes y.
+\end{eqnarray*}
+It is straightforward to check that $\bar d$, $\EE\otimes 1-1\otimes \EE$
+and $\bar\delta$ form a standard $\sl(2)$-triple. Let $\res_s(M^{(k)})$ be
+the eigenspace of the operator $\EE\otimes 1+1\otimes \EE$ in
+$M^{(k)}$. Then obviously $\bar d$ and $\bar \delta$ induce operators
+\begin{eqnarray*}
+d: \res_s (M^{(n)})&\to &\res_s( M^{(n-1)})\\
+\delta: \res_s (M^{(n-1)})&\to &\res_s( M^{(n)}),
+\end{eqnarray*}
+and elementary $\sl(2)$ representation theory implies 
+that if $s\notin\ZZ$, $s<n-1$ or $s\geq 2n$, then $d$ is surjective, $\delta$ is injective, and
+\begin{equation}\label{eq87}
+\res_s( M^{(n)})=\Ker d\oplus \im \delta.
+\end{equation}
+For any $(D^u,\kk)$-module $M$ choose a simple $(A,\tilde\kk)$-module $\hat M$ such that $\res_u(\hat M)=M$ (in fact $\hat M$ is unique).
+
+Let $T^n(M):=\res_{u+n}({\hat M}^{(n)})\cap \Ker d$. If $u\neq
+-1,0,\dots,n-1$, \refeq{eq87} implies
+\begin{equation}\label{eqcTnM}
+c(T^n(M))=c(\res_{u+n}(\hat M^{(n)}))-c(\res_{u+n}(\hat M^{(n-1)})).
+\end{equation}
+
+\begin{lemma}\label{le811}
+Let $M$ be a bounded simple $(D^u,\kk)$-module. Assume that $u\neq -1,0,\dots,n-1$. Then $T^n(M)$ is a simple $(\gg,\kk)$-module with central character $\chi(u+1-n,n+1)$.
+\end{lemma}
+\begin{proof}
+\refle{le95} implies that $M$ is a $(\gg,\kk)$-module with central character $\chi(u+1,1)$. Therefore $M\otimes S^n(\span\{x,y,t\})$ has constituents with central character $\chi(u+1+n-2k,1+k)$, $k=0,\dots,n$, and $\im \delta$ has constituents with central character $\chi(u+1+n-2k,1+k)$, $k=0,\dots,n-1$. Thus, $T^n(M)$ is a direct summand of $M\otimes S^n(\span\{x,y,t\})$ with central character $\chi(u+1-n,n+1)$.
+
+Our restrictions on $u$ imply that the weights $(u+1)\omega_1+\omega_2$ and $(u-n+1)\omega_1+(n+1)\omega_2$ belong to the same Weyl chamber and have the same stabilizer in the Weyl group. Hence, $T^n$ is nothing but the translation functor
+\[
+T_{(u+1)\omega_1+\omega_2}^{(u-n+1)\omega_1+(n+1)\omega_2}:\BB_\kk^{\chi(u+1,1)}\to\BB_\kk^{\chi(u-n+1,n+1)}.
+\]
+ 
+
+Therefore $T^n$ is an equivalence of categories, in particular $T^n(M)$ is simple.
+\end{proof}
+
+We put for $u\neq -1,0,\dots,n-1$
+\[
+I^\pm_{u,n}:=T^n(I^\pm_{u,0}),
+\]
+\[
+J_{u,n}:=T^n(J_{u,0}).
+\]
+
+\begin{theorem}\label{th914}
+Let $M$ be a simple bounded infinite-dimensional $(\gg,\kk)$-module with central character $\chi$. Then
+\item[(a)] if $\chi=\chi(u+1-n,n+1)$ for $u\notin\ZZ$,
+\[
+M\simeq\doublebrace{I^\pm_{u,n}}{\text{~for~}u\notin\half+\ZZ}{I^\pm_{u,n},J_{u,n}}{\text{~for~}u\in\half+\ZZ};
+\]
+\item[(b)] if $\chi=\chi(u+1-n,n+1)$ for $u\in\ZZ_{\geq n}$,
+\[
+M\simeq I^\pm_{-n-3,u-n},I^\pm_{u,n};
+\]
+\item[(c)] if $\chi=\chi(-1-n,n+1)$,
+\[
+M\simeq I^\pm_{-2,n};
+\]
+\item[(d)] if $\chi=\chi(0,n+1)$,
+\[
+M\simeq(I^\pm_{-2,n})^\tau,
+\]
+where $\tau$ stands for the outer automorphism $\tau(X)=-X^t$ for any 
+$X\in\gg$.
+\end{theorem}
+\begin{proof}
+By \refcor{corPrimIdeal} every simple bounded $(\gg,\kk)$-module has
+central character $\chi$ of the form $\chi(u+1-n,n+1)$ for some
+$n\in\ZZ_{\geq 0}$ and some $u\in\{\CC\backslash
+\ZZ_{<n-1}\}\cup\{-2\}$. Moreover,
+$T^n=T_{(u+1)\omega_1+\omega_2}^{(u-n+1)\omega_1+(n+1)\omega_2}$ is an
+equivalence of the categories $\BB_\kk^{\chi(u+1,1)}$ and
+$\BB_\kk^{\chi(u+1-n,n+1)}$. If $u\notin\ZZ$, $\half+\ZZ$ then
+$\BB_\kk^{\chi(u+1,1)}$ has two non-isomorphic simple objects, and, if $u\in \half+\ZZ$, $\BB_\kk^{\chi(u+1,1)}$ has three non-isomorphic simple objects. This implies (a).
+
+If $u\in\ZZ_{\geq 0}$, $u\geq n$, we have $\chi=\chi(u+1-n,n+1)=\chi((-n-3)+1-(u-n),(u-n)+1)$, hence in this case $\BB_\kk^\chi$ has 4 non-isomorphic simple objects: $I^\pm_{u,n}$ and $I^\pm_{-n-3,u-n}$. This proves (b). If $n=-2$, $\BB_\kk^\chi$ is equivalent to $\BB_\kk^{\chi(1,1)}$ and has two simple objects, $I^\pm_{-2,n}$, which proves (c). Finally if $u=n-1$, the automorphism $\tau$ establishes an equivalence between $\BB_\kk^{\chi(0,n+1)}$ and $\BB_\kk^{\chi(-1-n,n+1)}$, hence (d).
+\end{proof}
+
+\begin{lemma}\label{le915}
+For $a\in\ZZ_{\geq 2}$, define
+\[
+\mu_n(a,z):=\frac{z^a}{1-z^4}\otimes c(V_{n,0})-\frac{z^{a-2}}{1-z^4}\otimes c(V_{n-1,0}).
+\]
+For $a\in\ZZ_{\geq 0}$, define
+\[
+\kappa_n(a,z):=\frac{z^a}{1-z^4}\otimes c(V_{n,0})-\frac{z^{a+2}}{1-z^4}\otimes c(V_{n-1,0}).
+\]
+Then
+\begin{equation}\label{eq916x}
+\mu_{2p}(a,z)=\frac{z^a}{1-z^4}+\frac{z^{a-2}(z^4+z^8+\dots+z^{4p})}{1-z^2},
+\end{equation}
+\begin{equation}\label{eq916x+1}
+\mu_{2p+1}(a,z)=\frac{z^{a}(1+z^4+\dots+z^{4p})}{1-z^2},
+\end{equation}
+\begin{equation}\label{eq916x+2}
+\kappa_{2p}(a,z)=\frac{z^a}{1-z^4}+\frac{z^{|a-4|}+\dots+z^{|a-4p|}}{1-z^2},
+\end{equation}
+\begin{equation}\label{eq916x+3}
+\kappa_{2p+1}(a,z)=\frac{z^{|a-2|}+\dots+z^{|a-4p-2|}}{1-z^2}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Since $V_{n,0}=S^n(V_{1,0})$, and since $S^n(V_{1,0})$ is isomorphic as a $\kk$-module to $S^n(V_2)$, we have
+\[
+c(V_{2p,0})=1+z^4+\dots+z^{2p},
+\]
+\[
+c(V_{2p+1,0})=z^2+z^6+\dots+z^{2p+2}.
+\]
+Recall that $z^a\otimes z^b=\pi(z^a\sum_{i=0}^{i=b}z^{b-2i})$ (\refle{le202},(b)). Therefore
+\begin{eqnarray*}
+\frac{z^a}{1-z^4}\otimes z^{2k}-\frac{z^{a-2}}{1-z^4}\otimes z^{2k-2}&=&\pi\left(\frac{z^{a-2}(z^2\sum\limits_{i=0}^{i=2k}z^{2k-2i}-z^{-2}\sum\limits_{i=0}^{i=2k-2}z^{2k-2i})}{1-z^4}\right)=\\
+&=&\pi\left(\frac{z^{a-2}(z^{2k+2}+z^{2k})}{1-z^4}\right)=\frac{z^{a-2+2k}}{1-z^2}.
+\end{eqnarray*}
+\begin{eqnarray*}
+\frac{z^a}{1-z^4}\otimes z^{2k}-\frac{z^{a+2}}{1-z^4}\otimes z^{2k-2}&=&\pi\left(\frac{z^{a}(\sum\limits_{i=0}^{i=2k}z^{2k-2i}-z^2\sum\limits_{i=0}^{i=2k-2}z^{2k-2-2i})}{1-z^4}\right)=\\
+&=&\pi\left(\frac{z^{a}(z^{-2k}+z^{2-2k})}{1-z^4}\right)=\pi\left(\frac{z^{a-2k}}{1-z^2}\right)=\frac{z^{|a-2k|}}{1-z^2}.
+\end{eqnarray*}
+The above identities imply \refeq{eq916x}-\refeq{eq916x+3}.
+\end{proof}
+%\begin{eqnarray*}
+%\mu_{2p}(a,z)&=&\frac{z^a}{1-z^4}\otimes(1+z^4+\dots+z^{4p})-\\
+%&&-\frac{z^{a-2}}{1-z^4}\otimes(z^2+\dots+z^{4p-2})=\\
+%&=&\frac{z^a}{1-z^4}+\frac{z^{a-2}(z^4+z^8+\dots+z^{4p})}{1-z^2}
+%\end{eqnarray*}
+%\begin{eqnarray*}
+%\mu_{2p+1}(a,z)&=&\frac{z^a}{1-z^4}\otimes(z^2+z^6+\dots+z^{4p+2})-\\
+%&&-\frac{z^{a-2}}{1-z^4}\otimes(1+z^4+\dots+z^{4p})=\\
+%&=&\frac{z^{a}(1+z^4+\dots+z^{4p})}{1-z^2}
+%\end{eqnarray*}
+%\begin{eqnarray*}
+%\kappa_{2p}(a,z)&=&\frac{z^a}{1-z^4}\otimes(1+z^4+\dots+z^{4p})-\\
+%&&-\frac{z^{a+2}}{1-z^4}\otimes(z^2+\dots+z^{4p-2})=\\
+%&=&\pi\left(\frac{z^{a}(z^{-4}+\dots+z^{-4p})}{1-z^2}\right)+\frac{z^a}{1-z^4}=\\
+%&=&\frac{z^{|a-4|}+\dots+z^{|a-4p|}}{1-z^2}+\frac{z^a}{1-z^4}
+%\end{eqnarray*}
+%\begin{eqnarray*}
+%\kappa_{2p+1}(a,z)&=&\frac{z^a}{1-z^4}\otimes(z^2+z^6+\dots+z^{4p+2})-\\
+%&&-\frac{z^{a+2}}{1-z^4}\otimes(1+z^4+\dots+z^{4p})=\\
+%&=&\pi\left(\frac{z^{a}(z^{-2}+z^{-6}+\dots+z^{-4p-2})}{1-z^2}\right)=\\
+%&=&\frac{z^{|a-2|}+\dots+z^{|a-4p-2|}}{1-z^2}
+%\end{eqnarray*}
+
+\begin{theorem}\label{th916}
+\item[(a)]Let $u\notin \ZZ$, $\half+\ZZ$. Then
+\[\begin{array}{l}
+c(I^+_{u,n})=\kappa_n(0,z), \quad c(I^-_{u,n})=\mu_{n}(2,z).
+\end{array}\]
+\item[(b)]Let $u\in \half+\ZZ$. Then
+\[\begin{array}{ll}
+c(J_{u,n})=\kappa_n(4+2u,z)&\text{~for~}u\geq -\half,\\
+c(J_{u,n})=\mu_n(2-2u,z)&\text{~for~}u\leq -\threehalfs.
+\end{array}\]
+\item[(c)]Let $u\in 2\ZZ_{\geq 0}$. Then
+\[\begin{array}{ll}
+c(I^+_{u,0})=\frac{z^{2u+4}}{1-z^4},&c(I^-_{u,0})=\frac{z^{2}}{1-z^4},\\
+c(I^+_{u,n})=\kappa_n(2u+4,z),&c(I^-_{u,n})=\mu_n(2,z).
+\end{array}\]
+\item[(d)]Let $u\in 1+2\ZZ_{\geq 0}$. Then
+\[\begin{array}{ll}
+c(I^+_{u,0})=\frac{1}{1-z^4},&c(I^-_{u,0})=\frac{z^{2u+4}}{1-z^4},\\
+c(I^+_{u,n})=\kappa_n(0,z),&c(I^-_{u,n})=\kappa_n(2u+4,z).
+\end{array}\]
+\item[(e)]Let $u\in 2\ZZ_{\leq-2}$. Then
+\[\begin{array}{ll}
+c(I^+_{u,0})=\frac{1}{1-z^4},&c(I^-_{u,0})=\frac{z^{-2-2u}}{1-z^4},\\
+c(I^+_{u,n})=\kappa_n(0,z),&c(I^-_{u,n})=\mu_n(-2-2u,z).
+\end{array}\]
+\item[(f)]Let $u\in -1+2\ZZ_{\leq-1}$. Then
+\[\begin{array}{ll}
+c(I^+_{c,0})=\frac{z^{-2-2u}}{1-z^4},&c(I^-_{u,0})=\frac{z^{2}}{1-z^4},\\
+c(I^+_{u,n})=\mu_n(-2-2u,z),&c(I^-_{u,n})=\mu_n(2,z).
+\end{array}\]
+\item[(g)]
+\[\begin{array}{l}
+c(I^+_{-2,n})=c((I^+_{-2,n})^\tau)=\kappa_n(0,z),\\
+c(I^-_{-2,n})=c((I^-_{-2,n})^\tau)=\mu_n(2,z).
+\end{array}\]
+\end{theorem}
+\begin{proof}
+Using \refeq{eqcTnM} one obtains the identities
+\begin{equation}\label{eqth916}
+\begin{array}{l}
+c(I^\pm_{u,n})=c(I^\pm_{u,0}\otimes V_{n,0})-c(I^\mp_{u+1,0}\otimes V_{n-1,0}),\\
+c(J_{u,n})=c(J_{u,0}\otimes V_{n,0})-c(J_{u+1,0}\otimes V_{n-1,0}).
+\end{array}
+\end{equation}
+The theorem is a straightforward corollary of \refeq{eqth916}. Indeed, let us prove (f). In this case
+\[
+c(I_{u,0}^+)=\frac{z^{-2u-2}}{1-z^4},\quad c(I_{u-1,0}^+)=\frac{z^{-2u-4}}{1-z^4},
+\]
+\[
+c(I_{u,n}^+)=\frac{z^{-2u-2}}{1-z^4}\otimes c(V_{n,0})-\frac{z^{-2u-4}}{1-z^4}\otimes c(V_{n-1,0})=\mu_n(-2-2u,z);
+\]
+\[
+c(I_{u-1,0}^-)=\frac{z^{-2u-4}}{1-z^4},\quad c(I_{u-1,0}^+)=\frac{1}{1-z^4},
+\]
+\[
+c(I_{u,n}^-)=\frac{z^{2}}{1-z^4}\otimes c(V_{n,0})-\frac{1}{1-z^4}\otimes c(V_{n-1,0})=\mu_n(2,z).
+\]
+In all other cases the arguments are similar.
+\end{proof}
+
+\begin{corollary}
+\item[(a)] The minimal $\kk$-type can be any $V_k$ but its multiplicity is always 1.
+\item[(b)] For sufficiently large $i$ $c_i(M)=c_{i+4}(M)$ for any
+  simple bounded $(\gg,\kk)$-module, and for sufficiently large $j$
+  there are the following $\kk$-multiplicities:
+\[
+c_{4j}(I^\pm_{u,2p+1})=c_{4j+2}(I^\pm_{u,2p+1})=p+1,
+\]
+\[
+c_{4j}(I^+_{u,2p})=p+1, c_{4j+2}(I^+_{u,2p})=p,
+\]
+\[
+c_{4j+2}(I^-_{u,2p})=p+1, c_{4j}(I^-_{u,2p})=p,
+\]
+\[
+c_{4j+1}(J_{u,2p+1})=c_{4j+3}(J_{u,2p+1})=p+1,
+\]
+\[
+c_{4j+2u}(J_{u,2p})=p, c_{4j+2u+2}(J_{u,2p})=p+1.
+\]
+\item[(c)] The only multiplicity-free simple infinite-dimensional 
+ $(\gg,\kk)$-modules are $I^\pm_{u,0}$, $J_{u,0}$, $I^\pm_{u,1}$,
+ $J_{u,1}$, $(I^\pm_{-2,1})^\tau$.
+\end{corollary}
+
+The complete list of multiplicity-free simple $(\gg,\kk)$-modules has
+been first found by Dj. Sijacki, see \cite{S} and the references
+therein for a historic perspective on this problem. 
+
+\section{Classification of simple bounded $(\sp(4),\sl(2))$-modules}\label{se6}
+In this section we classify all simple bounded $(\gg,\kk)$-modules,
+where $\gg=\sp(4)$ and $\kk$ is a principal $\sl(2)$-subalgebra or a
+$\sl(2)$-subalgebra corresponding to a short root. We fix a Cartan
+subalgebra $\hh\subset\gg$ and write the roots of $\gg$ as $\{\pm
+2\eps_1,\pm 2\eps_2, \pm\eps_1\pm\eps_2\}$. Our fixed simple roots are
+$\eps_1-\eps_2, 2\eps_2$, and $\rho=2\eps_1+\eps_2$. By $e_1$, $e_2$,
+$h_1$, $h_2$, $f_1$, $f_2$ we denote the Serre generators of $\gg$
+associated to our choice of simple roots, \cite{OV}. We define two
+$\sl(2)$-subalgebras of $\gg$: one with basis $e_1$, $h_1$, $f_1$ and
+one with basis $e_1+2e_2$, $3h_1+4h_2,3f_1+2f_2$. The first one is the
+root subalgebra corresponding to the simple root $\eps_1-\eps_2$, and
+the second one is a principal $\sl(2)$-subalgebra. In Sections
+\ref{se6} and \ref{secKchars4-2}, we denote by $\kk$ any one of these
+two subalgebras, referring respectively to the \emph{root case} and to
+the \emph{principal case} when we want to be specific. We set
+$\bb_\kk:=\bb\cap \kk$, where $\bb$ is the Borel subalgebra 
+generated by $e_1$, $e_2$, $h_1$, $h_2$. By
+$L_{a,b}$ we denote the simple $\bb$-highest weight $\gg$-module with
+highest weight $a\eps_1+b\eps_2-\rho=(a-2)\eps_1+(b-1)\eps_2$, by
+$V_{a,b}$ we denote the simple finite-dimensional $\gg$-module with
+highest weight $a\eps_1+b\eps_2$, and $\chi(a,b)$ is the central character of $L_{a,b}$.
+
+\begin{lemma}\label {le100}
+Let dim $L_{a,b}=\infty$ and $\gkdim L_{a,b}\leq 2$. Then $a>| b|$ and $a,b\in \half+\ZZ$.
+\end{lemma}
+\begin {proof} Let $\lambda=a\eps_1+b\eps_2$. If $(\lambda,\alpha)\notin
+  \ZZ_{>0}$ for all positive roots $\alpha$, then $L_{a,b}$ is
+  a Verma module and therefore its Gelfand-Kirillov
+  dimension equals 4. If $(\lambda,\check\alpha)\in \ZZ_{>0}$ for exactly one positive
+  root, then one has the following exact sequence
+\[
+0\to L_{w_\alpha(\lambda)} \to M_{\lambda} \to L_{\lambda}\to 0,
+\]
+where $w_{\alpha}$ denotes the reflection in $\alpha$. A straightforward computation shows that in this case $\gkdim
+L_{\lambda}=3$. Therefore $\gkdim L_{\lambda}\leq 2$ implies the existence
+of two positive roots $\alpha$ and $\beta$ such that
+$(\lambda,\check\alpha), (\lambda,\check\beta) \in \ZZ_{>0}$. One can see
+immediately that at least one of these roots, say $\alpha$, is
+simple. If $N_{\lambda}$ denotes the quotient of $M_{\lambda}$ by the 
+submodule generated 
+by a highest vector with weight $w_\alpha(\lambda)-\rho$, then $\gkdim
+N_{\lambda}=3$. The condition $\gkdim L_{\lambda}\leq 2$ implies the 
+reducibility of
+$N_{\lambda}$ which in turn implies $(\lambda,\check\gamma) \in \ZZ_{>0}$
+for the positive root $\gamma$ orthogonal to $\alpha$. That leaves only
+two possibilities for $\lambda$: $\lambda$ is either regular integral
+or $\lambda$ satisfies the conditions of the Lemma.
+
+It remains to eliminate the case of a regular integral non-dominant $\lambda$. By using the translation functor we may assume without loss of generality that $\lambda$ belongs to the Weyl group orbit of $\rho$. That leaves four possibilities for $\lambda$: $2\eps_1-\eps_2$, $\eps_1-2\eps_2$, $\eps_1+2\eps_2$, $-\eps_1+2\eps_2$.  Let $\pp_1$ and $\pp_2$ be the parabolic subalgebras obtained from $\bb$ by joining $\eps_2-\eps_1$ and $-2\eps_2$ respectively. It is  not difficult to verify the existence of embeddings
+\[
+L_{2,-1}\to U(\gg)\otimes_{U(\pp_1)}F^1_{2,1},\quad
+L_{1,-2}\to U(\gg)\otimes_{U(\pp_1)}F^1_{2,-1},
+\]
+\[
+L_{1,2}\to U(\gg)\otimes_{U(\pp_2)}F^2_{2,1},\quad
+L_{-1,2}\to U(\gg)\otimes_{U(\pp_2)}F^2_{1,2},
+\]
+where $F_{a,b}^1$ (respectively, $F_{a,b}^2$) is the finite
+ dimensional $\pp_1$-module (resp., $\pp_2$-module) with $\bb$-highest
+ weight $a\eps_1+b\eps_2-\rho$. Therefore 
+ the Gelfand-Kirillov dimension of any of the above four simple
+ modules equals the Gelfand-Kirillov dimension of the corresponding
+ parabolically induced module, i.e. 3. The proof is now complete.
+\end{proof}
+
+\begin {corollary}\label{cor101}
+Let $M$ be a simple bounded infinite-dimensional \gkm. Then $\ann M= \ann L_{a,b}$ for some $a,b$ with $a>|b|$, $a,b\in\half+\ZZ$. In particular, $\chi(a,b)$ is the central character of $M$.
+\end{corollary}
+\begin {proof}
+By Duflo's theorem, $\ann M = \ann L_{a,b}$ for some $a,b$. It is known that $\half\dim X_{L_{a,b}}=\gkdim L_{a,b}$, thus $\gkdim M\geq \gkdim L_{a,b}$. On the other hand, \mbox{$\displaystyle\gkdim M\leq 2=b_\kk$} holds by Theorem 4.4 in [PS2] . Hence $\gkdim L_{a,b}\leq 2$, and \refle{le100} applies to $L_{a,b}$.
+\end{proof}
+
+\begin {corollary}\label{cor102}
+Let $a,b\in \half+\ZZ$, $a>|b|$. Then $\BB_\kk^{\chi(a,b)}$ is equivalent to $\BB_\kk^{\chi(\threehalfs,\half)}$.
+\end {corollary}
+\begin{proof}
+It is well known that the categories $U^{\chi(a,b)}$-mod for $(a,b)$ as above are translation-equivalent to the category $U^{\chi^(\frac{3}{2},\frac{1}{2})}$-mod. Since the translation functor preserves the subcategories of bounded modules, the categories $\BB_\kk^{\chi(a,b)}$ and $\BB_\kk^{\chi(\threehalfs,\half)}$ are equivalent as well. 
+\end{proof}
+
+Our next step is to describe the quotient algebra $\univ(\gg) / \ann L_{\threehalfs,\half}$. In this section we denote by $A$ the Weyl algebra in two variables, i.e. the algebra of differential operators acting in $\CC[x,y]$. We introduce a $\ZZ_2$-grading, $A\eqdef A_0\oplus A_1$, by putting $\deg x=\deg y=\deg\del_x=\deg\del_y\eqdef \overline{1}\in\ZZ_2$. It is well known that there exists a surjective algebra homomorphism
+\[
+\kappa:\univ(\gg)\to A_0
+\]
+such that
+\[
+\kappa(e_1)=x\del_y,\quad \kappa (e_2)=\frac{y^2}{2},\quad \kappa (f_1)=y\del_x, \quad \kappa (f_2)=-\frac{\del_y^2}{2},
+\]
+\[
+\kappa(h_1)=x\del_x-y\del_y,\quad \kappa(h_2)=y\del_y+\half.
+\]
+The kernel of $\kappa$ equals $\ann L_{\threehalfs,\half}$. Furthermore, $\kappa (\kk)$ is spanned by $E\eqdef x\del_y$, $F\eqdef y\del_x$, $H\eqdef x\del_x-y\del_y$ in the root case, and respectively by $E\eqdef x\del_y+y^2$, $H\eqdef 3x\del_x+y\del_y+2$, $F\eqdef 3y\del_x-\del_y^2$ in the principal case.
+
+The problem of describing all simple modules in $\BB_\kk^{\chi(\threehalfs,\half)}$ is equivalent to the problem of describing all simple $(A_0,\kk)$-modules, i.e. all simple locally $\kappa(\kk)$-finite $A_0$-modules. The following lemma reduces this problem to a classification of all simple $(A,\kk)$-modules.
+
+\begin{lemma}\label{le103}
+Every simple $(A,\kk)$-module $M$ is a $\ZZ_2$-graded $A$-module, i. e. $M=M_0\oplus M_1$ where $M_0$ and $M_1$ are simple $(A_0,\kk)$-modules. Furthermore, $M=A\otimes_{A_0}M_0$, and the $\ZZ_2$-grading on $M$ is unique up to interchanging $M_0$ with $M_1$.
+\end{lemma}
+\begin{proof}
+The element $H$ (as defined above separately for the root case and for the principal case) acts semisimply on $M$ with integer eigenvalues. We define $M_0$ (respectively, $M_1$) as the direct sum of $H$-eigenspaces with even (resp., odd) eigenvalues. It is obvious that $M=M_0\oplus M_1$, that $M_0$ and $M_1$ are simple $A_0$ modules, and that $M=A\otimes_{A_0}M_0$. Since $M_0$ and $M_1$ are non-isomorphic as $A_0$-modules, the uniqueness follows from the fact that a decomposition of $M$ as an $A_0$-module into a direct sum of two non-isomorphic $A_0$-modules is unique.
+\end{proof}
+
+\textbf{Remark.} More generally, if $\kk'$ is a subalgebra of $\gg'=\sp(2m)$ such that the centralizer of $\kk'$ in the Weyl $A'$ algebra of $m$ indeterminates is abelian, every $(A',\kk')$-module is a multiplicity-free $(\gg',\kk')$-module whose primitive ideal is a Joseph ideal. F. Knop has classified all such subalgebras $\kk'$, \cite{Kn2}, which makes us optimistic that this idea can eventually lead to a classification of simple bounded $(\gg',\kk')$-modules.
+
+\medskip
+
+Let $\Fou:A\to A$ be the automorphism defined by
+\[
+\Fou(x)\eqdef \del_x,\quad \Fou(y)\eqdef\del_y,\quad\Fou(\del_x)\eqdef -x,\quad \Fou(\del_y)\eqdef -y
+\]
+If $M$ is an $A$-module, we denote by $M^\Fou$ the twist of $M$ by $\Fou$.
+\begin{theorem} \label{th500}\myLabel{th500}\relax
+In the root case, any simple $(A,\kk)$-module is isomorphic to $\CC[x,y]$ or $\CC[x,y]^\Fou$.
+\end{theorem}
+\begin{proof}
+Let $M$ be a simple $(A,\kk)$-module. Then there exists $ 0\neq v\in M $ such that $E\cdot v=0$, i.e. $ x\partial_{y}\cdot v=0 $. Hence either $ x $ or $ \partial_{y} $
+act locally nilpotently on $ M $.
+
+Assume first that $ \partial_{y} $ acts locally nilpotently on $ M $. Then $ \partial_{x}\in\left[{\mathfrak k},\partial_{y}\right] $
+also acts locally nilpotenly on $ M $. Let $ A^{+} $ be the abelian subalgebra in $A$
+generated by $ \partial_{x},\partial_{y} $. One can find $ 0\neq w\in M $ such that $ A^{+}\cdot w=0 $, and hence
+\begin{equation}
+M\cong A\otimes_{ A^{+}}\CC\cong\CC\left[x,y\right].
+\notag\end{equation}
+
+If $ x $ acts locally nilpotently on $ M $, one considers $ M^{\Fou} $ and reduces to the previous case.\end{proof}
+
+\begin{corollary} \label{cor35}\myLabel{cor35}\relax
+In the root case, up to isomorphism, there are exactly four simple $(\gg,\kk)$-modules with central character $\chi(\threehalfs,\half)$. As $\kk$-modules two of these modules are isomorphic to
+\begin{equation}
+V_{0}\oplus V_{2}\oplus V_{4}\oplus\dots\quad,
+\notag\end{equation}
+and the other two are isomorphic to
+\begin{equation}
+V_{1}\oplus V_{3}\oplus V_{5}\oplus\dots\quad .
+\notag\end{equation}
+\end{corollary}
+
+\begin{theorem} \label{th600}\myLabel{th600}\relax
+In the principal case, up to isomorphism, there exist exactly two simple $(A,\kk)$-modules and they have the following $\kk$-module decompositions:
+\begin{equation}
+V_{0}\oplus V_{3}\oplus V_{6}\oplus V_{9}\oplus\text{\dots , }\quad V_{1}\oplus V_{4}\oplus V_{7}\oplus V_{10}\oplus\dots\quad .
+\notag\end{equation}
+\end{theorem}
+\begin{proof}
+Note that $ \kk $ is a maximal subalgebra of $ \gg $. Hence, every element
+$ g\in{\mathfrak g}\backslash\kk $ acts freely on a simple $ \left( A,\kk\right) $-module $ M $. In particular, $ x^{2} $ acts
+freely on $ M $, and therefore $ x $ acts freely on $ M $. Let $ A_{x} $ be the localization
+of $A$ in $ x $, and $ M_{x}:={A}_{x}\otimes_{{A}}M $. Then $ M\subset M_{x} $. Fix $0\neq m\in M $ with $ E\cdot m=0 $ and
+$ H\cdot m=\lambda m $ for a minimal $ \lambda\in{\mathbb Z}_{\geq0} $. Since $E=x\del_y+y^2$ and $H=3x\del_x+y\del_y+2$, we have
+\[
+%original version below
+%\partial_{y}\cdot m=-\frac{y^{2}}{x}\cdot m\text{, }\partial_{x}\cdot m=\left(-\frac{y^{3}}{3x^{2}}+\frac{\lambda-2}{3x}\right)\cdot m.
+%suggested by Alexey correction below
+\partial_{y}\cdot m=-\frac{y^{2}}{x}\cdot m\text{, }\partial_{x}\cdot m=\left(\frac{y^{3}}{3x^{2}}+\frac{\lambda-2}{3x}\right)\cdot m.
+\notag
+\]
+Therefore, $ M_{x}={\mathbb C}\left[x,x^{-1},y\right]\cdot m $. Set
+\begin{equation}
+u_{\lambda}\eqdef x^{\frac{\lambda-2}{3}}\exp{}\left({\frac{-y^{3}}{3x}}\right).
+\notag
+\end{equation}
+Then it is easy to see that $ M_{x} $ is isomorphic to $ {\mathcal F}_{\lambda}\eqdef{\mathbb C}\left[x,x^{-1},y\right]u_{\lambda} $ and that
+$ {\mathcal F}_{\lambda}={\mathcal F}_{\lambda+3} $. Hence, $ M_{x} $ is isomorphic $ {\mathcal F}_{0},{\mathcal F}_{1} $ or $ {\mathcal F}_{2} $.
+
+Next we calculate $ \Gamma_\kk\left({\mathcal F}_{\lambda}\right)
+$. Note that the space of $ {\mathfrak b}_{{\mathfrak k}} $-singular
+vectors in $ {\mathcal F}_{\lambda} $ is spanned by the family $
+u_{\lambda+3k} $, $ k\in{\mathbb Z} $ of solutions to the
+differential equation
+\begin{equation}
+E\cdot u=x\partial_{y}(u)+y^{2}u=0.
+\notag
+\end{equation}
+If $ \lambda\in{\mathbb Z}_{\geq0} $, then $ F^{\lambda+1}\cdot u_{\lambda} $ is again a $ {\mathfrak b}_{{\mathfrak k}} $-highest vector of
+weight $ -\lambda-2 $. Therefore $ F^{\lambda+1}\cdot u_{\lambda}=c u_{-\lambda-2} $ for some constant $ c $. On the other hand,
+$ u_{-\lambda-2}\in{\mathcal F}_{\lambda} $ iff \mbox{$ \lambda-\left(-\lambda-2\right)=2\lambda+2\in3{\mathbb Z} $} or $ \lambda=3k+2 $. Hence $ F^{\lambda+1} \cdot u_{\lambda}=0 $ for $ \lambda=3k $ or $\lambda=3k+1 $.
+Thus, $ \Gamma_\kk\left({\mathcal F}_{0}\right) $ is generated by $ u_{3k} $ for $ k\geq0 $,  $ \Gamma_\kk\left({\mathcal F}_{1}\right) $ is generated by $ u_{3k+1} $ for
+$ k\geq0 $, and we have the $\kk$-module decompositions
+\begin{equation}
+\Gamma_\kk\left({\mathcal F}_{0}\right)\simeq V_{0}\oplus V_{3}\oplus V_{6}\oplus V_{9}\oplus\text{\dots , }\Gamma_\kk\left({\mathcal F}_{1}\right)\simeq V_{1}\oplus V_{4}\oplus V_{7}\oplus V_{10}\oplus\dots.
+\notag
+\end{equation}
+
+Let us prove that $ \Gamma_\kk\left({\mathcal F}_{0}\right) $ and $ \Gamma_\kk\left({\mathcal F}_{1}\right) $ are simple $ {A} $-modules. Indeed, let $ N $
+be a proper submodule of $\Gamma_\kk(\mathcal{F}_0)$. If $ u_{\lambda}\in N $, then $ u_{\lambda+3k}=x^{k} u_{\lambda}\in N $ for all positive $ k $.
+Choose the minimal $ \lambda $ such that $ u_{\lambda}\in N $. Then the quotient module has a
+decomposition $ V_{\lambda-3}\oplus\dots \oplus V_{0} $, hence it is finite-dimensional. Since $A$ has no non-zero finite-dimensional modules, this is a contradiction. The case of  $\Gamma_\kk(\mathcal{F}_1)$ is very similar. In this way we obtain that, if $ M_{x}={\mathcal F}_{0} $ or $ {\mathcal F}_{1} $, then $ M $ is respectively isomorphic to $ \Gamma_\kk\left({\mathcal F}_{0}\right) $ or $ \Gamma_\kk\left({\mathcal F}_{1}\right) $.
+
+Finally, we show that $ \Gamma_\kk\left({\mathcal F}_{2}\right)=0 $. It is sufficient to check that there is no
+non-zero $v\in{\mathcal F}_{2} $ with $F\cdot v=0 $ and
+\begin{equation}
+H \cdot v=\left(-3k-2\right)v\text{ for }k\in{\mathbb Z}_{\geq0}.
+\label{equ23}\end{equation}\myLabel{equ23,}\relax
+Indeed, then $v$ would be a solution of the differential equation
+\begin{equation}
+3y v_{x}=v_{yy}.
+\notag\end{equation}
+Since $ v\in{\mathcal F}_{2} $,
+\[
+v = g \left( x,y \right) \exp{} \left( -\frac{y^{3}}{3x} \right)
+\]
+for some $g\left( x,y \right) \in {\mathbb C} \left[x,x^{-1},y\right]$ such that
+\begin{equation}
+3y g_{x}=g_{yy}-2\frac{y^{2}}{x}g_{y}-2\frac{y}{x}g.
+\notag\end{equation}
+As $ g\left(x,y\right) $ is homogeneous with respect to $ H $, we may assume without loss of
+generality that
+\begin{equation}
+g\left(x,y\right)=\sum_{i=0}^{l} b_{i} x^{p-i}y^{3i+s},
+\notag\end{equation}
+where $ s\in{\mathbb Z}_{\geq0} $, $ p\in{\mathbb Z} $, $ b_{i}\in{\mathbb C} $, $ b_{0}=1 $. The equation on the highest term with respect to $ x $ gives the condition
+\begin{equation}
+\partial_{y}^{2}\left(y^{s}\right)=0,
+\notag\end{equation}
+or, equivalently, $ s=0,1$. But $ H\cdot g=\left(3p+s+2\right)g $, hence $ H \cdot v=\left(3p+s+2\right)\cdot v $. Therefore
+\begin{equation}
+H \cdot v=\left(3p+2\right) v\text{ or }H\cdot v=\left(3p+3\right) v,
+\notag\end{equation}
+and~\eqref{equ23} does not hold.\end{proof}
+
+\refth{th600} together with \refle{le103} yield the following.
+
+\begin{corollary} \label{cor36}\myLabel{cor36}\relax
+In the principal case, up to isomorphism, there are exactly four simple $(\gg,\kk)$-modules with central character $\chi(\threehalfs,\half)$. They have the following $\kk$-module decompositions:
+\begin{equation}\label{eq72}
+V_{0}\oplus V_{6}\oplus V_{12}\oplus\text{\dots , }V_{1}\oplus V_{7}\oplus V_{13}\oplus\text{\dots , }V_{3}\oplus V_{9}\oplus V_{15}\oplus\text{\dots , }V_{4}\oplus V_{10}\oplus V_{16}\oplus\dots .
+\end{equation}
+\end{corollary}
+
+\section{$\kk$-characters of simple  bounded ($\sp(4)$, $\sl(2))$-modules}\label{secKchars4-2}
+\subsection{The root case.}
+In this case, the four simple modules of \refcor{cor35} are nothing but the simple highest weight modules $L_{\threehalfs,\half}$, $L_{\threehalfs,-\half}$, and their respective restricted duals $L'_{\threehalfs,\half}$, $L'_{\threehalfs,-\half}$, i.e. the simple $\bb$-lowest weight modules with lowest weights $(-\threehalfs,-\half)$ and $(-\threehalfs, \half)$. Therefore, by Corollaries \ref{cor101}, \ref{cor102} we conclude that all simple bounded $(\gg,\kk)$-modules are precisely $L_{a,b}$ and the lowest weight modules $L_{-a,-b}'$, where $a>|b|\in\half+\ZZ$. Since $c(L_{a,b})=c(L_{-a,-b}')$, it suffices to compute $c(L_{a,b})$, for $a,b$ as above.
+
+The $\hh$-character of $L_{a,b}$ is given by the formula
+\begin{equation}\label{eq61}
+\ch_\hh L_{a,b}=\frac{(x^{a-b}-x^{b-a})(y^{a+b}-y^{-a-b})}{(x-x^{-1})(y-y^{-1})(xy-x^{-1}y^{-1})(x^{-1}y-xy^{-1})},
+\end{equation}
+where $x=e^{\frac{\eps_1-\eps_2}{2}}$, $y=e^{\frac{\eps_1+\eps_2}{2}}$. We rewrite \refeq{eq61} as
+\begin{equation}\label{eq92}
+\frac{(x^{a-b}-x^{b-a})(y^{a-b}-y^{b-a})}{(x-x^{-1})(y-y^{-1})}y^{-2}(1-x^2y^{-2})^{-1}(1-x^{-2}y^{-2})^{-1}.
+\end{equation}
+
+Next we note that
+\begin{equation}\label{eq93}
+(1-x^2y^{-2})^{-1}(1-x^{-2}y^{-2})^{-1}=\sum_{k=0}^{\infty}y^{-2k}(x^{2k}+x^{2k-4}+\dots+x^{-2k}),
+\end{equation}
+and use the expression
+\[
+z^k=x^k+x^{k-2}+\dots+x^{-k}=\frac{x^{k+1}-x^{-(k+1)}}{x-x^{-1}}
+\]
+to rewrite the right-hand side of \refeq{eq93} in the form
+\[
+\sum_{k=0}^{\infty}y^{-2k}(z^{2k}-z^{2k-2}+\dots+(-1)^k)=\frac{1}{1+y^{2}}\sum_{k=0}^\infty z^{2k}y^{-2k}.
+\]
+Now \refeq{eq92} becomes
+\[
+\ch_\hh L_{a,b}=z^{a-b-1}\frac{y^{a+b}-y^{-a-b}}{y-y^{-1}}\frac{1}{1+y^{2}}\sum_{k=0}^\infty z^{2k}y^{-2k}.
+\]
+To find the $\kk$-character of $L_{a,b}$, we set $y=1$:
+\begin{equation}\label{eq94}
+c(L_{a,b})=\frac{a+b}{2}z^{a-b-1}\otimes\sum_{k=0}^\infty z^{2k}.
+\end{equation}
+Thus, equation \refeq{eq94} implies the following result.
+\begin{theorem}~
+\begin{itemize}
+\item[(a)] If $a-b$ is even and $a+b$ is odd, then
+\[
+c(L_{a,b})=\frac{a+b}{2}(2z+4z^3+\dots+(a-b)z^{a-b-1}+(a-b)z^{a-b+1}+\dots).
+\]
+\item[(b)] If $a-b$ is odd and $a+b$ is even, then
+\[
+c(L_{a,b})=\frac{a+b}{2}(1+3z^2+5z^4+\dots+(a-b)z^{a-b-1}+(a-b)z^{a-b+1}+\dots).
+\]
+\item[(c)] In the case (a) the minimal $\kk$-type is $V_1$ and its multiplicity is $a+b$. In the case (b) the minimal $\kk$-type is $V_0$ and its multiplicity is $\frac{a+b}{2}$.
+\item[(d)] For sufficiently large $i$,
+\[
+c_i(L_{a,b})=c_{i+2}(L_{a+b})=\frac{(a^2+b^2)(1+(-1)^{a+b-i})}{4}.
+\]
+\item[(e)] $L_{a,b}$ is $\kk$-multiplicity-free if and only if $a=\threehalfs$, hence the only simple multiplicity-free $(\gg,\kk)$-modules are those with central character $\chi(\threehalfs, \half)$, i.e. the four $\gg$-modules from \refcor{cor36}.
+\end{itemize}
+\end{theorem}
+
+\subsection{The principal case.}
+We now proceed to calculating the $\kk$-characters of all simple bounded $(\gg,\kk)$-modules where $\gg=\sp(4)$ and $\kk$ is the principal subalgebra of $\gg$ fixed in \refse{se6}. In this case, let $M_{\threehalfs,\half}^0$ and $M_{\threehalfs,\half}^1$ denote the simple bounded $(\gg,\kk)$-modules with central character $\chi (\threehalfs,\half)$ and respective $\kk$-module decompositions $V_0\oplus V_6\oplus V_{12}\oplus\dots$ and  $V_1\oplus V_7\oplus V_{13}\oplus\dots$. We set $M_{a,b}^s \eqdef T_{a\eps_1+b\eps_2}^{\threehalfs\eps_1+\half\eps_2}(M_{\threehalfs,\half}^s)$ for $a,b\in\half+\ZZ, a>|b|$, $s\in\{0,1\}$, and $M_{a,b}^s:=0$ for $a,b\in\half+\ZZ, a\leq|b|$, $s\in\{0,1\}$. By $V_{p,q}$ we denote the simple finite-dimensional $\gg=\sp(4)$-module with $\bb$-highest weight $p\eps_1+q\eps_2$ ($p,q\in \ZZ_{\geq 0}$, $p\geq q$).
+\begin {lemma}\label{le200}
+We have
+\begin{equation}\label{eq1155}
+V_{1,0}\otimes M_{a,b}^s \simeq M_{a+1,b}^s\oplus M_{a,b+1}^s\oplus M_{a-1,b}^s\oplus M_{a,b-1}^s,
+\end{equation}
+and, for $a\neq |b|+1$,
+\begin{equation}\label{starstar}
+V_{1,1}\otimes M_{a,b}^s \simeq M_{a+1,b+1}^s\oplus M_{a,b}^s\oplus M_{a-1,b+1}^s\oplus M_{a+1,b-1}^s\oplus M_{a-1,b-1}^s.
+\end{equation}
+If $a=b+1,b>0$, then
+\begin{equation}\label{star1star}
+V_{1,1}\otimes M_{a,b}^s\simeq M_{a+1,b+1}^s\oplus M_{a+1,b-1}^s
+\oplus M_{a-1,b-1}^s,
+\end{equation}
+and if $a=-b+1,b<0$, then
+\begin{equation}\label{star2star}
+ V_{1,1}\otimes M_{a,b}^s\simeq M_{a+1,b+1}^s\oplus M_{a+1,b-1}^s
+\oplus M_{a-1,b+1}^s.
+\end{equation}
+\end{lemma}
+\newcommand{\mabs}{\MM_{a,b}^s}
+\begin{proof}
+Let us first prove \refeq{eq1155}. In what follows we use the notation of [PS2], Section 5. Let
+$\MM_{a,b}^s\eqdef\DD_{G/B}^{a,|b|}\otimes_{\univ^{\chi(a,b)}}M_{a,b}^s$
+be the localization of $M_{a,b}$ on $G/B$.
+Then as a sheaf of $\univ$-modules $V_{1,0}\otimes\MM_{a,b}^s$ has a filtration of length 4 with the following associated factors given in increasing order:
+\[
+\OO(-\eps_1)\otimes_\OO \mabs, \quad \OO(-\eps_2)\otimes_\OO\mabs,\quad
+\OO(\eps_2)\otimes_\OO\mabs,\quad \OO(\eps_1)\otimes_\OO\mabs.
+\]
+Note that $Z_\univ$ acts via a character on any of the four associated
+ factors, and that these characters are pairwise distinct.
+ Therefore, as a sheaf of $\univ$-modules, $V_{1,0}\otimes\mabs$ is isomorphic to the direct sum
+\[
+\left(\OO(-\eps_1)\otimes_\OO \mabs\right) \oplus \left(\OO(-\eps_2)
+\otimes_\OO\mabs\right)\oplus\left( \OO(\eps_2)\otimes_\OO\mabs\right)
+\oplus(\OO(\eps_1)\otimes\mabs).
+\]
+Now we calculate $\Gamma(G/B,V_{1,0}\otimes\mabs)$. If $a=b+1,b>0$, then
+$$\Gamma(G/B,\OO(-\eps_1)\otimes_\OO \mabs)=
+\Gamma(G/B,\OO(\eps_2)\otimes_\OO \mabs)=0$$
+ as there are no bounded modules with these central characters. Similarly, if
+$a=-b+1$, $b<0$, then
+$$\Gamma(G/B,\OO(-\eps_1)\otimes_\OO \mabs)=
+\Gamma(G/B,\OO(-\eps_2)\otimes_\OO \mabs)=0.$$
+In all other cases
+$$\Gamma(G/B,\OO(\pm\eps_1)\otimes_\OO \mabs)\simeq M^s_{a\pm 1,b},$$
+$$\Gamma(G/B,\OO(\pm\eps_2)\otimes_\OO \mabs)\simeq M^s_{a,b \pm 1}.$$
+Thus, \refeq{eq1155} is established.
+
+
+Consider \refeq{starstar}. Then as a sheaf of $\univ$-modules $V_{1,1}\otimes\MM_{a,b}^s$ has a filtration of length 5 with the following associated factors given in increasing order:
+\[
+\OO(-\eps_1-\eps_2)\otimes_\OO \mabs, \quad \OO(\eps_1-\eps_2)\otimes_\OO\mabs, \quad \mabs,
+\]
+\[
+\OO(-\eps_1+\eps_2)\otimes_\OO\mabs,\quad \OO(\eps_1+\eps_2)\otimes_\OO\mabs.
+\]
+Note that $Z_\univ$ acts via a character on any of the five associated
+factors, and that these characters are pairwise distinct if $a\neq
+|b|+1$. Therefore the proof of \refeq{starstar} is very similar to that of \refeq{eq1155}.
+
+Let now $a=b+1$. Then $\mabs$ and $\OO(-\eps_1+\eps_2)\otimes_\OO\mabs$
+both afford the central character $\chi (a,b)$. Thus, as a sheaf of
+$\univ$-modules,
+$V_{1,1}\otimes\mabs$ is isomorphic to the direct sum
+\begin{equation}\label{eqle112}
+\left(\OO(-\eps_1-\eps_2)\otimes_\OO \mabs\right) \oplus \left(\OO(\eps_1-\eps_2)\otimes_\OO\mabs\right)\oplus \left(\mabs\right)' \oplus
+\end{equation}
+\[
+\oplus\left( \OO(\eps_1+\eps_2)\otimes_\OO\mabs\right),
+\]
+where for $\left(\mabs\right)'$ we have an exact sequence
+\[
+0\to\mabs\to\left(\mabs\right)'\to\OO(-\eps_1+\eps_2)\otimes_\OO\mabs\to 0.
+\]
+We will show that $\Gamma(G/B,(\mabs)')=0$. It suffices to show that
+the tensor product $V_{1,1}\otimes M^s_{a,b}$ has no simple constituent with central character $\chi (a,b)$. Indeed, from \refeq{eq1155}, we see that $V_{1,0}\otimes V_{1,0}\otimes M^s_{a,b}$ has exactly two simple constituents affording the central character $\chi (a,b)$ and that both these constituents are isomorphic to $M^s_{a,b}$. Recall that
+\begin{equation*}%\label{eqle112}
+V_{1,0}\otimes V_{1,0}\cong V_{2,0}\oplus V_{1,1}\oplus V_{0,0}.
+\end{equation*}
+Clearly, $V_{0,0}\otimes M^s_{a,b}=M^s_{a,b}$. Furthermore, $V_{2,0}$ is the adjoint representation and therefore the very $\gg$-module structure on $M^s_{a,b}$ defines a non-trivial intertwining operator $V_{2,0}\otimes M^s_{a,b}\to M^s_{a,b}$. Thus, $V_{2,0}\otimes M^s_{a,b}$ must have a constituent isomorphic to $M^s_{a,b}$ and consequently $V_{1,1}\otimes M^s_{a,b}$ has no simple constituent affording the central character $\chi(a,b)$. By taking the global sections of the direct sum \refeq{eqle112} we obtain \refeq{star1star}. The case $a=-b+1$, which leads to \refeq{star2star}, is similar.
+\end{proof}
+
+\begin{lemma}\label{le201}
+There is the following $\kk$-module decomposition
+\begin{equation} \label {e1}
+M_{\threehalfs,-\half}^{s}\simeq V_{3+s}\oplus V_{9+s}\oplus V_{15+s}\oplus\dots\text{ .}
+\end{equation}
+\end{lemma}
+\begin {proof}
+By \refeq{eq1155},
+\[
+M_{\threehalfs,\half}^{0}\otimes V_{1,0}\simeq M_{\frac{5}{2},\half}^0\oplus M_{\threehalfs,-\half}^0.
+\]
+As a $\kk$-module, $V_{1,0}$ is isomorphic to $V_3$. Hence $M_{\threehalfs,\half}^{0}\otimes V_{1,0}$ has a $\kk$-module decomposition
+\[
+\label{e3}
+2V_3\oplus V_5\oplus \dots\quad .
+\]
+Since $\chi(\threehalfs, -\half)=\chi(\threehalfs,\half)$, $M_{\threehalfs,-\half}^0$ must have one of the four $\kk$-module decompositions \refeq{eq72}, and hence \refeq{eq1155} implies \refeq{e1} for $s=0$. Similarly, $M_{\threehalfs,\half}^1\otimes V_{1,0}$ has the $\kk$-module decomposition $V_2\oplus 2V_4\oplus \dots$, which implies \refeq{e1} for $s=1$.
+\end{proof}
+
+We set now $\phi_{a,b}^s(z)\eqdef c(M_{a,b}^s)$ for $a,b\in\half+\ZZ, a\geq|b|$, $s\in\{0,1\}$ and extend the definition of $\phi _{a,b}^s(z)$ to arbitrary pairs $a,b\in \half +\ZZ$ by putting
+\begin{equation}\label{eqDelta}
+\phi_{a,b}^s(z)=-\phi_{b,a}^s(z)=-\phi_{-b,-a}^s(z)=\phi_{-a,-b}^s(z).
+\end{equation}
+
+\begin {lemma}\label{le204}
+For all $a,b\in \half+\ZZ$ and $s\in\{0,1\}$,
+\[
+\pi(\phi_{a,b}^s(z^3+z+z^{-1}+z^{-3}))=\phi_{a-1,b}^s+\phi_{a+1,b}^s+\phi_{a,b+1}^s+\phi_{a,b-1}^s
+\]
+\[
+\pi(\phi_{a,b}^s(z^4+z^2+1+z^{-2}+z^{-4}))=\phi_{a+1,b+1}^s+\phi_{a-1,b+1}^s+\phi_{a+1,b-1}^s+\phi_{a-1,b-1}^s+\phi_{a,b}^s.
+\]
+(the projection $\pi$ is introduced in \refsec{secRank2Case}).
+\end{lemma}
+\begin{proof}
+Both equalities are straightforward corollaries of \refle{le200} and \refle{le202} (b) if one takes into account the isomorphisms of $\kk$-modules $V_{1,0}\simeq V_3$ and $V_{1,1}\simeq V_4$.
+\end{proof}
+
+We define now $\psi_{a,b}^s(z)\in \CC((z))$ via the conditions:
+\begin {itemize}
+\item[(c1)]$\displaystyle\psi_{a,b}^s(z)(z^3+z+z^{-1}+z^{-3})=\psi_{a+1,b}^s(z)+\psi_{a-1,b}^s(z)+\psi_{a,b+1}^s(z)+\psi_{a,b-1}^s(z)$,
+\item[(c2)]$\displaystyle\psi_{a,b}^s(z)(z^4+z^2+1+z^{-2}+z^{-4})=\psi_{a+1,b+1}^s(z)+\psi_{a+1,b-1}^s(z)+\psi_{a-1,b+1}^s(z)+\psi_{a-1,b-1}^s(z)+\psi_{a,b}^s(z)$,
+\item[(c3)]$\displaystyle\psi_{a,b}^s(z)=-\psi_{b,a}^s(z)=-\psi_{-b,-a}^s(z)=\psi_{-a,-b}^s(z)$,
+\item[(c4)]$\displaystyle\psi_{\threehalfs,\half}^s(z)=\frac{z^s}{1-z^6}, \quad \psi_{\threehalfs,-\half}^{s}(z)=\frac{z^{3+s}}{1-z^6}$.
+\end{itemize}
+
+\begin {theorem}\label{th206}
+The Laurent series $\psi_{a,b}^s(z)$ exists and is unique. Moreover,
+\begin{equation}\label{eq4}
+\psi_{a,b}^{s}(z)=\frac{ z^{5+s}(z^{3a+b}-z^{a+3b}-z^{-a-3b}+z^{-3a-b})-z^{6+s}(z^{3a-b}-z^{-a+3b}-z^{a-3b}+z^{-3a+b})}{(1-z^2)^2(1-z^4)(1-z^6)}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+We show first that $\psi_{a,b}^s(z)$ is unique if it exists. By \refeq{eqDelta} $\psi_{a,b}^s(z)$ is determined by $\psi_{a,b}^s(z)$ for $a>|b|$. Assume, by induction on $a$, that $\psi_{a,b}^s(z)$  is unique for all $a\leq a_0$, $|b|<a$. Then equation (c1) determines $\psi_{a_0+1,b}^s(z)$, and equation (c2) determines $\psi_{a_0+1,a_0}^s(z)$ and $\psi_{a_0+1,a_0+1}^s(z)$.
+
+To prove the existence of $\psi_{a,b}^s(z)$, it suffices to verify that the right-hand side of \refeq{eq4} satisfies all conditions (c1)-(c4). This is a direct calculation, which is simplified by the observation that both Laurent polynomials
+\[
+z^{3a+b}-z^{a+3b}-z^{-a-3b}+z^{-3a-b},
+\]
+\[
+z^{3a-b}-z^{-a+3b}-z^{a-3b}+z^{-3a+b}
+\]
+satisfy (c1),(c2) and (c3). The condition (c4) is satisfied only by the entire expression.
+\end{proof}
+
+\begin {corollary}\label{cor207}
+\[
+\phi_{a,b}^s=\pi(\psi_{a,b}^s).
+\]
+\end{corollary}
+
+\begin {corollary}\label{cor207'}
+Any simple bounded \gkm~ is either even or odd. More precisely, $M_{a,b}^s$ is even if $a+b+s$ is even, and $M_{a,b}^s$ is odd if $a+b+s$ is odd.
+\end{corollary}
+
+In the calculations below we use binomial coefficients $\binom{s}{k}$,
+for which we always assume $\binom{s}{k}=0$ if $s$ or $k$ are not integers.
+
+\begin {lemma}\label{le208}
+\[
+\frac{1}{(1-z^2)^2(1-z^4)(1-z^6)}=\sum_{n=0}^{\infty}\gamma(n)z^{2n},
+\]
+where
+\[
+\gamma(n)\eqdef \frac{1}{144}\left[ 119\binom{n+3}{3}-179\binom{n+2}{3}+109\binom{n+1}{3}-25\binom{n}{3}\right]+\frac{(-1)^n}{16}+\frac{\beta(n)}{9}
+\]
+and
+\[
+\beta(n)\eqdef\triplebrace{0}{n\equiv 1~(\mod 3)}{1}{n\equiv 0~(\mod 3)}{-1}{n\equiv -1~(\mod 3)}.
+\]
+\end{lemma}
+\begin{proof}
+The statement follows from the identity
+\[
+\frac{1}{(1-z^2)^2(1-z^4)(1-z^6)}=\frac{119-179z^2+109z^4-25z^6}{144(1-z^2)^4}+\frac{1}{16(1+z^2)}+\frac{1+z^2}{9(1+z^2+z^4)}.
+\]
+\end{proof}
+
+\begin {corollary}\label{cor208}
+Let
+\begin{eqnarray*}
+\delta_{a,b}^s(n)&=&\gamma\left(\frac{n-(3a+b+5)-s}{2}\right)-\gamma\left(\frac{n-(a+3b+5)-s}{2}\right)-\\
+&&-\gamma\left(\frac{n-(-a-3b+5)-s}{2}\right)+\gamma\left(\frac{n-(-3a-b+5)-s}{2}\right)-\\
+&&-\gamma\left(\frac{n-(3a-b+6)-s}{2}\right)+\gamma\left(\frac{n-(-a+3b+6)-s}{2}\right)+\\
+&&+\gamma\left(\frac{n-(a-3b+6)-s}{2}\right)-\gamma\left(\frac{n-(-3a+b+6)-s}{2}\right).
+\end{eqnarray*}
+Then
+\[
+c_i(M_{a,b}^s)=\delta_{a,b}^s(i)-\delta_{a,b}^s(-i-2).
+\]
+\end{corollary}
+\begin{proof}
+The statement follows directly from \refth{th206}, \refcor{cor207}, and \refle{le208}.
+\end{proof}
+
+\begin{corollary}\label{cor209}
+For any simple bounded \gkm~ $M$, $c_i(M)=c_{i+6}(M)$ for sufficiently large $i\in\NN$.
+\end{corollary}
+\begin{proof}
+The given \gkm~ $M$ is isomorphic to $M_{a,b}^s$ for some $a,b\in \half+\ZZ$, $s\in\{0,1\}$. For sufficiently large $i$, $\delta_{a,b}^s(-i-2)=0$, hence $c_i(M)=\delta_{a,b}^s(i)$. The explicit formula for $\gamma(i)$ from \refle{le208} implies that $\delta_{a,b}^s(i+6n)$ is a polynomial in $n$. Since this polynomial is a bounded function, it is necessarily a constant.
+\end{proof}
+
+For large enough values of $i$, \refcor{cor209} enables us to write $c_{\overline{i}}(M_{a,b}^s)$, $\overline{i}\in \ZZ_6$. Here are simple explicit expressions for $c_{\overline{i}}(M_{a,b}^s)$.
+
+\begin {theorem}\label{thX}
+Let $\sigma_{a,b}\eqdef\triplebrace{1}{\text{ if }3|2a,3\nmid 2b}{-1}{\text{ if }3|2b,3\nmid 2a}{0}{\text{ in all other cases}}$.
+
+Then
+\flushleft{
+$\displaystyle
+c_{\overline{0+s}}(M_{a,b}^s)=\frac{1}{6}(1+(-1)^{a+b})\left(\frac{a^2-b^2}{2} +2\sigma_{a,b}\right),
+$
+}
+\flushleft{
+$\displaystyle
+c_{\overline{1+s}}(M_{a,b}^s)=c_{\overline{5+s}}(M_{a,b}^s)=\frac{1}{6}(1-(-1)^{a+b})\left(\frac{a^2-b^2}{2} -\sigma_{a,b}\right),
+$
+}
+\flushleft{
+$\displaystyle
+c_{\overline{2+s}}(M_{a,b}^s)=c_{\overline{4+s}}(M_{a,b}^0)=\frac{1}{6}(1+(-1)^{a+b})\left(\frac{a^2-b^2}{2} -\sigma_{a,b}\right),
+$
+}
+\flushleft{
+$\displaystyle
+c_{\overline{3+s}}(M_{a,b}^s)=\frac{1}{6}(1-(-1)^{a+b})\left(\frac{a^2-b^2}{2} +2\sigma_{a,b}\right).
+$
+}
+
+\end{theorem}
+\begin{proof}
+Let $\{\xi_{\bar i}\}_{\bar i\in\ZZ_6}$ denote the standard basis in $\CC^6$. Set
+\[
+\overline{\phi}_{a,b}^s\eqdef\sum_{\overline{i}\in\ZZ_6}c_{\overline{i}}(M_{a,b}^s)\xi_{\bar
+  i}
+\]
+for $a,b\in\half+\ZZ$, $a\geq |b|$. Extend $\overline{\phi}_{a,b}^s$ to all $a,b\in\half+\ZZ$ by putting
+\[
+\overline{\phi}_{a,b}^s =-\overline{\phi}_{b,a}^s=-\overline{\phi}_{-b,-a}^s=\overline{\phi}_{-a,-b}^s,
+\]
+and let $S,T:\CC^6\to \CC^6$ be the linear operators
+\[
+S(\xi_{\overline{i}})\eqdef 2\xi_{\overline{i+3}}+\xi_{\overline{i+1}}+\xi_{\overline{i-1}},\quad T(\xi_{\overline{i}})\eqdef 2\xi_{\overline{i+2}}+2\xi_{\overline{i+4}}.
+\]
+Then $\overline{\phi}_{a,b}^s$ satisfy the following version of conditions (c1)-(c4):
+\begin{itemize}
+\item[(c5)] $S(\overline{\phi}_{a,b}^s )=\overline{\phi}_{a+1,b}^s +\overline{\phi}_{a,b+1}^s +\overline{\phi}_{a-1,b}^s +\overline{\phi}_{a,b-1}^s$,
+\item[(c6)] $T(\overline{\phi}_{a,b}^s )=\overline{\phi}_{a+1,b+1}^s +\overline{\phi}_{a-1,b+1}^s +\overline{\phi}_{a+1,b-1}^s +\overline{\phi}_{a-1,b-1}^s$,
+\item[(c7)] $\overline{\phi}_{a,b}^s =-\overline{\phi}_{b,a}^s =-\overline{\phi}_{-b,-a}^s =\overline{\phi}_{-a,-b}^s $,
+\item[(c8)] $\overline{\phi}_{\threehalfs,\half}^s=\xi_{\overline{s}},\quad  \overline{\phi}_{\threehalfs,-\half}^s=\xi_{\overline{3+s}}$.
+\end{itemize}
+Denote by $\omega$ a primitive sixth root of unity. Then $\displaystyle\{\eta_{\overline{i}}\eqdef\sum_{\overline{j}\in \ZZ_6}\omega^{\overline{i}\overline{j}}\xi_{\overline{j}}\}_{\overline{i}\in\ZZ_6}$ is an eigenbasis for $S$ and $T$.
+Put
+\[
+\eta_{\overline{0},a,b}\eqdef \frac{(a^2-b^2)}{2}\eta_{\overline{0}},\quad \eta_{\overline{3},a,b}\eqdef (-1)^{a+b}\frac{(a^2-b^2)}{2}\eta_{\overline{3}},
+\]
+\[
+\eta_{\overline{2},a,b}\eqdef \sigma_{a,b}\eta_{\overline{2}},\quad \eta_{\overline{4},a,b}\eqdef \sigma_{a,b}\eta_{\overline{4}},
+\]
+\[
+\eta_{\overline{3},a,b}\eqdef (-1)^{a+b}\sigma_{a,b}\eta_{\overline{3}},\quad \eta_{\overline{5},a,b}\eqdef (-1)^{a+b}\sigma_{a,b}\eta_{\overline{5}}.
+\]
+Using the identity
+\[
+\sigma_{a,b}=\frac{\omega^{2b}+\omega^{-2b}-\omega^{2a}-\omega^{-2a}}{3},
+\]
+one can easily check that $\eta_{\overline{i},a,b}$ satisfies (c5)-(c7). The linear combination
+\[
+\overline{\phi}_{a,b}^s=\frac{1}{6}\sum_{\overline{i}\in\ZZ_6}\omega^{-\overline{is}}\eta_{\overline{i},a,b}
+\]
+satisfies the condition (c8), hence its coefficients in the basis
+$\{\xi_{\bar i}\}$ equal $c_{\overline{i}}\left(M_{a,b}^s\right)$.
+\end{proof}
+
+\begin{corollary}\label{cor712}
+The following is a complete list of multiplicity-free simple \gkm s: $M_{\threehalfs,\pm\half}^{s}$,  $M_{\frac{5}{2},\pm \threehalfs}^s$, $M_{\frac{5}{2},\pm\half}^{s}$,$M_{\frac{7}{2},\pm\frac{5}{2}}^{s}$, $s\in\{0,1\}$.
+\end{corollary}
+\begin {proof}
+A straightforward computation based on \refth{thX} shows that $c_{\overline{i}}(M_{a,b}^s)\in\{0,1\}$ for $\overline{i}\in\ZZ_6$ iff $(a,b)$ is one of the pairs $\displaystyle\left(\frac{3}{2},\pm\frac{1}{2} \right)$, $\displaystyle\left(\frac{5}{2},\pm\frac{3}{2} \right)$, $\displaystyle\left(\frac{5}{2},\pm\frac{1}{2} \right)$, and $\displaystyle\left(\frac{7}{2},\pm\frac{5}{2} \right)$. Then, using \refcor{cor208} one verifies that all modules $M_{a,b}^s$ for $(a,b)$ as above are indeed multiplicity-free.
+\end{proof}
+
+\begin {theorem}\label{th813}~
+
+\begin {itemize}
+\item[(a)] The minimal $\kk$-type of any even (respectively, odd) bounded simple \gkm~M equals $V_0$, $V_2$ or $V_4$ (resp., $V_1$ or $V_3$).
+\item[(b)] If $M$ is an even (respectively, odd) simple module in $\BB^{\chi(a,b)}$, then $c_0(M)$ (resp., $c_1(M)$) equals $\displaystyle \frac{a\pm b}{6}+\eps$ or
+$\displaystyle \frac{a\pm b}{12}+\eps$ (resp., $\displaystyle \frac{a\pm b}{3}+\eps$ or $\displaystyle \frac{a\pm b}{6}+\eps$) for some $\eps$ with $|\eps|<1$.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+(a) Note that for any bounded \gkm~M, $c_i(M)$ equals the constant term of the Laurent polynomial $z^{-i}(1-z^{2i+2})c(M)$. Hence $c_1(M)+c_3(M)$ equals the constant term in the Laurent expansion of $(z^{-1}(1-z^4)+z^{-3}(1-z^8))c(M)$. A straightforward calculation shows that for $M=M_{a,b}^s$ the latter is nothing but the constant term of the Laurent series
+\[
+\frac{z^{3a+b+2+s}-z^{a+3b+2+s}-z^{-a-3b+2+s}+z^{-3a-b+2+s}-z^{-3a+b+3+s}}{(1-z^2)^3}+
+\]
+\[
++\frac {z^{a-3b+3+s}+z^{-a+3b+3+s}-z^{3a-b+3+s}}{(1-z^2)^3}.
+\]
+Using the identity
+\begin{equation}\label{eq851}
+\frac{1}{(1-z^2)^3}=\sum_{n=0}^{\infty}\binom{n+2}{2}z^{2n},
+\end{equation}
+we obtain
+\begin{equation}
+\label{eqX}
+c_1(M_{a,b}^s)+c_3(M_{a,b}^s)\eqdefrev d_{a,b}^s=\binom{\frac{-3a-b+2-s}{2}}{2}-\binom{\frac{-a-3b+2-s}{2}}{2}-\binom{\frac{a+3b+2-s}{2}}{2}+\binom{\frac{3a+b+2-s}{2}}{2}
+\end{equation}
+\[
+-\binom{\frac{3a-b+1-s}{2}}{2}+\binom{\frac{-a+3b+1-s}{2}}{2}+\binom{\frac{a-3b+1-s}{2}}{2}-\binom{\frac{-3a+b+1-s}{2}}{2},
+\]
+where we set $\binom{l}{2}:=0$ for $l\notin\ZZ_{\geq 0}$.
+
+This expression is a piecewise polynomial function which equals identically zero whenever $M_{a,b}^s$ is even, i.e. when $a+b+s$ is even. In fact, the right hand side of \refeq{eqX} turns out to be very simple as an explicit calculation shows that, for $a+b+s$ odd,
+\begin{equation}\label{eq813}
+d_{a,b}^s=\doublebrace{\displaystyle\frac{a+(-1)^{s+1}b}{2}}{\mathrm{ for~} a+(-1)^s3b\geq 0}{a+(-1)^{s}b}{\mathrm{ for~} a+(-1)^s3b\leq 0}.
+\end{equation}
+Since $a>|b|$, the right hand side of \refeq{eq813} is never 0, i.e. the minimal $\kk$-type of $M_{a,b}^s$ is $V_1$ or $V_3$ whenever $a+b+s$ is odd.
+
+A similar analysis proves that the minimal $\kk$-type of $M_{a,b}^s$ is $V_0$, $V_2$, or $V_4$ whenever $a+b+s$ is even. Indeed, in this case
+\[
+e_{a,b}^s\eqdef c_0(M_{a,b}^s)+c_2(M_{a,b}^s)+c_4(M_{a,b}^s)
+\]
+equals the constant term of the Laurent series
+\[
+(1-z^2)+z^{-2}(1-z^6)+z^{-4}(1-z^{10})c(M)\quad .
+\]
+Using the identity
+\[
+\frac{(1-z^2)+z^{-2}(1-z^6)+z^{-4}(1-z^{10})}{(1-z^2)^2(1-z^4)(1-z^6)}=\frac{1}{8z^4}\left( \frac{7+4z^2+z^4}{(1-z^2)^3}+\frac{1}{(1+z^2)}\right),
+\]
+as well as the identity \refeq{eq851}, we calculate
+\begin{eqnarray*}
+e_{a,b}^s&=& \theta\left( \frac{-3a-b-1-s}{2} \right)-\theta\left( \frac{-a-3b-1-s}{2} \right)-\\
+&&-\theta\left( \frac{a+3b-1-s}{2} \right)+\theta\left( \frac{3a+b-1-s}{2} \right)-\\
+&&-\theta\left( \frac{3a-b-2-s}{2} \right)+\theta\left( \frac{-a+3b-2-s}{2} \right)+\\
+&&+\theta\left( \frac{a-3b-2-s}{2} \right)-\theta\left( \frac{-3a+b-2-s}{2} \right),
+\end{eqnarray*}
+where $\displaystyle\theta(n)\eqdef \frac{3}{4}n^2+\frac{3}{2}n+\frac{7}{8}+\frac{(-1)^n}{8}$ for $n\in\ZZ_{\geq 0}$ and $\theta(n):=0$ otherwise. Further calculations show:
+\begin{equation}\label{eqeabs}
+e_{a,b}^s=\doublebrace{\displaystyle \frac{3}{4}\left(a+(-1)^{s+1}b\right)+\frac{(-1)^ {\frac{a+(-1)^{s+1}b-1}{2}}}{4}} {\mathrm{~for~}(-1)^sa+3b\geq 0}{\displaystyle\frac{3}{2}\left(a+(-1)^sb\right)}{\mathrm{~for~}(-1)^sa+3b\leq 0}
+\end{equation}
+under the assumption that $a+b+s$ is even. Since the right-hand side of \refeq{eqeabs} never equals 0, we obtain that $e_{a,b}^s\neq 0$ under the same assumption. Hence the minimal $\kk$-type of any even simple bounded \gkm~ equals $V_0$, $V_2$, or $V_4$.
+
+(b) To compute $c_0(M)$ we use the identity
+\begin{eqnarray*}
+\frac{1-z^2}{(1-z^2)^2(1-z^4)(1-z^6)}&=&\frac{1}{(1-z^2)(1-z^4)(1-z^6)}\\
+&=&\frac{47-52z^2+17z^4}{72(1-z^2)^3}+\frac{1}{8(1+z^2)}+\frac{2-z^2-z^4}{9(1-z^6)}
+\end{eqnarray*}
+which yields
+\begin{eqnarray*}
+c_0(M_{a,b}^s)&=&\gamma'\left( \frac{-3a-b-5-s}{2}\right)-\gamma'\left( \frac{-a-3b-5-s}{2}\right)-\\
+&&-\gamma'\left( \frac{a+3b-5-s}{2}\right)+\gamma'\left( \frac{3a+b-5-s}{2}\right)-\\
+&&-\gamma'\left( \frac{3a-b-6-s}{2}\right)+\gamma'\left( \frac{-a+3b-6-s}{2}\right)+\\
+&&+\gamma'\left( \frac{a-3b-6-s}{2}\right)-\gamma'\left( \frac{-3a+b-6-s}{2}\right),
+\end{eqnarray*}
+where
+\[
+\gamma'(n)\eqdef
+\frac{n^2}{12}+\frac{n}{2}+\frac{94}{144}+\frac{(-1)^n}{8}+\frac{\sigma'(n)}{9},
+\]
+\[
+\sigma'(n)\eqdef\doublebrace{-1}{3\nmid n}{2}{3\mid n}
+\]
+for $n\in \ZZ_{\geq 0}$ and $\gamma'(n)=\sigma'(n):=0$ otherwise. Similarly, using the identity
+\begin{eqnarray*}
+\frac{z^{-1}(1-z^4)}{(1-z^2)^2(1-z^4)(1-z^6)}=z^{-1}\left( \frac{8-7z^2+2z^4}{9(1-z^2)^3}+\frac{1+z^2-2z^4}{9(1-z^6)}\right)
+\end{eqnarray*}
+we obtain
+\begin{eqnarray*}
+c_1(M_{a,b}^s)&=&\gamma''\left( \frac{-3a-b-4-s}{2}\right)-\gamma''\left( \frac{-a-3b-4-s}{2}\right)-\\
+&&-\gamma''\left( \frac{a+3b-4-s}{2}\right)+\gamma''\left( \frac{3a+b-4-s}{2}\right)-\\
+&&-\gamma''\left( \frac{3a-b-5-s}{2}\right)+\gamma''\left( \frac{-a+3b-5-s}{2}\right)+\\
+&&+\gamma''\left( \frac{a-3b-5-s}{2}\right)-\gamma''\left( \frac{-3a+b-5-s}{2}\right),
+\end{eqnarray*}
+where
+\[
+\gamma''(n)\eqdef \frac{n^2}{6}+\frac{5n}{6}+\frac{8}{9}+\frac{\sigma''(n)}{9},
+\]
+\[
+\sigma''(n)\eqdef\doublebrace{-2}{n= -1 (\mod 3)}{1}{n\neq -1 (\mod 3)}
+\]
+for $n\in \ZZ_{\geq 0}$ and $\gamma''(n)=\sigma''(n):=0$ otherwise. Using the expressions for $c_0(M^s_{a,b})$ and $c_1(M^s_{a,b})$ we notice that the terms $\frac{(-1)^n}{8}+\frac{\sigma'(n)}{9}$ and $\frac{\sigma''(n)}{9}$ will give a contribution $\eps$ with $|\eps|<1$. Thus, a direct computation implies
+\[
+c_0(M^s_{a,b})=\doublebrace{\frac{a+(-1)^sb}{6}+\eps}{\mathrm{~for~}a+(-1)^s3b<0}{\frac{a-(-1)^sb}{12}+\eps}{\mathrm{~for~}a+(-1)^s3b>0},
+\]
+\[
+c_1(M^s_{a,b})=\doublebrace{\frac{a-(-1)^sb}{6}+\eps}{\mathrm{~for~}a+(-1)^s3b>0}{\frac{a+(-1)^sb}{3}+\eps}{\mathrm{~for~}a+(-1)^s3b<0.}
+\]
+\end{proof}
+
+\begin{corollary}
+For $a\pm b\geq 24$, the minimal $\kk$-type of $M_{a,b}^s$ equals $V_0$ (respectively, $V_1$) if $a+b+s$ is odd (resp., even).
+\end{corollary}
+
+\begin{corollary}
+A simple \gkm~ with minimal $\kk$-type $V_i$ for $i\geq 5$ is unbounded.
+\end{corollary}
+
+Note that all simple \gkm s of finite type over $\kk$ with minimal $\kk$-type $V_i$ for $i\geq 6$ are classified in \cite{PZ2}. In particular it is proved, \cite{PZ2}, that if $M$ is a \gkm~ with minimal $\kk$-type $V_i$ for $i\geq 6$, then $M$ is necessarily of finite type over $\kk$ and $c_i(M)=1$. Recently G. Zuckerman and the first named author have shown that this holds also for $i=5$, and \refth{th813} (b) implies that the statement is false for $i\leq 1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{20}
+\bibitem[B]{B} V. Bargmann, Irreducible unitary representations of the Lorentz group, Ann. of Math. (2) \textbf{48} (1947), 586--640.
+\bibitem[BG]{BG} J. Bernstein, S. Gelfand, Tensor products of finite and infinite-dimensional representations of semi-simple Lie algebras, Compositio Math. \textbf{41} (1980), 245--285.
+\bibitem[Dix]{Dix} J. Dixmier, Enveloping algebras, North-Nolland Math. Library, 14, North Holland, Amsterdam, 1977.
+\bibitem[F]{F} S. L. Fernando, Lie algebra modules with finite-dimensional weight spaces I, Trans. Amer. Math. Soc. \textbf{322} (1990), 757--781.
+\bibitem[Fo]{Fo} A. I. Fomin, Quasisimple irreducible representations of the group $SL(3,\mathbb R)$. Func. Anal. i Pril. \textbf{9} (1975), No 3, 67--74.
+\bibitem[GN]{GN} I. M. Gelfand, M. A. Naimark, Unitary representations of the Lorentz group, Izvestiya Akad. Nauk SSSR, Ser. Mat. \textbf{11} (1947), 411--504.
+%\bibitem[GP]{GP} I. M. Gelfand, V. A. Ponomarev, The classification of
+% indecomposable infinitesimal representations of the Lorentz group,
+% Dokl. Acad. Nauk USSR 176 (1967), 502-505.
+\bibitem[HC]{HC} Harish-Chandra, Infinite irreducible representations of the Lorentz group, Proc. Roy. Soc. London, Ser. A \textbf{189} (1947), 372--401.
+%\bibitem[H]{H} A. van den Hombergh, Harish-Chandra modules and
+ % representations of step algebras, Thesis Nijmegen University (1976).
+%\bibitem[J]{J} A. Joseph, Some ring theoretic techniques and open
+% problems in enveloping algebras, Noncommutative Rings, (Berkeley,
+ % Calif., 1989),  MSRI Publ. 24, Springer Verlag, New York, 1992.
+%\bibitem[K]{K} M. Kashiwara, B-functions and holonomic systems. Rationality of roots of B-functions. Invent. Math. \textbf{38} (1976/77), 33--53
+%\bibitem[K1]{K1} V. G. Kac, Some remarks on nilpotent of orbits, J. Algebra \textbf{64} (1980), 190--213.
+%\bibitem[K2]{K2} V. G. Kac, Constructing groups associated to infinite-dimensional Lie algebras, Infinite-dimensional groups with applications (Berkeley, Calif., 1984), MSRI Publ. 4, Springer-Verlag, New York, 1985.
+%\bibitem[KL]{KL} G.R. Krause, T.H. Lenagan, Growth of algebras and Gelfand-Kirillov dimension, Pitman, Boston-London-Melbourne, 1985.
+\bibitem[Kn1]{Kn1} F. Knop, Der Zentralisator einer Liealgebra in
+einer einhuellenden Algebra (German), J. Reine Angew. Math.  \textbf{406} (1990), 5--9.
+\bibitem[Kn2]{Kn2} F. Knop, Classification of multiplicity-free symplectic  representations.  J. Algebra  \textbf{301} (2006), 531--553.
+\bibitem[KV]{KV} A. W. Knapp, D. Vogan, Jr., Cohomological induction and unitary representations, Princeton University Press, Princeton, NJ, 1995.
+%\bibitem[M]{M} O. Mathieu, Classification of irreducible weight
+ % modules, Ann. Fourier \textbf{50} (2000),  537--592.
+\bibitem[OV]{OV} A. Onishchik, E. Vinberg, Lie groups and algebraic
+  groups. Springer series in Soviet mathematics, Springer-Verlag,
+  Berlin, 1990.
+\bibitem[PS1]{PS1} I. Penkov, V. Serganova, Generalized Harish-Chandra modules, Moscow Math. J. \textbf{2} (2002), 753--767.
+\bibitem[PS2]{PS2} I. Penkov, V. Serganova, On bounded generalized Harish-Chandra modules, preprint, 2009, math.jacobs-university.de/penkov
+\bibitem[PSZ]{PSZ} I. Penkov, V. Serganova, G. Zuckerman, On the existence of \gkm s of finite type, Duke Math. J. \textbf{125} (2004), 329-349.
+\bibitem[PZ1]{PZ1} I. Penkov, G. Zuckerman, Generalized Harish-Chandra modules: a new direction of the structure theory of representations, Acta Applic. Math. \textbf{81} (2004), 311--326.
+\bibitem[PZ2]{PZ2} I. Penkov, G. Zuckerman, Generalized Harish-Chandra modules with generic minimal $\kk$-type, Asian J. of Math. \textbf{8} (2004), 795-812.
+\bibitem[PZ3]{PZ3} I. Penkov, G. Zuckerman, A construction of generalized Harish-Chandra  modules with arbitrary minimal $\kk$-type, Canad. Math. Bull. 50 (2007), 603-609.
+\bibitem[S]{S} Dj. Sijacki, All $SL(3,\mathbb R)$ ladder
+  representations, J. Math. Phys. \textbf{31} (1990), 1872--1876.
+%\bibitem[Sch]{Sch}W. Schmid, Die Randwerte holomorpher Funktionen auf
+%  hermitesch symmetrischen Raeumen (German),
+% Invent. Math. \textbf{116}(1969/1970), 61--80.
+\bibitem[Sp]{Sp} B. Speh, The unitary dual of $GL(3,\mathbb R)$ and
+  $GL(4,\mathbb R)$, Ann. Math.\textbf{258}(1981/82), 113--133.  
+%\bibitem[Str]{Str} R.S. Strichartz, Harmonic analysis on  hyperboloids,
+%J. Fuct. Analysis \textbf{12}(1973), 341--383.
+\bibitem[V1]{V1} D. Vogan, Jr., Singular unitary representations. In Lecture Notes in Mathematics 880, Springer-Verlag, 1981.
+\bibitem[V2]{V3} D. Vogan, Jr., The unitary dual of
+  $G_2$. Invent. Math. \textbf{116} (1994), 677--791.
+%\bibitem[VK]{VK} E.B. Vinberg, B.N. Kimelfield, Homogeneous domains on flag manifolds and spherical subgroups of semi-simple Lie groups, Func. Anal. i Pril. \textbf{12} (1978), 12--19.
+%\bibitem[Z]{Z} G. Zuckerman, Tensor product of finite and
+% infinite-dimensional representations of semisimple Lie
+%  groups, Ann. Math. \textbf{106}(1977), 295--308.
+
+
+\end{thebibliography}
+
+\end{document}

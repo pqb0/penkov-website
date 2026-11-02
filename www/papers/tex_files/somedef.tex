@@ -1,0 +1,172 @@
+
+%%%%%my
+\def\Exp{
+%\text{Exp}\,
+{\rm Exp}\, }
+
+\def\Lie{
+{\rm Lie}\, }
+
+\def\gyr{
+{\rm gyr}\, }
+
+\def\sign{
+{\rm sign} }
+
+\def\Sgn{
+{\rm Sgn} }
+
+\def\Ad{
+{\rm Ad}}
+
+\def\AdS{
+{\rm AdS}}
+
+%\def\Im{
+%{\rm Im}}
+
+\def\im{
+{\rm im}}
+
+\def\sp{
+{\rm sp}}
+
+\def\Sp{
+{\rm Sp}}
+
+\def\ad{
+{\rm ad}}
+
+\def\Span{
+{\rm Span}\, }
+
+\def\Id{
+{\rm Id}\, }
+
+
+\def\id{
+{\rm id}\, }
+
+\def\Sym{
+{\rm Sym}\, }
+
+\def\Stab{
+{\rm Stab}\, }
+
+\def\Tr{
+{\rm Tr}}
+
+\def\tr{
+{\rm tr}}
+
+\def\Gr{
+{\rm Gr}}
+
+\def\SO{
+{\rm SO}}
+
+\def\SU{
+{\rm SU}}
+
+\def\U{
+{\rm U}}
+
+\def\col{
+{\rm col}}
+
+\def\ker{
+{\rm ker}}
+
+%\def\Re{
+%{\rm Re}}
+
+\def\Mat{
+{\rm Mat}}
+
+\def\det{
+{\rm det}}
+
+\def\diag{
+{\rm diag}}
+
+\def\tan{
+{\rm tan}}
+
+\def\const{
+{\rm const}}
+
+\def\nD{
+\mbox{$\not\!\!D$}}
+
+
+\def\lr{
+%\langle\text{\ ,\ }\rangle
+{\arraycolsep=3pt
+\begin{array}{ccc}
+\langle & \text{,} & \rangle
+\end{array}}
+}
+
+\def\lrb{
+%\langle\text{\ ,\ }\rangle
+{\arraycolsep=3pt
+\begin{array}{ccc@{}}
+\{ & \text{,} & \}
+\end{array}}
+}
+
+\def\nf{\normalfont}
+
+
+\newcommand{\rj}{\mathrm{j}}
+\newcommand{\rk}{\mathrm{k}}
+\newcommand{\e}{\mathrm{e}}
+\renewcommand{\i}{\mathrm{i}}
+\renewcommand{\d}{\mathrm{d}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{remarks}[theorem]{Remarks}
+
+%%% From Holzapfels
+\newtheorem{definitions}[theorem]{Definitions}
+%\newtheorem{Example}[theorem]{Example.}
+\newtheorem{examples}[theorem]{Examples}
+%\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{fact} [theorem] {Fact}
+\newtheorem{facts} [theorem] {Facts}
+\newtheorem{Char} [theorem] {Characterisation}
+\newtheorem{maintheorem} [theorem] {Main Theorem}
+%%% From Holzapfels
+
+
+
+
+\def\aut#1#2{
+{%\small
+
+\noindent
+\parbox[t]{6.5cm}{#1}
+ \hfill
+\parbox[t]{6.5cm}{#2}
+}
+}
+
+
+\def\enu#1{
+\mbox{}\hspace*{0.5cm}\begin{minipage}[t]{12cm}
+\begin{enumerate}\itemsep=-3pt
+#1
+\end{enumerate}
+\vspace{4pt}
+\end{minipage}
+}
+
+\newenvironment{proof}[1][{}]{\par\noindent\textbf{Proof{#1}: }}{\hspace*{\fill}$\blacksquare$\smallskip\noindent\par}

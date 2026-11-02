@@ -1,0 +1,75 @@
+\NeedsTeXFormat{LaTeX2e}
+\documentclass[10pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{floatflt}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{subfig}
+\usepackage[ngerman,english]{babel}
+\usepackage{listings}
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcase}
+\usepackage{microtype}
+\usepackage[colorlinks]{hyperref}
+\usepackage{comment}
+ 
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{Bibliography.bib}
+\renewbibmacro{in:}{}
+\newcommand{\Implies}[2]{$\text{\ref{#1}}\implies\text{\ref{#2}}$}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defn}{Definition}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+\lstset{
+	language=C++,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	tabsize=4,
+	numbers=left,
+	numberstyle=\footnotesize
+%	morekeywords={*,auto}
+}
+
+\selectlanguage{english}
+
+\begin{document}
+
+\input{Title}
+
+\renewcommand{\abstractname}{\begin{Large}Acknowledgements\end{Large}}
+\begin{abstract}
+\begin{large}
+\textit{
+I would like to express a special gratitude to my academic and thesis advisor Prof. Dr. Ivan B. Penkov, who introduced me to interesting areas such as represenatation theory and Lie algebras.   Moreover, I am very grateful for the constant support and help from Johanna Hennig, a visiting PhD student from  the University of California, San Diego.}
+\end{large}
+\end{abstract}
+
+\thispagestyle{empty}
+\newpage
+\tableofcontents{}
+\thispagestyle{empty}
+\newpage
+\pagestyle{headings}
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\include{Body}
+\newpage
+\medskip
+ 
+\printbibliography
+\end{document}

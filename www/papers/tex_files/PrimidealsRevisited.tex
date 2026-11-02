@@ -1,0 +1,460 @@
+\documentclass[10pt]{amsart}\oddsidemargin -1mm \evensidemargin -1mm \topmargin -15mm\headheight5mm \headsep 3.5mm \textheight 245mm\textwidth 170mm % 160mm
+\usepackage{amsfonts, amssymb, amsthm, amsmath, euscript}
+%\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]\newtheorem{lemma}[theorem]{Lemma}\newtheorem{claim}[theorem]{Claim}\newtheorem{remark}[theorem]{Remark}\newtheorem{proposition}[theorem]{Proposition}\newtheorem{corollary}[theorem]{Corollary}\newtheorem{definition}[theorem]{Definition}\newtheorem{Ex}[theorem]{Example}\newtheorem*{Ex0}{Examples}
+\DeclareMathOperator{\Ima}{\mathrm{im}}\DeclareMathOperator{\Ue}{\mathrm{U}}\DeclareMathOperator{\gr}{\mathrm{gr}}\DeclareMathOperator{\Sa}{\mathrm{S}}\DeclareMathOperator{\Var}{\mathrm{Var}}\DeclareMathOperator{\Ann}{\mathrm{Ann}}\DeclareMathOperator{\GVar}{\mathrm{GVar}}\DeclareMathOperator{\Irr}{\mathrm{Irr}}\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\begin{document}
+\title{Primitive ideals of $\Ue(\frak{sl}(\infty))$}
+\author{Ivan Penkov, Alexey Petukhov}
+\address{Ivan Penkov: Jacobs University Bremen, Campus Ring 1, D-28759, Bremen, Germany}
+\email{i.penkov@jacobs-university.de}
+\address{Alexey Petukhov: The University of Manchester, Oxford Road M13 9PL, Manchester, UK, on leave from the Institute for Information Transmission Problems, Bolshoy Karetniy 19-1, Moscow 127994, Russia}
+\email{alex-{}-2@yandex.ru}
+\maketitle
+
+\begin{abstract}We provide an explicit description of the primitive ideals of the enveloping algebra $\Ue(\frak{sl}(\infty))$ of the infinite-dimensional finitary Lie algebra $\frak{sl}(\infty)$ over an uncountable algebraically closed field of characteristic 0. Our main new result is that any primitive ideal of $\Ue(\frak{sl}(\infty))$ is integrable. A classification of integrable primitive ideals has been known previously, and relies on the pioneering work of A.~Zhilinskii. We also present an inclusion criterion for primitive ideals of ${\rm U}(\frak{sl}(\infty))$.
+
+{\bf Key words:} Primitive ideals, finitary Lie algebras, highest weight modules.
+
+{\bf AMS subject classification.} Primary 17B10, 17B35, 17B65.
+\end{abstract}
+
+
+\section{Introduction} A two-sided ideal $I$ of an associative algebra $A$ is called {\it primitive} if $I$ is the annihilator of a simple $A$-module. Given an infinite-dimensional associative algebra $A$,
+% If $A$ is infinite-dimensional, then in it might
+it may be too hard to classify simple $A$-modules (this problem seems to be open for the algebra of differential operators in two variables) but it may still  be possible to provide an explicit  description of the primitive ideals of $A$. This is precisely the situation when $A=\Ue(\frak g)$ is the enveloping algebra of a semisimple finite-dimensional Lie algebra over a field of characteristic 0. Here, a rough description of primitive ideals is given by the celebrated Duflo Theorem~\cite{Du}: it claims that every primitive ideal of $A=\Ue(\frak g)$ is the annihilator of some (in general not unique)  simple highest weight module. This reduces the problem of classifying primitive ideals to a combinatorial problem. The latter problem has been solved due to the efforts of many mathematicians, in particular D.~Barbasch, D.~Vogan~\cite{BV1, BV2}, W.~Borho, J.-C.~Jantzen~\cite{BJ}, A.~Joseph~\cite{Jo}, D.~Kazhdan,~G.~Lusztig~\cite{Lu}, and others, see, for example,~\cite{Atl}. In~\cite{PP3} we have made an attempt to summarize the  combinatorial description of the primitive  ideals of $\Ue(\frak g)$ for classical simple Lie algebras $\frak g$ in a language suitable for studying the case when $\operatorname{rk}\frak g$ tends to $\infty$.
+%reduces the problem of classifying primitive ideals to a combinatorial problem. For the explicit parametrization, see~\cite{}.
+
+We consider the Lie algebra $\frak{sl}(\infty)$ which consists of traceless finitary infinite matrices, i.e. traceless infinite  matrices each of which has only finitely many nonzero entries. 
+An understanding of the primitive ideals of the enveloping algebra $\Ue(\frak{sl}(\infty))$ is needed for the current development of the representation theory of $\frak{sl}(\infty)$. 
+The main result of the present paper is an explicit description of all primitive ideals of $\Ue(\frak{sl}(\infty))$. 
+%Very roughly, when passing from $\Ue(\frak{sl}(n))$ to $\Ue(\frak{sl}(\infty))$,
+While the problem of classifying irreducible representations of the Lie algebra $\frak{sl}(\infty)$ appears to be intractable, we show that the problem of classifying primitive ideals in $\Ue(\frak{sl}(\infty))$ admits a beautifully simple answer.
+In contrast with the case of a finite-dimensional simple Lie  algebra, $\Ue(\frak{sl}(\infty))$ has only countably many primitive ideals. 
+This is related to the circumstance that a generic irreducible highest weight $\Ue(\frak{sl}(\infty))$-module has zero annihilator, see~\cite{PP3}.
+
+Moreover, in the recent review~\cite{PP3} we presented the classification of primitive ideals of $\Ue(\frak{sl}(\infty))$ subject to the condition that they are integrable. This classification relies on the work of A.~Zhilinskii~\cite{Zh1, Zh2, Zh3}. We recall that a two-sided ideal $I$ is {\it integrable} if  $I=\Ann_{\Ue(\frak{sl}(\infty))}M$ for an integrable, not necessarily simple,  $\Ue(\frak{sl}(\infty))$-module $M$, i.e., a $\Ue(\frak{sl}(\infty))$-module $M$ which becomes a sum of finite-dimensional $\Ue(\frak{sl}(n))$-modules after being restricted to $\Ue(\frak{sl}(n))$ for each $n\ge2$. The main result of the present paper is that every primitive ideal of $\Ue(\frak{sl}(\infty))$ is integrable, and hence the integrable primitive ideals described in~\cite{PP3} are all primitive ideals.
+
+In an appendix we give also an explicit inclusion criterion for primitive ideals of ${\rm U}(\frak{sl}(\infty))$.
+\section{Main result}\label{Smr} Fix an uncountable algebraically closed field $\mathbb F$ of characteristic 0. All vector spaces (in particular, Lie algebras) are assumed to be defined over $\mathbb F$. If $W$ is a vector space, then $W^*:=\operatorname{Hom}_{\mathbb F}(W, \mathbb F)$.
+
+One can define the Lie algebra $\frak{sl}(\infty)$ as the direct limit of (arbitrary) inclusions of the form
+$$\frak{sl}(2)\hookrightarrow\frak{sl}(3)\hookrightarrow...\hookrightarrow\frak{sl}(n)\hookrightarrow....$$
+It is well known that this property determines $\frak{sl}(\infty)$ up to isomorphism. 
+
+If we fix a simple $n$-dimensional $\frak{sl}(n)$-module $V(n)$ for some $n\ge3$, then for any $m>n$ there is a unique, up to isomorphism, simple $m$-dimensional $\frak{sl}(m)$-module $V(m)$ whose restriction to $\frak{sl}(n)$ is isomorphic to $V(n)\oplus\mathbb F^{m-n}$ where $\mathbb F^{m-n}$ is a trivial $\frak{sl}(n)$-module. Therefore, the direct limit $\varinjlim_{m} V(m)$ is well defined, and we denote it by $V$. Similarly, we define $V_*$ as the direct limit $\varinjlim_{m} V(m)^*$. 
+%Moreover, for $n\ge3$, the defining representation $V(n)$ of $\frak{sl}(n)$ decomposes as $V(n-1)\oplus\mathbb F$ over $\frak{sl}(n-1)$, and, up to isomorphism, there is only one $\frak{sl}(\infty)$-module obtained as a direct limit $\varinjlim V(n)$ (this is not the case for other infinite-dimensional locally simple Lie algebras as can be seen for instance from~\cite{HS}). The direct limit $\varinjlim V(n)$ is by definition the {\it natural} $\frak{sl}(\infty)$-module, and we denote it by $V$. Similarly, there is a well-defined {\it  conatural} $\frak{sl}(\infty)$-module $V_*:=\varinjlim (V(n)^*)$.
+In what follows we consider also the symmetric and exterior algebras $\Sa^\cdot(V):=\oplus_{k\ge0}\Sa^k(V)$ and $\Lambda^\cdot(V):=\oplus_{k\ge0}\Lambda^k(V)$, as well as $\Sa^\cdot(V_*)$ and $\Lambda^\cdot(V_*)$.
+
+Next, for any (possibly empty) Young diagram $Y$ whose row lengths form a sequence  $$l_1\ge l_2\ge...\ge l_s>0$$(the empty sequence for $Y=\emptyset$), we define the $\frak{sl}(\infty)$-module $V_Y$ as a direct limit $\varinjlim_{n\ge s} V_Y(n)$: here $V_Y(n)$ denotes a simple finite-dimensional $\frak{sl}(n)$-module with highest weight $$l_1\ge l_2\ge...\ge l_s>0\ge0\ge...\ge0$$ having $n$ entries~(for $Y=\emptyset$ the highest weight of $V_Y(n)$ equals 0). The $\frak{sl}(n)$-module $V_Y(n)$ is isomorphic to a simple direct summand of the tensor product $$\operatorname{S}^{l_1}(V(n))\otimes\operatorname{S}^{l_2}(V(n))\otimes....\otimes\operatorname{S}^{l_s}(V(n)),$$ and the direct limit $\varinjlim_{n\ge s} V_Y(n)$ is clearly well defined up to isomorphism. Similarly, we define $\frak{sl}(\infty)$-module $(V_Y)_*$ as the direct limit $\varinjlim_{n\ge s}(V_Y(n))^*$.
+
+Finally, we set $$I(x, y, Y_l, Y_r):=\Ann_{\Ue(\frak{sl}(\infty))}~(V_{Y_l}\otimes(\Sa^\cdot(V))^{\otimes x}\otimes(\Lambda^\cdot(V))^{\otimes y}\otimes (V_{Y_r})_*)$$ where $x, y\in\mathbb Z_{\ge0}$, $Y_l$ and $Y_r$ are Young diagrams with respective row lengths $l_1,..., l_s$ and $r_1,..., r_t$.
+
+
+The classification of primitive ideals of $\Ue(\frak{sl}(\infty))$ can now be stated as follows.
+\begin{theorem}\label{T1} All ideals $I(x, y, Y_l, Y_r)$ are primitive and nonzero, and any nonzero primitive ideal $I$ of $\Ue(\frak{sl}(\infty))$ equals exactly one of these ideals.\end{theorem}
+
+
+Since Proposition~4.8  in~\cite{PP2} asserts that the primitive ideals $I(x, y, Y_l, Y_r)$ are precisely the integrable primitive ideals of $\Ue(\frak{sl}(\infty))$, in order to prove Theorem~\ref{T1} it is enough to prove the following.
+\begin{theorem}\label{T1b} Every nonzero primitive ideal of $\Ue(\frak{sl}(\infty))$ is integrable.\end{theorem}
+
+It was pointed out by the reviewer that the lattice of two-sided ideals has several symmetries and that one of them arises from the fact that we can interchange $V$ and $V_*$. This defines an involution $I\to {I}_*$ on the lattice of integrable ideals, and
+$$I(x, y, Y_l, Y_r)_*=I(x, y, Y_r, Y_l).$$
+\section{Corollaries, examples and further results}
+A brief review of basic facts concerning  splitting Cartan and Borel subalgebras of $\frak{sl}(\infty)$ (including the definitions), as well as the roots of $\frak{sl}(\infty)$, see in~\cite{PP3} and Examples below. For any splitting Borel subalgebra $\frak b\subset\frak{sl}(\infty)$ with fixed Cartan subalgebra $\frak h$, there is a well-defined notion of simple $\frak b$-highest weight module $L_\frak b(\lambda)$ with highest weight $\lambda\in\frak h^*$. Given a weight $\lambda\in\frak h^*$, by definition $L_\frak b(\lambda)$ is the unique simple quotient of the induced module $\Ue(\frak{sl}(\infty))\otimes_{\Ue(\frak  b)}\mathbb F_\lambda$, where $\mathbb F_\lambda$ is a one-dimensional $\frak b$-module on which $\frak h$ acts through the weight $\lambda$.
+
+There is a class of Borel subalgebras of $\frak{sl}(\infty)$, which we call {\it ideal}. % note that these are not ``most obvious'' Borel subalgebras.
+%In~\cite{PP2} we defined a class of ideal Borel subalgebras of $\frak{sl}(\infty)$.
+A quick definition of an ideal Borel subalgebra $\frak b$ of $\frak{sl}(\infty)$ is as follows: a splitting Borel subalgebra of $\frak{sl}(\infty)$ is ideal if and only if any simple object in the category of tensor modules $\mathbb T_{\frak{sl}(\infty)}$ defined in~\cite{DPS} is a $\frak b$-highest weight $\frak{sl}(\infty)$-module.
+
+Here is an equivalent definition in terms of roots. Recall that the roots of $\frak{sl}(\infty)$ have the form $\{\varepsilon_i-\varepsilon_j\}_{i\ne j\in\mathbb Z_{>0}}$, where $\varepsilon_i$ are certain standard vectors, see~\cite[Appendix~A]{PP3}. 
+The splitting Borel subalgebras $\frak b\subset\frak{sl}(\infty)$ which contain $\frak h$ are in bijections with total orders on $\mathbb Z_{>0}$: given a total order $\succ$ on $\mathbb Z_{>0}$, the positive roots of the corresponding Borel subalgebra are
+\begin{center}$\{\varepsilon_i-\varepsilon_j\mid i\succ j\}$.\end{center}
+A splitting Borel subalgebra is ideal if the total order $\succ$ satisfies the condition: for every nonnegative integer $n$ there exist $i_1, i_2$ such that
+$$|\{i\in\mathbb Z_{>0}\mid i_1\succ i\}|=n,\hspace{10pt}|\{i\in\mathbb Z_{>0}\mid i\succ i_2\}|=n.$$
+%In~\cite[Section~2.2]{PP2} (see also~\cite[Section~5]{PP3}) we have given a description of ideal Borel subalgebras in terms of their roots and total orders on a properly defined countable set, see also Examples below~\footnote{It is worth pointing out that ideal Borel subalgebras are not the ``most obvious'' Borel subalgebras in a matrix representation of $\frak{sl}(\infty)$. In particular, if one thinks of $\frak{sl}(\infty)$ as the finitary matrices extending infinitely down and to the right, then the Borel subalgebra of upper triangular matrices is not ideal.}.
+
+The following is an analogue of Duflo's Theorem.
+\begin{theorem}\label{T1c}Let $\frak b$ be an ideal Borel subalgebra of $\frak{sl}(\infty)$ with a fixed splitting Cartan subalgebra $\frak h\subset\frak b$.\\
+a)For any primitive ideal $I$ of $\Ue(\frak{sl}(\infty))$ there exists $\lambda\in\frak h^*$ such that $I=\Ann_{\Ue(\frak{sl}(\infty))}L_\frak b(\lambda)$.\\
+b) If $I=I(0, 0, Y_l, Y_r)$ then the weight $\lambda\in\frak h^*$, such that $I=\Ann_{\Ue(\frak{sl}(\infty))}L_\frak b(\lambda)$, is unique.
+\end{theorem}
+\begin{proof}Part a) is implied by Theorem~\ref{T1} and~\cite[Theorem 3.1]{PP2}. Part b) follows directly from a more general uniqueness result of A.~Sava~\cite{S}, see also~\cite{PP3}.\end{proof}
+\begin{Ex0}
+Consider the splitting Borel subalgebra $\frak b\subset\frak{sl}(\infty)$ corresponding to the total order\begin{center}$1\succ3\succ5\succ...\hspace{10pt}...\succ6\succ4\succ2$.\end{center}
+This Borel subalgebra is ideal. Given a primitive ideal $I(x, y, Y_l, Y_r)$ with $$Y_l=( l_1\ge ...\ge l_s>0),\hspace{10pt}Y_r=(r_1\ge ...\ge r_t>0),$$ the weight $\lambda$ in Theorem~\ref{T1c}a) can be chosen as
+
+$$\sum\limits_{1\le i\le x}i\alpha\varepsilon_{2i-1}+\sum_{1\le j\le s}l_i\varepsilon_{2i+2x-1}+y(\sum_{k\ge1}\varepsilon_{2k-1})-\sum_{1\le j\le t}r_{j}\varepsilon_{2j}$$
+for an arbitrary $\alpha\in\mathbb F\backslash\mathbb Q$. Moreover, one  can show that, if $x=0$, then the above weight $\lambda$ is unique with the property $I=\Ann_{\Ue(\frak{sl}(\infty))}L_\frak b(\lambda)$.
+
+For other ideal Borel subalgebras, a primitive ideal may be the annihilator of several nonisomorphic simple highest weight modules. 
+Indeed, consider the Borel subalgebra $\frak b'$ of $\frak{sl}(\infty)$ defined by the total order
+$$3\succ5\succ7\succ...\hspace{10pt}\succ1\succ\hspace{10pt}...\succ 6\succ4\succ 2.$$
+Then $\frak b'$ is also ideal, but one can check that $\Ann_{\Ue(\frak{sl}(\infty))}L_{\frak b'}(\lambda)=\Ann_{\Ue(\frak{sl}(\infty))}L_{\frak b'}(\lambda')$ where
+$$\lambda=\sum\limits_{i\ge0}\varepsilon_{2i+1},\hspace{10pt}\lambda'=\sum\limits_{i\ge1}\varepsilon_{2i+1}.$$
+
+Finally, if $x=y=0$ and $\frak b''$ is any ideal Borel subalgebra then a simple highest weight module $L_{\frak b''}(\lambda)$ with
+$$\Ann_{\Ue(\frak{sl}(\infty))} L_{\frak b''}(\lambda)=I(0, 0, Y_l, Y_r),$$ is isomorphic to the socle of the tensor product $V_{Y_l}\otimes (V_{Y_r})_*$ (see in~\cite{PSt} the proof that this tensor product has simple socle).\end{Ex0}
+\section{Proof of Theorem~\ref{T1b}}
+The proof consists of several reduction steps which we will go through one-by-one.
+
+By an ideal of an associative algebra we always mean a two-sided ideal. We set $$\Ue:=\Ue(\frak{sl}(\infty)),\hspace{10pt} \Ue_n:=\Ue(\frak{sl}(n))\subset\Ue.$$ For an ideal $I\in\Ue$, we put $I_n:=I\cap\Ue_n$ for $n\ge2$.
+
+Let $A$ be an associative algebra and $M$ be an $A$-module. We say that $M$ is {\it integrable} if, for any finitely generated subalgebra $A'\subset A$ and any $m\in M$, we have $$\dim (A'\cdot m)<\infty.$$Define an ideal $I\subset A$ to be {\it integrable} if $I=\Ann_{A}M$ for an integrable (not necessarily simple) $A$-module $M$. 
+An ideal $I\subset A$ is {\it locally integrable} if, for any finitely generated subalgebra $A'\subset A$, the ideal $I\cap A'$ is an integrable ideal of $A'$.
+
+It is easy to see that an ideal $I\subset\Ue$ is locally integrable if, for every $n\ge2$, the ideal $I_n$ is an intersection of ideals of finite codimension in $\Ue_n$.
+
+Theorem~\ref{T1b} is a direct corollary of the following two statements:
+\begin{theorem}\label{Tprtolint}If $I\subset\Ue$ is a primitive ideal then $I$ is locally integrable.\end{theorem}
+\begin{theorem}\label{Tlinttoint} If $I$ is a locally integrable ideal then $I$ is integrable. \end{theorem}
+A stronger version of Theorem~\ref{Tprtolint} is proved in Subsection~\ref{SSprt1}, and in Subsections~\ref{SSprt2}-\ref{SScomb} we prove a chain of statements which imply Theorem~\ref{Tlinttoint}.
+\subsection{Proof of Theorem~\ref{Tprtolint}}\label{SSprt1}
+Let $I$ be an ideal of an associative algebra $A$. We denote by $\sqrt I$ the intersection of all primitive ideals of $A$ containing $I$. Note that $\sqrt I$ is the pullback in $A$ of the Jacobson radical of the ring $A/I$. If $I$ is a primitive ideal then $I=\sqrt I$.
+
+It is clear that Theorem~\ref{Tprtolint} is a consequence of the following statement.
+\begin{proposition}\label{Pjtolint} Let $I$ be an ideal of $\Ue$. Then $\sqrt I$ is a locally integrable ideal.\end{proposition}
+To prove this proposition, we first need the following alternative description of $\sqrt I$.
+\begin{lemma}\label{Lalg} Let $I\subset A$ be an ideal and let the cardinality of $\mathbb F$ exceed the $\mathbb F$-dimension of $A$. Then the following conditions on an element $z\in A$ are equivalent:
+
+1) $z\in \sqrt I$,
+
+2) for every $a\in A$ there is $k\in\mathbb Z_{>0}$, such that $(az)^k\in I$.\end{lemma}
+\begin{proof} The fact that 1) implies 2) follows from~\cite[p.~344,~Corollary~1.8]{MCR}. We now show that 2) implies 1).
+
+Let $z\in A$ satisfy 2), and let $\bar z$ be the image of $z$ in $A/I$. Assume to the contrary that there exists a simple $A/I$-module $M$ such that $\bar z\cdot M\ne0$. Pick $m\in M$  with $\bar z\cdot m\ne0$. There exists $\bar a\in A$ such that $\bar a\cdot(\bar z\cdot m)=m$. Let $k\in\mathbb Z_{>0}$ satisfy $(\bar a\bar z)^k=0$. Then
+$$0=(\bar z(\bar a\bar z)^k)\cdot m=\bar z\cdot m\ne0.$$
+This contradicts our assumption that $\bar z\cdot M\ne0$. Hence $\bar z\in\sqrt I$.
+\end{proof}
+%We would like to mention that this is the only place where we will do use any cardinality assumptions on $\mathbb F$.
+The proof of Proposition~\ref{Pjtolint} is based on the following proposition.
+\begin{proposition}\label{Prad} Let $I$ be an ideal of $\Ue$. Then there exists $r\in\mathbb Z_{>0}$ such that, for any $n\gg 0$ and any primitive ideal $J(n)\subset \Ue_n$ containing $I_n$, the intersection $J(n)\cap\Ue_{n-r}$ is an integrable ideal in $\Ue_{n-r}$.\end{proposition}
+To prove Proposition~\ref{Prad} we need several different ingredients. In particular, we need a description of primitive ideals of $\Ue(\frak{sl}(n))$, and the notion of associated variety of an ideal.
+
+{\bf Associated variety.} Let $J(n)\subset \Ue_n$ be an ideal. Recall that $\Ue_n$ has a standard filtration by the degrees of elements and therefore we can attach to $J$ the graded ideal $$\operatorname{gr} J(n)\subset\Sa^\cdot(\frak{sl}(n)).$$
+Denote by $\Var(J(n))$ the set of points of $\frak{sl}(n)^*$ annihilated by $\operatorname{gr} J(n)$. It is clear that \begin{center}if $J_1\subset J_2$ then $\Var(J_2)\subset\Var(J_1)$.\end{center}
+
+If $I$ is an ideal of $\Ue$ then the intersection $I_n=I\cap \Ue_n$ determines a sequence of ${\rm SL}(n)$-stable varieties $\Var(I_n)\subset\frak{sl}(n)^*$, and we have \begin{equation}\label{Ephimn}\phi_{m, n}(\Var(I_m))\subset\Var(I_n)\end{equation}
+for the map $\phi_{m, n}:\frak{sl}(m)^*\to\frak{sl}(n)^*$ induced by the inclusion $\frak{sl}(n)\hookrightarrow\frak{sl}(m)$. 
+%It turns out that this condition is quite restrictive for varieties $\{\Var(I_n)\}_{n\ge2}$, see Lemma~\ref{Lrk17}.
+
+For any $n\ge2$ and any $r'\in\mathbb Z_{\ge0}$ we put $$\frak{sl}(n)^{\le r'}:=\{x\in\frak{sl}(n)\mid \exists\lambda\in\mathbb F : \operatorname{rk}(x-\lambda{\bf 1}_n)\le r'\},$$
+where $\operatorname{rk}$ refers to the rank of a matrix, and ${\bf 1}_n$ is the identity $n\times n$-matrix, cf.~\cite{PP1}. We identify $\frak{sl}(n)$ and $\frak{sl}(n)^*$ via the Killing form and so we consider $\frak{sl}(n)^{\le r'}$ as a subset of $\frak{sl}(n)^*$. 
+
+\begin{lemma}\label{Lrk17}Let $I$ be a nonzero ideal of $\Ue$. Then there exists $r\in\mathbb Z_{\ge0}$ such that $$\Var(I_n)\subset\frak{sl}(n)^{\le r}$$ for all $n\gg0$.\end{lemma}
+\begin{proof}If $I$ is nonzero then $\Var(I_m)\ne\frak{sl}(m)^*$ for some $m\ge 2$. For every $n\ge m$ and every $X\in\Var(I_n)$ formula~(\ref{Ephimn}) shows that
+$$\phi_{n, m}({\rm SL}(n)X)\subset \Var(I_m)\ne\frak{sl}(m)^*$$
+where ${\rm SL}(n)X$ is the coadjoint orbit of $X$ in $\frak{sl}(n)^*$. Hence $\phi_{n, m}({\rm SL}(n)X)$ is not dense in $\frak{sl}(n)^*$. This together with~\cite[Lemma~4.12]{PP1} implies the desired result for $r=m$ under the assumption that $n>3m$.
+\end{proof}
+A well known theorem of A.~Joseph implies that the associated variety of a primitive ideal $J(n)\subset\Ue_n$ equals the closure of a nilpotent coadjoint orbit, see~\cite{Jo}. The  nilpotent coadjoint orbits of $\frak{sl}(n)$ are identified with the conjugacy classes of nilpotent $n\times n$-matrices. These conjugacy classes are in 1-1 correspondence with the partitions of $n$: the partition attached to a conjugacy class comes from the Jordan normal form of a representative of this class. In this way we attach a partition of $n$ to $J(n)$. 
+By $p(n)$ we denote the partition conjugate to that partition. Let $r(n)$ to be the difference between $n$ and the maximal element of $p(n)$. It is easy to check that $r(n)$ equals the rank of every element of the orbit defined by $p(n)$. 
+\begin{lemma}\label{Lslnrx}Let $X\in\frak{sl}(n)^{\le r}$ be a nilpotent matrix and $p(n)$ be the partition attached to the conjugacy class of $X$. Then $r(n)\le r$.\end{lemma}
+\begin{proof} We have ${\rm rk}(X-\lambda{\bf 1}_n)\le r$ for $\lambda\in\mathbb F$. If $\lambda\ne0$ then ${\rm rk}(X-\lambda{\bf 1}_n)=n$, and therefore $$r(n)={\rm rk}X\le n\le r.$$ If $\lambda=0$ then $r(n)={\rm rk}X={\rm rk}(X-\lambda{\bf 1}_n)\le r$.\end{proof}
+%It is crucial that the inclusion $\Var(J(n))\subset\frak{sl}(n)^{\le r}$ implies $r(n)\le r$, see~\cite[Subsection 4.3]{PP2}.\\
+{\bf Description of primitive ideals of $\Ue(\frak{sl}(n))$.} We use a version of the classification of primitive ideals of $\Ue_n$ given in~\cite{PP2}. Namely, a primitive ideal $J(n)$ of $\Ue_n$ is determined by its intersection with the centre of $\Ue_n$, together with the left cell in the integral Weyl group attached to this intersection, see for example~\cite[Section 6]{LO}. The intersection of $J(n)$ with the centre of $\Ue_n$ can be encoded by an unordered $n$-tuple $a_1',..., a_n'\in \mathbb F$. The integral Weyl group is isomorphic to a direct product of symmetric groups, and the factors of this direct product are parametrized by the equivalence classes of elements of $\{1,..., n\}$ with respect to the equivalence relation
+$$i\sim j\Leftrightarrow a_i'-a_j'\in\mathbb Z.$$
+The left cells of the integral Weyl group of $J$ are in 1-1 correspondence with collections of Young tableaux such that the entries of the $i$th tableau are precisely the elements of the $i$th equivalence class in $\{1,..., n\}$, see~\cite[p.~172]{BV1}.
+
+Inserting $a_i'$ instead of $i$ in all these semistandard tableaux, we attach to any primitive ideal $J$ the datum
+\begin{equation}\cup_{t\in\mathbb F/\mathbb Z}\{a^t_{1, 1}, a^t_{2, 1}, ..., a^t_{l_1^t, 1}; a^t_{1, 2}, a^t_{2, 2}, ..., a^t_{l_2^t, 2};...; a^t_{1, h_t},..., a^t_{l_{h_t}^t, h_t}\}\label{Eslpack}\end{equation}
+where
+
+1) $h_t\ne0$ only for a finite subset of $\mathbb F/\mathbb Z$ and $\Sigma_{t, j} l_j^t=n$,
+
+2) $a^t_{i, j}\in\mathbb F$ and the image of $a^t_{i, j}$ in $\mathbb F/\mathbb Z$ equals $t$,
+
+3) $a^t_{i, j}-a^t_{i', j}\in\mathbb Z_{>0}$ for all $t\in\mathbb F/\mathbb Z, 1\le j\le h_t, 1\le i<i'\le l_j^t$,
+
+4) $l_j^t\le l_{j'}^t$ for all $t\in\mathbb F/\mathbb Z, 1\le j<j'\le h_j$.
+
+5) $a^t_{i, j}-a^t_{i, j'}\in\mathbb Z_{\ge0}$ for all $t\in\mathbb F/\mathbb Z, 1\le j\le h_t, 1\le i\le l_j^t, 1\le j'\le j$.\\
+Here $h_t$ is the height of the $t$th tableau, $l_1^t,..., l^t_{h_t}$ are the row lengths of the $t$th tableau, and $a_{i,j}^t$ is the $i$th entry of the $j$th row of the $t$th tableau.
+
+We now assume that the above datum corresponds to a primitive ideal $J(n)$ of $\Ue_n$, and let $t_1,..., t_s$ be the elements of $\mathbb F/\mathbb Z$ for which $h_t\ne0$. Then the parts of $p(n)$ (that is the partition attached to the associated variety of $J(n)$ defined above) are all nonzero elements in the sequence$$l_1^{t_1}, l_2^{t_1},..., l_{h_{t_1}}^{t_1}, l_1^{t_2}, l_2^{t_2},..., l_{h_{t_2}}^{t_2},..., l_1^{t_s},..., l_{h_{t_s}}^{t_s}$$(repetitions are possible). Therefore, \begin{equation}\label{Erksl}r(n)=n-\max\limits_{t\in\mathbb F/\mathbb Z,~1\le j\le h_t}l_j^t.\end{equation}
+
+Denote by $\lambda^*(n)$ the $\frak{sl}(n)$-weight corresponding to the sequence
+\begin{center}$a^{t_1}_{1, 1}, a^{t_1}_{2, 1}, ..., a^{t_1}_{l_1^{t_1}, 1}, \hspace{10pt}a^{t_1}_{1, 2}, a^{t_1}_{2, 2}, ..., a^{t_1}_{l_2^{t_1}, 2},\hspace{10pt}...,$\\
+$a^{t_2}_{1, 1}, a^{t_2}_{2, 1}, ..., a^{t_2}_{l_1^{t_2}, 1}, \hspace{10pt}a^{t_2}_{1, 2}, a^{t_2}_{2, 2}, ..., a^{t_2}_{l_2^{t_2}, 2},\hspace{10pt}...,$\\{~}...{~}\\
+$a^{t_s}_{1, 1}, a^{t_s}_{2, 1}, ..., a^{t_s}_{l_1^{t_s}, 1},\hspace{10pt} a^{t_s}_{1, 2}, a^{t_s}_{2, 2}, ..., a^{t_s}_{l_2^{t_s}, 2},\hspace{10pt}...,$\end{center} by $\rho$ the weight corresponding to the sequence
+$$0, 1, 2,..., n-1,$$ and set $\lambda(n):=\lambda^*(n)+\rho$.
+
+Then $J(n)=\Ann_{\Ue_n}L(\lambda(n))$ where $L(\lambda(n))$ is a simple $\frak{sl}(n)$-module with highest weight $\lambda(n)$. This can be seen for instance by following the algorithm in~\cite[Subsection 4.2]{PP2}. It is clear that $L(\lambda(n))|_{\frak{sl}(l_j^{t_i})}$ is an integrable module for each root subalgebra $\frak{sl}({l_j^{t_i}})$~of $\frak{sl}(n)$ corresponding to the subsequence $a^{t_i}_{1, j},..., a^{t_i}_{l_j^{t_i}, j}$. This implies the following.
+\begin{corollary}\label{Clfk} In the above notation, the ideal $J(n)\cap \Ue(\frak{sl}({l_j^t}))$ is an integrable ideal of $\Ue(\frak{sl}({l_j^t}))$.\end{corollary}
+\begin{proof}[Proof of Proposition~\ref{Prad}]  According to Lemma~\ref{Lrk17}, there exists $r\in\mathbb Z_{\ge0}$ such that $\Var(I_n)\subset\frak{sl}(n)^{\le r}$ for $n\gg0$. Since $J(n)\supset I_n$, we have \begin{equation}\Var(J(n))\subset\Var(I_n)\subset\frak{sl}(n)^{\le r}.\label{Erk17}\end{equation}
+Recall that $\Var(J(n))$ is the closure of the coadjoint orbit ${\rm SL}(n)X$ of a nilpotent matrix $$X\in\frak{sl}(n)\cong\frak{sl}(n)^*$$of rank $r(n)$. 
+The inclusion~(\ref{Erk17}) implies that $X\in\frak{sl}(n)^{\le r}$. Therefore Lemma~\ref{Lslnrx} yields $r(n)\le r$.
+
+%It is crucial that the above inclusion implies $r(n)\le r$, see~\cite[Subsection 4.3]{PP2}.
+
+We attach to $J(n)$ the datum~(\ref{Eslpack}) as above. Corollary~\ref{Clfk} shows that $J(n)\cap \Ue(\frak{sl}({l_j^t}))$ is an integrable ideal of $\Ue(\frak{sl}({l_j^t}))$. Finally,~(\ref{Erksl}) together with the inequality $r\ge r(n)$ implies that $J(n)\cap \Ue(\frak{sl}(n-r))$ is an integrable ideal of $\Ue(\frak{sl}(n-r))$.\end{proof}
+\begin{proof}[Proof of Proposition~\ref{Pjtolint}] Proposition~\ref{Prad} implies the existence of $r\ge0$ such that
+$\sqrt{I_{n+r}}\cap\Ue_{n}$ is an integrable ideal of $\Ue_{n}$ for $n\gg0$.
+%Therefore, for $n'\ge 2$, $\sqrt I_{n'}$ is an integrable ideal of $\Ue_{n'}$ , i.e. equals the intersection of $\Ue_{n'}$ with ideals of finite codimension in $\Ue_{n'+r}$.
+ Next, Lemma~\ref{Lalg} shows that $(\sqrt I)_{n}=\cap_{n'\ge n}\sqrt{I_{n'}}$ for all $n\ge2$. However, $$\cap_{n'\ge n}\sqrt{I_{n'}}=(\cap_{n'\ge n+r}\sqrt{I_{n'}})\cap\Ue_n.$$
+Being integrable in $\Ue_{n'-r}$, the ideal $\sqrt{I_{n'}}\cap\Ue_{n'-r}$ is an intersection of ideals of finite codimension in $\Ue_{n'-r}$, hence $(\sqrt I)_n=(\cap_{n'\ge n+r}\sqrt{I_{n'}})\cap\Ue_n$ is an intersection of ideals of finite codimension in $\Ue_n$. This means that the ideal $(\sqrt I)_n$ is integrable for $n\gg 0$. A very similar argument shows that $(\sqrt I)_n$ is integrable for all $n\ge 2$. 
+%which together with the integrability of the ideals $\sqrt{I_{n}}\cap U_{n-r}$ allows us to conclude that $(\sqrt I)_n$ is an integrable ideal of $U_n$ for each $n\ge2$.
+%Consequently, for $n'\ge n$, the ideal $\sqrt{I_{n'+r}}\cap\Ue_{n'}$ is an integrable ideal of $\Ue_{n'}$.
+%This, together with the fact that $\sqrt{I_{n'}}\supset(\sqrt{I_{n'+1}}\cap\Ue_{n'})$, immediately implies that $\sqrt I\cap\Ue_{n}$ is an integrable ideal of $\Ue_{n}$.
+\end{proof}
+
+\subsection{Locally integrable ideals and p.l.s..}\label{SSprt2} Let $I$ be a locally integrable  ideal of $\Ue$. As we pointed out, for every $n\ge2$, $I_n\subset\Ue_n$ is an intersection of ideals of finite codimension in $\Ue_n$. Therefore, $I_n$ is the intersection of annihilators of finite-dimensional $\frak{sl}(n)$-modules. Since any finite-dimensional $\frak{sl}(n)$-module is semisimple, it follows that $I_n$ is an intersection of annihilators of simple finite-dimensional $\Ue_n$-modules.
+
+Let $\Irr_n$ denote the set of isomorphism classes of simple finite-dimensional $\frak{sl}(n)$-modules. We put $$Q(I)_n:=\{[M]\in\Irr_n\mid (I\cap\Ue_n)\subset\Ann_{\Ue_n}M\}$$
+where $M$ stands for a simple finite-dimensional $\frak{sl}(n)$-module and $[M]$ denotes the isomorphism class of $M$. For any $n'\ge n$ and any subset $Q_{n'}\subset\Irr_{n'}$ we denote by $(Q_{n'})|_{\frak{sl}(n)}$ the set of isomorphism classes of all simple $\frak{sl}(n)$-submodules of the $\frak{sl}(n')$-modules $M$ with $[M]\in Q_{n'}$. It is clear that $Q(I)_{n'}|_{\frak{sl}(n)}\subset Q(I)_n$. This leads to the following definition.
+
+Let $Q=\{Q_2, Q_3,..., Q_n,...\}$ be a collection of subsets $Q_2\subset \Irr_2, Q_3\subset\Irr_3,..., Q_n\subset\Irr_n,...$. We call $Q$ a {\it precoherent local system} ({\it p.l.s.} for short) if $Q_{n'}|_{\frak{sl}(n)}\subset Q_n$ for all $n'\ge n\ge 2$. By definition, $Q$ is a {\it coherent local system} ({\it c.l.s.} for short) if $Q_{n'}|_{\frak{sl}(n)}=Q_n$ for all $n'\ge n\ge 2$. The notion of c.l.s. has been introduced by A.~Zhilinskii~\cite{Zh1}.
+
+%For an ideal $I\subset\Ue$, put $$Q_n(I):=\{[M]\in\Irr_n\mid I\cap\Ue_n\subset\Ann_{\Ue_n}M\}.$$
+The collection $\{Q_n(I)\}_{n\ge2}$ defined above is immediately seen to be a p.l.s.. We denote this p.l.s. by $Q(I)$. Conversely,
+given a p.l.s. $Q$, we assign to $Q$ the ideal
+$$I(Q):=\cup_{n'\ge n}(\cap_{[M]\in Q_{n'}}\Ann_{\Ue_{n'}}M)\subset\Ue.$$
+Clearly, $I(Q)$ is a locally integrable ideal $I$ of $\Ue$. Moreover, $I(Q(I))=I$ for any locally integrable ideal $I\subset\Ue$. This reduces Theorem~\ref{Tlinttoint} to the following statement.
+\begin{proposition}\label{Pdef}If $Q$ is a p.l.s. then $I(Q)$ is an integrable ideal.\end{proposition}
+\begin{remark}One can show that $Q(I)$ is a c.l.s. whenever $I$ is an integrable ideal. Therefore, Proposition~\ref{Pdef} implies that $Q(I)$ is in fact a c.l.s. under the weaker assumption that $I$ is a locally integrable ideal of $\Ue$.\end{remark}
+
+We say that two p.l.s. $Q, Q'$ are {\it equivalent} if there exists $n\ge 2$ such that $Q_{n'}=Q'_{n'}$ for all $n'\ge n$. It is clear that if $Q$ and $Q'$ are equivalent, then $I(Q)=I(Q')$. It is known that if $Q$ is a c.l.s., then $I(Q)$ is an integrable ideal~\cite{PP1}. Thus, in order to prove Proposition~\ref{Pdef}, it suffices to prove the following.
+\begin{proposition}\label{Ppcls2}For any p.l.s. $Q$ there exists a c.l.s. $Q'$ such that $Q$ and $Q'$ are equivalent.\end{proposition}
+Next, we reduce Proposition~\ref{Ppcls2} to a purely combinatorial statement. We call a nonincreasing sequence $\lambda_1\ge\lambda_2\ge...\ge\lambda_n$ of integers a {\it $\mathbb Z$-partition} of {\it width} $\sharp\lambda:=n$ ($\mathbb Z$-partitions of width $n$ are precisely the integral dominant weights of $\frak{gl}(n)$). We then identify $\Irr_n$ with the set of $\mathbb Z$-partitions of width $n$ modulo the equivalence relation $$(\lambda_1\ge ...\ge \lambda_n)\sim(\lambda_1+D\ge...\ge\lambda_n+D), \hspace{10pt}D\in\mathbb Z.$$
+By $V_\lambda$ we denote a simple finite-dimensional $\frak{sl}(n)$-module corresponding to the $\mathbb Z$-partition $\lambda$ with $\sharp\lambda=n$. By a slight abuse of notation we write $\lambda\in\Irr_{\sharp\lambda}$.
+
+The classical Gelfand-Tsetlin rule claims that, for $\mathbb Z$-partitions $\lambda$ and $\mu$ with $\sharp\lambda=n$, $\sharp\mu=n-1$, the following conditions are equivalent:
+
+$\bullet$ $\Hom_{\frak{sl}(n-1)}(V_\mu, V_\lambda|_{\frak{sl}(n-1)})\ne 0$,
+
+$\bullet$ there exists $D\in\mathbb Z$ such that $\lambda_1\ge\mu_1+D\ge\lambda_2\ge\mu_2+D\ge...\ge\lambda_{n-1}\ge\mu_{n-1}+D\ge\lambda_n$.\\
+We write $\lambda>\mu$ whenever these conditions hold.
+
+For general $\mathbb Z$-partitions $\lambda$ and $\mu$ with $\sharp\lambda\ge\sharp\mu$, the Gelfand-Tsetlin rule implies that the following conditions are equivalent:
+
+$\bullet$ $\Hom_{\frak{sl}({\sharp \mu})}(V_\mu, V_\lambda|_{\frak{sl}(\sharp\mu)})\ne 0$,
+
+$\bullet$ there exists a sequence of $\mathbb Z$-partitions $\lambda=\lambda^0, \lambda^1,..., \lambda^{n-m}=\mu$ such that
+$$\lambda=\lambda^0>\lambda^1>...>\lambda^{n-m}=\mu$$
+and $\sharp \lambda^i=\sharp\lambda-i$. We write $\lambda\succ\mu$ whenever these latter conditions hold, and say that $\lambda$ {\it dominates} $\mu$.
+
+We can now restate the definitions of c.l.s. and p.l.s. as follows.
+%\begin{lemma}\label{Llang}
+Let $Q=\{Q_2, Q_3, ..., Q_n\}$ be a collection of subsets $Q_2\subset\Irr_2, Q_3\subset\Irr_3,..., Q_n\subset\Irr_n,...$. Then\\
+a) the following conditions are equivalent:
+
+$\bullet$ $Q$ is a p.l.s.,
+
+$\bullet$ for all $\lambda, \mu$ such that $\lambda\succ\mu$ and $\lambda\in Q_{\sharp\lambda}$, we have $\mu\in Q_{\sharp\mu}$;\\
+b) the following conditions are equivalent:
+
+$\bullet$ $Q$ is a c.l.s.,
+
+$\bullet$ $Q$ is a p.l.s. and for every $\mu\in Q_{\sharp\mu}$ there is $\lambda\in Q_{\sharp\mu+1}$ such that $\lambda\succ\mu$.\\
+%\end{lemma}
+%This provides a combinatorial description of p.l.s. and c.l.s. and therefore turns Proposition~\ref{Ppcls2} into a purely combinatorial statement. %We prove Proposition~\ref{Ppcls2} in Subsection~\ref{SScomb}.
+We denote by $Q^\vee(\lambda)$ the largest p.l.s. $Q$ which does not contain (the equivalence class of) a given $\mathbb Z$-partition $\lambda$. It is clear that
+
+$Q^\vee(\lambda)_n$ consists of all $\mathbb Z$-partitions of width $n$ for $n<\sharp\lambda$,
+
+$Q^\vee(\lambda)_{\sharp\lambda}$ consists of all $\mathbb Z$-partitions of width $\sharp\lambda$ except $\lambda$,
+
+$Q^\vee(\lambda)_n$ consists of all $\mathbb Z$-partitions $\mu$ of width $n$ such that $\mu\not\succ\lambda$ for all $n>\sharp\lambda$.\\
+We are now ready to state
+\begin{proposition}\label{Pmain}For any $\mathbb Z$-partition $\lambda$, the p.l.s. $Q^\vee(\lambda)$ is equivalent to the c.l.s.
+$$Q(\lambda):=\cup_{1\le k< l\le \sharp\lambda} Q(k, l, \lambda_k-\lambda_l)$$
+where $Q(k, l, \lambda_k-\lambda_l)$ is the c.l.s. defined by the formula
+$$Q(k, l, \lambda_k-\lambda_l)_m:=\{\mu\in\Irr_m\mid \mu_k-\mu_{m-\sharp\lambda+l}<\lambda_k-\lambda_l\}.$$
+\end{proposition}
+The next subsection is devoted to the proof of Proposition~\ref{Pmain}. We conclude this subsection by showing how Proposition~\ref{Pmain} implies Proposition~\ref{Ppcls2}, and therefore ultimately Proposition~\ref{Pjtolint}.
+\begin{proof}[Proof of Proposition~\ref{Ppcls2}]
+Let $Q$ be a p.l.s. Then, clearly
+
+$$Q=\cap_{\lambda\not\in Q} Q^\vee(\lambda).$$
+According to Proposition~\ref{Pmain}, a p.l.s. of the form $Q^\vee(\lambda)$ is equivalent to the c.l.s. $Q(\lambda)$. The lattice of c.l.s. is artinian~\cite{Zh1}, and therefore we conclude that $Q$ is equivalent to
+a c.l.s. $$Q(\lambda_1)\cap....\cap Q(\lambda_s)$$
+for some finite set of elements $\lambda_1,..., \lambda_s\not\in Q$.\end{proof}
+
+\subsection{Combinatorics of $\mathbb Z$-partitions}\label{SScomb}
+It is clear that Proposition~\ref{Pmain} is implied by the following.
+\begin{proposition}\label{Lgts2}Let $\lambda$ and $\mu$ be $\mathbb Z$-partitions such that $\sharp\mu\ge 4\sharp\lambda$. Then  the following conditions are equivalent:
+
+1) $\mu\succ\lambda$,
+
+2) $\mu_k-\mu_{\sharp\mu-\sharp\lambda+l}\ge\lambda_k-\lambda_l$ for any $1\le k<l\le\sharp\lambda$.
+\end{proposition}
+In the proof of Proposition~\ref{Lgts2} we need the following three lemmas.
+\begin{lemma}\label{Lgts}Let $\lambda$ and $\mu$ be $\mathbb Z$-partitions such that $\sharp\mu\ge\sharp\lambda$, $\lambda_1=\mu_1, \lambda_{\sharp\lambda}=\mu_{\sharp\mu}$. Then \begin{center} $\mu_i\ge \lambda_i\ge \mu_{\sharp\mu-\sharp\lambda+i}$ for $1\le i\le \sharp\lambda$\end{center}
+implies $\mu\succ\lambda$.\end{lemma}
+\begin{proof}If $\sharp\lambda=\sharp\mu$ then clearly $\lambda=\mu$. For $\sharp\mu>\sharp\lambda$, arguing by induction, it clearly suffices to show the existence of a $\mathbb Z$-partition $\mu'$ such that
+
+$\bullet$ $\mu>\mu', \sharp\mu'=\sharp\mu-1$,
+
+$\bullet$ $\mu'_1=\mu_1, \mu'_{\sharp\mu'}=\mu_{\sharp\mu}$,
+
+$\bullet$ $\mu'_i\ge\lambda_i\ge\mu'_{\sharp\mu'-\sharp\lambda+i}$ for $1\le i\le \sharp\lambda$,\\
+This is straightforward and we leave the details to the reader.\end{proof}
+%We proceed with the following lemma.
+\begin{lemma}\label{Lgts25}Let $\lambda$ and $\mu$ be $\mathbb Z$-partitions such that $\sharp\mu\ge 2\sharp\lambda$. Then the conditions
+
+a) for every $k, l\in\mathbb Z_{\ge1}$ such that~$1\le k<l\le\sharp\lambda$ we have $\mu_k-\mu_{\sharp\mu-\sharp\lambda+l}\ge\lambda_k-\lambda_l$,
+
+b) there are $k, l\in\mathbb Z_{\ge1}$ such that $1\le k<l\le\sharp\lambda$ and $\mu_k-\mu_{\sharp\mu-\sharp\lambda+l}=\lambda_k-\lambda_l$\\
+imply $\mu\succ\lambda$.
+\end{lemma}
+\begin{proof}Condition a) and b) implies via Lemma~\ref{Lgts} the existence of $\mathbb Z$-partitions $\mu^0, \mu^1,..., \mu^{m-n}$ such that
+
+$\bullet$ $\mu^{i}\succ\mu^{i+1}$, $\sharp\mu^i=l-k+1+(\sharp\mu-\sharp\lambda-i)$,
+
+$\bullet$ $\mu^0=(\mu_k\ge...\ge\mu_{\sharp\mu-\sharp\lambda+l})$,
+
+$\bullet$ $\mu^{\sharp\mu-\sharp\lambda}=(\lambda_k\ge ...\ge \lambda_l)$,
+
+$\bullet$ $\lambda_k=\mu^0_1=\mu_1^1=\mu^2_1=...=\mu^{\sharp\mu-\sharp\lambda}_0,$ and $\lambda_l=\mu^0_{\sharp\mu^0}=\mu^1_{\sharp\mu^1}=...=\mu^{\sharp\mu-\sharp\lambda}_{l-k+1}$.\\
+We set
+
+$$\hat{\mu^i}_j:=\begin{cases}\mu_j\mbox{~for~}j< k-i,\\
+\lambda_j+(\mu_k-\lambda_k)\mbox{~for~}k-i\le j\le k,\\
+\mu^i_{j-k}\mbox{~for~}k<j\le (\sharp\mu-i)-\sharp\lambda+l,\\
+\lambda_{j-(\sharp\mu-\sharp\lambda)}+(\mu_{\sharp\mu-\sharp\lambda+l}-\lambda_l)\mbox{~for~}(\sharp\mu-i)-\sharp\lambda+l< j\le \sharp\mu-\sharp\lambda+l,\\
+\mu_j\mbox{~for~}j>\sharp\mu-\sharp\lambda+l.\end{cases}$$
+One can easily check that
+
+$\bullet$ $\hat \mu_{i+1}\succ\hat \mu_i$,
+
+$\bullet$ $\hat \mu^0=\mu$ (here it is crucial that $\sharp\mu-\sharp\lambda\ge \sharp\lambda\ge\max(k, \sharp\lambda-l+1))$,
+
+$\bullet$ $\mu^{\sharp\mu-\sharp\lambda}=\lambda$.\\
+Thus $\mu\succ\lambda$.\end{proof}
+%Finally,  for the proof of Proposition~\ref{Lgts2} we need the following lemma.
+\begin{lemma}\label{Lfir} Let $\lambda, \mu$ be $\mathbb Z$-partitions, and $i\in\mathbb Z_{>0}$ be a positive integer such that
+
+$$\sharp \lambda \le i\le \sharp\mu-i,\hspace{10pt}\mu_i-\mu_{\sharp\mu-i+1}\ge\lambda_1-\lambda_{\sharp\lambda}.$$
+Then $\mu\succ\lambda$.\end{lemma}
+\begin{proof} Put $\mu':=(\mu_1,..., \mu_i, \mu_{\sharp\mu-i+1},..., \mu_{\sharp\mu})$. It is clear that $\mu\succ\mu'$, and that $\mu'$ and $\lambda$ satisfy the conditions of Lemma~\ref{Lfir} as well. Therefore without loss of generality we can assume that $\mu=\mu'$, and thus that $i=\sharp\mu-i$. We can also assume that $\lambda_1=\mu_i$. This implies that $\lambda_{\sharp\lambda}\ge\mu_{\sharp\mu-i+1}=\mu_{i+1}.$
+
+Next, we observe that the following sequence of $\mathbb Z$-partitions each element dominates the next:
+$$\mu_1\ge...\ge\mu_i\ge\mu_{i+1}\ge...\ge\mu_{\sharp\mu}$$
+$$\mu_1\ge...\ge\mu_{i-1}\ge\lambda_{\sharp\lambda}\ge\mu_{i+1}\ge...\ge\mu_{\sharp\mu-1}$$
+$$...$$
+$$\mu_1\ge...\ge\mu_{i-k}\ge\lambda_{\sharp\lambda-k+1}\ge...\ge\lambda_{\sharp\lambda}\ge\mu_{i+1}\ge...\ge\mu_{\sharp\mu-k}$$
+$$...$$
+$$\mu_1\ge...\ge\mu_{i-\sharp\lambda}\ge\lambda_1\ge...\ge\lambda_{\sharp\lambda}\ge\mu_{i+1}\ge...\ge\mu_{\sharp\mu-\sharp\lambda}.$$
+The last $\mathbb Z$-partition dominates $\lambda$, hence $\mu\succ\lambda$.
+\end{proof}
+\begin{proof}[Proof of Proposition~\ref{Lgts2}]It is clear that 1) implies 2). We show now that 2) implies 1). To do this, we assume to the contrary that 2) holds and $\mu\not\succ\lambda$. We claim that this contradicts Lemma~\ref{Lgts25}.
+
+Indeed, consider the $\mathbb Z$-partitions $\mu^{r, s}$, for $r, s\le\sharp\lambda$, where
+$$\mu_i^{r, s}=\mu_{i+r},\mbox{~for~}1\le i\le \sharp\mu-s-r,~\mu^{0, 0}=\mu.$$
+It is clear that $\mu\succ\mu^{r, s}$. Lemma~\ref{Lfir} implies that $\mu_{\sharp\lambda}-\mu_{\sharp\mu-\sharp\lambda+1}<\lambda_1-\lambda_{\sharp\lambda}$, and in particular that $\mu^{\sharp\lambda-1, \sharp\lambda-1}$ does not satisfy condition 2) of Proposition~\ref{Lgts2} considered as an abstract condition on a partition $\mu'$ instead of $\mu$. Therefore, since $\mu=\mu^{0, 0}$ satisfies this condition, there exist $r, s<\sharp\lambda$ such that $\mu^{r, s}$ satisfies this condition, and $\mu^{r+1, s}$ or $\mu^{r, s+1}$ does not satisfy this condition. These two cases are very similar, and we consider only the first one (leaving the second one to the reader).
+
+We put $\mu':=\mu^{r, s}$ and assume that $\mu^{r+1, s}\not\succ\lambda$. Then there exist $k, l$, for $1\le k< l\le\sharp\lambda$, such that
+
+$$\mu'_k-\mu'_{\sharp\mu-\sharp\lambda+l}\ge\lambda_k-\lambda_l,\hspace{10pt}\mu'_{k+1}-\mu'_{\sharp\mu-\sharp\lambda+l}< \lambda_k-\lambda_l.$$
+Without loss of generality we can assume that $l$ is chosen so that the value of
+$$\mu_{\sharp\mu-\sharp\lambda+l}+\lambda_k-\lambda_l$$
+is maximal. This implies that, for
+$$\mu'':=\mu'_1, \mu'_2,..., \mu'_{k-1}, \mu'_k+\lambda_l-\lambda_k, \mu'_{k+1}, \mu'_{k+2},..., \mu'_{\sharp\mu-r-s-1},$$
+we have $\mu\succ\mu''$, and all conditions of Lemma~\ref{Lgts25} are satisfied for the pair $(\lambda, \mu'')$ (here it is crucial that $\mu+2-(r+s)\ge 2\lambda$). Hence $\mu''\succ\lambda$, and we have the desired contradiction.\end{proof}
+\section{Appendix: The inclusion order on primitive ideals}
+As explained in~\cite[Subsection~7.3]{PP1}, a c.l.s. for $\frak{sl}(\infty)$ can be encoded by a pair of nonincreasing sequences
+\begin{equation}\label{Eseqlr}p_1\ge p_2\ge p_3\ge...{\rm~and~}q_1\ge q_2\ge q_3\ge...\end{equation}
+of elements of $\mathbb Z_{\ge0}\sqcup\{+\infty\}$ with common limit
+$$\lim\limits_{i\to\infty}p_i=\lim\limits_{i\to\infty}q_i=m,$$
+see~\cite{Zh1}, see also~\cite[Proposition~7.5 and Subsection~7.3]{PP1}. We denote by ${\rm cls}(p_1, p_2,... ; q_1, q_2,...)$ the c.l.s. attached to the pair of sequences~(\ref{Eseqlr}).
+The inclusion order on c.l.s. is described by the following theorem due to A.~Zhilinskii.
+\begin{theorem}[{\cite[Subsection 2.5]{Zh1},~see~also~\cite[Subsection~7.3]{PP1}}]\label{Tiap}Let $\{p_i, q_i\}_{i\ge 1}$ and $\{p_i', q_i'\}_{i\ge 1}$ be pairs of nonincreasing sequences with respective limits $m, m'$ as in~(\ref{Eseqlr}). Then the following conditions are equivalent:
+
+a) ${\rm cls}(p_1', p_2',...; q_1', q_2',...)\subset{\rm cls}(p_1, p_2,...; q_1, q_2,...)$,
+
+b) there exist $a, b\in\mathbb Z_{\ge0}$ such that $a+b=m-m'$ and
+$$p_i'\le p_i-a,\hspace{10pt}q_i'\le q_i-b.$$
+\end{theorem}
+%We wish to mention that condition b) of Theorem~\ref{Tiap} can be easily restated in terms of inclusions of simple modifications of the seminifinite diagrams as above.
+Consider $I(x, y,Y_l, Y_r)$ for $Y_l=( l_1\ge...\ge l_s>0), Y_r=(r_1\ge...\ge r_t>0)$, and put
+\begin{equation}p^c_i:=\begin{cases}+\infty&{\rm~if~} 1\le i\le c\\y+l_{i-c}&{\rm~if~} c+1\le i\le c+s\\y&{\rm~if~} i>c+s+1\\\end{cases},\hspace{10pt}q^d_i:=\begin{cases}+\infty&{\rm~if~} 1\le i\le d\\y+r_{i-d}&{\rm~if~} d+1\le i\le d+t\\y&{\rm~if~} i>d+t+1\\\end{cases}\label{Eseqpq}\end{equation}
+for any $c, d\in\mathbb Z_{\ge0}$.
+\begin{proposition}\label{Pordz}We have
+
+a) $I=I(x, y, Y_l, Y_r)=I({\rm cls}(p_1^x, p_2^x,...; q_1^0, q_2^0,...)),$
+
+b) $I=I(x, y, Y_l, Y_r)=I({\rm cls}(p_1^c, p_2^c,...; q_1^d, q_2^d,...))$ for all $c, d$ such that $c+d=x$,
+
+c) $Q(I)=\cup_{c+d=x} {\rm cls}(p_1^c, p_2^c,...; q_1^d, q_2^d,...)$.
+\end{proposition}
+\begin{proof}Part a) follows from the definition of $I(x, y, Y_l, Y_r)$, see also~\cite[Theorem~7.9]{PP1}. Part b) follows from the discussion in~\cite[Subsection~7.4]{PP1}, see formula
+$$I(v, w, Q_f)=I(v+w, 0, Q_f)$$
+in the notation of~\cite{PP1}.
+
+Part c) is implied by~\cite[Lemma 7.6c)]{PP1}.\end{proof}
+Alltogether, this allows us to provide an explicit inclusion criterion for a pair of primitive ideals.
+\begin{theorem}\label{Tord} Let $x, y, Y_l, Y_r$ be as above, and let $Y_l'=(l_1'\ge...\ge l_{s'}'>0), Y'_r=(r_1'\ge...\ge r_{t'}'>0)$ be Young diagrams and $x', y'\in\mathbb Z_{\ge0}$. 
+The following conditions are equivalent:
+
+a) there is a (not necessarily strict) inclusion
+\begin{equation}I(x, y, Y_l, Y_r)\subset I(x', y',  Y_l', Y_r'),\label{Eid17}\end{equation}
+
+b) $x\ge x', y\ge y'$ and, for some $a, b, c, d\in\mathbb Z_{\ge0}$ with $c+d=x-x', a+b=y-y'$, the inequalities
+$$ l_{i}+a\ge l'_{i+c},\hspace{10pt}r_{j}+b\ge r'_{j+d},$$
+where
+$$l_i=0{\rm~if~}i>s,\hspace{10pt}l'_i=0{\rm~if~}i>s',\hspace{10pt}r_j=0{\rm~if~}j>t,\hspace{10pt}r'_j=0{\rm~if~}j>t'$$
+are satisfied for all $i, j\ge 0$.
+\end{theorem}
+\begin{proof} Let $\{p_i^c, q_i^d\}_{i\ge1}$, $\{(p')_i^c, (q')_i^d\}$ be defined by~(\ref{Eseqpq}).
+
+We would like to show first that b) implies a). Condition b) yields
+$${\rm cls}((p')_1^{x'}, (p')_2^{x'},...; (q')_1^{0}, (q')_2^{0},...)\subset {\rm cls}(p_1^{x'+c}, p_2^{x'+c},...; q_1^{d}, q_2^{d},...)$$
+by Theorem~\ref{Tiap}. This together with Proposition~\ref{Pordz} a-b) implies a).
+
+Now we show that a) implies b). The inclusion~(\ref{Eid17}) yields
+$$Q(I(x', y', Y_l', Y_r'))\subset Q(I(x, y, Y_l, Y_r)).$$
+According to Proposition~\ref{Pordz} c), this implies
+$$\cup_{c+d=x'} {\rm cls}((p')_1^c, (p')_2^c,...; (q')_1^d, (q')_2^d,...)\subset \cup_{c+d=x} {\rm cls}(p_1^c, p_2^c,...; q_1^d, q_2^d,...).$$
+In particular, we have
+$${\rm cls}((p')_1^{x'}, (p')_2^{x'},...; (q')_1^0, (q')_2^0,...)\subset \cup_{c+d=x} {\rm cls}(p_1^c, p_2^c,...; q_1^d, q_2^d,...).$$
+The c.l.s. ${\rm cls}((p')_1^{x'}, (p')_2^{x'},...; (q')_1^0, (q')_2^0,...)$ is irreducible~\cite[Definition~I.I.I]{Zh1}, and therefore
+\begin{equation}{\rm cls}((p')_1^{x'}, (p')_2^{x'},...; (q')_1^0, (q')_2^0,...)\subset {\rm cls}(p_1^c, p_2^c,...; q_1^d, q_2^d,...)\label{Eclsapp}\end{equation}
+for some $c, d$ such that $c+d=x$, see~\cite[Proposition~I.I.2]{Zh1}. Next, by Theorem~\ref{Tiap} the inclusion~(\ref{Eclsapp}) implies that condition b) of Theorem~\ref{Tiap} holds for
+%we have $c\ge x'$, and moreover
+$a, b\in\mathbb Z_{\ge0}$ such that
+$$a+b=\lim p_i^c-\lim (p')_i^c.$$ Since, by definition, $\lim p_i^c=y$ and $\lim (p')_i^c=y'$, we obtain that claim b) of Theorem~\ref{Tord} holds for \begin{center}$a, b~(a+b=y-y')$ and $c-(x'), d~((c-x')+d=x-x')$.\end{center}
+
+% result for the combinatorial counterparts of the primitive ideals $I(x, y, s, t, l_1,..., l_s, r_1,..., r_t)$. These combinatorial counterparts are called coherent local systems, see Subsection~\ref{SSprt2} below. Theorem~\ref{Tord} is a corollary of Zhilinskii's result.
+%The description of c.l.s. given by A.~Zhilinskii~\cite{Zh1} is explicit enough to evaluate the inclusions between irreducible c.l.s.. We borrow the explicit conditions on parameters from
+\end{proof}
+\begin{corollary}The lattice of primitive ideals of $\Ue(\frak{sl}(\infty))$ satisfies the ascending chain condition.\end{corollary}
+\begin{corollary}The augmentation ideal $I(0, 0, \emptyset, \emptyset)$ is the only maximal ideal of $\Ue(\frak{sl}(\infty))$.\end{corollary}
+\begin{proof} The statement  is implied by Theorems~\ref{T1b} and ~\ref{Tord}.\end{proof}
+%\begin{remark} It is convenient to think about~(\ref{Eseqlr}) as about the pair of semi-infinite Young diagrams attached to~(\ref{Eseqlr}) considered as the sequences of column lengths (therefore if $m\ne+\infty$ such diagrams would start from finitely many infinite colums and such diagrams would stabilize to $m$ infinite rows).  It is not hard to restate Theorems~\ref{Tiap},~\ref{Tord} and Proposition~\ref{Pordz} in terms inclusions of such diagrams. \end{remark}
+\section{Acknowledgements}
+ We thank A.~Baranov for inroducing us to the work of A.~Zhilinskii several years ago. We also thank D.~Rumynin and S.~Sierra for discussions which led finally to the statement and proof of Lemma~\ref{Lalg}. In addition, we are grateful for A.~Fadeev for pointing out some details in the proofs which required improvement. Both authors acknowledge partial support through DFG Grant~PE 980/6-1. The second author was also supported by Leverhulme Trust Grant RPG-2013-293, RFBR grant 16-01-00818, and thanks Jacobs University for its hospitality. Finally, we thank a referee for a few good suggestions.
+\begin{thebibliography}{99}
+\bibitem{BV1} D.~Barbasch, D.~Vogan, {\it Primitive ideals and orbital integrals in complex classical groups}, Math. Ann. {\bf 259} (1982), 153--199.
+\bibitem{BV2} D.~Barbasch, D.~Vogan, {\it Primitive Ideals and Orbital Integrals in Complex Exceptional Groups}, J. Algebra {\bf 80} (1983), 350--382.
+\bibitem{BJ} W.~Borho, J.-C. Jantzen,  {\it \"Uber primitive Ideale in der Einh\"ullenden einer halbeinfacher Lie-algebra}, Inv. Math. {\bf 39} (1977), 1--53.
+\bibitem{D} E. Dan-Cohen, {\it Borel subalgebras of root-reductive Lie algebras}, J. Lie Theory {\bf 18} (2008), 215--241.
+\bibitem{DPS} E.~Dan-Cohen, I.~Penkov, V.~Serganova, {\it A Koszul category of representations of finitary Lie algebras}, Adv. Math. {\bf 289} (2016), 250--278.
+\bibitem{Du} M.~Duflo, Sur la classiﬁcation des id\'eaux primitifs dans l'alg\`ebre enveloppante d'une alg\`ebre de Lie semisimple, Ann.~of~Math. {\bf 105} (1977), 107--120.
+\bibitem{HS} J.~Hennig, S.~Sierra, {\it Path algebras of quivers and representations of locally finite Lie algebras}, Int. Math. Res. Not. {\bf 2017}, 6036--6084.
+\bibitem{Jo} A.~Joseph, {\it On the associated variety of a primitive ideal}, J. Algebra {\bf 93} (1985), 509--523.
+\bibitem{LO} I.~Losev,  V.~Ostrik, {\it Classiﬁcation of finite-dimensional irreducible modules over W-algebras}, Comp. Math {\bf 150} (2014), 1024--1076.
+\bibitem{Lu} G.~Lusztig, D.~Kazhdan, Representations of coxeter groups and hecke algebras, Inv. Math. {\bf 53} (1979), 165--184.
+\bibitem{MCR} J.~McConnell, J.~Robson, {\it Noncommutative N\"otherian Rings}, Graduate Studies in Math., Vol. 30, Amer. Math. Soc., 1987.
+\bibitem{PP1} I.~Penkov, A.~Petukhov, {\it On ideals in the enveloping algebra of a locally simple Lie algebra},  IMRN {\bf 13} (2015), 5196--5228.
+\bibitem{PP2} I.~Penkov, A.~Petukhov, {\it Annihilators of highest weight $\frak{sl}(\infty)$-modules}, Transformation groups {\bf 21} (2016), 821--849.
+\bibitem{PP3} I.~Penkov, A.~Petukhov, {\it On ideals  in $\Ue(\frak{sl}(\infty)), \Ue(\frak{o}(\infty)), \Ue(\frak{sp}(\infty))$}, Representation theory - current trends and perspectives, EMS Series of Congress Reports, European Mathematical Society (EMS), 2016, 565--602.
+\bibitem{PSt} I.~Penkov, K.~Styrkas, {\it Tensor representations of infinite-dimensional root-reductive Lie algebras}, in Developments and Trends in Infinite-Dimensional Lie Theory, Progress in Mathematics 288, Birkha\"user, 2011, 127--150.
+\bibitem{S} A.~Sava, {\it Annihilators of simple tensor modules}, master’s thesis, Jacobs University Bremen, 2012, arXiv: 1201.3829.
+\bibitem{Zh1} A. Zhilinskii, {\it Coherent systems of representations of inductive families of simple complex Lie algebras} (Russian), preprint of Academy of Belarussian SSR, ser. 38 (438), Minsk, 1990.
+\bibitem{Zh2} A. Zhilinskii, {\it Coherent finite-type systems of inductive families of nondiagonal inclusions} (Russian), {\it Dokl. Acad. Nauk Belarusi} {\bf 36:1}(1992), 9--13, 92.
+\bibitem{Zh3} A. Zhilinskii, {\it On the lattice of ideals in the universal enveloping algebra of a diagonal Lie algebra} (Russian), preprint, Minsk, 2011.
+\bibitem{Atl} Atlas of Lie Groups and Representations, liegroups.org.
+\end{thebibliography}
+\end{document}
+
+
+
+\end{document}
+
+
+Using Lemma~\ref{Lalg} we can provide an alternative description of $\sqrt I$ for $A=\Ue$.
+\begin{lemma}\label{Ljlim} Let $I$ be an ideal of $\Ue$. Then we have
+$$\sqrt I=\cup_n (\sqrt I\cap\Ue_n),\hspace{10pt} \sqrt I\cap\Ue_n=\cap_{m\ge n}\sqrt{I\cap\Ue_m}.$$\end{lemma}
+Taking this into account it is easy to see that Proposition~\ref{Pjtolint} is implied by the following statement.
+\begin{lemma} Let $I$ be a two-sided ideal of $\Ue$. Then there exists $r$ such that for any $m\ge r$ we have that $\sqrt{I\cap\Ue_m}\cap\Ue_{m-r}$ is an intersection of ideals of finite codimension in $\Ue_{m-r}$.\end{lemma}
+
+It is clear that Proposition~\ref{Pjtolint} is implied by the following statement.

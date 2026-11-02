@@ -1,0 +1,55 @@
+/* --- shared styles for both pages ------------------------------------------- */
+:root{
+    --accent:#949494;        /* main blue */
+    --accent-600:#003e75;
+    --background:#f9f9f9;
+    --card-bg:#fff6eb;
+    --text:#333;
+    --text-muted:#666;
+    --font-sans:'Montserrat',sans-serif;
+  }
+  
+  html{font-size:16px;}
+  body{margin:0;padding:0;font-family:var(--font-sans);background:var(--background);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+  header{background:var(--accent);color:#fff;padding:1.5rem 2rem;text-align:center;}
+  header h1{margin:0;font-size:2.4rem;}
+  footer{background:#fff;text-align:center;padding:1rem 0;font-size:.9rem;color:var(--text-muted);border-top:1px solid #e0e0e0;}
+  main{flex:1;padding:2rem 1rem;max-width:1200px;margin:0 auto;}
+  
+    
+  .link{
+    padding: 2.8rem;
+    text-align:center;
+  }
+  
+  .card-grid{
+    /* 1. Use a single‑column grid (or flex column) */
+    display: grid;                 /* a grid works well for a column layout */
+    grid-template-columns: 1fr;    /* one column that takes the full width */
+    gap: 1.5rem;                   /* vertical spacing between cards */
+  }
+  .card{
+    flex: 0 0 auto;                /* let the card take its natural width */
+    max-width: none;               /* clear the 300 px limit */
+    background: var(--card-bg);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover{transform:translateY(-1px);box-shadow:0 3px 6px rgba(0,0,0,.1);}
+  .card h2{margin:0 0 .6rem 0;font-size:1.8rem;color:var(--accent);}
+  .card .subtitle{margin:0 0 .8rem 0;font-size:1.2rem;color:var(--accent-600);}
+  .card .meta{margin:0 0 .8rem 0;font-size:.92rem;color:var(--text-muted);}
+  .card .description{flex:1;margin:0 0 1.2rem 0;font-size:1rem;line-height:1.5;}
+  .card .btn{align-self:flex-start;text-decoration:none;background:var(--accent);color:#fff;padding:.5rem 1.2rem;border-radius:4px;font-weight:600;transition:background .2s;}
+  .card .btn:hover{background:var(--accent-600);}
+  
+  /* --- pagination ---------------------------------------------------- */
+  .pagination{margin:0 0 2rem 0;text-align:center;}
+  .page-btn{margin:0 4px;color:#004e92;text-decoration:none;}
+  .page-btn.active{font-weight:600;text-decoration:underline;}
+  .page-btn:hover{text-decoration:underline;}
+  

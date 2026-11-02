@@ -1,0 +1,2433 @@
+\documentclass{amsart}
+%\documentclass{article}
+\usepackage[russian]{babel}
+%\usepackage[koi8-r]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[all]{xy}
+
+\usepackage{fixmath}
+
+\usepackage[usenames]{color}
+\usepackage{colortbl}
+
+
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{notation}{Обозначение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\newcommand{\courbe}[7]{\qbezier(#1,#3)(#4,#7)(#5,#7)
+\qbezier(#5,#7)(#6,#7)(#2,#3)}
+
+\newcommand{\courbebis}[3]{\qbezier(#1,#3)(#1,2*#3)(#1/2+#2/2,2*#3)
+\qbezier(#1/2+#2/2,2*#3)(#2,2*#3)(#2,#3)}
+
+\newcommand{\NN}{\mathbb{N}^*}
+
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+\begin{document}
+
+\makeatletter
+\edef\@@and{и}
+\makeatother
+
+
+
+
+%\let\uppercase\MakeUppercase
+
+%{ \bf ДВОЙСТВЕННОСТЬ ОРБИТ В ИНД-МНОГООБРАЗИЯХ МАКСИМАЛЬНЫХ ОБОБЩЁННЫХ ФЛАГОВ}
+%\title{Двойственность орбит в инд-многообразиях максимальных обобщённых флагов}
+\title[\CYRD\CYRV\CYRO\CYRISHRT\CYRS\CYRT\CYRV\CYRE\CYRN\CYRN\CYRO\CYRS\CYRT\CYRSFTSN\
+\CYRO\CYRR\CYRB\CYRI\CYRT\ \CYRV\
+\CYRI\CYRN\CYRD-\CYRM\CYRN\CYRO\CYRG\CYRO\CYRO\CYRB\CYRR\CYRA\CYRZ\CYRI\CYRYA\CYRH...]
+{\CYRD\CYRV\CYRO\CYRISHRT\CYRS\CYRT\CYRV\CYRE\CYRN\CYRN\CYRO\CYRS\CYRT\CYRSFTSN\
+\CYRO\CYRR\CYRB\CYRI\CYRT\ \CYRV\
+\CYRI\CYRN\CYRD-\CYRM\CYRN\CYRO\CYRG\CYRO\CYRO\CYRB\CYRR\CYRA\CYRZ\CYRI\CYRYA\CYRH\
+\CYRM\CYRA\CYRK\CYRS\CYRI\CYRM\CYRA\CYRL\CYRSFTSN\CYRN\CYRERY\CYRH\
+\CYRO\CYRB\CYRO\CYRB\CYRSHCH\CYRYO\CYRN\CYRN\CYRERY\CYRH\
+\CYRF\CYRL\CYRA\CYRG\CYRO\CYRV}
+\author{Иван Пенков}
+\address{Университет Лотарингии, Нац. Центр Научн. Иссл., Лотарингский Институт им. Эли Картана, Объед. Иссл. Подраздел. 7502, Вандёвр в Нанси, F-54506 Франция}
+\email{lucas.fresse@univ-lorraine.fr}
+\author{Лука Фресс}
+\address{Университет Якобса в Бремене, Кампус Ринг 1, 28759 Бремен, Германия}
+\email{i.penkov@jacobs-university.de}
+%\begin{center}
+%\footnotesize{Лука Фресс и Иван Пенков}
+%\end{center}
+\dedicatory{Посвящается Эрнесту Борисовичу Винбергу  \\ к восьмидесятилетию }
+
+УДК {512.816.2, 512.816.4, 512.818}
+
+\footnotetext[0]{Ключевые слова. Классические инд-группы, обобщённые флаги, симметрические пары, вещетвенные формы, Двойственность Мацуки.}
+\keywords{}
+
+
+
+\begin{abstract}
+%We show an orbit duality for ind-varieties of maximal generalized flags associated to classical ind-groups, which extends the duality shown by Matsuki for finite-dimensional flag varieties. In addition we provide explicit parametrizations of orbits.
+Мы распространяем двойственность Мацуки на произвольные инд-многообразия максимальных обобщённых флагов, другими словами, на любое однородное инд-многообразие $\mathbf{G}/\mathbf{B}$ для классической инд-группы $\mathbf{G}$  и расщепляющей Борелевской инд-подгруппы $\mathbf{B}\subset\mathbf{G}$.  Сначала мы приводим явную комбинаторную версию двойственности Мацуки в конечномерном случае, включающую явную параметризацию  $K$- и $G^0$-орбит на $G/B$.  После того, как мы доказываем двойственность Мацуки в бесконечномерном случае,  мы даём необходимые и достаточные условия на Борелевскую инд-подгруппу $\mathbf{B}\subset\mathbf{G}$ для существования открытых и замкнутых $\mathbf{K}$- и $\mathbf{G}^0$-орбит на $\mathbf{G}/\mathbf{B}$, где $\left(\mathbf{K},\mathbf{G}^0\right)$ --- согласованная пара, состоящая из симметрической инд-подгруппы $\mathbf{K}$ и вещественной формы $\mathbf{G}^0$  инд-группы $\mathbf{G}$.
+\end{abstract}
+
+%\keywords{Classical ind-groups; generalized flags; symmetric pairs; real forms; Matsuki duality}
+
+\begin{footnotesize}
+
+\end{footnotesize}
+\maketitle
+
+
+\section{Введение}
+
+\label{S.intro}
+
+В настоящей статье мы распространяем двойственность Мацуки на
+инд-много\-образия максимальных обобщённых флагов, то есть, на однородные пространства вида $\mathbf{G}/\mathbf{B}$ для $\mathbf{G}=\mathrm{GL}(\infty)$, $\mathrm{SL}(\infty)$, $\mathrm{SO}(\infty)$, $\mathrm{Sp}(\infty)$.  В случае  конечномерной редуктивной алгебраической группы  $G$, двойственность Мацуки \cite{Gindikin-Matsuki, Matsuki, Matsuki3} это биекция между (конечным) множеством $K$-орбит на $G/B$ и множеством $G^0$-орбит на $G/B$, где $K$ является симметрической подгруппой $G$ и $G^0$ является вещественной формой $G$.  Более того, эта биекция обращает отношения включения на замыканиях орбит.  В частности, замечательная теорема об единственности замкнутой $G^0$-орбиты на $G/B$, см. \cite{W1}, следует  через двойственность  Мацуки из единственности  открытой (по Зарисскому) $K$-орбиты на $G/B$.
+В монографии \cite{FHW} двойственность Мацуки была использована в качестве отправной точки для изучения  пространств циклов.
+
+Если  $\mathbf{G}=\mathrm{GL}(\infty)$, $\mathrm{SL}(\infty)$, $\mathrm{SO}(\infty)$, $\mathrm{Sp}(\infty)$ --- классическая инд-группа, то её Борелевские инд-подгруппы не являются ни $\mathbf{G}$-сопряжёнными, ни $\mathrm{Aut}(\mathbf{G})$-сопряжёнными, поэтому существет много инд-многообразий вида $\mathbf{G}/\mathbf{B}$.  Мы показываем, что двойственность Мацуки продолжается на произвольное инд-много\-образие $\mathbf{G}/\mathbf{B}$, где $\mathbf{B}$ --- расщепляющая Борелевская инд-подгруппа  инд-группы $\mathbf{G}$, а $\mathbf{G}=\mathrm{GL}(\infty)$, $\mathrm{SL}(\infty)$, $\mathrm{SO}(\infty)$, $\mathrm{Sp}(\infty)$.  В бесконечномерном случае структура $\mathbf{G}^0$-орбит и $\mathbf{K}$-орбит на $\mathbf{G}/\mathbf{B}$ сложнее, чем в конечномерном случае, и  всегда существует бесконечно много орбит.
+
+ Изучение $\mathbf{G}^0$-орбит на $\mathbf{G}/\mathbf{B}$ для $\mathbf{G}=\mathrm{GL}(\infty),\mathrm{SL}(\infty)$ было начато в работе~\cite{Ignatyev-Penkov-Wolf} и  продолжено в работе~\cite{W}.  В частности, в статье \cite{Ignatyev-Penkov-Wolf} было показано, что для некоторых веществнных форм $\mathbf{G}^0$ существуют расщепляющие Борелевские инд-подгруппы $\mathbf{B}\subset \mathbf{G}$ такие, что $\mathbf{G}/\mathbf{B}$ не имеет ни открытых, ни замкнутых  $\mathbf{G}^0$-орбит.  %On the other hand, Wolf's Theorem about the uniqueness of a closed $G^0$-orbit on $G/B$ in the finite-dimensional case extends also to the infinite-dimensional case: here the correct statement is that a closed $\mathbf{G}^0$-orbit is unique whenever it exists.
+Нам не известно о каких-либо предшествующих исследованиях    $\mathbf{K}$-орбит на $\mathbf{G}/\mathbf{B}$ для $\mathbf{G}=\mathrm{GL}(\infty),\mathrm{SL}(\infty),\mathrm{SO}(\infty),\mathrm{Sp}(\infty)$.  Двойственность, которую мы устанавливаем в этой статье, показывает, что структура $\mathbf{K}$-орбит на $\mathbf{G}/\mathbf{B}$ является ``зеркальным отражением'' структуры $\mathbf{G}^0$-орбит на $\mathbf{G}/\mathbf{B}$.  В частности, факт, что $\mathbf{G}/\mathbf{B}$ допускает не более одной замкнутой $\mathbf{G}^0$-орбиты теперь следствие очевидного утверждения, что $\mathbf{G}/\mathbf{B}$ допускает не более одной открытой по Зарисскому $\mathbf{K}$-орбиты.  %In the case of classical ind-groups $\mathrm{SO}(\infty)$ and $\mathrm{Sp}(\infty)$, it is natural to undertake a study of the structure of $\mathbf{K}$-orbits first, and then transfer the results of $\mathbf{G}^0$-orbits via Matsuki duality...
+
+%MENTION ALSO $G/P$!
+
+Наш основной результат можно сформулировать следующим образом.
+Пусть $(\mathbf{G},\mathbf{K},\mathbf{G}^0)$ --- одна из троек
+перечисленных в разделе \ref{S2.1},
+состоящих из классической (комплексной)
+инд-группы $\mathbf{G}$, симметрической инд-подгруппы $\mathbf{K}\subset\mathbf{G}$
+и соответствующей вещественной формы $\mathbf{G}^0\subset\mathbf{G}$.
+Пусть $\mathbf{B}\subset\mathbf{G}$ --- расщепляющая Борелевская инд-подгруппа
+такая, что $\mathbf{X}:=\mathbf{G}/\mathbf{B}$ является инд-многообразием максимальных обобщённых флагов (изотропных для типов B, C, D)
+слабо согласованных с некоторым базисом в $\textbf{V} $, соответствующим
+выбору $\mathbf{K}$ и $\mathbf{G}^0$ в смысле разделов \ref{S2.1}, \ref{S2.3}.
+Имеется естественное разложение $\mathbf{G}=\bigcup_{n\geq 1}G_n$
+и $\mathbf{X}=\bigcup_{n\geq 1}X_n$.
+Здесь $G_n$ --- конечномерная алгебраическая группа,
+$X_n$ --- полное многообразие флагов  в $G_n$,
+и вложение $X_n\subset\mathbf{X}$, в частности, $G_n$-эквивариантно.
+Подгруппы $K_n:=\mathbf{K}\cap G_n$ и $G^0_n:=\mathbf{G}^0\cap G_n$
+являются, соответственно, симметрической подгруппой и вещественной формой группы $G_n$.
+Подробности см. в разделе  \ref{S4.4}  .
+
+\begin{theorem}
+\label{theorem-1}
+\begin{itemize}
+\item[\rm (a)] Для всех $n\geq 1$ включение $X_n\subset \mathbf{X}$
+индуцирует вложение множеств орбит $X_n/K_n\hookrightarrow \mathbf{X}/\mathbf{K}$
+и $X_n/G^0_n\hookrightarrow \mathbf{X}/\mathbf{G}^0$.
+\item[\rm (b)] Существет биекция $\Xi:\mathbf{X}/\mathbf{K}\to\mathbf{X}/\mathbf{G}^0$
+такая, что диаграмма
+\begin{equation}
+\label{diag}
+\xymatrix{
+X_n/K_n \ar@{->}[d]^{\Xi_n} \ar@{^{(}->}[r] & \mathbf{X}/\mathbf{K} \ar@{->}[d]^{\Xi} \\
+X_n/G^0_n \ar@{^{(}->}[r] & \mathbf{X}/\mathbf{G}^0
+}
+\end{equation}
+комутативна. Здесь $\Xi_n$ означает двойственность Мацуки.
+\item[\rm (c)] Для каждой $\mathbf{K}$-орбиты $\bs{\mathcal{O}}\subset\mathbf{X}$
+пересечение $\bs{\mathcal{O}}\cap\Xi(\bs{\mathcal{O}})$ состоит из одной $\mathbf{K}\cap\mathbf{G}^0$-орбиты.
+\item[\rm (d)] Биекция $\Xi$ обращает отношение включения на замыканиях орбит.
+В частности, $\Xi$ отображает открытые (соответственно, замкнутые) $\mathbf{K}$-орбиты в
+замкнутые (соответственно, открытые) $\mathbf{G}^0$-орбиты.
+\end{itemize}
+\end{theorem}
+
+На самом деле наши результаты намного точнее: в предложениях \ref{P4-1.1}, \ref{P4.2-2}, \ref{P4.3} мы показывем, что $\mathbf{X}/\mathbf{K}$ и $\mathbf{X}/\mathbf{G}^0$ допускают одну и ту же явную параметризацию индуктивным  пределом подходящих одинаковых параметризаций  $X_n/K_n$ и $X_n/G_n^0$.  Это влечёт биекцию $\Xi$ из теоремы  \ref{theorem-1}\,{\rm (b)}. Утверждения {\rm (a)} и {\rm (b)} из теоремы \ref{theorem-1} удовлетворяют нашим требованиям (\ref{T-proof.1}), (\ref{T-proof.2}), (\ref{T-proof.3}) ниже. Теорема \ref{theorem-1}\,{\rm (c)} следует из соответсвующих утверждений в предложениях \ref{P4-1.1}, \ref{P4.2-2}, \ref{P4.3}.
+Наконец, теорема \ref{theorem-1}\,{\rm (d)} получается из
+теоремы \ref{theorem-1}\,{\rm (a)} --- {\rm (b)}, определения инд-топологии,
+и из факта, что двойственность $\Xi_n$ обращает отношение включения на замыканиях орбит.
+
+Например, в случае, когда $\mathbf{G}=\mathrm{GL}(\infty)$ и $\mathbf{K}\subset \mathbf{G}$ --- инд-подгруппа, сохраняющая ортогональную форму $\omega$, мы показываем, что оба множества орбит $\mathbf{X}/\mathbf{K}$ и $\mathbf{X}/\mathbf{G}^0$ параметризуются инволюциями $ \omega: \mathbb{N}^* \to \mathbb{N}^*$ такими, что $\omega(\ell)=i(\ell)$ для почти всех $\ell \in \mathbb{N}^*$, где $i$ --- инволюция, индуцированная матрицей формы $\omega$ в подходящем базисе натурального представления  $\mathbf{G}$ (см. раздел \ref{S4.1}).
+
+Наши методы основаны на классификации симметрических подгрупп и вещественных форм классических простых алгебраических групп. Возможно, будущие исследования позволят привести доказательство наших результатов, не зависящее от классификации.
+
+\subsection*{Организация статьи}
+
+В разделе \ref{S2} мы вводим обозначения для классических инд-групп, симметрических инд-подгрупп и вещественнх форм.
+Мы напоминаем несколько основных фактов о конечномерных многообразиях  флагов, а также понятие инд-многообразия обобщённых флагов \cite{Dimitrov-Penkov,Ignatyev-Penkov}.
+В разделе \ref{S3} мы строим
+совместную параметризацию  $K$- и $G^0$-орбит для конечномерных многообразий  флагов.
+Возможно, эта параметризация  известна (см. \cite{MO,Y}),
+однако мы не нашли ссылки, в которой она была бы представлена в точности, как у нас. Ради полноты статьи мы приводим явное доказательство этих результатов.
+В разделе \ref{S4} мы излагаем наши основные результаты о параметризации $\mathbf{K}$- и $\mathbf{G}^0$-орбит в инд-многообразиях обобщённых флагов. Сформулированная выше теорема \ref{theorem-1}  является основным следствием наших результатов.
+В секции \ref{S5} мы указываем некоторые дальнейшие следствия из  основных результатов.
+
+Через $\NN$ мы обозначаем множество положительных целых чисел.
+$|A|$  обозначает мощность множества $A$.  Симметрическая группа на $n$ символах будет обозначаться $\mathfrak{S}_n$, а $\mathfrak{S}_\infty=\lim\limits_{\longrightarrow}\,\mathfrak{S}_n$ ---  бесконечная симметрическая группа.
+Часто мы будем писать $w_k$ для образа $w(k)$ элемента $k$ перестановки $w$.
+Через $(k;\ell)$ мы обозначим перестановку, которая меняет местами $k$ и $\ell$.
+Мы будем использовать полужирные символы для обозначения инд-многообразий.
+В конце статьи дан список обозначений.
+
+\subsection*{Благодарности}
+
+
+Мы благодарим Алана Хаклберри и Михаила Игнатьева за поддержку идеи изучения двойственности Мацуки.  Мы также признательны рецензенту за вдумчивые замечания. Первый автор получил частичную поддержку от Немецкого фонда научных исследований DFG через грант PE $980/6-1$. Второй автор получил частичную поддержку от Израильского научного фонда ISF через грант 797/14, а также от проекта ANR-15-CE40-0012. 
+%\thanks{L. Fresse: supported in part by ISF Grant Nr. 797/14 and by ANR project GeoLie (ANR-15-CE40-0012)}
+%\thanks{I. Penkov: supported in part by DFG Grant PE 980/6-1}
+
+\section{Обозначения и известные факты}
+
+\label{S2}
+
+
+
+\subsection{Классические группы и классические инд-группы}
+
+\label{S2.1}
+
+Пусть $\mathbf{V}$ - комлексное векторное пространство счётной размерности, с упорядоченным базисом
+$E=  (e_1,e_2,\ldots) \\ =  (e_\ell)_{\ell\in \NN}$.
+Каждый вектор $x\in\mathbf{V}$ отождествляется со столбцом своих координат в базисе $E$,
+и $x\mapsto \overline{x}$ это отображаение комплексного сопряжения  по отношению к базису $E$.
+Мы рассматриваем также конечномерные подпространства $V=V_n:=\langle e_1,\ldots,e_n\rangle_\mathbb{C}$ в $\mathbf{V}$.
+
+Классическая инд-группа $\mathrm{GL}(\infty)$ определяется как
+\[\mathrm{GL}(\infty)=\mathbf{G}(E):=\{g\in\mathrm{Aut}(\mathbf{V}):g(e_\ell)=e_\ell\mbox{ для всех $\ell\gg 1$}\}=\bigcup_{n\geq 1}\mathrm{GL}(V_n).\]
+%
+%(resp. $(K,G^0)$)
+%of a symmetric subgroup $\mathbf{K}\subset \mathbf{G}(E)$ and a real form $\mathbf{G}^0\subset \mathbf{G}(E)$.
+%of $\mathbf{G}(E)$ (resp. $\mathrm{GL}(V)$).
+Вещественные формы инд-группы $\mathrm{GL}(\infty)$ хорошо известны и восходят к работе Баранова~\cite{Baranov}.  Ниже мы перечисляем согласованные пары $(\mathbf{K},\mathbf{G}^0)$, где $\textbf{G}^0$ --- вещественная форма инд-группы $\mathbf{G}$, а $\mathbf{K}$  --- симметрическая инд-подгруппа  $\mathbf{G}$. Пары $\left(\mathbf{K},\mathbf{G}^0\right)$, которые мы рассматриваем, согласованы следующим образом: для разложения $\mathbf{G}$ в качестве объединения $\bigcup_n\,\mathrm{GL}\left(V_n\right)$, подгруппа $K_n:=\mathbf{K}\cap\mathrm{GL}\left(V_n\right)$ является симметрической подгруппой группы $\mathrm{GL}\left(V_n\right)$, $G_0^n:=\mathbf{G}^0\cap\mathrm{GL}\left(V_n\right)$ является вещественной формой группы $\mathrm{GL}\left(V_n\right)$, и $K_n\cap G_n^0$ --- максимальная компактная подгруппа $G_n^0$.
+
+\subsubsection{Типы A1 и A2}
+\label{S:A1A2}
+
+Через $\Omega$ обозначим $\NN\times\NN$-матрицу вида
+\begin{equation}
+\label{omega}
+\Omega=\left(
+\begin{array}{cccc}
+J_1 & & (0) \\
+ & J_2 \\
+(0) & & \ddots
+\end{array}
+\right),\
+\mbox{где}\
+\left\{
+\begin{array}{ll}
+J_k\in\left\{\left(\begin{matrix} 0 & 1 \\ 1 & 0 \end{matrix}\right),\left(1\right)\right\}
+& \parbox{2.6cm}{(ортогональный случай, тип A1)} \\[4mm]
+J_k=\left(\begin{matrix} 0 & 1 \\ -1 & 0 \end{matrix}\right) & \parbox{2.6cm}{(симплектический случай,  тип A2)}
+\end{array}
+\right.
+\end{equation}
+Билинейная форма
+\[\omega(x,y):={}^tx\Omega y\quad (x,y\in \mathbf{V})\]
+симметрична для типа A1 и симплектична для типа A2, в то время как отображение
+\[\gamma(x):=\Omega\overline{x}\quad (x\in \mathbf{V})\]
+это инволюция пространства $\mathbf{V}$ для типа A1 и антиинволюция для типа A2.
+Пусть
+
+$$ \mathbf{K}=\mathbf{G}(E,\omega):=\{g\in \mathbf{G}(E):\omega(gx,gy)=\omega(x,y)\ \forall x,y\in\mathbf{V}\} $$
+и
+  $$ \mathbf{G}^0:=\{g\in \mathbf{G}(E):\gamma(gx)=g\gamma(x)\ \forall x\in\mathbf{V}\}.$$
+
+%In other words we get $(\mathbf{K},\mathbf{G}^0)=(\mathrm{SO}(\infty),\mathrm{GL}(\infty,\mathbb{R}))$ in type A1 and $(\mathbf{K},\mathbf{G}^0)=(\mathrm{Sp}(\infty),\mathrm{GL}(\infty,\mathbb{H}))$ in type A2, where $\mathbb{H}$ stands for the field of quaternions.
+
+
+\subsubsection{Тип A3}
+\label{S:A3}
+Зафиксируем (нетривиальное) разложение $\NN=N_+\sqcup N_-$ и положим
+\begin{equation}
+\label{phi}
+\Phi=\left(
+\begin{array}{cccc}
+\epsilon_1 & & (0) \\
+ & \epsilon_2 \\
+(0) & & \ddots
+\end{array}
+\right),
+\end{equation}
+где $\epsilon_\ell=1$ for $\ell\in N_+$ и $\epsilon_\ell=-1$ для $\ell\in N_-$.
+Таким образом
+\[\phi(x,y):={}^t\overline{x} \Phi y\quad(x,y\in\mathbf{V})\]
+--- Эрмитова форма сигнатуры $(|N_+|,|N_-|)$ и
+\[\delta(x):=\Phi x\quad(x\in\mathbf{V})\]
+--- инволюция. Наконец положим
+\[
+\mathbf{K}:=\{g\in \mathbf{G}(E):\delta(gx)=g\delta(x)\ \forall
+x\in\mathbf{V}\}
+\]
+и
+\[
+\mathbf{G}^0:=\{g\in \mathbf{G}(E):\phi(gx,gy)=\phi(x,y)\ \forall
+ x,y\in\mathbf{V}\}.
+\]
+%In other words the pair $(\mathbf{K},\mathbf{G}^0)$ is of the form $(\mathrm{GL}(\infty)\times \mathrm{GL}(\infty),\mathrm{U}(\infty,\infty))$ (if $N_+,N_-$ are both infinite) or $(\mathrm{GL}_p(\mathbb{C})\times \mathrm{GL}(\infty),\mathrm{U}(p,\infty))$ for some finite $p\geq 0$ (otherwise).
+
+%\medskip
+
+%In types A1--A3 $\mathbf{K}$ and $\mathbf{G}^0$ are respectively a symmetric subgroup and a real form of $\mathbf{G}=\mathrm{GL}(\infty)$.
+
+
+\subsection*{Типы B, C, D}
+%\label{S:BCD}
+Далее, мы опишем пары $(\mathbf{K},\mathbf{G}^0)$, связанные
+с другими классическими инд-группами $\mathrm{SO}(\infty)$ и $\mathrm{Sp}(\infty)$.  Пусть $\mathbf{G}=\mathbf{G}(E,\omega)$,
+где $\omega$ --- (симметрическая или симплектическая) билинейная форма, задающаяся матрицей $\Omega$ как и в  (\ref{omega}).
+С учётом  (\ref{omega}), для каждого $\ell\in\NN$ существует единственное число $\ell^*\in\NN$ такое, что
+\[\omega(e_\ell,e_{\ell^*})\not=0.\]
+Далее, $\ell^*\in\{\ell-1,\ell,\ell+1\}$. Отображение $\ell\mapsto\ell^*$ это инволюция множества $\NN$.
+
+%\medskip
+
+\subsubsection{Типы BD1 и C2}
+\label{S:BD1C2}
+
+Предположим, что форма $\omega$ симметрична для типа BD1 и симплектична для типа C2.
+Зафиксируем (нетривиальное) разложение $\NN=N_+\sqcup N_-$ такое, что
+\[\forall \ell\in\NN,\ \ell\in N_+\Leftrightarrow \ell^*\in N_+\]
+и ограничение формы $\omega$ на каждое подпространство $\mathbf{V}_+:=\langle e_\ell:\ell\in N_+\rangle_\mathbb{C}$ и
+$\mathbf{V}_-:=\langle e_\ell:\ell\in N_-\rangle_\mathbb{C}$ невырождено.
+Пусть  $\Phi,\phi,\delta$ --- такие же как и в разделе ~\ref{S:A3}.  Тогда  положим
+\begin{eqnarray}
+\label{N1}
+ \mathbf{K}:=\{g\in \mathbf{G}(E,\omega):\delta(gx)=g\delta(x)\ \forall
+x\in\mathbf{V}\}
+\end{eqnarray}
+и
+\begin{eqnarray}
+\label{N2}
+ \mathbf{G}^0:=\{g\in \mathbf{G}(E,\omega):\phi(gx,gy)=\phi(x,y)\ \forall
+ x,y\in\mathbf{V}\}.
+\end{eqnarray}
+%The triple $(\mathbf{G},\mathbf{K},\mathbf{G}^0)$ is thereby of the form $(\mathrm{SO}(\infty),\mathrm{O}(p)\times \mathrm{O}(q),\mathrm{O}(p,q))$ (in type BD1) or $(\mathrm{Sp}(\infty),\mathrm{Sp}(p)\times \mathrm{Sp}(q),\mathrm{Sp}(p,q))$ (in type C2), where $(p,q)=(|N_+|,|N_-|)$.
+
+%\medskip
+
+\subsubsection{Типы C1 и D3}
+\label{S:C1D3}
+Предположим, что форма $\omega$ симметрична для типа D3 и симплектична для типа C1.
+Зафиксируем разложение $\NN=N_+\sqcup N_-$, удовлетворяющее
+\[
+\forall \ell\in\NN,\ \ell\in N_+\Leftrightarrow \ell^*\in N_-.
+\]
+Заметим, что из-за этого каждый блок  $J_k$ в (\ref{omega}) должен иметь размер $2$.
+В этой ситуации $\mathbf{V}_+:=\langle e_\ell:\ell\in N_+\rangle_\mathbb{C}$ и $\mathbf{V}_-:=\langle e_\ell:\ell\in N_-\rangle_\mathbb{C}$
+являются максимальными изотропными подпространствами для формы $\omega$.
+Определим $\Phi,\phi,\delta$ так же как и в разделе~\ref{S:A3}. Наконец,  определим инд-подгруппы $\mathbf{K},\mathbf{G}^0\subset\mathbf{G}$  как  в (\ref{N1}), (\ref{N2}).
+%Hence $(\mathbf{G},\mathbf{K},\mathbf{G}^0)$ is of the form $(\mathrm{SO}(\infty),\mathrm{GL}(\infty),\mathrm{O}(p,q))$ (type D1) or $(\mathrm{Sp}(\infty),\mathrm{GL}(\infty),\mathrm{O}(p,q))$ (type C1).
+
+%\medskip
+
+\subsection*{Конечномерный случай}
+В следующей таблице представлены пересечения $G=\textbf{G}\cap\mathrm{GL}\left(V_n\right)$, $K=\textbf{K}\cap\mathrm{GL}\left(V_n\right)$, $G^0=\textbf{G}^0\cap\mathrm{GL}\left(V_n\right)$, где число $n=2m$ чётное для типов A2, C1, C2 и D3.
+Для типов A3, BD1 и C2, полагаем $(p,q)=(|N_+\cap\{1,\ldots,n\}|,|N_-\cap\{1,\ldots,n\}|)$.
+Через $\mathbb{H}$  обозначаем тело кватернионов.
+Таким образом мы получаем классические конечномерные симметрические пары и вещественные формы
+(см., например, \cite{Berger,OV,Otha1}).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|c|c|c|c|}
+\hline
+type & $G:=\mathbf{G}\cap\mathrm{GL}\left(V_n\right)$ & $K:=\mathbf{K}\cap\mathrm{GL}\left(V_n\right)$ & $G^0:=\mathbf{G}^0\cap\mathrm{GL}\left(V_n\right)$ \\
+\hline
+A1 & & $\mathrm{O}_n(\mathbb{C})$ & $\mathrm{GL}_n(\mathbb{R})$ \\
+A2 & $\mathrm{GL}_n(\mathbb{C})$ & $\mathrm{Sp}_n(\mathbb{C})$ & $\mathrm{GL}_m(\mathbb{H})$ \\
+A3 & & $\mathrm{GL}_p(\mathbb{C})\times\mathrm{GL}_q(\mathbb{C})$ & $\mathrm{U}_{p,q}(\mathbb{C})$ \\
+\hline
+BD1 & $\mathrm{O}_n(\mathbb{C})$ & $\mathrm{O}_p(\mathbb{C})\times\mathrm{O}_q(\mathbb{C})$ & $\mathrm{O}_{p,q}(\mathbb{C})$ \\
+\hline
+C1 & ${}_{{}_{\mbox{$\mathrm{Sp}_n(\mathbb{C})$}}}$ & $\mathrm{GL}_m(\mathbb{C})$ & $\mathrm{Sp}_n(\mathbb{R})$ \\[-1.5mm]
+C2 & & $\mathrm{Sp}_p(\mathbb{C})\times\mathrm{Sp}_q(\mathbb{C})$ & $\mathrm{Sp}_{p,q}(\mathbb{C})$ \\
+\hline
+D3 & $\mathrm{O}_n(\mathbb{C})=\mathrm{O}_{2m}(\mathbb{C})$ & $\mathrm{GL}_m(\mathbb{C})$ & $\mathrm{O}^*_n(\mathbb{C})$ \\
+\hline
+\end{tabular}
+\end{center}
+В каждом случае  вещественная форма $G^0$ получается из $K$ таким образом, чтобы пересечение $K\cap G^0$ было максимальной компактной подгруппой $G^0$.
+Наоборот, $K$ получается из $G^0$ как комплексификация максимальной компактной подгруппы.
+
+\subsection{Конечномерные многообразия флагов}
+
+\label{S2.2}
+
+Напомним, что $V=V_n$.
+Многообразие флагов $X:=\mathrm{GL}(V)/B=\{gB:g\in \mathrm{GL}(V)\}$ (для Борелевской подгруппы $B\subset \mathrm{GL}(V)$)
+может  рассматриваться как   множество Борелевских подгрупп $\{gBg^{-1}:g\in \mathrm{GL}(V)\}$
+или как множество полных флагов
+\begin{equation}
+\label{2.2.X}
+\big\{\mathcal{F}=(F_0\subset F_1\subset\ldots\subset F_n=V): \dim F_k=k\ \mbox{ для всех $k$}\big\}.
+\end{equation}
+Для каждого полного флага $\mathcal{F}$ обозначим через $B_\mathcal{F}:=\{g\in \mathrm{GL}(V):g\mathcal{F}=\mathcal{F}\}$  сответствующую Борелевскую подгруппу.
+Если $(v_1,\ldots,v_n)$ --- базис пространства $V$, то мы будем писать
+\[\mathcal{F}(v_1,\ldots,v_n):=\big(0\subset\langle v_1\rangle_\mathbb{C}\subset\langle v_1,v_2\rangle_\mathbb{C}\subset\ldots\subset\langle v_1,\ldots,v_n\rangle_\mathbb{C}\big)\in X.\]
+
+\medskip
+
+\paragraph{{\bf Разложение Брюа.}}
+Двойное многообразие флагов $X\times X$ имеет конечное число $\mathrm{GL}(V)$-орбит, параметризуемых перестановками $w\in\mathfrak{S}_n$.
+В самом деле, если даны два флага $\mathcal{F}=(F_k)_{k=0}^n$ и
+$\mathcal{F}'=(F'_\ell)_{\ell=0}^n$, то существет единственная перестановка
+$w=:w(\mathcal{F},\mathcal{F}')$ такая, что
+\[\dim F_k\cap F'_\ell=\big|\big\{j\in\{1,\ldots,\ell\}:w_j\in\{1,\ldots,k\}\big\}\big|.\]
+Перестановка $w(\mathcal{F},\mathcal{F}')$ называется \textit{относительной позицией} пары $(\mathcal{F},\mathcal{F}')\in X\times X$.
+%Set
+%\[\mathbb{O}_w:=\big\{(\mathcal{F},\mathcal{F}')\in X\times X:w(\mathcal{F},\mathcal{F}')=w\big\}.\]
+При этом
+\[X\times X=\bigsqcup_{w\in\mathfrak{S}_n}\mathbb{O}_w,
+\quad\mbox{где $\mathbb{O}_w:=\big\{(\mathcal{F},\mathcal{F}')\in X\times X:w(\mathcal{F},\mathcal{F}')=w\big\}$},\]
+есть разложение $X\times X$ в объединение $\mathrm{GL}(V)$-орбит.
+Единственная замкнутая орбита это $\mathbb{O}_{\mathrm{id}}$, и единственная открытая орбита это $\mathbb{O}_{w_0}$, где $w_0$ --- инволюция, заданная равенством
+$w_0(k)=n-k+1$ для всех $k$. Отображение
+$\mathbb{O}_w\mapsto\mathbb{O}_{w_0w}$ это инволюция на множестве орбит, и она обращает отношение включения на замыканиях орбит. Представители $\mathbb{O}_w$ описываются следующим образом:
+для каждого базиса $(v_1,\ldots,v_n)$ of $V$ мы имеем
+\[\big(\mathcal{F}(v_1,\ldots,v_n),\mathcal{F}(v_{w_1},\ldots,v_{w_n})\big)\in\mathbb{O}_w.\]
+
+\medskip
+
+\paragraph{{\bf Многообразие изотропных флагов}} Пусть $V$ обладает невырожденной симметрической или симплектической  билинейной формой $\omega$.
+Для подпространства $F\subset V$, положим $F^\perp=\{x\in V:\omega(x,y)=0\ \forall y\in F\}$.
+Многообразие  изотропных флагов $X_\omega$ является подмногообразием  в $X$, где
+\begin{equation}
+\label{2.2.Xomega}
+X_\omega=\{\mathcal{F}=(F_k)_{k=0}^n\in X:F_k^\perp=F_{n-k}\ \forall k=0,\ldots,n\}.
+\end{equation}
+Оно обладает транзитивно действующей подгруппой
+$G(V,\omega)\subset\mathrm{GL}(V)$ автоморфизмов, сохраняющих форму $\omega$.
+
+\begin{lemma}
+\label{lemma-2.2.1}
+{\rm (a)}
+Для каждого эндоморфизма  $f\in\mathrm{End}(V)$, обозначим через $f^*\in\mathrm{End}(V)$  эндоморфизм,  сопряжённый к $f$ относительно формы $\omega$.
+Пусть $H\subset \mathrm{GL}(V)$ подгруппа, удовлетворяющая условию
+\begin{equation}
+\label{2.2.1}
+\mathbb{C}[g^*g]\cap\mathrm{GL}(V)\subset H\ \mbox{ для всех $g\in H$}.
+\end{equation}
+Предположим, что $\mathcal{F}\in X_\omega$ и $\mathcal{F}'\in X_\omega$ принадлежат одной $H$-орбите в $X$.  Тогда они принадлежат одной $H\cap G(V,\omega)$-орбите в $X_\omega$. \\
+{\rm (b)} Пусть $H=\{g\in \mathrm{GL}(V):g(V_+)=V_+,\ g(V_-)=V_-\}$, где $V=V_+\oplus V_-$ это разложение такое, что
+$(V_+^\perp,V_-^\perp)=(V_+,V_-)$ или $(V_-,V_+)$.
+Тогда (\ref{2.2.1}) выполняется.
+\end{lemma}
+
+\begin{proof}
+{\rm (a)}
+Отметим, что $G(V,\omega)=\{g\in\mathrm{GL}(V):g^*=g^{-1}\}$.
+Рассмотрим элемент $g\in H$ такой, что $\mathcal{F}'=g\mathcal{F}$.
+Равенство $(gF)^\perp=(g^*)^{-1}F^\perp$ выполняется для всех подпространств $F\subset V$.
+Так как $\mathcal{F}$ и $\mathcal{F}'$ принадлежат $X_\omega$, мы получаем $\mathcal{F}'=(g^*)^{-1}\mathcal{F}$,
+поэтому $g^*g\mathcal{F}=\mathcal{F}$.
+Пусть $g_1=g^*g$.
+Согласно \cite[Лемма 1.5]{Jantzen} существет полином $P(t)\in\mathbb{C}[t]$ такой, что
+$P(g_1)^2=g_1$. Положим $h=P(g_1)$.
+Тогда $h\in\mathrm{GL}(V)$ (так как $h^2=g_1\in\mathrm{GL}(V)$), и из (\ref{2.2.1}) вытекает, что на самом деле $h\in H$.
+Далее, $h^*=h$ (поскольку $h\in\mathbb{C}[g_1]$ и $g_1^*=g_1$)
+и $h\mathcal{F}=\mathcal{F}$ ( так как и каждое подпространство в $\mathcal{F}$ является $g_1$-подмодулем и, следовательно, также $h$-подмодулем).
+Положим $h_1:=gh^{-1}\in H$.
+Тогда, с одной стороны,
+\[h_1^*=(h^*)^{-1}g^*=h^{-1}g_1g^{-1}=h^{-1}h^2g^{-1}=hg^{-1}=h_1^{-1}\,.\]
+Поэтому $h_1\in H\cap G(V,\omega)$.
+С другой стороны,
+$h_1\mathcal{F}=gh^{-1}\mathcal{F}=g\mathcal{F}=\mathcal{F}'$, и часть (a) доказана. \\
+{\rm (b)}
+Равенство  $g^*(gF)^\perp=F^\perp$ (которое уже упоминалось), применяемое к $F=V_\pm$, даёт $g^*\in H$, и таким образом $g^*g\in H$, если $g\in H$. Поэтому выполняется (\ref{2.2.1}).
+\end{proof}
+
+\begin{remark}
+Идея доказательства леммы  \ref{lemma-2.2.1}\,{\rm (a)} навеяна нам \cite[\S1.4]{Jantzen}. В  работах \cite{Nishiyama, Otha} читатель найдёт аналогичные результаты и обобщения.
+\end{remark}
+
+\subsection{Инд-многообразия обобщённых флагов}
+
+\label{S2.3}
+
+Напомним, что $\mathbf{V}$ обозначает комплексное векторное пространство счётной размерности,
+с упорядоченным базисом $E= \ (e_\ell)_{\ell\in\NN}$.
+
+\begin{definition}[\cite{Dimitrov-Penkov}]
+Пусть $\mathcal{F}$ будет цепью подпространств в $\mathbf{V}$, то есть, множеством подпространств из $\mathbf{V}$, полностью упорядоченным по  включению . Пусть $\mathcal{F}'$ (соответственно $\mathcal{F}''$) --- подцепь, состоящая из всех $F\in\mathcal{F}$ с непосредственным последующим (соответственно предыдущим) элементом.
+Через $s(F)\in\mathcal{F}''$  мы обозначим подпространство непосредственно следующее за  $F\in\mathcal{F}'$.
+
+{\em Обобщённый флаг} в $\mathbf{V}$ это цепь подпространств $\mathcal{F}$ такая что:
+\begin{itemize}
+\item[\rm (i)] каждый $F\in\mathcal{F}$ обладает непосредственно последующим или предыдущим элементом,
+то есть, $\mathcal{F}=\mathcal{F}'\cup\mathcal{F}''$;
+\item[\rm (ii)] для каждого $v\in\mathbf{V}\setminus\{0\}$ существует единственное подпространство $F_v\in\mathcal{F}'$ такое, что $v\in s(F_v)\setminus F_v$, то есть,
+$\mathbf{V}\setminus\{0\}=\bigcup_{F\in\mathcal{F}'}(s(F)\setminus F)$.
+\end{itemize}
+
+Обобщённый флаг назывется  {\em максимальным}, если он не содержится ни в каком другом обобщённом  флаге.
+В частности, $\mathcal{F}$ максимален тогда и только тогда, когда $\dim s(F)/F=1$ для всех $F\in\mathcal{F}'$.
+\end{definition}
+
+\begin{notation}
+Пусть $\sigma:\NN\to (A,\prec)$-- сюръективное отображение на полностью упорядоченное множество.
+Пусть $\underline{v}=(v_1,v_2,\ldots)$ --- базис в $\mathbf{V}$.
+Для каждого $a\in A$ положим
+\[F'_a:=\langle v_\ell:\sigma(\ell)\prec a\rangle_\mathbb{C},\quad
+F''_a:=\langle v_\ell:\sigma(\ell)\preceq a\rangle_\mathbb{C}.\]
+Тогда $\mathcal{F}=\mathcal{F}_\sigma(\underline{v}):=\{F'_a,F''_a:a\in A\}$ --- обобщённый флаг, такой что
+$\mathcal{F}'=\{F'_a:a\in A\}$, $\mathcal{F}''=\{F''_a:a\in A\}$, и $s(F'_a)=F''_a$ для всех $a$.
+Мы называем такой обобщённый флаг {\em согласованным с базисом $\underline{v}$}.
+
+Более того, $\mathcal{F}_\sigma(\underline{v})$ максимален, тогда и только тогда, когда отображение $\sigma$ биективно.
+
+В дальнейшем будем использовать сокращённое обозначение $\mathcal{F}_\sigma:=\mathcal{F}_\sigma(E)$.
+
+Отметим, что для каждого обобщённого флага существует согласованный с ним базис \cite[предложение 4.1]{Dimitrov-Penkov}.
+Обобщённый флаг {\em слабо согласован с $E$}, если он согласован с некоторым базисом  $\underline{v}$ таким, что $E\setminus(E\cap \underline{v})$ --- конечное множество (аналогично,  $\dim\mathbf{V}/\langle E\cap \underline{v}\rangle_\mathbb{C}<\infty$).
+\end{notation}
+
+Группа $\mathbf{G}(E)$ (так же как и $\mathrm{Aut}(\mathbf{V})$) действует на множестве обобщённых флагов естественным образом.
+Пусть $\mathbf{P}_\mathcal{F}\subset\mathbf{G}(E)$ обозначает инд-подгруппу, состоящую из элементов сохраняющих  $\mathcal{F}$.
+Это замкнутая инд-подгруппа группы $\mathbf{G}(E)$.
+Если $\mathcal{F}$ согласован с  $E$, то $\mathbf{P}_\mathcal{F}$ --- расщепляющая параболическая инд-подгруппа в  $\mathbf{G}(E)$ в том смысле, что она локально параболическая (то есть, существует исчерпание $\mathbf{G}(E)$  конечномерными редуктивными алгебраическими подгруппами $G_n$ такими, что все пересечения $\mathbf{P}_\mathcal{F}\cap G_n$ ---  параболические подгруппы в $G_n$) и содержит Картановскую инд-подгруппу  $\mathbf{H}(E)\subset \mathbf{G}(E)$, состоящую из диагональных элементов относительно базиса  $E$.
+Более того, если $\mathcal{F}$ максимален, тогда $\mathbf{B}_\mathcal{F}:=\mathbf{P}_\mathcal{F}$ является расщепляющей Борелевской инд-подгруппой
+(то есть все вышеупомянутые пересечения $\mathbf{B}_\mathcal{F}\cap G_n$ суть Борелевские подгруппы в $G_n$).
+
+\begin{definition}[\cite{Dimitrov-Penkov}]
+Два обобщённых флага $\mathcal{F},\mathcal{G}$ называются {\em $E$-соизмеримыми},
+если $\mathcal{F},\mathcal{G}$ слабо согласованы с $E$, и существует изоморфизм $\phi:\mathcal{F}\to\mathcal{G}$ упорядоченных множеств и конечномерное подпространство $U\subset\mathbf{V}$ такие, что
+\begin{itemize}
+\item[\rm (i)] $\phi(F)+U=F+U$ для всех $F\in\mathcal{F}$;
+\item[\rm (ii)] $\dim \phi(F)\cap U=\dim F\cap U$ для всех $F\in\mathcal{F}$.
+\end{itemize}
+\end{definition}
+
+$E$-соизмеримость --- отношение эквивалентности на множестве обобщённых флагов слабо согласованных с  $E$. На самом деле, согласно следующему предложению, каждый класс эквивалентности состоит из одной $\mathbf{G}(E)$-орбиты.
+Если $\mathcal{F}$ обобщённый флаг слабо согласован с  $E$, мы обозначим через $\mathbf{X}(\mathcal{F},E)$ множество обобщённых флагов, которые $E$-соизмеримы с  $\mathcal{F}$.
+
+\begin{proposition}[\cite{Dimitrov-Penkov}]
+\label{P2.3-1}
+Множество $\mathbf{X}=\mathbf{X}(\mathcal{F},E)$ обладает естественной структурой инд-многообразия.
+Далее, $\mathbf{X}$  является $\mathbf{G}(E)$-однородным инд-многообразием и отображение $g\mapsto g\mathcal{F}$ индуцирует изоморфизм инд-многооб\-разий $\mathbf{G}(E)/\mathbf{P}_\mathcal{F}\stackrel{\sim}{\to}\mathbf{X}$.
+\end{proposition}
+
+%Let $\mathfrak{S}_\infty$ be the group of permutations
+%$w:\NN\to\NN$ such that $w(\ell)=\ell$ for all $\ell\gg 1$.
+
+
+
+\begin{proposition}[\cite{Fresse-Penkov}]
+\label{P2-3.2}
+Пусть $\sigma:\NN\to (A,\prec)$ и $\tau:\NN\to (B,\prec)$ --- два сюръективных отображения  на полностью упорядоченные множества.
+\begin{itemize}
+\item[\rm (a)] Каждый $E$-согласованный обобщённый флаг в $\mathbf{X}(\mathcal{F}_\sigma,E)$ имеет вид $\mathcal{F}_{\sigma w}$ для $w\in \mathfrak{S}_\infty$.
+Более того, $\mathcal{F}_{\sigma w}=\mathcal{F}_{\sigma w'}\Leftrightarrow
+w'w^{-1}\in\mathrm{Stab}_\sigma:=\{v\in\mathfrak{S}_\infty:\sigma v=\sigma\}$.
+\item[\rm (b)] Предположим, что $\mathcal{F}_\tau$ максимален (то есть, $\tau$ --- биекция), и, таким образом, $\mathbf{B}_{\mathcal{F}_\tau}$ --- расщепляющая Борелевская инд-подгруппа.
+Каждая $\mathbf{B}_{\mathcal{F}_\tau}$-орбита  в $\mathbf{X}(\mathcal{F}_\sigma,E)$
+содержит единственный элемент вида $\mathcal{F}_{\sigma w}$ для $w\in\mathfrak{S}_\infty/\mathrm{Stab}_\sigma$.
+\item[\rm (c)] В частности, если $\mathcal{F}_\sigma$ и $\mathcal{F}_\tau$ оба максимальны (то есть, $\sigma,\tau$ --- биекции), то
+\begin{eqnarray*}
+\displaystyle \mathbf{X}(\mathcal{F}_\tau,E)\times\mathbf{X}(\mathcal{F}_\sigma,E)=\bigsqcup_{w\in\mathfrak{S}_\infty}(\pmb{\mathbb{O}}_{\tau,\sigma})_w ,
+\end{eqnarray*}
+где
+\begin{eqnarray*}
+(\pmb{\mathbb{O}}_{\tau,\sigma})_w:=\{(g\mathcal{F}_\tau,g\mathcal{F}_{\sigma w}):g\in\mathbf{G}(E)\}
+\end{eqnarray*}
+--- разложение пространства $\mathbf{X}(\mathcal{F}_\tau,E)\times\mathbf{X}(\mathcal{F}_\sigma,E)$ на $\mathbf{G}(E)$-орбиты.
+\end{itemize}
+\end{proposition}
+
+\begin{remark}
+Орбита $(\pmb{\mathbb{O}}_{\tau,\sigma})_w$
+из предложения \ref{P2-3.2}\,{\rm (c)}
+на самом деле состоит из всех пар обобщённых флагов $(\mathcal{F}_\tau(\underline{v}),\mathcal{F}_{\sigma w}(\underline{v}))$
+слабо согласованных с базисом $\underline{v}=(v_1,v_2,\ldots)$.
+\end{remark}
+
+
+
+
+Предположим, $\mathbf{V}$ обладает невырожденной  симметрической или симплектической  формой $\omega$, значения которой на  элементах базиса $E$ могут быть получены из матрицы $\Omega$ в (\ref{omega}).
+
+%\begin{notation}
+%Given a generalized flag $\mathcal{F}$ let $\mathcal{F}^\perp:=\{F^\perp:F\in\mathcal{F}\}$,
+%where we denote $F^\perp:=\{x\in\mathbf{V}:\omega(x,y)=0\ \forall y\in F\}$.
+%
+%If $\mathcal{F}=\mathcal{F}_\sigma$ is an $E$-compatible generalized flag, then so is $\mathcal{F}^\perp$.
+%Specifically assume that $\sigma:\NN\to(A,\prec)$.
+%Let $(A^*,\prec^*)$ be the totally ordered set given by $A^*=A$
+%and $a\prec^*a'$ whenever $a\succ a'$.
+%In view of $\Omega$
+%for each $j\in\NN$ there is a unique $j^*\in\NN$ such that $\omega(e_j,e_{j^*})\not=0$.
+%Then
+%$\mathcal{F}^\perp=\mathcal{F}_{\sigma^*}$
+%where $\sigma^*:\NN\to(A^*,\prec^*)$, $j\mapsto \sigma(j^*)$.
+%\end{notation}
+
+\begin{definition}
+Обобщённый флаг $\mathcal{F}$ назывется {\em $\omega$-изотропным}, если отображение $F\mapsto F^\perp:=\{x\in\mathbf{V}:\omega(x,y)=0\ \forall y\in F\}$
+является инволюцией обобщённого флага  $\mathcal{F}$.
+\end{definition}
+
+\begin{proposition}[\cite{Dimitrov-Penkov}]
+\label{P2.3-3}
+Пусть $\mathcal{F}$ есть  $\omega$-изотропный обобщённый флаг слабо согласованный с $E$.
+Множество $\mathbf{X}_\omega(\mathcal{F},E)$ всех
+$\omega$-изотропных обобщённых флагов, которые $E$-соизмеримы с $\mathcal{F}$,
+является $\mathbf{G}(E,\omega)$-однородным, замкнутым инд-подмногообразием в $\mathbf{X}(\mathcal{F},E)$.
+\end{proposition}
+
+Наконец, мы хотели бы отметить, что одна из основных особенностей  инд-групп это факт, что их Борелевские подгруппы не $\mathrm{Aut}(\mathbf{G})$-сопряжены.  Вот три примера максимальных обобщённых флагов в $\mathbf{V}$, согласованных с базисом $E$, и таких, что их стабилизаторы в $\mathbf{G}(E)$ попарно не $\mathrm{Aut}(\mathbf{G})$-сопряжены. Более подробное обсуждение этих примеров см. в \cite{Dimitrov-Penkov}.
+
+\begin{example}
+{\rm (a)} Пусть  $\sigma_1:\mathbb{N}^*\to(\mathbb{N}^*,<)$, $\ell\mapsto\ell$.
+Обобщённый флаг $\mathcal{F}_{\sigma_1}$ это восходящая цепочка подпространств
+$\mathcal{F}_{\sigma_1}=\{0=F_0\subset F_1\subset F_2\subset\ldots\}$, изоморфная упорядоченному множеству $(\mathbb{N},<)$ .
+\\
+{\rm (b)} Пусть $\sigma_2:\mathbb{N}^*\to\Big(\{\frac{1}{n}:n\in\mathbb{Z}^*\},<\Big)$, $\ell\mapsto \frac{(-1)^\ell}{\ell}$.
+Обобщённый флаг $\mathcal{F}_{\sigma_2}$ это цепь вида
+$\mathcal{F}_{\sigma_2}=\{0=F_0\subset F_1\subset\ldots\subset F_{-2}\subset F_{-1}=\mathbf{V}\}$
+не изоморфная как упорядоченное множество подмножеству в $(\mathbb{Z},<)$.
+\\
+{\rm (c)} Пусть $\sigma_3:\mathbb{N}^*\to(\mathbb{Q},<)$ - биекция.
+В этом случе нет подпространств $F\in\mathcal{F}_{\sigma_3}$, у которых есть одновременно  непосредственно последующее и непосредственно предыдущее подпространство.
+
+\end{example}
+
+%our main purpose is...
+
+
+\section{Параметризация орбит в конечномерном случае}
+
+\label{S3}
+
+В разделах ~\ref{S3.1}-\ref{S3.3}, мы приводим явную параметризацию $K$- и $G^0$-орбит в конечномерном случае. Все доказательства представленны в разделе  ~\ref{S3.5}.
+
+\subsection{Типы A1 и A2}
+\label{S3.1}
+Обозначения такие же, как и в разделе~\ref{S:A1A2}.
+Пространство $V=V_n:=\langle e_1,\ldots,e_n\rangle_\mathbb{C}$ обладает симметрической или симплектической билинейной формой $\omega(x,y)={}^tx\cdot \Omega\cdot y$ и сопряжением $\gamma(x)=\Omega\overline{x}$, которые  являются ограничениями на $V$ отображений $\omega,\gamma$, введённых в разделе \ref{S2.1}.
+Это позволяет нам определить две инволюции многообразия флагов $X$:
+\[
+\mathcal{F}=(F_0,\ldots,F_n)\mapsto\mathcal{F}^\perp:=(F_n^\perp,\ldots,F_0^\perp)
+\quad\mbox{и}\quad
+\mathcal{F}\mapsto\gamma(\mathcal{F}):=(\gamma(F_0),\ldots,\gamma(F_n)),
+\]
+где $F^\perp\subset V$ обозначает подпространство, ортогональное  $F$ по отношению к форме $\omega$.
+
+Положим $K=\{g\in\mathrm{GL}(V):\mbox{$g$ сохраняет $\omega$}\}$
+и $G^0=\{g\in\mathrm{GL}(V):\gamma g=g\gamma\}$.
+
+Через $\mathfrak{I}_n\subset\mathfrak{S}_n$ мы обозначим подмножество инволюций.
+Если $n=2m$ чётное, тогда $\mathfrak{I}'_n\subset\mathfrak{I}_n$
+будет подмножеством инволюций  без неподвижных точек.
+
+\begin{definition}
+\label{DA12}
+Пусть $w\in\mathfrak{I}_n$. Зададим $\epsilon:=1$ для типа A1 и
+$\epsilon:=-1$ для типа A2. Базис $(v_1,\ldots,v_n)$ в $V$ такой, что
+\[\omega(v_k,v_\ell)=\left\{\begin{array}{ll} 1, & \mbox{если $w_k=\ell\geq k$} \\ \epsilon, & \mbox{если $w_k=\ell< k$} \\ 0, & \mbox{если $w_k\not=\ell$} \end{array}\right.
+\ \mbox{ для всех $k,\ell\in\{1,\ldots,n\}$}\] называется {\em
+$w$-двойственным}. Базис $(v_1,\ldots,v_n)$ в $V$ такой, что 
+\[
+\gamma(v_k)=\left\{\begin{array}{ll} \epsilon v_{w_k}, & \mbox{если $w_k\geq k$}
+\\ v_{w_k}, & \mbox{если $w_k< k$}
+\end{array}\right.
+\ \mbox{ для всех $k\in\{1,\ldots,n\}$}
+\]
+называется {\em $w$-сопряжённым}. Положим
+\begin{eqnarray*}
+ & \mathcal{O}_w:=\{\mathcal{F}(v_1,\ldots,v_n):\mbox{$(v_1,\ldots,v_n)$ ---  $w$-двойственный базис}\}, \\[1mm]
+ & \mathfrak{O}_w:=\{\mathcal{F}(v_1,\ldots,v_n):\mbox{$(v_1,\ldots,v_n)$ --- $w$-сопряжённый базис}\}.
+\end{eqnarray*}
+\end{definition}
+
+%In type A2 there exist $w$-dual and/or $w$-conjugate bases only if there is no $k$ such that $w_k=k$, i.e., $w\in\mathfrak{I}'_n$. Part {\rm (a)} of the following proposition shows in particular that there always exist $w$-dual bases and $w$-conjugate bases for all $w\in\mathfrak{I}_n$ in type A1 (resp. $w\in\mathfrak{I}_n'$ in type A2); it is actually much more precise.
+
+
+\begin{proposition}
+\label{P1} Пусть $\mathfrak{I}_n^\epsilon=\mathfrak{I}_n$ для типа A1
+и $\mathfrak{I}_n^\epsilon=\mathfrak{I}'_n$ для типа A2. Напомним обозначения
+$\mathbb{O}_w$ и $w_0$, введённые  в разделе \ref{S2.2}.
+\begin{itemize}
+\item[\rm (a)]
+Для каждого $w\in\mathfrak{I}_n^\epsilon$ мы имеем
+$\mathcal{O}_w\not =\emptyset$, $\mathfrak{O}_w\not=\emptyset$
+и
+$\mathcal{O}_w\cap\mathfrak{O}_w $ $=\{\mathcal{F}(v_1,\ldots,v_n):\mbox{$(v_1,\ldots,v_n)$  $w$-двойствен и $w$-сопряжён}\}\not=\emptyset.$
+\item[\rm (b)]
+Для каждого $w\in \mathfrak{I}_n^\epsilon$,
+\[
+\mathcal{O}_w=\{\mathcal{F}\in
+X:(\mathcal{F}^\perp,\mathcal{F})\in\mathbb{O}_{w_0w}\}
+\quad\mbox{и}\quad \mathfrak{O}_w=\{\mathcal{F}\in
+X:(\gamma(\mathcal{F}),\mathcal{F})\in\mathbb{O}_{w}\}.
+\]
+\item[\rm (c)]
+Подмножества $\mathcal{O}_w$ ($w\in\mathfrak{I}_n^\epsilon$) суть в точности $K$-орбиты из $X$. Подмножества $\mathfrak{O}_w$
+($w\in\mathfrak{I}_n^\epsilon$) суть в точности $G^0$-орбиты из $X$.
+\item[\rm (d)]
+Отображение $\mathcal{O}_w\mapsto\mathfrak{O}_w$ есть двойственность Мацуки.
+\end{itemize}
+\end{proposition}
+
+\subsection{Тип A3}
+\label{S3.2}
+Обозначения такие же как и в разделе~\ref{S:A3}: пространство $V=V_n=\langle e_1,\ldots,e_n\rangle_\mathbb{C}$ обладает Эрмитовой формой $\phi(x,y)={}^t\overline{x}\Phi y$ и сопряжением $\delta(x)=\Phi x$, где $\Phi$ это диагональная матрица, состоящая из $\epsilon_1,\ldots,\epsilon_n\in\{+1,-1\}$ (эта матрица ни что иное, как левый верхний $n\times n$-угол  матрицы $\Phi$ из раздела \ref{S2.1}).
+
+Зададим $V_+=\langle e_k:\epsilon_k=1\rangle_\mathbb{C}$ и $V_-=\langle e_k:\epsilon_k=-1\rangle_\mathbb{C}$.  Тогда $V=V_+\oplus V_-$.
+Пусть $K=\{g\in\mathrm{GL}(V):\delta g=g\delta\}=\mathrm{GL}(V_+)\times\mathrm{GL}(V_-)$ и $G^0=\{g\in \mathrm{GL}(V):\mbox{$g$ сохраняет $\phi$}\}$.
+
+Как и в разделе \ref{S3.1} мы получаем две инволюции многообразия флагов $X$:
+\[\mathcal{F}=(F_0,\ldots,F_n)\mapsto\delta(\mathcal{F}):=(\delta(F_0),\ldots,\delta(F_n))\quad\mbox{и}\quad\mathcal{F}\mapsto\mathcal{F}^\dag:=(F_n^\dag,\ldots,F_0^\dag),\]
+где $F^\dag\subset V$ обозначение для подпространства, ортогонального  $F\subset V$ относительно формы $\phi$.
+Эрмитова форма на факторе $F/(F\cap F^\dag)$ индуцированная формой $\phi$ невырождена; мы обозначим её сигнатуру через $\varsigma(\phi:F)$. Пусть задан $\mathcal{F}=(F_0,\ldots,F_n)\in X$, и пусть
+\[\varsigma(\phi:\mathcal{F}):=\big(\varsigma(\phi:F_\ell)\big)_{\ell=1}^n\in(\{0,\ldots,n\}^2)^n.\]
+Тогда
+\[\varsigma(\delta:\mathcal{F}):=\big((\dim F_\ell\cap V_+,\dim F_\ell\cap V_-)\big)_{\ell=1}^n\in(\{0,\ldots,n\}^2)^n\]
+отмечает относительное положение $\mathcal{F}$ по отношению к подпространствам
+$V_+$ и
+$V_-$.
+
+\medskip
+
+\paragraph{\bf Комбинаторные обозначения}
+Мы назовём {\em инволюцией со знаками} пару $(w,\varepsilon)$, состоящую из инволюции $w\in\mathfrak{I}_n$ и значений
+$\varepsilon_k\in\{+1,-1\}$, прикреплённых к заданным позициям
+$k\in\{\ell:w_\ell=\ell\}$.
+(Эквивалентным образом, $\varepsilon$ является отображением $\{\ell:w_\ell=\ell\}\to\{+1,-1\}$.)
+
+Удобно представлять $w$ в виде графа $l(w)$ (называемого {\em шаблоном связей}) с $n$ вершинами
+$1,2,\ldots,n$ и дугами $(k,w_k)$, соединяющими $k$ и $w_k$ всякий раз, когда $k<w_k$.
+ {\em Шаблон связей со знаками $l(w,\varepsilon)$} получается из графа $l(w)$, если пометить каждую вершину
+$k\in\{\ell:w_\ell=\ell\}$ знаком $\varepsilon_k$.
+
+Например, следующий шаблон связей со знаками (где нумерация вершин  неявна)
+\[
+\begin{picture}(140,30)(-20,-5)
+\courbe{-16}{32}{0}{8}{10}{12}{16} \courbe{0}{80}{0}{36}{40}{44}{24}
+\courbe{96}{112}{0}{103}{104}{105}{6} \put(-18,-3){$\bullet$}
+\put(-2,-3){$\bullet$} \put(14,-3){$\bullet$} \put(13,-9){$+$}
+\put(30,-3){$\bullet$} \put(46,-3){$\bullet$} \put(45,-9){$-$}
+\put(62,-3){$\bullet$} \put(61,-9){$+$} \put(78,-3){$\bullet$}
+\put(94,-3){$\bullet$} \put(110,-3){$\bullet$}
+\end{picture}
+\]
+представляет элемент $(w,\varepsilon)$, где
+$w=(1;4)(2;7)(8;9)\in\mathfrak{I}_9$ и
+$(\varepsilon_3,\varepsilon_5,\varepsilon_6)=(+1,-1,+1)$.
+
+Определим $\varsigma(w,\varepsilon):=\{(p_\ell,q_\ell)\}_{\ell=1}^n$
+как пару последовательностей, получаемых следующим образом:
+\[
+p_\ell\mbox{ (соответственно, $q_\ell$)}=\mbox{(количество знаков $+$
+\mbox{ (соответственно, знаков $-$ )}}
+\]
+\[
+\mbox{и дуг проходящих через первые  $\ell$ вершин
+$l(w,\varepsilon)$).}
+\]
+
+Предполагая $n=p+q$, обозначим через $\mathfrak{I}_n(p,q)$  множество инволюций со знаками сигнатуры $(p,q)$, то есть таких, что $(p_n,q_n)=(p,q)$.
+Отметим, что элементы из $\mathfrak{I}_n(p,q)$ совпадают с множеством сигнатуры $(p,q)$
+в смысле \cite{MO,Y}.
+
+Например, для вышеуказанной пары
+$(w,\varepsilon)$ мы получаем
+$(w,\varepsilon)\in\mathfrak{I}_9(5,4)$ и
+\[
+\varsigma(w,\varepsilon)=\big((0,0),(0,0),(1,0),(2,1),(2,2),(3,2),(4,3),(4,3),(5,4)\big).
+\]
+
+\begin{definition}
+\label{D2}
+\label{DA3}
+Для данной инволюции со знаками
+$(w,\varepsilon)$ мы будем говорить, что базис $(v_1,\ldots,v_n)$ в $V$  \emph{$(w,\epsilon)$-сопряжён,} если
+\[
+\delta(v_k)=\left\{\begin{array}{ll} \varepsilon_kv_{w_k}, & \mbox{если
+$w_k=k$}
+\\ v_{w_k}, & \mbox{если $w_k\not=k$}
+\end{array}\right.
+\ \mbox{ для всех $k\in\{1,\ldots,n\}$\,.}
+\]
+Базис
+$(v_1,\ldots,v_n)$ такой, что
+\[\phi(v_k,v_\ell)=\left\{\begin{array}{ll} \varepsilon_k, & \mbox{если $w_k=\ell=k$} \\ 1, & \mbox{если $w_k=\ell\not=k$} \\ 0, & \mbox{если $w_k\not=\ell$} \end{array}\right.
+\ \mbox{ для всех $k,\ell\in\{1,\ldots,n\}$}\] называется {\em
+$(w,\varepsilon)$-двойственным}.
+Положим
+\begin{eqnarray*}
+ & \mathcal{O}_{(w,\varepsilon)}:=\{\mathcal{F}(v_1,\ldots,v_n):\mbox{$(v_1,\ldots,v_n)$ --- $(w,\varepsilon)$-сопряжённый базис}\}, \\[1mm]
+ & \mathfrak{O}_{(w,\varepsilon)}:=\{\mathcal{F}(v_1,\ldots,v_n):\mbox{$(v_1,\ldots,v_n)$ --- $(w,\varepsilon)$-двойственный базис}\}.
+\end{eqnarray*}
+\end{definition}
+
+
+
+\begin{proposition}
+\label{P2}
+В дополнение к обозначениям выше, положим $(p,q)=\\ (\dim V_+,\dim V_-)$. Тогда:
+\begin{itemize}
+\item[\rm (a)] Для каждой $(w,\varepsilon)\in\mathfrak{I}_n(p,q)$ подмножества $\mathcal{O}_{(w,\varepsilon)}$ и $\mathfrak{O}_{(w,\varepsilon)}$ непусты, и
+$\mathcal{O}_{(w,\varepsilon)}\cap\mathfrak{O}_{(w,\varepsilon)}= $
+\[\{\mathcal{F}(\underline{v}):\mbox{$\underline{v}=(v_k)_{k=1}^n$  $(w,\varepsilon)$-двойственен и $(w,\varepsilon)$-сопряжён}\} \not=\emptyset.\]
+\item[\rm (b)]
+Для каждого $(w,\varepsilon)\in \mathfrak{I}_n(p,q)$,
+\begin{eqnarray*}
+ & \mathcal{O}_{(w,\varepsilon)}=\big\{\mathcal{F}\in
+X: (\delta(\mathcal{F}),\mathcal{F})\in\mathbb{O}_{w}\mbox{ и
+}\varsigma(\delta:\mathcal{F})=\varsigma(w,\varepsilon)\big\}, \\
+ &\mathfrak{O}_{(w,\varepsilon)}=\big\{\mathcal{F}\in X:
+(\mathcal{F}^\dag,\mathcal{F})\in\mathbb{O}_{w_0w}\mbox{ и
+}\varsigma(\phi:\mathcal{F})=\varsigma(w,\varepsilon)\big\}.
+\end{eqnarray*}
+\item[\rm (c)]
+Подмножества $\mathcal{O}_{(w,\varepsilon)}$
+($(w,\varepsilon)\in\mathfrak{I}_n(p,q)$) в точности  $K$-орбиты
+в $X$. Подмножества $\mathfrak{O}_{(w,\varepsilon)}$
+($(w,\varepsilon)\in\mathfrak{I}_n(p,q)$) в точности
+$G^0$-орбиты в $X$.
+\item[\rm (d)]
+Отображение
+$\mathcal{O}_{(w,\varepsilon)}\mapsto\mathfrak{O}_{(w,\varepsilon)}$
+есть двойственность Мацуки.
+\end{itemize}
+\end{proposition}
+
+\subsection{Типы B, C, D}
+
+\label{S3.3}
+
+В этом разделе мы будем предполагать, что пространство $V=V_n=\langle e_1,\ldots,e_n\rangle_\mathbb{C}$ обладает симметрической или симплектической формой $\omega$, действие которой на базисе $(e_1,\ldots,e_n)$ описывается матрицей $\Omega$
+из (\ref{omega}).
+%for instance be described in terms of the matrix $\Omega=\Omega_n$ given by
+%\[\begin{array}[t]{c}
+%\Omega=I_n \\[1mm]
+%\mbox{(type BD1)}
+%\end{array},
+%\quad
+%\begin{array}[t]{c}
+%\Omega=\left(\begin{array}{cccc}
+%\begin{smallmatrix} 0 & 1 \\ -1 & 0 \end{smallmatrix} & & (0) \\
+% & \ddots \\
+%(0) & & \begin{smallmatrix} 0 & 1 \\ -1 & 0 \end{smallmatrix}
+%\end{array}\right)
+%\\
+%\mbox{(type C)}
+%\end{array},
+%\quad
+%\begin{array}[t]{c}
+%\Omega=\left(\begin{array}{cccc}
+%\begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix} & & (0) \\
+% & \ddots \\
+%(0) & & \begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix}
+%\end{array}\right)
+%\\
+%\mbox{(type D3)}
+%\end{array}.\]
+Мы рассматриваем группу $G=G(V,\omega)=\{g\in\mathrm{GL}(V):\mbox{$g$ сохраняет $\omega$}\}$ и многообразие изотропных флагов $X_\omega=\{\mathcal{F}\in X:\mathcal{F}^\perp=\mathcal{F}\}$
+(см. раздел \ref{S2.2}).
+
+В дополнение мы предположим, что $V$ обладает Эрмитовой формой $\phi$, сопряжением $\delta$ и разложением $V=V_+\oplus V_-$ (как и в разделе \ref{S3.2}) таким, что
+\begin{itemize}
+\item в случаях BD1 и C2 ограничения формы $\omega$ на $V_+$ и $V_-$ невырождены, то есть, $V_+^\perp=V_-$,
+\item в случаях C1 и D3 $V_+$ и $V_-$ --- Лагранжевы по отношению $\omega$, то есть, $V_+^\perp=V_+$ и $V_-^\perp=V_-$.
+\end{itemize}
+Положим $K:=\{g\in G:g\delta=\delta g\}$ и $G^0:=\{g\in G:\mbox{$g$ сохраняет $\phi$}\}$.
+
+\medskip
+
+\paragraph{\bf Комбинаторные обозначения}
+Напомним, что $w_0(k)=n-k+1$.
+Пусть $(\eta,\epsilon)\in\{1,-1\}^2$.
+Инволюция со знаками $(w,\varepsilon)$ называется {\em $(\eta,\epsilon)$-симметричной}, если выполнены следующие условия:
+\begin{itemize}
+\item[(i)] $ww_0=w_0w$ (так, что  $w_0$ сохраняет множество $\{\ell:w_\ell=\ell\}$);
+\item[(ii)] $\varepsilon_{w_0(k)}=\eta \varepsilon_k$ для всех $k\in\{\ell:w_\ell=\ell\}$;
+\end{itemize}
+и в случае, когда $\eta\not=\epsilon$:
+\begin{itemize}
+\item[(iii)]$w_k\not=w_0(k)$ для всех $k$.
+\end{itemize}
+Предположим, что $n=p+q$, и через $\mathfrak{I}_n^{\eta,\epsilon}(p,q)\subset\mathfrak{I}_n(p,q)$ обозначим подмножество инволюций со знаками сигнатуры $(p,q)$, которые $(\eta,\epsilon)$-симметричны.
+
+В частности, инволюция со знаками $(w,\varepsilon)$  $(1,1)$-симметрична, когда шаблон связей со знаками $l(w,\varepsilon)$ симметричен относительно обращения нумерации вершин;
+инволюция со знаками $(w,\varepsilon)$  $(1,-1)$-симметрична, когда  $l(w,\varepsilon)$ симметричен и не имеет симметричных дуг (то есть, соединённых $k$ и $n-k+1$);
+$(w,\varepsilon)$  $(-1,-1)$-симметрична,
+когда $l(w,\varepsilon)$ антисимметричен
+в смысле того, что зеркальный образ $l(w,\varepsilon)$ это шаблон связей со знаками с теми же дугами но противоположными знаками; $(w,\varepsilon)$  $(-1,1)$-симметрична, когда $l(w,\varepsilon)$ антисимметричен и не имеет симметричных дуг. Например:
+\begin{eqnarray*}
+ & \begin{array}[t]{c}
+\begin{picture}(140,30)(-20,-5)
+\courbe{-16}{32}{0}{8}{10}{12}{16} \courbe{0}{96}{0}{40}{48}{56}{26}
+\courbe{64}{112}{0}{86}{88}{90}{16} \put(-18,-3){$\bullet$}
+\put(-2,-3){$\bullet$} \put(14,-3){$\bullet$} \put(13,-9){$+$}
+\put(30,-3){$\bullet$} \put(46,-3){$\bullet$} \put(45,-9){$-$}
+\put(62,-3){$\bullet$} \put(77,-9){$+$} \put(78,-3){$\bullet$}
+\put(94,-3){$\bullet$} \put(110,-3){$\bullet$}
+\end{picture}
+\\[1mm]
+\mbox{$(w,\varepsilon)\in\mathfrak{I}^{1,1}_9(5,4),$}
+\end{array}
+\qquad
+\begin{array}[t]{c}
+\begin{picture}(140,30)(-20,-5)
+\courbe{-16}{32}{0}{8}{10}{12}{16} \courbe{0}{112}{0}{48}{56}{64}{28}
+\courbe{80}{128}{0}{102}{104}{106}{16} \put(-18,-3){$\bullet$}
+\put(-2,-3){$\bullet$} \put(14,-3){$\bullet$} \put(13,-9){$+$}
+\put(30,-3){$\bullet$} \put(46,-3){$\bullet$} \put(45,-9){$-$}
+\put(62,-3){$\bullet$} \put(61,-9){$+$} \put(78,-3){$\bullet$}
+\put(94,-3){$\bullet$} \put(93,-9){$-$} \put(110,-3){$\bullet$} \put(126,-3){$\bullet$}
+\end{picture}
+\\[1mm]
+\mbox{$(w,\varepsilon)\in\mathfrak{I}^{-1,-1}_{10}(5,5)$,}
+\end{array} \\
+ & \begin{array}[t]{c}
+\begin{picture}(140,30)(-20,-5)
+\courbe{-16}{32}{0}{8}{10}{12}{16}
+\courbe{80}{128}{0}{102}{104}{106}{16} \put(-18,-3){$\bullet$}
+\put(-2,-3){$\bullet$} \put(-3,-9){$-$} \put(14,-3){$\bullet$} \put(13,-9){$+$}
+\put(30,-3){$\bullet$} \put(46,-3){$\bullet$} \put(45,-9){$+$}
+\put(62,-3){$\bullet$} \put(61,-9){$+$} \put(78,-3){$\bullet$}
+\put(94,-3){$\bullet$} \put(93,-9){$+$} \put(110,-3){$\bullet$} \put(109,-9){$-$} \put(126,-3){$\bullet$}
+\end{picture}\\[1mm]
+\mbox{$(w,\varepsilon)\in\mathfrak{I}^{1,-1}_{10}(6,4),$}
+\end{array}
+\qquad
+\begin{array}[t]{c}
+\begin{picture}(140,30)(-20,-5)
+\courbe{-16}{32}{0}{8}{10}{12}{16}
+\courbe{80}{128}{0}{102}{104}{106}{16} \put(-18,-3){$\bullet$}
+\put(-2,-3){$\bullet$} \put(-3,-9){$-$} \put(14,-3){$\bullet$} \put(13,-9){$+$}
+\put(30,-3){$\bullet$} \put(46,-3){$\bullet$} \put(45,-9){$-$}
+\put(62,-3){$\bullet$} \put(61,-9){$+$} \put(78,-3){$\bullet$}
+\put(94,-3){$\bullet$} \put(93,-9){$-$} \put(110,-3){$\bullet$} \put(109,-9){$+$} \put(126,-3){$\bullet$}
+\end{picture}
+\\[1mm]
+\mbox{$(w,\varepsilon)\in\mathfrak{I}^{-1,1}_{10}(5,5)$.}
+\end{array}
+\end{eqnarray*}
+
+
+
+\begin{proposition}
+\label{P3}
+Положим $(p,q)=(\dim V_+,\dim V_-)$ (так, что $p=q=\frac{n}{2}$ для типов C1 и D3).
+Зададим
+$(\eta,\epsilon)=(1,1)$ для типа BD1,
+$(\eta,\epsilon)=(1,-1)$ для типа C2,
+$(\eta,\epsilon)=(-1,-1)$ для типа C1 и
+$(\eta,\epsilon)=(-1,1)$ для типа D3.
+\begin{itemize}
+\item[(a)] Для каждого $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$,
+рассматривая базис $\underline{v}=(v_1,\ldots,v_n)$ в $V$ такой, что
+\begin{equation}
+\label{3.3.18}
+\omega(v_k,v_\ell)=\left\{\begin{array}{ll} 0, & \mbox{если $\ell\not=n-k+1$} %\\ \pm 1 & \mbox{if $\ell=n-k+1$.}
+\\
+1, & \mbox{если $\ell=n-k+1$ и $w_k,w_\ell\in[k,\,\ell]$ ($k\leq\ell$)} \\
+\epsilon, & \mbox{если $\ell=n-k+1$ и $w_k,w_\ell\in[\ell,\,k]$ ($\ell\leq k$)} \\
+\eta, & \mbox{если $\ell=n-k+1$ и $k,\ell\in]w_k,\,w_\ell[$} \\
+\eta\epsilon, & \mbox{если $\ell=n-k+1$ и $k,\ell\in]w_\ell,\,w_k[$,} \\
+\end{array}\right.
+\end{equation}
+мы получаем
+\begin{eqnarray*}
+ & & \mathcal{O}^{\eta,\epsilon}_{(w,\varepsilon)}:=\\
+ & &\mathcal{O}_{(w,\varepsilon)}\cap X_\omega=\{\mathcal{F}(\underline{v}):\underline{v}\mbox{  $(w,\varepsilon)$-сопряжён и удовлетворяет (\ref{3.3.18})}\}\not=\emptyset, \\
+ & & \mathfrak{O}^{\eta,\epsilon}_{(w,\varepsilon)}:=\\
+ & &\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega=\{\mathcal{F}(\underline{v}):\underline{v}\mbox{ $(w,\varepsilon)$-двойственен и удовлетворяет (\ref{3.3.18})}\}\not=\emptyset, \\
+ & & \mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}\cap\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}=\\
+ & &=\{\mathcal{F}(\underline{v}):\underline{v}\mbox{ $(w,\varepsilon)$-сопряжён, $(w,\varepsilon)$-двойственен и удовлетворяет (\ref{3.3.18})}\}\not=\emptyset.
+\end{eqnarray*}
+\item[(b)] Подмножества $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ ($(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$) суть в точности $K$-орбиты в $X_\omega$.
+Подмножества $\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ ($(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$) суть в точности $G^0$-орбиты в $X_\omega$.
+\item[(c)] Отображение $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}\mapsto \mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ есть двойственность Мацуки.
+\end{itemize}
+\end{proposition}
+
+\subsection{Замечания}
+
+Положим $X_0:=X$ для типа A и $X_0:=X_\omega$ для типов B, C, D.
+
+\begin{remark}
+\label{R3.4.1}
+Характеризация $K$-орбит в разделах \ref{P1} --- \ref{P3} может быть получена следующим единым образом. Если $\mathcal{F}\in X$, мы будем писать
+$\sigma(\mathcal{F})=\mathcal{F}^\perp$ для типов A1--A2 и
+$\sigma(\mathcal{F})=\delta(\mathcal{F})$ для типов A3, BD1, C1--C2, D3. Пусть $P\subset
+G$ --- параболическая подгруппа, содержащая $K$ и минимальная с этим свойством. Два флага $\mathcal{F}_1,\mathcal{F}_2\in X_0$ принадлежат одной  $K$-орбите тогда и только тогда
+$(\sigma(\mathcal{F}_1),\mathcal{F}_1)$ и
+$(\sigma(\mathcal{F}_2),\mathcal{F}_2)$ принадлежат одной  $P$-орбите   для диагонального действия $P$ на $X_0\times X_0$.
+\end{remark}
+
+
+\begin{remark}
+	
+	(Открытые $K$-орбиты.)
+\label{R-open}
+	В обозначениях из замечания \ref{R3.4.1} отображение $\sigma_0:X_0\to X\times X$, $\mathcal{F}\mapsto(\sigma(\mathcal{F}),\mathcal{F})$ является замкнутым вложением.
+%For every $K$-orbit $\mathcal{O}\subset X_0$
+%there is a unique $G$-orbit $\mathbb{O}_w\subset X\times X$
+%such that $\mathcal{O}\subset\sigma_0^{-1}(\mathbb{O}_w)$.
+
+Для типов A и C многообразие флагов $X_0$ неприводимо.
+В частности, существует единственная $G$-орбита $\mathbb{O}_w\subset X\times X$
+такая, что пересечение $\mathbb{O}_w\cap \sigma_0(X_0)$ открыто в $\sigma_0(X_0)$;
+оно соответствует элементу $w\in\mathfrak{S}_n$ максимальному для порядка Брюа такому, что $\mathbb{O}_w$ пересекается с $\sigma_0(X_0)$.
+Во всех случаях найдётся единственная  $K$-орбита $\mathcal{O}\subset X_0$ такая, что $\sigma_0(\mathcal{O})\subset\mathbb{O}_w$, поэтому это (единственная) открытая $K$-орбита в $X_0$.
+Таким образом, мы получаем следующий список открытых $K$-орбит для типов A1--A3, C1--C2:
+\begin{itemize}
+\item[\rm A1:] $\mathcal{O}_\mathrm{id}$;
+\item[\rm A2:] $\mathcal{O}_{v_0}$, где $v_0=(1;2)(3;4)\cdots(n-1;n)$;
+\item[\rm A3:] $\mathcal{O}_{(w_0^{(t)},\varepsilon)}$, где
+$t=\min\{p,q\}$, $\varepsilon\equiv\mathrm{sign}(p-q)$
+и $w^{(t)}_0=\prod\limits_{k=1}^t(k;n-k+1)$;
+\item[\rm C1:] $\mathcal{O}^{-1,-1}_{(w_0,\emptyset)}$;
+\item[\rm C2:] $\mathcal{O}^{1,-1}_{(\hat{w}_0^{(t)},\varepsilon)}$,
+где $t=\min\{p,q\}$, $\varepsilon\equiv\mathrm{sign}(p-q)$ и $\hat{w}_0^{(t)}=v_0^{(t)}w_0^{(t)}v_0^{(t)}$,
+где $v_0^{(t)}=(1;2)(3;4)\cdots(t-1;t)$.
+\end{itemize}
+
+Если $n=\dim V$ чётно и форма $\omega$ ортогональна, то многообразие $X_\omega$ иимеет две связные компоненты.
+В самом деле, для каждого изотропного флага $\mathcal{F}=(F_k)_{k=0}^n\in X_\omega$ существет единственный изотропный флаг $\tilde{\mathcal{F}}=(\tilde{F}_k)_{k=0}^n\in X_\omega$
+такой, что $F_k=\tilde{F}_k$ для всех $k\not=m:=\frac{n}{2}$, $\tilde{F}_m\not=F_m$.
+Тогда отображение $\tilde{I}:\mathcal{F}\mapsto\tilde{\mathcal{F}}$ --- автоморфизм
+ $X_\omega$, который отображает одну связную компоненту $X_\omega$ на другую.
+Если $\mathcal{F}=\mathcal{F}(v_1,\ldots,v_n)$ для базиса $\underline{v}=(v_1,\ldots,v_n)$ такого, что
+\[\omega(v_k,v_\ell)\not=0\Leftrightarrow \ell=n-k+1,\]
+то
+$\tilde{I}(\mathcal{F}(\underline{v}))=\mathcal{F}(\underline{\tilde{v}})$,
+где $\underline{\tilde{v}}$ --- базис полученный $\underline{v}$ перестановкой двух средних векторов $v_m,v_{m+1}$.
+Если $\underline{v}$ --- $(w,\varepsilon)$-сопряжённый, то $\underline{\tilde{v}}$ --- $\tilde{i}(w,\varepsilon)$-сопряжённый, где
+$\tilde{i}(w,\varepsilon):=\big((m;m+1)w(m;m+1),\varepsilon\circ(m;m+1)\big)$.
+Следовательно $\tilde{I}$ отображает  $K$-орбиту $\mathcal{O}^{\eta,\epsilon}_{(w,\varepsilon)}$
+на $\mathcal{O}^{\eta,\epsilon}_{\tilde{i}(w,\varepsilon)}$.
+
+Для типа D3
+$X_\omega$ имеет в точности две открытые $K$-орбиты.
+Действительно, перестановка $w=\hat{w}_0:=w_0v_0$
+максимальна для порядка такого, что $\mathbb{O}_w\cap\sigma_0(X_0)$ непусто,
+следовательно, $\sigma_0^{-1}(\mathbb{O}_{\hat{w}_0})$ открыта.
+Перестановка $\hat{w}_0$ не имеет неподвижных точек, если $m:=\frac{n}{2}$ чётное; если $m:=\frac{n}{2}$ нечётное, то $\hat{w}_0$ фиксирует $m$ и $m+1$.
+В первом случае
+$\sigma_0^{-1}(\mathbb{O}_{\hat{w}_0})=\mathcal{O}^{-1,1}_{(\hat{w}_0,\emptyset)}$ ---
+единая $K$-орбита, и
+$\tilde{I}(\mathcal{O}^{-1,1}_{(\hat{w}_0,\emptyset)})=\mathcal{O}^{-1,1}_{\tilde{i}(\hat{w}_0,\emptyset)}$ ---
+вторая открытая $K$-орбита.
+Во втором случае
+$\sigma_0^{-1}(\mathbb{O}_{\hat{w}_0^{(m-1)}})=\mathcal{O}^{-1,1}_{(\hat{w}_0,\varepsilon)}\cup\mathcal{O}^{-1,1}_{(\hat{w}_0,\tilde\varepsilon)}$, где $(\varepsilon_m,\varepsilon_{m+1})=(\tilde\varepsilon_{m+1},\tilde\varepsilon_m)=(+1,-1)$, это объединение двух различных $K$-орбит, являющихся образами друг друга под действием  $\tilde{I}$.
+
+В случае BD1 многообразие $X_\omega$ может быть разложимым,
+но $w=w^{(t)}_0$, для $t:=\min\{p,q\}$, это единственный максимальный элемент в $\mathfrak{S}_n$
+такой, что $\mathbb{O}_w\cap\sigma_0(X_0)$ непусто.
+Тогда $\sigma_0^{-1}(\mathbb{O}_w)$
+состоит из единой $\tilde{I}$-инвариантной открытой $K$-орбиты, обозначаемой
+$\mathcal{O}^{1,1}_{(w^{(t)}_0,\varepsilon)}$ для $\varepsilon\equiv\mathrm{sign}(p-q)$.
+Следовательно многообразие флагов $X_\omega$  имеет единственную открытую орбиту  $K$-орбиту (которая несвязана в случае, когда $n$ чётное).
+\end{remark}
+
+
+
+\begin{remark}
+	
+	(Замкнутые $K$-орбиты.)
+\label{R-closed}
+Мы будем использовать обозначения из замечаний \ref{R3.4.1}--\ref{R-open}.
+Как видно из предложений \ref{P1}--\ref{P3}, в каждом случае можно найти единственную перестановку $w_{\mathrm{min}}\in\mathfrak{S}_n$ такую, что $\mathbb{O}_{w_{\mathrm{min}}}\cap\sigma_0(X_0)$ замкнуто;
+в самом деле, $w_{\mathrm{min}}=\mathrm{id}$ кроме типа BD1 для $p,q$ нечётных:
+в этом случае$w_{\mathrm{min}}=(\frac{n}{2};\frac{n}{2}+1)$.
+Для каждой $K$-орбиты $\mathcal{O}\subset X_0$ имеет место следующая эквивалентность:
+\[
+\mbox{$\mathcal{O}$ замкнута}\quad \Leftrightarrow\quad \sigma_0(\mathcal{O})\subset\mathbb{O}_{w_{\mathrm{min}}}
+\]
+(см. \cite{Brion,Richardson-Springer}). Ввиду этой эквивалентности, мы получаем следующий полный список замкнутых $K$-орбит  $X_0$ для разных типов.
+Для типов A1 и A2, $\mathcal{O}_{w_0}$ --- единственная замкнутая $K$-орбита.
+Для типа A3 замкнутые $K$-орбиты суть в точности орбиты
+$\mathcal{O}_{(\mathrm{id},\varepsilon)}$ для всех пар вида $(\mathrm{id},\varepsilon)\in\mathfrak{I}_n(p,q)$;
+существует $\binom{n}{p}$ таких орбит.
+Для типов B, C, D, замкнутые $K$-орбиты это орбиты
+$\mathcal{O}^{\eta,\epsilon}_{(\mathrm{id},\varepsilon)}$ для всех пар вида $(\mathrm{id},\varepsilon)\in\mathfrak{I}^{\eta,\epsilon}_n(p,q)$,
+кроме случая BD1, при условии $n=:2m$ чётное и $p,q$ нечётные;
+в этом случае замкнутые $K$-орбиты
+это орбиты $\mathcal{O}^{1,1}_{((m;m+1),\varepsilon)}$
+для всех пар вида $((m;m+1),\varepsilon)\in\mathfrak{I}^{1,1}_n(p,q)$.
+Существует $\binom{\lfloor\frac{p}{2}\rfloor+\lfloor\frac{q}{2}\rfloor}{\lfloor\frac{p}{2}\rfloor}$ замкнутых орбит в случаях BD1 и C2, и $2^{\frac{n}{2}}$ замкнутых орбит для типов C1 и D3.
+\end{remark}
+
+
+\begin{remark} Предложения
+\ref{P1}--\ref{P3} показывают, в частности, что {\em специальные элементы $X_0$},  в понимании Мацуки \cite{Matsuki, Matsuki3}, суть в точности флаги $\mathcal{F}\in X_0$ вида
+$\mathcal{F}=\mathcal{F}(v_1,\ldots,v_n)$, где $(v_1,\ldots,v_n)$ ---
+одновременно двойственный и сопряжённый базис пространства $V$, относительно некоторой инволюции $w\in\mathfrak{I}_n^\epsilon$ для типов A1
+и A2, и  некоторой инволюции со знаками
+$(w,\varepsilon)\in\mathfrak{I}_n(p,q)$ для типов A3, B--D. В самом деле,  согласно \cite{Matsuki, Matsuki3}, множество
+$\mathcal{S}\subset X_0$ специальных элементов совпадает с
+\[\bigcup_{\mathcal{O}\in X_0/K}\mathcal{O}\cap\Xi(\mathcal{O}),\]
+где отображение $X_0/K\to X_0/G^0$, $\mathcal{O}\mapsto\Xi(\mathcal{O})$
+это двойственность Мацуки.
+\end{remark}
+
+\subsection{Доказательства}
+
+\label{S3.5}
+
+\begin{proof}[Доказательство предложения \ref{P1}\,{\rm (a)}]
+Мы будем писать $w=(a_1;b_1)\cdots(a_m;b_m)$ с $a_1<\ldots<a_m$ и
+$a_k<b_k$ для всех $k$; положим $c_1<\ldots<c_{n-2m}$ будут элементами множества $\{k:w_k=k\}$.
+Для типа A2 мы имеем $n=2m$, и $(e_1,\ldots,e_n)$ есть одновременно
+$(1;2)(3;4)\cdots(n-1;n)$-двойственный базис и
+$(1;2)(3;4)\cdots(n-1;n)$-сопряжённый базис; тогда базис
+$\left\{e'_1,\ldots,e'_n\right\}$, где
+\[e'_{a_\ell}=e_{2\ell-1}\quad\mbox{и}\quad e'_{b_\ell}=e_{2\ell}\quad\mbox{для всех $\ell\in\{1,\ldots,m\}$},\]
+является  одновременно $w$-двойственным и $w$-сопряжённым.
+Для типа A1,
+заменяя $e_\ell$ и $e_{\ell^*}$ на $\frac{e_\ell+e_{\ell^*}}{\sqrt{2}}$ и $\frac{e_\ell-e_{\ell^*}}{i\sqrt{2}}$ в тех случаях, когда $\ell<\ell^*$,
+мы можем считать, что
+базис $(e_1,\ldots,e_n)$  одновременно $\mathrm{id}$-двойственен
+и $\mathrm{id}$-сопряжён. Для всех $\ell\in\{1,\ldots,m\}$ и
+$k\in\{1,\ldots,n-2m\}$,
+\[e'_{a_\ell}=\frac{e_{2\ell-1}+ie_{2\ell}}{\sqrt{2}},\quad e'_{b_\ell}=\frac{e_{2\ell-1}-ie_{2\ell}}{\sqrt{2}}\quad\mbox{и}\quad e'_{c_k}=e_{2m+k}.\]
+Тогда $(e'_1,\ldots,e'_n)$ --- одновременно  $w$-двойственный и
+$w$-сопряжённый базис.
+В обоих случаях мы заключаем, что
+\begin{equation}
+\label{3.1.4}
+\emptyset\not=\{\mathcal{F}(v_1,\ldots,v_n):\mbox{$(v_1,\ldots,v_n)$ --- $w$-двойственный и $w$-сопряжённый}\}\subset\mathcal{O}_w\cap\mathfrak{O}_w.
+\end{equation}
+
+
+Теперь проверим обратное включение. Предположим, что
+$\mathcal{F}\:=\:(F_0,\ldots,F_n)\in\mathcal{O}_w \cap \mathfrak{O}_w$.
+Пусть $(v_1,\:\ldots,\:v_n)$ --- $w$-двойственный базис такой, что $ \mathcal{F} = \mathcal{F}(v_1,\ldots,v_n)$.
+Поскольку $\mathcal{F}\in\mathfrak{O}_w$, мы имеем
+\begin{equation}
+\label{1-new}
+w_k=\min\{\ell=1,\ldots,n:\gamma(F_k)\cap F_\ell\not=\gamma(F_{k-1})\cap F_\ell\}.
+\end{equation}
+Для всех $\ell\in\{0,\ldots,n\}$ мы построим  $w$-двойственный базис
+$(v_1^{(\ell)},\ldots,v_n^{(\ell)})$ в $V$ такой, что
+\begin{eqnarray}
+\label{2-new}
+& F_k=\langle v_1^{(\ell)},\ldots,v_k^{(\ell)}\rangle_\mathbb{C}
+\quad\mbox{
+для всех $k\in\{1,\ldots,n\}$}
+\end{eqnarray}
+и
+\begin{eqnarray}
+\label{3-new}
+&
+\gamma(v_k^{(\ell)})=\left\{\begin{array}{ll}
+\epsilon v_{w_k}^{(\ell)}, & \mbox{если $w_k\geq k$,} \\
+v_{w_k}^{(\ell)}, & \mbox{если $w_k<k$}
+\end{array}\right.
+\quad\mbox{
+для всех $k\in\{1,\ldots,\ell\}$.}
+\end{eqnarray}
+Это будет означать, что
+$\mathcal{F}=\mathcal{F}(v_1^{(n)},\ldots,v_n^{(n)})$ для базиса $(v_1^{(n)},\ldots,v_n^{(n)})$ одновременно $w$-двойственного и $w$-сопряжённого,
+то есть, полностью докажет (a).
+
+Наша конструкция будет строиться по индукции, начиная с $(v_1^{(0)},\ldots,v_n^{(0)})=(v_1,\ldots,v_n)$.
+Пусть $\ell\in\{1,\ldots,n\}$, и предположим, что базис $(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$ построен.
+Мы выделяем три случая.
+
+\smallskip
+\noindent
+{\it Случай 1: $w_\ell<\ell$.}
+
+Неравенство $w_\ell<\ell=w(w_\ell)$ влечёт $\gamma(v_{w_\ell}^{(\ell-1)})=\epsilon v_{\ell}^{(\ell-1)}$, откуда
+$\gamma(v_{\ell}^{(\ell-1)})=v_{w_\ell}^{(\ell-1)}$, так как $\gamma^2=\epsilon\mathrm{id}$.
+Поэтому базис $(v_1^{(\ell)},\ldots,v_n^{(\ell)}):=(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$ удовлетворяет условиям (\ref{2-new}) и (\ref{3-new}).
+
+\smallskip
+\noindent
+{\it Случай 2: $w_\ell=\ell$.}
+
+Этот случай имеет место только для типа A1.
+С одной стороны, (\ref{1-new}) даёт
+\[\gamma(v_\ell^{(\ell-1)})\in\langle v_1^{(\ell-1)},\ldots,v_\ell^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}.\]
+С другой стороны, так как базис $(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$ является $w$-двойственным,
+мы получаем
+\[v_\ell^{(\ell-1)}\in\langle v_1^{(\ell-1)},\ldots,v_{\ell-1}^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}^\perp\,.\]
+Следовательно, поскольку $\gamma$ сохраняет ортогональность по отношению к форме $\omega$, то
+\begin{eqnarray*}
+\gamma(v_\ell^{(\ell-1)}) & \in & \langle \gamma(v_1^{(\ell-1)}),\ldots,\gamma(v_{\ell-1}^{(\ell-1)}),\gamma(v_{w_1}^{(\ell-1)}),\ldots,\gamma(v_{w_{\ell-1}}^{(\ell-1)})\rangle_\mathbb{C}^\perp \\
+ & & =\langle v_1^{(\ell-1)},\ldots,v_{\ell-1}^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}^\perp.
+\end{eqnarray*}
+Всё это вместе  указывает на существование ненулевого комплексного  числа  $\lambda$ такого, что $\gamma(v_\ell^{(\ell-1)})=\lambda v_\ell^{(\ell-1)}$.
+Так как $\gamma$ --- инволюция, мы заключаем, что $\lambda\in\{+1,-1\}$.
+В дополнение мы знаем, что
+\[\lambda=\omega(\gamma(v_\ell^{(\ell-1)}),v_\ell^{(\ell-1)})={}^t\overline{v_\ell^{(\ell-1)}} v_\ell^{(\ell-1)}\in\mathbb{R}^+.\]
+Следовательно $\gamma(v_\ell^{(\ell-1)})=v_\ell^{(\ell-1)}$, и мы можем положить
+$$(v_1^{(\ell)},\ldots,v_n^{(\ell)}):=(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)}).$$
+
+\smallskip
+\noindent
+{\it Случай 3: $w_\ell>\ell$.}
+
+Из (\ref{1-new}) мы получаем
+\[\gamma(v_\ell^{(\ell-1)})\in
+\langle v_k^{(\ell-1)}:1\leq k\leq w_\ell\rangle_\mathbb{C}+\langle v_{w_k}^{(\ell-1)}:1\leq k\leq \ell-1\rangle_\mathbb{C}.
+\]
+С другой стороны, рассуждая, как и в случае 2, мы видим, что
+\[\gamma(v_\ell^{(\ell-1)})\in\langle v_1^{(\ell-1)},\ldots,v_{\ell-1}^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}^\perp.\]
+Поэтому выполняется равенство
+\begin{equation}
+\label{4-new}
+\gamma(v_\ell^{(\ell-1)})=\sum_{k\in I}\lambda_kv_k^{(\ell-1)}
+\quad\mbox{для некоторых $\lambda_k\in\mathbb{C}$ ,}
+\end{equation}
+где $I:=\{k:\ell\leq k\leq w_\ell\mbox{ and }\ell\leq w_k\}\subset\hat{I}:=\{k:\ell\leq k\mbox{ and }\ell\leq w_k\}$.
+Используя (\ref{4-new}), факт, что базис $(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$  $w$-двойственен, и определения $\omega$ и $\gamma$, мы видим, что
+\begin{equation}
+\label{5-new}
+\lambda_{w_\ell}=\omega(v_\ell^{(\ell-1)},\gamma(v_\ell^{(\ell-1)}))=\epsilon \mbox{\:}^tv_\ell^{(\ell-1)}\overline{v_\ell^{(\ell-1)}}=\epsilon\alpha,
+\end{equation}
+где $\alpha\in\mathbb{R}$, $\alpha>0$.
+Положим
+\begin{eqnarray*}
+ && v_\ell^{(\ell)}:=\frac{1}{\sqrt{\alpha}}v_\ell^{(\ell-1)},\quad
+v_{w_\ell}^{(\ell)}:=\frac{\epsilon}{\sqrt{\alpha}}\gamma(v_\ell^{(\ell-1)}),\\
+ && v_k^{(\ell)}:=v_k^{(\ell-1)}-\frac{\omega(v_k^{(\ell-1)},\gamma(v_\ell^{(\ell-1)}))}{\lambda_{w_\ell}}v_\ell^{(\ell-1)}\ \mbox{ для всех $k\in \hat{I}\setminus\{\ell,w_\ell\}$}, \\
+&& v_k^{(\ell)}:=v_k^{(\ell-1)}\ \mbox{ для всех $k\in\{1,\ldots,n\}\setminus \hat{I}$.}
+\end{eqnarray*}
+Основываясь на равенствах (\ref{4-new}) и (\ref{5-new}), легко проверить, что $(v_1^{(\ell)},\ldots,v_n^{(\ell)})$ является  $w$-двойственным базисом,  удовлетворяющим (\ref{2-new}) и (\ref{3-new}).
+Это завершает рассмотрение случая 3.
+\end{proof}
+
+\begin{proof}[Доказательство предложений \ref{P1}\,{\rm (b)}--{\rm (d)}]
+Пусть $\mathcal{F}\in\mathcal{O}_w$, то есть,
+$\mathcal{F}=\mathcal{F}(v_1,\ldots,v_n)$ для некоторого $w$-двойственного базиса
+$(v_1,\ldots,v_n)$ в $V$. Из определения
+$w$-двойственного базиса мы видим, что
+\begin{eqnarray*}
+\langle v_1,\ldots,v_{n-k}\rangle_\mathbb{C}^\perp & = & \langle v_j:w_j\notin\{1,\ldots,n-k\}\rangle_\mathbb{C} \\
+ & = & \langle v_j:w_j\in\{n-k+1,\ldots,n\}\rangle_\mathbb{C} \\
+ & = & \langle v_j:(w_0w)_j\in\{1,\ldots,k\}\rangle_\mathbb{C}\,.
+\end{eqnarray*}
+Следовательно
+\[\dim\langle v_1,\ldots,v_{n-k}\rangle_\mathbb{C}^\perp\cap\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}=\big|\big\{j\in\{1,\ldots,\ell\}:(w_0w)_j\in\{1,\ldots,k\}\big\}\big|\]
+для всех $k,\ell\in\{1,\ldots,n\}$, что даёт равенство
+$w(\mathcal{F}^\perp,\mathcal{F})=w_0w$, и поэтому включение
+\begin{equation}
+\label{1}
+\mathcal{O}_w\subset\{\mathcal{F}\in
+X:(\mathcal{F}^\perp,\mathcal{F})\in\mathbb{O}_{w_0w}\}.
+\end{equation}
+
+Пусть $\mathcal{F}=\mathcal{F}(v_1,\ldots,v_n)\in\mathfrak{O}_w$ для
+$w$-сопряжённого базиса $(v_1,\ldots,v_n)$ в $V$. Из определения $w$-сопряжённого базиса мы получаем
+\[\gamma(\langle v_1,\ldots,v_k\rangle_\mathbb{C})=\langle v_{w_j}:j\in\{1,\ldots,k\}\rangle_\mathbb{C}\,.\]
+Поэтому
+\[\dim\gamma(\langle v_1,\ldots,v_k\rangle_\mathbb{C})\cap\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}=\]
+
+\[\big|\big\{j\in\{1,\ldots,\ell\}:w^{-1}_j\in\{1,\ldots,k\}\big\}\big|\]
+для всех $k,\ell\in\{1,\ldots,n\}$,
+ откуда
+$w(\gamma(\mathcal{F}),\mathcal{F})=w^{-1}=w$ (где $w$ --- инволюция).\\ Это влечёт включение
+\begin{equation}
+\label{2} \mathfrak{O}_w\subset\{\mathcal{F}\in
+X:(\gamma(\mathcal{F}),\mathcal{F})\in\mathbb{O}_{w}\}.
+\end{equation}
+
+Ясно, что группа $K$ действует транзитивно на множестве
+$w$-двойственных базисов, следовательно, $\mathcal{O}_w$ является  $K$-орбитой. Более того,
+(\ref{1}) влечёт то, что орбиты $\mathcal{O}_w$ (для
+$w\in\mathfrak{I}_w^\epsilon$) попарно различны. Аналогично, подмножества $\mathfrak{O}_w$ (для $w\in\mathfrak{I}_w^\epsilon$) суть попарно различные $G^0$-орбиты.
+
+Обозначим через $L_k$ матрицу размера $k\times k$ с $1$ на антидиагонали и $0$ в остальных местах. Пусть
+$\underline{v}=(v_1,\ldots,v_n)$ является $w_0$-двойственным базисом, другими словами,
+\[
+\left\{
+\begin{array}{ll}
+\omega(v_k,v_{n+1-k})=\left\{\begin{array}{ll}
+1, & \mbox{если $k\leq\frac{n+1}{2}$} \\[1mm] \epsilon, & \mbox{если $k>\frac{n+1}{2}$}
+\end{array}\right. \\[4mm]
+\omega(v_k,v_\ell)=0,\quad\mbox{если $\ell\not=n+1-k$;}
+\end{array}
+\right.
+\]
+поэтому  $L:=\left(\omega(v_k,v_\ell)\right)_{1\leq k,\ell\leq n}$ это следующая матрица:
+\[
+L=L_n\quad \mbox{(тип A1)}\quad\mbox{или}\quad L=\left(\begin{matrix} 0 & L_m \\ -L_m & 0 \end{matrix}\right)\quad\mbox{(тип A2, $n=2m$)}.
+\]
+
+Флаг $\mathcal{F}_0:=\mathcal{F}(v_1,\ldots,v_n)$ удовлетворяет условию $\mathcal{F}_0^\perp=\mathcal{F}_0$. По Ричардсону-Спрингеру \cite{Richardson-Springer} каждая $K$-орбита
+$\mathcal{O}\subset X$ содержит элемент вида
+$g\mathcal{F}_0$ с  $g\in G$ такой, что
+$h:=L{}^t[g]_{\underline{v}}L^{-1}[g]_{\underline{v}}\in N$, где
+$[g]_{\underline{v}}$ обозначает матрицу $g$ в базисе
+$\underline{v}$ и $N$ обозначает группу обратимых $n\times
+n$-матриц с ровно одним ненулевым коэффициентом в каждой строке и кажом столбце. Заметим, что матрица
+$Lh={}^t[g]_{\underline{v}}L[g]_{\underline{v}}$ тоже принадлежит   $N$
+(так же, как и $L$ ) и является симметрической в случае A1 и антисимметрической в
+случае A2. Вследствие этого, существует $w\in\mathfrak{I}_n$ и константы
+$t_1,\ldots,t_n\in\mathbb{C}^*$ такие, что матрица
+$Lh=:\left(a_{k,\ell}\right)_{1\leq k,\ell\leq n}$ состоит из коэффициентов:
+\[
+a_{k,\ell}=0,\ \mbox{если $\ell\not=w_k$,}\qquad
+a_{k,w_k}=\left\{\begin{array}{ll} t_k, & \mbox{если $w_k\geq k$}
+\\ \epsilon t_k, & \mbox{если $w_k\leq k$.}
+\end{array}\right.
+\]
+Так как $\epsilon=-1$ для типа A2, должно выполняться $w_k\not=k$ для всех $k$,
+поэтому $w\in\mathfrak{I}'_n$. Следовательно, в обоих случаях
+$w\in\mathfrak{I}^\epsilon_n$.
+Для всех $k\in\{1,\ldots,n\}$, мы
+выберем $s_k=s_{w_k}\in\mathbb{C}^*$ такие, что $s_k^{-2}=t_k$
+(отметим, что $t_{w_k}=t_k$).
+Таким образом,
+\[g\mathcal{F}_0=\mathcal{F}(s_1gv_1,\ldots,s_ngv_n)\,,\]
+и для всех $k,\ell\in\{1,\ldots,n\}$ мы имеем
+\[
+\omega(s_kgv_k,s_\ell g
+v_\ell)=s_ks_\ell\omega(gv_k,gv_\ell)=s_ks_\ell
+a_{k,\ell}=\left\{\begin{array}{ll} 1, & \mbox{если $\ell=w_k\geq k$}
+\\ \epsilon, & \mbox{если $\ell=w_k< k$} \\ 0, & \mbox{если
+$\ell\not=w_k$}.
+\end{array}\right.
+\]
+Поэтому $g\mathcal{F}_0\in\mathcal{O}_w$. Это даёт
+$\mathcal{O}=\mathcal{O}_w$.
+
+Мы доказали, что подмножества $\mathcal{O}_w$ (для
+$w\in\mathfrak{I}^\epsilon_w$) суть в точности $K$-орбиты в $X$. В частности, $X=\bigcup_{w\in\mathfrak{I}^\epsilon_w}\mathcal{O}_w$ так, что включение (\ref{1}) на самом деле является равенством. По двойственности Мацуки число $G^0$-орбит в $X$ равно числу
+$K$-орбит, поэтому подмножества $\mathfrak{O}_w$ (для
+$w\in\mathfrak{I}^\epsilon_w$) суть в точности $G^0$-орбиты в $X$.
+Тем самым в (\ref{2})  имеет место равенство. Таким образом, мы доказали части
+{\rm (b)} и {\rm (c)} утверждения.
+
+Из части (a) следует что,  для каждого $w\in\mathfrak{I}_n^\epsilon$, пересечение $\mathcal{O}_w\cap\mathfrak{O}_w$ непусто и состоит из единой $K\cap G^0$-орбиты.
+Это показывает, что орбита $\mathfrak{O}_w$ двойственна по Мацуки орбите $\mathcal{O}_w$ (см. \cite{Matsuki3}), и часть {\rm (d)} утверждения также доказана.
+\end{proof}
+
+\begin{proof}[Доказательство предложения \ref{P2}\,{\rm (a)}]
+Мы представим $w$ в виде произвдения попарно коммутирующих транспозиций
+$w=(a_1;b_1)\cdots(a_m;b_m)$,
+и пусть $c_{m+1}<\ldots<c_p$ --- элементы в $\{k:w_k=k,\ \varepsilon_k=+1\}$
+и $d_{m+1}<\ldots<d_q$ - элементы в $\{k:w_k=k,\ \varepsilon_k=-1\}$.
+Представим $\{e_1,\ldots,e_n\}=\{e_1^+,\ldots,e_p^+\}\cup\{e_1^-,\ldots,e_q^-\}$
+так, чтобы $V_+=\langle e_\ell^+:\ell=1,\ldots,p\rangle_\mathbb{C}$
+и $V_-=\langle e_\ell^-:\ell=1,\ldots,q\rangle_\mathbb{C}$.
+Полагая
+\begin{eqnarray*}
+& v_{a_k}:=\frac{e^+_k+e^-_k}{\sqrt{2}}\,,\,\,\ v_{b_k}:=\frac{e^+_k-e^-_k}{\sqrt{2}}\ \mbox{ для всех $k\in\{1,\ldots,m\}$,} \\
+& v_{c_k}:=e^+_k\ \mbox{ для всех $k\in\{m+1,\ldots,p\}$, \ и }\ v_{d_k}:=e^-_k\ \mbox{ для всех $k\in\{m+1,\ldots,q\}$,}
+\end{eqnarray*}
+легко видеть, что $(v_1,\ldots,v_n)$ ---  
+$(w,\varepsilon)$-двойственный и $(w,\varepsilon)$-сопряжённый базис в $V$.  Следовательно
+\begin{equation}
+\label{3.5.14}
+\emptyset\not=\{\mathcal{F}(\underline{v}):\mbox{$\underline{v}$  $(w,\varepsilon)$-двойственен и $(w,\varepsilon)$-сопряжён}\}\subset \mathcal{O}_{(w,\varepsilon)}\cap\mathfrak{O}_{(w,\varepsilon)}.
+\end{equation}
+
+	Чтобы показать обратное  включение, рассмотрим
+$\mathcal{F}=(F_0,\ldots,F_n)\in \mathcal{O}_{(w,\varepsilon)}\cap\mathfrak{O}_{(w,\varepsilon)}$.
+С одной стороны, так как $\mathcal{F}\in\mathfrak{O}_{(w,\varepsilon)}$, существует  $(w,\varepsilon)$-двойственный базис $(v_1,\ldots,v_n)$ такой, что
+$\mathcal{F}=\mathcal{F}(v_1,\ldots,v_n)$. С другой стороны, то, что $\mathcal{F}\in\mathcal{O}_{(w,\varepsilon)}$ влечёт
+\begin{equation}
+\label{8-new}
+w_k=\min\{\ell=1,\ldots,n:\delta(F_k)\cap F_\ell\not=\delta(F_{k-1})\cap F_\ell\}\ \mbox{ для всех $k\in\{1,\ldots,n\}$.}
+\end{equation}
+
+Для всех $\ell\in\{0,\ldots,n\}$ мы построим $(w,\varepsilon)$-двойственный базис
+$(v_1^{(\ell)},\ldots,v_n^{(\ell)})$ такой, что
+\begin{eqnarray}
+\label{9-new}
+ & F_k=\langle v_1^{(\ell)},\ldots,v_k^{(\ell)}\rangle_\mathbb{C}\quad\mbox{для всех $k\in\{1,\ldots,n\}$}
+\\
+\label{10-new}
+ \mbox{и} & \delta(v_k^{(\ell)})=\left\{\begin{array}{ll}
+v_{w_k}^{(\ell)}, & \mbox{если $w_k\not=k$,} \\
+\varepsilon_k v_{k}^{(\ell)}, & \mbox{если $w_k=k$} \\
+\end{array}\right.\quad\mbox{для всех $k\in\{1,\ldots,\ell\}$.}
+\end{eqnarray}
+Это даст нам
+базис $(v_1^{(n)},\ldots,v_n^{(n)})$, являющийся одновременно $(w,\varepsilon)$-двойственным и $(w,\varepsilon)$-сопряжённым и таким, что
+$\mathcal{F}=\mathcal{F}(v_1^{(n)},\ldots,v_n^{(n)})$, и, таким образом, завершит доказательство части {\rm (a)}.
+
+Построение будет посредством индукции по $\ell\in\{0,\ldots,n\}$, с базой индукции
+$(v_1^{(0)},\ldots,v_n^{(0)}):=(v_1,\ldots,v_n)$. Предположим, что для
+$\ell\in\{1,\ldots,n\}$  базис
+$(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$ уже построен. Мы различаем три случая.
+
+\medskip
+\noindent {\it Случай 1: $w_\ell<\ell$.}
+
+Поскольку в этом случае $w_\ell\leq\ell-1$ и $w(w_\ell)=\ell$, мы получаем
+$\delta(v_{w_\ell}^{(\ell-1)})=v_{\ell}^{(\ell-1)}$ и поэтому
+$\delta(v_{\ell}^{(\ell-1)})=v_{w_\ell}^{(\ell-1)}$ (так как
+$\delta$ инволюция). Поэтому базис
+$(v_1^{(\ell)},\ldots,v_n^{(\ell)}):=(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$
+удовлетворяет условиям (\ref{9-new}) и (\ref{10-new}).
+
+\medskip
+\noindent {\it Случай 2: $w_\ell=\ell$.}
+
+Используя (\ref{8-new}), мы получаем
+\[\delta(v_\ell^{(\ell-1)})\in\langle v_1^{(\ell-1)},v_2^{(\ell-1)},\ldots,v_\ell^{(\ell-1)}\rangle_\mathbb{C}+\langle v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}\,.\]
+С другой стороны, из того, что базис
+$(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$
+$(w,\varepsilon)$-сопряжён следует
+\begin{align}v_\ell^{(\ell-1)}\in\langle v_1^{(\ell-1)},\ldots,v_{\ell-1}^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}^\dag.
+\label{E:induction}
+\end{align}
+Поскольку $\delta$ сохраняет ортогональность по отношению к форме
+$\phi$, и  $\delta(v_k^{(\ell-1)})=v_{w_k}^{(\ell-1)}$
+для всех $k\in\{1,\ldots,\ell-1\}$ (по предположению индукции), (\ref{E:induction}) влечёт
+\[\delta(v_\ell^{(\ell-1)})\in\langle v_1^{(\ell-1)},\ldots,v_{\ell-1}^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}^\dag.\]
+В итоге мы получаем
+\[\delta(v_\ell^{(\ell-1)})=\lambda
+v_\ell^{(\ell-1)}\quad\mbox{для некоторого $\lambda\in\mathbb{C}^*$.}\]
+Так как $\delta$ ---  инволюция, мы заключаем, что $\lambda\in\{+1,-1\}$.
+Далее, из того, что
+$\phi(v_\ell^{(\ell-1)},v_\ell^{(\ell-1)})=\varepsilon_\ell$ вытекает
+\[\lambda\varepsilon_\ell=\phi(v_\ell^{(\ell-1)},\delta(v_\ell^{(\ell-1)}))={}^t\overline{v_\ell^{(\ell-1)}}\Phi\Phi v_\ell^{(\ell-1)}={}^t\overline{v_\ell^{(\ell-1)}}v_\ell^{(\ell-1)}\geq 0.\]
+Наконец, мы получаем $\lambda=\varepsilon_\ell$. Отсюда следует, что базис
+$(v_1^{(\ell)},\ldots,v_n^{(\ell)}):=(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$
+удовлетворяет (\ref{9-new}) и (\ref{10-new}).
+
+\medskip
+\noindent {\it Случай 3: $w_\ell>\ell$.}
+
+Вспоминая (\ref{8-new}), тот факт, что
+$(v_1^{(\ell-1)},\ldots,v_n^{(\ell-1)})$
+$(w,\varepsilon)$-двойственен, предположение индукции и  факт, что $\delta$ сохраняет ортогональность по отношению к форме $\phi$, мы получаем, как и в случае 2 ,
+\begin{eqnarray*}
+\delta(v_\ell^{(\ell-1)}) & \in & \big(\langle v_k^{(\ell-1)}:1\leq
+k\leq w_\ell\rangle_\mathbb{C}+\langle v_{w_k}^{(\ell-1)}:1\leq k\leq
+\ell-1\rangle_\mathbb{C}\big) \\
+ & & \cap\,\langle
+v_1^{(\ell-1)},\ldots,v_{\ell-1}^{(\ell-1)},v_{w_1}^{(\ell-1)},\ldots,v_{w_{\ell-1}}^{(\ell-1)}\rangle_\mathbb{C}^\dag.
+\end{eqnarray*} Следовательно
+\begin{equation} \label{11-new}
+\delta(v_\ell^{(\ell-1)})=\sum_{k\in
+I}\lambda_kv_k^{(\ell-1)}\quad\mbox{с $\lambda_k\in\mathbb{C}$,}
+\end{equation}
+где $I:=\{k:\ell\leq k\leq w_\ell,\ \ell\leq w_k\}\subset\hat{I}:=\{k:\ell\leq k,\ \ell\leq w_k\}$.
+Это влечёт
+\[\lambda_{w_\ell}=\phi(v_\ell^{(\ell-1)},\delta(v_\ell^{(\ell-1)}))={}^t\overline{v_\ell^{(\ell-1)}}\Phi\Phi v_\ell^{(\ell-1)}={}^t\overline{v_\ell^{(\ell-1)}}v_\ell^{(\ell-1)}\in\mathbb{R}_+^*.\]
+Нетрудно проверить, что базис
+$(v_1^{(\ell)},\ldots,v_n^{(\ell)})$, определённый как
+\begin{eqnarray*}
+ & & v_\ell^{(\ell)}:=\frac{1}{\sqrt{\lambda_{w_\ell}}}v_\ell^{(\ell-1)},\quad
+v_{w_\ell}^{(\ell)}:=\frac{1}{\sqrt{\lambda_{w_\ell}}}\delta(v_\ell^{(\ell-1)}),
+\\
+ & & v_k^{(\ell)}:=v_k^{(\ell-1)}-\frac{\phi(v_k^{(\ell-1)},\delta(v_\ell^{(\ell-1)}))}{\lambda_{w_\ell}}v_\ell^{(\ell-1)}
+\quad\mbox{для всех $k\in \hat{I}\setminus\{\ell,w_\ell\}$,} \\
+ &  & v_k^{(\ell)}:=v_k^{(\ell-1)}\quad\mbox{для всех $k\in\{1,\ldots,n\}\setminus \hat{I}$,}
+\end{eqnarray*}
+ является $(w,\varepsilon)$-двойственным и удовлетворяет условиям
+(\ref{9-new}) и (\ref{10-new}).
+\end{proof}
+
+\begin{proof}[Доказательство предложения \ref{P2}\,{\rm (b)}--{\rm (d)}]
+Пусть $\mathcal{F}=\mathcal{F}(v_1,\ldots,v_n)$, где
+$(v_1,\ldots,v_n)$ --- $(w,\varepsilon)$-сопряжённый базис. Тогда, по определению, мы имеем
+\[\delta(\langle v_1,\ldots,v_k\rangle_\mathbb{C})=\langle v_{w_j}:j\in\{1,\ldots,k\}\rangle_\mathbb{C}\,,\]
+и поэтому \begin{eqnarray*} \dim \delta(\langle
+v_1,\ldots,v_k\rangle_\mathbb{C})\cap \langle v_1,\ldots,v_\ell\rangle_\mathbb{C} & = &
+|\{j\in\{1,\ldots,\ell\}:w^{-1}_j\in\{1,\ldots,k\}\}| \\
+  & = &
+|\{j\in\{1,\ldots,\ell\}:w_j\in\{1,\ldots,k\}\}|
+\end{eqnarray*}
+для всех $k,\ell\in\{1,\ldots,n\}$. Далее, для
+$\varepsilon\in\{+1,-1\}$ мы получаем
+\begin{eqnarray*}
+\langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}\cap\ker(\delta-\varepsilon\mathrm{id}) & =
+&
+\langle v_j:1\leq w_j=j\leq \ell\mbox{ и }\varepsilon_j=\varepsilon\rangle_\mathbb{C} \\
+ & & +\langle
+v_j+\varepsilon v_{w_j}:1\leq w_j<j\leq \ell\rangle_\mathbb{C}\,.
+\end{eqnarray*}
+Следовательно
+\[
+\big(\dim \langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}\cap V_+,\dim \langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}\cap V_-\big)_{\ell=1}^n=\varsigma(w,\varepsilon).
+\]
+В итоге это даёт включение
+\begin{equation}
+\label{3} \mathcal{O}_{(w,\varepsilon)}\subset\big\{\mathcal{F}\in
+X: (\delta(\mathcal{F}),\mathcal{F})\in\mathbb{O}_{w}\mbox{ и
+}\varsigma(\delta:\mathcal{F})=\varsigma(w,\varepsilon)\big\}.
+\end{equation}
+
+Теперь пусть $(v_1,\ldots,v_n)$ --- $(w,\varepsilon)$-двойственный базис. Тогда
+\begin{eqnarray*}
+\langle v_1,\ldots,v_{n-k}\rangle_\mathbb{C}^\dag\cap\langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C} & = & \langle
+v_j:j\in\{1,\ldots,\ell\}\mbox{ и }w_j>n-k\rangle_\mathbb{C} \\
+ & = & \langle
+v_j:j\in\{1,\ldots,\ell\}\mbox{ и }(w_0w)_j\leq k\rangle_\mathbb{C}\,,
+\end{eqnarray*}
+откуда
+\[\dim\langle v_1,\ldots,v_{n-k}\rangle_\mathbb{C}^\dag\cap\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}=|\{j\in\{1,\ldots,\ell\}:(w_0w)_j\in\{1,\ldots,k\}|\]
+для всех $k,\ell\in\{1,\ldots,n\}$. В частности, мы видим, что
+\[\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}=\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}\cap\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}^\dag\oplus\langle v_j:
+j\in\{1,\ldots,\ell\}\mbox{ и }w_j\leq \ell\rangle_\mathbb{C}.\] Это влечёт, что векторы $v_j$ (для $1\leq w_j=j\leq \ell$) и
+$\frac{1}{\sqrt{2}}(v_j\pm v_{w_j})$ (для $1\leq w_j<j\leq \ell$)
+составляют базис факторпространства $\langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}/\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}\cap\langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}^\dag$. Этот базис $\phi$-ортогонален и,
+поскольку $(v_1,\ldots,v_n)$  $(w,\varepsilon)$-двойственен, мы имеем
+\[
+\textstyle \phi(v_j,v_j)=\varepsilon_j,\mbox{ если $w_j=j$};\quad
+\left\{\begin{array}{l}
+\phi\big(\frac{v_j+v_{w_j}}{\sqrt{2}},\frac{v_j+v_{w_j}}{\sqrt{2}}\big)=1,\\[2mm]
+\phi\big(\frac{v_j-v_{w_j}}{\sqrt{2}},\frac{v_j-v_{w_j}}{\sqrt{2}}\big)=-1
+\end{array}\right.\mbox{ если $w_j<j$.}
+\]
+Поэтому сигнатура $\phi$ на $\langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}/\langle v_1,\ldots,v_\ell\rangle_\mathbb{C}\cap\langle
+v_1,\ldots,v_\ell\rangle_\mathbb{C}^\dag$ это пара
+\[
+\begin{array}{rll}
+\big( & |\{j:w_j=j\leq\ell,\
+\varepsilon_j=+1\}|+|\{j:w_j<j\leq\ell\}|,
+\\[2mm]
+ & |\{j:w_j=j\leq\ell,\
+\varepsilon_j=-1\}|+|\{j:w_j<j\leq\ell\}| & \big),\end{array}
+\]
+которая совпадает с  $\ell$-ым элементом последовательности
+$\varsigma(w,\varepsilon)$. Наконец, мы получаем включение
+\begin{equation}
+\label{4} \mathfrak{O}_{(w,\varepsilon)}\subset\big\{\mathcal{F}\in
+X: (\mathcal{F}^\dag,\mathcal{F})\in\mathbb{O}_{w_0w}\mbox{ и
+}\varsigma(\phi:\mathcal{F})=\varsigma(w,\varepsilon)\big\}.
+\end{equation}
+
+Ясно, что $K$ (соответственно, $G^0$) действует транзитивно на множестве
+$(w,\varepsilon)$-сопряжённых базисов (соответственно, $(w,\varepsilon)$-двойственных
+базисов). Поэтому подмножества $\mathcal{O}_{(w,\varepsilon)}$ (соответственно,
+$\mathfrak{O}_{(w,\varepsilon)}$) суть  $K$-орбиты (соответственно,
+$G^0$-орбиты). Далее, принимая во внимание (\ref{3}) и (\ref{4}) мы видим, что эти орбиты попарно различны.
+
+Пусть $\mathcal{O}$ это  $K$-орбита в $X$. Отметим, что базис $(e_1,\ldots,e_n)$ в
+$V$ удовлетворяет $\delta(e_j)=\pm
+e_j$ для всех $j$, следовательно, флаг
+$\mathcal{F}_0:=\mathcal{F}(e_1,\ldots,e_n)$ удовлетворяет
+$\delta(\mathcal{F}_0)=\mathcal{F}_0$. Из
+\cite{Richardson-Springer} следует, что  $K$-орбита $\mathcal{O}$ содержит элементы вида $g\mathcal{F}_0$ для некоторого $g\in G$ такого, что
+$h:=\Phi g^{-1}\Phi g\in N$ где, как и в доказательстве предложения
+\ref{P1}, $N\subset G$ обозначает подгруппу матриц с ровно
+одним ненулевым коэффициентом в каждой строке и каждом столбце. Так как
+$\Phi\in N$, то тоже $\Phi h\in N$. Следовательно существует перестановка
+$w\in\mathfrak{S}_n$ и константы
+$t_1,\ldots,t_n\in\mathbb{C}^*$ такие, что матрица $\Phi
+h=:\big(a_{k,\ell}\big)_{1\leq k,\ell\leq n}$ составлена из
+\[a_{k,\ell}=0,\ \mbox{ если $\ell\not=w_k$,}\quad a_{k,w_k}=t_k\quad\mbox{ для всех $k,\ell\in\{1,\ldots,n\}$}.\]
+Соотношение $\Phi h=g^{-1}\Phi g$ показывает, что $(\Phi h)^2=1_n$. Это
+даёт $w^2=\mathrm{id}$ и $t_kt_{w_k}=1$ для всех $k$; поэтому
+\[t_{w_k}=t_k^{-1}\ \mbox{ при $w_k\not=k$}\quad\mbox{и}\quad \varepsilon_k:=t_k\in\{+1,-1\}\ \mbox{ при
+$w_k=k$}.\] В дополнение, поскольку матрица $\Phi h$ сопряжена матрице $\Phi$, её собственные значения $+1$ и $-1$ имеют соответственно кратности $p$ и
+$q$, откуда
+\[(w,\varepsilon)\in\mathfrak{I}_n(p,q).\]
+Для каждого $k\in\{1,\ldots,n\}$ с $w_k<k$, мы
+выберем  $s_k\in\mathbb{C}^*$ так, чтобы $t_k=s_k^2$, и положим
+$s_{w_k}=s_k^{-1}$ (так, чтобы $s_{w_k}^2=t_k^{-1}=t_{w_k}$). Далее,
+для каждого $k\in\{1,\ldots,n\}$ с $w_k=k$, положим $s_k=1$. Равенство $\Phi g=g\Phi h$ даёт
+\[
+\delta(g(s_ke_k))=s_k\Phi g e_k=s_k g(\Phi h)e_k=s_k
+g(t_{w_k}e_{w_k})=s_{w_k}^{-1}
+g(s_{w_k}^2e_{w_k})=g(s_{w_k}e_{w_k})
+\]
+для всех $k\in\{1,\ldots,n\}$ таких, что $w_k\not=k$, и
+\[
+\delta(g(s_k e_k))=\delta(g(e_k))=\Phi g e_k=g(\Phi
+h)e_k=g(\varepsilon_k e_k)=\varepsilon_k g(e_k)=\varepsilon_k g(s_k
+e_k)
+\]
+для всех $k\in\{1,\ldots,n\}$ таких, что $w_k=k$. Следовательно, множество
+$(g(s_1 e_1),\ldots,\\g(s_n e_n))$ является $(w,\varepsilon)$-сопряжённым базисом в
+$V$. Таким образм
+\[g\mathcal{F}_0=g\mathcal{F}(e_1,\ldots,e_n)=g\mathcal{F}(s_1 e_1,\ldots,s_n e_n)=\mathcal{F}(g(s_1 e_1),\ldots,g(s_n e_n))\in\mathcal{O}_{(w,\varepsilon)}.\]
+Следовательно $\mathcal{O}=\mathcal{O}_{(w,\varepsilon)}$.
+
+Мы заключаем, что подмножества $\mathcal{O}_{(w,\varepsilon)}$ (для
+$(w,\varepsilon)\in\mathfrak{I}_n(p,q)$) суть в точности $K$-орбиты
+в $X$. Тогда из двойственности Мацуки вытекает, что подмножества
+$\mathfrak{O}_{(w,\varepsilon)}$ (для
+$(w,\varepsilon)\in\mathfrak{I}_n(p,q)$) являются в точности
+$G^0$-орбитами в $X$. Этот факт влечёт, в частности, что (\ref{3}) и (\ref{4}) на самом деле являются равенствами. В итоге мы доказали части {\rm (b)} и {\rm (c)} утверждения.
+
+Наконец, часть {\rm (a)} показывет, что для каждой
+$(w,\varepsilon)\in\mathfrak{I}_n(p,q)$ пересечение
+$\mathcal{O}_{(w,\varepsilon)}\cap\mathfrak{O}_{(w,\varepsilon)}$
+состоит из единой $K\cap G^0$-орбиты, и откуда следует, что орбиты  $\mathcal{O}_{(w,\varepsilon)}$ и
+$\mathfrak{O}_{(w,\varepsilon)}$ двойственны по Мацуки (см.
+\cite{Matsuki,Matsuki3}). Это доказывает часть {\rm (d)} утверждения. Доказательство предложения \ref{P2} закончено.
+\end{proof}
+
+\begin{proof}[Доказательство предложения \ref{P3}]
+Доказательство опирается на следующие два технических утверждения.
+
+\medskip
+\item
+{\it Утверждение 1:}
+Для каждой инволюции со знаками $(w,\varepsilon)\in\mathfrak{I}_n(p,q)$ мы имеем
+$\mathcal{O}_{(w,\varepsilon)}\cap X_\omega=\emptyset$, если $(w,\varepsilon)\notin\mathfrak{I}_n^{\eta,\epsilon}(p,q)$.
+
+\medskip
+\noindent
+{\it Утверждение 2:}
+Для каждой инволюции со знаками $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$ есть базис $\underline{v}=(v_1,\ldots,v_n)$, являющийся одновременно $(w,\varepsilon)$-двойственным и $(w,\varepsilon)$-сопряжённым, и удовлетворяющим (\ref{3.3.18}).
+
+\medskip
+
+Опираясь на утверждения 1 и 2, продолжим доказательство. Для каждой $(w,\varepsilon)\in\mathfrak{I}_n(p,q)$ включения
+\begin{eqnarray}
+\label{proof.P3.1} & \{\mathcal{F}(\underline{v}):\mbox{$\underline{v}$  $(w,\varepsilon)$-сопряжён
+ и удовлетворяет (\ref{3.3.18})}\}\subset\mathcal{O}_{(w,\varepsilon)}\cap X_\omega,
+ \\
+\label{proof.P3.2} & \{\mathcal{F}(\underline{v}):\mbox{$\underline{v}$  $(w,\varepsilon)$-двойственен
+ и удовлетворяет (\ref{3.3.18})}\}\subset\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega, \\
+\label{proof.P3.3}  & \{\mathcal{F}(\underline{v}):\mbox{$\underline{v}$  $(w,\varepsilon)$-двойственен и $(w,\varepsilon)$-сопряжён и удовлетворяет} \\ \nonumber
+& \mbox{ условию  (\ref{3.3.18}) }\}\\ \nonumber
+& \subset
+\mathcal{O}_{(w,\varepsilon)}\cap\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega
+\end{eqnarray}
+очевидно выполняются. Поэтому утверждение 2 показывает, что
+$\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}$, $\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$, и
+$\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}\cap\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ все непусты, когда $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$.
+По утверждению 1, лемме \ref{lemma-2.2.1}, и предложению \ref{P2}\,{\rm (c)},  $K$-орбиты в $X_\omega$ суть в точности подмножества $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}$.
+С другой стороны, подмножества $\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega$ (для $(w,\varepsilon)\in\mathfrak{I}_n(p,q)$)  $G^0$-инвариантны и попарно различны. По двойственности Мацуки существует биекция между $K$-орбитами и $G^0$-орбитами. Это заставляет $\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}=\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega$ быть единой $G^0$-орбитой при $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$, и  $\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega$ быть пустым при $(w,\varepsilon)\notin\mathfrak{I}_n^{\eta,\epsilon}(p,q)$.
+Это доказывает предложение \ref{P3}\,{\rm (b)}.
+
+Поскольку орбиты $\mathcal{O}_{(w,\varepsilon)},\mathfrak{O}_{(w,\varepsilon)}\subset X$ двойственны по Мацуки (см. предложение \ref{P2}\,{\rm (d)}), их пересечение $\mathcal{O}_{(w,\varepsilon)}\cap\mathfrak{O}_{(w,\varepsilon)}$ компактно, поэтому то же верно для всех пересечений $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}\cap
+\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ при $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$.  Это влечёт то, что $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ и $\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ двойственны по Мацуки (см. \cite{Gindikin-Matsuki}), и, соответственно, выполнение части {\rm (c)} утверждения .
+
+Пусть $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$. Поскольку орбиты $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ и $\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}$ двойственны по Мацуки, их пересечение --- единая $K\cap G^0$-орбита. Множество в левой части  (\ref{proof.P3.3}) непусто (по утверждению 2) и $K\cap G^0$-инвариантно, поэтому равенство из (\ref{proof.P3.3}) выполнено. По аналогии, множества в левых частях  (\ref{proof.P3.1}) и (\ref{proof.P3.2}) непусты (по утверждению 2) и, соответственно, $K$- и $G^0$-инвариантны. Поскольку $\mathcal{O}_{(w,\varepsilon)}^{\eta,\epsilon}=\mathcal{O}_{(w,\varepsilon)}\cap X_\omega$ и $\mathfrak{O}_{(w,\varepsilon)}^{\eta,\epsilon}=\mathfrak{O}_{(w,\varepsilon)}\cap X_\omega$  являются, соответственно, $K$-орбитой и $G^0$-орбитой, мы получаем, что (\ref{proof.P3.1}) и (\ref{proof.P3.2}) суть равенства. Это показывает часть {\rm (a)} утверждения.
+
+Таким образом, доказательство предложения \ref{P3} будет завершено, когда мы установим утверждения 1 и 2.
+
+\medskip
+\noindent
+{\it Доказательства утверждения 1.}
+Заметим, что для двух подпространств $A,B\subset V$ мы имеем
+$A^\perp+B^\perp=(A\cap B)^\perp$, поэтому
+\begin{equation}
+\label{proof-P3.4}
+\dim A^\perp\cap B^\perp+\dim A+\dim B=\dim A\cap B+\dim V.
+\end{equation}
+Заметим также, что отображение $\delta$
+самосопряжено (для типов BD1 и C2) или антисамосопряжено (для типов C1 и D3) по отношению к форме $\omega$, поэтому равенство $\delta(A)^\perp=\delta(A^\perp)$ выполняется для любого подпространства $A\subset V$ и для всех типов.
+
+Пусть $(w,\varepsilon)\in\mathfrak{I}_n(p,q)$ такая, что $\mathcal{O}_{(w,\varepsilon)}\cap X_\omega\not=\emptyset$.
+Положим $\mathcal{F}=(F_0,\ldots,F_n)\in \mathcal{O}_{(w,\varepsilon)}\cap X_\omega$.
+
+Применяя (\ref{proof-P3.4}) к $A=\delta\left( F_k\right)$ и $B=F_\ell$ для $1\leq k,\ell\leq n$, получаем
+\begin{equation}
+\label{proof-P3.5}
+\dim \delta\left( F_{n-k}\right)\cap F_{n-\ell}+k+\ell=\dim \delta \left(F_k\right)\cap F_\ell+n.
+\end{equation}
+С другой стороны, поскольку $\mathcal{F}\in\mathcal{O}_{(w,\varepsilon)}$, предложение \ref{P2}\,{\rm (b)} даёт
+\begin{equation}
+\label{proof-P3.6}
+\dim \delta\left( F_{n-k}\right)\cap F_{n-\ell}=|\{j=1,\ldots,n-\ell:1\leq w_j\leq n-k\}|
+\end{equation}
+и
+\begin{eqnarray}
+\label{proof-P3.7}
+\dim\delta \left(F_k\right)\cap F_\ell & = & |\{j=1,\ldots,\ell:1\leq w_j\leq k\}| \\
+\nonumber & = & \ell-|\{j=1,\ldots,\ell:w_j\geq k+1\}| \\
+\nonumber & = & \ell-(n-k-|\{j\geq \ell+1:w_j\geq k+1\}|) \\
+\nonumber & = & \ell+k-n+|\{j=1,\ldots,n-\ell:w_0ww_0(j)\leq n-k\}|
+\end{eqnarray}
+для всех $k,\ell\in\{1,\ldots,n\}$. Сравнивая (\ref{proof-P3.5})--(\ref{proof-P3.7}), мы заключаем, что $w=w_0ww_0$.
+
+Пусть $k\in\{1,\ldots,n\}$ такое, что $w_k=k$. Поскольку $ww_0=w_0w$, мы имеем $w_{n-k+1}=n-k+1$.
+Применяя (\ref{proof-P3.4}) для $A=F_k$ (соответственно, $A=F_{k-1}$) и $B=V_+$, мы получаем
+\[1+\dim F_{k-1}\cap V_+-\dim F_k\cap V_+=\dim F_{n-k+1}\cap V_--\dim F_{n-k}\cap V_-\]
+для типов BD1 и C2 (где $V_+^\perp=V_-$), откуда
+\begin{eqnarray*}
+\varepsilon_k=1 & \Leftrightarrow &  \dim F_k\cap V_+=\dim F_{k-1}\cap V_++1 \\
+ & \Leftrightarrow &  \dim F_{n-k+1}\cap V_-=\dim F_{n-k}\cap V_-\Leftrightarrow\varepsilon_{n-k+1}=1
+\end{eqnarray*}
+в этом случае.  Для типов C1 и D3  (где $V_+^\perp=V_+$), мы получаем
+\[1+\dim F_{k-1}\cap V_+-\dim F_k\cap V_+=\dim F_{n-k+1}\cap V_+-\dim F_{n-k}\cap V_+\,,\]
+откуда также
+\[\varepsilon_k=1\Leftrightarrow \varepsilon_{n-k+1}=-1\,.\]
+
+На этом этапе мы получаем, что инволюция со знаками $(w,\varepsilon)$ удовлетворяет условиям {\rm (i)}--{\rm (ii)} из раздела \ref{S3.3}.
+Чтобы заключить, что $(w,\varepsilon)\in\mathfrak{I}_n^{\eta,\epsilon}(p,q)$, остаётся проверить, что для типов C2 и D3 мы имеем $w_k\not=n-k+1$ при всех $k\leq\frac{n}{2}$. Рассуждая от противного, предположим, что $w_k=n-k+1$. Поскольку $\mathcal{F}\in\mathcal{O}_{(w,\varepsilon)}$, то существует $(w,\varepsilon)$-сопряжённый базис $\underline{v}=(v_1,\ldots,v_n)$ такой, что $\mathcal{F}=\mathcal{F}(\underline{v})$.
+Таким образом, $\delta(v_k)=v_{n-k+1}$ и мы можем написать $v_k=v_k^++v_k^-$ и $v_{n-k+1}=v_k^+-v_k^-$.
+Для типа C2 мы имеем $V_+^\perp=V_-$ и $\omega$ антисимметрична, поэтому
+\[\omega(v_k^++v_k^-,v_k^+-v_k^-)=\omega(v_k^+,v_k^+)-\omega(v_k^-,v_k^-)=0-0=0.\]
+Для типа D3 мы имеем $V_+^\perp=V_+$, $V_-^\perp=V_-$, и $\omega$ симметрична, и поэтому
+\[\omega(v_k^++v_k^-,v_k^+-v_k^-)=-\omega(v_k^+,v_k^-)+\omega(v_k^-,v_k^+)=0.\]
+В обоих случаях мы выводим
+\[F_{n-k+1}=F_{n-k}+\langle v_{n-k+1}\rangle_{\mathbb{C}}\subset F_k^\perp+F_{k-1}^\perp\cap\langle v_k\rangle_\mathbb{C}^\perp=F_k^\perp=F_{n-k},\]
+что есть противоречие.
+Этим завершается доказательство утверждения 1.
+
+\medskip
+\noindent
+{\it Доказательство утверждения 2.}
+Для $k\in\{1,\ldots,n\}$ положим $k^*=n-k+1$. Запишем $\omega$ как
+\[w=(c_1;c'_1)\cdots(c_s;c'_s)(c'^*_1;c^*_1)\cdots(c'^*_s;c^*_s)(d_1;d^*_1)\cdots(d_t;d^*_t),\]
+где $c_1<\ldots<c_s<c^*_s<\ldots<c^*_1$, $c_j<c'_j\not=c^*_j$ для всех $j$, $d_1<\ldots<d_t<d^*_t<\ldots<d^*_1$. Отметим, что $t=0$ для типов C2 и D3.
+Далее, мы обозначим
+\begin{eqnarray*}
+ & \{a_1<\ldots<a_{p-t-2s}\}:=\{k:w_k=k,\ \varepsilon_k=1\},\\
+ & \{b_1<\ldots<b_{q-t-2s}\}:=\{k:w_k=k,\ \varepsilon_k=-1\}.
+\end{eqnarray*}
+
+Зафиксируем $\phi$-ортонормальный базис $V_+$
+\[x_1^+,\ldots,x_t^+,y^+_1,\ldots,y^+_s,y^{+*}_s,\ldots,y^{+*}_1,z^+_1,\ldots,z^+_{p-t-2s}\]
+и $(-\phi)$-ортонормальный базис $V_-$
+\[x_1^-,\ldots,x_t^-,y^-_1,\ldots,y^-_s,y^{-*}_s,\ldots,y^{-*}_1,z^-_1,\ldots,z^-_{q-t-2s},\]
+такие, что в случаях BD1 и C2 (где ограничение $\omega$ на $V_+$ и $V_-$ невырождено)  имеем
+\begin{eqnarray*}
+ & \omega(x^+_j,x^+_j)=\omega(x^-_j,x^-_j)=1,\\
+ & \omega(y^+_j,y^{+*}_j)=\omega(y^-_j,y^{-*}_j)=1,\quad\omega(y^{+*}_j,y^+_j)=\omega(y^{-*}_j,y^-_j)=\epsilon, \\
+ & \omega(z^+_j,z^+_{\ell})=\left\{\begin{array}{ll} 1, & \mbox{если $j\leq \ell=p-t-2s+1-j$} \\ \epsilon, & \mbox{если $j>\ell=p-t-2s+1-j, $} \end{array}\right.
+\\
+ & \omega(z^-_j,z^-_{\ell})=\left\{\begin{array}{ll} 1, & \mbox{если $j\leq \ell=q-t-2s+1-j$} \\ \epsilon, & \mbox{если $j>\ell=q-t-2s+1-j, $} \end{array}\right.
+\end{eqnarray*}
+и остальные значения $\omega$ на базисе  равны $0$.  Для типов C1 и D3 (где $V_+^\perp=V_+$, $V_-^\perp=V_-$, и, в частности, $p=q=\frac{n}{2}$ в этом случае) мы требуем, чтобы
+\begin{eqnarray*}
+ & \omega(x^+_j,x^-_j)=i,\quad \omega(x^-_j,x^+_j)=\epsilon i,\\
+ & \omega(y^+_j,y^{-*}_j)=\omega(y^-_j,y^{+*}_j)=1,\quad\omega(y^{+*}_j,y^-_j)=\omega(y^{-*}_j,y^+_j)=\epsilon, \\
+ & \omega(z^+_j,z^-_{\ell})=\epsilon\omega(z^-_\ell,z^+_j)=\left\{\begin{array}{ll} 1, & \mbox{если $\ell=\tilde{j}:=\frac{n}{2}-t-2s+1-j$ и $a_j<b_{\tilde{j}}$} \\ \epsilon, & \mbox{если $\ell=\tilde{j}:=\frac{n}{2}-t-2s+1-j$ и $a_j>b_{\tilde{j}}$,} \end{array}\right.
+\end{eqnarray*}
+и чтобы  остальные значения $\omega$ на базисе были равны $0$.
+В отличие от значений $\omega(z_j^\pm,z_\ell^\pm)$ в случаях BD1,C2, значения $\omega(z_j^+,z_\ell^-)$ в случаях C1,D3 не подлежат ограничанию но выбраны так, чтобы базис $(v_1,\ldots,v_n)$ ниже удовлетворял (\ref{3.3.18}).
+
+Во всех случаях мы строим базис $(v_1,\ldots,v_n)$ следующим образом
+\[v_{d_j}=\frac{x^+_j+ix^-_j}{\sqrt{2}},\quad v_{d_j^*}=\frac{x^+_j-ix^-_j}{\sqrt{2}},\]
+\[v_{c_j}=\frac{y^+_j+y^-_j}{\sqrt{2}},\quad v_{c'_j}=\frac{y^+_j-y^-_j}{\sqrt{2}},\quad v_{c^*_j}=\frac{y^{+*}_j+y^{-*}_j}{\sqrt{2}},\quad v_{c'^*_j}=\frac{y^{+*}_j-y^{-*}_j}{\sqrt{2}},\]
+\[v_{a_j}=z^+_j,\quad\mbox{и}\quad v_{b_j}=z_j^-.\]
+Просто проверить, что базис $(v_1,\ldots,v_n)$ является одновременно $(w,\varepsilon)$-двойственным и $(w,\varepsilon)$-сопряжённым и, что он удовлетворяет (\ref{3.3.18}). Это завершает доказательство утверждения 2.
+\end{proof}
+
+
+
+\section{Двойственность орбит в инд-многообразиях обобщённых флагов}
+
+\label{S4}
+
+Следуя схеме раздела ~\ref{S3}, мы теперь изложим наши результаты о двойственности орбит в бесконечномерном случае.  Все доказательства представлены в разделе~\ref{S4.proofs}.
+\subsection{Типы A1 и A2}
+
+\label{S4.1}
+
+Обозначения такие же, как  в разделе \ref{S:A1A2}.
+Для каждого $\ell\in\NN$ существует единственное $\ell^*\in\NN$
+такое, что $\omega(e_\ell,e_{\ell^*})\not=0$, и
+это даёт биекцию $\iota:\NN\to\NN$, $\ell\mapsto\ell^*$.
+
+Обозначим через $\mathfrak{I}_\infty(\iota)$ - множество инволлюций $w:\NN\to\NN$
+таких, что $w(\ell)=\ell^*$ для всех кроме конечного числа $\ell\in\NN$.
+В частности, мы имеем $w\iota\in\mathfrak{S}_\infty$ для всех $w\in\mathfrak{I}_\infty(\iota)$.
+Пусть $\mathfrak{I}'_\infty(\iota)\subset \mathfrak{I}_\infty(\iota)$ ---
+подмножество инволюций без неподвижных точек (то есть, таких, что $w(\ell)\not=\ell$ для всех $\ell\in\NN$).
+
+Пусть $\sigma:\NN\to(A,\prec)$ --- биекция на полностью упорядоченное множество,
+и  рассмотрим инд-многообразие обобщённых флагов $\mathbf{X}(\mathcal{F}_\sigma,E)$.
+В предложении \ref{P4-1.1} ниже мы покажем, что $\mathbf{K}$-орбиты
+и $\mathbf{G}^0$-орбиты в $\mathbf{X}(\mathcal{F}_\sigma,E)$ параметризуются элементами $\mathfrak{I}_\infty(\iota)$ для типа A1, и элементами $\mathfrak{I}'_\infty(\iota)$ для типа A2.
+
+\begin{definition}
+Пусть $w\in\mathfrak{I}_\infty(\iota)$.
+И $\underline{v}=(v_1,v_2,\ldots)$ --- базис $\mathbf{V}$ такой, что
+\begin{equation}
+\label{4.1.1}
+v_\ell=e_\ell\quad\mbox{для всех кроме конечного числа $\ell\in\NN$}.
+\end{equation}
+Назовём $\underline{v}$ {\em $w$-двойственным}, если в дополнение к (\ref{4.1.1}) $\underline{v}$ удовлетворяет
+\[\omega(v_\ell,v_k)=\left\{
+\begin{array}{ll}
+0, & \mbox{если $\ell\not=w_k$,} \\
+\pm1, & \mbox{если $\ell=w_k$}
+\end{array}
+\quad\mbox{для всех $k,\ell\in\NN$,}
+\right.\]
+и назовём $\underline{v}$ {\em $w$-сопряжённым}, если в дополнение к (\ref{4.1.1})
+\[\gamma(v_k)=\pm v_{w_k}\quad\mbox{для всех $k\in\NN$.}\]
+Положим
+$\bs{\mathcal{O}}_w:=\{\mathcal{F}_{\sigma}(\underline{v}):\mbox{$\underline{v}$ --- $w$-двойственный}\}$ и $\bs{\mathfrak{O}}_w:=\{\mathcal{F}_{\sigma}(\underline{v}):\mbox{$\underline{v}$ ---\\ $w$-сопряжён-}\\\mbox{ный}\}$, где $\bs{\mathcal{O}}_w$ и $\bs{\mathfrak{O}}_w$ --- подмножества инд-многообразия $\mathbf{X}(\mathcal{F}_\sigma,E)$.
+\end{definition}
+
+\paragraph{\bf Обозначения.}
+{\rm (a)}
+Мы будем использовать сокращенное обозначение $\mathbf{X}:=\mathbf{X}(\mathcal{F}_\sigma,E)$. \\
+{\rm (b)}
+Если $\mathcal{F}$ --- обобщённый флаг слабо согласованный с $E$,
+то $\mathcal{F}^\perp:=\{F^\perp:F\in\mathcal{F}\}$ также является обобщённым флагом слабо согласованным с  $E$.
+
+Обозначим через $(A^*,\prec^*)$  полностью упорядоченное множество такое, что $A^*=A$ как множество и  $a\prec^*a'$, тогда и только когда $a\succ a'$.
+Определим $\sigma^\perp:\NN\to(A^*,\prec^*)$, полагая $\sigma^\perp(\ell)=\sigma(\ell^*)$.
+Тогда
+$\mathcal{F}_\sigma^\perp=\mathcal{F}_{\sigma^\perp}$.
+Отметим, что $\mathcal{F}^\perp$ --- $E$-соизмерим с $\mathcal{F}_{\sigma^\perp}$,
+когда $\mathcal{F}$ --- $E$-соизмерим с $\mathcal{F}_\sigma$.
+Следовательно, отображение
+\[\mathbf{X}\to\mathbf{X}^\perp:=\mathbf{X}(\mathcal{F}_{\sigma^\perp},E),\ \mathcal{F}\mapsto\mathcal{F}^\perp\]
+корректно определено.
+Мы  будем использовать сокращённое обозначение $\pmb{\mathbb{O}}^\perp_w:=(\pmb{\mathbb{O}}_{\sigma^\perp,\sigma})_w$ для всех $w\in\mathfrak{S}_\infty$. \\
+{\rm (c)}
+Заметим далее, что $\gamma(\mathcal{F}_\sigma)=\mathcal{F}_{\sigma\circ\iota}$, и что $\gamma(\mathcal{F})\in\mathbf{X}^\gamma:=\mathbf{X}(\mathcal{F}_{\sigma\circ\iota},E)$ , когда $\mathcal{F}\in\mathbf{X}$.
+Мы  будем использовать сокращённое обозначение $\pmb{\mathbb{O}}^\gamma_w:=(\pmb{\mathbb{O}}_{\sigma\circ\iota,\sigma})_w$ для всех $w\in\mathfrak{S}_\infty$.
+
+\medskip
+Таким образом,
+$\displaystyle \mathbf{X}^\perp\times\mathbf{X}=\bigsqcup_{w\in\mathfrak{S}_\infty}\pmb{\mathbb{O}}^\perp_w$
+и
+$\displaystyle \mathbf{X}^\gamma\times\mathbf{X}=\bigsqcup_{w\in\mathfrak{S}_\infty}\pmb{\mathbb{O}}^\gamma_w$
+(см. предложение \ref{P2-3.2}).
+
+
+\begin{proposition}
+\label{P4-1.1}
+Пусть $\mathfrak{I}^\epsilon_\infty(\iota)=\mathfrak{I}_\infty(\iota)$ для типа A1
+и $\mathfrak{I}^\epsilon_\infty(\iota)=\mathfrak{I}'_\infty(\iota)$ для типа A2.
+\begin{itemize}
+\item[\rm (a)] Для всех $w\in\mathfrak{I}^\epsilon_\infty(\iota)$, имеем \[\bs{\mathcal{O}}_w\cap\bs{\mathfrak{O}}_w=\{\mathcal{F}_\sigma(\underline{v}):\mbox{$\underline{v}$  $w$-двойственен и $w$-сопряжён}\}\not=\emptyset.\]
+\item[\rm (b)] Для каждого $w\in\mathfrak{I}^\epsilon_\infty(\iota)$, имеем
+\[
+\bs{\mathcal{O}}_w=\{\mathcal{F}\in\mathbf{X}:(\mathcal{F}^\perp,\mathcal{F})\in\pmb{\mathbb{O}}^\perp_{w\iota}\} \quad\mbox{и}\quad
+\bs{\mathfrak{O}}_w=\{\mathcal{F}\in\mathbf{X}:(\gamma(\mathcal{F}),\mathcal{F})\in\pmb{\mathbb{O}}^\gamma_{w\iota}\}.
+\]
+\item[\rm (c)] Подмножества $\bs{\mathcal{O}}_w$ (для $w\in\mathfrak{I}^\epsilon_\infty(\iota)$) суть в точности $\mathbf{K}$-орбиты в $\mathbf{X}$.
+Подмножества $\bs{\mathfrak{O}}_w$ (для $w\in\mathfrak{I}^\epsilon_\infty(\iota)$) суть в точности $\mathbf{G}^0$-орбиты в $\mathbf{X}$.
+Далее, $\bs{\mathcal{O}}_w\cap\bs{\mathfrak{O}}_w$ есть единая $\mathbf{K}\cap\mathbf{G}^0$-орбита.
+\end{itemize}
+\end{proposition}
+
+\subsection{Тип A3}
+
+\label{S4.2}
+
+Обозначения такие же, как и в разделе \ref{S:A3}.
+В частности, мы фиксируем разложение $\NN=N_+\sqcup N_-$, задающее $\Phi$ как и в  (\ref{phi}), и мы рассматриваем соответствующую
+Эрмитову форму $\phi$ и инволюцию $\delta$ на $\mathbf{V}$.
+
+Обозначим через $\mathfrak{I}_\infty(N_+,N_-)$  множество пар $(w,\varepsilon)$, состоящих из инволюции $w:\NN\to\NN$ и отображения $\varepsilon:\{\ell:w_\ell=\ell\}\to\{1,-1\}$ таких, что подмножества
+\[N'_\pm=N'_\pm(w,\varepsilon):=\{\ell\in N_\pm:(w_\ell,\varepsilon_\ell)=(\ell,\pm1)\}
+\]
+удовлетворяют
+\[|N_\pm\setminus N'_\pm|=|\{\ell\in N_\mp:(w_\ell,\varepsilon_\ell)=(\ell,\pm 1)\}|+\frac{1}{2}|\{\ell\in\NN:w_\ell\not=\ell\}|<\infty.\]
+В частности, $w\in\mathfrak{S}_\infty$.
+
+Зафиксируем биекцию $\sigma:\NN\to (A,\prec)$  на полностью упорядоченное множество.
+Мы покажем в предложении \ref{P4.2-2}, что  $\mathbf{K}$-орбиты и $\mathbf{G}^0$-орбиты инд-многообразия $\mathbf{X}:=\mathbf{X}(\mathcal{F}_\sigma,E)$ параметризуются элементами из $\mathfrak{I}_\infty(N_+,N_-)$.
+
+\begin{definition}
+Пусть $(w,\varepsilon)\in\mathfrak{I}_\infty(N_+,N_-)$.
+Базис $\underline{v}=(v_1,v_2,\ldots)$ в $\mathbf{V}$ такой, что $v_\ell=e_\ell$ для всех кроме конечного множества $\ell\in\NN$, назовём {\em $(w,\varepsilon)$-сопряжённым}, если
+\[\delta(v_k)=\left\{
+\begin{array}{ll}
+v_{w_k}, & \mbox{если $w_k\not=k$,} \\
+\varepsilon_kv_k, & \mbox{если $w_k=k$}
+\end{array}
+\right.
+\quad\mbox{для всех $k\in\NN$,}\]
+и  {\em $(w,\varepsilon)$-двойственным}, если
+\[
+\phi(v_k,v_\ell)=\left\{
+\begin{array}{ll}
+0, & \mbox{если $\ell\not=w_k$,} \\
+1, & \mbox{если $\ell=w_k\not=k$,} \\
+\varepsilon_k, & \mbox{если $\ell=w_k=k$}
+\end{array}
+\right.
+\quad\mbox{для всех $k,\ell\in\NN$}.
+\]
+Положим
+$\bs{\mathcal{O}}_{(w,\varepsilon)}:=\{\mathcal{F}_\sigma(\underline{v}):\mbox{$\underline{v}$ --- $(w,\varepsilon)$-сопряжённый}\}$,
+ $\bs{\mathfrak{O}}_{(w,\varepsilon)}:=\\\{\mathcal{F}_\sigma(\underline{v}):\mbox{$\underline{v}$ --- $(w,\varepsilon)$-двойственный}\}$.
+
+\end{definition}
+
+\paragraph{\bf Примечание}
+{\rm (a)} Заметим, что каждое подпространство в обобщённом флаге $\mathcal{F}_\sigma$ --- $\delta$-инвариантно, то есть, $\delta(\mathcal{F}_\sigma)=\mathcal{F}_\sigma$.
+Отображение $\mathbf{X}\to\mathbf{X}$, $\mathcal{F}\mapsto\delta(\mathcal{F})$ корректно определено.
+%We abbreviate $\pmb{\mathbb{O}}_w:=(\pmb{\mathbb{O}}_{\sigma,\sigma})_w$
+%for all $w\in\mathfrak{S}_\infty$.
+\\
+{\rm (b)} Обозначим $F^\dag=\{x\in\mathbf{V}:\phi(x,y)=0\ \forall y\in F\}$ и
+$\mathcal{F}^\dag:=\{F^\dag:F\in \mathcal{F}\}$; при этом, $\mathcal{F}^\dag$ является обобщённым флагом слабо согласованным с  $E$, когда это же верно для $\mathcal{F}$.
+
+Как и в разделе \ref{S4.1}, мы обозначим через $(A^*,\prec^*)$ полностью упорядочнное множество
+такое, что $A^*=A$ и $a\prec^*a'$, когда $a\succ a'$.
+Легко видеть, что $\mathcal{F}_\sigma^\dag=\mathcal{F}_{\sigma^\dag}$,
+где $\sigma^\dag:\NN\to(A^*,\prec^*)$ такое, что $\sigma^\dag(\ell)=\sigma(\ell)$ для всех $\ell\in\NN$, и поэтому мы получаем корректно определённое отображение
+\[\mathbf{X}\to\mathbf{X}^\dag:=\mathbf{X}(\mathcal{F}_{\sigma^\dag},E),\ \mathcal{F}\mapsto\mathcal{F}^\dag.\]
+{\rm (c)}
+Обозначим $\pmb{\mathbb{O}}_w:=(\pmb{\mathbb{O}}_{\sigma,\sigma})_w$ и
+$\pmb{\mathbb{O}}_w^\dag:=(\pmb{\mathbb{O}}_{\sigma^\dag,\sigma})_w$; тогда
+\[\mathbf{X}\times\mathbf{X}=\bigsqcup_{w\in\mathfrak{S}_\infty}\pmb{\mathbb{O}}_w
+\quad\mbox{и}\quad
+\mathbf{X}^\dag\times\mathbf{X}=\bigsqcup_{w\in\mathfrak{S}_\infty}\pmb{\mathbb{O}}^\dag_w
+\]
+(см. предложение \ref{P2-3.2}).
+
+\begin{proposition}
+\label{P4.2-2}
+\begin{itemize}
+\item[\rm (a)] Для каждой $(w,\varepsilon)\in\mathfrak{I}_\infty(N_+,N_-)$ мы имеем
+\[\bs{\mathcal{O}}_{(w,\varepsilon)}\cap\bs{\mathfrak{O}}_{(w,\varepsilon)}=\{\mathcal{F}_\sigma(\underline{v}):\mbox{$\underline{v}$  $(w,\varepsilon)$-сопряжён и $(w,\varepsilon)$-двойственен}\}\not=\emptyset.\]
+\item[\rm (b)] Пусть $(w,\varepsilon)\in\mathfrak{I}_\infty(N_+,N_-)$
+и $\mathcal{F}=\{F'_a,F''_a:a\in A\}\in\mathbf{X}$. Тогда
+$\mathcal{F}\in\bs{\mathcal{O}}_{(w,\varepsilon)}$ (соответственно, $\mathcal{F}\in\bs{\mathfrak{O}}_{(w,\varepsilon)}$), если и только если
+\[(\delta(\mathcal{F}),\mathcal{F})\in\pmb{\mathbb{O}}_w\quad\mbox{(соответственно, $(\mathcal{F}^\dag,\mathcal{F})\in\pmb{\mathbb{O}}_w^\dag$)}\]
+и для всех $\ell\in\NN$ выполнены условия
+\[
+\dim F''_{\sigma(\ell)}\cap \mathbf{V}_\pm/F'_{\sigma(\ell)}\cap \mathbf{V}_\pm
+=
+\left\{\begin{array}{ll}
+1, & \mbox{если $\sigma(w_\ell)\prec\sigma(\ell)$ или $(w_\ell,\varepsilon_\ell)=(\ell,\pm1)$,} \\
+0 & \mbox{в противном случае,}
+\end{array}\right.
+\]
+где $\mathbf{V}_\pm=\langle e_\ell:\ell\in N_\pm\rangle_\mathbb{C}$
+(соответственно, для достаточно большого $n\in\NN$
+\[
+\varsigma(\phi:F''_{\sigma(\ell)}\cap V_n)=\varsigma(\phi:F'_{\sigma(\ell)}\cap V_n)+\left\{
+\begin{array}{ll}
+(1,1), & \mbox{если $\sigma(w_\ell)\prec\sigma(\ell)$,} \\
+(1,0), & \mbox{если $(w_\ell,\varepsilon_\ell)=(\ell,1)$,} \\
+(0,1), & \mbox{если $(w_\ell,\varepsilon_\ell)=(\ell,-1)$,} \\
+(0,0), & \mbox{если $\sigma(w_\ell)\succ\sigma(\ell)$,}
+\end{array}
+\right.
+\]
+где
+$V_n=\langle e_k:k\leq n\rangle_\mathbb{C}$
+и
+$\varsigma(\phi:F)$ обозначает сигнатуру $\phi$ на $F/F\cap F^\dag$).
+\item[\rm (c)] Подмножества $\bs{\mathcal{O}}_{(w,\varepsilon)}$ ($(w,\varepsilon)\in\mathfrak{I}_\infty(N_+,N_-)$) суть в точности $\mathbf{K}$-орбиты в $\mathbf{X}$. Подмножества $\bs{\mathfrak{O}}_{(w,\varepsilon)}$ ($(w,\varepsilon)\in\mathfrak{I}_\infty(N_+,N_-)$) суть в точности $\mathbf{G}^0$-орбиты в $\mathbf{X}$.
+Далее, $\bs{\mathcal{O}}_{(w,\varepsilon)}\cap\bs{\mathfrak{O}}_{(w,\varepsilon)}$ есть единая $\mathbf{K}\cap\mathbf{G}^0$-орбита.
+\end{itemize}
+\end{proposition}
+
+\subsection{Типы B, C, D}
+
+\label{S4.3}
+
+Предположим, что $\mathbf{V}$ обладает невырожденной симметрической или симплектической формой $\omega$, определяемой матрицей $\Omega$ как и в (\ref{omega}).
+Пусть $\iota:\NN\to\NN$, $\ell\mapsto\ell^*$
+удовлетворяет $\omega(e_\ell,e_{\ell^*})\not=0$ для всех $\ell$.
+
+Зафиксируем  разложение $\NN=N_+\sqcup N_-$  такое, что $N_+,N_-$ или оба $\iota$-инвариантны или такие, что  $\iota(N_+)=N_-$.
+Как и ранее, пусть $\phi$ и $\delta$ будут соответственно Эрмитовой формой и инволюцией в $\mathbf{V}$,
+согласованными с этим разложением.
+В следующей таблице представлены различные случаи.
+%\begin{center}
+%\begin{tabular}{|c|c|c|}
+%\cline{2-3}
+%\multicolumn{1}{c|}{ } & $\omega$ symmetric ($\epsilon:=1$) & $\omega$ symplectic %($\epsilon:=-1$) \\
+%\hline
+%$\iota(N_\pm)\subset N_\pm$ ($\eta:=1$) & type BD1 & type C2 \\
+%\hline
+%$\iota(N_\pm)=N_\mp$ ($\eta:=-1$) & type D3 & type C1 \\
+%\hline
+%\end{tabular}
+%\end{center}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\cline{2-3}
+\multicolumn{1}{c|}{ } & \begin{tabular}{c} $\omega$ симметрическая \\ $\epsilon=1$ \end{tabular} & \begin{tabular}{c} $\omega$ симплектическая \\ $\epsilon=-1$ \end{tabular} \\
+\hline
+\begin{tabular}{c} $\iota(N_\pm)\subset N_\pm$ \\ $\eta=1$ \end{tabular} & тип BD1 & тип C2 \\
+\hline
+\begin{tabular}{c} $\iota(N_\pm)=N_\mp$ \\ $\eta=-1$ \end{tabular} & тип D3 & тип C1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Обозначим через $\mathfrak{I}_\infty^{\eta,\epsilon}(N_+,N_-)\subset
+\mathfrak{I}_\infty(N_+,N_-)$ подмножество пар
+$(w,\varepsilon)$ такое, что
+\begin{itemize}
+\item[\rm (i)] $\iota w=w\iota$ (поэтому множество $\{\ell:w_\ell=\ell\}$  $\iota$-инвариантно);
+\item[\rm (ii)] $\varepsilon_{\iota(k)}=\eta\varepsilon_k$ для всех $k\in\{\ell:w_\ell=\ell\}$;
+\end{itemize}
+и, если $\eta\epsilon=-1$:
+\begin{itemize}
+\item[\rm (iii)] 
+
+ $w_k\not=\iota(k)$ для всех $k\in\mathbb{N}^*$.
+\end{itemize}
+
+Пусть $\mathcal{F}_\sigma$ является $\omega$-изотропным максимальным  обобщённым флагом, согласованным с $E$.
+Таким образом $\sigma:\NN\to(A,\prec)$ --- биекция на
+полностью упорядоченное множество $(A,\prec)$, обладающее (инволютивным) антиавтоморфизмом упорядоченных множеств
+$\iota_A:(A,\prec)\to (A,\prec)$ таким, что $\sigma\iota=\iota_A\sigma$.
+Следующее утверждение показывает, что $\mathbf{K}$-орбиты и $\mathbf{G}^0$-орбиты
+инд-многообразия $\mathbf{X}_\omega:=\mathbf{X}_\omega(\mathcal{F}_\sigma,E)$
+нумеруются элементами множества $\mathfrak{I}_\infty^{\eta,\epsilon}(N_+,N_-)$.
+
+\begin{proposition}
+\label{P4.3}
+Рассмотрим базис $\underline{v}=(v_1,v_2,\ldots)$ в $\mathbf{V}$ такой, что
+\begin{equation}
+\label{4-3.1}
+\omega(v_k,v_\ell)\not=0,\quad\mbox{если и только если}\quad \ell=\iota(k).
+\end{equation}
+\begin{itemize}
+\item[\rm (a)] Для каждой пары $(w,\varepsilon)\in\mathfrak{I}^{\eta,\epsilon}_\infty(N_+,N_-)$ мы имеем
+\begin{eqnarray*}
+ & \bs{\mathcal{O}}_{(w,\varepsilon)}^{\eta,\epsilon}:=\bs{\mathcal{O}}_{(w,\varepsilon)}\cap\mathbf{X}_\omega=\{\mathcal{F}_\sigma(\underline{v}):
+ \mbox{$\underline{v}$  $(w,\varepsilon)$-сопряжён} 
+ \mbox{ и удовлетворяет (\ref{4-3.1})}\}\not=\emptyset, \\
+ & \bs{\mathfrak{O}}_{(w,\varepsilon)}^{\eta,\epsilon}:=\bs{\mathfrak{O}}_{(w,\varepsilon)}\cap\mathbf{X}_\omega=\{\mathcal{F}_\sigma(\underline{v}):\mbox{$\underline{v}$ $(w,\varepsilon)$-двойственен} \mbox{ и удовлетворяет (\ref{4-3.1})}\}\not=\emptyset, \\
+ & \bs{\mathcal{O}}_{(w,\varepsilon)}^{\eta,\epsilon}\cap\bs{\mathfrak{O}}_{(w,\varepsilon)}^{\eta,\epsilon}=\{\mathcal{F}_\sigma(\underline{v}):\mbox{$\underline{v}$ $(w,\varepsilon)$-сопряжён, $(w,\varepsilon)$-двойственен}\\
+ & \mbox{и удовлетворяет (\ref{4-3.1})}\}\not=\emptyset.
+\end{eqnarray*}
+\item[\rm (b)] Подмножества $\bs{\mathcal{O}}_{(w,\varepsilon)}^{\eta,\epsilon}$
+($(w,\varepsilon)\in\mathfrak{I}_\infty^{\eta,\epsilon}(N_+,N_-)$) суть
+в точности $\mathbf{K}$-орбиты в $\mathbf{X}_\omega$.
+Подмножества $\bs{\mathfrak{O}}_{(w,\varepsilon)}^{\eta,\epsilon}$
+($(w,\varepsilon)\in\mathfrak{I}_\infty^{\eta,\epsilon}(N_+,N_-)$) суть
+в точности $\mathbf{G}^0$-орбиты в $\mathbf{X}_\omega$.
+Далее, $\bs{\mathcal{O}}_{(w,\varepsilon)}^{\eta,\epsilon}\cap\bs{\mathfrak{O}}_{(w,\varepsilon)}^{\eta,\epsilon}$ есть единая $\mathbf{K}\cap\mathbf{G}^0$-орбита.
+\end{itemize}
+\end{proposition}
+
+\subsection{Структура инд-многообразий}
+
+\label{S4.4}
+
+В этом разделе мы напоминаем структуру инд-многообразий  на $\mathbf{X}$ и $\mathbf{X}_\omega$, см. \cite{Dimitrov-Penkov}.
+
+Напомним, что $E=(e_1,e_2,\ldots)$ --- (счётный) базис в $\mathbf{V}$.
+Зафиксируем $E$-соизмеримый максимальный обобщённый флаг $\mathcal{F}_\sigma$, соответствующий некоторой биекции $\sigma:\NN\to(A,\prec)$ на полностью упорядоченное множество, и положим
+$\mathbf{X}=\mathbf{X}(\mathcal{F}_\sigma,E)$.
+
+Пусть $V_n:=\langle e_1,\ldots,e_n\rangle_\mathbb{C}$ и
+пусть $X_n$ обозначает многообразие полных флагов в $V_n$ определённых как  в (\ref{2.2.X}).
+Имеются естественные включения
+$V_n\subset V_{n+1}$
+и
+\begin{equation}
+\label{4.4-1}
+\mathrm{GL}(V_n)\cong\{g\in \mathrm{GL}(V_{n+1}):g(V_n)=V_n,\ g(e_{n+1})=e_{n+1}\}\subset \mathrm{GL}(V_{n+1}).
+\end{equation}
+Зададим $\mathrm{GL}(V_n)$-эквивариантное вложение
+\[\iota_n=\iota_n(\sigma):X_n\to X_{n+1},\ (F_k)_{k=0}^n\mapsto (F'_k)_{k=0}^{n+1},\]
+полагая
+\[F'_k:=\left\{
+\begin{array}{ll}
+F_k & \mbox{, если $a_k\prec\sigma(n+1)$} \\
+F_{k-1}\oplus\langle e_{n+1}\rangle_\mathbb{C} & \mbox{, если $a_k\succeq \sigma(n+1),$}
+\end{array}
+\right.  \]
+где $a_1\prec a_2\prec\ldots\prec a_{n+1}$ --- элементы множества $\{\sigma(\ell):1\leq \ell\leq n+1\}$, записанные в порядке возрастания.
+Таким образом, мы имеем цепь вложений (являющихся морфизмами алгебраических многообразий)
+%\[
+%\xymatrix{
+%\cdots \ar@{^{(}->}[r] & X_{n-1} \ar@{^{(}->}[r]^{\iota_{n-1}}
+% & X_{n} \ar@{^{(}->}[r]^{\iota_{n}}
+% & X_{n+1} \ar@{^{(}->}[r]^{\iota_{n+1}}
+% & \cdots
+%}
+%\]
+\[\cdots \hookrightarrow X_{n-1} \stackrel{\iota_{n-1}}{\hookrightarrow} X_n \stackrel{\iota_{n}}{\hookrightarrow} X_{n+1} \stackrel{\iota_{n+1}}{\hookrightarrow} \cdots,\]
+и $\mathbf{X}$ получается как прямой предел
+\[\mathbf{X}=\mathbf{X}(\mathcal{F}_\sigma,E)=\lim_\to X_n.\]
+В частности, для каждого $n$ мы получаем вложение $\hat{\iota}_n:X_n\hookrightarrow \mathbf{X}$, и, отождествляя $X_n$ со своим образом в $\mathbf{X}$, мы можем представить $\mathbf{X}$ в виде объединения
+$\mathbf{X}=\bigcup_{n\geq 1}X_n$.
+При этом, каждый обобщённый флаг $\mathcal{F}\in\mathbf{X}$ принадлежит всем $X_n$, начиная с некоторого номера $n_\mathcal{F}$. Например, $\mathcal{F}_\sigma\in X_n$ для всех $n\geq 1$.
+
+Базис $\underline{v}=(v_1,\ldots,v_n)$ в $V_n$ может быть дополнен до базиса в $\mathbf{V}$, обозначаемого $\underline{\hat{v}}:=(v_1,\ldots,v_n,e_{n+1},e_{n+2},\ldots)$ так, что
+\begin{equation}
+\label{completed-basis}
+\hat{\iota}_n(\mathcal{F}(v_{\tau_1},\ldots,v_{\tau_n}))=\mathcal{F}_\sigma(\underline{\hat{v}})
+\end{equation}
+(в обозначениях из разделов \ref{S2.2}--\ref{S2.3}),
+где $\tau=\tau^{(n)}\in\mathfrak{S}_n$ --- перестановка такая, что
+$\sigma(\tau^{(n)}_1)\prec\ldots\prec\sigma(\tau^{(n)}_n)$.
+
+Напомним, что инд-топология на $\mathbf{X}$ определяется объявлением подмножества $\mathbf{Z}\subset\mathbf{X}$ открытым (соответственно, замкнутым), если каждое пересечение $\mathbf{Z}\cap X_n$ открыто (соответственно, замкнуто).
+
+Ясно, что структура инд-многообразия на $\mathbf{X}$ не меняется, если последовательность $(X_n,\iota_n)_{n\geq 1}$ заменить на подпоследовательность $(X_{n_k},\iota'_k)_{k\geq 1}$,
+где $\iota'_k:=\iota_{n_{k+1}-1}\circ\cdots\circ\iota_{n_k}$.
+
+Для типа A3 (используя обозначения из раздела \ref{S2.1}) подпространство $V_n\subset\mathbf{V}$ обладает ограничениями $\phi$ и $\delta$
+, поэтому мы можем определить $K_n,G_n^0\subset \mathrm{GL}(V_n)$ как в разделе \ref{S3.2}
+и с условием, чтобы включения в (\ref{4.4-1}) задавали  естественные включения
+$K_n\subset K_{n+1}$ и $G_n^0\subset G_{n+1}^0$.
+
+Далее предположим, что пространство $\mathbf{V}$ обладает невырожденной симплектической или симметрической формой $\omega$ определяемой матрицей $\Omega$ из (\ref{omega}).
+Блоки $J_1,J_2,\ldots$ в матрице $\Omega$ имеют размер $1$ или $2$.
+Зададим $n_k:=|J_1|+\ldots+|J_k|$
+так, чтобы ограничение $\omega$ на каждое подпространство $V_{n_k}$ было невырождено.
+Поэтому для типов A1, A2, BD1, C1, C2, и D3 мы можем определить
+подгруппы $K_{n_k},G_{n_k}^0\subset \mathrm{GL}(V_{n_k})$
+как в разделе \ref{S3}
+и так, чтобы включения в (\ref{4.4-1}) задавали естественные включения
+\[K_{n_k}\subset K_{n_{k+1}}\quad\mbox{и}\quad G^0_{n_k}\subset G^0_{n_{k+1}}.\]
+
+Далее, подмногообразие $(X_{n_k})_\omega\subset X_{n_k}$ изотропных флагов (относительно формы $\omega$) может быть определено как и в (\ref{2.2.Xomega}).
+Для $\omega$-изотропного обобщённого флага $\mathcal{F}_\sigma$  включение
+$\iota'_k:X_{n_k}\hookrightarrow X_{n_{k+1}}$ отображает $(X_{n_k})_\omega$ в $(X_{n_{k+1}})_\omega$, и мы имеем
+\[\mathbf{X}_\omega=\mathbf{X}_\omega(\mathcal{F}_\sigma,E)=\bigcup_{k\geq 1}(X_{n_k})_\omega\quad\mbox{и}\quad (X_{n_k})_\omega=\mathbf{X}_\omega\cap X_{n_k}\ \mbox{для всех $k\geq 1$}.\]
+В частности, $\mathbf{X}_\omega$ --- замкнутое инд-подмногообразие $\mathbf{X}$
+(как утверждалось в предложении \ref{P2.3-3}).
+
+\subsection{Доказательства}
+
+\label{S4.proofs}
+
+\begin{proof}[Доказательство предложения \ref{P4-1.1}]
+Пусть $\mathcal{F}=\{F'_a,F''_a:a\in A\}=\mathcal{F}_\sigma(\underline{v})$ для базиса $\underline{v}=(v_1,v_2,\ldots)$ в $\mathbf{V}$.
+Пусть $w\in\mathfrak{I}_\infty^\epsilon(\iota)$.
+Если базис $\underline{v}$ является $w$-двойственным,  то
+\[
+(F'_a)^\perp=\langle v_\ell:\sigma(w_\ell)\succeq a\rangle_\mathbb{C}
+\quad\mbox{и}\quad
+(F''_a)^\perp=\langle v_\ell:\sigma(w_\ell)\succ a\rangle_\mathbb{C}\,,
+\]
+поэтому $\mathcal{F}^\perp=\mathcal{F}_{\sigma^\perp\iota w}(\underline{v})$;
+это даёт
+$(\mathcal{F}^\perp,\mathcal{F})\in\pmb{\mathbb{O}}^\perp_{w\iota}$.
+Если $\underline{v}$ --- $w$-сопряжённый, то
+\[
+\gamma(F'_a)=\langle v_\ell:\sigma(w_\ell)\prec a\rangle_\mathbb{C}
+\quad\mbox{и}\quad
+\gamma(F''_a)=\langle v_\ell:\sigma(w_\ell)\preceq a\rangle_\mathbb{C}\,,
+\]
+следовательно $\gamma(\mathcal{F})=\mathcal{F}_{\sigma w}(\underline{v})$
+и
+$(\gamma(\mathcal{F}),\mathcal{F})\in\pmb{\mathbb{O}}^\gamma_{w\iota}$.
+Это доказывает включение в предложении \ref{P4-1.1}\,{\rm (b)}.
+Отметим что эти включения указывают, в частности,  на то, что подмножества $\bs{\mathcal{O}}_w$, так же как и $\bs{\mathfrak{O}}_w$, попарно различны.
+
+Для $w\in\mathfrak{I}_{n_k}^\epsilon$ мы определим $\hat{w}:\mathbb{N}^*\to\mathbb{N}^*$ следующим образом:
+\[\hat{w}(\ell)=\left\{
+\begin{array}{ll}
+\tau w\tau^{-1}(\ell), & \mbox{если $\ell\leq n_k$,} \\
+\iota(\ell), & \mbox{если $\ell\geq n_k+1$,}
+\end{array}
+\right.\]
+где $\tau=\tau^{(n_k)}:\{1,\ldots,n_k\}\to\{1,\ldots,n_k\}$ --- перестановка такая, что $\sigma(\tau_1)\prec\ldots\prec\sigma(\tau_{n_k})$.
+Легко видеть, что мы получаем корректно определённое (инъективное) отображение
+$j_k:\mathfrak{I}_{n_k}^\epsilon\to\mathfrak{I}_\infty^\epsilon(\iota)$, $j_k(w):=\hat{w}$,
+и
+\begin{equation}
+\label{4.5.0}
+\mathfrak{I}_\infty^\epsilon(\iota)=\bigcup_{k\geq 1}j_k(\mathfrak{I}_{n_k}^\epsilon).\end{equation}
+Далее, если
+дан базис $\underline{v}=(v_1,\ldots,v_{n_k})$ в $V_{n_k}$ и
+базис $\underline{\hat{v}}$ в $\mathbf{V}$, получаемый добавлением векторов $e_\ell$ для $\ell\geq n_k+1$,
+то импликация
+\begin{eqnarray}
+\label{4.5.1}
+ & \mbox{$(v_{\tau_1},\ldots,v_{\tau_{n_k}})$ --- $w$-двойственный (соответственно, $w$-сопряжённый)} \\
+\nonumber
+ & \Rightarrow \
+\mbox{$\underline{\hat{v}}$ --- $\hat{w}$-двойственный (соответственно, $\hat{w}$-сопряжённый)}
+\end{eqnarray}
+очевидно следует из нашей конструкции.
+Отметим, что
+\begin{equation}
+\label{T-proof.1}
+\bs{\mathcal{O}}_{\hat{w}}\cap X_{n_k}=\mathcal{O}_{w}
+\quad
+\mbox{и}
+\quad
+\bs{\mathfrak{O}}_{\hat{w}}\cap X_{n_k}=\mathfrak{O}_{w},
+\end{equation}
+где $\mathcal{O}_w,\mathfrak{O}_w\subset X_{n_k}$ --- орбиты из  определения \ref{DA12};
+в самом деле, включения $\supset$ в (\ref{T-proof.1}) следуют из
+(\ref{completed-basis}) и (\ref{4.5.1}),
+в то время как включения $\subset$ следуют из
+предложения \ref{P1}\,{\rm (c)}
+и факта, что подмножества $\bs{\mathcal{O}}_{\hat{w}}$, так же как и $\bs{\mathfrak{O}}_{\hat{w}}$,
+попарно различны.
+Части {\rm (a)} и {\rm (c)} предложения \ref{P4-1.1} теперь следуют
+из (\ref{4.5.0})--(\ref{T-proof.1}) и предложения \ref{P1}\,{\rm (a)}, {\rm (c)}. Из предложения \ref{P4-1.1}\,{\rm (a)} мы выводим, что равенства в предложениях \ref{P4-1.1}\,{\rm (b)} справедливы, и завершаем доказательство.
+\end{proof}
+
+\begin{proof}[Доказательство предложения \ref{P4.2-2}]
+Для каждого $n\geq 1$ положим $p_n=|N_+\cap\{1,\ldots,n\}|$  и $q_n=|N_-\cap\{1,\ldots,n\}|$.
+
+Пусть $\mathcal{F}=\{F'_a,F''_a:a\in A\}=\mathcal{F}_\sigma(\underline{v})$ для некоторого базиса $\underline{v}=(v_1,v_2,\ldots)$  $\mathbf{V}$.
+Пусть $(w,\varepsilon)\in\mathfrak{I}_\infty(N_+,N_-)$.
+Если $\underline{v}$ $(w,\varepsilon)$-сопряжён, то
+\[
+\delta(F'_a)=\langle v_\ell:\sigma(w_\ell)\prec a\rangle_\mathbb{C}
+\quad\mbox{и}\quad
+\delta(F''_a)=\langle v_\ell:\sigma(w_\ell)\preceq a\rangle_\mathbb{C}
+\]
+так, что $(\delta(\mathcal{F}),\mathcal{F})=(\mathcal{F}_{\sigma w}(\underline{v}),\mathcal{F}_\sigma(\underline{v}))\in\pmb{\mathbb{O}}_w$.
+Далее,
+\[\left\{
+\begin{array}{ll}
+\mbox{$F''_{\sigma(\ell)}\cap\mathbf{V}_+/F'_{\sigma(\ell)}\cap\mathbf{V}_+=\langle v_\ell\rangle_\mathbb{C}$, $F''_{\sigma(\ell)}\cap\mathbf{V}_-=F'_{\sigma(\ell)}\cap\mathbf{V}_-$} & \mbox{\!\!\!, если $(w_\ell,\varepsilon_\ell)=(\ell,+1)$,} \\[1.5mm]
+\mbox{$F''_{\sigma(\ell)}\cap\mathbf{V}_-/F'_{\sigma(\ell)}\cap\mathbf{V}_-=\langle v_\ell\rangle_\mathbb{C}$, $F''_{\sigma(\ell)}\cap\mathbf{V}_+=F'_{\sigma(\ell)}\cap\mathbf{V}_+$} & \mbox{\!\!\!, если $(w_\ell,\varepsilon_\ell)=(\ell,-1)$,} \\[1.5mm]
+\mbox{$F''_{\sigma(\ell)}\cap\mathbf{V}_+/F'_{\sigma(\ell)}\cap\mathbf{V}_+=\langle v_\ell+v_{w_\ell}\rangle_\mathbb{C}$\,,} \\[1mm]
+\mbox{\qquad $F''_{\sigma(\ell)}\cap\mathbf{V}_-/F'_{\sigma(\ell)}\cap\mathbf{V}_-=\langle v_\ell- v_{w_\ell}\rangle_\mathbb{C}$} & \mbox{\!\!\!, если $\sigma(w_\ell)\prec\sigma(\ell)$,} \\[1.5mm]
+F''_{\sigma(\ell)}\cap \mathbf{V}_+=F'_{\sigma(\ell)}\cap \mathbf{V}_+,\ F''_{\sigma(\ell)}\cap \mathbf{V}_+=F'_{\sigma(\ell)}\cap \mathbf{V}_+ & \mbox{\!\!\!, если $\sigma(w_\ell)\succ\sigma(\ell)$,}
+\end{array}
+\right.\]
+что доказывает формулу для $\dim F''_{\sigma(\ell)}\cap \mathbf{V}_\pm/F'_{\sigma(\ell)}\cap \mathbf{V}_\pm$ из предложения \ref{P4.2-2}\,{\rm (b)}.
+Если $\underline{v}$  $(w,\varepsilon)$-двойственен, то мы получаем одновременно
+\[
+(F'_a)^\dag=\langle v_\ell:\sigma(w_\ell)\succeq a\rangle_\mathbb{C}
+\quad\mbox{и}\quad
+(F''_a)^\dag=\langle v_\ell:\sigma(w_\ell)\succ a\rangle_\mathbb{C}\,.
+\]
+Поэтому $(\mathcal{F}^\dag,\mathcal{F})=(\mathcal{F}_{\sigma^\dag w}(\underline{v}),\mathcal{F}_\sigma(\underline{v}))\in\pmb{\mathbb{O}}_w^\dag$.
+Для достаточно большого $n\geq 1$  мы имеем
+$(w_\ell,\varepsilon_\ell)=(\ell,\pm1)$ для всех $\ell\in N_\pm\cap\{n+1,n+2,\ldots\}$
+и $v_\ell=e_\ell$ для всех $\ell\geq n+1$.
+Таким образом, пара $(\check{w},\check{\varepsilon}):=(w|_{\{1,\ldots,n\}},\varepsilon|_{\{1,\ldots,n\}})$ принадлежит $\mathfrak{I}_n(p_n,q_n)$, в то время как согласно (\ref{completed-basis})  имеем
+\[\mathcal{F}=\mathcal{F}(v_{\tau_1},\ldots,v_{\tau_n}).\]
+Базис $(v_{\tau_1},\ldots,v_{\tau_n})$ в $V_n$  $(\tau^{-1}\check{w}\tau,\check{\varepsilon}\tau)$-двойственен, если $\underline{v}$  $(w,\varepsilon)$-двойственен; последняя формула в предложении \ref{P4.2-2}\,{\rm (b)} теперь следует из предложения \ref{P2}\,{\rm (b)} и данного наблюдения. В итоге, это доказывает условие необходимости в предложении \ref{P4.2-2}\,{\rm (b)}, которое гарантирует, в частности, что подмножества $\bs{\mathcal{O}}_{(w,\varepsilon)}$, так же как и подмножества $\bs{\mathfrak{O}}_{(w,\varepsilon)}$,
+попарно различны.
+Достаточность в предложении \ref{P4.2-2}\,{\rm (b)} получится как только мы докажем
+предложение \ref{P4.2-2}\,{\rm (a)}.
+
+Для $(w,\varepsilon)\in\mathfrak{I}_n(p_n,q_n)$
+положим
+\begin{equation}
+\label{4.5.4}
+\hat{w}(\ell)=\left\{
+\begin{array}{ll}
+\tau w\tau^{-1}(\ell) & \mbox{, если $\ell\leq n$,} \\
+\ell & \mbox{, если $\ell\geq n+1$}
+\end{array}
+\right.\quad\mbox{для всех $\ell\in\mathbb{N}^*$,}
+\end{equation}
+где $\tau=\tau^{(n)}\in\mathfrak{S}_n$ как и в (\ref{completed-basis}), и
+\begin{equation}
+\label{4.5.5}\hat{\varepsilon}(\ell)=\left\{
+\begin{array}{ll}
+\varepsilon\tau^{-1}(\ell) & \mbox{, если $\ell\leq n$,} \\
+1 & \mbox{, если $\ell\geq n+1$, $n\in N_+$,} \\
+-1 & \mbox{, если $\ell\geq n+1$, $n\in N_-$}
+\end{array}
+\right.
+\end{equation}
+для всех $\ell\in\mathbb{N}^*$ таких, что $\hat{w}_\ell=\ell$.
+Легко проверить, что $(\hat{w},\hat{\varepsilon})\in\mathfrak{I}_\infty(N_+,N_-)$,
+и, что полученное таким образом отображение $j_n:\mathfrak{I}_n(p_n,q_n)\to\mathfrak{I}_\infty(N_+,N_-)$ инъективно
+и
+\[
+\mathfrak{I}_\infty(N_+,N_-)=\bigcup_{n\geq 1}j_n(\mathfrak{I}_n(p_n,q_n)).
+\]
+Более того, из нашего построения следует, что, если дан базис в $\underline{v}=(v_1,\ldots,v_n)$ в $V_n$ и базис $\underline{\hat{v}}$ в $\mathbf{V}$ получается добавлением векторов $e_\ell$ для $\ell\geq n+1$, то верна импликация:
+\begin{eqnarray*}
+ & \mbox{$(v_{\tau_1},\ldots,v_{\tau_n})$ --- $(w,\varepsilon)$-сопряжённый (соответственно, двойственный)} \\
+ & \Rightarrow \
+\mbox{$\underline{\hat{v}}$ --- $(\hat{w},\hat{\varepsilon})$-сопряжённый (соответственно, двойственный)}.
+\end{eqnarray*}
+Как и в доказательстве предложения \ref{P4-1.1} мы получаем равенства
+\begin{equation}
+\label{T-proof.2}
+\bs{\mathcal{O}}_{(\hat{w},\hat{\varepsilon})}\cap X_{n}=\mathcal{O}_{(w,\varepsilon)}
+\quad
+\mbox{и}
+\quad
+\bs{\mathfrak{O}}_{(\hat{w},\hat{\varepsilon})}\cap X_{n}=\mathfrak{O}_{(w,\varepsilon),}
+\end{equation}
+где $\mathcal{O}_{(w,\varepsilon)},\mathfrak{O}_{(w,\varepsilon)}\subset X_{n}$ как и в определении \ref{DA3}.
+Части {\rm (a)} и {\rm (c)} предложения \ref{P4.2-2} тогда следуют
+из предложений \ref{P2}\,{\rm (a)} и {\rm (c)}.
+\end{proof}
+
+\begin{proof}[Доказательство предложения \ref{P4.3}]
+Пусть $n\in\{n_1,n_2,\ldots\}$ (где $n_k=|J_1|+\ldots+|J_k|$ как и ранее) и $(p_n,q_n)=(|N_+\cap\{1,\ldots,n\}|,|N_-\cap\{1,\ldots,n\}|)$
+и пусть $\tau=\tau^{(n)}:\{1,\ldots,n\}\to\{1,\ldots,n\}$
+--- перестановка такая, что $\sigma(\tau_1)\prec\ldots\prec\sigma(\tau_n)$.
+Поскольку обобщённый флаг $\mathcal{F}_\sigma$  $\omega$-изотропен,
+должно быть выполнено
+\[\iota(\tau_\ell)=\tau_{n-\ell+1}\quad\mbox{для всех $\ell\in\{1,\ldots,n\}$}.\]
+Это наблюдение легко влечёт то, что отображение $j_n$ определённое в доказательстве
+предложения \ref{P4.2-2}
+ограничивается до корректно определённого инъективного отображения
+\[j_n:\mathfrak{I}^{\eta,\epsilon}_n(p_n,q_n)\to \mathfrak{I}^{\eta,\epsilon}_\infty(N_+,N_-)\]
+такого, что
+\[\mathfrak{I}^{\eta,\epsilon}_\infty(N_+,N_-)=\bigcup_{k\geq 1}
+j_{n_k}(\mathfrak{I}^{\eta,\epsilon}_{n_k}(p_{n_k},q_{n_k})).\]
+Из (\ref{T-proof.2}) для $(\hat{w},\hat{\varepsilon})=j_n(w,\varepsilon)$ мы получаем
+\begin{equation}
+\label{T-proof.3}
+\bs{\mathcal{O}}^{\eta,\epsilon}_{(\hat{w},\hat{\varepsilon})}\cap (X_{n})_\omega=\mathcal{O}^{\eta,\epsilon}_{(w,\varepsilon)}
+\quad
+\mbox{и}
+\quad
+\bs{\mathfrak{O}}^{\eta,\epsilon}_{(\hat{w},\hat{\varepsilon})}\cap (X_{n})_\omega=\mathfrak{O}^{\eta,\epsilon}_{(w,\varepsilon)}.
+\end{equation}
+Предложение \ref{P4.3} легко следует из этого факта и предложения \ref{P3}.
+\end{proof}
+
+
+
+\section{Следствия}
+
+\label{S5}
+
+%Note that our parametrization of orbits does not depend on the choice of the $E$-compatible maximal generalized flag $\mathcal{F}_\sigma$, which yields:
+\begin{corollary}
+	Отображение двойственности $\Xi$ из теоремы \ref{theorem-1} $(b)$ зависит от выбора $\mathbf{G}$, $\mathbf{B}$, $\mathbf{K}$ и $\mathbf{G}^0$, но не от выбора базиса $E$, используемого выше в построении $\mathbf{G}$, $\mathbf{B}$, $\mathbf{K}$ и $\mathbf{G}^0$. В частности, $\Xi$ не зависит от исчерпания $\mathbf{X}= \bigcup_{n \geq 1} X_n$, определяемого $E$ и упоминемого в теореме \ref{theorem-1} $(b)$.
+\end{corollary}
+
+\begin{proof}
+	Утверждение следует сразу из коммутативности диаграммы (\ref{diag})  и из наблюдения, что, если  $\mathbf{X}= \bigcup_{n \geq 1} X_n$ и  $\mathbf{X}= \bigcup_{n' \geq 1} X'_{n'}$, суть два исчерпания инд-многообразия  $\mathbf{X}$, то, для любых $n_0$ и $n'_0$ существуют $n_1$ и $n'_1$ такие, что $X_{n_0}\cup X'_{n'_0} \subset X_{n_1}$ и $X_{n_0}\cup X'_{n'_0} \subset X'_{n'_1}$.
+\end{proof}
+Второе следствие утверждает, что параметризация $\mathbf{K}$- и $\mathbf{G}^0$-орбит на $\mathbf{G}/\mathbf{B}$ на самом деле зависит только от тройки $\left(\mathbf{G},\mathbf{K},\mathbf{G}^0\right)$, но не зависит от выбора инд-многообразия  $\mathbf{G}/\mathbf{B}$.
+
+\begin{corollary}
+\label{C1}
+Пусть $E,\mathbf{G},\mathbf{K},\mathbf{G}^0$ --- такие же, как  в  разделе \ref{S2.1}.
+Пусть $\mathcal{F}_{\sigma_j}$ ($j=1,2$) --- два
+$E$-соизмеримых
+максимальных обобщённых флага, которые $\omega$-изотропны для типов B,C,D,
+и пусть $\mathbf{X}_j=\mathbf{G}/\mathbf{B}_{\mathcal{F}_{\sigma_j}}$.
+Тогда существуют естественные биекции
+\[
+\mathbf{X}_1/\mathbf{K}\cong\mathbf{X}_2/\mathbf{K}
+\quad\mbox{и}\quad
+\mathbf{X}_1/\mathbf{G}^0\cong\mathbf{X}_2/\mathbf{G}^0,
+\]
+ которые коммутируют с двойственностью из теоремы \ref{theorem-1}.
+\end{corollary}
+
+Далее, прямой подсчёт параметров даёт:
+
+\begin{corollary}
+\label{C2}
+В следствии \ref{C1}
+множества орбит $\mathbf{X}_j/\mathbf{K}$ и $\mathbf{X}_j/\mathbf{G}^0$
+всегда бесконечны.
+\end{corollary}
+
+%Corollary \ref{C2} makes the existence of open (resp., closed) orbits not automatic.
+%The next statement answers this question.
+
+Важно отметить, что, несмотря на следствие \ref{C1}, топологические свойства орбит на $\mathbf{G}/\mathbf{B}$ не одинаковы для различных Борелевских инд-подгрупп $\mathbf{B}\subset\mathbf{G}$.  Следующее следствие устанавливает критерии для существования открытых и замкнутых орбит на $\mathbf{G}/\mathbf{B}=\mathbf{X}\left(\mathcal{F}_\sigma,E\right)$.
+
+\begin{corollary}
+\label{C3}
+Пусть $E,\mathbf{G},\mathbf{K},\mathbf{G}^0$ --- такие, как в разделе \ref{S2.1},
+и пусть $\mathcal{F}_\sigma$ --- $E$-соизмеримый максимальный обобщённый флаг, $\omega$-изотропный для типов B,C,D, где $\sigma:\mathbb{N}^*\to (A,\prec)$ --- биекция на полностью упорядоченное множество.
+Пусть $\mathbf{X}=\mathbf{G}/\mathbf{B}_{\mathcal{F}_\sigma}$; то есть, $\mathbf{X}=\mathbf{X}(\mathcal{F}_\sigma,E)$ для типа A, и $\mathbf{X}=\mathbf{X}_\omega(\mathcal{F}_\sigma,E)$ для типов B,C,D.
+
+\begin{itemize}
+\item[\rm ($\mbox{a}_1$)] Для типа A1,
+$\mathbf{X}$ обладает открытой $\mathbf{K}$-орбитой (эквивалентно, замкнутой $\mathbf{G}^0$-орбитой), если и только если $\iota(\ell)=\ell$ для всех $\ell\gg 1$ (то есть, если матрица $\Omega$ из (\ref{omega}) содержит конечное число диагоналных блоков размера 2).%; in that case the open $\mathbf{K}$-orbit is $\bs{\mathcal{O}}_\mathrm{id}$.
+\item[\rm ($\mbox{a}_2$)]
+Для типа A2, $\mathbf{X}$ обладает открытой $\mathbf{K}$-орбитой (эквивалентно, замкнутой $\mathbf{G}^0$-орбитой),если и только если
+для всех $\ell\gg 1$ элементы
+$\sigma(2\ell-1),\sigma(2\ell)$ --- последовательные в  $A$, и
+число $|\{k<2\ell-1:\sigma(k)\prec\sigma(2\ell-1)\}|$ --- чётное.
+\item[\rm ($\mbox{a}'_{12}$)]
+Для типов A1 и A2,
+$\mathbf{X}$ имеет не более одной замкнутой $\mathbf{K}$-орбиты
+(эквивалентно,не более одной открытой $\mathbf{G}^0$-орбиты).  $\mathbf{X}$ имеет замкнутую $\mathbf{K}$-орбиту (эквивалентно, открытую $\mathbf{G}^0$-орбиту), если и только если $\mathbf{X}$ содержит $\omega$-изотропные обобщённые флаги. Это последнее условие эквивалентно существованию инволютивного автоморфизма упорядоченных множеств $\iota_A:(A,\prec)\to(A,\prec)$ такого, что
+$\iota_A\sigma(\ell)=\sigma\iota(\ell)$ для всех $\ell\gg 1$.
+\item[\rm ($\mbox{a}_3$)] Для типа A3,
+$\mathbf{X}$ имеет всегда беконечно много замкнутых $\mathbf{K}$-орбит (эквивалентно, бесконечно много $\mathbf{G}^0$-орбит).
+%, namely $\bs{\mathcal{O}}_{(\mathrm{id},\varepsilon)}$ and $\bs{\mathfrak{O}}_{(\mathrm{id},\varepsilon)}$.
+%corresponding to elements of $\mathfrak{I}_\infty(N_+,N_-)$ of the form $(\mathrm{id},\varepsilon)$.
+$\mathbf{X}$ обладает открытой $\mathbf{K}$-орбитой (эквивалентно, замкнутой $\mathbf{G}^0$-орбитой),
+если и только если $d:=\min\{|N_+|,|N_-|\}<\infty$ и $\mathcal{F}_\sigma$
+содержит подпространства размерности $d$ и коразмерности  $d$.
+\item[\rm (bcd)] Для типов B,C,D,
+$\mathbf{X}$ имеет всегда бесконечно много замкнутых  $\mathbf{K}$-орбит (эквивалентно, бесконечно много открытых $\mathbf{G}^0$-орбит).
+Для типов C1 и D3, $\mathbf{X}$ не имеет открытых $\mathbf{K}$-орбит (эквивалентно, не содержит замкнутых $\mathbf{G}^0$-орбит).
+Для типов BD1 и C2, $\mathbf{X}$ имеет открытую $\mathbf{K}$-орбиту (соответственно, замкнутую $\mathbf{G}^0$-орбиту),
+если и только если $d:=\min\{|N_+|,|N_-|\}<\infty$ и $\mathcal{F}_\sigma$ имеет подпространство размерности $d$  ( эквивалентно, содержит подпространства коразмерности $d$).
+\end{itemize}
+\end{corollary}
+
+\begin{proof}
+Утверждения следуют из замечаний \ref{R-open} и \ref{R-closed}, предложений \ref{P4-1.1}, \ref{P4.2-2}, \ref{P4.3} и равенств (\ref{T-proof.1}), (\ref{T-proof.2}), (\ref{T-proof.3}).
+\end{proof}
+
+%Note that, despite of the bijections of Corollary \ref{C1},
+%it appears in Corollary \ref{C3} that the existence
+%of open and closed orbits in $\mathbf{X}=\mathbf{G}/\mathbf{B}_{\mathcal{F}_\sigma}$
+%may depend on the form of the maximal generalized flag $\mathcal{F}_\sigma$.
+%The next statement follows from Corollary \ref{C3}.
+
+\begin{corollary}
+Единственный случай, в котором $\mathbf{X}$ имеет одновременно открытые и замкнутые $\mathbf{K}$-орбиты (эквивалентно, открытые и замкнутые $\mathbf{G}^0$-орбиты), это типы
+A3, BD1, C2 когда $d:=\min\{|N_+|,|N_-|\}<\infty$ и $\mathcal{F}_\sigma$
+содержит подпространства размерности $d$ и коразмерности $d$.
+\end{corollary}
+
+\section*{Список обозначений}
+
+\begin{itemize}
+\item[\S\ref{S.intro}:] $\mathbb{N}^*$, $|A|$, $\mathfrak{S}_n$, $\mathfrak{S}_\infty$, $(k;\ell)$
+
+\smallskip
+\item[\S\ref{S2.1}:] $\mathbf{G}(E)$, $\mathbf{G}(E,\omega)$, $\Omega$, $\omega$, $\gamma$, $\Phi$, $\phi$, $\delta$
+
+\smallskip
+\item[\S\ref{S2.2}:] $\mathcal{F}(v_1,\ldots,v_n)$, $\mathbb{O}_w$
+
+\smallskip
+\item[\S\ref{S2.3}:] $\mathcal{F}_\sigma(\underline{v})$, $\mathcal{F}_\sigma$,
+$\mathbf{P}_\mathcal{F}$, $\mathbf{B}_\mathcal{F}$, $\mathbf{X}(\mathcal{F},E)$, $(\pmb{\mathbb{O}}_{\tau,\sigma})_w$, $\mathbf{X}_\omega(\mathcal{F},E)$
+
+\smallskip
+\item[\S\ref{S3.1}:] $\mathcal{F}^\perp$, $\gamma(\mathcal{F})$, $\mathfrak{I}_n$, $\mathfrak{I}'_n$, $\mathcal{O}_w$, $\mathfrak{O}_w$
+
+\smallskip
+\item[\S\ref{S3.2}:] $\delta(\mathcal{F})$, $\mathcal{F}^\dag$, $\varsigma(\phi:\mathcal{F})$, $\varsigma(\delta:\mathcal{F})$, $\varsigma(w,\varepsilon)$, $\mathfrak{I}_n(p,q)$, $\mathcal{O}_{(w,\varepsilon)}$, $\mathfrak{O}_{(w,\varepsilon)}$
+
+\smallskip
+\item[\S\ref{S3.3}:] $\mathfrak{I}^{\eta,\epsilon}_n(p,q)$, $\mathcal{O}^{\eta,\epsilon}_{(w,\varepsilon)}$, $\mathfrak{O}^{\eta,\epsilon}_{(w,\varepsilon)}$
+\smallskip
+\item[\S\ref{S4.1}:] $\iota$, $\mathfrak{I}_\infty(\iota)$, $\mathfrak{I}'_\infty(\iota)$, $\bs{\mathcal{O}}_w$, $\bs{\mathfrak{O}}_w$, $(A^*,\prec^*)$, $\sigma^\perp$, $\mathbf{X}^\perp$, $\mathbf{X}^\gamma$, $\pmb{\mathbb{O}}_w^\perp$, $\pmb{\mathbb{O}}_w^\gamma$
+\smallskip
+\item[\S\ref{S4.2}:] $\mathfrak{I}_\infty(N_+,N_-)$, $\bs{\mathcal{O}}_{(w,\varepsilon)}$, $\bs{\mathfrak{O}}_{(w,\varepsilon)}$, $\sigma^\dag$, $\mathbf{X}^\dag$, $\pmb{\mathbb{O}}_w$, $\pmb{\mathbb{O}}_w^\dag$
+\smallskip
+\item[\S\ref{S4.3}:] $\mathfrak{I}_\infty^{\eta,\epsilon}(N_+,N_-)$, $\bs{\mathcal{O}}_{(w,\varepsilon)}^{\eta,\epsilon}$, $\bs{\mathfrak{O}}_{(w,\varepsilon)}^{\eta,\epsilon}$
+%\smallskip
+%\item[\S\ref{S4.4}:] $\tau^{(n)}$
+\end{itemize}
+
+\begin{thebibliography}{gz}
+\bibitem{Baranov} А. А. Baranov: Finitary simple Lie algebras.  J. Algebra \textbf{219} (1999), 299--329.
+\bibitem{Berger} M. Berger: Les espaces sym\'etriques non compacts. Ann. Sci. \'Ecole Norm. Sup. \textbf{74} (1957) 85--177.
+\bibitem{Brion} M. Brion and G. Helminck: On orbit closures of symmetric subgroups in flag varities. Canad. J. Math. \textbf{52} (2000), 265--292.
+\bibitem{Dimitrov-Penkov} I. Dimitrov and I. Penkov: Ind-varieties of generalized flags as homogeneous spaces for classical ind-groups. Int. Math. Res. Not. \textbf{2004} (2004), 2935--2953.
+\bibitem{Fresse-Penkov} L. Fresse and I. Penkov: Schubert decompositions for ind-varieties of generalized flags. Asian J. Math., to appear.
+\bibitem{Gindikin-Matsuki} S. Gindikin and T. Matsuki: Stein extensions of Riemannian symmetric spaces and dualities of orbits on flag manifolds. Transform. Groups \textbf{8} (2003), 333--376.
+\bibitem{FHW} G. Fels, A. Huckleberry, and J. A. Wolf: Cycle spaces of flag domains. A complex geometric viewpoint. Progr. Math., vol. 245, Birkh\"auser, Boston, MA, 2006.
+\bibitem{Ignatyev-Penkov} M. V. Ignatyev and I. Penkov: Ind-varieties of generalized flags: a survey of results. Preprint (2016).
+\bibitem{Ignatyev-Penkov-Wolf} M. V. Ignatyev, I. Penkov, and J. A. Wolf: Real group orbits on flag ind-varieties of $\mathrm{SL}(\infty,\mathbb{C})$. In: Lie Theory and Its Applications in Physics, pp. 111--135. Springer Proc. Math. Stat., vol. 191, Springer, Singapore, 2016.
+\bibitem{Jantzen}  J. C. Jantzen: Nilpotent orbits in representation theory. Lie theory, 1--211, Progr. Math., vol. 228, Birkh\"auser Boston, Boston, MA, 2004.
+\bibitem{Matsuki} T. Matsuki: The orbits of affine symetric spaces under the action of minimal parabolic
+subgroups. J. Math. Soc. Japan. \textbf{31} (1979) 331--357.
+%\bibitem{Matsuki2} T. Matsuki: Orbits on affine symetric spaces under the action of parabolic subgroups. Hiroshima Math. Jour. \textbf{12} (1982) 307--320.
+\bibitem{Matsuki3} T. Matsuki: Closure relations for orbits on affine symmetric spaces under the action of parabolic subgroups. Intersections of associated orbits. Hiroshima Math. J. \textbf{18} (1988) 59--67.
+\bibitem{MO} T. Matsuki and T. Oshima:
+Embeddings of discrete series into principal series.
+In: The orbit method in representation theory (Copenhagen, 1988), pp. 147--175.
+Progr. Math., vol. 82, Birkh\"auser, Boston, MA, 1990.
+\bibitem{Nishiyama} K. Nishiyama: Enhanced orbit embedding.
+Comment. Math. Univ. St. Pauli \textbf{63} (2014), 223--232.
+\bibitem{OV} A. L. Onishchik and \`E. B. Vinberg:
+Lie groups and algebraic groups.
+Translated from the Russian and with a preface by D. A. Leites. Springer Series in Soviet Mathematics. Springer-Verlag, Berlin, 1990.
+\bibitem{Otha1} T. Ohta: The closures of nilpotent orbits in the classical symmetric pairs and their singularities. Tohoku Math. J. \textbf{43} (1991), 161--211.
+\bibitem{Otha} T. Ohta: An inclusion between sets of orbits and surjectivity of the restriction map of rings of invariants.
+Hokkaido Math. J. \textbf{37} (2008), 437--454.
+\bibitem{Richardson-Springer} R. W. Richardson and T. A. Springer:
+The Bruhat order on symmetric varieties. Geom. Dedicata \textbf{35} (1990), 389--436.
+\bibitem{W1} J. A. Wolf: The action of a real semisimple Lie group on a complex flag manifold. I: Orbit structure and holomorphic arc components.  Bull. Amer. Math. Soc. \textbf{75} (1969), 1121--1237.
+\bibitem{W} J. A. Wolf: Cycle spaces of infinite dimensional flag domains. Annals of Global Analysis and Geometry \textbf{50} (2016), 315--346.
+\bibitem{Y} A. Yamamoto:
+Orbits in the flag variety and images of the moment map for classical groups I.
+Represent. Theory \textbf{1} (1997), 329--404.
+\end{thebibliography}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+

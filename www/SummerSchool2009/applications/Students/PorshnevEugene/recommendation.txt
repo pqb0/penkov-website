@@ -1,0 +1,12 @@
+Dear Ivan,
+If it is not late, I would like to recommend another my graduate
+student of the first year, Evgeny Porshnev, for participation in your
+Summer School in representation theory. He is, maybe, the most gifted
+of them but, unfortunately, has obtained only partial results on his
+problem so far. Maybe, this is because the problem is too difficult.
+He is supposed to find out if, for any homogeneous space X of a
+unipotent algebraic group, any invariant regular function on the
+cotangent bundle T*X, which is homogeneous of degree m on each fiber,
+is a symbol of an invariant differential operator of degree m. He
+verified this for some special cases.
+  With best regards, E.B.Vinberg.

@@ -1,0 +1,1919 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[cp1251]{inputenc}
+%\usepackage[russian]{babel}
+\usepackage{amsmath, amscd} \usepackage{euscript}
+\usepackage{changepage}
+\usepackage{cancel}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{mymatrx5}
+\usepackage{mathtools}
+\def\mymatrix{\MyMatrixwithdelims..}
+\Linestrue\Autonumtrue
+\usepackage{mathrsfs}
+\mymatrixvsep=2pt
+\mymatrixhsep=2.5pt
+\mymatrixindent=2pt
+\usepackage{amssymb}
+\usepackage[matrix, arrow, curve]{xy}
+\oddsidemargin=-0.54cm \textwidth=17cm \topmargin=-0.54cm
+\headheight=0cm \textheight=24cm \footskip=1cm \pagestyle{plain}\overfullrule=5pt
+
+
+\newtheorem{theorem}{Theorem.}
+\newtheorem{lemma}[theorem]{Lemma.}
+%\newtheorem{def}[theorem]{Definition}
+\newtheorem{prp}[theorem]{Proposition.}
+\newtheorem{cor}[theorem]{Corollary.}
+\newtheorem{ex}[theorem]{Example.}
+\newtheorem{rmk}[theorem]{Remark.}
+\begin{document}
+
+\newcounter{bnomer} \newcounter{snomer}
+\newcounter{bsnomer}
+\setcounter{bnomer}{0}
+\renewcommand{\thesnomer}{\thebnomer.\arabic{snomer}}
+\renewcommand{\thebsnomer}{\thebnomer.\arabic{bsnomer}}
+\renewcommand{\refname}{\begin{center}\large{\textbf{References}}\end{center}}
+
+\setcounter{MaxMatrixCols}{14}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  %\vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+}}
+
+\newcommand{\sect}[1]{%
+\setcounter{snomer}{0}\setcounter{bsnomer}{0}
+\refstepcounter{bnomer}
+\par\bigskip\begin{center}\large{\textbf{\arabic{bnomer}. {#1}}}\end{center}}
+\newcommand{\sectappendix}[1]{%
+\setcounter{snomer}{0}
+\par\bigskip\begin{center}\large{\textbf{A. {#1}}}\end{center}}
+\newcommand{\sst}[1]{%
+\refstepcounter{bsnomer}
+\par\bigskip\textbf{\arabic{bnomer}.\arabic{bsnomer}. {#1}.}}
+\newcommand{\sstappendix}[1]{%
+\refstepcounter{bsnomer}
+\par\bigskip\textbf{A.\arabic{bsnomer}. {#1}.}}
+\newcommand{\lemmpappendix}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Lemma A.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par\medskip}
+\newcommand{\theopappendix}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem A.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par}
+\newcommand{\proppappendix}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Proposition A.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par\medskip}
+\newcommand{\defiappendix}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Definition A.\arabic{snomer}. }{#1}\par\medskip}
+\newcommand{\notaappendix}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Remark A.\arabic{snomer}. }{#1}\hspace{\fill}$\bigcirc$\par\medskip}
+
+\newcommand{\examappendix}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Example A.\arabic{snomer}. }{#2} {{#1}}\hspace{\fill}$\bigcirc$\par}
+
+\newcommand{\defi}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Definition \arabic{bnomer}.\arabic{snomer}. }{#1}\par\medskip}
+\newcommand{\theo}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{#2} {\emph{#1}}\hspace{\fill}$\square$\par}
+\newcommand{\mtheop}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par}
+\newcommand{\mcorop}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Corollary \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par}
+\newcommand{\mtheo}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\par\medskip}
+\newcommand{\theoc}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{#1} {\emph{#2}}\par\medskip}
+\newcommand{\mlemm}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Lemma \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\par\medskip}
+\newcommand{\mprop}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Proposition \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\par\medskip}
+\newcommand{\theobp}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{#2} {\emph{#1}}\par}
+\newcommand{\theop}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par}
+\newcommand{\theopwop}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}}
+\newcommand{\theosp}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Theorem \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textbf{Sketch of the proof}. {#2}\hspace{\fill}$\square$\par}
+\newcommand{\exam}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Example \arabic{bnomer}.\arabic{snomer}. }{#1}\par\medskip}
+\newcommand{\deno}[1]{%
+\refstepcounter{snomer}
+\par\textbf{Notation \arabic{bnomer}.\arabic{snomer}. }{#1}\par}
+\newcommand{\lemm}[1]{%
+\refstepcounter{snomer}
+\par\textbf{Lemma \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\hspace{\fill}$\square$\par}
+\newcommand{\lemmp}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Lemma \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par\medskip}
+\newcommand{\coro}[1]{%
+\refstepcounter{snomer}
+\par\textbf{Corollary \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\hspace{\fill}$\square$\par}
+
+\newcommand{\coropappendix}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Corollary A.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par\medskip}
+
+\newcommand{\corowop}[1]{%
+\refstepcounter{snomer}
+\par\textbf{Corollary \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}}
+\newcommand{\mcoro}[1]{%
+\refstepcounter{snomer}
+\par\textbf{Corollary \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\par\medskip}
+\newcommand{\corop}[2]{%
+\refstepcounter{snomer}
+\par\textbf{Corollary \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par}
+\newcommand{\nota}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Remark \arabic{bnomer}.\arabic{snomer}. }{#1}\hspace{\fill}$\bigcirc$\par\medskip}
+\newcommand{\propp}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Proposition \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}
+\par\textsc{Proof}. {#2}\hspace{\fill}$\square$\par\medskip}
+\newcommand{\hypo}[1]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{Conjecture \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\par\medskip}
+\newcommand{\prop}[1]{%
+\refstepcounter{snomer}
+\par\textbf{Proposition \arabic{bnomer}.\arabic{snomer}. }{\emph{#1}}\hspace{\fill}$\square$\par}
+
+\newcommand{\proof}[2]{%
+\par\medskip\textsc{Proof{#1}}. {#2}\hspace{\fill}$\square$\par\medskip}
+
+\newcommand{\okr}[2]{%
+\refstepcounter{snomer}
+\par\medskip\textbf{{#1} \arabic{bnomer}.\arabic{snomer}. }{\emph{#2}}\par\medskip}
+
+\newcommand{\hooklongrightarrow}{\lhook\joinrel\longrightarrow}
+
+
+\newcommand{\Ind}[3]{%
+\mathrm{Ind}_{#1}^{#2}{#3}}
+\newcommand{\Res}[3]{%
+\mathrm{Res}_{#1}^{#2}{#3}}
+\newcommand{\epsi}{\epsilon}
+\newcommand{\tri}{\triangleleft}
+\newcommand{\Supp}[1]{%
+\mathrm{Supp}(#1)}
+
+\newcommand{\lee}{\leqslant}
+\newcommand{\gee}{\geqslant}
+\newcommand{\reg}{\mathrm{reg}}
+\newcommand{\Ann}{\mathrm{Ann}\,}
+\newcommand{\Cent}[1]{\mathbin\mathrm{Cent}({#1})}
+\newcommand{\PCent}[1]{\mathbin\mathrm{PCent}({#1})}
+\newcommand{\Exp}[1]{\mathbin\mathrm{Exp}({#1})}
+\newcommand{\empr}[2]{[-{#1},{#1}]\times[-{#2},{#2}]}
+\newcommand{\sreg}{\mathrm{sreg}}
+\newcommand{\ilm}{\varinjlim}
+\newcommand{\plm}{\varprojlim}
+\newcommand{\codim}{\mathrm{codim}\,}
+\newcommand{\chara}{\mathrm{char}\,}
+\newcommand{\rk}{\mathrm{rk}\,}
+\newcommand{\chr}{\mathrm{ch}\,}
+\newcommand{\Ker}{\mathrm{Ker}\,}
+\newcommand{\Pic}{\mathrm{Pic}\,}
+\newcommand{\Imm}{\mathrm{im}\,}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Ad}{\mathrm{Ad}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\low}{\mathrm{low}}
+\newcommand{\pho}{\hphantom{\quad}\vphantom{\mid}}
+\newcommand{\fho}[1]{\vphantom{\mid}\setbox0\hbox{00}\hbox to \wd0{\hss\ensuremath{#1}\hss}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\ad}[1]{\mathrm{ad}_{#1}}
+\newcommand{\tr}{\mathrm{tr}\,}
+\newcommand{\GL}{GL}
+\newcommand{\PGL}{PGL}
+\newcommand{\Pro}{P}
+\newcommand{\SO}{SO}
+\newcommand{\Orth}{O}
+\newcommand{\Sp}{Sp}
+\newcommand{\Gra}{Gr}
+\newcommand{\GraO}{GrO}
+\newcommand{\GraS}{GrS}
+\newcommand{\Fl}{Fl}
+\newcommand{\FlO}{FlO}
+\newcommand{\FlS}{FlS}
+\newcommand{\St}{St}
+
+
+\newcommand{\SL}{SL}
+
+
+\newcommand{\Sa}{\mathrm{S}}
+\newcommand{\Ua}{\mathrm{U}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\Stab}{\mathrm{Stab}}
+\newcommand{\htt}{\mathfrak{h}}
+\newcommand{\spt}{\mathfrak{sp}}
+\newcommand{\slt}{\mathfrak{sl}}
+\newcommand{\sot}{\mathfrak{so}}
+
+
+
+\newcommand{\vfi}{\varphi}
+\newcommand{\teta}{\vartheta}
+\newcommand{\Bfi}{\Phi}
+\newcommand{\Fp}{\mathbb{F}}
+\newcommand{\Rp}{\mathbb{R}}
+\newcommand{\Zp}{\mathbb{Z}}
+\newcommand{\Cp}{\mathbb{C}}
+\newcommand{\Np}{\mathbb{N}}
+\newcommand{\ut}{\mathfrak{u}}
+\newcommand{\at}{\mathfrak{a}}
+\newcommand{\hei}{\mathfrak{hei}}
+\newcommand{\nt}{\mathfrak{n}}
+\newcommand{\mt}{\mathfrak{m}}
+\newcommand{\rt}{\mathfrak{r}}
+\newcommand{\rad}{\mathfrak{rad}}
+\newcommand{\bt}{\mathfrak{b}}
+\newcommand{\gt}{\mathfrak{g}}
+\newcommand{\vt}{\mathfrak{v}}
+\newcommand{\pt}{\mathfrak{p}}
+\newcommand{\Xt}{\mathfrak{X}}
+\newcommand{\Po}{\mathcal{P}}
+\newcommand{\PV}{\mathcal{PV}}
+\newcommand{\Uo}{\EuScript{U}}
+\newcommand{\Fo}{\EuScript{F}}
+\newcommand{\Do}{\EuScript{D}}
+\newcommand{\Eo}{\EuScript{E}}
+\newcommand{\Xu}{\mathcal{X}}
+\newcommand{\Iu}{\mathcal{I}}
+\newcommand{\Mo}{\mathcal{M}}
+\newcommand{\Nu}{\mathcal{N}}
+\newcommand{\Gu}{\mathcal{G}}
+\newcommand{\Ro}{\mathcal{R}}
+\newcommand{\Co}{\mathcal{C}}
+\newcommand{\Lo}{\mathcal{L}}
+\newcommand{\Ou}{\mathcal{O}}
+\newcommand{\Uu}{\mathcal{U}}
+\newcommand{\Au}{\mathcal{A}}
+\newcommand{\Vu}{\mathcal{V}}
+\newcommand{\Du}{\mathcal{D}}
+\newcommand{\Bu}{\mathcal{B}}
+\newcommand{\Sy}{\mathcal{Z}}
+\newcommand{\Sb}{\mathcal{F}}
+\newcommand{\Gr}{\mathcal{G}}
+\newcommand{\rtc}[1]{C_{#1}^{\mathrm{red}}}
+
+%\theoremstyle{definition}
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{remark}[theorem]{Remark}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{Ex}[theorem]{Example}
+
+\newcommand{\JSpec}[1]{\mathrm{JSpec}\,{#1}}
+\newcommand{\PSpec}[1]{\mathrm{PSpec}\,{#1}}
+\newcommand{\APbr}[1]{\mathrm{span}\{#1\}}
+\newcommand{\APbre}[1]{\langle #1\rangle}
+\newcommand{\APro}[1]{\setcounter{AP}{#1}\Roman{AP}}\newcommand{\apro}[1]{{\rm\setcounter{AP}{#1}\roman{AP}}}
+\newcommand{\ot}{\xleftarrow[]{}}
+\newcounter{AP}
+
+
+
+\author{Mikhail Ignatyev and Ivan Penkov}%\address{Alexey Petukhov: The University of Manchester, Oxford Rd M13 9PL, Manchester, UK\\ on leave from the Institute for Information Transmission Problems, Bolshoy Karetniy 19-1, Moscow 127994, Russia}
+%\email{alex--2@yandex.ru}
+\date{}
+\title{Automorphism groups of ind-varieties of generalized flags}\maketitle
+\begin{abstract} 
+We compute the group of automorphisms of an arbitrary ind-variety of (possibly isotropic) generalized flags. Such an ind-variety is a homogeneous ind-space for one of the ind-groups $SL(\infty)$, $O(\infty)$ or $Sp(\infty)$. We show that the respective automorphism groups are much larger than $SL(\infty)$, $O(\infty)$ or $Sp(\infty)$, and present the answer in terms of Mackey groups. The latter are groups of automorphisms of nondegenerate  pairings of (in general infinite-dimensional) vector spaces. An explicit matrix form of the automorphism group of an arbitrary ind-variety of generalized flags  is also given. The case of the Sato grassmannian is considered in detail, and its automorphism group is the projectivization of the connected component of unity in the group Japanese $\GL(\infty)$.   % of an  is considered in detail, and a matrix realization of the automorphism group of an arbitrary ind-variety of generalized flags is given.  
+
+{\bf Keywords:} ind-variety, ind-group, generalized flag, homogeneous space, automorphism group, Makey group, Sato grassmannian, Japanese $GL(\infty)$.
+
+{\bf AMS subject classification:} 14L30, 14M15, 14M17, 14J50. 
+\end{abstract}
+%\tableofcontents\newpage
+
+\begin{center}
+    {\large \bfseries Introduciton}
+\end{center}
+
+Given a homogenous space $X$, it is a natural problem to compute its automorphism group $\mathrm{Aut}\,X$. In the case when $X$ is a complex flag variety, that is, $X=G/P$ for a connected reductive complex algebraic group and a parabolic subgroup $P\subset G$, the automorphism group of $X$ is well known. Moreover, it is a classical result that here the connected component $\mathrm{Aut}^{0}\, X$ of the identity equals the projectivized group $\Pro G$, except in some special cases as described in \cite{Onishchik}.
+
+In this paper, we would like to pose and solve the problem of computing $\mathrm{Aut}\, X$ for a class of homogeneous ind-varieties $X$. This is the class of ind-varieties of generalized flags introduced by that name in \cite{DimitrovPenkov} but also considered earlier in several works, see for instance \cite{DmitrovPenkovWolf}, \cite{NatarajanRodriguez-CarringtonWolf}. These ind-varieties can be defined simply as $G/P$ where $G$ is one of the ind-groups $\SL(\infty)=\ilm \SL(n)$, $\SO(\infty)=\ilm \SO(n)$, $\Sp(\infty)=\ilm \Sp(2n)$ and $P$ is a splitting parabolic subgroup, i.e., a subgroup for which the intersections $P\cap \SL(n)$, $P\cap \SO(2n)$, $P\cap \SO(2n+1)$, $P\cap \Sp(2n)$ are parabolic subgroups of $\SL(n)$, $\SO(2n)$, $\SO(2n+1)$, $\Sp(2n)$ for all $n$, respectively. %Another definition, possibly more transparent, is the definiton given in \cite{DimitrovPenkov}.
+The definition from \cite{DimitrovPenkov} can be considered as a
+%brbrbr generalised flag?
+    flag realization of the ind-varieties $G/P$ as above, and is recalled in Section \ref{section:brief_background} below. The main idea of that approach is that one designates
+%brbrbr what does it mean?
+certain chains of subspaces in the natural representation $V$ of $\SL(\infty)$ as generalized flags, and then defines an ind-variety of generalized flags as the ind-variety of generalized flags which differ only ``slightly'' from a fixed generalized flag $W$ in $V$. The exact definition see
+%brbrbr is this correct?
+in Section \ref{section:brief_background}. One then shows that the so obtained ind-variety is isomorphic to $G/P$ for $G=\SL(\infty)$ and some splitting parabolic subgroup $P\subset G$.
+
+An ind-grassmannian is an ind-variety of generalized flags for which the fixed generalized flag consists of a single proper subspace $W\subset V$. For $\dim W=\codim_V W=\infty$ %In the special case where $\dim W=\codim_V W=\infty$, 
+the ind-grassmannian is isomorphic to the Sato grassmannian. This has been pointed out for instance in \cite{GattoSalehyan}.
+%brbrbr not beautiful!
+
+In the cases of the groups $\SO(\infty)$ and $\Sp(\infty)$ we consider ind-varieties of isotropic generalized flags, as stated in Section \ref{section:more_background}.
+
+Our main result is the explicit determination of the group $\mathrm{Aut}\,X$ for an arbitrary ind-variety of, possibly isotropic, generalized flags. A notable feature is that the answer is very different form the ind-groups $\Pro \GL(\infty)$, $\Pro \Orth(\infty)$, or $\Pro \Sp(\infty)$, and we present it in terms of Mackey groups. Such a group is defined in terms
+%brbrbr in terms, in terms
+of a nondegenerate pairing of vector spaces $T\times R\rightarrow \Cp$, and is a subgroup of the group of all linear operators $\vfi \colon T\rightarrow T$ for which the dual operator $\vfi^*$ determines a well-defined automorphism $\overline{\vfi}\colon R\rightarrow R$. This definition of Mackey group is inspired by G. Mackey's dissertation \cite{Mackey45}. If $T$ and $R$ are finite dimensional, then the Mackey group is nothing but $\GL(T)\simeq\GL(R)$. The group known as Japanese $GL(\infty)$ is a Mackey group and plays a crusial role in our work. In the Appendix we discuss the structure of this group in detail.
+
+The precise statement of our main result, Theorem \ref{theorem:1}, is presented in Section \ref{section:brief_background}. The consideration of the isotropic case is postponed to Section \ref{sect:proof_theorem_2_isotropic_case}. The proof of Theorem \ref{theorem:1} is divided into two parts: the case of an ind-grassmannian and the case of an arbitrary generalized flag. For the Sato grassmannian (which is the most interesting ind-grassmannian) our result implies that its automorphism group is isomorphic to the projectivization of the connected component of the identity in the group Japanese $GL(\infty)$. In Section \ref{sect_explicit_matrix_form} we give a matrix realization of the group of automorphisms of an arbitrary ind-variety of generalized flags. In the isotropic case such a realization is given in Corollary \ref{corollary:group_structure_isotropic_case}.
+
+%In the Appendix we describe a particular Mackey group known also as ``Japanese $\GL(\infty)$'', see \textbf{[?]}. 
+%A detailed understanding of the structure of this group, in particular a grading on it, plays a crucial role in proving our main result in the case of a Sato grassmannian. 
+
+We would like to point out that $\mathrm{Aut}\, X$ depends essentially on the ind-variety $X$, despite the fact that all $X$ are homogeneous spaces for the same group $\SL(\infty)$ (or, respectively, $\SO(\infty)$, $\Sp(\infty)$). This is in contrast with the finite-dimensional case in which the connected component of the identity in the automorphism group of a variety $\SL(n)/P$ (respectively, $\SO(2n)/P$, $\SO(2n+1)/P$ or $\Sp(2n)/P$) depends only on $n$ and not on the choice of $P$. Further research should be carried out to compare the isomorphism classes of ind-varieties of generalized flags with the isomorphism classes of automorphism groups of ind-varieties of generalized flags.
+%brbrbr of their?
+
+Our possible application of the results of the present paper would be the study of locally reductive ind-groups $\widetilde{G}$ different from $G=\SL(\infty)$, $\SO(\infty)$, $\Sp(\infty)$ for which $G/P$ is a homogeneous $\widetilde{G}$-space.
+
+In conclusion of this short introduction, we should mention that some particular cases of the automorphism groups of ind-varieties of generalized flags have been considered in \cite{Penkov} and \cite{Tarigradschi}.
+
+\textbf{Acknowledgements}. 
+
+ I.P. thanks Francesco Esposito for inspiring discussion on topics related to the present paper. M.I. was supported by the Foundation for the Advancement of Theoretical Physics and Mathematics ``BASIS'', grant no. 18--1--7--2--1. I.P. was supported in part by DFG grant PE 980/8--1.
+
+
+\sect{Brief background and statement of the main result}\label{section:brief_background}
+
+The ground field is $\Cp$. If $R$ is a vector space, we set $\GL(R)=\{ \varphi\in \mathrm{Hom}_{\Cp}(R,R)\mid \varphi\text{ is invertible}\}$ and $R^*=\mathrm{Hom}_{\mathbb{C}}(R,\mathbb{C})$. We also use the superscript $\cdot^*$ to denote the dual of a vector bundle, as well as the pullback functor for vector bundles along a morphism of varieties. In what follows we consider infinite matrices, in particular, infinite rows and columns. We call such matrices, rows or columns \emph{finitary} if they have at most finitely many nonzero entries. By $\langle \cdot \rangle_{\Cp}$ we denote the linear span over $\Cp$.
+
+We fix a countable-dimensional vector space $V$. A \emph{chain of subspaces} $W=\{W_{\alpha}\}$ is a set of subspaces $W_{\alpha}\subseteq V$, parameterized by some index set with elements $\alpha$ such that for $\alpha\neq \alpha'$ we have $W_{\alpha}\varsubsetneq W_{\alpha'}$ or $W_{\alpha'}\varsubsetneq W_{\alpha}$. The relation of inclusion induces a total order on the set of indices of a chain. A chain of subspaces  $W=\{W_{\alpha}\}$ is a \emph{generalized flag in} $V$ if every index $\alpha$ has either an immediate predecessor or an immediate successor, and every nonzero vector $v$ of $V$ is contained in some difference $W_{\alpha''}\setminus W_{\alpha'}$, where $\alpha''$ is the immediate successor of $\alpha'$. For a more detailed discussion of generalized flags, and for an introduction to ind-varieties of generalized flags, see, e.g., \cite{DimitrovPenkov}, \cite{IgnatyevPenkov} and \cite{PenkovTikhomirov2}.
+
+We say that a generalized flag $W$ is \emph{compatible with a basis} $\widetilde{E}$ of $V$ (or that $W$ is $\widetilde{E}$-\emph{compatible}) if any space $W_{\alpha}$ of $W$ is spanned by elements of $\widetilde{E}$, i.e., $W_{\alpha}=\langle W_{\alpha}\cap \widetilde{E} \rangle_{\Cp}$ for any $\alpha$. We set $E_{\alpha}=\widetilde{E}\cap W_{\alpha}$. Then $E_\alpha$ is a basis of~$W_{\alpha}$. By $(W_{\alpha})_*$ we denote the span of the system of linear functions $\widetilde{E}^*$ dual to the basis $E_{\alpha}$. We have $(W_{\alpha})_*\subseteq W^*_{\alpha}$. We also let $V_*$ equal the span of the system of linear functions dual to the basis $\widetilde{E}$. The group $\GL(\widetilde{E},V)$ is the subgroup of $\GL(V)$ consisting of all invertible operators $\vfi\colon V\rightarrow V$ each of which acts as the identity on all but finitely elements of $\widetilde{E}$.
+
+In what follows, we fix a basis $\widetilde{E}$ and a generalized flag $W$ in $V$ compatible with $\widetilde{E}$. The set $\Fl(W,\widetilde{E},V)$ is the set of all generalized flags $W'=\{W'_{\alpha}\}$ which are $\widetilde{E}$\emph{-commensurable} with $W$. This latter requirement spells out as the following three conditions for each element $W'$ of $\Fl(W,\widetilde{E},V)$:
+
+\begin{itemize}
+	\item the index set which parameterizes the generalized flag $W'$ is the same as the index set of $W$;
+	\item there exists a finite-dimensional subspace $Z\subsetneq V$ depending on $W'$, such that for any $\alpha$ we have $W'_{\alpha}+Z= W_{\alpha}+Z$ and $\dim(W_{\alpha}\cap Z)=\dim(W'_{\alpha}\cap Z)$;
+	\item the generalized flag $W'$ is compatible with a basis $\widetilde{E}'$ of $V$, depending on $W'$, such that $\widetilde{E}'$ differs from $\widetilde{E}$ by finitely many vectors.
+\end{itemize}
+%The subspace $Z$ and the basis $\widetilde{E}'$ depend on $W'$ but not on $\alpha$.
+
+The set $\Fl(W,\widetilde{E},V)$ has a natural structure of ind-variety. This is explained in detail in \cite{DimitrovPenkov} (and in \cite{IgnatyevPenkov} and \cite{PenkovTikhomirov2}). Briefly, the ind-variety structure on $\Fl(W,\widetilde{E},V)$ arises as follows. Enumerate the basis $\widetilde{E}$ by the set $\Zp_{>0}$ and put $V_{i}:=\langle e_1,\ldots,e_i \rangle_{\Cp}$ for $i\in\Zp_{>0}$. Each intersection $W\cap V_i$ is a flag in $V_i$ of certain type $\underline{d}_i=(d_i^1,\ldots,d_i^{k_i})$, and this ordering of the basis $\widetilde{E}$ induces embeddings \begin{equation}\label{formula:flag_embeddings}
+	\Fl(\underline{d}_i,V_i)\hooklongrightarrow \Fl(\underline{d}_{i+1},V_{i+1}),
+\end{equation}
+called \emph{strict standard extensions},
+such that $\Fl(W,\widetilde{E},V)=\ilm \Fl(\underline{d}_i,V_i)$. The embeddings (\ref{formula:flag_embeddings}) endow $\Fl(W,\widetilde{E},V)$ with an ind-variety structure. In Section \ref{section:more_background} below we recall the definition of a strict standard extension.
+
+Next we recall that if $T$ and $R$ are two (in general, infinite-dimensional) vector spaces endowed with a non-degenerate pairing $\mathbf{p}\colon T\times R \rightarrow \Cp$, then the Mackey group $ G(T,R)$ is defined as \begin{equation}\label{formula:first_definition_mackey_group}
+	 G(T,R)=\{\varphi\in\GL(T)\mid \varphi^*(R)= R\},
+\end{equation}
+see \cite{Mackey45}. Here $\varphi^*\colon T^*\rightarrow T^*$ is the operator dual (adjoint) to the operator $\varphi\colon T\rightarrow T$, and $R$ is considered as a subspace of $T^*$ via the embedding $R\hookrightarrow T^*$ induced by the pairing $\mathbf{p}$. Equivalently, $ G(T,R)$ can be defined as the group
+\begin{equation}\label{formula:second_definition_mackey_group}
+	\{\psi\in\GL(R)\mid \psi^*(T)= T\}
+\end{equation}
+where $T$ is considered as a subspace of $R^*$ via $\mathbf{p}$. The correspondence $$\varphi\mapsto \left(\varphi^*|_R\right)^{-1}$$ is a canonical isomorphism between the groups (\ref{formula:first_definition_mackey_group}) and (\ref{formula:second_definition_mackey_group}). In what follows, when writing $\vfi \in  G(T,R)$ we will assume that $\vfi\in \GL(T)$, and will denote the operator $\vfi^*|_R$ by $\overline{\vfi}$. Note that, given a subspace $A$ of~$T$, one has $\vfi(A)=\overline{\vfi}^{-1}(A^{\perp})$, where $A^{\perp}$ is the annihilator of $A$ in $R$.
+
+Consider again the ind-variety of generalized flags $\Fl(W,\widetilde{E},V)$. Define the spaces $V^W_{\widetilde{E}}$ and $V^W_{*\widetilde{E}}$ as \begin{equation*}
+	\begin{split}	
+	V^W_{\widetilde{E}}&:=\bigcap\limits_{\alpha} \left(\left(\left(W_{\alpha}\right)_*\right)^*\oplus U_{\alpha}\right),\\
+	V^W_{*\widetilde{E}}&:=\bigcap\limits_{\alpha} \left(\left(W_{\alpha}\right)_*\oplus U^*_{\alpha}\right),
+		\end{split}
+\end{equation*}
+where $\alpha$ runs over the indices parameterizing the generalized flag $W$, and the spaces $U_{\alpha}$ are direct complements of the spaces $W_{\alpha}$, i.e., $V=W_{\alpha}\oplus U_{\alpha}$, with the assumption that $U_{\alpha}\cap \widetilde{E}$ is a basis of $U_{\alpha}$. %and the spaces $\left(W_{\alpha}\right)_*$ are defined via the bases $\widetilde{E}\cap W_{\alpha}$. 
+Note that there is a natural non-degenerate pairing \begin{equation*}
+	V^W_{\widetilde{E}}\times V^W_{*\widetilde{E}} \rightarrow \Cp,
+\end{equation*}  
+therefore the group $ G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$ is well-defined. Moreover, $\GL(\widetilde{E},V)$ is a subgroup of $ G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$. To see this, the reader will check that for any linear operator $\varkappa \colon V \rightarrow V$, $\varkappa \in \GL(\widetilde{E},V)$, the dual operator $\varkappa^* \colon V^* \rightarrow V^*$ has $V^W_{*\widetilde{E}}$ as an invariant space, and the double dual operator $\varkappa^{**} \colon V^{**} \rightarrow V^{**}$ has $V^W_{\widetilde{E}}$ as an invariant space. 
+Therefore, this allows to consider $\varkappa$ as an element of $ G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$.
+
+ Another essential observation is that the spaces $V^W_{\widetilde{E}}$ and $V^W_{*\widetilde{E}}$ depend only on the ind-variety $\Fl(W,\widetilde{E},V)$ and not on the choice of point $W\in \Fl(W,\widetilde{E},V)$. This follows from the fact that, for each $\alpha$, the spaces $((W_{\alpha})_*)^*\oplus U_{\alpha}$ and $(W_{\alpha})_*\oplus U^*_{\alpha}$ do not change when $W_{\alpha}$ is replaced by a subspace $W'_{\alpha}\subset W$ which is $\widetilde{E}$-commensurable with $W_{\alpha}$, and $U_{\alpha}$ is replaced by a direct complement $U_{\alpha}'$ of $W_{\alpha}'$ containing all but finitely many vectors from $\widetilde{E}\cap U_{\alpha}$.  
+
+Next, if $W'$ is any chain of subspaces in $V$ and $\varphi\colon V^W_{\widetilde{E}}\rightarrow V^W_{\widetilde{E}}$ is any linear operator from the group $ G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$, then \begin{equation}\label{formula:action_on_flag}
+	\overline{\varphi}^{-1}\left({W'}^\perp\right)^{\perp}\cap V=\vfi((W'^{\perp})^{\perp})\cap V
+\end{equation}
+is a chain of subspaces in $V$. Here $W'^{\perp}$ is the chain in $V^W_{*\widetilde{E}}$ consisting of the annihilators in $V^W_{*\widetilde{E}}\subseteq V^*$ of the spaces $W_{\alpha}'$, and similarly $\overline{\varphi}^{-1}\left(W'^\perp\right)^{\perp}$, $W'^{\perp\perp}$ are chains in $V^W_{\widetilde{E}}\subseteq V^{**}$. 
+
+In what follows, we use the notation ${W'}^{\perp}$ for chains perpendicular to $W'$ also in appropriate subspaces of $V^*$ different from $V^W_{*\widetilde{E}}$ and indicate the respective subspace as necessary. A similar convention applies to the notation ${W'}^{\perp \perp}$. Moreover, we call the generalized flag $W$ \emph{symmetric} if the chain $W^{\perp}\subset V_*$ is the image of $W$ under a linear isomorphism $V_*\simeq V$ sending $\widetilde{E}^*$ to $\widetilde{E}$.
+
+%\textcolor{red}{\xcancel{The group $\GL(\widetilde{E},V)$ also acts on $V^W_{*\widetilde{E}}$ via adjoint operator: if $x\in V^W_{*\widetilde{E}}$ and $\gamma\in \GL(\widetilde{E},V)$, then} $\gamma \cdot x=(\gamma^*)^{-1}(x)$. Since $V^W_{*\widetilde{E}}$ is a $\gamma^*$-invariant subspace of $V^*$, this action is well-defined. Moreover, the linear action of $\gamma$ on a chain of subspaces ${W'}^{\perp}$ as above coincides with that given by formula (\ref{formula:action_on_flag}) with $\overline{\vfi}$ replaced by $\gamma^*$.}
+
+
+\theopwop{\label{theorem:1}
+\begin{itemize}
+		\item[\textup{a)}] If $W$ is not symmetric\textup, then the group $\mathrm{Aut}\,\Fl(W,\widetilde{E},V)$ is isomorphic to $\Pro(\GL(\widetilde{E},V) \cdot \St_W )$\textup, where $\St_W$ is the stabilizer of the generalized flag $W$ in the group $ G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$ under the action~\textup{(\ref{formula:action_on_flag})}. Here the product $\cdot$ is taken inside $ G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$\textup, and $\Pro\cdot$ indicates passage to the quotient modulo scalar operators.
+		\item[\textup{b)}] If $W$ is symmetric\textup, then the group $\mathrm{Aut}\,\Fl(W,\widetilde{E},V)$ is isomorphic to $\Pro(\GL(\widetilde{E},V) \cdot \St_W)\rtimes \mathbb{Z}_2$.
+	\end{itemize}}
+
+In Section \ref{sect_explicit_matrix_form} we present an explicit matrix realization of the group $\GL(\widetilde{E},V) \cdot \St_W$. Let's also point out that, since Theorem~\ref{theorem:1} implies that $\GL(\widetilde{E},V) \cdot \St_W$ is a group, we have $\GL(\widetilde{E},V) \cdot \St_W=\St_W\cdot \GL(\widetilde{E},V)$.
+
+\nota{In the case of a finite-dimensional flag variety $X$, every automorphism of $X$ belonging to the connected component of unity in the automorphism group has a fixed point on $X$. This no longer holds in the generality of Theorem \ref{theorem:1}. Indeed, if $X$ is the projective ind-space $\Fl(W,E,V)$ for $\dim W=1$, then $\mathrm{Aut}X=\PGL(V)$ and it is well known that not every invertible linear automorphism of $V$ has an eigenvector.}
+
+%ii) Pick an index $\alpha_0$. Put $E_W=\bigcap_{\alpha}E_{\alpha}$ and $E^W=\bigcup_{\alpha}E_{\alpha}$, so that $V_{\wt E}^W=\bigcap_{\alpha}(((W_{\alpha})_*)^*\oplus U_{\alpha})$ can be identified with the space $\{(a',~b,~x,~y)\}$, where $a'$ is a (possibly, infinite) sequence labeled by the vectors from $E_W$, while $b$, $x$ and $y$ are finitary sequences labelled by the vectors from $E_{\alpha_0}\setminus E_W$, $E^W\setminus E_{\alpha_0}$ and $\wt E\setminus E^W$ respectively. In a similar way, $((W_{\alpha_0})_*)^*\oplus U_{\alpha_0}$ can be identified with the space $\{(a',~b',~x,~y)\}$, where $b'$ is a (possibly, infinite) sequences labeled by the vectors from $E_{\alpha_0}\setminus E_W$, and $a'$, $x$, $y$ are as above.
+
+%On the other hand, $V_{*\wt E}^W=\bigcap_{\alpha}((W_{\alpha})_*\oplus U_{\alpha}^*)$ can be identified with the space $\{(\xi,~\eta,~\gamma,~\delta')\}$, where $\xi$, $\eta$ and $\gamma$ are finitary sequence labeled by the vectors from $E_W$, $E_{\alpha_0}\setminus E_W$ and $E^W\setminus E_{\alpha_0}$ respectively, while $\delta'$ is a (possibly, infinite) sequence labeled by the vectors from $\wt E\setminus E^W$. Similarly, $(W_{\alpha_0})_*\oplus U_{\alpha_0}^*$ can be identified with the space $\{(\xi,~\eta,~\gamma',~\delta')\}$, where $\gamma'$ is a (possibly, infinite) sequence labeled by the vectors from $E^W\setminus E_{\alpha_0}$, and $\xi$, $\eta$, $\delta'$ are as above. 
+
+%The annihilator of $W_{\alpha_0}$ in the space $V_{*\wt E}^W$ (respectively, in the space $(W_{\alpha_0})_*\oplus U_{\alpha_0}^*$) is $\{(0,~0,~\gamma,~\delta')\}$ (respectively, $\{(0,~0,~\gamma',~\delta')\}$). The annihilator of $\{(0,~0,~\gamma,~\delta')\}$ (respectively, of $\{0,~0,~\gamma',~\delta'\}$) in the space $V_{\wt E}^W$ (respectively, in the space $((W_{\alpha_0})_*)^*\oplus U_{\alpha_0}$) coincides with $\{(a',~b,~0,~0)\}$ (respectively, with $\{(a'~,b',~0,~0)\}$). It follows from the matrix description of the action of $\vfi$ presented in the Appendix that the intersections of $\vfi(\{(a',~b,~0,~0)\})$ and $\vfi(\{(a',~b',~0,~0)\})$ with $V$ coincide. Thus, it does not matter in formula (\ref{formula:action_on_flag}) in which pairs of spaces ($V_{*\wt E}^W$ and $V_{\wt E}^W$, or $(W_{\alpha_0})_*\oplus U_{\alpha_0}^*$ and $((W_{\alpha_0})_*)^*\oplus U_{\alpha_0}$) the annihilators are taken.
+
+
+\sect{Examples}
+
+Before we embark on proving Theorem \ref{theorem:1}, we present five examples in which we compute the respective group $\GL(\widetilde{E},V) \cdot \St_W$ from Theorem \ref{theorem:1}. %The reader will note that 
+In all five cases our claims follow from Theorem \ref{theorem:description_general_case} below, which provides a matrix form of the group $\GL(\widetilde{E},V) \cdot \St_W$ in the general case.
+
+\sst{The case of an ind-grassmannian} Let's consider the case where the generalized flag $W$ has the form $0\subsetneq W\subsetneq V$, where $W$ is a single proper subspace of $V$ (we slightly abuse notation by using the same letter $W$ for a flag and a subspace). There are three cases: $\dim W<\infty$, or $\dim W=\codim_V W=\infty$, or $\codim_V W<\infty$. If $\dim W<\infty$, then $\Gra(W,\widetilde{E},V)$ does not depend on the basis $\widetilde{E}$, and the points of $\Gra(W,\widetilde{E},V)$ are all subspaces of $V$ of the same dimension as $W$. In this case we may write $\Gra(W,\widetilde{E},V)=\Gra(\dim W, V)$. If $\codim_V W<\infty$ then $\Gra(W,\widetilde{E},V)$ depends as a set on the choice of the basis $\widetilde{E}$, but up to isomorphism $\Gra(W,\widetilde{E},V)$ depends only on $\codim_V W$. Moreover, as an ind-variety $\Gra(W,\widetilde{E},V)$ is isomorphic to $\Gra(\codim_V W,V)$. If $\dim W=\codim_V W=\infty$, the ind-variety $\Gra(W,\widetilde{E}, V)$ does not depend up to isomorphism on the choice of both $W$ and $\widetilde{E}$. It is known, see, for instance, \cite{GattoSalehyan}, that in this case $\Gra(W,\widetilde{E}, V)$ is isomorphic to the Sato grassmannian introduced in \cite{Sato}.
+
+If $\dim W<\infty$, then $V^W_{\widetilde{E}}=V$, $V^W_{*\widetilde{E}}=V^*$ and $ G(V,V^*)=\GL(V)$. Since $W$ is not symmetric, Theorem \ref{theorem:1} asserts that $\mathrm{Aut}\,\Gra(W,\widetilde{E},V)\cong \Pro(\GL(\widetilde{E},V) \cdot \St_W)$, and we note that in this case  \begin{equation}\label{formula:automorphism_group_grassmannian_special_case}
+    %\mathrm{Aut}\,\Gra(W,\widetilde{E},V)\cong
+    \Pro(\GL(\widetilde{E},V) \cdot \St_W)\cong\Pro \GL(V).
+\end{equation}
+Indeed, the action of $ G(V,V^*)=\GL(V)$ on $\Gra(W,\widetilde{E},V)$ via the formula (\ref{formula:action_on_flag}) is easily checked to coincide with the obvious action of $\GL(V)$ on subspaces of $V$, and the isomorphism (\ref{formula:automorphism_group_grassmannian_special_case}) is a consequence of the transitive action of the group $\GL(\widetilde{E},V)$ on finite-dimensional subspaces of fixed dimension in~$V$.
+
+If $\codim_V W<\infty$, then $V^W_{\widetilde{E}}=(V_*)^*$, $V^W_{*\widetilde{E}}=V_*$ and  $\Pro(\GL(\widetilde{E},V) \cdot \St_W)\cong\Pro \GL(V_*)$, i.e.,
+\begin{equation*}
+    \mathrm{Aut}\,\Gra(W,\widetilde{E},V)\cong\Pro \GL(V_*).
+\end{equation*}
+
+%In matrix form we can represent $\GL(V)$ or $\GL(V_*)$ as the group of all invertible $\Zp_{>0}\times \Zp_{>0}$-matrices (i.e., matrices whose rows and columns are enumerated by the ordered set $\Zp_{>0}$) %with finite columns and
+%such that each column is finitary %has finitely many nonzero entries 
+%and there is no restriction on the rows. %Similarly, $\GL(V_*)$ can be represented as the group of invertible $\Zp_{>0}\times \Zp_{>0}$-matrices such that each row has finitely many nonzero entries and there is no restriction on the columns.
+
+In the case where $\dim W=\codim_V W=\infty$, we prove in the Appendix that the group $G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$ can be represented as invertible $(\Zp\setminus\{0\})\times(\Zp\setminus\{0\})$-matrices which together with their inverses satisfy the condition: in the block structure 
+\begin{equation}\label{formula:block_matrix_structure}
+    \left(\begin{array}{c|c}
+A & B \\
+\hline
+C & D  \end{array}\right)
+\end{equation}
+induced by the equality $\Zp\setminus\{0\}=\Zp_{<0}\sqcup\Zp_{>0}$, the matrix $A$ has finitary rows (no restriction on the columns), the matrix $D$ has finitary columns (no restriction on the rows) and the matrix $C$ is finitary. %has finitely many nonzero entries. 
+ The group $\GL(\widetilde{E},V) \cdot \St_W$ consists of matrices $M$ such that $M$ and $M^{-1}$ have the form (\ref{formula:block_matrix_structure}) and satisfy the additional condition $\rk C=\rk C'$ where \begin{equation*}
+M^{-1}=\left(\begin{array}{c|c}
+A' & B' \\
+\hline
+C' & D' \end{array}\right).
+\end{equation*}  Moreover, in this case $W$ is symmetric.  %and $\St_W$ consists of matrices of the form (\ref{formula:block_matrix_structure}) with $D=0$.
+
+%In all above cases, the action of a matrix $M$ from the respective matrix group on $V^W_{*\widetilde{E}}$ is given by $Mv$, where $v$ is a vector from $V^W_{*\widetilde{E}}$ represented as a column: if $\dim W<\infty$ then $V^W_{*\widetilde{E}}$ consists of all columns $(a_i)_{i\in \Zp_{>0}}$; if $\codim_V W<\infty$, %$V^W_{*\widetilde{E}}=V^*$
+%we represent the vectors of $V^W_{*\widetilde{E}}$ as finitary columns $(a_i)_{i\in \Zp_{>0}}$,  %(i.e. columns satisfying $a_i=0$ for $|i|\gg 0$); %(for $\codim_V W<\infty$) we represent its vectors as columns
+%and if $\dim W=\codim_V W=\infty$, the vectors in $V^W_{*\widetilde{E}}$ are represented as columns $(a_i)_{i\in \Zp\setminus \{ 0\}}$ with $a_i=0$ for $i\ll 0$.
+
+\sst{The case of $\Fl(W,\widetilde{E},V)$, where $W=\{W_n\}$, $\dim W_n=n$ for $n\in \Zp_{>0}$, $\bigcup_n W_n=V$}\label{example:generalized_flag_full} In this case $V^W_{\widetilde{E}}=V$, $V^W_{*\widetilde{E}}=V^*$, and the group $\GL(\widetilde{E},V) \cdot \St_W$ can be identified with all invertible  $\Zp_{>0}\times \Zp_{>0}$-matrices with finitely many nonzero entries below the main diagonal, cf. \cite{Penkov}. 
+
+\sst{The case of $\Fl(W,\widetilde{E},V)$, where $\widetilde{E}=\{e_i\}_{i\in \Zp}$ and $W=\{W_n=\langle e_i,~i\leq n \rangle_{\Cp},~n\in \Zp\}$}\label{example:generalized_flag_basis_E_tilde} Here $$V^W_{\widetilde{E}}=\left(\left(W_0\right)_*\right)^*\oplus  \langle e_i,~i>0\rangle_{\Cp},~V^W_{*\widetilde{E}}=(W_0)_*\oplus \left( \langle e_i,~i>0\rangle_{\Cp}\right)^*.$$ In coordinate form, the vectors from~$V^W_{\widetilde{E}}$ are columns $(a_j)_{j\in \Zp}$ with $a_j=0$ for $j\gg 0$, and %$\mathrm{Aut}^0\Fl(W,\widetilde{E},V)$ 
+$\GL(\widetilde{E},V) \cdot \St_W$ consists of   all invertible $\Zp  \times \Zp $-matrices $M$ which, together with their inverses, have finitely many nonzero entries below the main diagonal and satisfy the condition $\rk C=\rk C'$, where $C$ and $C'$ are respectively the strictly lower-triangular parts of $M$ and $M^{-1}$.
+
+\sst{The case of $\Fl(W,\widetilde{E},V)$, where $W=\{0\subset W_1 \subset W_{-1} \subset V \}$, $\dim W_1=1$, $\codim_V W_{-1}=1$}\label{example:generalized_flag_W_1_W_-1} Here $\widetilde{E}$ can be ordered by any countable ordered set $I$ with a minimal and a maximal element. We have $V^W_{\widetilde{E }}=V$, $V^W_{*\widetilde{E}}=V_*$, and $\GL(\widetilde{E},V) \cdot \St_W$ consists of all invertible $I\times I$-matrices %such that each column and row 
+which, together with their inverses, satisfy the condition that each row and column is finitary. %This condition applies also to the inverse matrix. with finite rows and finite columns.
+
+\sst{The case of $\Fl(W,\widetilde{E},V)$ for $\widetilde{E}=\{e_i\}_{i\in \Zp_{>0} \sqcup \Zp_{<0}}$ and $W=\{ W_n \}$, where \linebreak $W_n=\langle e_1,\ldots,e_n \rangle_{\Cp}$ if $n\in \Zp_{>0}$ and $W_n=\langle\ldots,e_{n-2},e_{n-1},e_1,e_2,\ldots\rangle_{\Cp}$ if $n\in \Zp_{<0}$}\label{example:generalized_flag_basis_E_tilde_pm} Then $V^W_{\widetilde{E}}=V$, $V^W_{*\widetilde{E}}=V_*$, % and $\mathrm{Aut}^0\Fl(W,\widetilde{E},V)$ consists of block matrices 
+$I=\Zp_{>0} \sqcup \Zp_{<0}$ with $k<l$ if $k\in \mathbb{Z}_{>0}$, $l\in \mathbb{Z}_{<0}$, and $\GL(\widetilde{E},V) \cdot \St_W$ consists of all invertible $I\times I$-matrices which, together with their inverses, satisfy the condition: each row and column %has finitely many nonzero entries, 
+is finitary, and there are at most finitely many nonzero entries below the main diagonal.
+%\begin{equation*}
+    %\left(\begin{array}{c|c}
+%A & B \\
+%\hline
+%C & D  \end{array}\right),
+%\end{equation*}
+%where $A$ and $D$ have finitely many nonzero entries above the diagonal and $B$ has finitely many nonzero entries. Here the formats of $A$, $B$, $C$, $D$ are respectively $\Zp_{>0}\times \Zp_{>0}$, $\Zp_{<0}\times \Zp_{>0}$, $\Zp_{<0}\times \Zp_{>0}$, and $\Zp_{<0}\times \Zp_{<0}$.
+\vspace{0.4cm}
+
+
+Note that in the cases \ref{example:generalized_flag_basis_E_tilde}, \ref{example:generalized_flag_W_1_W_-1}, and \ref{example:generalized_flag_basis_E_tilde_pm} the generalized flag $W$ is symmetric, while in the case \ref{example:generalized_flag_full} $W$ is not symmetric.
+
+
+\sect{More background}\label{section:more_background}
+
+
+
+We need to recall some facts about linear embeddings of finite-dimensional grassmannians and flag varieties. If $T$ is a finite-dimensional space and $\underline{d}=\{d^1,\ldots,d^i\}$ is a vector of positive integers satisfying $d^k<d^l<\dim T$ for $k<l$, then $\Fl(\underline{d},T)$ denotes the variety of all flags of subspaces $T_1\subsetneq \ldots \subsetneq T_i \subsetneq T$, where $\dim T_j=d^j$. If $\underline{d}$ consists of one integer $d$, we write simply $\Gra(d,T)$. If $T$ is endowed with a non-degenerate symmetric or antisymmetric (symplectic) form, we write respectively $\FlO(\underline{d},T)$ and $\FlS(\underline{d},T)$ for the varieties of isotropic flags in $T$ with respect to the fixed form. We also write $\GraO(d,T)$ and $\GraS(d,T)$. %In the isotropic case, one always has $d^i\lee \frac{\dim T}{2}$.
+An isotropic flag has always length less or equal $\frac{\dim T}{2}$ but, for convenience, in this paper by an \emph{isotropic flag} we will mean a flag of the form $$W_1\subset W_2 \subset \ldots \subset W_k \subset W^{\perp}_k \subset \ldots \subset W^{\perp}_k,$$ where the spaces $W_1,~\ldots,~W_k$ are isotropic and the spaces $W^{\perp}_k,~\ldots,~W^{\perp}_1$ are coisotropic. All flag varieties $\FlO(\underline{d},T)$ and $\FlS(\underline{d},T)$ are connected, except %In some cases, $\FlO(\underline{d},T)$ is not connected and consists of isomorphic connected components. This applies for instance to
+$\GraO(d,T)$ for $\dim T=2d$. In what follows, by $\FlO(\underline{d},T)$ or $\GraO(\underline{d},T)$ we always denote a connected component.
+
+The Picard group of any grassmannian or ind-grassmannian $Z$ is isomorphic to $\Zp$ except in the case of $\Gra\left(\frac{\dim T}{2}-1,~T\right)$ for $2<\dim T\in 2\Zp_{>0}$, and $\mathcal{O}_Z(1)$ always denotes the ample generator of $\mathrm{Pic}\,Z$. In the case of $\Gra\left(\frac{\dim T}{2}-1,~T\right)$ for $2<\dim T\in 2\Zp_{>0}$ we have $\mathrm{Pic}\, \Gra\left(\frac{\dim T}{2}-1,~T\right)\simeq \Zp \times \Zp$.  
+
+The automorphism groups of the flag varieties $\Fl(\underline{d},~T)$, $\FlO(\underline{d},~T)$, $\FlS(\underline{d},~T)$ have been known for long time. The fact that the automorphism group of the projective space $\mathbb{P}^n$ is $\PGL (n+1)$ goes back to the nineteenth century. Wei-Liang Chow \cite{Chow} extended this result to grassmannians in 1949. %A standard reference for the automorphism groups of general flag varieties 
+For a general flag variety $X=\Fl(\underline{d},~T)$, $\FlO(\underline{d},~T)$, $\FlS(\underline{d},~T)$ %is A. Onishchik's paper \cite{Onishchik}. It implies that in all cases 
+the connected component of the identity in the automorphism group $\mathrm{Aut}\,X$ is the respective group $\PGL (T)$, $\SO (T)$, or $\Sp (T)$, except in several cases listed by A.L. Onishchik in \cite{Onishchik}. These special cases are %when $\FlS(\underline{d},~T)$ is the projective space $\mathbb{P}(T)$ (that is, when $\underline{d}=(1,~0,~\ldots,~0)$), or
+%when $G=G_2$ and $\dim G/P=5$, or when 
+$\GraS(1,T)\simeq\mathbb{P}(T)$, the five dimensional quadric $\GraO(1,T)$ for $\dim T=7$, and $\GraO \left(\frac{\dim T -1}{2},~T\right)$ for $\dim T\in 2\Zp_{>0}+1$. %In the latter case, the group $\mathrm{Aut} \GraO \left(\frac{\dim T -1}{2},~T\right)$ is isomorphic to $\SO(T')$ where $T'$ is an orthogonal space of dimension $\dim T+1$. For $X=\mathbb{P}(T)$ we have $\mathrm{Aut}\,X=\Pro \GL(T)$, and the case of $G=G_2$ is not relevant for our paper. 
+
+In all cases, see for instance \cite[Section 3.3]{Akhiezer}, the full automorphism group $G$ is always a semidirect product of its connected component of unity $G^0$ and a finite group %$G^0 \rtimes F$ where $G^0$ is the connected component of unity and $F$ is the finite group
+of automorphisms of the Dynkin diagram  of the Lie algebra $\mathfrak{g}=\mathrm{Lie}\, G^0$ which keep fixed 
+the simple roots of the Lie algebra of the isotropy subgroup of a point on the respective flag variety. In the present paper we only consider classical groups of large enough rank, hence we can summarize the relevant part of this result as follows:
+\begin{itemize}
+    \item for $\dim T\geq 3$, 
+    \end{itemize}
+    $$\mathrm{Aut}\, \Fl (\underline{d},T)\simeq \begin{cases} \Pro \GL(T) \rtimes \Zp_2 \text{ if } \underline{d}=(d^0=0,~d^1,~d^2,~\ldots,~d^s,~d_n^{s+1}=\dim T)\text{ satisfies  }  %d^i-d^{i-1}=d_{\dim T-i}-d_{\dim T - i -1} \text{ for all } i\leq \left[ \frac{\dim T}{2} \right] \text{ (here } d_{0}=0 \text{)}
+    \\ \text{ the condition } d^i-d^{i-1}=d^{s+2-i}-d^{s+1-i}\text{ for all } 1\leq s\leq n+1
+    \\
+    \PGL(T) \text{ in all other cases. } \end{cases}$$ 
+    \begin{itemize}
+    \item for $\dim T\geq 8$, $\mathrm{Aut}\, \FlO (\underline{d},T)\simeq \Orth (T)$, except for $\GraO(\frac{\dim T}{2},T)$ where $\mathrm{Aut}\, \GraO(\frac{\dim T}{2},T)\simeq \SO (T)$, and for $\GraO(\frac{\dim T-1}{2},T)$ where $\mathrm{Aut}\, \GraO(\frac{\dim T-1}{2},T)\simeq \SO (T')$ for $\dim T'=\dim T +1$.
+    \item for $\dim T\geq 4$, $\mathrm{Aut}\, \FlS(\underline{d},T)\simeq \Sp(T)$, except for $\GraS(1,T)$ where  $\mathrm{Aut}\,\GraS(1,T)\simeq \Pro \GL(T)$.
+\end{itemize}
+Based on the above exception concerning $\GraO\left(\frac{\dim T -1}{2},~T\right)$ for $\dim T\in 2\Zp_{>0}+1$, in what follows we will automatically assume that this case is excluded from consideration. This leads to no loss of generality as $\GraO\left(\frac{\dim T -1}{2},~T\right)$ is isomorphic to $\GraO\left(\frac{\dim T'}{2},~T'\right)$ where $T'$ is an orthogonal space of dimension $\dim T+1$.
+
+A nice class of embeddings of flag varieties 
+$\Fl(\underline{d}_1,T_1)\hookrightarrow \Fl(\underline{d}_2,T_2)$ for $\dim T_1<\dim T_2$ is the class of standard extensions. Embeddings of ind-grassmannians are discussed in detail in \cite{PenkovTikhomirov1}, and of arbitrary flag varieties in \cite{PenkovTikhomirov2}. %The reader will have to refer to these papers in order 
+Here we just recall a definition and a basic fact needed to understand our arguments in Section \ref{sect:proof_theorem_1_for_ind-grassmannians}, \ref{sect:proof_theorem_1_in_the_general_case}, \ref{sect:proof_theorem_2_isotropic_case}.% in full detail. Here we just recall the definition of a strict standard extension.
+
+\defi{\label{descrn of st eTt}\begin{itemize}
+    \item[a)] An embedding \begin{equation*}
+    \eta \colon \Fl(d^1_1,\ldots,d^k_1,T)\hookrightarrow 
+\Fl(d^1_2,\ldots,d^l_2,T'),
+\end{equation*} respectively, \begin{equation*}\eta\colon \FlO(d^1_1,\ldots,d^k_1,T)\hookrightarrow \FlO(d^1_2,\ldots,d^l_2,T'),\end{equation*} respectively, \begin{equation*}\eta\colon \FlS(d^1_1,\ldots,d^k_1,T)
+\hookrightarrow \FlS(d^1_2,\ldots,d^l_2,T')\end{equation*} %is a nonconstant strict standard extension corresponding to a surjection
+is a \emph{strict standard extension} if there exists a surjection
+\begin{equation*}p\colon\{0,1,\ldots,l,l+1\}\to
+\{0,1,\ldots,k,k+1\}\end{equation*} %Define the flag $(0\subset W_1\subset\ldots\subset W_{\tilde{k}}\subset V')$ by setting $W_i:=\ker\varepsilon_i$. Then there exists a direct sum decomposition 
+satisfying $p(i)\leq p(j)$ for $i<j$, together with an isomorphism
+\begin{equation}\label{direct sum with W}
+V'=V\oplus \widehat{W},
+\end{equation}
+satisfying $\widehat{W}=V^{\bot}$ in the orthogonal and symplectic 
+case, %, and satisfying $W_i\subset \widehat{W}$, $U_i\supset V$ for all $i$ with $\varepsilon_i\ne0$, and the nonzero operators $\varepsilon_i\colon U_i\to V$ are just projections onto $V$ via the decomposition \eqref{direct sum with W} 
+ and with a flag $0\subset W_1\subset\ldots\subset W_{\tilde{k}}\subset\wh W$ containing also the spaces $W^{\perp}_i$ for $1\leq i \leq \tilde{k}$, such that $\eta$ has the form
+\begin{equation}\label{phi(...)1}
+\eta\big(0\subset V_{p(1)}\subset\ldots\subset 
+V_{p(l)}\subset V\big)=
+\big(0\subset V_{p(1)}\oplus W_1\subset\ldots\subset 
+V_{p(l)}\oplus W_{l}\subset V'\big).
+\end{equation}
+\item[b)] An embedding $$\eta\colon \Fl(d^1_1,~\ldots,~d^k_1,~T)\hooklongrightarrow \Fl(d^1_2,~\ldots,~d^l_2,~T')$$
+is a \emph{standard extension} if after composing with one of the duality isomorphisms
+$$\Fl(d^1_1,~\ldots,~d^k_1,~T)\simeq \Fl(\dim T -d^k_1,~\ldots,~\dim T -d^1_1,~T^* ),$$
+$$\Fl(d^1_2,~\ldots,~d^l_2,~T')\simeq \Fl(\dim T' -d^l_2,~\ldots,~\dim T' -d^1_2,~{T'}^* )$$
+$\eta$ becomes a strict standard extension. For varieties of isotropic flags, standard extension and strict standard extension are synonyms.
+\end{itemize}}
+
+The following theorem follows directly from Corollary 4.4 %, Theorem 1, Corollary 3.12, and Proposition 3.15 
+in \cite{PenkovTikhomirov2}.
+
+\theopwop{\label{theorem:P}
+Let $X_1\hookrightarrow X_2$ and $Y_1\hookrightarrow Y_2$ be embeddings of flag varieties or of isotropic flag varieties, such that $Y_1$ is the image of $X_1$ under some isomorphism $\vfi\colon X_2 \rightarrow Y_2$. Then the embedding $Y_1\hookrightarrow Y_2$ is a standard extension whenever the embedding $X_1\hookrightarrow X_2$ is a standard extension.}
+
+
+
+We need to recall also the notion of an ind-variety of isotropic generalized flags. There are several cases. If a symmetric non-degenerate form $(\cdot,\cdot)$ on $V$ is given, then there are two types of relevant bases $\widetilde{E}$ we consider: $$\{ e_i \}_{i\in \mathbb{Z}}\text{ with } (e_i,~e_{-i})=1\text{ for  all }i,~(e_i,~e_k)=0\text{ for }k\neq -i,$$ %$$(e_0,~e_0)=1,~ (e_0,~e_{j})=0\text{ for }j\in \pm A,$$ 
+or \begin{equation}\label{formula:second_basis}
+\{e_i\}_{i\in \mathbb{Z}\setminus\{0\}}\text{ with }(e_i,~e_{-i})=1 \text{ for all }i\in \mathbb{Z}_{>0},~ (e_i,~e_k)=0\text{ for }k\neq -i.
+\end{equation}
+ In the case of a symplectic non-degenerate form on $V$, we consider bases satisfying (\ref{formula:second_basis}) (here $(e_{-i},e_i)=-1$ for $i\in \mathbb{Z}_{>0}$). %with the condition $(e_{i},~e_{-i})=1$ for all $i$ replaced by $(e_{i},~e_{-i})=1$ for $i\in \mathbb{Z}_{>0}$. 
+ We refer to bases as above as \emph{isotropic bases} of $V$. An \emph{isotropic generalized flag} in $V$ is by definition a generalized flag $W=\{ W_{\alpha} \}$ in $V$ such that each space $W_{\alpha}$ is either isotropic or coisotropic and  %for each $\alpha$, 
+$W_{\alpha}$ belongs to $W$ if and only if $W^{\perp}_{\alpha}=\{ w'\in V\mid (w',w)=0\text{ for all }w\in W_{\alpha} \}$ belongs to $W$. If $W$ is an $E$-compatible isotropic generalized flag in $V$, then by  definition, $\FlO (W,\widetilde{E},V)$ in the case of a symmetric form, or $\FlS(W,\widetilde{E},V)$ in the case of a symplectic form, consists of all isotropic generalized flags in $V$ which are $\widetilde{E}$-commensurable with $W$. %Here $\widetilde{E}$ is an isotropic basis as above.
+In all cases, $\FlO(W,\widetilde{E},V)$ or, respectively, $\FlS(W,\widetilde{E},V)$ is a direct limit of finite-dimensional varieties of isotropic flags under standard extensions.
+
+%\theopwop{\label{theorem:P}\begin{itemize}
+%    \item[\textup{a)}] Let $\eta\colon \Gra(d,T)\hookrightarrow \Gra(f,T')$ be an embedding of finite-dimensional grassmannians\textup, where \linebreak $\dim T < \dim T'$. Assume that $\eta^*\mathcal{O}_{\Gra(f,T')}(1)\cong \mathcal{O}_{\Gra(d,T)}(1)$ and that $\eta$ does not factor through a projective subspace of $\Gra(f,T')$. Then\textup, after a possible replacement of $\Gra(d,T)$ by $\Gra(\dim T-d,T^*)$ and\textup/or $\Gra(f,T')$ by  $\Gra(\dim T'-f,{T'}^*)$\textup, $\eta$ becomes a strict standard extension.
+%    \item[\textup{b)}] Let $\eta\colon \GraO(d,T)\hookrightarrow \GraO(f,T')$ or $\eta\colon \GraS(d,T)\hookrightarrow \GraS(f,T')$ be an embedding of isotropic grassmannians. Assume that $\eta^*\mathcal{O}_{\GraO(f,T')}(1)\cong \mathcal{O}_{\GraO(d,T)}(1)$ or\textup, respectively\textup, $\eta^*\mathcal{O}_{\GraS(f,T')}(1)\cong \mathcal{O}_{\GraS(d,T)}(1)$. If $\eta$ does not factor through an ordinary grassmannian \textup(possibly\textup, a projective space\textup) or a certain type of quadric in $\GraO(f,T')$ or $\GraS(f,T')$\textup, then $\eta$ is a strict standard extension.
+%\end{itemize}}
+
+%An explicit description of the relevant quadrics and grassmannians embedded in $\GraO(f,T')$ and $\GraS(f,T')$ can be found in \cite{PenkovTikhomirov1}.
+
+%\corowop{\label{corollary:strict_standard_extension}\begin{itemize}
+ %   \item[\textup{a)}] Let $X=\ilm X_n$ be an ind-variety arising as a direct limit of embeddings of grassmannians \begin{equation*}
+  %      X_1=\Gra(d_1,T_1)\xhookrightarrow[]{\eta_1} X_2=\Gra(d_2,T_2)\xhookrightarrow[]{\eta_2}\ldots \xhookrightarrow{\eta_{i-1}} X_i=\Gra(d_i,T_i) \xhookrightarrow{\eta_{i}}\ldots
+ %   \end{equation*}  
+  %  Assume that $\eta^*_i\mathcal{O}_{X_{i+1}}(1)\cong \mathcal{O}_{X_{i}}(1)$ for all $i$. If $X$ is not isomorphic to the infinite projective space $\mathbb{P}^{\infty}$\textup, then\textup, after possibly replacing $T_i$ by an isomorphic vector space and $d_i$ by $\dim T_i-d_i$\textup, %one can choose a subsequence $k_1$, $k_2,\ldots$ of $1$, $2$, $3,\ldots$ such that each embedding
+   %  the embeddings $\eta_{n}$ become strict standard extensions for $n\gg 0$.
+    %\item[\textup{b)}] Let $X=\GraO(W,\widetilde{E},V)$ or $X=\GraS(W,\widetilde{E},V)$\textup, and let $X=\ilm X_i$ for a sequence of embeddings
+%    \begin{equation*}
+%        X_1 \xhookrightarrow[]{\eta_1} X_2 \xhookrightarrow[]{\eta_2}\ldots \xhookrightarrow[]{\eta_{i-1}} X_i \xhookrightarrow[]{\eta_i} \ldots
+%    \end{equation*}
+%    satisfying $\eta^*_i\mathcal{O}_{X_{i+1}}(1)\cong \mathcal{O}_{X_{i}}(1)$ for all $i$\textup, where $X_i=\GraO(d_i,T_i)$ or\textup, respectively\textup,\break $X_i=\GraS(d_i,T_i)$ for some $d_i$ and some $T_i$. Then if $X\ncong \Gra(W',T')$ for any $W'$ and $T'$\textup, %one can choose a subsequence $k_1$, $k_2,\ldots$ of $1$, $2$, $3,\ldots$ such that 
+%     the embeddings $\eta_{n}$ are strict standard extensions for $n\gg 0$.
+%\end{itemize}}
+
+
+\sect{Proof of Theorem \ref{theorem:1} for ind-grassmannians}\label{sect:proof_theorem_1_for_ind-grassmannians}
+
+%\sst{The automorphism group of the ind-grassmannian $\Gra(W,\widetilde{E},V)$} 
+We start by proving Theorem \ref{theorem:1} under the assumption that %now consider in detail the case when 
+the generalized flag $W$ has exactly one proper subspace, which we also denote by $W$. In what follows, we write most of the time $\Gra(W,E,V)$ instead of $\Gra(W,\widetilde{E},V)$, where $E=\widetilde{E}\cap W$. The set $E$ is a basis of $W$, and the ind-variety $\Gra(W,\widetilde{E},V)$ depends only on $E$ and not on the entire basis $\widetilde{E}$. We feel that this notation makes the argument more transparent. Also, the space $W$ is fixed and we write $V_E$ and $V_{*E}$ instead of $V^W_{\widetilde{E}}$ and $V^W_{*\widetilde{E}}$, respectively.
+
+ Recall that $\Gra(W,E,V)$ is defined as the direct limit of strict standard extensions \begin{equation*}
+    \Gra(d_n,V_n) \hooklongrightarrow \Gra(d_{n+1},V_{n+1})
+\end{equation*}
+%where $\dim V_n=n$ and $d_{n+1}$ equals $d_n$ of $d_n+1$. 
+for some $d_n$ and some subspaces $V_n\subset V$, $\dim V_n\gee n$, $\ilm V_n=V$. If $d_n$ stabilizes at $k\in\mathbb{Z}_{>0}$ for large $n$, then $\ilm \Gra(d_n,V_n)=\Gra(k,V)$ is the ind-grassmannian of all $k$-dimensional subspaces in $V$. If $\dim{V_n}-d_n$ stabilizes at $k>0$, then $\Gra(W,E,V)$ is isomorphic to $\Gra(k,V)$ as an ind-variety via the map
+\begin{equation*}
+        \delta \colon \Gra(W,E,V) \rightarrow \Gra(k,V_*),
+\end{equation*}
+\begin{equation*}
+        W'\longmapsto W'^{\perp}\subset V_*,
+\end{equation*}
+ where $W'$ denotes a variable point of $\Gra(W,E,V)$ and ${W'}^{\perp}:=\{ \alpha \in V_*\mid 
+\alpha(w')=0~\forall~w' \in W' \}$.
+ 
+ %It follows from Theorem \textbf{X} in \cite{PenkovTikhomirov1} 
+ %Corollary \textbf{?} states that if $\ilm \Gra(d_n,T_n)\simeq \Gra(W,E,V)$ for some vector spaces $T_n$, $\dim T_n=n$, and some $d_n<n$, then, by choosing a subsequence $k_1$, $k_2,\ldots$ of the sequence $1$, $2,\ldots$, and possibly replacing $\Gra(d_{k_n},T_{k_n})$ by $\Gra(\dim T_{k_n}-d_{k_n},T^*_{k_n})$, we can assume that the embeddings \begin{equation*}
+%     \Gra(d_{k_n},T_{k_n})\hooklongrightarrow \Gra(d_{k_{n+1}},T_{k_{n+1}})
+% \end{equation*}
+% are given by strict standard extensions. 
+%Furthermore, it is a well-known fact \textbf{[?]} 
+As we already mentioned, the automorphism groups of (finite-dimensional) grassmannians have been described in the classical paper \cite{Chow}. This description implies that if
+ \begin{equation}\label{formula:isomorphism_of_grassmannians}
+     \alpha \colon \Gra(d_n,T_n)\stackrel{\sim}{\rightarrow}
+    \Gra(d_n,T'_n)
+ \end{equation}
+ is any isomorphism of grassmannians, where $\dim T_n=\dim T'_n$, then the pullback $\alpha^*S'_n$ of the tautological bundle $S'_n$ on $\Gra(d_n,T'_n)$ is isomorphic to the tautological bundle $S_n$ on $\Gra(d_n,T_n)$, or to the bundle $(\widetilde{T}_n/S_n)^*$ in case $2d_n=n$, where $\widetilde{T}_n$ is the trivial bundle on $\Gra(d_n,T_n)$ with fiber $T_n$. Moreover, if $\alpha^*S'_n\simeq S_n$, then the isomorphism (\ref{formula:isomorphism_of_grassmannians}) is determined by the linear operator $\eta \colon(T'_n)^*\rightarrow T^*_n$ which it induces via pullback: we have $\alpha(T_{d_n})=\eta^*(T_{d_n})$ where $T_{d_n}\in \Gra(d_n,T_n)$ and the operator $\eta^*$ is dual to $\eta$. Recall also that any global endomorphism of the bundle $S_n$ or $(\widetilde{T}/S_n)^*$ is scalar. 
+ 
+ Set $X_n=\Gra(d_n,V_n)$. Then $\Gra(W,E,V)=\ilm X_n$. In the rest of the argument we assume in addition that $\dim W=\codim_V W=\infty$ and that $d_n=n$, $\dim V_n=2n$. This is the case of the Sato grassmannian. The remaining cases where $\dim W<\infty$ or $\codim_V W<\infty$ have been considered in \cite{Penkov}, and it has been proved there that $\mathrm{Aut}\,\Gra(W,E,V)\cong\Pro \GL(V)$ for $\dim W<\infty$, and $\mathrm{Aut}\,\Gra(W,E,V)\cong\Pro \GL(V_*)$ for $\codim W<\infty$. This is in agreement with Theorem \ref{theorem:1}, as in these two cases $W$ is not symmetric and there is an isomorphism \begin{equation}\label{formula:group_special_cases}
+     \GL(\widetilde{E},V)\cdot \St_W \cong\begin{cases} \GL(V) \text{ for } \dim W<\infty \\ \GL(V_*) \text{ for } \codim_V W<\infty.\end{cases}
+ \end{equation} 
+We leave the proof of (\ref{formula:group_special_cases}) as an exercise to the reader. %Therefore we can assume that $n$ runs over $2\mathbb{Z}_{>0}$ and $d_n=\frac{n}{2}$ for every $n$.
+
+Our first step will be to prove that the group of automorphisms of the ind-variety $\Gra(W,E,V)$ is a subgroup of $\Pro(\GL(\widetilde{E},V)\cdot \St_W)\rtimes \mathbb{Z}_2$. Let $\widetilde{\varphi}\colon \Gra(W,E,V)\rightarrow \Gra(W,E,V)$ be an arbitrary automorphism. Denote by $Y_n$ the image of $X_n$, that is, $\widetilde{\varphi}(X_n)=Y_n$. Clearly, $Y_n$ is a grassmannian isomorphic to $X_n$. Moreover, the embeddings $Y_n\hookrightarrow Y_{n+1}$ can be assumed to be strict standard extensions by Theorem \ref{theorem:P}. %Since $\Gra(W,E,V)$ is not isomorphic to $\mathbb{P}^{\infty}$, by Corollary \ref{corollary:strict_standard_extension}, a) we can assume that for %some subsequence $l_n$ 
+%large enough $n$ the embeddings $Y_{n}\hookrightarrow Y_{n+1}$ are strict standard extensions. %As the reader can check, this enables us to assume that in fact all embeddings $Y_n\hookrightarrow Y_{n+2}$ are strict standard extensions.
+%Since we can ignore small values of $n$, we will assume that $Y_n\hookrightarrow Y_{n+1}$ is a standard extension for any $n$. 
+
+Next, we have two possibilities: for some $n$, the isomorphism \begin{equation*}
+    \widetilde{\varphi}_n:=\widetilde{\vfi}|_{X_n}\colon X_n\longrightarrow Y_n
+\end{equation*}
+has the property \begin{equation}\label{formula:first_possibillity_for_varphi_tilde}
+    \widetilde{\varphi}^*_nS_{Y_n}\cong \left(\widetilde{V}_n/S_n\right)^*,
+\end{equation}
+where $S_n$ is the tautological bundle on $X_n$ and $S_{Y_n}$ is the tautological bundle on $Y_n$, or the property \begin{equation}\label{formula:second_possibillity_for_varphi_tilde}
+    \widetilde{\varphi}^*_nS_{Y_n}\cong S_n
+\end{equation}
+for all $n$. Since our chains of embeddings $X_n\hookrightarrow X_{n+1}$ and $Y_n\hookrightarrow Y_{n+1}$ are strict standard extensions, if the isomorphism (\ref{formula:first_possibillity_for_varphi_tilde}) holds for some $n$, it must hold for all $n$. However, if this happens we can compose our automorphism $\widetilde{\varphi}$ with the following automorphism which represents an element of $\mathbb{Z}_2$ in the semidirect product from the statement of the theorem:\begin{equation*}
+    \delta:\Gra(W,\widetilde{E},V)\longmapsto \Gra(W^{\perp},\widetilde{E}^*,V_*)\longrightarrow \Gra(W,\widetilde{E},V),
+\end{equation*}
+where the left arrow sends $W$ to $W^{\perp}\subset V_*$ and the right arrow is induced by an appropriate linear isomorphism \begin{equation*}
+    V_*\longrightarrow V%, e^*_i\longmapsto e_i.
+\end{equation*} 
+which maps $W^{\perp}$ to $W$. Option (\ref{formula:second_possibillity_for_varphi_tilde}) certainly holds for the composition $\delta \circ \widetilde{\varphi}$, so without loss of generality we can assume in the rest of the argument that (\ref{formula:second_possibillity_for_varphi_tilde}) holds.
+
+The latter assumption implies \begin{equation}\label{formula:image_of_sheaf}
+    \widetilde{\varphi}^*_n S^*_{Y_n}= S^*_n
+\end{equation}
+for all $n$. We write equality, as such an isomorphism is determined up to a scalar $c_n$, and we assume that the scalars $c_n$ are chosen in a way compatible with the restriction
+maps
+\begin{equation*}%\label{formual:diagram_with_H_and_S}
+    \begin{tikzcd}
+\widetilde{\varphi}^*_n S^*_{Y_n}|_{X_{n-1}} \arrow[d,equal] \arrow{r}
+& \widetilde{\varphi}^*_{n-1}S^*_{Y_{n-1}} \arrow[d,equal] \\
+S^*_n|_{X_{n-1}} \arrow{r}
+& S^*_{n-1}.
+\end{tikzcd}
+\end{equation*}
+%\begin{equation*}
+%\widetilde{\varphi}^*_n (S^*_{Y_n})|_{X_{n-1}} \longrightarrow \widetilde{\varphi}^*_{n-1}(S^*_{Y_{n-1}}),
+%\end{equation*}
+%%    S^*_n|_{X_{n-1}} \longrightarrow S^*_{n-1}.
+%\end{equation*}
+Then, by our above remark that isomorphisms of grassmannians are encoded by linear operators, the isomorphisms $\widetilde{\vfi}_n\colon X_n\stackrel{\sim}{\rightarrow} Y_n$ are recovered by a choice of compatible invertible linear operators \begin{equation*}
+    \varphi^*_n\colon (V'_n)^*=\mathrm{H}^0(Y_n,S^*_{Y_n})\stackrel{\sim}{\rightarrow} \mathrm{H}^0(X_n,S^*_n)=V^*_n. 
+\end{equation*}
+The operators $\vfi^*_n$ are dual to unique operators $\vfi_n=(\vfi^*_n)^*\colon V_n \rightarrow V'_n$ which we will also consider.
+
+Since both chains of embeddings $X_n\hookrightarrow X_{n+1}$ and $Y_n\hookrightarrow Y_{n+1}$ are strict standard extensions, we have $\ilm V'_n=V=\ilm V_n$, and consequently, $\plm (V'_n)^*=V^*=\plm V^*_n$. Therefore, the operators $\varphi^*_n$ induce a linear operator \begin{equation*}
+    \Phi\colon V^*\rightarrow V^*,
+\end{equation*}
+and more precisely, a commutative diagram
+
+%Moreover, we can assume that the inclusion $X_n\mapsto X_{n+1}$ is a standard extension.
+
+%Next, let $Y_n=\widetilde{\varphi}(X_n)$. By Theorem \textbf{X} in \cite{PenkovTikhomirov1} we can assume also that embedding $Y_n\mapsto Y_{n+1}$ is a standard embedding for any $n$. In more detail, let $V=\ilm V_n$, $X_n=\Gra(d_n,V_n)$. Then $Y_n=\Gra(d_n,\varphi^*_n(V_n))$, where $\varphi:=\plm \varphi^*_n$ is the linear operator induced on $V^*=\plm \mathrm{H^0}(X_n,\Lo_n)=\plm V_n^*$. Since the inverse limit sheaf $\ilm \Lo_n$ is invariant under the automorphism $\widetilde{\varphi}$, we can identify $\plm \varphi_n^*(V_n)^*$ with $V^*$ and we get a commutative diagram 
+
+\begin{equation}\label{formula:big_commutative_diagram}
+    \begin{tikzcd}
+\begin{array}{c}
+     V^*\\
+     \vdots
+\end{array} \arrow[d]  
+& \begin{array}{c}
+     V^*\\
+     \vdots
+\end{array}   \arrow[d]  \arrow[yshift=2.0ex,l,"\Phi"'] \\
+V^*_n \arrow[d]
+& (V'_{n})^* \arrow[l,"\varphi^*_{n}"'] \arrow[d]\\
+V^*_{n-1} \arrow[d]
+& (V'_{n-1})^* \arrow[l,"\varphi^*_{n-1}"'] \arrow[d]\\
+\vdots & \vdots \\
+\end{tikzcd}
+\end{equation}
+
+
+
+
+The diagram (\ref{formula:big_commutative_diagram}) encodes the automorphism $\widetilde{\vfi}$ in the following way. Let $W'=\ilm(W'\cap V_n)$ be a point of $\Gra(W,E,V)$. Then \begin{equation}\label{formula:action_tilde_vfi_on_subspace}
+    \widetilde{\vfi}(W')=\ilm \vfi_n(W'\cap V_n)=\ilm  \left(\left(\varphi_n^*\right)^{-1}\left((W'\cap V_n)^{\perp}\right)^{\perp}\right),
+\end{equation} where the orthogonal to $W'\cap V_n$ is taken in $V^*_n$ and the orthogonal to $\left(\varphi_n^*\right)^{-1}\left(\left(W'\cap V_n\right)^{\perp}\right)$ is taken in $V'_n$.
+
+Next, it is essential to observe that the subspace $V_{* E}\subset V^*$ is nothing but the subspace of global sections $\mu$ of the sheaf $\plm S^*_n$ satisfying the condition: the value of %such a global section
+$\mu$ at any point $W'\in \Gra(W,E,V)$ is a linear function on $W'$ which belongs to the subspace $W'_*\subset {W'}^*$. Here $W'_*$ is defined in terms of a basis of $W'$ which differs from $E$ by finitely many vectors ($W'_*$ is the span of the system of linear functionals dual to such a basis). Note that, for each $W'\in \Gra(W,E,V)$, the subspace $W'_*\subset W'^*$ is determined solely by the set $\Gra(W,E,V)$, and hence the above subspace of global sections $\mu$, i.e., the space $V_{*E}$, must be invariant under the operator $\Phi$. %induced by automorphisms of $\Gra(W,E,V)$ 
+Next, the subspace $V_E$ is the counterpart of the space $V_{*E}$ for the ind-grassmannian $\Gra(W^\perp,\wt E^*,V_*)$, where $V_*$ is defined by the fixed extension $\widetilde{E}$ of $E$ to a basis of $V$, and $E^*$ are the linear functions in $\widetilde{E}^*$ which do not vanish on $W$. %Note that the space $V_E$ is the exact analogue of the space $V_{*E}$ for the ind-grassmannian $\Gra(W^{\perp},E^*,V_*)$.
+Since $\Gra(W^\perp,\wt E^*,V_*)$ is isomorphic to $\Gra(W,E,V)$, the space $V_E$ is also invariant under the linear map $\Phi'\colon (V_*)^*\rightarrow (V_*)^*$ induced by the automorphism $\widetilde{\varphi}$ of $\Gra(W,E,V)$. Moreover, given $\widetilde{\varphi}$, the linear operator $\Phi'$ is nothing but the dual operator $\Phi^*$ restricted to the subspace $(V_*)^*$ of $V^{**}$.
+
+We have shown that any automorphism $\widetilde{\varphi}\colon \Gra(W,E,V)\rightarrow \Gra(W,E,V)$ satisfying (\ref{formula:second_possibillity_for_varphi_tilde}) induces a pair of invertible operators $\varphi:=\Phi'|_{V_{E}}\colon V_E\rightarrow V_E$ and $\overline{\varphi}:=\Phi|_{V_{*E}}\colon V_{*E}\rightarrow V_{*E}$ which determine an element of the Mackey group $ G(V_E,V_{*E})$. Moreover, if $\mathrm{Aut}^0\Gra(W,E,V)$ stands for the group of automorphisms of the ind-variety $\Gra(W,E,V)$ satisfying (\ref{formula:second_possibillity_for_varphi_tilde}), then   the assignment $\widetilde{\varphi}\longmapsto \varphi$, or equivalently $\widetilde{\varphi}\longmapsto \overline{\varphi}^{-1}$, defines an injective group homomorphism $$\varepsilon \colon \mathrm{Aut}^0\Gra(W,E,V)\hookrightarrow \Pro G(V_E,V_{*E}).$$
+
+We now check that the action of the image in $\Pro G(V_E,V_{*E})$ of $\mathrm{Aut}^0\Gra(W,E,V)$ is given by the formula \begin{equation*}
+	\widetilde{\varphi}\left(W'\right)=\overline{\varphi}^{-1}\left(W'^{\perp}\right)^{\perp}\cap V,
+\end{equation*}
+where $W'^{\perp}\subset V_{*E}$ and $\overline{\varphi}^{-1}\left( W'^{\perp}\right)^{\perp}\subset (V_{*E})^*$ (clearly, $V\subset (V_{*E})^*$). To do this, recall that  $\widetilde{\vfi}(W')$ is given by formula (\ref{formula:action_tilde_vfi_on_subspace}). %\begin{equation}\label{formula:action_tilde_vfi_on_subspace}
+%	\widetilde{\varphi}\left(W'\right)=\ilm \left(\varphi^{-1}_n\left(\left(W'\cap V_n\right)^\perp\right)^\perp\right).
+%\end{equation}
+Therefore, we need to verify that \begin{equation}\label{formula:two_ilm_are_equal}
+	\ilm \left(\left(\varphi^*_n\right)^{-1}\left(\left(W'\cap V_n\right)^\perp\right)^\perp\right)=\overline{\varphi}^{-1}\left(\left(\plm\left(\left(W'\cap V_n\right)^\perp\right)\right)^\perp\right) \cap V.
+\end{equation}
+However, formula (\ref{formula:two_ilm_are_equal})  follows from the observation that both its left-hand and right-hand sides coincide with the subspace of vectors in $V$ which vanish on $\left(\varphi^*_n\right)^{-1}\left(\left(W'\cap V_n\right)^\perp\right)$ whenever they belong to $V_n$; we consider here vectors in $V_n$ as %vectors are 
+linear functions on $V^*_n$.
+
+In conclusion, the image of $\mathrm{Aut}^0\Gra(W,E,V)$ in $\Pro G(V_E,V_{*E})$ is a subgroup of $\Pro G(V_E,V_{*E})$ which acts on $\Gra(W,E,V)$ via the formula (\ref{formula:two_ilm_are_equal}). 
+Next, we note that since $\GL(\widetilde{E},V)$ acts transitively on $\Gra(W,E,V)$, for any $\widetilde{\vfi}\in \mathrm{Aut}^0\Gra(W,E,V)$ there are $\varkappa\in \GL(\widetilde{E},V)$ and  $\widetilde{\vfi}_W\in \mathrm{Aut}^0\Gra(W,E,V)$ %and $\theta\in \St_W$
+such that $\widetilde{\vfi}_W(W)=W$ and $\widetilde{\vfi}=\varkappa\circ \widetilde{\vfi}_W$. 
+%$\beta$ is the image in $\Pro G(V_{*E},V_E)$ of $\theta \varkappa $. 
+Indeed if %$\vfi \in  G^0(V_{*E},V_E)$ and
+$\widetilde{\vfi}(W)=W'$ for $W'\in \Gra(W,E,V)$, then $\widetilde{\vfi}=   \varkappa^{-1}\circ \varkappa \circ \widetilde{\vfi}$ where $\varkappa\in \GL(\widetilde{E},V)$ satisfies $\varkappa(W')=W$.
+Consequently,  $\vfi=\varkappa^{-1}\vfi_W$ for $\vfi_W\in \St_W$, in other words,   the image of $\varepsilon$ lies in $\Pro(\GL(\widetilde{E},V)\cdot \St_W)$. 
+
+To complete the proof, we need to show that any operator $\vfi \in \GL(\widetilde{E},V)\cdot \St_W$ determines a well-defined automorphism of $\Gra(W,E,V)$. In the Appendix we introduce the degree $d(\vfi)$ of an operator $\vfi$ and show that the space $\vfi \cdot W'=\overline{\vfi}^{-1}({W'}^{\perp})^{\perp}\cap V$ is $\widetilde{E}$-commensurable with $W$ for any $\vfi \in  G(V_E,V_{*E})$ such that $d(\vfi)=0$. Denote by $G^0(V_E,V_{*E})$ the group of all operators $\vfi\in G(V_E,V_{*E})$ with $d(\vfi)=0$.
+
+We have to convince ourselves that the action of $G^0(V_E,V_{*E})$
+on $\Gra(W,E,V)$ is by automorphisms of ind-varieties, and not merely by bijections of the set $\Gra(W,E,V)$. Let $V=W\oplus U$ where $\widetilde{E}\cap U$ spans $U$. Recall that our fixed nested finite-dimensional spaces $V_1 \subset \ldots \subset V_n \subset V_{n+1}\subset \ldots$ are spanned by elements of $\widetilde{E}$ and $\Gra(W,E,V)=\ilm \Gra(d_n,V_n)$ where $d_n=\dim V_n\cap W$. The embeddings $X_n=\Gra(d_n,V_n)\hookrightarrow \Gra(d_{n+1},V_{n+1})=X_{n+1}$ are strict standard extensions \begin{equation*}
+    F_{d_n}\longmapsto F_{d_n}\oplus W_{n|n+1},
+\end{equation*}
+where $W_{n+1}=W\cap V_{n+1}=W_n\oplus W_{n|n+1}$ for $W_n=W\cap V_n$, and $W_{n|n+1}\cap \widetilde{E}$ spans $W_{n|n+1}$. Therefore we have a decomposition $V_{*E}={\overline{W}_{n}}_* \oplus V^*_n \oplus U^*_n$, where ${\overline{W}_{n}}_*$ is the $\widetilde{E}$-compatible direct complement of $V^*_n$ within $W_*+ V^*_n$ and $U^*_n$ is the dual of the $\widetilde{E}$-compatible direct complement $U_n$ of $W+V_n$ in $V$. Any invertible linear operator $\zeta\colon V_{*E}\rightarrow V_{*E}$ induces a decomposition\begin{equation*}
+    V_{*E}=\zeta({\overline{W}_{n}}_*)\oplus \zeta(V^*_n)\oplus \zeta(U^*_n),
+\end{equation*} 
+and hence an operator\begin{equation*}
+    \zeta_n\colon V^*_n:=V_{*E}/({\overline{W}_{n}}_*\oplus U^*_n)\longrightarrow V_{*E}/(\zeta({\overline{W}_{n}}_*)\oplus \zeta(U^*_n))=\zeta_n(V^*_n).
+\end{equation*}
+Moreover, we have $\zeta=\left(\plm\zeta_n\right)|_{V_{*E}}.$
+
+Each linear operator $\zeta_n$ induces an isomorphism of grassmannians \begin{equation*}
+    \Gra(d_n,\zeta_n(V^*_n)^*)\longrightarrow\Gra(d_n,V_n),
+\end{equation*}
+and the varieties $\Gra(d_n,\zeta_n(V^*_n)^*)$ form an ind-variety isomorphic to $\Gra(W,E,V)$. We conclude that, if $\ilm \Gra(d_n,\zeta_n(V^*_n)^*)=\Gra(W,E,V)$ then $\zeta$ induces an automorphism of the ind-variety $\Gra(W,E,V)$. Set now $\zeta:=\overline{\vfi}^{-1}$ for $\vfi\in G^0(V_E,V_{*E})$. Then $\zeta_n=\left(\vfi^*_n\right)^{-1}$ and $\zeta_n(V^*_n)^*=\vfi_n(V_n)$.  By the above mentioned result from the Appendix, we know that  $\vfi \cdot W'\in \Gra(W,E,V)$ whenever $\vfi \in G^0(V_E,V_{*E})$ and $W'\in \Gra(W,E,V)$.
+Therefore $\ilm\Gra(d_n,\varphi_n(V_n))=\Gra(W,E,V)$,
+and we have shown that $\Pro G^0(V_E,V_{*E})\subset \Imm\varepsilon$. 
+
+Finally, Theorem A.\ref{theoapp:d_0_G_k_G_k} (i) from the Appendix implies that $\St_W\subset G^0(V_E,V_{*E})$, and hence that also $\GL(\widetilde{E},V) \cdot \St_W \subset G^0(V_E,V_{*E})$. Consequently, $\GL(\widetilde{E},V) \cdot \St_W=G^0(V_E, V_{*E})$ and $\GL(\widetilde{E},V) \cdot \St_W$ is a group. In particular, $\GL(\widetilde{E},V))\cdot \St_W=St_W\cdot \GL(\widetilde{E},V))$. The proof is now complete as we have shown that $\Imm\varepsilon=\Pro(\GL(\widetilde{E},V) \cdot\St_W ).$% and the proof is complete. 
+\hspace{\fill}$\square$\par
+\corop{If $\dim W=\codim_V W =\infty$, the group $\mathrm{Aut}\Gra(W,E,V)$ is isomorphic to projectivization of the connected component of unity in the group Japanese $\GL(\infty)$.}{We proved that $\mathrm{Aut}\Gra(W,E,V)\cong \Pro G^0(V_E, V_{*E})$. As pointed out in the Appendix, the group $G^0(V_E, V_{*E})$ is isomorphic to the connected component of unity in the group Japanese $\GL(\infty)$.}
+
+%\nota{In the case where $\dim W<\infty$, the action (\ref{formula:action_on_flag}) of $\vfi\in  G(V^*,V)=\GL(V)$ on $\Gra(W,\widetilde{E},V)$ is induced simply by the linear operator $\overline{\varphi}\colon V_E=V\rightarrow V_E=V$. However, if $\dim W=\infty$, the subspace $V\subset V_E$ is not $\overline{\vfi}$-invariant and $\vfi \cdot W\neq \overline{\vfi}(W')$ for general points $W'\in \Gra(W,E,V)$. In other words, unless $\dim W<\infty$, the action (\ref{formula:action_on_flag}) of the group $G^0(V_{*E},V_E)$ on $\Gra(W,E,V)$ does not coincide with the action of the linear operator $\overline{\vfi}$ on the subspaces $W'\subset V_E$ for $W'\in \Gra(W,E,V)$. %in general the action (\ref{formula:action_on_flag}) %does not arise from the restriction of 
+%cannot be replaced by considering the restriction of the linear operator $\overline{\vfi}\colon V_E\rightarrow V_E$ to~$V$. This is already clear in the case where $W$ has finite codimension in $V$. Here $V_E=(V_*)^*$ and the subspace $V\subset V_E$ is not $\overline{\vfi}$-invariant. %subspace of $V_E$.
+%}
+
+
+
+
+
+
+
+\sect{Proof of Theorem \ref{theorem:1} in the general case}\label{sect:proof_theorem_1_in_the_general_case}
+
+\emph{Step 1. Reduction to the case of an automorphism which preserves all inverse limits of dual tautological bundles.} Consider the ind-variety $\Fl(W,\widetilde{E},V)$ for our fixed generalized flag $W=\{ W_{\alpha}\}$ compatible with the fixed basis $\widetilde{E}$ of $V$. Fix an exhaustion of $\Fl(W,\widetilde{E},V)$ as a direct limit $\ilm \Fl(\underline{d}_{n},V_{n})$ of strict standard extensions of finite-dimensional flag varieties $\Fl(\underline{d}_{n},V_{n})$. If the generalized flag $W$ is symmetric, then the exhaustion can be chosen so that each flag variety $\Fl(\underline{d}_{n},V_{n})$ is symmetric, i.e., the vector $(d_n^0=0,d^1_{n},d^2_{n},\ldots,d^s_{n},d_n^{s+1}=\dim V_{n})$ satisfies the condition $$d^i_{n}-d^{i-1}_{n}=d^{s+2-i}_{n}-d^{s+1-i}_{n}$$ for all $1\leq s\leq n+1$. If $W$ is not symmetric, then infinitely many vectors $\underline{d}_{n}$ are not symmetric, so (by passing to a subsequence of the sequence $\{n\}$) we can assume that all vectors $\underline{d}_{n}$ are not symmetric. 
+
+Let $\widetilde{\varphi}\colon \Fl(W,\widetilde{E},V) \rightarrow \Fl(W,\widetilde{E},V)$ be an automorphism. Set $X_n:=\Fl(\underline{d}_{n},V_{n})$ and let $Y_n=\widetilde{\varphi}(X_n)$. The varieties are finite-dimensional flag varieties, and there are fixed isomorphisms $\widetilde{\varphi}_n:=\widetilde{\varphi}|_{X_n}\colon X_n \stackrel{\sim}{\rightarrow} Y_n$. Moreover, Theorem \ref{theorem:P} implies that %the image of a standard embedding under an automorphism is also a standard embedding, therefore 
+the embeddings $Y_n\hookrightarrow Y_{n+1}$ are standard extensions. By replacing $Y_n$ or $Y_{n+1}$ by its dual flag variety we can further assume that the embeddings $Y_n\hookrightarrow Y_{n+1}$ are strict standard extensions. 
+
+Denote by $S^j_n$ and $S^j_{Y_n}$ the tautological bundles of rank $d^j_n$ on $X_n$ and $Y_n$, respectively. There are two possibilities: either
+\begin{equation}\label{formula:first_case_proof_theorem_1}
+    \widetilde{\varphi}^*_n S^j_{Y_n} \simeq S^j_n
+\end{equation}
+%for any tautological bundle $S_j$ (of rank $d^j_n$) on $X_n$
+for all $n$, or
+\begin{equation}\label{formula:second_case_proof_theorem_1}
+    \widetilde{\varphi}^*_n S^j_{Y_n}  \simeq (\widetilde{V}_n/S^{s+1-j}_n)^*
+\end{equation}
+for some $n=n_0$ and all $j$, $1<j\lee s$. Case (\ref{formula:second_case_proof_theorem_1}) can occur only if the vector $\underline{d}_{n_0}$ is symmetric. Moreover, then (\ref{formula:second_case_proof_theorem_1}) will necessarily hold for all $n>n_0$ due to the assumption that all embeddings $X_{n}\hookrightarrow X_{n+1}$ and $Y_{n}\hookrightarrow Y_{n+1}$ are strict standard extensions. In that case, we may as well assume that (\ref{formula:second_case_proof_theorem_1}) holds for all $n$.
+
+Similarly to the case of an ind-grassmannian, if (\ref{formula:second_case_proof_theorem_1}) holds for all $n$ we can compose $\widetilde{\varphi}$ with an automorphism \begin{equation*}
+    \delta: \Fl(W,\widetilde{E},V) \stackrel{\sim}{\longrightarrow} \Fl(W^{\perp},\widetilde{E}^*,V_*) \stackrel{\sim}{\longrightarrow} \Fl(W,\widetilde{E},V)
+\end{equation*}
+which maps $W$ first to $W^{\perp}$ and then maps $W^{\perp}$ to a point of $\Fl(W,\widetilde{E},V)$ under the isomorphism
+    $ \Fl(W^{\perp},\widetilde{E}^*,V_*) \stackrel{\sim}{\longrightarrow} \Fl(W,\widetilde{E},V)$
+induced by an appropriate linear isomorphism $V_*\rightarrow V$ mapping $\widetilde{E}^*$ to $\widetilde{E}$. Then the composition $\delta\circ\widetilde{\varphi}$ satisfies the condition (\ref{formula:first_case_proof_theorem_1}) for all $n$. Therefore, in order to prove Theorem \ref{theorem:1}, it suffices to prove that \begin{equation*}
+    \mathrm{Aut}^0\Fl(W,\widetilde{E},V)\simeq \Pro(\GL(\widetilde{E},V)\cdot \St_W)
+\end{equation*}
+where $\mathrm{Aut}^0\Fl(W,\widetilde{E},V)$ denotes the group of automorphisms of $\Fl(W,\widetilde{E},V)$ satisfying (\ref{formula:first_case_proof_theorem_1}) for all $n$.
+
+\emph{Step 2. From automorphisms to linear operators.} Since (\ref{formula:first_case_proof_theorem_1}) holds, the automorphism \begin{equation*}
+    \widetilde{\varphi}\colon \Fl(W,\widetilde{E},V) \rightarrow \Fl(W,\widetilde{E},V)
+\end{equation*} induces automorphisms \begin{equation}\label{formula:induced_automorphisms}
+    \widetilde{\varphi}_{\alpha}\colon \Gra(W_{\alpha},E_{\alpha},V)\rightarrow \Gra(W_{\alpha},E_{\alpha},V)
+\end{equation} 
+for each subspace $W_{\alpha}$ in $W$. In turn, the automorphisms (\ref{formula:induced_automorphisms}) induce linear operators, defined up to scalar multiples, \begin{equation*}
+    \Phi_{\alpha}:V^*\rightarrow V^*
+\end{equation*}
+as explained in Section \ref{sect:proof_theorem_1_for_ind-grassmannians}.
+
+We now point out that the operators $\Phi_{\alpha}$ can be chosen to coincide, i.e., to define a single operator
+\begin{equation*}
+    \Phi:V^*\rightarrow V^*
+\end{equation*}
+not depending on $\alpha$. This observation is justified as follows. Denote by $S^*_{\alpha}$ the pullback to $\Fl(W,\widetilde{E},V)$ of the inverse limit of the tautological bundles $S^*_{n}$ on $\Gra(W_{\alpha},E_{\alpha},V)$. Let $\alpha'<\alpha$ be two indices in the chain $W=\{W_{\alpha}\}$. Then the morphism of inverse limits $S^*_{\alpha}\rightarrow S^*_{\alpha'}$, arising from the respective morphism of inverse systems, induces a commutative diagram
+
+\begin{equation}\label{formual:diagram_with_H_and_S}
+    \begin{tikzcd}
+\mathrm{H}^0(\Fl(W,\widetilde{E},V),S^*_{\alpha}) \arrow[d,equal] \arrow{r}
+& \mathrm{H}^0(\Fl(W,\widetilde{E},V),S^*_{\alpha'}) \arrow[d,equal] \\
+V^* \arrow[r,equal,"id"]
+& V^*,
+\end{tikzcd}
+\end{equation}
+the vertical equalities being the identifications $V^*=\plm V^*_n=\plm \mathrm{H}^0(\Gra(d^{\gamma}_n,V_n),S^*_n)$ where\linebreak $\Gra(W_{\gamma},E_{\gamma},V)=\ilm \Gra(d^{\gamma}_n,V_n)$ for $\gamma=\alpha$ and $\gamma=\alpha'$, respectively.
+Therefore, for a fixed $\alpha$ and all $\alpha'<\alpha$, the spaces of the form $\mathrm{H}^0(S^*_{\alpha'})$ are identified with $V^*$ in a way compatible with the upper horizontal arrows of the diagrams (\ref{formual:diagram_with_H_and_S}). Next, the following diagram is commutative
+\begin{equation*}
+    \begin{tikzcd}
+    \mathrm{H}^0(\Fl(W,\widetilde{E},V),S^*_{\alpha}) \arrow[d,equal] \arrow{r}
+\arrow[bend right = 70]{ddd} & \mathrm{H}^0(\Fl(W,\widetilde{E},V),S^*_{\alpha'})  \arrow[bend left=70]{ddd} \arrow[d,equal] \\
+V^* \arrow[r,equal,"id"] \arrow[d, "\Phi_{\alpha}"']
+& V^* \arrow[d,"\Phi_{\alpha'}"]\\
+V^* \arrow[r,equal,"id"] \arrow[d,equal]
+& V^* \arrow[d,equal] \\
+\mathrm{H}^0(\Fl(W,\widetilde{E},V),\widetilde{\varphi}^*S^*_{\alpha})  \arrow{r}
+& \mathrm{H}^0(\Fl(W,\widetilde{E},V),\widetilde{\varphi}^* S^*_{\alpha'}), 
+    \end{tikzcd}
+\end{equation*}
+and this implies $\Phi_{\alpha}=\Phi_{\alpha'}$.
+
+\emph{Step 3. Injective homomorphism $\mathrm{Aut}^0 \Fl(W,\widetilde{E},V)\rightarrow \Pro G\left(V^W_{\widetilde{E}},V^W_{*\widetilde{E}}\right)$.} Note first that each homomorphism \begin{equation*}
+    \mathrm{Aut}^0 \Fl(W,\widetilde{E},V) \longrightarrow \mathrm{Aut}^0 \Gra(W_{\alpha},\widetilde{E},V)
+    \end{equation*}
+    \begin{equation*}\widetilde{\varphi}\longmapsto \widetilde{\varphi}_{\alpha}
+\end{equation*}
+is injective, as $\widetilde{\varphi}_{\alpha}$ recovers $\widetilde{\varphi}$ through the formula \begin{equation*}
+    \widetilde{\varphi}\left(W'\right)_{\alpha'}=\Phi^{-1}\left({W'_{\alpha'}}^{\perp} \right)^{\perp}\cap V
+\end{equation*}
+for any $\alpha'$, where $\Phi=\Phi_{\alpha}$ as explained above and by definition ${W'_{\alpha'}}^{\perp}\subset V^{W_{\alpha'}}_{*E_{\alpha'}}$, $\Phi^{-1}\left({W'_{\alpha'}}^{\perp} \right)^{\perp} \subset V^{W_{\alpha'}}_{E_{\alpha'}}$. %V^{W_{\alpha'}}_{E_{\alpha'}}$.
+%brbrbr написать, почему не важно, в каком пространстве брать - или хотя бы продумать
+
+Moreover, the automorphism $\Phi:V^*\rightarrow V^*$ induces pairs of automorphisms \begin{equation}
+    \vfi_{\alpha}=\Phi'_{\alpha}|_{V^{W_{\alpha}}_{E_{\alpha}}}\colon V^{W_{\alpha}}_{E_{\alpha}}\longrightarrow\label{formula:phi_alpha} V^{W_{\alpha}}_{E_{\alpha}},~%\overline{\vfi_{\alpha}|_{V^{W_{\alpha}}_{*E_{\alpha}}}}
+    \overline{\vfi}_{\alpha}\colon V^{W_{\alpha}}_{*E_{\alpha}}\longrightarrow V^{W_{\alpha}}_{*E_{\alpha}},
+\end{equation}
+compatible with all inclusions of the form $V^{W_{\alpha'}}_{E_{\alpha'}}\subset V^{W_{\alpha}}_{E_{\alpha}}$, $V^{W_{\alpha}}_{*E_{\alpha}}\subset V^{W_{\alpha'}}_{*E_{\alpha'}}$  for $\alpha'<\alpha$, and such that $\vfi_{\alpha}%|_{V^{W_{\alpha}}_{*E_{\alpha}}}
+\in  G\left(V^{W_{\alpha}}_{E_{\alpha}},V^{W_{\alpha}}_{*E_{\alpha}}\right)$. In addition, it is easy to check that for any pair of indices $\alpha<\alpha'$
+\begin{equation*}
+\vfi_{\alpha}^{-1}(W_{\alpha}^{\perp})^{\perp}=\vfi_{\alpha'}^{-1}(W_{\alpha'}^{\perp})^{\perp},
+\end{equation*}
+where $W_{\alpha}^{\perp}\subset V^{W_{\alpha}}_{*E_{\alpha}}$, $W_{\alpha'}^{\perp}\subset V^{W_{\alpha'}}_{*E_{\alpha'}}$, $\vfi_{\alpha}^{-1}(W_{\alpha}^{\perp})^{\perp}\subset V^{W_{\alpha}}_{E_{\alpha}}$, $\vfi_{\alpha'}^{-1}(W_{\alpha'}^{\perp})^{\perp}\subset V^{W_{\alpha'}}_{E_{\alpha'}}$. Therefore the system of linear operators (\ref{formula:phi_alpha}) determines a unique element in $ G\left( V^W_{\widetilde{E}}, V^W_{*\widetilde{E}}\right)$
+for $V^W_{\widetilde{E}}=\bigcap \limits_{\alpha}V^{W_{\alpha}}_{E_{\alpha}}$ and $V^W_{*\widetilde{E}}=\bigcap \limits_{\alpha}V^{W_{\alpha}}_{*E_{\alpha}}$, and we obtain a homomorphism \begin{equation*}
+\varepsilon:\mathrm{Aut}^0 \Fl(W,\widetilde{E},V) \longrightarrow \Pro G\left(V^W_{\widetilde{E}},V^W_{*\widetilde{E}}\right).
+\end{equation*}
+The fact that $\GL(\widetilde{E},V)$ acts transitively on $\Fl(W,\widetilde{E},V)$ shows, by the same argument as in Section~\ref{sect:proof_theorem_1_for_ind-grassmannians}, that the image of $\varepsilon$ lies in the subset $\Pro\left(\GL(\widetilde{E},V)\cdot \St_W\right)$ of $\Pro G\left(V^W_{\widetilde{E}}, V^W_{*\widetilde{E}}\right)$.
+
+We have to show that $\varepsilon$ is injective, i.e., that the image of $\varepsilon$ determines all operators $\vfi_{\alpha}%|_{V^{W_{\alpha}}_{*E_{\alpha}}}
+$ and $\overline{\vfi}_{\alpha}$ %|_{V^{W_{\alpha}}_{*E_{\alpha}}}}$
+as above. We will do this by %looking at the matrix form of the operator $\varepsilon(\widetilde{\varphi})$. 
+recalling that each operator $\vfi_{\alpha}:V^{W_{\alpha}}_{E_{\alpha}}\rightarrow V^{W_{\alpha}}_{E_{\alpha}}$ admits a matrix as described in the Appendix. The key point is that if an invertible operator on $V^{W_{\alpha}}_{E_{\alpha}}$ admits such a matrix, then this matrix is unique. Now the compatibility of the operators $\vfi_{\alpha}$ under all inclusions $V^{W_{\alpha'}}_{E_{\alpha'}}\hookrightarrow V^{W_{\alpha}}_{E_{\alpha}}$ for $\alpha'<\alpha$ imply that the matrices of all operators $\vfi_{\alpha}$ coincide. Since each homomorphism $$\widetilde{\vfi}_{\alpha} \longmapsto \vfi_{\alpha}$$ is injective according to Section \ref{sect:proof_theorem_1_for_ind-grassmannians}, we conclude that $\varepsilon$ is injective.
+
+
+
+%Moreover, all other blocks have finite rows and columns, except the leftmost column of blocks and the lowest row of blocks, if such rows and columns exist. In the latter case, if a lowest left corner block exists, it is subject to no condition, and all other blocks in the lowest row have finite rows while all blocks in the leftmost column have finite columns. If no lowest left corner block exists, then all blocks in the last row, whenever it exists, have finite rows, and all blocks in the leftmost column, whenever it exists, have finite columns.
+
+ %The key observation is that a matrix of the form (\ref{formula:matrix_form}) recovers uniquely a system of operators $\varphi_{\alpha}$ and ${\overline{\varphi}}_{\alpha}$ as above. This implies the injectivity of the homomorphism $\varepsilon$.
+ 
+\emph{Step 4. The image of $\varepsilon$.} As a final step of the proof, we need to show that the image of $\varepsilon$ coincides with the set $\Pro(\GL(\widetilde{E},V)\cdot \St_W)$. For this it suffices to prove that $\Pro(\GL(\wt E,V)\cdot \St_W)$ %of $\Pro G (V^W_{*\widetilde{E}},V^W_{\widetilde{E}})$ 
+belongs to the image of $\varepsilon$, i.e., that $\GL(\wt E,V)\cdot\St_W$ acts on the ind-variety $\Fl(W,\widetilde{E},V)$ via the formula (\ref{formula:action_on_flag}). 
+
+%We need to check that the generalized flag $\vfi\cdot W'=(\vfi^{-1}(W'^{\perp}))^{\perp}\cap V$ is $\wt E$-commensurable with $W'$.
+ 
+Pick an operator $\vfi\in \GL(\wt E,V)\cdot\St_W$ and a flag $W'\in\Fl(W,\widetilde{E},V)$. Since $W$ and $W'$ are $E$-commensurable, one has $\GL(\wt E,V)\cdot \St_{W}=\GL(\widetilde{E},V)\cdot \St_{W'}$. % where $\wt E'$ is a basis of $V$ compatible with $W'$, which differs from $\wt E$ by finitely many vectors. (Clearly, $\GL(\wt E,V)=\GL(\wt E,V)$). Hence, we may assume that $\vfi\in\St_{W'}\cdot\GL(\wt E',V)$.
+Therefore $\vfi=\varkappa^{-1} \vfi_{W'}$ for some $\vfi_{W'}\in \St_{W'}$  and some $\varkappa\in \GL(\widetilde{E},V)$. Consequently,   $\vfi(W')=\varkappa^{-1}(W')$, %for $\varkappa^{-1}\in \GL(\wt E,V)$, 
+i.e. $\vfi^{-1}(W')$ is $\wt E$-commensurable with $W$. In conclusion, $\mathrm{im} \varepsilon=\Pro(\GL(\wt E,V)\cdot \St_{W})$, and since $(\GL(\wt E,V)\cdot \St_{W})$ is a group we have also $\mathrm{im} \varepsilon=\Pro( \St_{W} \cdot\GL(\wt E,V))$. The proof is complete.
+ 
+%It remains to prove that $\vfi\cdot W'$ is compatible with a basis, which differs from $\wt E$ by finitely many vectors. Let $W_{\alpha}'$ be a subspace from $W'$, and $U_{\alpha}'$ be the corresponding complement subspace of~$V$ spanned by a subset of $\wt E$, so that $V=W_{\alpha}'\oplus U_{\alpha}'$. Denote by $\pi_{U_{\alpha}'}\colon V\to U_{\alpha}'$ the projection from~$V$ onto $U_{\alpha}'$ along $W_{\alpha}'$. As we proved in the Appendix, $$d_{\alpha}=\dim(\Imm(\pi_{U'_{\alpha}}\circ\restr{\overline{\vfi}}{((W'_{\alpha})_*)^*}))<\infty,$$ see Definition~A\ref{defi:defect}. Furthermore, there exists a finite subset $D_{\alpha}\subset\wt E'$ of cardinality $d_{\alpha}$ such that $\vfi\cdot W_{\alpha}'$ contains all vectors from $(\wt E'\setminus D_{\alpha})\cap W_{\alpha}'$. According to Remark~A\ref{nota:finite_pi_vfi}, $D_{\alpha}$ is contained in the finite set $$\{e\in\wt E'\mid\pi_{U_{\alpha}'}(\overline{\vfi}(e))\neq0\}.$$
+%But the fact that $\vfi$ belongs to $\St_{W'}\cdot\GL(\wt E',V)$ implies that the entire set $$\{e\in\wt E'\mid \pi_{U_{\alpha}'}(\overline{\vfi}(e))\neq0\text{ for a certain index }\alpha\}$$ (containing the subset $D=\bigcup_{\alpha}D_{\alpha}$) is finite. Thus, one can remove the finite subset $D$ from $\wt E'$ so that, for each $\alpha$, $\vfi \cdot W_{\alpha}'$ contains all basis vectors from $(\wt E'\setminus D)\cap W_{\alpha}'$. The result follows.
+ 
+\sect{An explicit matrix form of the group $\GL(\widetilde{E},V)\cdot \St_W $}\label{sect_explicit_matrix_form}
+ 
+% In the previous section we found an explicit matrix form for the linear operators $\varphi\colon V^W_{*\widetilde{E}}\rightarrow V^W_{*\widetilde{E}}$ belonging to $\St_W$. 
+Now we would like to characterize the product $\GL(\widetilde{E},V)\cdot \St_W$ in terms of matrices. We start by describing a matrix form of the group $\St_W$.
+
+Choose a linear order on $\widetilde{E}$ such that $e_j\in W_{\alpha} \setminus W_{\alpha'}$, $e_k\in W_{\alpha'}$ for $\alpha'<\alpha$ implies $k<j$.  It follows from the Appendix that for each space $W_{\alpha}$ the stabilizer of $W_{\alpha}$ in $ G \left( V^{W_{\alpha}}_{E_{\alpha}}, V^{W_{\alpha}}_{*E_{\alpha}}\right)$ under the action (\ref{formula:action_on_flag}) can be represented by infinite matrices (with rows and columns ordered by the fixed order on $\widetilde{E}$) %compatible with the generalized flag $0\subset W\subset V$
+which, together with their inverses, have the form \begin{equation}\label{formula:matrix_form_zero_up_right}
+    \left(\begin{array}{c|c}
+A & B  \\
+\hline
+0 & D  \end{array}\right)
+\end{equation}
+where $A$ has finitary rows, $D$ has finitary columns, and there are no restrictions on the rows and columns of $B$. Certainly, the splitting (\ref{formula:matrix_form_zero_up_right}) depends on the space $W_{\alpha}$.
+
+
+Next, the fact that the operators $\varphi_{\alpha}$ and $\overline{\varphi}_{\alpha}$ form a system compatible with the inclusions $V^{W_{\alpha'}}_{E_{\alpha}}\subset V^{W_{\alpha}}_{E_{\alpha}}$, $V^{W_{\alpha}}_{*E_{\alpha}}\subset V^{W_{\alpha'}}_{*E_{\alpha}}$ for $\alpha'<\alpha$, %as explained above,
+implies that all operators $\vfi_{\alpha}$, respectively $\overline{\vfi}_{\alpha}$, are represented by the same matrix. %the preimage in $G(V^W_{\widetilde{E}},V^W_{*\widetilde{E}})$ of the image of $\varepsilon$ in $\Pro G (V^W_{*\widetilde{E}},V^W_{\widetilde{E}})$ 
+This means that all matrices (\ref{formula:matrix_form_zero_up_right}) are just one matrix  which satisfies the above conditions for all spaces $W_{\alpha}$. Consequently, 
+$\St_W$ consists of matrices $M$ which, together with their inverses, have the form
+\begin{equation}\predisplaypenalty=0\label{formula:matrix_form}
+    M=\begin{pmatrix} 
+    \ddots & & &  &   \\
+    0 & \boxed{A_{\alpha'}} & &  &   \\
+    &&\ddots & & \\
+    0 & 0 &  & \boxed{A_{\alpha}} &   &  \\ 0
+    & 0 &  & 0  & \ddots   \\
+    \end{pmatrix},
+\end{equation}
+the rows and columns of $M$ being ordered by the ordered set which orders the elements of $\widetilde{E}$ as above, 
+%Diagram (\ref{formula:matrix_form}) represents a matrix whose rows and columns are ordered by %the countable ordering set of indices $\alpha$ of $W=\{W_{\alpha}\}$ an order compatible with the generalized flag $W$
+%the same ordered set which orders the elements of $\widetilde{E}$ as above,
+and the diagonal blocks being of size $\dim (W_{\alpha_2}/W_{\alpha_1}) \times\dim (W_{\alpha_2}/W_{\alpha_1})$ where $\alpha$ is one of the indices $\alpha_1$ and $\alpha_2$, and $\alpha_1$ is the immediate predecessor of $\alpha_2$. %This datum induces a block structure on the entire matrix $M$ and all strictly triagonal blocks are equal to zero. 
+This datum induces a block structure on the entire matrix $M$, and all strictly lower-triangular blocks are set to equal zero.
+Furthermore, since $M$ and $M^{-1}$ are subject to the above 
+ additional conditions for all splittings arising from spaces $W_{\alpha}$ of $W$, the matrices $M$ and $M^{-1}$ satisfy the following: % the following conditions:
+\begin{itemize}
+    \item if there exists a rightmost highest  block $L$ (this depends on the %set ordering the rows and columns of $A$)
+    order on $\widetilde{E}$, i.e., ultimately on the structure of the generalized flag $W$), then there are no conditions on the rows and columns of $L$, all columns of $M$ which intersect  $L$ have at most finitely many nonzero entries outside of $L$, all rows of $L$ which intersect $L$ have at most finitely many nonzero entries outside of $L$, and all other rows and columns of $M$ have at most finitely many nonzero entries in the region %of $M$
+    in which the first index is greater then the first index of any entry of $L$ and the second index is smaller than the second index of any entry of $L$;
+    \item if $M$ has no rightmost highest block, then all rows %of $M$
+    have at most finitely many nonzero entries in  direction to the left (from any point on) and all columns %of $M$
+    have at most finitely many nonzero entries in the downward direction  (from any point on).
+\end{itemize}
+
+In order to pass to the full group $\GL(\widetilde{E},V) \cdot \St_W$, consider matrices of the form (\ref{formula:matrix_form}) and replace the zeros in the lower-triangular part by finitely many nonzero entries. Let's refer to such matrices as $W$-\emph{aligned}. If $M$ is a $W$-aligned matrix, then every space $W_\alpha$ induces a splitting of $M$ into four blocks \begin{equation}\label{formula:splitting_depends_on_alpha}
+    \left(\begin{array}{c|c}
+A & B  \\
+\hline
+C & D  \end{array}\right)
+\end{equation}
+ where $C$ is a finitary matrix. A $W$-aligned matrix M is \emph{eligible} if $M^{-1}$ is also $W$-aligned, and for any $\alpha$ the splittings 
+ \begin{equation*}
+    \left(\begin{array}{c|c}
+A & B  \\
+\hline
+C & D  \end{array}\right)\text{ and }     \left(\begin{array}{c|c}
+A' & B'  \\
+\hline
+C' & D'  \end{array}\right)
+\end{equation*}
+of $M$ and $M^{-1}$ respectively, satisfy the condition \begin{equation*}
+    \mathrm{rk}\,C=\mathrm{rk}\,C'.
+\end{equation*} 
+We leave it as an exercise to the reader to check that the condition of eligibility is empty (i.e., it is automatically satisfied) if the ordered set parameterizing the rows and columns of $A$ or $D$ is finite.
+ 
+ 
+ Our result in this section states as follows.
+ 
+ \theop{\label{theorem:description_general_case}The group $\GL(\widetilde{E},V) \cdot \St_W$ is isomorphic to the group of all eligible $W$-aligned matrices.}{Any matrix in $\GL(\widetilde{E},V)\cdot \St_W$ has the form $M_f M$ where $M_f$ is an element of $\GL(\widetilde{E},V)$ and $M$ is a matrix from $\St_W$ having the form (\ref{formula:matrix_form}). The necessary and sufficient condition for $M_f M$ to lie in $\GL(\widetilde{E},V)\cdot \St_W$ is that the splitting (\ref{formula:splitting_depends_on_alpha}) of $M_f M$ for any space $W_{\alpha}$ in $W$ satisfies the condition of Theorem A.\ref{theoapp:d_0_G_k_G_k}. For all $\alpha$ these conditions amount precisely to the requirement that the matrix $M_f M$ be eligible.}
+ 
+
+ 
+\sect{The isotropic case}\label{sect:proof_theorem_2_isotropic_case}
+\theopwop{\label{theorem:2} Let $X=\FlO(W,\widetilde{E},V)$ or $\FlS(W,\widetilde{E},V)$ for some isotropic generalized flag $W$ compatible with an isotropic basis $\widetilde{E}$ of $V$. %In the symplectic case
+We assume in addition that $W$ %does not equal to a single 1-dimensional space
+does not have the form $0\subset W_1 \subset W^{\perp}_1 \subset V$ where $\dim W_1=1$ in the symplectic case\textup, and that $\dim W^{\perp}_1/W_1\neq 2$ in the orthogonal case if the basis $\widetilde{E}$ has the form \textup{(\ref{formula:second_basis})}.  Then \begin{equation*}
+    \mathrm{Aut}X\simeq \Pro(\Orth(\widetilde{E},V)\cdot \St^{\Orth}_W)
+\end{equation*}or\begin{equation*}
+    \mathrm{Aut}X\simeq \Pro(\Sp(\widetilde{E},V) \cdot \St^{\Sp}_W),
+\end{equation*} where $\St^{\Orth}_W$ and $\St^{\Sp}_W$ denote respectively the stabilizer of $W$ in $\Orth(V)$ and $\Sp(V)$. %, under the linear action of $\Orth(V)$ or $\Sp(V)$ on $V$.
+The action of $\Orth(V)$ on\linebreak $\FlO(W,\widetilde{E},V)$\textup, or respectively of $\Sp(V)$ on $\FlS(W,\widetilde{E},V)$\textup, is induced by the linear action of $\Orth(V)$ or $\Sp(V)$ on $V$.}
+
+
+\par\textsc{Proof}. 
+\emph{Step 1. The case of an isotropic ind-grassmannian.} The argument starts in the same way as for ordinary ind-grassmannians. The embeddings $X_n\hookrightarrow X_{n+1}$ are assumed to be standard extensions of isotropic grassmannians, and by Theorem \ref{theorem:P} %we need to ensure that %one can choose a subsequence $n_k$ such that 
+%for $n\gg0$ 
+the embeddings  $Y_{n}:=\varphi(X_n)\xhookrightarrow{\eta_n} Y_{n+1}:=\varphi(X_{n+1})$ are also standard extensions. %Here $Y_{n}=\widetilde{\varphi}(X_n)$.
+%This follows from Corollary \ref{corollary:strict_standard_extension}, b). Indeed, the embeddings $Y_n\xhookrightarrow{\eta_n} Y_{n+1}$ clearly satisfy the condition $\eta^*_n \mathcal{O}_{Y_{n+1}} (1)\simeq \mathcal{O}_{Y_n}(1)$, %are of course linear embeddings
+%and all we need to check that only finitely many such embeddings can factor through projective spaces, quadrics, or usual grassmannians. But this is of course a consequence of the fact that only finitely many embeddings $X_n\hookrightarrow X_{n+1}$ can factor through projective spaces, quadrics or usual grassmannians.
+
+Next, in the isotropic case the isomorphisms (\ref{formula:image_of_sheaf}) must hold, so we arrive to diagram (\ref{formula:big_commutative_diagram}) or, equivalently, to a commutative diagram 
+
+\begin{equation*}
+    \begin{tikzcd}
+     \begin{array}{c}
+           V=\ilm V_n \\
+          \vdots
+     \end{array} \arrow[r,yshift=2.0ex,"\ilm\vfi_n"] 
+& 
+     \begin{array}{c}
+           V=\ilm V'_n  \\
+          \vdots
+     \end{array}     \\
+V_n \arrow[u] \arrow[r,"\varphi_{n}"]
+& V'_{n}  \arrow[u]\\
+V_{n-1} \arrow[u] \arrow[r,"\varphi_{n-1}"]
+& V'_{n-1}  \arrow[u]\\
+\vdots \arrow[u] & \vdots \arrow[u] \\
+\end{tikzcd}.
+\end{equation*}
+
+%\begin{equation*}
+%\hspace*{-1.6cm}
+%\begin{tikzpicture}[baseline=(current bounding box.center)][commutative diagrams/every diagram]
+%	\node (P0) at (0,0) {$V=\ilm V_n$};
+%	\node (P1) at (2,0) {$V=\ilm V'_n$};
+%	\node (P2) at (-0.15,-0.6) {};
+%	\node (P3) at (2.15,-0.6) {};
+%	\node (P41) at (-2.2,-2) {};
+%	\node (P4) at (-0.5,-2) {$V_n$};
+%	\node (P5) at (2.5,-2) {$V'_{n}$};
+%	\node (P6) at (-3.3,-3.4) {};
+%	\node (P6) at (-0.85,-3.4) {$V_{n-1}$};
+%	\node (P7) at (2.85,-3.4) {$V'_{n-1}$};
+%	\node (P8) at (-1.15,-4.6) {};
+%	\node (P9) at (3.15,-4.6) {};
+%	\node (P10) at (-1.3,-5.1) {};
+%	\node (P11) at (3.3,-5.1) {};
+%	\path[commutative diagrams/.cd, every arrow, every label]
+%	(P0) edge node {$\Phi^*|_V$} (P1)
+%	(P4) edge node[swap] {} (P2)
+%	(P5) edge node[swap] {} (P3)
+%	(P6) edge node[swap] {} (P4)
+%	(P7) edge node[swap] {} (P5)
+%	(P4) edge node {$\varphi_n$} (P5)
+%	(P6) edge node {$\varphi_{n-1}$} (P7)
+%	(P8) edge node[swap] {} (P6)
+%	(P9) edge node[swap] {} (P7);
+%	\draw[dotted] (P2) -- (P0);
+%	\draw[dotted] (P3) -- (P1);
+%	\draw[dotted] (P8) -- (P10);
+%	\draw[dotted] (P9) -- (P11);
+%\end{tikzpicture}.
+%\end{equation*}
+The isomorphism $V=\ilm V'_n$ holds since the embeddings $Y_n \hookrightarrow Y_{n+1}$ are standard extensions, and hence any $V'_n$ is a subspace of $V_N$ for some $N>n$. Furthermore, the restriction of the fixed (symmetric or antisymmetric) form on $V$ to $V_n'$ is a form defining the corresponding isotropic grassmannian in $V_n'$. (Such a form is unique up to a scalar if $W$ satisfies the conditions of the theorem.) Recall (from Section \ref{sect:proof_theorem_1_for_ind-grassmannians}) that the maps $\vfi_n$ are defined up to compatible scalars $c_n$.
+The key observation is that there is a unique choice of these scalars such that the maps $\vfi_n$ are isomorphisms of orthogonal or, respectively, symplectic vector spaces. This follows from the fact that the automorphism groups of our finite-dimensional isotropic grassmannians $X_n$ and $Y_n$ are the respective orthogonal or  symplectic groups. %However, in the presence of compatible non-degenerate (symmetric or, respectively, antisymmetric) bilinear forms we can identify $V_n$ with $V^*_n$ and 
+%consider $\varphi_n$ as isomorphisms of orthogonal or, respectively, symplectic vector spaces. %, $\varphi_n\colon V_n \rightarrow \varphi(V_n)$. 
+%Here the form on $V_n$ is induced by the form on $V$, and the form on $V'_n$ is the unique form which makes $\vfi_n$ an orthogonal or, respectively, symplectic operator.
+%Therefore, a part of diagram (\ref{formula:big_commutative_diagram}) becomes %\begin{equation}\label{formual:diagram_from_big_commutative_diagram}
+%\begin{tikzcd}[row sep=normal, column sep = scriptsize]
+%\varphi_n(V_n)   \arrow[xshift=-0.7ex]{d} 
+%& V^*_n \arrow[xshift=0.7ex]{d}  \arrow[l,"\varphi_{n}"'] \arrow[r,equal]  & V_n \\
+%\varphi_{n-1}(V_{n-1}) \arrow[xshift=0.7ex]{u}
+%& V^*_{n-1} \arrow[l,"\varphi_{n-1}"'] \arrow[r,equal] 
+%\rar[shorten >= 2em, equal]
+%\arrow[xshift=-0.7ex]{u} & V_{n-1} \\
+%\end{tikzcd},
+%\end{equation}
+%the upward arrows being %the canonical splittings of the downward arrows
+%the fixed inclusion $V_{n-1}\hookrightarrow V_n$ and its image under $\varphi_n$. The commutativity of diagram (\ref{formual:diagram_from_big_commutative_diagram}) follows from the fact that the horizontal arrows preserve the %relevant
+%non-degenerate bilinear forms on $V_{n-1}$ and $V_n$. 
+
+Set  %As a conclusion, we see that the linear operator \begin{equation*}
+%    \Phi:V^*\rightarrow V^*
+%\end{equation*}
+%preserves the linear %subspace $V=\ilm V_n\subset \plm V_n=V^*$, and that the restriction
+\begin{equation*}
+    \vfi:=\ilm\vfi_n\colon V\rightarrow V.
+\end{equation*}
+Then by construction $\vfi$
+is an orthogonal or, respectively, symplectic operator, and $\vfi$ determines our automorphism $\widetilde{\varphi}$ which acts on a point $W'$ by formula (\ref{formula:action_tilde_vfi_on_subspace}). However, in the case considered we have \begin{equation}\label{formula:phi^-1_V_as_a_inductive_limit}
+	\ilm \left(\varphi_n\left(\left(W'\cap V_n\right)^\perp\right)^\perp\right)=\ilm \left(\varphi_n\left(W'\cap V_n\right)\right)=\varphi(W'),
+\end{equation}
+hence the action of $\widetilde{\varphi}$ on $X$ is simply induced by the action of $\varphi$ as a linear automorphism of $V$. This implies that there is an injective homomorphism \begin{equation*}
+    \varepsilon:\mathrm{Aut}\GraO(W,\widetilde{E},V)\hookrightarrow \Pro\Orth(V)
+\end{equation*} or, respectively,
+\begin{equation*}
+    \varepsilon:\mathrm{Aut}\GraS(W,\widetilde{E},V)\hookrightarrow \Pro\Sp(V), 
+\end{equation*}
+    \begin{equation*}\widetilde{\varphi}\longmapsto \varphi
+\end{equation*}
+and that the action of the image of $\varepsilon$ on $\GraO(W,\widetilde{E},V)$ or $\GraS(W,\widetilde{E},V)$ is induced by the linear action of $\Orth(V)$ or, respectively, $\Sp(V)$ on $V$.
+
+In the case of a general ind-variety of isotropic generalized flags, an injective homomorphism~$\varepsilon$ is constructed exactly as in Step 3 of the proof of Theorem \ref{theorem:1}. %The argument that $\varepsilon$ is injective is simpler in the isotropic case as 
+Here the images of all homomorphisms $\varepsilon_{\alpha}$ lie in $\Pro \Orth(V)$ or, respectively, $\Pro \Sp(V)$, therefore $\varepsilon$ is just the homomorphism into the intersection of all images of $\varepsilon_{\alpha}$. %Moreover, clearly, this intersection is nothing but $\St_W\cdot \SO(V)$ or, respectively, $\St_W\cdot \Sp(V)$.
+Moreover, the image of $\varepsilon$ coincides respectively with $\Pro(\Orth(\widetilde{E},V)\cdot \St^{\Orth}_W)$ or $\Pro(\Sp(\widetilde{E},V)\cdot \St^{\Sp}_W)$. Indeed, since $\Orth(\widetilde{E},V)$ or, respectively, $\Sp(\widetilde{E},V)$, acts transitively on $\FlO(W,\widetilde{E},V)$ or $\FlS(W,\widetilde{E},V)$, the image of $\varepsilon$ must be a subgroup of $\Pro(\Orth(\widetilde{E},V)\cdot \St^{\Orth}_W)$ or, respectively, $\Pro(\Sp(\widetilde{E},V)\cdot \St^{\Sp}_W)$. On the other hand, by the same argument as in Section \ref{sect:proof_theorem_1_in_the_general_case}, $\Orth(\widetilde{E},V)\cdot \St^{\Orth}_W$ or, respectively, $\Sp(\widetilde{E},V)\cdot \St^{\Sp}_W$ acts on the ind-variety $\FlO(W,\widetilde{E},V)$ or $\FlS(W,\widetilde{E},V)$ via the formula (\ref{formula:action_tilde_vfi_on_subspace}). Since in our case the equality (\ref{formula:phi^-1_V_as_a_inductive_limit}) holds, the proof is complete.\hspace{\fill}$\square$\par
+
+\corop{\label{corollary:group_structure_isotropic_case}The group $\Orth(\widetilde{E},V)\cdot \St^{\Orth}_W$, or $\Sp(\widetilde{E},V)\cdot \St^{\Sp}_W$, is isomorphic to the group of all invertible $W$-aligned matrices $M$ with finitary rows and columns satisfying $\overline{M}=\pm M^{-1}$, where $\overline{\,\,\cdot\,\,}$ denotes reflection along the antidiagonal, plus corresponds to the case of $O$ and minus corresponds to the case of $Sp$. %is the matrix in the basis $\widetilde{E}$ of the fixed bilinear form on $V$.
+}{%The claim is a direct corollary of the fact that our 
+The group $\Orth(\widetilde{E},V)\cdot \St^{\Orth}_W$ or $\Sp(\widetilde{E},V)\cdot \St^{\Sp}_W$ is clearly the intersection of the group $\GL(\widetilde{E},V)\cdot \St_W$ with $\Orth(V)$ or, respectively, with $\Sp(V)$, and this implies the claim. Note that the condition $\overline{M}= \pm M^{-1}$ makes $M$  eligible automatically.}
+
+%Note that if 
+%\begin{equation*}
+%     M=\begin{pmatrix} 
+%    & & & & \\
+%    &\boxed{A_{\alpha'}} & & B^+  & \\
+%    & &\ddots &  & & \\
+%    & B^-   &  & \boxed{A_{\alpha}} &  \\
+%     & & & &  \\
+%    \end{pmatrix}
+%    \end{equation*}
+%is a matrix as in Corollary \ref{corollary:group_structure_isotropic_case}, then %$M$ has finitary rows and columns,
+%both matrices $B^+$ and $B^-$ are finitary and $\rk B^+=\rk B^-$. This follows from %the combination of 
+%the equality $M^T SM=S$ and the fact that $M$ is eligible $W$-aligned.
+
+
+ 
+\begin{center}
+\subsection*{Appendix: on the structure of the group $ G (V_E,V_{*E})$}
+\end{center}
+
+In this Appendix we have collected some basic statements about the Mackey group $ G (V_E,V_{*E})$. The isomorphism of this group with the group Japanese $GL(\infty)$ is stated at the end.
+
+\setcounter{snomer}{0}
+\renewcommand{\thesnomer}{\arabic{snomer}}
+
+\sstappendix{ A lemma from linear algebra}
+\lemmpappendix{Let $A$ be\label{lemm:fin_dim_Im} a countable-dimensional vector space\textup, and $\mu\colon A^*\to A$\textup, $\nu\colon A^*\to A$ be linear maps such that $\alpha(\mu(\beta))=\beta(\nu(\alpha))$ for all $\alpha,~\beta\in A^*$. Then the dimensions of the images of $\mu$ and $\nu$ are finite and equal.
+}{We will first check that %the dimension of $\Imm\mu$, the image of $\mu, is finite,$
+$\dim\Imm\mu<\infty$. This will imply that $\dim\Imm\nu$ is also finite because the conditions on $\mu$ and $\nu$ are symmetric. Pick a basis $\{f_1,~f_2,~\ldots\}$ of $A$, and let $\{f_1^*,~f_2^*,~\ldots\}$ be the dual system in $A^*$. Assume that $\Imm\mu$ is infinite dimensional. Then there exist linear functions $\lambda_n\in A^*$ for $n\in\Zp_{>0}$, such that $\dim\langle\mu(\lambda_1),~\ldots,~\mu(\lambda_n)\rangle_{\Cp}=n$. It is easy to see that these linear functions can be chosen so that $\lambda_n(f_i)=0$ for $i<n$ and $\lambda_n(f_n)\neq0$. Let $B:=\langle \lambda_n | n\in\Zp_{>0} \rangle_{\Cp}$. %be the linear span of $\lambda_n$, $n\in\Zp_{>0}$, then 
+The formula $(a,~b)\mapsto b(a)$ for $a\in A$, $b\in B$ defines a non-degenerate pairing between $A$ and $B$. By a result of G. Mackey \cite[Lemma on p. 171]{Mackey45}, we may assume without loss of generality that $\lambda_n=f_n^*$ for all $n$.
+
+%Hence, given any number 
+Since $\dim \Imm \mu = \infty$, for any $n\in\Zp_{>0}$ there exists $i_n\in\Zp_{>0}$ such that $\mu(f_{i_n}^*)$ is not contained in~$A_n:=\langle f_1,\ldots,f_n\rangle_{\Cp}$.
+%, the linear span of $f_1,~\ldots,f_n$.
+In other words, there exist two infinite sequences of integers $1\leq i_1<i_2<\ldots$ and $2\leq k_1<k_2<\ldots$ so that $\mu(f_{i_n}^*)\in A_{k_n}\setminus A_{k_n-1}$ for all $n\geq1$.
+
+Now we define a sequence $c_1,~c_2,~\ldots$ of complex numbers inductively as follows. %in the following way. 
+Set $c_1$ to be an arbitrary nonzero scalar. For $n>1$ we let $c_n$ to be an arbitrary complex number such that $$\sum_{j=1}^nc_jf_{k_j}^*(\mu(f_{i_n}^*))=c_nf_{k_n}^*(\mu(f_{i_n}^*))+\sum_{j=1}^{n-1}c_jf_{k_j}^*(\mu(f_{i_n}^*))\neq0.$$ (Such a number exists because $f_{k_n}^*(\mu(f_{i_n}^*))\neq0$.) Finally, we define $\alpha\in A^*$ by the formula
+\begin{equation*}
+\alpha(f_j)=\begin{cases}c_n&\text{if }j=k_n\text{ for some }n\geq1,\\
+0&\text{otherwise}.
+\end{cases}
+\end{equation*}
+Then %for each $n\geq1$ one has
+\begin{equation*}
+\begin{split}f_{i_n}^*(\nu(\alpha))=\alpha(\mu(f_{i_n}^*))=\sum_{j=1}^nc_jf_{k_j}^*(\mu(f_{i_n}^*))\neq0
+\end{split}
+\end{equation*}
+for any $n\in \Zp_{>0}$. This means that $\nu(\alpha)\notin A_{i_n-1}$ for all $n\geq1$, i.e., that $\nu(\alpha)$ can not be expressed as a finite linear combination of $f_1,~f_2,~\ldots$, and this is a contradiction.
+
+%We have proved that $\dim\Imm\mu$ and $\dim\Imm\nu$ are finite. 
+Hence, $\dim\Imm \mu<\infty$, and also $\dim\Imm \nu<\infty$. It remains to check that $\dim\Imm \mu=\dim \Imm \nu$. %they are equal. Using the basis $\{f_1,~f_2,~\ldots\}$, one can say more about $\Imm\mu$ (and $\Imm\nu$).
+Since $\dim \Imm \mu<\infty$, there exist $n\in\Zp_{>0}$ and linear functions $\alpha_1,~\ldots,~\alpha_n\in A^{**}$ such that $\mu(a)=\sum_{i=1}^n\alpha_i(a)f_i$ for all $a\in A^*$. %But it is easy to see that
+We note that in fact $\alpha_i\in A$ for all $i$. Indeed, $$f_j^*(\mu(a))=f_j^*\left(\sum_{i=1}^n\alpha_i(a)f_i\right)=\alpha_j(a)=a(\nu(f_j^*)),$$ so $\alpha_j=\nu(f_j^*)\in A$ for all $j$. It follows that there exist $m\in\Zp_{>0}$ and scalars $\alpha_{ij}\in\Cp$ so that $\alpha_j=\sum_{i=1}^m\alpha_{ij}f_i$ for all $1\leq j\leq n$. Clearly, $\dim\Imm\mu=\rk(\alpha_{ij})_{i,j=1}^{m,n}$. Similarly, there exist $n',~m'\in\Zp_{>0}$, vectors $\beta_j\in A$, and scalars $\beta_{ij}\in\Cp$ so that $\nu(b)=\sum_{j=1}^{n'}\beta_j(b)f_j$ and $\beta_j=\sum_{i=1}^{m'}\beta_{ij}f_i$ for all $1\leq j\leq n'$. Then $\dim\Imm\nu=\rk(\beta_{ij})_{i,j=1}^{m',n'}$. However, $\alpha_{ij}=f_i^*(\alpha_j)=f_i^*(\nu(f_j^*))=f_j^*(\mu(f_i^*))=f_j^*(\beta_i)=\beta_{ji}$ for all $i,~j$. This means that $m'=n$, $n'=m$, and the matrices $(\alpha_{ij})_{i,j=1}^{m,n}$ and $(\beta_{ij})_{i,j=1}^{n,m}$ are transpose to each other. The result follows.}
+
+\sstappendix{A grading on the group $ G (V_E, V_{*E})$} We work in the setup of Section \ref{sect:proof_theorem_1_for_ind-grassmannians}. %\textcolor{red}{This will be slightly expanded.} 
+Recall that we consider a generalized flag having a single proper subspace $W\subset V$ with $\dim W=\codim_V W=\infty$, and that $E=\widetilde{E}\cap W$ is a basis of $W$. Let $U=\langle\widetilde{E}\setminus E\rangle_{\Cp}$. We have $V_{E}=(W_*)^*\oplus U$, $V_{*E}=W_*\oplus U^*$ and there is a natural nondegenerate pairing $V_{E}\times V_{*E}\rightarrow \mathbb{C}$. The group $ G (V_E,V_{*E})$ consists of invertible linear operators $\vfi \colon V_E\rightarrow V_E$ such that $\overline{\vfi}=\restr{\vfi^*}{V_{*E}}\colon V_{*E} \rightarrow V_{*E}$ is a well-defined isomorphism. 
+
+Choose an ordering of $E$ via $\mathbb{Z}_{<0}$ and an ordering of $\widetilde{E}\setminus E$ via $\mathbb{Z}_{>0}$. Set
+\begin{equation*}
+    E^k:=\begin{cases} E\setminus \{e_k,\ldots,e_{-1}\}\text{ for }k<0 \\ E\cup \{e_1,\ldots,e_k\}\text{ for }k>0  \end{cases}
+\end{equation*}
+and $W^k:=\langle E^k \rangle_{\Cp}$. The disjoint union $\bigsqcup\limits_{k\in \Zp}\Gra(W^k,E^k,V)$, where $E=E^0$, $W=W^0$, is an ind-variety which we denote by $X$.\newpage
+\proppappendix{The formula \textup{(\ref{formula:action_on_flag})} defines an action of $ G (V_E, V_{*E})$ on $X$ by ind-variety\label{propapp:action_X} automorphisms.}{ We first prove that $\varphi\cdot W'\in X$ for any $W'\in X$ and any $\varphi\colon V_{E}\rightarrow V_{E}$, $\varphi\in  G (V_E, V_{*E})$. Since 
+in the definition of $X$, $W$ can be replaced by $W'$, it suffices to check that $\varphi\cdot W\in X$. %Recall that $\overline{\vfi}=\vfi^*|_{V_E}$. 
+Denote by $\pi_U\colon V_E\to U$ and $\pi_{W_*}\colon V_{*E}\to W_*$ the canonical projections onto the corresponding direct summands. Set also $\mu:=\pi_U\circ \left(\vfi|_{(W_*)^*}\right)$ and $\nu:=\pi_{W_*}\circ (\overline{\vfi}|_{U^*})$. 
+
+We claim that $\dim\Imm\mu$ and $\dim\Imm\nu$ are finite (and equal). 
+Fix an isomorphism of vector spaces $\eta\colon W_*\to U$  
+and the dual isomorphism $\eta^*\colon U^*\to (W_*)^*$. 
+Consider the linear maps $\mu'=\mu\circ\eta^*$ and $\nu'=\eta\circ\nu$ from $U^*$ to $U$. Then, for all $\alpha,~\beta\in U^*$, we have
+\begin{equation*}
+\begin{split}\alpha(\mu'(\beta))&=\alpha(\mu(\eta^*(\beta)))=\alpha(\pi_U(\vfi(\eta^*(\beta))))=\alpha(\vfi(\eta^*(\beta)))=
+\overline{\vfi}(\alpha)(\eta^*(\beta))\\
+&=\pi_{W_*}(\overline{\vfi}(\alpha))(\eta^*(\beta))=\nu(\alpha)(\eta^*(\beta))=\eta(\nu(\alpha))(\beta)=\beta(\nu'(\alpha)).
+\end{split}
+\end{equation*}
+Hence, $\dim\Imm\mu'=\dim\Imm\nu'<\infty$ (and, consequently, $\dim\Imm\mu=\dim\Imm\nu<\infty$) by Lemma~A.\ref{lemm:fin_dim_Im}.
+
+Now, denote by $A_0$  the preimage of zero under the restriction of $\pi_U$ to $\vfi((W_*)^*)$. Obviously, $A_0=(W_*)^*\cap\vfi((W_*)^*)$. According to the proof of Lemma~A.\ref{lemm:fin_dim_Im}, there exist $n\in\Zp_{>0}$ and $\alpha_1,~\ldots,~\alpha_n\in W_*$ such that $$\mu(\omega)=\pi_U(\vfi|_{(W_*)^*}(\omega))=\sum\nolimits_{i=1}^n\omega(\alpha_i)e_i$$ for all $\omega\in (W_*)^*$. A vector $\omega$ of $(W_*)^*$ belongs to $A_0$ if and only if $\mu(\omega)=0$, i.e, if $\omega(\alpha_i)=0$ for $1\leq i\leq n$. %, as required.
+It follows immediately that $A_0\cap W$ has finite codimension in $W$ and, moreover, given $w\in W$, one has $w\in A_0$ if and only if $\alpha_i(w)=0$ for all $1\leq i\leq n$. Hence, $A_0\cap W$ contains all but finitely many vectors of $E$.
+
+Recall that $\vfi\cdot W=\overline{\vfi}^{-1}(W^{\perp})^{\perp}\cap V$. Clearly, $W^{\perp}=U^*$, and since $\overline{\vfi}^{-1}(B)^{\perp}=\vfi(B^{\perp})$ for any subspace~$B$ of $V_{*E}$, we conclude that $$\overline{\vfi}^{-1}(U^*)^{\perp}=\vfi((U^*)^\perp)=\vfi((W_*)^*).$$ Hence $\vfi\cdot W=\vfi((W_*)^*)\cap V$. Since $A_0\subset\vfi((W_*)^*)$, we have $A_0\cap W\subset\vfi\cdot W$, so $\vfi\cdot W$ contains all but finitely many vectors of $E$. On the other hand, $$\vfi((W_*)^*)\subset (W_*)^*\oplus\pi_U(\vfi((W_*)^*))=(W_*)^*\oplus\Imm\mu.$$ This implies $\vfi\cdot W\subset W\oplus\Imm\mu$, %. Since $\Imm\mu$ is finite dimensional, we have 
+and consequently $\vfi\cdot W\in X$.
+
+Next, a trivial modification of the argument at the end of the proof of Theorem \ref{theorem:1} for ind-grassmannians shows that $\vfi$ induces an automorphism of ind-varieties\begin{equation*}
+\widetilde{\vfi}:X\rightarrow X.
+\end{equation*}
+Finally, the fact that $\widetilde{\vfi'\circ \vfi''}=\widetilde{\vfi'}\circ \widetilde{\vfi}''$ follows from the realization of $\tilde{\vfi}$ as an inverse limit of morphisms of finite-dimensional grassmannians where the property $\widetilde{\vfi_n'\circ \vfi_n''}=\widetilde{\vfi}_n'\circ \widetilde{\vfi}_n''$ is obvious.
+}
+
+
+The ind-variety $X$ is the disjoint union of the ind-grassmannians $\Gra(W^k,E^k,V)$ for $k\in\Zp$. These closed ind-subvarieties are not stable with respect to this action. 
+
+\examappendix{Let a \emph{reverse sequence} be a set parameterized by $\mathbb{Z}_{<0}$. The vectors in $V_E$ and $V_{*E}$ can be written respectively as $x=\sum \limits_{i>0} \omega_i e_{-i}+\sum \limits_{i>0} u_i e_{i}\in V_E$, $y=\sum \limits_{i>0} w_i e^*_{-i}+\sum \limits_{i>0} \nu_i e^*_{i}\in V_{*E}$  where $\omega=(\ldots,~\omega_{-2},~\omega_{-1})$ and $w=(\ldots,~w_{-2},~w_{-1})$ are reverse sequences of complex numbers, and $u=(u_1,~u_2,~\ldots)$, $\nu=(\nu_1,~\nu_2,~\ldots)$  are usual sequences of complex numbers. In addition, $u$ and $w$ are finitary, i.e. have at most finitely many nonzero entries. In what follows, we write simply $(\omega,u)$ for vectors in $V_E$, and $(w,\nu)$ for vectors in $V_{*E}$.
+
+ Consider the shift (linear) operator $Sh\colon V_{E}\to V_{E}$ %and $\mho\colon V_E\to V_E$ defined by the formulas
+\begin{equation*}
+Sh((\omega,~u))=((\ldots,~\omega_{-3},~\omega_{-2}),(\omega_{-1},~u_1,~u_2\ldots)).
+\end{equation*}
+One checks immediately that $Sh$ is an element of the group $ G (V_E,V_{*E})$ with $\overline{Sh}$ having the form $$\overline{Sh}((w,~\nu))=((\ldots,~w_{-2},~w_{-1},\nu_1),(\nu_2,~\nu_3,~\ldots)).$$
+Moreover, $Sh\cdot W$ belongs to $\Gra(W^1,E^1,V)$, and in fact
+$Sh\cdot\Gra(W,E,V)=\Gra(W^1,E^1,V)$.
+%Obviously, 
+%\begin{equation*}
+%\begin{split}
+%\Omega^{-1}(w,~\nu)&=(w_2,~w_3,~w_4,~w_5,~\ldots;~w_1,~\nu_1,~\nu_2,~\nu_3,~\ldots),\\
+%\mho^{-1}(\omega,~u)&=(u_1,~\omega_1,~\omega_2,~\omega_3,~\ldots;~u_2,~u_3,~u_4,~u_5,~\ldots).\\
+%\end{split}
+%\end{equation*}
+%$Sh((W_*)^*)=(W_*)^*\oplus\Cp e_1$, and $Sh^{-1}((W_*)^*)=\{\omega\in (W_*)^*\mid\omega_1=0\}$, $\overline{Sh}(U^*)=\Cp e^*_{-1}\oplus U^*$, $\overline{Sh}^{-1}(U^*)=\{\nu\in U^*\mid\nu_1=0\}$. %This implies,
+In addition, we note that
+\begin{equation*}
+\dim\pi_U(Sh((W_*)^*))-\dim\pi_U(Sh^{-1}((W_*)^*))=\dim\pi_{W_*}(\overline{Sh}(U^*))-\dim\pi_{W_*}(\overline{Sh}^{-1}(U^*))=1.
+\end{equation*}
+}
+
+This example motivates the following.
+
+\defiappendix{%We call call the number
+Let $\vfi\in  G (V_E, V_{*E})$. We\label{defi:defect} define the integer
+\begin{equation*}
+d(\vfi)=d(\overline{\vfi}):=\dim\pi_U(\vfi((W_*)^*))-\dim\pi_U(\vfi^{-1}((W_*)^*))=\dim\pi_{W_*}(\overline{\vfi}(U^*))-\dim\pi_{W_*}(\overline{\vfi}^{-1}(U^*))
+\end{equation*}
+to be the \emph{degree} of $\vfi$. (The latter equality follows immediately from the fact that $\dim\Imm(\pi_U\circ\restr{\vfi}{(W_*)^*})=\dim\Imm(\pi_{W_*}\circ\restr{\overline{\vfi}}{U^*})$ checked in the proof of Proposition A.\ref{propapp:action_X}.) %the operators $\vfi$ and $\overline{\vfi}$.
+}
+
+\proppappendix{Given $\vfi\in  G (V_E,V_{*E})$ and $k\in\Zp$, one \label{propp:d_G_0_G_k}
+has $\vfi\cdot\Gra(W,E,V)=\Gra(W^k,E^k,V)$ if and only if $d(\vfi)=k$.}{It suffices to check that the condition $\vfi\cdot W\in\Gra(W^k,E^k,V)$ is equivalent to $d(\vfi)=k$. %Let $A_0=(W_*)^*\cap\overline{\vfi}((W_*)^*)$ be as in the proof of Proposition~A.\ref{propapp:action_X}.
+Since $\vfi\cdot W$ belongs to $X$, the condition $\vfi\cdot W\in\Gra(W^k,E^k,V)$ is equivalent to the equality  $$\codim_{\vfi\cdot W}((\vfi\cdot W)\cap W)-\codim_W((\vfi\cdot W)\cap W)=k.$$
+We have $\vfi\cdot W=\vfi((W_*)^*)\cap V$ and $W\subset (W_*)^*$, hence $$(\vfi\cdot W)\cap W\subset(\vfi((W_*)^*)\cap V)\cap (W_*)^*=A_0\cap V=A_0\cap W$$
+where $A_0=(W_*)^*\cap\vfi((W_*)^*)$. Moreover, the opposite inclusion is clear, so $(\vfi\cdot W)\cap W=A_0\cap W$. Therefore, we need to prove that
+$$\codim_{\vfi((W_*)^*)\cap V}(A_0\cap W)-\codim_W(A_0\cap W)=d(\vfi).$$
+
+As was shown in the proof of Proposition~A.\ref{propapp:action_X}, there exist $n\in\Zp_{>0}$ and $\alpha_1,~\ldots,~ \alpha_n\in W_*$ such that $\pi_U(\vfi|_{(W_*)^*}(\omega))=\sum_{i=1}^n\omega(\alpha_i)e_i$ for all $\omega\in (W_*)^*$, and $A_0=\{\omega\in (W_*)^*\mid\omega(\alpha_i)=0,~1\leq i\leq n\}$. Hence, $A_0\cap W=\{w\in W\mid\alpha_i(w)=0,~1\leq i\leq n\}$ and
+\begin{equation}\codim_{(W_*)^*}A_0=\codim_W(A_0\cap W)=\dim\pi_U(\vfi((W_*)^*)).\label{formula:A_0_cap_W}
+\end{equation}
+
+It remains to check that $\codim_{\vfi((W_*)^*)\cap V}(A_0\cap W)=\dim\pi_U(\vfi^{-1}((W_*)^*)$. This is done essentially by the same argument as above. Indeed, %recall that $V_E=(W_*)^*\oplus U$. We have $\overline{\vfi}^{-1}((W_*)^*)=\{(\omega,u)\in V_E\mid\overline{\vfi}^{-1}(\omega,u)\in(W_*)^*\}$. 
+the argument in the proof of Proposition A.\ref{propapp:action_X} now shows that there exist $m\in\Zp_{>0}$ and $\wt\alpha_i\in W_*$, $1\leq i\leq m$, such that $\pi_U(\vfi^{-1}|_{(W_*)^*}(\omega))=\sum_{i=1}^m\omega(\wt\alpha_i)e_i$ for $\omega\in(W_*)^*$. This, together with fact that $\dim\pi_U(\vfi^{-1}((W_*)^*))<\infty$, implies that, given $(\omega,u)\in V_E$, the condition $\vfi^{-1}((\omega,u))\in(W_*)^*$ is equivalent to a finite system of linear equations on finitely many of the coordinates of $(\omega,u)$. %(Where the left-hand side of each equation depends only on a finite number of coordinates, of course.) 
+Thus,
+\begin{equation*}
+\begin{split}
+\codim_{\vfi((W_*)^*)\cap V}(A_0\cap W)&=\codim_{\vfi((W_*)^*)}A_0=\codim_{\vfi((W_*)^*)}(\vfi((W_*)^*)\cap (W_*)^*)\\
+&=\codim_{(W_*)^*}((W_*)^*\cap\vfi^{-1}((W_*)^*))=\dim\pi_U(\vfi^{-1}((W_*)^*)).
+\end{split}
+\end{equation*}
+ The proof is now complete.}\newpage
+
+%It is %\label{nota:d_0_G_k_G_k} 
+%clear %from the proof of Lemma~\ref{lemm:d_0_G_0_G_0}
+%that one can define the degree of $\vfi$ by using an arbitrary subspace from $\Gra(W,E,V)$ instead of $W$, because the result $\vfi\cdot\Gra(W,E,V)=\Gra(W^k,E^k,V)$ does not depend on the choice of this subspace. Precisely, pick a subspace $L\in\Gra(W,E,V)$ and replace finitely many basis vectors $e_i$, $i\geq0$, to obtain a subspace $\wt U\subset V$ so that $V=L\oplus\wt U$. Then $V_{*E}=L_*\oplus\wt U^*$, $V_E=(L_*)^*\oplus\wt U$, and one can define the projections $\pi_{L_*}\colon V_{*E}\to L_*$, $\pi_{\wt U}\colon V_E\to\wt U$ similarly to $\pi_{W_*}$, $\pi_U$ respectively. Put
+%\begin{equation*}
+%d_L(\vfi)=d(\overline{\vfi})=\dim\pi_{L_*}(\vfi(\wt %U^*))-\dim\pi_{L_*}(\vfi^{-1}(\wt U^*))=\dim\pi_{\wt U}(\overline{\vfi}((L_*)^*))-\dim\pi_{\wt U}(\overline{\vfi}^{-1}((L_*)^*)).
+%\end{equation*}
+
+%\coropappendix{The degree of an operator $\vfi\in G (V_{*E},V_E)$ equals $d_L(\vfi)$.}{Pick a number $k\in\Zp$. Since $L\in\Gra(W,E,V)$, we have an ordered basis $E_L$ of $L$ such that $|E\setminus E_L|=|E_L\setminus E|<\infty$. Similarly, we have an ordered basis $\wt E_U$ of $\wt U$ such that $|\wt E\setminus\wt E_U|=|\wt E_U\setminus\wt E|<\infty$. For $k<0$, we delete the first $|k|$ vectors from $E_L$ and denote the obtained subset by $E_L^k$. For $k>0$, we add the first $k$ vectors from $\wt E_U$ to $E_L$ and denote the obtained set by $E_L^k$. Finally, we denote $E_L^0=E_L$ and put $L^k:=\langle E_L^k\rangle_\Cp$ (cf. the definition of $W^k$).
+
+%It is clear that $\Gra(L,E_L,V)=\Gra(W,E,V)$ and $\Gra(L^k,E_L^k,W)=\Gra(W^k,E^k,V)$. One can literally repeat the proof of Proposition~A.5 to check that $\vfi\cdot\Gra(L,E_L,V)=\Gra(L^k,E_L^k,V)$ if and only if $d_L(\vfi)=k$. This together with Proposition A.5 concludes the proof.}
+
+%Furthermore, given $k\in\Zp$, one has $\vfi\cdot\Gu_k=\Gu_k$ if and only if $\vfi$ sends one (or, equivalently, each) subspace from $\Gu_k$ to a subspace from $\Gu_k$, because we can replace $0$ by $k$ and $E$ by~$E^k$ everywhere in the proof of the lemma. Finally, we see that if $d(\vfi)=d$ then $\vfi^{\pm1}\cdot\Gu_0=\Gu_{\pm d}$, and, more generally, if $\vfi\cdot\Gu_k=\Gra(W^{k+d},E^{k+d},V)$ then $\vfi^{-1}\cdot\Gu_k=\Gu_{k-d}$.
+
+\coropappendix{The definition of $d(\vfi)$ does not depend on the choice of $W$ in the following sense: in the definition of $d(\vfi)$ one can replace $W$ by any subspace $W'\subset V$ which is $\widetilde{E}$-commensurable with $W$, and $U$ --- by any direct complement $U'$ of $W'$ in $V$ such that $\codim_{U'} \langle U'\cap \widetilde{E} \rangle_{\mathbb{C}}<\infty$.}{The claim follows directly from Proposition A.\ref{propp:d_G_0_G_k} as the ind-varieties $\Gra(W^k,E^k,V)$ remain unchanged under a replacement $W \leadsto W'$, $U\leadsto U'$.}
+
+%\notaappendix{A\label{nota:finite_pi_vfi}s we mentioned in the paragraph before formula (\ref{formula:A_0_cap_W}) in the proof of Proposition~A.\ref{propp:d_G_0_G_k}, there exist $n\in\Zp_{>0}$ and $\alpha_1,~\ldots,~ \alpha_n\in W_*$ such that $\pi_U(\vfi|_{(W_*)^*}(\omega))=\sum_{i=1}^n\omega(\alpha_i)e_i$ for all $\omega\in (W_*)^*$, and $(\vfi\cdot W)\cap W=\{w\in W\mid\alpha_i(w)=0,~1\leq i\leq n\}$. There are two obvious consequences of this fact. First, $\vfi$ belongs to~$\St_W$ if and only if $\dim(\Imm\pi_U\circ\restr{\vfi}{(W_*)^*})=0$. Second, one can remove a finite subset $D$ from $E$ so that $\vfi\cdot W$ contains all basis vectors from $(E\setminus D)\cap W$. In fact, $|D|=\dim\langle\alpha_1,~\ldots,~\alpha_n\rangle_{\Cp}=\dim(\Imm\pi_U\circ\restr{\overline{\vfi}}{(W_*)^*})$, and $D$ is contained in the finite set $\{e\in E\mid\alpha_i(e)\neq0\text{ for a certain index }i\}=\{e\in E\mid\pi_U(\overline{\vfi}(e))\neq0\}.$}
+
+
+Now we are ready to describe the structure of the 
+$ G (V_E, V_{*E})$-action on $X$ in more detail. In particular, we prove that the degree defines a grading on the group $ G (V_E, V_{*E})$. In the next theorem we set $X(k)=\Gra(W^{k},E^{k},V)$ for $k\in \Zp$. Then $X(0)=\Gra(W,E,V)$ and $X=\bigsqcup\limits_{k\in \Zp} X(k)$.
+
+\theopappendix{Given $d\in\Zp$, set \label{theoapp:d_0_G_k_G_k}
+$ G^d(V_E, V_{*E}):=\{\vfi\in  G (V_E, V_{*E})\mid d(\vfi)=d\}$. Then
+\begin{equation*}
+\begin{split}
+&\text{\textup{i)} $\vfi\cdot X(k)=X(k+d(\vfi))$ for all $\vfi\in  G (V_E, V_{*E})$, $k\in\Zp$};\\
+&\text{\textup{ii)} $d(\vfi\circ\vfi')=d(\vfi)+d(\vfi')$ for all $\vfi,~\vfi'\in  G (V_E, V_{*E})$};\\
+&\text{\textup{iii)} $ G^0 (V_E, V_{*E})$ is a normal subgroup of $ G (V_E, V_{*E})$ whose cosets are $ G^d (V_E, V_{*E})$, $d\in\Zp$}.\\
+\end{split}
+\end{equation*}
+}{i) We have $d(\vfi^{-1})=-d(\vfi)$ by the definition of degree. This implies that if $\vfi\cdot X(0)=X(d)$ then $\vfi^{-1}\cdot X(0)=X(-d)$. In particular, since $Sh \cdot X(n)=X(n+1)$ and consequently $Sh^k \cdot X(n)=X(n+k)$, we obtain $Sh^{-k}\cdot X(n)=X(n-k)$ %It is clear from the definition of $Sh$ in Example~A.3 that $Sh^n\cdot X(k)=X(k+n)$
+for all $k,~n\in\Zp$. 
+
+We claim that if $\vfi\cdot X(0)= X(0)$ then $\vfi\cdot X(k)= X(k)$ for all $k\in\Zp$. Indeed, assume that $\vfi\cdot X(0)= X(0)$ and pick an integer $k$. We have $(Sh^{-k}\circ\vfi)\cdot X(0)=Sh^{-k}\cdot(\vfi\cdot X(0))=Sh^{-k}\cdot X(0)=X(-k)$. By our observation in the first paragraph, we conclude that $(Sh^{-k}\circ\vfi)^{-1}\cdot X(0)= X(k),$ i.e, $$(\vfi^{-1}\cdot Sh^{-k})\cdot X(0)=\vfi^{-1}\cdot( Sh^k\cdot X(0))=\vfi^{-1}\cdot X(k)= X(k).$$ This clearly implies $\vfi\cdot X(k)= X(k)$.
+
+Now, assume that $\vfi\cdot X(0)=X(d)$, i.e., that $d(\vfi)=d$. Then $( Sh^{-d}\circ\vfi)\cdot X(0)= Sh^{-d}\cdot X(d)= X(0)$. Thus, by the previous paragraph, for all $k\in\Zp$ we have $( Sh^{-d}\circ\vfi)\cdot X(k)= X(k)$, i.e., $$\vfi\cdot X(k)= Sh^d\cdot X(k)=X(k+d).$$
+
+ii) Follows immediately from (i).
+
+iii) Follows immediately from (ii).}
+
+\sstappendix{Matrix realization} 
+Consider the spaces  $V_E=(W_*)^*\oplus U$, $V_{*E}=W_*\oplus U^*$, and assume that the isomorphism $\eta:W_*\rightarrow U$ maps $e^*_{-i}$ to $e_i$ for $i\in \Zp_{>0}$. Then the pairing $V_E\times V_{*E} \rightarrow \Cp$ is identified with the pairing
+\begin{equation*}
+(U^*\oplus U)\times(U^*\oplus U)\to\Cp\colon((\gamma,~y),~(\varkappa,z))\mapsto\langle(\gamma,~y),~(\varkappa,z)\rangle=\gamma(z)+\varkappa(y),~y,~z\in U,~\gamma,~\varkappa\in U^*.
+\end{equation*}
+This allows us to denote the group $ G(V_E,V_{*E})= G(U^*\oplus U,U^*\oplus U)$ simply by $G_U$. 
+
+We now present an explicit matrix realization of the group $G_U$. 
+We have a fixed basis 
+$\{e_1,~e_2,~\ldots\}$ of $U$, 
+and we identify 
+$U^*\oplus U$ with the space $\{(\gamma,~y)\}$ where $\gamma=(\ldots,~\gamma_{-2},~\gamma_{-1})$ are  reverse sequences and $y=(y_{1},~y_2,~\ldots)$  are finitary usual sequences. %are double infinite sequences such that $y$ is finitary.
+We consider matrices whose rows and columns are parameterized by the ordered set $\Zp\setminus \{0\}=\Zp_{<0}\sqcup \Zp_{>0}$. %the ordered set $\Zp \sqcup \Zp=\{ i,~j^* \mid i^*<j^* \text{ for any } i,~j \}$, where $i$ is an element of left-hand copy of $\Zp$ and $j^*$ is an element of the right-hand side copy of $\Zp$.  
+Such a matrix $M$ naturally splits into four blocks
+\begin{equation*}
+    M=\left(\begin{array}{c|c}
+A & B  \\
+\hline
+C & D  \end{array}\right).
+\end{equation*}
+Let $J$ be the subset of such matrices satisfying the following conditions:
+\begin{equation}
+\begin{split}\label{formula:matrix_group}
+&\text{$\bullet$ each row of $A$ and each column of $D$ is finitary};\\
+&\text{$\bullet$ $C$ is a finitary matrix}.\\
+\end{split}
+\end{equation}
+Matrices from $J$ act on $U^*\oplus U$ via left multiplication: one considers vectors of $U^*\oplus U$ as columns $$(\gamma,y)^{T}=\begin{pmatrix} \gamma^{T} \\ y^T \end{pmatrix},$$ and we have $(\gamma,y)^T \longmapsto \psi(\gamma,y)^{T}$
+for $\psi\in J$.
+
+Given a matrix $\psi\in J$, we let $\overline{\psi}$ denote the reflection of $\psi$ with respect to its antidiagonal.  
+Clearly, $\overline{\overline{\psi}}=\psi$. One 
+checks immediately that $\overline{\psi}$ belongs to $J$, and that $\overline{\psi_1\psi_2}=\overline{\psi_2}~\overline{\psi_1}$. Furthermore, if $\overline{\gamma}:=(\gamma_{-1},~\gamma_{-2},~\gamma_{-3},~\ldots)$ for a reverse sequence $\gamma=(\ldots,~\gamma_{-3},~\gamma_{-2},~\gamma_{-1})$ and $\overline{y}:=(\ldots,~y_3,~y_2,~y_1)$ for a finitary sequence $y=(y_1,~y_2,~y_3,~\ldots)$, then we have $\overline{\psi(\gamma,~y)^T}=\overline{(\gamma,~y)^T}~\overline{\psi}$ for all $(\gamma,~y)\in U^*\oplus U$, where $\overline{(\gamma,~y)^T}=(\overline{y},~\overline{\gamma})$.
+
+Let $\widetilde{G}_U$ be the group of automorphisms of $V_E$ with matrices $\psi$ such that $\psi$, $\psi^{-1}\in J$. 
+
+\theopappendix{The group $G_U$ coincides\label{theo:G_U} with $\wt G_U$.}{First, we prove that $G_U$ is contained in $\wt G_U$. %Denote by $\pi_U$ and $\pi_{U^*}$ the respective projections from $U\oplus U^*$ to $U$ and $U^*$.
+Pick an operator $\vfi\in G_U$. Since $\pi_U\circ (\restr{\vfi}{U})$ is a well-defined operator on the countable-dimensional space $U$% with basis $\{\ldots,~e_{-1},~e_0,~e_1,~\ldots\}$
+, it is represented by a (unique) matrix $D=(d_{i,j})_{i,j\in \Zp_{>0}}$ with finitary columns. 
+
+Next, Lemma~A.\ref{lemm:fin_dim_Im} implies that $\dim\Imm(\pi_U\circ(\restr{\vfi}{U^*}))<\infty$. Moreover, %it follows from
+according to the proof of Lemma~A.\ref{lemm:fin_dim_Im} there exist $n\in\Zp_{\geq0}$ and vectors $c_1,~\ldots,~c_n\in U$ such that $\pi_U(\restr{\vfi}{U^*}(\gamma))=\sum_{i=1}^n\gamma(c_i)e_i$ for all $\gamma\in U^*$. This means that $\pi_{U}\circ(\restr{\vfi}{U^*})$ can be represented as a finitary matrix $C=(c_{i,-j})_{i,j\in \Zp_{>0}}$, 
+where $c_i=\sum_{j\geq1}c_{i,-j}e_j$.
+
+Let $\pi_{U^*}$ be the projection operator $U^*\oplus U\rightarrow U^*$. The operator $\pi_{U^*}\circ (\restr{\vfi}{U})$ is an operator from the space $U$ of finitary sequences to the space $U^*$ of arbitrary reverse sequences, and is therefore given by a matrix $B=(b_{-i,j})_{i,j\in \Zp_{>0}}$. 
+
+Finally, given $\gamma\in U^*$, we have $\pi_{U^*}(\restr{\vfi}{U^*}(\gamma))(e_i)=\vfi(\gamma)(e_i)=\gamma(\overline{\vfi}(e_i))=\gamma(\pi_U(\overline{\vfi}(e_i)))$. There exist linear functions $\beta_j\in U^*$, $j\in \Zp_{>0}$, such that $\pi_U(\overline{\vfi}(y))=(\beta_1(y),~\beta_2(y),~\ldots)$. Since $\pi_U(\overline{\vfi}(e_i))$ belongs to $U$, there exists $k(i)\in \Zp_{>0}$ such that $\beta_j(e_i)=0$ for $j>k(i)$, i.e., $\pi_U(\overline{\vfi}(e_i))=\sum_{j=1}^{k(i)}\beta_j(e_i)e_j$. Thus, $\pi_{U^*}\circ(\restr{\vfi}{U^*})$ can be represented as a matrix with finitary rows $A=(a_{-i,-j})_{i,j\in \Zp_{>0}}$, where $a_{-i,-j}=\beta_j(e_i)$.
+
+It follows that $\varphi\in %\mathrm{Aut}(U\oplus U^*)
+G_U$ can be represented by invertible matrices from $L$. This conclusion applies also to the inverse operator $\varphi^{-1}$ by the same argument. 
+
+In order to verify the inclusion $\wt G_U\subset G_U$, let now $\psi$ be a matrix from $L$ such that $\psi^{-1}\in L$. Then the linear operator on $U^*\oplus U$ with matrix $\overline{\psi}$ is the restriction to $U^*\oplus U$ of the operator dual to the operator defined by $\psi$. Indeed,
+\begin{equation}
+\begin{split}
+\langle\overline{\psi}(\gamma,y)^T,(\gamma',y')^T\rangle&=\overline{\overline{\psi}(y,\gamma)^T}(\gamma',y')^T=\overline{(\gamma,y)^T}~\overline{\overline{\psi}}(\gamma',y')^T\\
+&=\overline{(\gamma,y)^T}\psi(\gamma',y')^T=\langle(\gamma,y)^T,\psi(\gamma',y')^T\rangle,
+\end{split}\label{formula:vee_Mackey}
+\end{equation}
+where the three middle terms are products of two or respectively three matrices.
+Moreover, the invertibility of $\overline{\psi}$ follows from the equality $\overline{\psi}^{-1}=\overline{\psi^{-1}}$ which is a consequence of the relation $\overline{\psi_1 \psi_2}=\overline{\psi}_2\overline{\psi}_1$. This shows that $\psi$ determines an operator from $G_U$.
+}
+
+\notaappendix{Finally, the reader will notice that if in the definition of $J$ we replace the ordered set $\Zp \setminus \{0\}=\Zp_{<0}\sqcup \Zp_{>0}$ 
+by any ordered set which is the disjoint union $O_1 \sqcup O_2$ of two linearly ordered countable sets with the condition $r<s$ for $r\in O_1$, $s\in O_2$, and define a group by imposing the conditions (\ref{formula:matrix_group}), we will obtain a group isomorphic to $G_U$.  Of course, in such a setting the matrix of the operator $\overline{\vfi}=\vfi^*|_{U^*\oplus U}$, for a given $\vfi \in   G_U$  with matrix $\psi$, will not be $\overline{\psi}$ as defined above, and its form will depend on the choice of $O_1$ and $O_2$. Moreover, there will also be analogues of the operator $Sh$, and we leave it to the reader to define one.}
+%check that in all above considerations the ordered set $\ldots,~3,~2,~1,~1^*,~2^*,~\ldots$ can be replaced by any countable ordered set which is the disjoint union $O \sqcup O$ where $O$ is a linearly ordered set isomorphic to its opposite ordered set. 
+%In this more general setting, $y$ is a function on the set $O$ with finitely many nonzero values, and $\gamma$ is an arbitrary function on the set $O$. 
+
+The above remark is used in the proof of Theorem \ref{theorem:1} presented in Section \ref{sect:proof_theorem_1_in_the_general_case}.
+
+Finally, using the matrix form of the group $G_U$ given by Theorem~A.\ref{theo:G_U}, it is straightforward to check that $G_U$ is nothing but the group   
+ %implies that the group $G_U$ is nothing but the group 
+ of continuous automorphisms of $U^*\oplus U$ as a Tate space, see, for instance, \cite{Kapranov}. In other words, $G_U$ is the well-known group Japanese $GL(\infty)$, and $G^0(U,U^*)$ is simply the connected component of the identity in $G(U,U^*)=G_U$.
+
+
+
+\newpage\begin{thebibliography}{XXXX}
+\bibitem[A]{Akhiezer} D. Akhiezer. Lie Group Actions in Complex Analysis. Asp. of Math. \textbf{27}, Vieweg + Teubner Verlag, 1995.
+%\bibitem[Ba1]{Baranov1} A. A. Baranov, Complex finitary simple Lie algebras, Arch. Math. {\bf 71} (1998), 1--6.
+%\bibitem[Ba2]{Baranov2} A. Baranov. Finitary simple Lie algebras, J. Algebra \textbf{219} (1999), 299--329.
+%\bibitem[CM]{CM} D. Collingwood, W. McGovern, Nilpotent orbits in semisimple Lie algebras, Van Nostrand Reinhold Math. Ser., Van Nostrand Reinhold Co., New York, 1993.
+%\bibitem[DPS]{DPS} E. Dan-Cohen, I. Penkov, V. Serganova, A Koszul category of representations of finitary Lie algebras, preprint 2011, arXiv:1105.3407.
+%\bibitem[DPSn]{DPSn} E. Dan-Cohen, I. Penkov, N. Snyder, Cartan subalgebras of root-reductive Lie algebras, Journ. of Algebra {\bf 308} (2007), 583--611.
+\bibitem[C]{Chow} Wei-Liang Chow. On the Geometry of Algebraic Homogeneous Spaces.
+Ann. Math. \textbf{50} (1949), 32--67.
+\bibitem[DP]{DimitrovPenkov} I. Dimitrov, I. Penkov. Ind-varieties of generalized flags as homogeneous spaces for classical ind-groups. Int. Math. Res. Notices \textbf{55} (2004), 2935--2953.
+\bibitem[DPW]{DmitrovPenkovWolf} I. Dimitrov, I. Penkov, J. Wolf. A Bott-Borel-Weil theory for direct limits of algebraic groups. American Journal of Mathematics \textbf{124} (2002), 955--998.
+
+\bibitem[GS]{GattoSalehyan} L. Gatto, P. Salehyan, The cohomology of the Grassmannian is a $\mathfrak{gl}_n$-module, Communications in Algebra \textbf{48}  (2020), 274--290.
+
+%\bibitem[DP1]{DimitrovPenkov1} I. Dimitrov, I. Penkov. Weight modules of direct limit Lie algebras, Int. Math. Res. Notes \textbf{5} (1999), 223--249.
+%\bibitem[DP2]{DimitrovPenkov2} I. Dimitrov, I. Penkov. Locally semisimple and maximal subalgebras of the finitary Lie algebras $\mathfrak{gl}(\infty)$, $\slt_{\infty}(\Cp)$, $\sot_{\infty}(\Cp)$, and $\spt_{\infty}(\Cp)$, J.~Algebra \textbf{322} (2009), 2069--2081.
+%\bibitem[Di4]{Dixmier} J. Dixmier. Enveloping algebras, Grad. Stud. in Math. \textbf{11}. AMS, 1996.
+\bibitem[IP]{IgnatyevPenkov} I. Ignatyev, I. Penkov. Ind-varieties of generalized flags: a survey of results. J. Math. Sci. \textbf{248} (2020), 255--302.
+%\bibitem[Jo1]{Jo3} A. Joseph, Sur la classification des id\'eaux primitifs dans l'alg\'ebre enveloppante de sl(n+1,~C) (French), C. R. Acad. Sci. Paris S\'er. A-B {\bf 287 no 5} (1978), 303--306.
+%\bibitem[Jo2]{Jo2} A. Joseph, Dixmier's problem for Verma and principal series submodules, J. London Math. Soc. (2) {\bf 20} (1979), 193--204.
+%\bibitem[Jo3]{Jo1} A. Joseph, Towards the Jantzen conjecture. III, Compositio Math. {\bf 42} (1980/81), 23--30.
+%\bibitem[Jo4]{Jo4} A. Joseph, On the associated variety of the primitive ideal, Journ. of Algebra {\bf88} (1984), 238--278.
+
+\bibitem[K]{Kapranov}. M. Kapranov. Semiinfinite symmetric powers. Preprint 2001, arXiv: \texttt{math.QA/0107089}.
+
+\bibitem[M]{Mackey45} G.W. Mackey. On infinite-dimensional linear spaces. Trans. Amer. Math. Soc. \textbf{57} (1945), no.~2, 155--207.
+
+\bibitem[NRW]{NatarajanRodriguez-CarringtonWolf} L. Natarajan, E. Rodr\'iguez-Carrington, J. A. Wolf. The Bott--Borel--Weil Theorem for direct limit
+Lie groups. Trans. Amer. Math. Soc. \textbf{353} (2001), 4583--4622.
+
+\bibitem[O]{Onishchik} A. Onishchik. Transitive compact transformation groups. Math. Sb. (N.S.) \textbf{60}
+(1963), 447--485 English Transl.: AMS Transl. (2) \textbf{55} (1966), 5--58.
+
+%\bibitem[Knu]{Knu} D. E. Knuth, The art of computer programming. Volume 3. Sorting and searching, Addison-Wesley Series in Computer Science and Information Processing,  Addison-Wesley, 1973.
+\bibitem[P]{Penkov} I. Penkov. Examples of automorphism groups of ind-varieties of generalized flags. J. Geom. Symmetry Phys. \textbf{50} (2018), 71--77.
+%\bibitem[PS]{PS}  I. Penkov, V. Serganova, Tensor representations of Mackey Lie algebras and their dense subalgebras, Developments and Retrospectives in Lie Theory: Algebraic Methods, Developments in Mathematics, vol. {\bf 38}, Springer Verlag, 2014, pp. 291--330.
+
+%\bibitem[PP]{PP} I. Penkov, A. Petukhov, On ideals in the enveloping algebra of a locally simple Lie algebra, IMRN, 2014, doi:10.1093/imrn/rnu085.%, see also arXiv:1210.0466.
+
+\bibitem[PT1]{PenkovTikhomirov1} I. Penkov, A.S. Tikhomirov. Linear ind-Grassmannians. Pure and Applied Math. Quarterly \textbf{10} (2014), 289--323.
+
+\bibitem[PT2]{PenkovTikhomirov2} I. Penkov, A.S. Tikhomirov. An algebraic-geometric construction of ind-varieties of generalized flags. Preprint 2019, arXiv: \texttt{math.AG/1910.12005}.
+
+%\bibitem[S]{Sa} A. Sava, Annihilators of simple tensor modules, master's thesis, Jacobs University Bremen, 2012, arXiv: 1201.3829.
+%\bibitem[Zh1]{Zh1} A. G. Zhilinskii, Coherent systems of representations of inductive families of simple complex Lie algebras (Russian), preprint of Academy of Belarussian SSR, ser. {\bf 38 (438)}, Minsk, 1990.
+%\bibitem[Zh2]{Zh2} A. G. Zhilinskii, Coherent finite-type systems of inductive families of non-diagonal inclusions (Russian), Dokl. Acad. Nauk Belarusi {\bf 36:1} (1992), 9--13, 92.
+
+
+\bibitem[S]{Sato}  M. Sato. The \emph{KP} hierarchy and infinite-dimensional Grassmann manifolds. Theta functions~---
+Bowdoin 1987, Part 1 (Brunswick, ME, 1987), Proc. Sympos. Pure Math. \textbf{49}, Amer.
+Math. Soc., Providence, RI, 1989, 51--66.
+
+
+
+\bibitem[T]{Tarigradschi} M. Tarigradschi. On the automorphism groups of certain flag ind-varieties. Bachelor's thesis, Jacobs University Bremen, 2019. 
+
+
+%\bibitem[Zh3]{Zh3} A. G. Zhilinskii, On the lattice of ideals in the universal enveloping algebra of a diagonal Lie algebra, preprint, Minsk, 2011.
+
+\end{thebibliography}
+
+\medskip\textsc{Mikhail Ignatyev: Samara National Research University, Ak. Pavlova 1, Samara\break\indent 443011, Russia}
+
+\emph{E-mail address}: \texttt{mihail.ignatev@gmail.com}
+
+\medskip\textsc{Ivan Penkov: Jacobs University Bremen, Campus Ring 1, Bremen 2759, Germany}
+
+\emph{E-mail address}: \texttt{i.penkov@jacobs-university.de}
+
+\newpage
+
+
+
+\end{document}
+
+
+
+
+\sst{The spaces $V_E^*$ and $V_E$} Throughout the paper the ground field will be the field $\Cp$ of complex numbers. We will denote $\Cp^{\times}=\Cp\setminus\{0\}$. Let $V$ be a countably-dimensional vector space, and $E$ be a linearly independent subset of $V$. We denote by $W=\langle E\rangle_{\Cp}$ the linear span of the set $E$.
+
+Consider the following exact sequence of vector spaces:
+\begin{equation*}
+0\to W\hookrightarrow V\twoheadrightarrow U\to0.
+\end{equation*}
+Here $U=V/W$, the map from $W$ to $V$ is the natural embedding, and the map from $V$ to $U$ is the canonical projection. Dualizing this sequence, we obtain the sequence
+\begin{equation*}
+0\to U^*\hookrightarrow V^*\stackrel{p}{\twoheadrightarrow}W^*\to0.
+\end{equation*}
+Let $W_*$ be the subspace of $W^*$ spanned by the \emph{dual system} $\{e^*,~e\in E\}$, where, by definition, for~$e'\in E$,
+\begin{equation*}
+e^*(e')=\begin{cases}1,&\text{if }e'=e,\\
+0&\text{otherwise}.
+\end{cases}
+\end{equation*}
+We denote the preimage of $W_*$ under the map $p$ by $V_E^*$, so that we have the exact sequence
+\begin{equation*}
+0\to U^*\hookrightarrow V_E^*\stackrel{p}{\twoheadrightarrow}W_*\to0.
+\end{equation*}
+
+In fact $V_E^*$ consists of all linear functions $f\in V^*$ such that $f(e)=0$ for all but finitely many vectors $e\in E$. Dualizing the latter sequence, we obtain
+\begin{equation*}
+0\to (W_*)^*\hookrightarrow V_E^{**}\stackrel{q}{\twoheadrightarrow} U^{**}\to0.
+\end{equation*}
+The space $U$ is naturally embedded into $U^{**}$, and we denote the preimage of $U$ under the map $q$ by~$V_E$, so we obtain the exact sequence
+\begin{equation*}
+0\to (W_*)^*\hookrightarrow V_E\stackrel{q}{\twoheadrightarrow}U\to0.
+\end{equation*}
+
+\exam{Assume that $\dim W=k$ is finite. Then $W^*=W_*$ is also of dimension $k$. On the other hand, $\codim_{V^*}U^*=k$, hence $V_E^*=V^*$. Next, $(W_*)^*$ can be identified with $W$. Both $V$ and $V_E$ are subspaces of $V^{**}$, and it is clear that $V_E=V$.}
+
+Note that $U^*$ is the subspace of $V^*$ consisting of all linear function on $V$ which are zero on $W$. It is convenient for the sequel to pick a complement subspace to $W$ in $V$ and identify $U$ with this subspace. Then $W^*$ can be considered as the subspace of $V^*$ consisting of all linear functions on $V$ which are zero on $U$, so that $V^*=W^*\oplus U^*$. Hence we can write
+\begin{equation}
+V_E^*=W_*\oplus%\label{formula:spaces_V_E} 
+U^*,~V_E=(W_*)^*\oplus U
+\end{equation}
+(as subspaces of $V^*$, $V^{**}$ respectively). Pick a basis $F$ of $U$, so that $E\cup F$ is a basis of $V$. Using the bases $F$ and $E\cup F$ of $U$ and $V$ respectively, define the subspaces $U_*\subset U^*$ and $V_*\subset V^*$ similarly to $W_*\subset W^*$. Obviously, $V_*=W_*\oplus U_*$, and $(V_*)^*$ can be naturally identified with $(W_*)^*\oplus (U_*)^*$.
+
+\exam{Assume now that $\codim_VW=k<\infty$. Then $\dim U=k$ implies $U^*=U_*$ and $U=^{**}=(U_*)^*$, so we immediately obtain from formula (\ref{formula:spaces_V_E}) that
+\begin{equation*}
+\begin{split}
+V_E^*&=W_*\oplus U^*=W_*\oplus U_*=V_*,\\
+V_E&=(W_*)^*\oplus U=(W_*)^*\oplus(U_*)^*=(V_*)^*.
+\end{split}
+\end{equation*}
+Not that if both $\dim W$ and $\codim_VW$ are infinite then $V_*\subsetneq V_E^*\subsetneq V^*$ and $V\subsetneq V_E\subsetneq (V_*)^*$.}\newpage
+
+\sst{The Mackey group $G(V_E^*, V_E)$ and linear algebra} Let $A$, $B$ be two vector spaces with a non-degenerate bilinear pairing $$A\times B\to\Cp\colon (a,b)\mapsto\langle a,b\rangle,~a\in A,b\in B.$$ For example, if $B=A^*$ then one can put $\langle a,b\rangle=b(a)$ to be the value of the linear function $b$ on the vector $a$.
+
+\defi{We called the \emph{Mackey group} of this pairing the group $G(A, B)$ consisting of all isomorphisms of vector spaces $\vfi\colon A\to A$ such that there exists an isomorphism of vector spaces $\psi\colon B\to B$ satisfying
+\begin{equation*}
+\langle\vfi(a),b\rangle=\langle a,\psi(b)\rangle~\text{ for all }a\in A,~b\in B.
+\end{equation*}
+Since the pairing is non-degenerate, $\psi$ is uniquely determined by $\vfi$ (and vice versa), so the definition is in fact symmetric on $A$, $B$.
+
+For instance, if $B=A^*$, $\vfi\colon A\to A$ is arbitrary and $\vfi^*\colon B\to B$ is the dual operator, then, given $a\in A$, $b\in A^*$,
+\begin{equation*}
+\langle\vfi(a),b\rangle=b(\vfi(a))=\vfi^*(b)(a)=\langle a,\vfi^*(b)\rangle
+\end{equation*}
+by definition of $\vfi^*$, so in this case $G(A,A^*)$ is the group of all invertible linear operators on $A$.}
+
+By definition, \emph{the ind-grassmannian} $\Gra(W, E)$ consists of all subspaces $L\subset V$ such that $L\cap W$ is spanned by a subset $E_0\subset E$ for which $$\codim_W(L\cap W)=\codim_L(L\cap W)=|E\setminus E_0|<\infty.$$
+The space $V_E$ is a subspace of $V_E^{**}$, and it follows immediately from (\ref{formula:spaces_V_E}) that the natural pairing between $V_E^*$ and $V_E$ is non-degenerate. Our goal is to show that a certain subgroup of the Mackey group $G(V_E^*,V_E)$ acts on $\Gra(W,E)$. First, we need to prove the following completely linear-algebraic lemma.
+
+\lemmp{Let $A$ be%\label{lemm:fin_dim_Im} 
+a countable-dimensional vector space\textup, and $\mu\colon A^*\to A$\textup, $\nu\colon A^*\to A$ be linear maps such that $\alpha(\mu(\beta))=\beta(\nu(\alpha))$ for all $\alpha,~\beta\in A^*$. Then the dimensions of the images of $\mu$ and $\nu$ are finite and equal.
+}{We will check that the dimension of $\Imm\mu$, the image of $\mu$, is finite, then $\dim\Imm\nu$ is finite, too, because the conditions on $\mu$ and $\nu$ are symmetric. Pick a basis $\{f_1,~f_2,~\ldots\}$ of $A$, and let $\{f_1^*,~f_2^*,~\ldots\}$ be the dual system in $A^*$. Assume that $\Imm\mu$ is infinite-dimensional. Then there exist linear functions $\lambda_n$, $n\in\Zp_{>0}$, such that $\dim\langle\mu(\lambda_1),~\ldots,~\mu(\lambda_n)\rangle_{\Cp}=n$. It is easy to see that these linear functions can be chosen so that $\lambda_n(f_i)=0$ for $i<n$ and $\lambda_n(f_n)\neq0$. Let $B$ be the linear span of $\lambda_n$, $n\in\Zp_{>0}$, then the formula $a,~b\mapsto b(a)$, $a\in A$, $b\in B$, defines a non-degenerate pairing between $A$ and $B$. According to \cite[Lemma on p. 171]{Mackey45}, we may assume without loss of generality that $\lambda_n=f_n^*$ for all $n$.
+
+Hence, given any number $n\in\Zp_{>0}$, there exists $i_n\in\Zp_{>0}$ such that $\mu(f_{i_n}^*)$ is not contained in~$A_n$, the linear span of $f_1,~\ldots,f_n$. In other words, there exist two infinite sequences of integers $1\leq i_1<i_2<\ldots$ and $2\leq k_1<k_2<\ldots$ such that $\mu(f_{i_n}^*)\in A_{k_n}\setminus A_{k_n-1}$ for all $n\geq1$.
+
+We define the sequence $c_1,~c_2,~\ldots$ of complex numbers inductively in the following way. Set $c_1$ to be an arbitrary non-zero scalar. If $n>1$ then set $c_n$ to be an arbitrary complex number such that $$\sum_{j=1}^nc_jf_{k_j}^*(\mu(f_{i_n}^*))=c_nf_{k_n}^*(\mu(f_{i_n}^*))+\sum_{j=1}^{n-1}c_jf_{k_j}^*(\mu(f_{i_n}^*))\neq0.$$ (Such a number exists because $f_{k_n}^*(\mu(f_{i_n}^*))\neq0$.) Now, define $\alpha\in A^*$ be the formula
+\begin{equation*}
+\alpha(f_j)=\begin{cases}c_n,&\text{if }j=k_n\text{ for some }n\geq1,\\
+0&\text{otherwise}.
+\end{cases}
+\end{equation*}
+Then for each $n\geq1$ one has
+\begin{equation*}
+\begin{split}f_{i_n}^*(\nu(\alpha))=\alpha(\mu(f_{i_n}^*))=\sum_{j=1}^nc_jf_{k_j}^*(\mu(f_{i_n}^*))\neq0.
+\end{split}
+\end{equation*}
+This means that $\nu(\alpha)\notin A_{i_n-1}$ for all $n\geq1$, i.e., that $\nu(\alpha)$ can not be expressed as a finite linear combination of $f_1,~f_2,~\ldots$, a contradiction.
+
+Thus, $\dim\Imm\mu$ and $\dim\Imm\nu$ are finite. It remains to check that they are equal. Using the basis $\{f_1,~f_2,~\ldots\}$, one can say more about $\Imm\mu$ (and $\Imm\nu$). Namely, there exist $n\in\Zp_{>0}$ and linear functions $\alpha_1,~\ldots,~\alpha_n\in A^{**}$ such that $\mu(a)=\sum_{i=1}^n\alpha_i(a)f_i$ for all $a\in A^*$. But it is easy to see that in fact $\alpha_i\in A$ for all $i$. Indeed, $$f_j^*(\mu(a))=f_j^*\left(\sum_{i=1}^n\alpha_i(a)f_i\right)=\alpha_j(a)=a(\nu(f_j^*)),$$ so $\alpha_j=\nu(f_j^*)\in A$ for all $j$. In follows that there exist $m\in\Zp_{>0}$ and scalars $\alpha_{i,j}\in\Cp$ such that $\alpha_j=\sum_{i=1}^m\alpha_{i,j}f_i$ for all $1\leq j\leq n$. Clearly, $\dim\Imm\mu=\rk(\alpha_{i,j})_{i,j=1}^{m,n}$. Similarly, there exist $n',~m'\in\Zp_{>0}$, elements $\beta_j\in A$ and scalars $\beta_{i,j}\in\Cp$ such that $\nu(b)=\sum_{j=1}^{n'}\beta_j(b)f_j$ and $\beta_j=\sum_{i=1}^{m'}\beta_{i,j}f_i$ for all $1\leq j\leq n'$, so that $\dim\Imm\nu=\rk(\beta_{i,j})_{i,j=1}^{m',n'}$. But
+\begin{equation*}
+\alpha_{i,j}=f_i^*(\alpha_j)=f_i^*(\nu(f_j^*))=f_j^*(\mu(f_i^*))=f_j^*(\beta_i)=\beta_{j,i}
+\end{equation*}
+for all $i,~j$. This means that $m'=n$, $n'=m$ and the matrices $(\alpha_{i,j})_{i,j=1}^{m,n}$ and $(\beta_{i,j})_{i,j=1}^{n,m}$ are transpose to each other. The result follows.}
+
+\sst{The action of the Mackey group on the ind-variety $\Xu_E$} From now one, we will assume that both $\dim W$ and $\codim_VW$ are infinite. (Other cases are much easier and will be considered later.)
+We are ready now to define the action of the Mackey group $G_E=G(V_E^*,V_E)$ on a certain ind-variety $\Xu_E$ containing the ind-grassmannian $\Gra(W,E)$. By definition, $\Xu_E$ consists of all subspaces $L$ of $V$ such that $L$ has a basis $T$ for which both $|E\setminus T|$ and $|T \setminus E|$ are finite. To check that $\Xu_E$ is indeed an ind-variety, we need to construct a chain of nested finite-dimensional varieties
+\begin{equation*}
+X_1\stackrel{\xi_1}\hooklongrightarrow X_2\stackrel{\xi_2}\hooklongrightarrow\ldots\stackrel{\xi_{n-1}}{\hooklongrightarrow}
+X_n\stackrel{\xi_n}\hooklongrightarrow X_{n+1}\stackrel{\xi_{n+1}}\hooklongrightarrow\ldots.
+\end{equation*}
+such that $\Xu_E$ is the direct limit $\ilm X_n$ of this chain.
+
+To do this, denote the basis $E\cup F$ of $V$ by $B$ and let $B=\{b_1,~b_2,~\ldots\}$; put $V_n=\langle b_1,~\ldots,~b_n\rangle_{\Cp}$. Given a vector space $A$ and a number $k\in\Zp_{\geq0}$, we will denote by $\Gra_k(A)$ the grassmannian of all $k$-dimensional subspaces of $A$. Now, for $n\geq1$, set
+\begin{equation*}
+X_n=\Gra_0(V_n)\sqcup\Gra_1(V_n)\sqcup\ldots\sqcup\Gra_n(V_n)
+\end{equation*}
+and define the embedding $\xi_n\colon X_n\to X_{n+1}$ by the following rule: if $A$ is a subspace of $V_n$, then
+\begin{equation*}
+\xi_n(A)=\begin{cases}
+A,&\text{if }b_n\notin E,\\
+A\oplus\Cp b_n,&\text{if }b_n\in E,
+\end{cases}
+\end{equation*}
+where $\Cp b_n=\langle b_n\rangle_{\Cp}$. It is very easy to see that $\Xu_E=\ilm X_n$.
+
+Fix a linear orders $E=\{e_1,~e_2,~\ldots\}$ and $F=\{f_1,~f_2,~\ldots\}$. Then $\Xu_E$ is a disjoint union of its closed ind-subvarieties $\Gra(W^k,E^k)$, $k\in\Zp$. Here $W^k$ is the linear span of $E^k$, and, by definition,
+\begin{equation*}
+E^k=\begin{cases}
+E\setminus\{e_1,~\ldots,~e_{-k+1}\},&\text{if }k\leq0,\\
+E\cup\{f_1,~\ldots,~f_k\},&\text{if }k>0.
+\end{cases}
+\end{equation*}
+(In particular, $E^0=E$.) Indeed, if $L\in\Xu_E$ then $L$ has a basis $T$ for which $a=|E\setminus T|$ and $b=|T\setminus E|$ are finite. It is evident that $L$ belongs to $\Gra(W^k,E^k)$ for $k=b-a$. On the other hand, if $k_1<k_2$ then $W^{k_1}$ is properly contained in $W^{k_2}$, which implies that $\Gra(W^{k_1},E^{k_1})\cap\Gra(W^{k_2},E^{k_2})=\varnothing$ as sets of subspaces of $V$. Note also that $V_E^*=V_{E^k}^*$ and $V_E=V_{E^k}$ for all $k$. This follows from the description of $V_E^*$ as the space of functions on $V$ that vanish at almost all vectors of $E$.
+
+
+
+We are now ready to define the action of the group $G_E$  on the ind-variety $\Xu_E$. Given vector spaces $A,~B$ with a pairing $(a,b)\mapsto\langle a,b\rangle\in\Cp$, $a\in A$, $b\in B$, and a subspace $C\subset A$, we denote by $C^{\perp}$ its \emph{orthogonal subspace} in $B$, that is $$C^{\perp}=\{b\in B\mid\langle c, b\rangle=0\text{ for all }c\in C\}.$$ Now, for a linear operator $\vfi\in G_E$ and a subspace $A$ of $V$, we put by definition $\vfi\cdot A=\left(\vfi^{-1}(A^{\perp})\right)^{\perp}\cap V$. Clearly, $\vfi\cdot A$ is again a subspace of $V$, and below we will check that this formula defines an action of the Mackey group on $\Xu_E$.
+
+\propp{If $\vfi\in G_E$ and%\label{prop:action_G_E_X_E}
+$L\in\Xu_E$ then $\vfi\cdot L\in\Xu_E$.}{We may assume without loss of generality that $L=W$. Indeed, in the definition of $V_E^*$ one can replace $W$ by an arbitrary subspace from $\Gra(W, E)$; the resulting spaces $V_E^*$, $V_E$ and so the group $G_E$ will be the same. Hence, if $L\in\Gra(W,E)$ then we may assume that $L=W$. At the same time, as we mentioned above, we can replace $E$ by $E^k$ for an arbitrary $k$ in the definitions of these spaces and this group. So, we will suppose that $L=W$.
+
+We identify $U$ with a subspace of $V$ complement to $W$, $V_E^*$ with $W_*\oplus U^*$ and $V_E$ with~$(W_*)^*\oplus U$, as in (\ref{formula:spaces_V_E}). Let $\psi\colon V_E\to V_E$ be the isomorphism of vector spaces defined by $\vfi$ as by an element of the Mackey group $G_E$. Denote by $\pi_U\colon V_E\to U$ and $\pi_{W_*}\colon V_E^*\to W_*$ the canonical projections on the corresponding direct summands. Clearly, $\langle v,\omega\rangle=\langle\pi_{W_*}(v),\omega\rangle,~\langle\xi,w\rangle=\langle\xi,\pi_U(w)\rangle$ for all $\omega\in (W_*)^*$, $v\in V_E^*$, $\xi\in U^*$, $w\in V_E$.
+
+Define also $\mu\colon (W_*)^*\to U$ and $\nu\colon U^*\to W_*$ by putting
+\begin{equation*}
+\mu(\omega)=\pi_U(\psi(\omega)),~\nu(\xi)=\pi_{W_*}(\vfi(\xi)),~\omega\in (W_*)^*,~\xi\in U^*.
+\end{equation*}
+We claim that $\dim\Imm\mu$ and $\dim\Imm\nu$ are finite (and equal). %If either $W$ or $U$ is finite-dimensional, there is nothing to prove, so we may assume that both $W$ and $U$ are countable-dimensional.
+Fix an isomorphism of vector spaces $\eta\colon W_*\to U$, then the dual map $\eta^*\colon U^*\to (W_*)^*$ is also an isomorphism. Consider the linear maps $\mu'=\mu\circ\eta^*$ and $\nu'=\eta\circ\nu$ from $U^*$ to $U$. Then, for all $\alpha,~\beta\in U^*$, one has
+\begin{equation*}
+\begin{split}\alpha(\mu'(\beta))&=\langle\alpha,\mu(\eta^*(\beta))\rangle=\langle\alpha,\pi_U(\psi(\eta^*(\beta)))\rangle=\langle\alpha,\psi(\eta^*(\beta))\rangle=
+\langle\vfi(\alpha),\eta^*(\beta)\rangle\\
+&=\langle\pi_{W_*}(\vfi(\alpha)),\eta^*(\beta)\rangle=\langle\nu(\alpha),\eta^*(\beta)\rangle=\langle\eta(\nu(\alpha)),\beta\rangle=\beta(\nu'(\alpha)).
+\end{split}
+\end{equation*}
+Hence, $\dim\Imm\mu'=\dim\Imm\nu'$ (and, consequently, $\dim\Imm\mu=\dim\Imm\nu$) is finite by Lemma~\ref{lemm:fin_dim_Im}.
+
+Now, denote by $A_0=(W_*)^*\cap\psi((W_*)^*)$ the preimage of zero under the restriction of $\pi_U$ to $\psi((W_*)^*)$. Since $\Imm\mu$ is finite-dimensional, we see that $A_0$ is a subspace of~$\psi((W_*)^*)$ of finite codimension. Our next goal is to show that there exist $\alpha_1,~\ldots,~\alpha_n\in W_*$ such that, given $\omega\in (W_*)^*$, one has $\omega\in A_0$ if and only if $\omega\in\bigcap_{i=1}^n\Ker\alpha_i$. If $\dim W<\infty$, there is nothing to check, so we will assume that $\dim W=\infty$.
+To do this claim more clear, assume that $E=\{e_1,~e_2,~\ldots\}$. Then one can identify $(W_*)^*$ with the space of (possibly, infinite) sequences of complex numbers so that $\omega=(\omega_1,~\omega_2,~\ldots)$ means $\omega(e_i^*)=\omega_i$. Under this identification, we would like to check that $A_0$ not just has finite codimension in $(W_*)^*$, but can be defined as the solution subspace of a system of linear equations $\alpha_1=0,~\ldots,~\alpha_n=0$, where each $\alpha_i$ depends only on a finite number of $\omega_j$'s.
+
+To prove this claim, assume that $F=\{f_1,~f_2,~\ldots\}$ and $\eta$~has the form $e_i^*\mapsto f_i$. According to the proof of Lemma~\ref{lemm:fin_dim_Im}, there exist $n\in\Zp_{>0}$ and $\alpha_1,~\ldots,~\alpha_n\in W_*$ such that $$\mu(\omega)=\pi_U(\psi(\omega))=\sum\nolimits_{i=1}^n\alpha_i(\omega)f_i$$ for all $\omega\in (W_*)^*$. But an element $\omega$ of $(W_*)^*$ belongs to $A_0$ if and only if $\mu(\omega)=0$, i.e, if $\alpha_i(\omega)=0$ for $1\leq i\leq n$, as required. It follows immediately that $A_0\cap W$ has finite codimension in $W$ and, given $w\in W$, one has $w\in A_0$ if and only if $\alpha_i(w)=0$ for all $1\leq i\leq n$, hence $A_0\cap W$ contains all but finitely many vectors of $E$.
+
+Recall that $\vfi\cdot W=\left(\vfi^{-1}(W^{\perp})\right)^{\perp}\cap V$. Clearly, $W^{\perp}=U^*$ and $(\vfi^{-1}(B))^{\perp}=\psi(B^{\perp})$ for a subspace~$B$ of $V_E^*$, so we conclude that $$(\vfi^{-1}(U^*))^{\perp}=\psi((U^*)^\perp)=\psi((W_*)^*).$$ Hence $\vfi\cdot W=\psi((W_*)^*)\cap V$. Since $A_0\subset\psi((W_*)^*)$, we have $A_0\cap W\subset\vfi\cdot W$, so $\vfi\cdot W$ contains all but finitely many vectors of $E$. On the other hand, $$\psi((W_*)^*)\subset (W_*)^*\oplus\pi_U(\psi((W_*)^*))=(W_*)^*\oplus\Imm\mu.$$ This implies that $\vfi\cdot W\subset W\oplus\Imm\mu$. Since $\Imm\mu$ is finite-dimensional, the proof is complete.}
+
+\theop{The%\label{theo:action_G_E_X_E}
+formula $L\mapsto\vfi\cdot L$, $L\in\Xu_E$, $\vfi\in G_E$, defines a regular action of the Mackey group $G_E$ on the ind-variety $\Xu_E$.}{As in the previous proposition, we may assume without loss of generality that $L=W$. The only fact we need to check is that $(\vfi'\circ\vfi)\cdot W=\vfi'\cdot(\vfi\cdot W)$ for all $\vfi,~\vfi'\in G_E$. Let $\psi$, $\psi'\colon V_E\to V_E$ be the linear operators corresponding to $\vfi$, $\vfi'$ respectively in the Mackey group. As we mentioned above, $\vfi\cdot W=\psi((W_*)^*)\cap V$, so
+\begin{equation*}
+\vfi'\cdot(\vfi\cdot W)=\left(\vfi'\cdot\left((\psi((W_*)^*)\cap V)^{\perp}\right)\right)^{\perp}\cap V
+=\psi'\left(\left((\psi((W_*)^*)\cap V)^{\perp}\right)^{\perp}\right)\cap V.
+\end{equation*}
+
+We claim that $(\psi((W_*)^*)\cap V)^{\perp}=\psi((W_*)^*)^{\perp}$. Indeed, the fixing of a linear order $F=\{f_1,~f_2,~\ldots\}$ identifies $U$ with the space of finitary integral sequences $\{u=(u_1,~u_2,~\ldots)\}$ so that $u=\sum_{j\geq0}u_jf_j$. Recall that $V_E=(W_*)^*\oplus U$. Let $m\in\Zp_{>0}$, $\wt\alpha_i\in W_*$, $1\leq i\leq m$, and $\beta_j$, $j\in\Zp_{>0}$, be such that, given an element $(\omega,u)\in V_E$ (where $\omega\in (W_*)^*$, $u\in U$), one has
+\begin{equation*}
+\pi_U(\psi^{-1}(\omega,u))=(\wt\alpha_1(\omega)+\beta_1(u),~\ldots,~\wt\alpha_m(\omega)+\beta_m(u),~\beta_{m+1}(u),~\ldots).
+\end{equation*}
+The existence of $\beta_i$'s is evident, while the existence of $m$ and $\wt\alpha_i$'s was proved in the proof of Proposition~\ref{prop:action_G_E_X_E}, where we considered $\psi$ instead of $\psi^{-1}$ and wrote $\alpha_i$'s instead of $\wt\alpha_i$'s. Now, we have
+\begin{equation*}
+\begin{split}
+\psi((W_*)^*)&=\{(\omega,u)\in V_E\mid\psi^{-1}(\omega,u)\in (W_*)^*\}\\
+&=\{(\omega,u)\in V_E\mid\wt\alpha_i(\omega)+\beta_i(u)=0,~\beta_j(u)=0,~1\leq i\leq m,~j\geq m+1\}.
+\end{split}
+\end{equation*}
+
+It was checked in the proof of Proposition~\ref{prop:action_G_E_X_E} that $\dim\pi_U(\psi((W_*)^*))<\infty$, hence there exists $n\in\Zp_{>0}$ such that $\pi_U(\psi((W_*)^*))\subset U_n=\langle f_1,~\ldots,~f_n\rangle_{\Cp}$. Put $\overline{U}=\langle f_{n+1},~f_{n+2},~\ldots\rangle_{\Cp}$, so that $U=U_n\oplus\overline{U}$. If $u\notin U_n$ then $(\omega,u)\notin\psi((W_*)^*)$, therefore
+\begin{equation*}
+\begin{split}
+\psi((W_*)^*)&=\{(\omega,u)\in (W_*)^*\oplus U_n\mid\wt\alpha_i(\omega)+\beta_i(u)=0,~\beta_j(u)=0,~1\leq i\leq m,~j\geq m+1\}.
+\end{split}
+\end{equation*}
+Thus, we can (and will from this moment) consider $\beta_j$'s as elements of $U_n^*$. Since $U_n$ is finite-dimensional, there exists $s\in\Zp_{>0}$ such that the system of equations $\beta_j=0$, $j\geq m+1$, is equivalent to the system $\beta_j=0$, $m+1\leq j\leq s$. We may assume without loss of generality that $m=s$ (by putting $\wt\alpha_{m+1}=\ldots=\wt\alpha_s=0$ and then replacing $s$ by $m$), so
+\begin{equation*}
+\begin{split}
+\psi((W_*)^*)&=\{(\omega,u)\in (W_*)^*\oplus U_n\mid\wt\alpha_i(\omega)+\beta_i(u)=0,~1\leq i\leq m\}.
+\end{split}
+\end{equation*}
+
+Furthermore, each $\wt\alpha_i$ depends only on a finite number of $\omega_j$'s (see again the proof of Proposition~\ref{prop:action_G_E_X_E}). Given $r\in\Zp_{>0}$, denote $W_r=\langle e_1,~\ldots,~e_r\rangle_{\Cp}$ and $\overline{W}=\langle e_{r+1},~e_{r+2},~\ldots\rangle_{\Cp}$, so that $W=W_r\oplus\overline{W}$ and, consequently, $(W_*)^*=W_r\oplus(\overline{W}_*)^*$. Let $r$ be such that all $\wt\alpha_i$, $1\leq i\leq m$, depend only on $\omega_j$, $1\leq j\leq r$, then we can (and will from this moment) consider $\wt\alpha_i$'s as elements of $W_r^*$. Hence, denoting $A= W_r\oplus U_n$ and $B=\{(\omega,u)\in C\mid\wt\alpha_i(\omega)+\beta_i(u)=0,~1\leq i\leq m\}$, we have $\psi((W_*)^*)=(\overline{W}_*)^*\oplus B$, and, consequently, $\psi((W_*)^*)\cap V=\overline{W}\oplus B$. One has
+\begin{equation*}
+V_E^*=W_r^*\oplus\overline{W}_*\oplus U_n^*\oplus\overline{U}^*=A^*\oplus\overline{W}_*\oplus\overline{U}^*,~V_E=W_r\oplus(\overline{W}_*)^*\oplus U_n\oplus\overline{U}=A\oplus(\overline{W}_*)^*\oplus\overline{U}.
+\end{equation*}
+Denoting by $B'$ the orthogonal complement to $B$ in $A^*$, we conclude that
+\begin{equation*}
+\begin{split}
+(\psi((W_*)^*)\cap V)^{\perp}=(\overline{W}\oplus B)^{\perp}=B'\oplus\overline{U}^*=((\overline{W}_*)^*\oplus B)^{\perp}=(\psi^{-1}((W_*)^*))^{\perp},
+\end{split}
+\end{equation*}
+as required. Hence, $\vfi'\cdot(\vfi\cdot W)=(\psi')^{-1}\left(\left((\psi^{-1}((W_*)^*))^{\perp}\right)^{\perp}\right)\cap V$.
+
+Continuing this line of reasoning, we see that
+\begin{equation*}
+\begin{split}
+\left((\psi^{-1}((W_*)^*))^{\perp}\right)^{\perp}=\left(B'\oplus\overline{U}^*\right)^{\perp}=(\overline{W}_*)^*\oplus B=\psi^{-1}((W_*)^*),
+\end{split}
+\end{equation*}
+because the orthogonal complement to $B'$ in $A$ coincides with $B$. Thus,
+\begin{equation*}
+\vfi'\cdot(\vfi\cdot W)=\psi'\left(\psi((W_*)^*)\right)\cap V=(\psi'\circ\psi)((W_*)^*)\cap V=(\vfi'\circ\vfi)\cdot W.
+\end{equation*}
+The proof is complete.}
+
+\sst{The action on the ind-grassmannian $\Gra(W,E)$} We just checked that the Mackey group $G_E$ acts on the ind-variety $\Xu_E$. This ind-variety is the disjoint union of the ind-grassmannians $\Gra(W^k,E^k)$ for $k\in\Zp$. Of course, this closed ind-subvarieties are not stable with respect to this action. (In fact, this action is transitive, see the details below). Nevertheless, each $\Gu_k=\Gra(W^k,E^k)$ is an irreducible ind-variety (as a direct limit of irreducible varieties), so, given $\vfi\in G_E$, $\vfi\cdot\Gu_k$ is also irreducible (and can be expressed as a direct limit of irreducible varieties).
+
+Recall that $\Xu_E=\ilm X_n$. Since each $X_n$ can be expressed as a finite union of its intersections with certain $\Gu_n$'s, we conclude that $\vfi\cdot\Gu_k\subset\Gu_{k'}$ for some $k'$. Similarly, $\vfi^{-1}\cdot\Gu_{k'}\subset\Gu_{k''}$ for some $k''$, and we see that $\Gu_k\subset\vfi^{-1}\cdot\Gu_{k'}\subset\Gu_{k''}$, which implies that $k=k''$. Thus, the Mackey group $G_E$ permutes the ind-grassmannians $\Gu_k$, $k\in\Zp$.
+
+\exam{As above, we%\label{exam:sdvig}
+identify $V_E^*$ and $V_E$ with $W_*\oplus U^*$ and $(W_*)^*\oplus U$ respectively, so we will write elements of these spaces as $(w,\nu)\in V_E^*$ and $(\omega,u)\in V_E$, where $w\in W_*$, $\nu\in U^*$, $\omega\in (W_*)^*$, $u\in U$. Further, since we fixed linear orders on $E$ and $F$, we can identify $\omega$, $u$, $w$ and $\nu$ with the corresponding sequences of coplex numbers (possibly, infinite).
+
+Consider the linear operators $\eth\colon V_E^*\to V_E^*$ and $\mho\colon V_E\to V_E$ defined by the formulas
+\begin{equation*}
+\begin{split}
+\eth(w,~\nu)&=(\nu_1,~w_1,~w_2,~w_3,~\ldots;~\nu_2,~\nu_3,~\nu_4,~\nu_5,~\ldots),\\
+\mho(\omega,~u)&=(\omega_2,~\omega_3,~\omega_4,~\omega_5,~\ldots;~\omega_1,~u_1,~u_2,~u_3,~\ldots).\\
+\end{split}
+\end{equation*}
+One can immediately check that $\langle\eth(w,~\nu),~(\omega,u)\rangle=\langle(w,\nu),~\mho(\omega,~\nu)\rangle$ for all $(w,\nu)\in V_E^*$, $(\omega,\nu)\in V_E$, hence $\eth\in G_E$. At the same time,
+\begin{equation*}
+\eth\cdot W=\eth((W_*)^*)\cap V=((W_*)^*\oplus\Cp f_1)\cap V=W\oplus\Cp f_1.
+\end{equation*}
+We see that $\eth\cdot W$ belongs to $\Gu_1$, not to $\Gu_0=\Gra(W,E)$, hence $\eth\cdot\Gu_0=\Gu_1$.
+
+An obvious calculation shows that
+\begin{equation*}
+\begin{split}
+\eth^{-1}(w,~\nu)&=(w_2,~w_3,~w_4,~w_5,~\ldots;~w_1,~\nu_1,~\nu_2,~\nu_3,~\ldots),\\
+\mho^{-1}(\omega,~u)&=(u_1,~\omega_1,~\omega_2,~\omega_3,~\ldots;~u_2,~u_3,~u_4,~u_5,~\ldots).\\
+\end{split}
+\end{equation*}
+In particular, we obtain $\eth(U^*)=\Cp e_1^*\oplus U^*$, $\eth^{-1}(U^*)=\{\nu\in U^*\mid\nu_1=0\}$, $\mho((W_*)^*)=(W_*)^*\oplus\Cp f_1$ and $\mho^{-1}((W_*)^*)=\{\omega\in (W_*)^*\mid\omega_1=0\}$. It follows that
+\begin{equation*}
+\dim\pi_{W_*}(\eth(U^*))-\dim\pi_{W_*}(\eth^{-1}(U^*))=\dim\pi_U(\mho((W_*)^*))-\dim\pi_U(\mho^{-1}((W_*)^*))=1.
+\end{equation*}
+As we will see below, this is exactly the reason why $\eth\cdot\Gu_0\neq\Gu_0$.}
+
+More precisely, let $\vfi\in G_E$ and $\psi\colon V_E\to V_E$ is the linear corresponding to $\vfi$ as to an element of the Mackey group. By the proof of Proposition~\ref{prop:action_G_E_X_E} that $\dim\pi_U(\psi((W_*)^*))=\dim\pi_{W_*}(\vfi(U^*))<\infty$. Replacing these operators by their inverses, we see that $\dim\pi_U(\psi^{-1}((W_*)^*))=\dim\pi_{W_*}(\vfi^{-1}(U^*))<\infty$.
+
+\defi{We call call the number
+\begin{equation*}
+d(\vfi)=d(\psi):=\dim\pi_{W_*}(\vfi(U^*))-\dim\pi_{W_*}(\vfi^{-1}(U^*))=\dim\pi_U(\psi((W_*)^*))-\dim\pi_U(\psi^{-1}((W_*)^*))
+\end{equation*}
+the \emph{defect} of the operators $\vfi$ and $\psi$.}
+
+\lemmp{Given $\vfi\in G_E$, one%\label{lemm:d_0_G_0_G_0}
+has $\vfi\cdot\Gu_0=\Gu_0$ if and only if $d(\vfi)=0$.}{It suffices to check that the condition $\vfi\cdot W\in\Gu_0$ is equivalent to $d(\vfi)=0$. Let $A_0=(W_*)^*\cap\psi((W_*)^*)$ be as in the proof of Proposition~\ref{prop:action_G_E_X_E}. Since $\vfi\cdot W$ belongs to $\Xu_E$, the condition $\vfi\cdot W\in\Gu_0$ is equivalent to the fact that $$\codim_W((\vfi\cdot W)\cap W)=\codim_{\vfi\cdot W}((\vfi\cdot W)\cap W).$$
+But $\vfi\cdot W=\psi((W_*)^*)\cap V$ and $W\subset (W_*)^*$, hence $$(\vfi\cdot W)\cap W\subset(\psi((W_*)^*)\cap V)\cap (W_*)^*=A_0\cap V=A_0\cap W.$$ The opposite inclusion is clear, so $(\vfi\cdot W)\cap W=A_0\cap W$. Thus, we need to prove that $d(\vfi)=0$ if and only if the codimensions of $A_0\cap W$ in $W$ and in $\psi((W_*)^*)\cap V$ coincide.
+
+At it was shown in the proof of Proposition~\ref{prop:action_G_E_X_E}, there exists $n\in\Zp>0$ and $\alpha_1,~\ldots,~ _n\in W_*$ such that $\pi_U(\psi(\omega))=\sum_{i=1}^n\alpha_i(\omega)f_i$ for all $\omega\in (W_*)^*$, and $A_0\cap W^*=\{\omega\in W^*\mid\alpha_i(\omega)=0,~1\leq i\leq n\}$. Hence, $A_0\cap W=\{\omega\in W\mid\alpha_i(\omega)=0,~1\leq i\leq n\}$ and $$\codim_{(W_*)^*}A_0=\codim_W(A_0\cap W)=\dim\pi_U(\psi((W_*)^*)).$$ It remains to check that $\codim_{\psi((W_*)^*)\cap V}(A_0\cap W)=\dim\pi_U(\psi^{-1}((W_*)^*)$. But the equality $\psi((W_*)^*)=\overline{W}\oplus B$ from the proof of Theorem~\ref{theo:action_G_E_X_E} implies immediately that
+\begin{equation*}
+\begin{split}
+\codim_{\psi((W_*)^*)\cap V}(A_0\cap W)&=\codim_{\psi((W_*)^*)}A_0=\codim_{\psi(W_*)}(\psi((W_*)^*)\cap W)\\
+&=\codim_{(W_*)^*}((W_*)^*\cap\psi^{-1}((W_*)^*))=\dim\pi_U(\psi^{-1}((W_*)^*)).
+\end{split}
+\end{equation*}
+This completes the proof.}
+
+\nota{It is%\label{nota:d_0_G_k_G_k} 
+clear from the proof of Lemma~\ref{lemm:d_0_G_0_G_0} that one can define the defect of $\vfi$ using an arbitrary subspace from $\Gu_0$ instead of $W$, because the result $\vfi\cdot\Gu_0=\Gu_0$ does not depend on the choice of this subspace. Furthermore, given $k\in\Zp$, one has $\vfi\cdot\Gu_k=\Gu_k$ if and only if $\vfi$ sends one (or, equivalently, each) subspace from $\Gu_k$ to a subspace from $\Gu_k$, because we can replace $0$ by $k$ and $E$ by~$E^k$ everywhere in the proof of the lemma. Finally, we see that if $d(\vfi)=d$ then $\vfi^{\pm1}\cdot\Gu_0=\Gu_{\pm d}$, and, more generally, if $\vfi\cdot\Gu_k=\Gu_{k+d}$ then $\vfi^{-1}\cdot\Gu_k=\Gu_{k-d}$.}
+
+Now we are ready to describe the structure of the $G_E$-action on $\Xu_E$ in details. In particular, we will prove that the defect is a kind of ``grading'' on the group $G_E$.
+
+\theop{Given $d\in\Zp$, denote%\label{theo:d_0_G_k_G_k}
+$G_E^d=\{\vfi\in G_E\mid d(\vfi)=d\}$. Then
+\begin{equation*}
+\begin{split}
+&\text{\textup{i)} $\vfi\cdot\Gu_k=\Gu_{k+d(\vfi)}$ for all $\vfi\in G_E$, $k\in\Zp$};\\
+&\text{\textup{ii)} $d(\vfi\circ\vfi')=d(\vfi)+d(\vfi')$ for all $\vfi,~\vfi'\in G_E$};\\
+&\text{\textup{iii)} $G_E^0$ is a normal subgroup of $G_E$, which cosets are $G_E^d$, $d\in\Zp$}.\\
+\end{split}
+\end{equation*}
+}{i) First, we note that if $\vfi\cdot\Gu_k=\Gu_{k+d}$ for some $\vfi\in G_E$, $k,~d\in\Zp$, then $\vfi^n\cdot\Gu_{k+sd}=\Gu_{k+(s+n)d}$ for all $n,~s\in\Zp$. Indeed, by Remark~\ref{nota:d_0_G_k_G_k} one has $\psi^{-1}\cdot\Gu_k=\Gu_{k-d}$, i.e., $\vfi\cdot\Gu_{k-d}=\Gu_k$. Similarly, $\vfi\cdot\Gu_k=\Gu_{k+d}$ implies $\vfi^{-1}\cdot\Gu_{k+d}=\Gu_k$, and by Remark~\ref{nota:d_0_G_k_G_k} we have $\vfi\cdot\Gu_{k+d}=\Gu_{k+2d}$. Repeating this procedure, we obtain the required equality.
+
+Second, we claim that if $\vfi\cdot\Gu_0=\Gu_0$ then $\vfi\cdot\Gu_k=\Gu_k$ for all $k\in\Zp$. Indeed, assume that $\vfi\cdot\Gu_0=\Gu_0$ and pick an integer $k$. It is clear from the definition of $\eth$ (see Example~\ref{exam:sdvig}) that $\eth^n\cdot\Gu_0=\Gu_n$ for all $n\in\Zp$. Hence, $(\eth^{-k}\circ\vfi)\cdot\Gu_0=\eth^{-k}\cdot(\vfi\cdot\Gu_0)=\eth^{-k}\cdot\Gu_0=\Gu_{-k}$. Using Remark~\ref{nota:d_0_G_k_G_k} again, we conclude that $(\eth^{-k}\circ\vfi)^{-1}\cdot\Gu_0=\Gu_k$, i.e, $(\vfi^{-1}\cdot\eth^{-k})\cdot\Gu_0=\vfi^{-1}\cdot(\eth^k\cdot\Gu_0)=\vfi^{-1}\cdot\Gu_k=\Gu_k$. This clearly implies that $\vfi\cdot\Gu_k=\Gu_k$, too.
+
+Now, assume that $\vfi\cdot\Gu_0=\Gu_d$, i.e., that $d(\vfi)=d$. Then $(\eth^{-d}\circ\vfi)\cdot\Gu_0=\eth^{-d}\cdot\Gu_d=\Gu_0$. Thus, by the previous paragraph, for all $k\in\Zp$ we have $(\eth^{-d}\circ\vfi)\cdot\Gu_k=\Gu_k$, i.e., $\vfi\cdot\Gu_k=\eth^d\cdot\Gu_k$. It remains to check that $\eth^d\cdot\Gu_k=\Gu_{k+d}$, which follows immediately from the first paragraph of the proof and the fact that $\eth\cdot\Gu_k=\Gu_{k+1}$; the latter fact being clear from the equality $\eth\cdot W^k=W^{k+1}$ (see the definition of the linear operator $\eth$).
+
+ii) Follows immediately from (i).
+
+iii) Follows immediately from (ii).}
+
+\sst{Matrix realization} Let $Y$ be a countable-dimensional vector space. There is a natural non-degenerate bilinear pairing $\langle\cdot,~\cdot\rangle$ on the space $Y\oplus Y^*$ of the form
+\begin{equation*}
+(Y\oplus Y^*)\times(Y\oplus Y^*)\to\Cp\colon((a,~\alpha),~(b,\beta))\mapsto\langle(a,~\alpha),~(b,\beta)\rangle=\alpha(b)+\beta(a),~a,~b\in Y,~\alpha,~\beta\in Y^*.
+\end{equation*}
+We denote the corresponding Mackey group $G(Y\oplus Y^*,Y\oplus Y^*)$ simply by $G_Y$. Note that this group is isomorphic to the Mackey group $G_E$ considered in the previous subsections. Indeed, let $E$, $W$, $U$ be as above. Recall that we fixed a basis $F$ of the subspace $U$. This identifies both the spaces $V_E^*=W_*\oplus U^*$ and $V_E=(W_*)^*\oplus U\cong U\oplus (W_*)^*$ with the space $\{(y,~\gamma)\}$, where $y=(y_1,~y_2,~\ldots)$ and $\gamma=(\gamma_1,~\gamma_1,~\ldots)$ are infinite sequences such that all but finitely many $y_i$ are zero. Under this identification, the non-degenerate pairing $V_E^*\times V_E\to\Cp$ has the form
+\begin{equation*}
+\langle(a,~\alpha),~(b,\beta)\rangle=\sum\nolimits_{i\geq0}\alpha_ib_i+\sum\nolimits_{i\geq0}\beta_ia_i,
+\end{equation*}
+which immediately identifies $G_E$ with $G_Y$.
+
+Our next goal is to present an explicit ``matrix realization'' of the group $G_Y$. Namely, we fix a basis $B=\{b_1,~b_2,~\ldots\}$  of $Y$. Using this basis, we will identify in the sequel  $Y\oplus Y^*$ with the space $\{(y,~\gamma)\}$ mentioned above. We will consider the set $L$ of infinite matrices, whose rows and columns are indexed by the numbers $\ldots,~3,~2,~1,1^*,~2^*,~3^*,~\ldots$, so that such a matrix naturally splits into four blocks $A$, $B$, $C$, $D$ in the following way:
+$${\Autonumfalse
+\mymatrix{
+\Rt{2pt}A& B\\
+\Top{2pt}\Rt{2pt}C& \Top{2pt}D\\
+}=\mymatrix{ \lNote{\vdots}\Note{.\,.\,.}\pho& \Note{3}\pho& \Note{2}\pho& \Note{1}\Rt{2pt}\pho& \Note{$1^*$}\pho& \Note{$2$}\pho& \Note{$3^*$}\pho& \Note{.\,.\,.}\pho\\
+\lNote{3}\pho& \pho& \pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+\lNote{2}\pho& \pho& \pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+\lNote{1}\pho& \pho& \pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+\lNote{$1^*$}\Top{2pt}\pho& \Top{2pt}\pho& \Top{2pt}\pho& \Top{2pt}\Rt{2pt}\pho& \Top{2pt}\pho& \Top{2pt}\pho& \Top{2pt}\pho& \Top{2pt}\pho\\
+\lNote{$2^*$}\pho& \pho& \pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+\lNote{$3^*$}\pho& \pho& \pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+\lNote{\vdots}\pho& \pho& \pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+}}$$
+
+We denote by $\wt L$ the subset of $L$ consisting of all matrices satisfying the following conditions:
+\begin{equation}
+\begin{split}%\label{formula:matrix_group}
+&\text{\textup{i)} given $j>0$, there exists $i>0$ such that $a_{k,j}=0$ for all $k>i$};\\
+&\text{\textup{ii)} given $i>0$, there exists $j>0$ such that $d_{i^*,s^*}=0$ for all $s>j$};\\
+&\text{\textup{iii)} there exists $i,~j>0$ such that $b_{k,s^*}=0$ if $k>i$ or $s>j$}.\\
+\end{split}
+\end{equation}
+In other words, $\wt L$ consists of matrices from $L$ for which $A$ has finite columns, $D$ has finite rows, and $B$ is finitary (i.e., all but finitely many entries of $B$ are zero). On the picture below we draw schematically matrices from $\wt L$ (entries which can be non-zero are marked gray).
+$${\Autonumfalse
+\mymatrix{
+\Rt{2pt}A& B\\
+\Top{2pt}\Rt{2pt}C& \Top{2pt}D\\
+}=\mymatrix{ \lNote{\vdots}\Note{.\,.\,.}\pho& \Note{3}\pho& \Note{2}\pho& \Note{1}\Rt{2pt}\pho& \Note{$1^*$}\pho& \Note{$2^*$}\pho& \Note{$3^*$}\pho& \Note{.\,.\,.}\pho\\
+\lNote{3}\pho& \pho& \gray\pho& \Rt{2pt}\pho& \pho& \pho& \pho& \pho\\
+\lNote{2}\gray\pho& \pho& \gray\pho& \Rt{2pt}\pho& \gray\pho& \gray\pho& \pho& \pho\\
+\lNote{1}\gray\pho& \gray\pho& \gray\pho& \Rt{2pt}\gray\pho& \gray\pho& \gray\pho& \pho& \pho\\
+\lNote{$1^*$}\Top{2pt}\gray\pho& \Top{2pt}\gray\pho& \Top{2pt}\gray\pho& \Top{2pt}\Rt{2pt}\gray\pho& \Top{2pt}\gray\pho& \Top{2pt}\gray\pho& \Top{2pt}\gray\pho& \Top{2pt}\pho\\
+\lNote{$2^*$}\gray\pho& \gray\pho& \gray\pho& \Rt{2pt}\gray\pho& \gray\pho& \pho& \pho& \pho\\
+\lNote{$3^*$}\gray\pho& \gray\pho& \gray\pho& \gray\Rt{2pt}\pho& \gray\pho& \gray\pho& \pho& \pho\\
+\lNote{\vdots}\gray\pho& \gray\pho& \gray\pho& \Rt{2pt}\gray\pho& \gray\pho& \pho& \pho& \pho\\
+}}$$
+To each matrix $g$ from $\wt L$ one can assign a well-defined linear operator on $Y\oplus Y^*$ by the formula
+\begin{equation*}
+g\colon(y,\gamma)=
+\begin{bmatrix}\vdots\\y_3\\y_2\\y_1\\\hline\gamma_1\\\gamma_2\\\gamma_3\\\vdots
+\end{bmatrix}\mapsto
+{\Autonumfalse
+\mymatrix{
+\Rt{2pt}A& B\\
+\Top{2pt}\Rt{2pt}C& \Top{2pt}D\\
+}}\begin{bmatrix}\vdots\\y_3\\y_2\\y_1\\\hline\gamma_1\\\gamma_2\\\gamma_3\\\vdots
+\end{bmatrix}=
+\begin{bmatrix}Ay+B\gamma\\Cy+D\gamma
+\end{bmatrix}=
+\begin{bmatrix}\vdots\\\sum_{j\geq1}a_{3,j}y_j+\sum_{j\geq0}b_{3,j^*}\gamma_{j^*}\\\sum_{j\geq1}a_{2,j}y_j+\sum_{j\geq0}b_{2,j^*}\gamma_{j^*}\\
+\sum_{j\geq1}a_{1,j}y_j+\sum_{j\geq0}b_{1,j^*}\gamma_{j^*}\\\hline\sum_{j\geq1}c_{1^*,j}y_j+\sum_{j\geq0}d_{1^*,j^*}\gamma_{j^*}\\\sum_{j\geq1}c_{2^*,j}y_j+\sum_{j\geq0}d_{2^*,j^*}\gamma_{j^*}\\
+\sum_{j\geq1}c_{3^*,j}y_j+\sum_{j\geq0}d_{3^*,j^*}\gamma_{j^*}\\\vdots
+\end{bmatrix}.
+\end{equation*}
+
+Next, given a vector $(y,~\gamma)\in Y\oplus Y^*$ (considered as a ``column'', as above), we will denote by $(y,~\gamma)^{\vee}$ its ``skew-transposed row'', i.e,
+\begin{equation*}
+(y,~\gamma)^{\vee}=
+%\begin{bmatrix}\vdots\\y_3\\y_2\\y_1\\\hline\gamma_1\\\gamma_2\\\gamma_3\\\vdots\end{bmatrix}^{\vee}=
+[\ldots~\gamma_3~\gamma_2~\gamma_1~|~y_1~y_2~y_3~\ldots].
+\end{equation*}
+Clearly, for $(a,~\alpha),~(b,~\beta)\in Y\oplus Y^*$, one has
+\begin{equation*}
+\langle(a,~\alpha),~(b,~\beta)\rangle=\sum_{i\geq1}\alpha_ib_i+\sum_{j\geq1}\beta_ja_j=[\ldots~\alpha_3~\alpha_2~\alpha_1~|~a_1~a_2~a_3~\ldots]
+\begin{bmatrix}\vdots\\b_3\\b_2\\b_1\\\hline\beta_1\\\beta_2\\\beta_3\\\vdots
+\end{bmatrix}=(a,~\alpha)^{\vee}(b,~\beta).
+\end{equation*}
+
+Furthermore, given a matrix $g\in\wt L$, we denote by $g^{\vee}$ the ``skew-transposed'' matrix, i.e., the matrix, which is obtained from $g$ by reflection with respect to the antidiagonal:
+\begin{equation*}
+g^{\vee}={\Autonumfalse
+\mymatrix{
+\Rt{2pt}A& B\\
+\Top{2pt}\Rt{2pt}C& \Top{2pt}D\\
+}^{\vee}=
+\mymatrix{
+\Rt{2pt}D^{\vee}& B^{\vee}\\
+\Top{2pt}\Rt{2pt}C^{\vee}& \Top{2pt}A^{\vee}\\
+}}.
+\end{equation*}
+Clearly, $(g^{\vee})^{\vee}=g$. One can immediately check that $g^{\vee}$ belongs to $\wt L$, and that $(g(y,~\gamma))^{\vee}=(y,~\gamma)^{\vee}g^{\vee}$ for all $(y,~\gamma)$ from $Y\oplus Y^*$, where we consider the latter equality as a matrix equality.
+
+We denote the set of invertible operators $g$ from $\wt L$ by $\wt G_Y$, for which $g^{\vee}$ is also invertible.
+
+\theop{The Mackey group $G_Y$ coincides with $\wt G_Y$.}{First, we will prove that $G_Y$ is contained in $\wt G_Y$. To do this, we pick operators $\vfi,~\psi\in G_Y$ such that
+$$\langle\vfi(a,~\alpha),~(b,~\beta)\rangle=\langle(a,~\alpha),~\psi(b,~\beta)\rangle\text{ for all }a,~b\in Y,~\alpha,~\beta\in Y^*.$$
+Denote by $\pi_Y$ and $\pi_{Y^*}$ the respective projections from $Y\oplus Y^*$ on $Y$ and on $Y^*$. Obviously, for all $i$, if $\pi_Y(\psi(b_j))=(y_1^j,~y_2^j,~\ldots)$, then all but finitely many $y_i^j$ are zero. But this means exactly that $\pi_Y\circ\restr{\psi}{Y}$ can be represented as a matrix $A$ satisfying condition (i) from (\ref{formula:matrix_group}) (i.e., having finite columns), where in fact $a_{i,j}=y_i^j$.
+
+On the other hand, Lemma~\ref{lemm:fin_dim_Im} implies that $\dim\Imm(\pi_Y\circ\restr{\psi}{Y^*})$ is finite. Furthermore, it follows from the proof of Lemma~\ref{lemm:fin_dim_Im} that there exist $n\in\Zp_{\geq0}$ and elements $a_1,~\ldots,~a_n\in Y$ such that $\pi_Y(\psi(\gamma))=\sum_{i=1}^n\gamma(a_i)b_i$ for all $\gamma\in Y^*$. This means exactly that $\pi_{Y}\circ\restr{\psi}{Y^*}$ can be represented as a matrix $B$ satisfying condition (iii) from (\ref{formula:matrix_group}), where in fact $a_i=\sum_{j^*\geq1}b_{i,j^*}b_j$.
+
+Next, there exist linear functions $\vfi_i\in Y^{**}$, $i\geq1$, such that $\pi_{Y^*}(\vfi(y))=(\vfi_1(y),~\vfi_2(y),~\ldots)$. Hence, for all $i\geq1$ and all $y\in Y$, one has
+\begin{equation*}
+\langle\pi_{Y^*}(\psi(y)),~b_i\rangle=\langle\psi(y),~b_i\rangle=\langle y,\vfi(b_i)\rangle=\sum_{j\geq1}y_j\vfi_j(b_i).
+\end{equation*}
+This means that $\pi_{Y^*}\circ\restr{\psi}{Y}$ can be represented as a matrix $C$, where $c_{i^*,j}=\vfi_j(b_i)$.
+
+Finally, given $\gamma\in Y^*$, one has
+\begin{equation*}
+\langle\pi_{Y^*}(\psi(\gamma)),~b_i\rangle=\langle\psi(\gamma),~b_i\rangle=\langle\gamma,~\vfi(b_i)\rangle=\langle\gamma,~\pi_Y(\vfi(b_i))\rangle.
+\end{equation*}
+There exist linear functions $\beta_j\in Y^*$, $j\geq1$, such that $\pi_Y(\vfi(y))=(\beta_1(y),~\beta_2(y),~\ldots)$. Since $\pi_Y(\vfi(b_i))$ belongs to $Y$, there exist $k\geq0$ such that $\beta_j(b_i)=0$ for $j>k$, i.e., $\pi_Y(\vfi(b_i))=\sum_{j=1}^k\beta_j(b_i)b_j$. Thus, $\pi_{Y^*}\circ\restr{\vfi}{Y^*}$ can be represented as a matrix $D$ satisfying condition~(ii) from (\ref{formula:matrix_group}), where in fact $d_{i^*,j^*}=\beta_j(b_i)$.
+
+It remains to check that $\psi^{\vee}$ is also invertible. We claim that in fact $\psi^{\vee}$ coincides with $\vfi$ (and, consequently, $\psi^{\vee}=\vfi$ is invertible, as required). Indeed, for all $(a,~\alpha),~(b,~\beta)\in Y\oplus Y^*$, we have the following matrix equality:
+\begin{equation}
+\begin{split}
+\langle\vfi(a,~\alpha),~(b,~\beta)\rangle&=\langle(a,~\alpha),~\psi(b,~\beta)\rangle=(a,~\alpha)^{\vee}\psi(b,~\beta)\\
+&=(a,~\alpha)^{\vee}(\psi^{\vee})^{\vee}(b,~\beta)=(\psi^{\vee}(a,~\alpha))^{\vee}(b,~\beta)=\langle\psi^{\vee}(a,~\alpha),~(b,~\beta)\rangle.
+\end{split}%\label{formula:vee_Mackey}
+\end{equation}
+Since the pairing $\langle\cdot,~\cdot\rangle$ is non-degenerate, we conclude that $\psi^{\vee}=\vfi$. This completes the proof of the inclusion $G_Y\subset\wt G_Y$.
+
+The inclusion $\wt G_Y\subset G_Y$ now follows immediately from formula (\ref{formula:vee_Mackey}).}
+
+\sst{The automorphism group of the ind-grassmannian $\Gra(W,~E)$} We claim that the automorphism group of the ind-grassmannian $\Gra(W,~E)$ is isomorphic to the group $G_E^0$. Indeed, it follows from Theorem~\ref{theo:d_0_G_k_G_k} that each $\vfi\in G_E^0$ induces the automorphism of $\Gra(W,~E)$ of the form $\Gra(W,~E)\ni L\mapsto\vfi\cdot L$. It remains to check that each automorphism of the ind-grassmannian $\Gra(W,~E)$ has such a form. To do this, we need to recall some basic facts about grassmannians and ind-grassmannians, see, e.g., \cite{PenkovTikhomirov1}.
+
+Given a finite-dimensional vector space $A$, we will denote by $\Gra_k(A)$ the grassmannian of its $k$-dimensional subspaces. An embedding $\vfi\colon X\to X'$ of grassmannians in finite-dimensional spaces is called \emph{linear} if it induces an isomorphism of their Picard groups $\vfi^*\colon\Pic X'\to\Pic X$. (Recall that their Picard groups are isomorphic to $\Zp$.) Below we present en example of linear embedding.
+
+
+\defi{Let $X$, $X'$ be grassmannians in finite-dimensional spaces. An embedding $\wt\vfi\colon X\to X'$ is called a \emph{standard extension} if there exist isomorphisms $$j_X\colon X\to\Gra_k(A),~j_{X'}\colon X'\to\Gra_{k'}(A')$$ and an embedding $\vfi\colon\Gra_k(A)\to\Gra_{k'}(A')$ for $\dim A'\geq\dim A$, $k'\geq k$, such that the diagram
+\begin{equation*}
+\xymatrix{
+X\ar[d]^{j_X}\ar@{^{(}->}[r]^{\wt\vfi}&X'\ar[d]^{j_{X'}}\\
+\Gra_k(A)\ar@{^{(}->}[r]^{\vfi}&\Gra_{k'}(A')
+}
+\end{equation*}
+is commutative, and $\vfi$ is given by the formula
+\begin{equation*}%\label{formula:standard_extension}
+\vfi(L)=L\oplus B,~A\in\Gra_k(A),
+\end{equation*}
+for some fixed isomorphism $A'\cong A\oplus B'$ and a fixed subspace $B\subset B'$ of dimension $k'-k$.  Clearly, a standard extension is a linear embedding.}
+
+Not that the ind-grassmannian $\Gra(W,~E)$ can be represented as a direct limit $\Gra(W,~E)=\ilm X_i$ of a chain $X_1\hookrightarrow X_2\hookrightarrow\ldots$, where each $X_n$ is a grassmannian in a finite-dimensional space $V_n$, $\lim_{n\to\infty}\dim V_n=\lim_{n\to\infty}\dim X_n=\infty$, $V_n$ is a subspace of $V_{n+1}$, $\ilm V_n= V$, and each inclusion $X_n\hookrightarrow X_{n+1}$ is a standard extension.
+
+\theop{Given an automorphism $\Phi$ oh the ind-grassmannian $\Gra(W,~E)$\textup, there exists a linear operator $\vfi\in G_E^0$ such that $\Phi(L)=\vfi\cdot L$ for all $L\in\Gra(W,~E)$.}{Denote by $\Lo_n$ the vector bundle on $X_n$ dual to the tautological bundle. The space of its global sections is $V_n^*$. The inclusion $X_n\hookrightarrow X_{n+1}$ induces the restriction morphism $\Lo_{n+1}\to\Lo_n$, so these bundles form a projective system.
+
+Next, denote $Y_n=\Phi(X_n)$, then, evidently, the inclusion $Y_n\hookrightarrow Y_{n+1}$ is a linear embedding and $\Gra(W,~E)=\ilm Y_n$. Hence, there exist two sequences $\{i_s,~s\geq1\}$, $\{j_s,~s\geq1\}$ of increasing integers such that $X_{i_s}\subset Y_{j_s}\subset X_{i_{s+1}}$ for all $s$. Denote also by $\Mo_n$ the vector bundle on $Y_n$ corresponding to $\Lo_n$ via the automorphism $\Phi$. Since the inclusions $X_{i_s}\hookrightarrow X_{i_{s+1}}$ and $Y_{j_s}\hookrightarrow Y_{j_{s+1}}$ are linear embeddings for all $s$, the inclusions $X_{i_s}\hookrightarrow Y_{j_s}$ and $Y_{j_s}\hookrightarrow X_{i_{s+1}}$ are linear embeddings, too. This implies that the restriction morphism $\Lo_{i_{s+1}}\to\Lo_{i_s}$ (respectively, $\Mo_{j_{s+1}}\to\Mo_{j_s}$) factors through the bundle $\Mo_{j_s}$ (respectively, $\Lo_{i_{s+1}}$). Hence, the bundles $\Lo_{i_s}$ and $\Mo_{j_s}$ form a projective system
+\begin{equation*}
+\Lo_{i_1}\ot\Mo_{j_1}\ot\Lo_{i_2}\ot\Mo_{j_2}\ot\ldots\ot\Lo_{i_s}\ot\Mo_{j_s}\ot\Lo_{i_{s+1}}\ot\Mo_{j_{s+1}}\ot\ldots.
+\end{equation*}
+In the other words, $\Phi$ induces an automorphism of the projective system $\{\Lo_n,~n\geq1\}$.
+
+At the level of global sections, we obtain an invertible linear operator $\vfi$ on the space $V=\plm V_n^*$. One can check that $\vfi$ preserves $W_*\oplus U^*$ and belongs in fact to the group $G_E^0$, and that $\Phi(L)=\vfi\cdot L$ for $L\in\Gra(W,~E)$, as required.}
+
+
+
+
+
+
+
+An $E$-commensurability of $F$ and $W$ means that there exists a finite-dimensional subspace $Z$ of~$V$ such that $W_{\alpha}\subset F_{\alpha}+Z$, $F_{\alpha}\subset W_{\alpha}$ and $\dim(F_{\alpha}\cap Z)=\dim(W_{\alpha}\cap Z)$ for all $\alpha$. Since taking the annihilators reverses inclusions and $(X+Y)^{\perp}=X^{\perp}\cap Y^{\perp}$, $(X\cap Y)^\perp\subset X^{\perp}+Y^{\perp}$ for arbitrary subspaces $X,~Y$, we have $W_{\alpha}^{\perp}\supset(F_{\alpha}+Z)^{\perp}=F_{\alpha}^{\perp}\cap Z^{\perp}$. Hence, $\vfi^{-1}(W_{\alpha}^{\perp})\supset\vfi^{-1}(F_{\alpha}^{\perp}\cap Z^{\perp})=\vfi^{-1}(F_{\alpha}^{\perp})\cap\vfi^{-1}(Z^{\perp})$, and, consequently,
+ \begin{equation*}
+ (\vfi^{-1}(W_{\alpha}^{\perp}))^{\perp}\subset(\vfi^{-1}(F_{\alpha}^{\perp})\cap\vfi^{-1}(Z^{\perp}))^{\perp}\subset(\vfi^{-1}(F_{\alpha}^{\perp}))^{\perp}+(\vfi^{-1}(Z^{\perp}))^{\perp}.
+ \end{equation*}
+ Similarly, $(\vfi^{-1}(F_{\alpha}^{\perp}))^{\perp}\subset(\vfi^{-1}(W_{\alpha}^{\perp}))^{\perp}+(\vfi^{-1}(Z^{\perp}))^{\perp}$.
+ 
+ Next, note that $((W_{\alpha})^{\perp})^{\perp}=((W_{\alpha})_*)^*$ and $(Z^{\perp})^{\perp}=Z$. On the other hand, $(\vfi^{-1}(X))^{\perp}=\overline{\vfi}(X^{\perp})$ for each subspace $X$ of $(W_{\alpha})_*\oplus U_{\alpha}^*$. This implies that
+ \begin{equation*}
+ \begin{split}
+ (\vfi^{-1}(W_{\alpha}^{\perp}))^{\perp}+(\vfi^{-1}(Z^{\perp}))^{\perp}&=\overline{\vfi}((W_{\alpha}^{\perp})^{\perp})+\overline{\vfi}((Z^{\perp})^{\perp})\\
+ &=\overline{\vfi}(((W_{\alpha})_*)^*)+\overline{\vfi}(Z)=\overline{\vfi}(((W_{\alpha})_*)^*+Z).
+ \end{split}
+ \end{equation*}
+ Since $\vfi(V)=V$ and $Z\subset V$, one has
+  \begin{equation*}
+  \begin{split}
+ (\vfi^{-1}(F_{\alpha}^{\perp}))^{\perp}\cap V&\subset((\vfi^{-1}(W_{\alpha}^{\perp}))^{\perp}+(\vfi^{-1}(Z^{\perp}))^{\perp})\cap V=\overline{\vfi}(((W_{\alpha})_*)^*+Z)\cap\vfi(V)\\
+ &=\overline{\vfi}((((W_{\alpha})_*)^*+Z)\cap V)=\overline{\vfi}((((W_{\alpha})_*)^*)\cap V+Z)\\
+ &=\overline{\vfi}((((W_{\alpha})_*)^*)\cap V)+\overline{\vfi}(Z)=
+ (\overline{\vfi}((((W_{\alpha})_*)^*))\cap\overline{\vfi}(V))+\overline{\vfi}(Z)\\
+ &=(\vfi^{-1}((W_{\alpha})^{\perp})^{\perp}\cap V)+\vfi^{-1}(Z^{\perp})^{\perp}.
+ \end{split}
+ \end{equation*}
+ Similarly, $\vfi^{-1}((W_{\alpha})^{\perp})^{\perp}\cap V\subset(\vfi^{-1}((F_{\alpha})^{\perp})^{\perp}\cap V)+\vfi^{-1}(Z^{\perp})^{\perp}$.
+ 
+ Now, we need to check that
+ \begin{equation}\label{formula:dim_dim}
+ \dim((\vfi^{-1}((W_{\alpha})^{\perp})^{\perp}\cap V)\cap\vfi^{-1}(Z^{\perp})^{\perp})=\dim((\vfi^{-1}((F_{\alpha})^{\perp})^{\perp}\cap V)\cap\vfi^{-1}(Z^{\perp})^{\perp}).
+ \end{equation}
+ Evidently,
+ \begin{equation*}
+ \begin{split}
+ (\vfi^{-1}((W_{\alpha})^{\perp})^{\perp}\cap V)\cap\vfi^{-1}(Z^{\perp})^{\perp}&=
+ (\overline{\vfi}(((W_{\alpha})_*)^*)\cap\overline{\vfi}(V))\cap\overline{\vfi}(Z)\\
+ &=\overline{\vfi}(((W_{\alpha})_*)^*\cap V\cap Z)=\overline{\vfi}(((W_{\alpha})_*)^*\cap Z).
+ \end{split}
+ \end{equation*}
+ But $Z\subset V$, so $((W_{\alpha})_*)^*\cap Z=W_{\alpha}\cap Z$. Since $\overline{\vfi}$ is invertible, we conclude that the left-hand side of (\ref{formula:dim_dim}) equals $\dim(W_{\alpha}\cap Z)$. A similar argument shows that the right-hand side of (\ref{formula:dim_dim}) equals $\dim(F_{\alpha}\cap Z)$. We conclude that these dimensions coincide, as required.

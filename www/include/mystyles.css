@@ -1,0 +1,97 @@
+<style type="text/css" media="screen">
+
+/**************** menu coding *****************/
+#menu {
+width: 120%;
+background: #f44d00;
+border: solid;
+border:gray;
+}
+
+#menu ul {
+list-style: none;
+margin: 0;
+padding: 0;
+text-align:center;
+}
+
+#menu a, #menu h2 {
+font: bold 12px arial, helvetica, sans-serif;
+display: block;
+border-width: 1px;
+border-color: #ccc #888 #555 #bbb;
+margin: 0;
+padding: 2px 3px;
+height:3em;
+width:12em;
+
+}
+
+#menu h2 {
+color: #fff;
+background: #f44d00;
+text-transform: uppercase;
+}
+
+#menu a {
+color: #fff;
+background: #e12a0a;
+text-decoration: none;
+}
+
+#menu a:hover {
+color: #a00;
+background: #FFF1CA;
+}
+
+#menu li {position: relative;}
+
+#menu ul ul ul {
+position: absolute;
+top: 0;
+right: 100%;
+width: 100%;
+}
+
+div#menu ul ul ul,
+div#menu ul ul li:hover ul ul
+{display: none;}
+
+div#menu ul ul li:hover ul,
+div#menu ul ul ul li:hover ul
+{display: block;}
+
+div1
+{
+float:right;
+width:120px;
+margin:0 0 15px 20px;
+padding:15px;
+border: 0;
+text-align:center;
+}
+.footer	{color:#999999;}
+
+<!--[if IE]>
+<style type="text/css" media="screen">
+body {
+behavior: url(csshover.htc); /* call hover behaviour file */
+font-size: 100%; /* enable IE to resize em fonts */
+} 
+#menu ul li {
+float: left; /* cure IE5.x "whitespace in lists" problem */
+width: 100%;
+}
+#menu ul li a {
+height: 1%; /* make links honour display: block; properly */
+} 
+
+#menu a, #menu h2 {
+font: bold 0.7em/1.4em arial, helvetica, sans-serif; 
+/* if required use em's for IE as it won't resize pixels */
+} 
+</style>
+<![endif]-->
+
+
+</style>

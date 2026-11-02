@@ -1,0 +1,3084 @@
+\documentclass[openany, a4paper]{amsbook}
+\usepackage[british]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb, amsthm, bbold}
+\usepackage{ytableau, graphicx, tikz, tikz-cd, geometry}
+\usepackage{longtable}
+\usepackage{subcaption, floatrow}
+\usepackage[all]{xy}
+\usepackage{todonotes}
+\usepackage{enumitem}
+
+%% SETUP: text on top when in draft mode
+\usepackage{ifdraft}
+\ifoptiondraft{%
+  \usepackage[en-GB,showseconds=false]{datetime2}
+  % \usepackage{showkeys}
+  \usepackage[%
+  placement=top,
+  scale=1,
+  vshift=-2em,
+  color=black,
+  opacity=1]{background}
+  \DTMlangsetup[en-GB]{ord=omit}
+  \DTMsettimestyle{iso}
+  \SetBgContents{\uppercase{\texttt{DRAFT Version \DTMtoday\ \DTMcurrenttime}}}
+}{}
+
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsrefs}
+\usepackage{filecontents}
+
+
+% SETUP: Young Tableaux
+\ytableausetup{centertableaux, boxsize=1.1em}
+
+%% SETUP: amsthm
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rmk}[thm]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{defn}[thm]{Definition}
+
+\numberwithin{equation}{chapter}
+
+%% CUSTOM MACROS
+\newcommand{\Tbar}[1]{\overline{\mathbb{T}}_{\aleph_{#1}}}
+\newcommand{\T}[1]{{\mathbb{T}}_{\aleph_{#1}}}
+\newcommand{\socl}[2]{\underline{\mathrm{soc}}^{#1}({#2})}
+\newcommand{\soc}[2]{\mathrm{soc}^{#1}({#2})}
+\newcommand{\lr}[3]{{\rm N}^{#1}_{#2, #3}}
+\newcommand{\sort}[1]{\operatorname{sort}\!\left( #1 \right)}
+\newcommand{\SF}[1]{\operatorname{SF}\!\left( #1 \right)}
+\newcommand{\SST}[1]{\operatorname{SST}\!\left( #1 \right)}
+\newcommand{\gmod}[1]{#1\mathbf{{\operatorname{-}}mod}}
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\End}{\mathrm{End}}
+\DeclareMathOperator{\im}{\mathrm{im}}
+\DeclareMathOperator{\coker}{\mathrm{coker}}
+\newcommand{\Ext}[4]{\mathrm{Ext}^{#1}_{#2}({#3}, {#4})}
+% inline definitions
+\newcommand{\idef}[1]{\textbf{\emph{#1}}}
+
+
+\begin{filecontents}{refs.bib}
+    % \bib, bibdiv, biblist are defined by the amsrefs package.
+\begin{bibdiv}
+    \begin{biblist}
+    
+    \bib{cp17}{article}{
+          author={Chirvasitu, Alexandru},
+          author={Penkov, Ivan},
+           title={Representation categories of {M}ackey {L}ie algebras as universal monoidal categories},
+            date={2017},
+            ISSN={1558-8599},
+         journal={Pure Appl. Math. Q.},
+          volume={13},
+           pages={77\ndash 121},
+    }
+    
+    \bib{cp19}{article}{
+          author={Chirvasitu, Alexandru},
+          author={Penkov, Ivan},
+           title={Ordered tensor categories and representations of the {M}ackey {L}ie algebra of infinite matrices},
+            date={2019},
+         journal={Algebras and Representation Theory},
+          volume={22},
+           pages={249\ndash 279},
+    }
+    
+    \bib{dps}{article}{
+          author={Dan-Cohen, Elizabeth},
+          author={Penkov, Ivan},
+          author={Serganova, Vera},
+           title={A {K}oszul category of representations of finitary {L}ie algebras},
+            date={2011},
+         journal={Advances in Mathematics},
+          volume={289},
+           pages={250\ndash 278},
+    }
+    
+    \bib{dickson}{article}{
+          author={Dickson, Spencer~E.},
+           title={A torsion theory for abelian categories},
+            date={1966},
+            ISSN={00029947},
+         journal={Transactions of the American Mathematical Society},
+          volume={121},
+           pages={223\ndash 235},
+             url={http://www.jstor.org/stable/1994341},
+    }
+    
+    \bib{egno}{book}{
+          author={Etingof, Pavel},
+          author={Gelaki, Shlomo},
+          author={Nikshych, Dmitri},
+          author={Ostrik, Victor},
+           title={Tensor categories},
+          series={Mathematical Surveys and Monographs},
+       publisher={American Mathematical Society, Providence, RI},
+            date={2015},
+          volume={205},
+    }
+    
+    \bib{fulton-yt}{book}{
+          author={Fulton, William},
+           title={Young tableaux},
+        subtitle={with applications to representation theory and geometry},
+          series={London Mathematical Society student texts},
+       publisher={Cambridge University Press},
+            date={1997},
+          number={35},
+    }
+    
+    \bib{fulton}{book}{
+          author={Fulton, William},
+          author={Harris, Joe},
+           title={Representation theory},
+        subtitle={A first course},
+          series={Graduate Texts in Mathematics},
+       publisher={Springer-Verlag},
+            date={1991},
+          number={129},
+    }
+    
+    \bib{hungerford}{book}{
+          author={Hungerford, Thomas},
+           title={Algebra},
+          series={Graduate Texts in Mathematics},
+       publisher={Springer-Verlag},
+            date={1974},
+          number={73},
+    }
+    
+    \bib{maclane}{book}{
+          author={Lane, Saunders~Mac},
+           title={Categories for the working mathematician},
+          series={Graduate Texts in Mathematics},
+       publisher={Springer-Verlag},
+            date={1971},
+          number={5},
+    }
+    
+    \bib{lang}{book}{
+          author={Lang, Serge},
+           title={Algebra},
+       publisher={Springer},
+            date={2002},
+            ISBN={9781461300410 146130041X},
+    }
+    
+    \bib{pal}{manual}{
+          author={Pal, Abhik},
+           title={Socle filtration calculator},
+            date={2020},
+            note={\url{https://gitlab.com/abhikpal/socle-filtration}},
+    }
+    
+    \bib{ps14}{incollection}{
+          author={Penkov, Ivan},
+          author={Serganova, Vera},
+           title={Tensor representations of {M}ackey {L}ie algebras and their dense subalgebras},
+            date={2014},
+       booktitle={Developments and retrospectives in {L}ie theory},
+          editor={Mason, Geoffrey},
+          editor={Penkov, Ivan},
+          editor={Wolf, Joseph~A.},
+          series={Dev. Math.},
+          volume={38},
+       publisher={Springer, Cham},
+           pages={291\ndash 330},
+            note={Algebraic methods},
+    }
+    
+    \bib{ps11}{incollection}{
+          author={Penkov, Ivan},
+          author={Styrkas, Konstantin},
+           title={Tensor representations of classical locally finite {L}ie algebras},
+            date={2011},
+       booktitle={Developments and trends in infinite-dimensional {L}ie theory},
+          editor={Neeb, Karl-Hermann},
+          editor={Pianzola, Arturo},
+          series={Progr. Math.},
+          volume={288},
+       publisher={Birkh\"auser Boston, Boston, MA},
+           pages={127\ndash 150},
+    }
+    
+    \bib{popescu}{book}{
+          author={Popescu, Nicolae},
+           title={Abelian categories with applications to rings and modules},
+          series={London Mathematical Society Monographs},
+       publisher={Academic Press},
+            date={1973},
+          number={3},
+    }
+    
+    \bib{ss}{article}{
+          author={Sam, Steven},
+          author={Snowden, Andrew},
+           title={Stability patterns in representation theory},
+            date={2013},
+         journal={Forum of Mathematics, Sigma},
+          volume={3},
+    }
+    
+    \bib{s18}{misc}{
+          author={Shemyakov, Anton},
+           title={On the socle filtration of indecomposable injective objects of the category {$\mathbb T^3_{\mathfrak{gl}^M}$}},
+       publisher={Jacobs University Bremen},
+         address={Bremen, Germany},
+            date={2018},
+            note={(Bachelor's thesis)},
+    }
+    
+    \bib{p20}{misc}{
+          author={Shemyakov, Anton},
+           title={Loewy lengths of indecomposable injective objects in certain universal tensor categories},
+       publisher={Jacobs University Bremen},
+         address={Bremen, Germany},
+            date={2020},
+            note={(Bachelor's thesis)},
+    }
+    
+    \bib{weibel}{book}{
+          author={Weibel, Charles},
+           title={An introduction to homological algebra},
+          series={Cambridge Studies in Advanced Mathematics},
+       publisher={Cambridge University Press},
+            date={1994},
+          number={38},
+    }
+    
+    \end{biblist}
+    \end{bibdiv}    
+    \end{filecontents}
+
+
+\begin{document}
+\frontmatter \title{ %
+On the problem of computing the Ext-groups in a category of tensor modules over a Mackey Lie algebra
+  % 
+}
+
+\author{Tuan Anh Pham}
+\author[\null]{Supervisor: Prof. Dr. Ivan Penkov}
+
+\begin{abstract}
+  Let $\mathbb{K}$ be an algebraically closed field of characteristic 0, and let $\T{t}$ be the category of tensor representations of the Lie algebra $\mathfrak{gl}^M(V_\ast, V)$ of endomorphisms of a nondegenerate pairing $V_\ast \otimes V \to \mathbb{K}$ of $\aleph_t$-dimensional vector spaces $V_\ast$ and $V$, for some $t \in \mathbb{N}$. It is shown in \cite{cp19} that for $t =0$, the category $\T{0}$ is Koszul self-dual, which yields an explicit formula for the dimension of Ext-groups of simple objects in $\T{0}$. However, for $t \geq 1$, $\T{t}$ is not known to be Koszul self-dual and the problem of computing the Ext groups of simple objects 
+  % $\Ext{q}{}{V_{\lambda_t, ..., \lambda_0, \mu, \nu}}{V_{\lambda'_t, ..., \lambda'_0, \mu', \nu'}}$
+  remains open. In this work, as a first step towards solving this problem, we investigate the Ext-groups of simple objects in the category $\T{1}$. These simple objects will be denoted by $V_{\lambda_1, \lambda_0, \mu, \nu}$ as they are parametrized by quadruples of Young diagrams. At the end of this paper, we manage to calculate the Ext-groups $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda'_0, \mu', \nu'}}$ (where the first Young diagrams of both simple objects are the same) and $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}}$ (where the third Young diagram of the second simple object is empty). 
+\end{abstract}
+
+\maketitle
+
+\chapter*{Statutory declaration}
+
+\begin{description}
+\item[Family name, given name] Pham, Tuan 
+\item[Matriculation number] 30002433
+\item[Thesis type] Bachelor's thesis
+\end{description}
+
+\section*{English: Declaration of Authorship}
+
+\noindent
+I hereby declare that the thesis submitted was created and written
+solely by myself without any external support. Any sources, direct
+or indirect, are marked as such. I am aware of the fact that the
+contents of the thesis in digital form may be revised with regard
+to usage of unauthorized aid as well as whether the whole or parts
+of it may be identified as plagiarism. I do agree my work to be
+entered into a database for it to be compared with existing
+sources, where it will remain in order to enable further
+comparisons with future theses. This does not grant any rights of
+reproduction and usage, however.
+
+~\\
+\noindent
+This document was neither presented to any other examination board
+nor has it been published.
+
+
+\section*{German: Erkl\"arung der Autorenschaft (Urheberschaft)}
+
+\noindent
+Ich erkl\"are hiermit, dass die vorliegende Arbeit ohne fremde
+Hilfe ausschlie\ss lich von mir erstellt und geschrieben worden
+ist. Jedwede verwendeten Quellen, direkter oder indirekter
+Art, sind als solche kenntlich gemacht worden. Mir ist die
+Tatsache bewusst, dass der Inhalt der Thesis in digitaler Form
+gepr\"uft werden kann im Hinblick darauf, ob es sich ganz oder
+in Teilen um ein Plagiat handelt. Ich bin damit einverstanden,
+dass meine Arbeit in einer Datenbank eingegeben werden kann,
+um mit bereits bestehenden Quellen verglichen zu werden und
+dort auch verbleibt, um mit zuk\"unftigen Arbeiten verglichen
+werden zu k\"onnen. Dies berechtigt jedoch nicht zur Verwendung
+oder Vervielf\"altigung.
+
+~\\
+\noindent
+Diese Arbeit wurde noch keiner anderen Pr\"ufungsbeh\"orde
+vorgelegt noch wurde sie bisher ver\"offentlicht.
+
+\vfill
+% \noindent
+% \ifoptiondraft{}{
+%   May 15, 2022 \hfill
+%   % \includegraphics[trim=1.2cm 0.4cm 0.1cm 0cm]{./signature.pdf}
+%   \includegraphics[scale=0.1]{./signature.jpeg} Tuan Pham
+%   \\
+% }
+% \rule{\textwidth}{0.2mm}\\
+% Date, Signature
+
+\tableofcontents
+
+\mainmatter
+\chapter{Introduction}
+
+There have been several advancements in the study of monoidal categories of representations of infinite matrix algebras in the last two decades. In particular, the category $\mathbb{T}_{\mathfrak{sl}(\infty)}$ has been introduced and studied from different points of view. Notable papers in this direction are \cite{dps}, \cite{ps11}, and \cite{ss}. The category $\mathbb{T}_{\mathfrak{sl}(\infty)}$ can be seen as the ``limit as $q \to \infty$'' of the category of finite-dimensional $\mathfrak{sl}(q)$-modules, however, a big difference with the finite-dimensional case is that $\mathbb{T}_{\mathfrak{sl}(\infty)}$ is not a semisimple category. 
+
+The development of the representation theory of the Lie algebra $\mathfrak{sl}(\infty)$ also motivated the study of Mackey Lie algebras $\mathfrak{gl}^M(V_\ast, V)$ consisting of endomorphisms of a nondegenerate pairing $\mathbf{p}: V_\ast \times V \to \mathbb{K}$ between two abstract vector spaces $V$ and $V_\ast$. Tensor representations of Mackey Lie algebras are introduced and studied in \cite{ps14}.
+
+As a next step, in the work \cite{cp17}, A. Chirvasitu and I. Penkov have constructed and studied universal monoidal categories whose objects are more general tensor representations of Mackey Lie algebras. Throughout the paper, let $\mathbb{K}$ be an algebraically closed field of characteristic 0. Let $\mathbf{p}:  V_\ast \times V \to \mathbb{K}$ be a nondegenerate pairing where $V$ and $V_\ast$ are both $\alpha$-dimensional vector spaces over $\mathbb{K}$ for an arbitrary cardinal number $\alpha$. If the pairing $\mathbf{p}$ is diagonalizable in the sense that there are bases $\{v^{\ast}_{k} \}$ of $V_\ast$ and $\{v_{k'} \}$ of $V$ such that $\mathbf{p}(v^{\ast}_{k}, v_{k'}) = \delta_{k k '}$, then by definition $\mathbb{T}_\alpha$ is the minimal full monoidal subcategory of $\mathfrak{gl}^M$-mod (the category of modules over $\mathfrak{gl}^M$) containing $V$, $V^\ast$ and closed with respect to subquotients and arbitrary direct sums. Chirvasitu and Penkov also characterized all simple objects and their injective hulls in $\mathbb{T}_\alpha$. 
+
+When $\alpha = \aleph_t$ for some nonnegative integer $t$, 
+% they derived an explicit formula for the multiplicity of a simple object in the socle filtration of the injective hull of another indecomposable injective module. 
+the simple objects in $\T{t}$ are parametrized by $t+3$ Young diagrams $\lambda_t, ..., \lambda_0, \mu, \nu$:
+\begin{align}
+    V_{\lambda_t, ... , \lambda_0, \mu, \nu} = \bigotimes_{s=t}^{0} (V^{\ast}_{\aleph_{s+1}}/V^{\ast}_{\aleph_{s}})_{\lambda_s} \otimes V_{\mu, \nu}
+\end{align}
+where $\bullet_\lambda$ denotes the Schur functor associated with Young diagram $\lambda$ and $V_{\mu, \nu}$ is a simple object in $\mathbb{T}_{\mathfrak{sl}(\infty)}$. The injective hull of $V_{\lambda_t, ... , \lambda_0, \mu, \nu}$ is denoted by $ \tilde{V}_{\lambda_t, ... , \lambda_0, \mu, \nu}$ and has the form
+\begin{align}\label{eq: ext aldep 0}
+    \tilde{V}_{\lambda_t, ... , \lambda_0, \mu, \nu} = \bigotimes_{s=t}^{0} (V^{\ast}/V^{\ast}_{\aleph_{s}})_{\lambda_s} \otimes (V^*)_\mu \otimes V_\nu.
+\end{align}
+In \cite{cp17}, Chirvasitu and Penkov derive an explicit formula for the multiplicity of $V_{\lambda_t, \dots, \lambda_0, \mu, \nu}$ in $\tilde{V}_{\lambda'_t, \dots, \lambda'_0, \mu', \nu'}$. 
+
+When $t = 0$, the category $\T{0}$ coincides with the category $\mathbb{T}^3_{\mathfrak{gl}^M(V_\ast, V)}$ studied in \cite{cp19}. In what follows, we set $W:= V$ and $W_{\lambda, \mu, \nu}:= V_{\lambda, \mu, \nu}$ in the case when $\dim V = \aleph_0$. It is showed in \cite{cp19} that $\mathbb{T}^3_{\mathfrak{gl}^M(W_\ast, W)}$ has finite length and is a Koszul self-dual tensor category. The Koszul self-duality yields the following concrete formula for the dimension of Ext-groups between simple objects in $\mathbb{T}^3_{\mathfrak{gl}^M(W_\ast, W)}$:
+\begin{align}
+    \dim \Ext{q}{}{W_{\lambda, \mu, \nu}}{W_{\lambda', \mu', \nu'}} = \text{multiplicity of } W_{\lambda, \mu^\perp , \nu} \text{ in } \socl{q+1}{\tilde{W}_{\lambda', \mu'^\perp, \nu'}},
+\end{align}
+where $^\perp$ indicates conjugating (transposing) a Young diagram. 
+
+However, as shown in \cite{cp17}*{Remark 4.31}, there is no immediate pattern involving conjugating Young diagrams that would allow to compute the Ext-groups $\Ext{q}{\T{t}}{V_{\lambda_t, ... , \lambda_0, \mu, \nu}}{V_{\lambda'_t, ... , \lambda'_0, \mu', \nu'}}$ for $t \geq 1$ by generalizing formula \eqref{eq: ext aldep 0}. In this paper, we will investigate the case $t=1$, taking the first step to solve the open problem of computing these Ext-groups. Our main results calculate $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda_0', \mu', \nu'}}$, i.e. when the first Young diagrams parameterizing two simple objects are the same, and $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}}$, i.e. where the third Young diagram parameterizing the second object is empty. We introduce certain torsion classes that allow us to reduce the computation of these Ext-groups to the computation of Ext-groups in $\T{0}$, where we know an explicit formula. Further work is needed to address the case of $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda_0', \mu', \nu'}}$ for $\lambda'_1 \neq \lambda_1$ and $\mu' \neq \emptyset$.
+
+This thesis is organized as follows. In Chapter 2, we introduce some relevant background concepts. Chapter 3 contains some results of Ext-groups and socle filtrations adapted to the category $\T{1}$. In particular, we construct a minimal injective resolution for a simple object $V_{\lambda_1, \lambda_0, \mu, \nu}$ and define the injective dimension to be the length of such resolution. 
+% We present an example where there are no immediate ``transposing patterns'', to motivate our research question. 
+We then prove some lemmas regarding the socle filtration of indecomposable injectives in $\T{0}$ and $\T{1}$. Most of the proofs in this chapter are based on Lemma 4.28 bis, Lemma 4.29 bis and Proposition 4.30 in \cite{cp17}, and on combinatorial properties of Littlewood-Richardson coefficients. 
+
+Chapter 4 contains our main results and is divided into four parts. First, we use torsion theory to show that $\Ext{i}{\T{1}}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}} \cong \Ext{i}{\T{0}}{W_{\lambda_0, \mu, \nu}}{W_{\emptyset, \mu', \nu'}}$, and then tensor each term of the injective resolution of $V_{\emptyset, \lambda'_0, \mu', \nu'}$ with $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1}$ to obtain a more general result. Analogously, $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} \cong \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}}$, and we tensor each term of the injective resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$ with $V_{\nu'}$ to compute $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \nu'}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}}$.
+
+Lastly, in Chapter 5, we collect two conjectures, one of them regarding the injective dimension of simple objects in $\T{t}$. We check that this conjecture is indeed true in the case of $\T{0}$. The other conjecture addresses certain symmetry when we exchange the second and third Young diagrams of simple objects in $\T{1}$, which might correspond to a certain algebraic duality. The appendix contains various injective resolutions that are generated by a numerical software script that we developed.
+
+\chapter{Preliminaries}
+\section{Some relevant category notions}
+Following \cite{egno}, \cite{hungerford}, \cite{maclane} and \cite{popescu}, we first recall some relevant notions in category theory.
+
+\subsection{Tensor categories}
+    Let $\mathcal{C}$ be a category equipped with a bifunctor $\bigotimes: \mathcal{C} \times \mathcal{C} \to \mathcal{C}$. The category $\mathcal{C}$ is called \textbf{monoidal} if there is an \textbf{identity/unit object} $I$ and three natural isomorphisms $\alpha$ (\textbf{associator}) , $\lambda$ (\textbf{left unitor}), $\rho$ (\textbf{right unitor}) such that they statisfy the following axioms for all objects $A, B, C$ and $D$ in $\mathcal{C}$:
+
+\begin{enumerate}
+    \item The natural isomorphism associator $\alpha$ specifies the associativity of $\bigotimes$:
+    \begin{align*}
+        \alpha_{A,B,C}: A \otimes (B \otimes C) \cong (A \otimes B) \otimes C.
+    \end{align*}
+    \item The two natural isomorphsims left and right unitor $\lambda$ and $\rho$ indicate that $I$ is left and right identity:
+    \begin{align*}
+        \lambda_A: A \otimes I \cong A, \qquad \rho_A: I \otimes A \cong A.
+    \end{align*}
+    \item The following pentagon diagram commutes: 
+    \begin{center}
+        \begin{tikzpicture}[commutative diagrams/every diagram]
+            \node (P0) at (90:2.3cm) {$A\otimes (B\otimes (C\otimes D))$};
+            \node (P1) at (90+72:2cm) {$A\otimes ((B\otimes C)\otimes D))$} ;
+            \node (P2) at (90+2*72:2cm) {\makebox[5ex][r]{$(A\otimes (B\otimes C))\otimes D$}};
+            \node (P3) at (90+3*72:2cm) {\makebox[5ex][l]{$((A\otimes B)\otimes C)\otimes D$}};
+            \node (P4) at (90+4*72:2cm) {$(A\otimes B)\otimes (C\otimes D)$};
+            \path[commutative diagrams/.cd, every arrow, every label]
+            (P0) edge node[swap] {$1\otimes\alpha$} (P1)
+            (P1) edge node[swap] {$\alpha$} (P2)
+            (P2) edge node {$\alpha\otimes 1$} (P3)
+            (P4) edge node {$\alpha$} (P3)
+            (P0) edge node {$\alpha$} (P4);
+        \end{tikzpicture}
+    \end{center}
+    \item The triangle diagram commutes:
+    \begin{center}
+        \begin{tikzcd}[column sep=small]
+            & A \otimes B  & \\
+            A \otimes (I \otimes B) \arrow[ur, "1_A \otimes \lambda_B"] \arrow[rr, "\alpha_{A,I,B}" '] & & (A \otimes I) \otimes B \arrow[swap, ul, "\rho_A \otimes 1_B"]
+        \end{tikzcd}
+    \end{center}
+\end{enumerate}
+Note that the ``tensor product'' $\bigotimes$ is associative but need not be commutative. In particular, a \textbf{tensor/symmetric monoidal category} is a monoidal category such that the tensor product is symmetric, i.e. $A\otimes B$ is naturally isomorphic to $B\otimes A$ for all objects $A, B$. More precisely, we have: for every objects $A, B \in \mathcal{C}$, there is an isomorphism $s_{AB}:A\otimes B \cong B\otimes A$ such that:
+
+\begin{enumerate}
+    \item The triangle diagram commutes (unit coherence):
+    \begin{center}
+        \begin{tikzcd}[column sep=small]
+            & A & \\
+            A \otimes I \arrow[ur, "r_A"] \arrow[rr, "s_{AI}" '] & & I \otimes A \arrow[swap, ul, "l_A"]
+        \end{tikzcd}
+    \end{center}
+    \item The following hexagon diagram commutes (associativity coherence):
+    \[
+        \xymatrix{ 
+        & A \otimes (B \otimes C) \ar^{s_{B \otimes C, A}}[r] & (B \otimes C) \otimes A \ar^{\alpha_{BCA}}[dr] & \\
+        (A \otimes B) \otimes C \ar^{\alpha_{ABC}}[ur] \ar_{s_{AB} \otimes 1_C}[dr] & & & B \otimes (C \otimes A) \\
+        & (B \otimes A) \otimes C \ar_{\alpha_{BAC}}[r] & B \otimes (A \otimes C) \ar_{1_B \otimes s_{AC}}[ur] & 
+        }
+    \]
+    \item The triangle diagram commutes (inverse):
+    \begin{center}
+        \begin{tikzcd}[column sep=small]
+            & B \otimes A \arrow[dr, "s_{BA}"] & \\
+            A \otimes B \arrow[ur, "s_{AB}"] \arrow[rr, "1_{A \otimes B}"] & & A \otimes B \arrow[ll, "1_{A \otimes B}"]
+        \end{tikzcd}
+    \end{center}
+    
+\end{enumerate}
+% Note that our main category of concern $\T{t}$ that we introduce later is a tensor category.
+
+\subsection{Indecomposable Injective Objects}
+For a category $\mathcal{C}$, a morphism $f: X \to Y$ is called a \textbf{monomorphism} whenever:
+\begin{align*}
+    f \circ g_1 = f \circ g_2 \Longrightarrow g_1 = g_2.
+\end{align*}
+Dually, $f$ is called an \textbf{epimorphism} whenever: 
+\begin{align*}
+    g_1 \circ f = g_2 \circ f \Longrightarrow g_1 = g_2.
+\end{align*}
+
+An object $P \in \mathcal{C}$ is \textbf{projective} if every morphism $h: P \to X$ factors through every epimorphism $e: Y \to X$. Dually, an objective $I \in \mathcal{C}$ is \textbf{injective} if every morphism $h: X \to I$ factors through every monomorphism $m: X \to Y$.
+
+\begin{figure}[!h]
+    \tikzset{column sep=small, ampersand replacement=\&}
+\begin{floatrow}
+    \centering
+    \ffigbox{\begin{tikzcd}
+        \& Y \arrow[d, "e"] \\
+        P \arrow[ur, dotted, "\bar{h}"] \arrow[r, "h"] \& X
+    \end{tikzcd}}{\caption{Projective objects.}}
+    \ffigbox{\begin{tikzcd}
+        X \arrow[r, "m"] \arrow[d, "h"]   
+        \& Y \arrow[ld, dotted, "\bar{h}"] \\
+        I 
+    \end{tikzcd}}{\caption{Injective objects.}}
+    \end{floatrow}
+\end{figure}
+
+For two objects $A, B \in \mathcal{C}$, their \textbf{product} is an object $A \prod  B$ together with projections $p : A \prod  B \to A$ and $q : A \prod  B \to B$ such that for every object $C$ and morphisms $f : C \to A$ and $g : C \to B$, $f$ and $g$ factor through a unique $h: C \to A \prod  B$. The concept of \textbf{coproduct} is dual to that of product, i.e. an object $A \coprod B$ together with monomorphisms $i: A \to A \coprod B$ and $j : B \to A \coprod B$ such that for every object $C$ and morphisms $f : A \to C$ and $g : B \to C$, $f$ and $g$ factor through a unique morphism $h : A\coprod B \to C$. In other words, the following diagrams commute. 
+\begin{figure}[h!]
+    \tikzset{column sep=small, ampersand replacement=\&}
+\begin{floatrow}
+    \centering
+    \ffigbox{\begin{tikzcd}
+        \& C \arrow[swap, ld, "f"] \arrow[dotted, d, "h"] \arrow[rd, "g"] \& \\
+        A \& A \prod B \arrow[l, "p"] \arrow[swap, r, "q"] \& B
+    \end{tikzcd}}{\caption{Product.}}
+    \ffigbox{\begin{tikzcd}
+        \& C  \& \\
+        A \arrow[ur, "f"] \arrow[swap, r, "i"] \& A \coprod B   \arrow[dotted, u, "h"] \& B \arrow[swap, ul, "g"] \arrow[l, "j"]
+    \end{tikzcd}}{\caption{Coproduct.}}
+    \end{floatrow}
+\end{figure}
+
+An object $S \in \mathcal{C}$ is called \textbf{initial} if for for every object $A$ there is exactly one morphism $S \to A$. An object $T$ is called \textbf{terminal} if for every object $A$ there is exactly one morphism $A \to T$. A \textbf{null} object is both terminal and initial object. $X$ is called \textbf{indecomposable} if whenever there is isomorphism $X \cong X_1 \coprod X_2$ then $X_1$ or $X_2$ is a null object.
+
+\subsection{Exact functor}
+\begin{defn}
+    For two categories $\mathcal{C}$ and $\mathcal{D}$, a covariant additive functor $F: \mathcal{C} \to \mathcal{D} $ is \textbf{left-exact} if whenever we have a short exact sequence $0 \to A \to B \to C \to 0$ in $\mathcal{C}$ then the sequence $0 \to F(A) \to F(B) \to F(C)$ is exact in $\mathcal{D}$. Likewise $F: \mathcal{C} \to \mathcal{D} $ is \textbf{right-exact} if whenever we have a short exact sequence $0 \to A \to B \to C \to 0$ in $\mathcal{C}$ then the sequence $ F(A) \to F(B) \to F(C) \to 0$ is exact in $\mathcal{D}$. And $F$ is \textbf{exact} when it is both left-exact and right-exact.
+\end{defn}
+
+One of the most important left-exact functors is the $\Hom(X, \_)$ functor, which is the functor of our interest in calculating the Ext-groups between simple objects in $\T{1}$.
+\begin{prop}\label{hom exact}
+    The functor $\Hom(X, \_)$ is a covariant left-exact functor. Given short exact sequences
+    \begin{align*}
+        0 \to A' \to A \to A'' \to 0 
+    \end{align*}
+    we have the sequence
+    \begin{align*}
+        0 \to \Hom(X, A')  \to \Hom(X, A) \to \Hom(X, A)
+    \end{align*}
+    is exact. Dually, the functor $\Hom(\_, Y)$ is contravariant right-exact functor, i.e.
+    \begin{align*}
+        0 \to \Hom(A'', X)  \to \Hom(A, X) \to \Hom(A', X).
+    \end{align*}
+\end{prop}
+
+This proposition will be utilized later in the proof of the main result. The standard proof for this proposition could be found in a category theory or homological algebra textbook.
+
+
+\section{Semi-simplicity and socle filtration}
+A module $M$ over a ring $R$ is said to be \textbf{semisimple} if it is the direct sum of simple (irreducible) submodules. Semisimplicity of a module $M$ can be shown \cite{lang} to be equivalent to:
+\begin{enumerate}
+    \item $M$ is the sum of its irreducible submodules.
+    \item Every submodule of $M$ is a direct summand, i.e. for every submodule $N$ of $M$, there is a submodule $P$ such that $M = N \oplus P$.
+\end{enumerate}
+
+For an abitrary ring, an abitrary module $M$ need not be semisimple and hence we would want to study the maximal (with respect to inclusion) semisimple submodule of $M$, which is denoted by $soc(M)$ and is called the \textbf{socle} of $M$. Equivalently, $\soc{}{M}$ is also the sum of all simple submodules of $M$.
+
+For an abelian category $\mathcal{C}$, a \textbf{chain} of objects of $\mathcal{C}$ is a set of objects $\{ A_\omega \}$ such that: for every pair $ A_{\omega_1} $ and $ A_{\omega_2}$, exactly one noninvertible monomorphism $A_{\omega_1} \to A_{\omega_2}$ or $A_{\omega_2} \to A_{\omega_1}$ is fixed. We thus have a linear order: $\omega_1 < \omega_2$ if $A_{\omega_1} \to A_{\omega_2}$. An object $A$ of $\mathcal{C}$ is endowed with a \textbf{transfinite filtration} if there is a well-ordered chain of subobjects $\{ A_\omega \}$ of $A$ such that $\cup_{\omega} A_\omega = A$.
+
+In the categories introduced in Section \ref{sec: category T and T bar} below, particularly $\T{t}$, it is shown that every object $X$ has a transfinite socle filtration, which is built by letting $\soc{1}{X} = \soc{}{X}$ and inductively taking the preimage of $X/\soc{i}{X}$ in $X$. In general enough categories, the socle filtration need not terminate and may have infinite length. More precisely, we have
+\begin{align*}
+    0 \subset \soc{}{X} \subset \soc{2}{X} = \pi^{-1}_{1}(X/\soc{}{X}) \subset ... \subset \soc{\aleph_0}{X} = \pi^{-1}_{\aleph_0}
+    (\lim_{ \xrightarrow[q < \aleph_0]{}} (\soc{q}{X}) )
+    \subset ...
+\end{align*}
+where $\pi_i: X \to X/(\soc{i}{X})$ and 
+$\pi_{\aleph_0}: X \to X/
+(\lim\limits_{ \xrightarrow[q < \aleph_0]{} } (\soc{q}{X}))$ are the canonical projections and we denote the $q-$th layer $\socl{q}{X} = \soc{q}{X} / \soc{q-1}{X}$.  
+
+The socle filtration of an object $M$ has finite length if $M= \cup_{k \in \mathbb{Z}_{> 0}} \soc{k} M$ and for some $q \in \mathbb{N}$, the layer $\socl{q+1}{M}$ is zero. Then the smallest such $q$ is called the \textbf{Loewy length} of $M$. If no
+such $q$ exists, then the Loewy length is said to be infinite. In \cite{cp17}, the authors have shown that the indecomposable injectives in $\T{t}$ have finite Loewy length. An explicit formula for the Loewy length of those indecomposable injectives is derived in \cite{p20}.
+
+\section{Resolution and the Ext functors}
+We now introduce one of the main concepts in homological algebra, the \textbf{Ext} functor. Let $R$ be a ring and $R-$mod be the category of left $R$-modules. Recall that $\Hom(A, \_)$ is a covariant left-exact functor, thus it has the right derived functor $\Ext{\bullet}{}{A}{\_}$. We recall the definition of the functor as follows.  
+
+Recall that a \textbf{left resolution} of a $R$-module $M$ is an exact sequence of modules
+\begin{align}\label{resolution}
+    ... \xrightarrow{d_{n+1}} E_n \xrightarrow{d_{n}} ...  \xrightarrow{d_{2}} E_1 \xrightarrow{d_{1}} E_0 \xrightarrow{\epsilon} M \rightarrow 0,
+\end{align}
+where $d_n$ and $\epsilon$ are called boundary maps and augmentation map respectively. Dually, a \textbf{right resolution} is an exact sequence of $R$-modules
+
+\begin{align}\label{coresolution}
+    0 \rightarrow M \xrightarrow{\epsilon} E^0 \xrightarrow{d^{0}} E^1 \xrightarrow{d^{1}} ... \xrightarrow{d^{n-1}} E^n \xrightarrow{d^{n}} ...    
+\end{align}
+
+With additional conditions imposed on the modules $E_n$, we can have special types of resolutions. Specifically, a projective (resp., free, flat) resolution is a left resolution such that all $E_i$ are projective (resp., free, flat) R-modules. Dually, injective resolutions are right resolutions such that all $E^i$ are injective.
+
+A left resolution (resp., right resolution) is said to be finite if there are only finitely many nonzero modules included in \ref{resolution} (resp., \ref{coresolution}). In that case, the maximal number $n$ indexing a nonzero module is called the \textbf{length} of the resolution. Homological dimensions are defined in terms of length of resolution as well. In particular, the minimal length of a finite injective (resp., projective) resolution of a module M is its \textbf{injective} (resp., \textbf{projective}) \textbf{dimension}, and is denoted $id(M)$ (resp., $pd(M)$)
+\label{injective dimension}. Note that $id(M) = 0$ (resp., $pd(M) = 0$) if and only if $M$ is an injective module (resp., projective module).
+
+Given an injective resolution
+\begin{align*}
+    0 \to B \to I^0 \to I^1 \to ...,
+\end{align*} 
+we have the corresponding complex for a module $A$
+\begin{align*}
+    0 \xrightarrow{h^0} \Hom_R(A, I^0) \xrightarrow{h^1}  \Hom_R(A, I^1) \xrightarrow{h^2} ... .
+\end{align*} 
+For $i \in \mathbb{N}$, $\Ext{i}{R}{A}{B} := \ker h^{i}/\im h^{i-1}$ is the homology of the complex at position $i$. We are usually concerned with only Ext-groups between simple objects since this functor takes coproducts (direct sums) in the first variable and products in the second variable to products. 
+
+\begin{prop}
+    The groups $\Ext{i}{R}{A}{B}$ defined above
+    are independent of the choice of injective resolution of $B$.
+\end{prop}
+
+\begin{prop}[\cite{weibel}*{Proposition 3.3.4}]
+    \begin{align}
+        \Ext{i}{R}{\bigoplus _{\alpha }M_{\alpha }}{N} &\cong \prod _{\alpha } \Ext{i}{R}{M_{\alpha }}{N},\\
+        \Ext{i}{R}{M}{\prod _{\alpha }N_{\alpha }} &\cong \prod _{\alpha } \Ext{i}{R}{M}{N_{\alpha }}.
+    \end{align}
+\end{prop}
+
+
+
+\section{Mackey Lie algebras}
+From now, all vector spaces and Lie algebras are defined over the fixed algebraically closed field $\mathbb{K}$ of characteristic $0$. For a vector space $V$, we let $V^\ast = \Hom_{\mathbb{K}}(V, \mathbb{K})$ and $\End(V) = \End_{\mathbb{K}}(V)$ and abrreviate $\otimes_\mathbb{K}$ to $\otimes$. Furthermore, all additive categories considered are linear over $\mathbb{K}$ and all additive functors are assumed to preserve this structure.
+
+Here, we will define the Mackey Lie algebra for two vector spaces of the same dimension equal to $\aleph_t$, the $t$-th cardinal number after $\aleph_0$. For more general definitions and considerations, we refer the reader to \cite[]{ps14} and \cite[]{cp17}. Let $V$ and $V_{\ast}$ be two $\aleph_t$-dimensional vector spaces, and $\mathbf{p}: V_\ast \times V \to \mathbb{K}$ be a nondegenerate pairing that is diagonalizable in the sense that there bases $\{v^{\ast}_{k} \}$ and $\{v_{k'} \}$ of $V_\ast$ and $V$ such that $\mathbf{p}(v^{\ast}_{k}, v_{k'}) = \delta_{k k '}$. Picking the bases $\{v^{\ast}_{k} \}$ and  $\{v_{k'} \}$ and an arbitrary total order on the set of indices, we can think of elements of $V$ (resp., $V_\ast$) as size-$\aleph_t$ column vectors (resp., row vectors) with finitely many nonzero entries. 
+
+For each infinite cardinal $\beta \leq \aleph_{t+1}$, let $V^\ast_{\beta} \subset V^\ast$ the subspace of size-$\aleph_t$ row vectors with strictly fewer than $\beta$ nonzero entries. We have $V^{\ast}_{\aleph_{t+1}} = V^{\ast}$, $V^{\ast}_{\aleph_0} = V_{\ast}$, and a transfinite filtration 
+\begin{align}\label{socle filtration}
+    0 \subset V_{\ast} \subset ... \subset V^{\ast}_{\aleph_{t}} \subset V^{\ast}.
+\end{align}
+The \textbf{Mackey Lie algebra} $\mathfrak{gl}^M = \mathfrak{gl}^M (V_\ast, V)$ associated to the pairing $\mathbf{p}$ is the Lie algebra of endomorphisms of $\mathbf{p}$, i.e.
+\begin{align}
+    \mathfrak{gl}^M (V_\ast, V) = \{ x \in \End(V_\ast) | x^\ast(V) \subset V \} \cong \{ y \in \End(V) | y^\ast(V_\ast) \subset V_\ast \},
+\end{align}
+where here $^\ast$ denotes the dual operator. Using the bases $\{v^{\ast}_{k} \}$, $\{v^{\ast}_{k} \}$ and the order as before, we can think of elements of $\mathfrak{gl}^M$ as $\aleph_t \times \aleph_t$-matrices with the property that each row and column has finitely many nonzero entries. 
+
+
+\section{The categories \texorpdfstring{$\T{t}$}{T t} and  \texorpdfstring{$\Tbar{t}$}{T bar t}}\label{sec: category T and T bar}
+
+% Writing about the representation and the categories
+First, we note that $V$ and $V^\ast$ are $\mathfrak{gl}^M$-modules with the following actions:
+\begin{align*}
+    g \cdot v = gv \quad & \text{for } g \in \mathfrak{gl}^M, v \in V, \\
+    g \cdot v_{\ast} = -v_\ast g \quad &\text{for } g \in \mathfrak{gl}^M, v_\ast \in V_\ast.
+\end{align*}
+Since we have $\mathfrak{gl}^M \cdot V^{\ast}_{\beta} \subset  V^{\ast}_{\beta}$, the filtration \eqref{socle filtration} is  $\mathfrak{gl}^M$-stable. 
+
+We now introduce our main categories of interest $\T{t}$ and $\Tbar{t}$.
+
+\begin{defn}
+    Let $\mathfrak{gl}^M$-mod denote the category of modules over $\mathfrak{gl}^M$. The category $\T{t}$ is defined as the smallest full monoidal subcategory of $\mathfrak{gl}^M$-mod containing $V$ and $V_\ast$ and being closed under finite direct sums and taking subquotients. The category $\Tbar{t}$ is then the full subcategory of $\mathfrak{gl}^M$-mod whose objects are arbitrary direct sums of objects in $\T{t}$.
+\end{defn}
+
+Recall that for a Young diagram $\lambda$, we have a well-defined Schur functor $\bullet_\lambda: \text{Vect} \to \text{Vect}$ between the category of vector spaces over $\mathbb{K}$. For more detailed treatment, we refer the reader to \cite{fulton-yt} and \cite{fulton}. For a $GL(n, \mathbb{K})$-module $V$, the $GL(n, \mathbb{K})$-module $V_\lambda$ is a direct summand of the tensor power $V^ {\left\lvert\lambda \right\rvert }$ as a $GL(n, \mathbb{K})$-module. Note that the tensor product $V_\lambda$ and $V_\mu$ has the decomposition
+\begin{align}
+    V_\lambda \otimes V_\mu \simeq \bigoplus_{\nu} N^\nu_{\lambda, \mu} V_\nu ,
+\end{align}
+where $N^{\nu}_{\lambda \mu}$ is the Littlewood-Richardson coefficient associated to a triple of partitions $\nu, \lambda, \mu$. 
+
+We also collect some results in \cite{fulton-yt}, \cite{fulton},  and \cite{p20} about the Littlewood-Richardson coefficients that are used later.
+\begin{lem}
+    $N^{\lambda}_{\mu, \nu} = N^{\lambda}_{\nu, \mu}$.
+\end{lem}
+\begin{lem}
+    If $N^{\lambda}_{\mu, \nu} \neq 0$ then  $\left\lvert \lambda \right\rvert  = \left\lvert \mu \right\rvert + \left\lvert \nu \right\rvert$.
+\end{lem}
+\begin{lem}
+    If $N^{\lambda}_{\mu, \nu} \neq 0$ then $ \mu \subseteq \lambda$.
+\end{lem}
+\begin{lem}
+    If $\lambda_i = \mu_i + \nu_i$ for all $i$, then $N^{\lambda}_{\mu, \nu} = 1$.
+\end{lem}
+
+% Returning to the category $\T{t}$, similarly, for an object $M$ and Young diagram $\lambda$, we denote $M_\lambda$ to be the image of $M$ under the Schur functor $\bullet_\lambda$.
+We now look at the classification of simple objects in the category $\T{t}$. First, we introduce the simple module $V_{\mu, \nu}$ over the Mackey Lie algebra $\mathfrak{gl}^M$. For given partitions $\mu$ and $\nu$, we have $(V_\ast)_\mu \subseteq (V_\ast)^{\otimes|\mu|}$ and $V_\nu \subseteq V^{\otimes|\nu|}$ and thus $(V_\ast)_\mu \otimes V_\nu \subseteq (V_\ast)^{\otimes|\mu|} \otimes V^{\otimes|\nu|}$. By applying the pairing $\mathbf{p}: V_\ast \times V \to \mathbb{K}$ over $|\mu| \cdot |\nu|$ possible positions in $V_*^{\otimes |\mu|} \otimes V^{\otimes |\nu|}$, we get $|\mu||\nu|$ different compositions
+\begin{align} \label{traceless tensor}
+    (V_\ast)_\mu \otimes V_\nu \subseteq (V_\ast)^{\otimes|\mu|} \otimes V^{\otimes|\nu|} \to (V_\ast)^{\otimes(|\mu|-1)} \otimes V^{\otimes(|\nu|-1)}. 
+\end{align}
+
+Let $V_{\mu, \nu}$ be the space of traceless tensors in $(V_\ast)_\mu \otimes V_\nu$, i.e. those annihilated by all compositions \eqref{traceless tensor}. 
+
+We are now ready to state the classification of simple objects in $\T{t}$. 
+\begin{thm}[Proposition 4.2 \cite{cp17}]\label{simple theorem}
+    Given Young diagrams $\lambda_t, ... , \lambda_0, \mu, \nu$, the object
+    \begin{align}\label{simple}
+        V_{\lambda_t, ... , \lambda_0, \mu, \nu} := \bigotimes_{s=t}^{0} (V^{\ast}_{\aleph_{s+1}}/V^{\ast}_{\aleph_{s}})_{\lambda_s} \otimes V_{\mu, \nu}
+    \end{align}
+is simple over $\mathfrak{gl}^M$, and objects obtained for distinct choices of Young diagrams are
+mutually non-isomorphic. Moreover, every simple object of $\T{t}$ is isomorphic to $V_{\lambda_t, ... , \lambda_0, \mu, \nu}$ for some $t+3$ partition $\lambda_t, ..., \lambda_0, \mu, \nu$.
+\end{thm}
+
+Next, the injective objects in $\Tbar{t}$ are arbitrary direct sums of indecomposable injective objects. Thus it suffices to study the indecomposable injectives in $\Tbar{t}$. The following proposition characterizes these objects.
+\begin{thm}[Corollary 4.25(b) in \cite{cp17}]\label{indecomposable theorem}
+    The indecomposable injective objects in the category $\Tbar{t}$ are (up to isomorphism)
+    \begin{align}\label{indecomposable injective}
+        \tilde{V}_{\lambda_t, ... , \lambda_0, \mu, \nu} := \bigotimes_{s=t}^{0} (V^{\ast}/V^{\ast}_{\aleph_{s}})_{\lambda_s} \otimes (V^*)_\mu \otimes V_\nu,
+    \end{align}
+    with respective socles $V_{\lambda_t, ... , \lambda_0, \mu, \nu}$ as in \ref{simple} for arbitrary Young diagrams $\lambda_t, ... , \lambda_0, \mu, \nu$.
+\end{thm}
+
+\chapter{Ext-groups and socle filtrations of indecomposables in \texorpdfstring{$\T{1}$}{T 1}}
+
+\section{Ext-groups in \texorpdfstring{$\T{1}$}{T 1}}
+
+In this chapter, we will explore the Ext-groups of simple objects in the category $\T{1}$ more carefully, and will motivate our research question. Recall that from Theorem \ref{simple theorem} and \ref{indecomposable theorem} we know that simple objects in $\T{1}$ are characterized by 4 arbitrary Young diagrams $\lambda_1, \lambda_0, \mu, \nu$: 
+\begin{align*}
+    V_{\lambda_1, \lambda_0, \mu, \nu} = (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes (V^\ast_{\aleph_1}/V_\ast)_{\lambda_0} \otimes V_{\mu, \nu},
+\end{align*}
+and has injective hull 
+\begin{align*}
+    \tilde{V}_{\lambda_1, \lambda_0, \mu, \nu} = (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes (V^\ast/V_\ast)_{\lambda_0} \otimes (V^\ast)_\mu \otimes V_\nu.
+\end{align*}
+We will now explain the process of building the minimal injective resolution of $V_{\lambda_1, \lambda_0, \mu, \nu}$
+\begin{align*}
+    0 \to V_{\lambda_1, \lambda_0, \mu, \nu} \to I^0 \to I^1 \to ... .
+\end{align*} 
+First, we let $I^0 := \tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$, the injective hull of $V_{\lambda_1, \lambda_0, \mu, \nu}$, and thus the sequence
+\begin{align*}
+    0 \rightarrow V_{\lambda_1, \lambda_0, \mu, \nu} \xrightarrow{\epsilon} I^0
+\end{align*} 
+is exact. Next, we identify $V_{\lambda_1, \lambda_0, \mu, \nu}$ with its image in $I^0 = \tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$, and construct the quotient module $\coker \epsilon= I^0/V_{\lambda_1, \lambda_0, \mu, \nu}$. Choose $I_1$ to be the injective hull of $\coker \epsilon$. Then we have an injective homomorphism $\phi^0:\coker \epsilon \to I^1$, which induces a homomorphism $d^0: I^0 \to I^1$ whose kernel is $V_{\lambda_1, \lambda_0, \mu, \nu}$. Thus, we have constructed an exact sequence:
+\begin{align*}
+    0 \rightarrow V_{\lambda_1, \lambda_0, \mu, \nu} \rightarrow I^0 \rightarrow I^1.
+\end{align*} 
+Inductively, suppose we have chosen $I^0, ..., I^m$ along with $d^{0}, ..., d^{m-1}$. We consider the quotient module $\coker d^{m-1} = I^m/\im d^{m-1}$ and let $I^{m+1}$ be the injective hull of $\coker d^{m-1}$. The injective homomorphism $\phi^{m}: \coker d^{m-1} \to I^{m+1}$ induces a homomorphism $d^m: I^m \to I^{m+1}$ with kernel equal to $\im d^{m-1}$. We thus have a following exact sequence (with possibly infinitely many nonzero terms), denoted by $I^\ast$
+\begin{align}\label{injective resolution}
+    0 \to V_{\lambda_1, \lambda_0, \mu, \nu} \xrightarrow[]{\epsilon} I^0 \xrightarrow[]{d^0} I^1 \xrightarrow[]{d^1} ...\xrightarrow[]{d^{n-1}} I^n \xrightarrow[]{d^{n}} ... .
+\end{align}
+The injective resolution $I^\ast$ above is by definition the minimal injective resolution of $V_{\lambda_1, \lambda_0, \mu, \nu}$, and its length equals the injective dimension of $V_{\lambda_1, \lambda_0, \mu, \nu}$.
+% Note that although in this construction, each choice of $I_m$ is not unique but as we will see later, the definition of Ext-groups are independent of these choices. 
+
+% An injective resolution for a general object in a category might not have infinitely many terms, however, the injective resolution $I^\ast$ of a simple module $V_{\lambda_1, \lambda_0, \mu, \nu}$ in $\T{1}$ built as above is proven (\textbf{where - citation?}) to have finite length.
+
+\begin{prop}[cf. \cite{cp17}]
+    The minimal injective resolution $I^\ast$ of a simple module $V_{\lambda_1, \lambda_0, \mu, \nu}$ has finite length, i.e. there exists $n \in \mathbb{N}$ such that $I^m = 0$ for all $m \geq n$. Thus, every simple object in $\T{1}$ has finite injective dimension.
+\end{prop}
+
+% We then build the corresponding cochain complex of $V_{\lambda_1, \lambda_0, \mu, \nu}$ with an arbitrary module $A$
+% \begin{align*}
+%     0 \rightarrow \Hom_R(A, I^0) \xrightarrow{h^0}  \Hom_R(A, I^1) \xrightarrow{h^1} ... \xrightarrow{h^{n-1}} \Hom_R(A, I^n),
+% \end{align*} 
+% and define $\Ext{q}{}{A}{V_{\lambda_1, \lambda_0, \mu, \nu}} = \ker h^{q}/\im h^{q-1}$.
+% \begin{prop}
+%     The groups $\Ext{i}{}{A}{V_{\lambda_1, \lambda_0, \mu, \nu}}$
+%     are independent of the injective resolution of $V_{\lambda_1, \lambda_0, \mu, \nu}$.
+% \end{prop}
+
+% Since the Ext-groups $\Ext{i}{}{A}{V_{\lambda_1, \lambda_0, \mu, \nu}}$ are independent of the choice of an injective resolution of $V_{\lambda_1, \lambda_0, \mu, \nu}$, 
+From now on, we only speak of the injective resolution \eqref{injective resolution} when referring to an injective resolution of $V_{\lambda_1, \lambda_0, \mu, \nu}$. 
+% Thus for every simple module $V_{\lambda_1, \lambda_0, \mu, \nu}$, we have a well-defined contravariant additive functor $\Ext{n}{}{\_}{V_{\lambda_1, \lambda_0, \mu, \nu}}: \T{1} \to \mathcal{A}b$. Recall that the length of an injective resolution $I^\ast$ is the maximal $n$ such that $I_n$ is nonzero. The injective dimension of a module $V_{\lambda_1, \lambda_0, \mu, \nu}$ is the minimal length of all resolutions $I^\ast$ of $V_{\lambda_1, \lambda_0, \mu, \nu}$. 
+% A classical result about Ext-groups gives us a different characterization of the injective dimension, which allows us to consider only the length of the injective resolution $I^\ast$ in \eqref{injective resolution} above.
+% \begin{prop}
+%     The following statements are equivalent for $n \in \mathbb{N}$ and any object $A$:
+%     \begin{enumerate}
+%         \item $n$ is an injective dimension.
+%         \item $\Ext{m}{}{\_}{A} = 0$ for all $m > n$.
+%         % \item There is an exact sequence with all $I^k$ injective such that
+%         % \begin{align*}
+%         %     0 \rightarrow A \rightarrow I^0 \rightarrow ... \rightarrow I^{n-1} \to I^n \to 0
+%         % \end{align*}
+%         % is an injective resolution.
+%     \end{enumerate}
+% \end{prop}
+
+
+We now motivate the research question: In the paper \cite{cp17}, Chirvasitu and Penkov have established the striking result that the category $\T{0}$ is Koszul self-dual, in the sense that a certain type of Koszul coalgebra $C$ is isomorphic to the opposite of its Koszul dual. This yields a corollary that helps us calculate the higher extension groups for simple objects of $\T{0}$.
+
+\begin{cor}[\cite{cp17}*{Corollary 3.37}] \label{Ext soc}
+    For two simple objects in $\T{0}$ and every $i \geq 0$, we have
+    \begin{align}
+        \dim \Ext{q}{}{W_{\lambda, \mu, \nu}}{W_{\lambda', \mu', \nu'}} = \text{multiplicity of } W_{\lambda, (\mu)^\perp, \nu} \text{ in } \socl{q+1}{\tilde{W}_{\lambda', (\mu')^\perp, \nu'}}.
+    \end{align}
+\end{cor}
+
+This corollary establishes a relation between socle filtrations and higher extension groups for simple objects in $\T{0}$. However, it does not hold in general. Indeed, already in the category $\T{1}$ this relation fails and there is no simple conjugating pattern, as explained in this example.
+
+\begin{exmp}
+    Consider the socle filtration of the indecomposable object $\tilde{V}_{\emptyset, (1), (1), \emptyset}$:
+    \begin{center}
+        \begin{tabular}{|c|}
+            \hline
+            $V_{(2), \,\emptyset, \,\emptyset, \,\emptyset } \, \oplus \, V_{ (1,\,1), \,\emptyset, \,\emptyset, \,\emptyset}$ \\ \hline
+            $2 V_{ (1), \,(1), \,\emptyset, \,\emptyset }$  \\ \hline
+            $V_{ (1), \,\emptyset, \,(1), \,\emptyset }\,\oplus\,V_{ \emptyset, \,(2), \,\emptyset, \,\emptyset }\,\oplus\,V_{ \emptyset, \,(1,\,1), \,\emptyset, \,\emptyset }$  \\ \hline
+            $V_{ \emptyset, \,(1), \,(1), \,\emptyset }$  \\ \hline
+        \end{tabular}
+    \end{center}
+    and the injective resolution of its socle
+    \begin{align*}
+        0 \to V_{ \emptyset, (1), (1), \emptyset }\to
+        \tilde{V}_{ \emptyset, (1), (1), \emptyset }
+        \to
+        \tilde{V}_{ (1), \emptyset, (1), \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, (2), \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, (1,\,1), \emptyset, \emptyset }
+        \to
+        \tilde{V}_{ (1), (1), \emptyset, \emptyset }
+        \to 0.
+    \end{align*}
+    % Thus the corresponding complex of $V_{\emptyset, (1), (1), \emptyset}$ with  ${V}_{ (1), (1), \emptyset, \emptyset }$ is $0 \to 0 \to 0 \to \mathbb{K} \to 0$.
+    It shows that $\dim \Ext{2}{}{V_{ (1), (1), \emptyset, \emptyset }}{V_{ (1), (1), \emptyset, \emptyset }} = 1$. Note that by conjugating any Young diagrams from the indices of $V_{\emptyset, (1), (1), \emptyset}$ and $V_{ (1), (1), \emptyset, \emptyset}$ we obtain the same objects $V_{\emptyset, (1), (1), \emptyset}$ and $V_{ (1), (1), \emptyset, \emptyset}$ again. On the other hand, the multiplicity of $V_{ (1), (1), \emptyset, \emptyset}$ in $\socl{3}{\tilde{V}_{\emptyset, (1), (1), \emptyset}}$ is 2.
+\end{exmp}
+
+Therefore, we are motivated to study the open problem of computing Ext-groups of simple objects in $\T{1}$.
+
+\section{Socle filtrations of indecomposable objects in \texorpdfstring{$\Tbar{1}$}{T 1} and \texorpdfstring{$\Tbar{0}$}{T 0} and supporting lemmas}
+
+In this chapter, we will prove some lemmas about the multiplicities of the socle filtrations of indecomposable injective objects, which will be of much use in the next chapter. Note that most proofs here are combinatorial and use properties of Littlewood Richardson coefficients. We denote by $[\socl{q}{X}: Y]$ the multiplicity of $Y$ in the $q$-th layer of the socle filtration of $X$.
+
+First, we describe the socle filtration of an indecomposable injective $\tilde{W}_{\lambda_0, \mu, \nu} \in \Tbar{0}$. From \cite{cp17}*{Proposition 4.30 and Lemma 4.28 bis}, we have
+\begin{align}\label{30 W}
+    \socl{q}{\tilde{W}_{\lambda_0, \mu, \nu}} \cong \sum (W^\ast/W_\ast)_{\lambda_0} \otimes \socl{q}{ (W^*)_\mu \otimes W_\nu}.
+\end{align}
+% From \cite{cp17}*{Lemma 4.28 bis}, we have tell us that 
+% \begin{align}\label{28 W}
+%     \left[ \socl{u_0}{((W^\ast/W_\ast)_{\lambda_0})} \colon W_{\eta_0, \emptyset, \emptyset }  \right] = 
+%     \begin{cases}
+%         1 & \text{ if } \eta_0=\lambda_0, u_0 = 1. \\
+%         0 & \text{ if } \eta_0 \neq \lambda_0.
+%         \end{cases}
+% \end{align}
+From \cite{cp17}*{Lemma 4.29 bis}, we have for $q = 1 + (\left\lvert \nu \right\rvert - \left\lvert \xi \right\rvert ) + \left\lvert \eta_0 \right\rvert$,
+\begin{align}\label{29 W}
+    \left[ \socl{q}{(W^\ast)_\mu \otimes V_\nu } \colon W_{\eta_0, \xi, \zeta }  \right] = \sum_{\pi_0, \delta} N^{\mu}_{\pi_0, \eta_0} N^{\pi_0}_{\xi, \delta} N^{\nu}_{\zeta, \delta}.
+\end{align}
+
+Similarly, for the indecomposable injectives $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu} \in \Tbar{1}$, from \cite{cp17}*{Proposition 4.30 and Lemma 4.28 bis}, we have for $u_0 + y = q+1$:
+\begin{align}\label{30 V}
+    \socl{q}{\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}} \cong \sum  (V^\ast/V^{\ast}_{\aleph_1})_{\lambda_1} \otimes \socl{u_0}{(V^\ast/V_\ast)_{\lambda_0}} \otimes \socl{y}{ (V^*)_\mu \otimes V_\nu}.
+\end{align}
+From \cite{cp17}*{Lemma 4.28 bis}, the only simples appearing as constituents of $\socl{u_0}{(V^\ast/V_\ast)_{\lambda_0}}$ are of the form $V_{\eta_1, \eta_0, \emptyset, \emptyset }$ with $\left\lvert \eta_1 \right\rvert = u_0 - 1$, and
+% \begin{align}\label{28 V 1}
+%     \left[\socl{u_1}{(V^\ast/V^{\ast}_{\aleph_1})_{\lambda_1}} \colon V_{\eta_1, \emptyset, \emptyset, \emptyset }  \right] = 
+%     \begin{cases}
+%         1 & \text{ if } \eta_1=\lambda_1.\\
+%         0 & \text{ if } \eta_1 \neq \lambda_1.
+%         \end{cases}
+% \end{align}
+\begin{align}\label{28 V 0}
+    \left[ \socl{u_0}{(V^\ast/V_\ast)_{\lambda_0}} \colon V_{\eta_1, \eta_0, \emptyset, \emptyset }  \right] =  N^{\lambda_0}_{\eta_1, \eta_0}.
+\end{align}
+Furthermore, from \cite{cp17}*{Lemma 4.29 bis}, when $y = 1 + (\left\lvert \nu \right\rvert - \left\lvert \xi \right\rvert ) + \left\lvert \eta_0 \right\rvert + 2\left\lvert \eta_1 \right\rvert$ 
+\begin{align}\label{29 V}
+    \left[ \socl{y}{(V^\ast)_\mu \otimes V_\nu } \colon V_{\eta_1, \eta_0, \xi, \zeta }  \right] = \sum_{\pi_1,\pi_0, \delta} N^{\mu}_{\pi_1, \eta_1} N^{\pi_1}_{\pi_0, \eta_0} N^{\pi_0}_{\xi, \delta} N^{\nu}_{\zeta, \delta}.
+\end{align}
+% Thus, Proposition 4.30 \cite{cp17} yields that for $u_0 + y = q+1.$
+
+We now prove some useful lemmas for later chapters. We first show that the multiplicity of $W_{\eta_0, \xi, \zeta }$ in the socle filtration of $\tilde{W}_{\lambda_0, \mu, \nu}$ is the same as the multiplicity of $V_{\emptyset, \eta_0, \xi, \zeta }$ in $\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}$.
+
+\begin{lem}\label{socle 1}
+    \begin{align}
+        \left[ \socl{y}{\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}} \colon V_{\emptyset, \eta_0, \xi, \zeta }  \right] = 
+        \left[ \socl{y}{\tilde{W}_{\lambda_0, \mu, \nu}} \colon W_{\eta_0, \xi, \zeta }  \right].
+    \end{align}
+\end{lem}
+
+\begin{proof}
+    First, from \eqref{30 V}, we have for $u_0 + y = q+1$,
+    \begin{align}
+        \socl{q}{\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}} \cong \sum  \socl{u_0}{(V^\ast/V_\ast)_{\lambda_0}} \otimes \socl{y}{ (V^*)_\mu \otimes V_\nu}.
+    \end{align}
+    When $\eta_1 = \emptyset$, from \eqref{28 V 0} it follows that the simples $V_{\emptyset, \eta_0, \emptyset, \emptyset }$ can only appear in $\socl{1}{(V^\ast/V_\ast)_{\lambda_0}}$, and
+    \begin{align}
+        \left[ \socl{1}{(V^\ast/V_\ast)_{\lambda_0}} \colon V_{\emptyset, \eta_0, \emptyset, \emptyset }  \right] =  N^{\lambda_0}_{\emptyset, \eta_0} = 
+        \begin{cases}
+            1 & \text{ if } \eta_0=\lambda_0, \\
+            0 & \text{ if } \eta_0 \neq \lambda_0.
+        \end{cases}
+    \end{align}
+    In that case, from \eqref{29 V}, we have for $y = 1 + (\left\lvert \nu \right\rvert - \left\lvert \xi \right\rvert ) + \left\lvert \eta_0 \right\rvert $ 
+    \begin{align*}
+        \left[ \socl{y}{(V^\ast)_\mu \otimes V_\nu } \colon V_{\emptyset, \eta_0, \xi, \zeta }  \right] &= \sum_{\pi_1, \pi_0, \delta} N^{\mu}_{\pi_1, \emptyset} N^{\pi_1}_{\pi_0, \eta_0} N^{\pi_0}_{\xi, \delta} N^{\nu}_{\zeta, \delta}  \\
+        & = \sum_{\pi_0, \delta} N^{\mu}_{\pi_0, \eta_0} N^{\pi_0}_{\xi, \delta} N^{\nu}_{\zeta, \delta},
+    \end{align*}
+    since $N^{\mu}_{\pi_1, \emptyset} \neq 0$ only when $\pi_1 = \mu$ and $N^{\mu}_{\mu, \emptyset} = 1$. Note that this latter multiplicity is the same as \eqref{29 W}, the lemma thus follows. 
+
+    
+\end{proof}
+The next lemma shows that no simple modules of the form $V_{\eta_1, \eta_0, \xi, \zeta }$ with $ \left\lvert \xi \right\rvert + \left\lvert \zeta \right\rvert > 0$ appear in the socle filtration of $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$.
+% , which is used to show complete characterization of the nonzero Ext-groups in the case of ${V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$.
+
+\begin{lem}\label{socle 2}
+    \begin{align*}
+        \left[ \socl{q}{\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}} \colon V_{\eta_1, \eta_0, \xi, \zeta } \right] = 0 \quad \text{ unless } \xi = \zeta = \emptyset.
+    \end{align*}
+\end{lem}
+
+\begin{proof}
+    This follows immediately from \eqref{30 V}. Since $\socl{y}{ (V*)_\emptyset \otimes V_\emptyset}$ will not contribute to the tensor product, we have 
+    \begin{align}
+        \socl{q}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}} \cong \sum  (V^\ast/V^{\ast}_{\aleph_1})_{\lambda_1} \otimes \socl{u_0}{(V^\ast/V_\ast)_{\lambda_0}}.
+    \end{align}
+    From \eqref{28 V 0}, $\socl{u_0}{(V^\ast/V_\ast)_{\lambda_0}}$ has only irreducible submodules of the form $V_{\eta_1, \eta_0, \emptyset, \emptyset }$. Since there is no modules of the form $V_{\lambda_1, \lambda_0, \mu, \nu}$ with $\left\lvert \xi \right\rvert + \left\lvert \zeta \right\rvert > 0$ in either of the tensorands, they will not appear in the final result as well.
+\end{proof}
+
+Here is the analogous result for $\tilde{W}_{\lambda_0, \mu, \emptyset}$.
+\begin{lem}\label{socle 4}
+    \begin{align*}
+        \left[ \socl{q}{\tilde{W}_{\lambda_0, \mu, \emptyset}} \colon W_{\eta_0, \xi, \zeta } \right] = 0 \quad \text{ if } \zeta \neq \emptyset.
+    \end{align*}
+\end{lem}
+
+\begin{proof}
+    From \eqref{30 W}, we note that the first tensorand is $(W^\ast/W_\ast)_{\lambda_0}$, thus we only need to check that no modules of the form $W_{\eta_0, \xi, \zeta}$ with $\zeta \neq \emptyset$ appear in $\socl{q}{ (W*)_\mu \otimes W_\emptyset}$. From $\eqref{29 W}$, we have
+    \begin{align*}
+        \left[ \socl{q}{(W^\ast)_\mu \otimes V_\emptyset } \colon W_{\eta_0, \xi, \zeta }  \right] &= \sum_{\pi_0, \delta} N^{\mu}_{\pi_0, \eta_0} N^{\pi_0}_{\xi, \delta} N^{\emptyset}_{\zeta, \delta} = 0
+    \end{align*}
+    since $N^{\emptyset}_{\zeta, \delta} = 0$ for all $\zeta \neq \emptyset$.
+\end{proof}
+
+The next lemma is an important ingredient in Proposition \ref*{result 3 prop}.
+
+\begin{lem}\label{socle 3}
+    \begin{align*}
+        \left[ \socl{y}{\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}} \colon V_{\eta_1, \eta_0, \emptyset, \emptyset }  \right] = 
+        \left[ \socl{y}{\tilde{W}_{\lambda_1, \lambda_0, \emptyset}} \colon W_{\eta_1, \eta_0, \emptyset }  \right].
+    \end{align*}
+\end{lem}
+
+\begin{proof}
+    When $\mu = \nu = \emptyset$, \eqref{30 V} becomes
+    \begin{equation}\label{eq: soc empty third last}
+        \socl{q}{\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}} \cong \sum  (V^\ast/V^{\ast}_{\aleph_1})_{\lambda_1} \otimes \socl{q}{(V^\ast/V_\ast)_{\lambda_0}},
+    \end{equation}
+    whereas for $\tilde{W}_{\lambda_1, \lambda_0, \emptyset}$,  \eqref{29 W} becomes
+    \begin{align*}
+        \left[ \socl{q}{(W^\ast)_{\lambda_0} \otimes V_\emptyset } \colon W_{\eta_1, \eta_0, \emptyset }  \right] &= \sum_{\pi_0, \delta} N^{\lambda_0}_{\pi_0, \eta_1} N^{\pi_0}_{\eta_0, \delta} N^{\emptyset}_{\emptyset, \delta} = \sum_{\pi_0} N^{\lambda_0}_{\pi_0, \eta_1} N^{\pi_0}_{\eta_0, \emptyset} =  N^{\lambda_0}_{\eta_0, \eta_1}.
+    \end{align*}
+    Thus $\left[ \socl{q}{(W^\ast)_{\lambda_0} \otimes V_\emptyset } \colon W_{\eta_1, \eta_0, \emptyset }  \right] = \left[ \socl{u_0}{((V^\ast/V_\ast)_{\lambda_0})} \colon V_{\eta_1, \eta_0, \emptyset, \emptyset }  \right]$. From \eqref{eq: soc empty third last} and \eqref{30 W}, we have
+    \begin{align*}
+        \left[ \socl{y}{\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}} \colon V_{\eta_1, \eta_0, \emptyset, \emptyset }  \right] = 
+        \left[ \socl{y}{\tilde{W}_{\lambda_1, \lambda_0, \emptyset}} \colon W_{\eta_1, \eta_0, \emptyset }  \right].
+    \end{align*}
+\end{proof}
+
+Last, we prove a lemma that would help us obtain a new injective resolution when we tensor with a factor.
+
+\begin{lem}\label{injective}
+    For an injective module $I$ in $\T{1}$, the following modules are also injective:
+    \begin{enumerate}
+        \item $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I$,
+        \item $(V^\ast/V_\ast)_{\lambda_0}\otimes I$,
+        \item  $(V^\ast)_{\nu} \otimes I$,
+        \item  $V_\mu \otimes I$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    We will prove the statement for $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I$, the rest of the Lemma follows a similar argument. We can write each injective module $I$ as finite direct sum of the indecomposable injectives $\tilde{V}_{\lambda'_1, \lambda'_0, \mu', \nu'} = (V^\ast/V^\ast_{\aleph_1})_{\lambda'_1} \otimes (V^\ast/V_\ast)_{\lambda'_0} \otimes (V^\ast)_{\mu'} \otimes V_{\nu'}$. By the Schur functor, we have
+    \begin{align}
+        (V^\ast/V^\ast_{\aleph_1})_{\lambda'_1} \otimes (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \simeq \bigoplus_{\lambda''_1} N^{\lambda''_1}_{\lambda'_1, \lambda_1} (V^\ast/V^\ast_{\aleph_1})_{\lambda''_1},
+    \end{align}
+    where the multiplicities $N^{\lambda''_1}_{\lambda'_1, \lambda_1}$ are Littlewood-Richardson coefficients given by Littlewood–Richardson rule. Therefore, $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I$ is again a finite direct sum of indecomposable injectives, thus an injective module. 
+\end{proof}
+% For the proof, we need to recall a result from \cite{fulton}.
+% \begin{prop}
+%     Let $\bullet_{\lambda}$ denote the Schur functor defined according to a partition $\lambda$. Then have there is the decomposition:
+%     \begin{align}
+%         {V}_\lambda \otimes V_\mu \simeq \bigoplus_{\nu} N^{\nu}_{\lambda, \mu } V_\nu,
+%     \end{align}
+%     where the multiplicities $N^{\nu}_{\lambda, \mu }$ are Littlewood-Richardson coefficients given by Littlewood–Richardson rule.
+% \end{prop}
+
+% We now give the proof of the lemma.
+
+\chapter{Results}
+\section{First result}
+
+In this section, we compute $\Ext{i}{}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}}$ by reducing to a result in the category $\T{0}$. As pointed out in the Introduction, we write $V_{\lambda_1, \lambda_0, \mu, \nu}$ and $W_{\lambda_0, \mu, \nu}$ for the simple modules in $\T{1}$ and $\T{0}$ respectively. We first look at an example.
+
+\begin{exmp}
+    An injective resolution of $V_{\emptyset, \emptyset, (1,1), (1)}$ is
+    \begin{align*}
+        0 \to V_{\emptyset, \emptyset, (1,1), (1)} \to \tilde{V}_{\emptyset, \emptyset, (1,1), (1)} \to \tilde{V}_{\emptyset, \emptyset, (1), \emptyset} \oplus\tilde{V}_{\emptyset, (1), (1), (1)} \to \tilde{V}_{\emptyset, (1),  \emptyset, \emptyset} \oplus\tilde{V}_{\emptyset, (2),  \emptyset, (1)} \to 0.
+    \end{align*}
+    Hence the nonzero Ext-groups $\Ext{\cdot}{}{X}{V_{\emptyset, \emptyset, (1,1), (1)}}$ for simple modules $X$ are
+    \begin{align*}
+        &\Ext{0}{}{V_{\emptyset, \emptyset, (1,1), (1)}}{V_{\emptyset, \emptyset, (1,1), (1)}} = \mathbb{K}, \\
+        &\Ext{1}{}{V_{\emptyset, \emptyset, (1), \emptyset}}{V_{\emptyset, \emptyset, (1,1), (1)}} = \mathbb{K}, \quad  \Ext{1}{}{V_{\emptyset, (1), (1), (1)}}{V_{\emptyset, \emptyset, (1,1), (1)}} = \mathbb{K},\\
+        &\Ext{2}{}{V_{\emptyset, (1),  \emptyset, \emptyset}}{V_{\emptyset, \emptyset, (1,1), (1)}} = \mathbb{K}, \quad \Ext{2}{}{V_{\emptyset, (2),  \emptyset, (1)}}{V_{\emptyset, \emptyset, (1,1), (1)}} = \mathbb{K}.
+    \end{align*}
+\end{exmp}
+
+Motivated by this example, our goal of this section is to show the following Theorem. 
+\begin{thm}\label{result1}
+    \begin{align}
+        \Ext{i}{\T{1}}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}} \cong 
+        \Ext{i}{\T{0}}{W_{\lambda_0, \mu, \nu}}{W_{\lambda'_0, \mu', \nu'}}.
+        \end{align}        
+\end{thm}
+
+Our main strategy goes as follows: We will use a reduction process suggested by torsion theory. In particular, we define a torsion class $\mathcal{T}_1$ that contains $V_{\emptyset, \lambda_0, \mu, \nu}$, then reduce the Ext-groups for simple objects in $\mathcal{T}_1$ to Ext-groups for simple objects in $\T{0}$. Following \cite{dickson}, we first recall the notion of a torsion theory.
+
+\begin{defn}\cite{dickson}\label{dickson 1}
+    A \textbf{torsion theory} for an abelian category $\mathcal{C}$ is a pair $(\mathcal{T}, \mathcal{F})$ of strictly full subcategories (i.e. full and closed under isomorphisms) $\mathcal{T}, \mathcal{F}$ of $\mathcal{C}$ satisfying:
+    \begin{enumerate}
+        \item Extension Axiom: For each object $X$ of $\mathcal{C}$ there is an exact sequence:
+        \begin{align*}
+            0 \to T \to X \to F \to 0,
+        \end{align*}
+        with $T \in \mathcal{T}$ and $F \in \mathcal{F}$.
+        \item Orthogonality Axiom: $\Hom(T, F) = 0$ for each $T \in \mathcal{T}, F \in \mathcal{F}$.
+    \end{enumerate}
+
+    $\mathcal{T}$ is then called a \textbf{torsion class}, and $\mathcal{F}$ is called a \textbf{torsion-free class}.
+\end{defn}
+
+Let $\mathcal{T}_1$ be the strictly full subcategory of $\T{1}$ whose objects $Y$ admit filtrations with simple subquotients of the form $V_{\emptyset, \eta_0, \xi, \zeta}$. For each object $X$, let $X_t$ be the maximal subobject of $X$ which is an object in $\mathcal{T}_1$. On the other hand, let $\mathcal{F}_1$ be the strictly full subcategory whose objects admit filtrations with simple subquotients of the form $V_{\eta_1, \eta_0, \xi, \zeta}$ for $\eta_1 \neq \emptyset$. We will show that $(\mathcal{T}_1, \mathcal{F}_1)$ is a torsion theory of $\T{1}$. First, we study the maximal subobjects in $\mathcal{T}_1$ of simple objects and indecomposable injectives in $\T{1}$. 
+
+\begin{lem}\label{lemma 1 torsion 1}
+    % The following equations characterize image of simple objects and indecomposable injectives in $\mathcal{T}_1$:
+    We have
+    \begin{align}
+        (V_{\emptyset, \lambda_0, \mu, \nu})_t &= V_{\emptyset, \lambda_0, \mu, \nu},\\
+        (V_{\lambda_1, \lambda_0, \mu, \nu})_t &=  0 \quad \text{ if } \lambda_1 \neq 0,\\
+        (\tilde{V}_{\emptyset, \lambda_0, \mu, \nu})_t &= (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda_0} \otimes (V^{\ast}_{\aleph_1})_\mu \otimes V_\nu, \text{ and } \\
+        (\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t &= 0 \quad \text{ if } \lambda_1 \neq 0.
+    \end{align}
+\end{lem}
+
+\begin{proof}
+    The first two equations are obvious since $V_{\emptyset, \lambda_0, \mu, \nu} \in \mathcal{T}_1$ and  $V_{\lambda_1, \lambda_0, \mu, \nu} \in \mathcal{F}_1$ for $\lambda_1 \neq \emptyset$. For the last equation, note that $\soc{1}{\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}} = {V}_{\lambda_1, \lambda_0, \mu, \nu}$ is a simple module with $\lambda_1 \neq 0$. Thus, all nonzero subobjects of $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$ contain ${V}_{\lambda_1, \lambda_0, \mu, \nu}$, and $ (\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t = 0$ in this case.
+    
+    Note that ${V}_{\emptyset, \lambda_0, \mu, \nu}$ is of dimension at most $\aleph_{1}$ thus $(\tilde{V}_{\emptyset, \lambda_0, \mu, \nu})_t$ is the maximal subobject of $\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}$ with dimension at most $\aleph_{1}$ (so that the subquotients of its filtration have the form $V_{\emptyset, \eta_0, \xi, \zeta}$). 
+    % Therefore, $V^\ast$ with dimension $2^{\aleph_{1}}$ is sent to the maximal submodule $V^\ast_{\aleph_1}$ of dimension $\aleph_{1}$. 
+    Thus, the third equation follows
+    \begin{align*}
+        (\tilde{V}_{\emptyset, \lambda_0, \mu, \nu})_t = (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda_0} \otimes (V^{\ast}_{\aleph_1})_\mu \otimes V_\nu.
+    \end{align*}
+\end{proof}
+
+\begin{lem}\label{lemma 2 torsion 1}
+    The quotients $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}/(\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t$ are objects in $\mathcal{F}_1$.
+\end{lem}
+
+\begin{proof}
+    We note that for $\lambda_1 \neq \emptyset$, $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}/(\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t = \tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$ is an object of $\mathcal{F}_1$. For the quotient $\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}/(\tilde{V}_{\emptyset, \lambda_0, \mu, \nu})_t$, we have the filtration:
+    \begin{align}\label{filtration 1}
+        (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda_0} \otimes (V^{\ast}_{\aleph_1})_{\mu} \otimes V_{\nu} 
+        \subset (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda_0} \otimes (V^{\ast})_{\mu} \otimes V_{\nu}
+        \subset (V^{\ast}/V_{\ast})_{\lambda_0} \otimes (V^{\ast})_{\mu} \otimes V_{\nu}.
+        % = \tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'}
+    \end{align}
+
+    The first quotient of the filtration \eqref{filtration 1} is of the form $(V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda_0} \otimes (V^{\ast}/V^{\ast}_{\aleph_1})_{\mu} \otimes V_{\nu}$ and the second quotient of the filtration \eqref{filtration 1} is of the form $ (V^{\ast}/V^{\ast}_{\aleph_1})_{\lambda_0} \otimes (V^\ast)_{\mu} \otimes V_{\nu}$. Therefore, we can see that all subquotients of the filtration of $\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}/(\tilde{V}_{\emptyset, \lambda_0, \mu, \nu})_t$ have the form $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\eta_1 \neq \emptyset$. Thus $\tilde{V}_{\emptyset, \lambda_0, \mu, \nu}/(\tilde{V}_{\emptyset, \lambda_0, \mu, \nu})_t \in \mathcal{F}_1$.
+\end{proof}
+
+\begin{prop}
+    The category $\mathcal{T}_1$ defined above is a torsion class. 
+\end{prop}
+
+\begin{proof}     
+    There is no nontrivial module homomorphism between two nonisomorphic simple objects. Moreover, simple subquotients in the filtration of $T \in \mathcal{T}_1$ and $F \in \mathcal{F}_1$ are of different forms $V_{\emptyset, \eta_0, \xi, \zeta}$ and $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\eta_1 \neq \emptyset$ respectively. Therefore, the Orthogonality Axiom follows.
+    
+    We now check the Extension Axiom: for each object $X$ of $\T{1}$, we embed X into an injective module $I$. Let $I_t$ be the maximal subobject of $I$ such that $I_t \in \mathcal{T}_1$.
+    Note that $I/I_t$ can be written as direct sum of corresponding quotients of indecomposable injectives $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}/(\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t$. Lemma \ref{lemma 2 torsion 1} shows that $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}/(\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t$ (and hence $I/I_t$) has only subquotients of the form $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\eta_1 \neq \emptyset$. Thus $I/I_t \in \mathcal{F}_1$. Let $X_t = X \cap I_t$, then $X+I_t$ is a submodule of $I$ and the quotient module $X/X_t \cong (X+I_t)/I_t$ is a submodule of $I/I_t$. Hence $X/X_t$ admits a filtration with subquotients of the form $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\eta_1 \neq \emptyset$. In other words, $X/X_t \in \mathcal{F}_1$ and we have the short exact sequence: 
+    \begin{align*}
+        0 \to X_t \to X \to X/X_t \to 0.
+    \end{align*}
+    Therefore, the Extension Axiom is statisfied and $\mathcal{T}_1$ is a torsion class.
+\end{proof}
+
+We now collect some facts about torsion theory.
+\begin{prop}[\cite{dickson}*{Proposition 2.4}]\label{dickson 2}
+    Let $(\mathcal{T}, \mathcal{F})$ be a torsion theory, and $M$ be an arbitrary object in $\mathcal{C}$. Then there is a unique largest subobject $M_t$ of $M$ such that $M_t \in \mathcal{T}$. Moreover, $M/M_t \in \mathcal{F}$.
+\end{prop}
+
+\begin{cor}[\cite{dickson}*{Corollary 2.5}]\label{dickson 3}
+    The correspondence $M \to M_t$ defines a functor $\mathfrak{r}: \mathcal{C} \to \mathcal{C}$:
+    \begin{enumerate}
+        \item given $f: A \to B$, then $\mathfrak{r}(f): A_t \to B_t$ is the restriction of $f$,
+        \item $\mathfrak{r}(A/\mathfrak{r}(A)) = 0$,
+        \item $\mathfrak{r}^2 = \mathfrak{r}$. 
+    \end{enumerate}
+\end{cor}
+
+Hence there is a functor $\mathfrak{r}: \T{1} \to \T{1}$ is defined by the correspondence $X \to X_t$ as above. Lemma \ref{lemma 1 torsion 1} can be reformulated in terms of this functor $\mathfrak{r}$.
+
+We calculate the Ext-groups of a pair of simple objects by building an injective resolution of the second object. This injective resolution is finite, as explained in Chapter 3. In particular, let 
+\begin{align}\label{resolution_case1}
+    0 \to V_{\emptyset, \lambda'_0, \mu', \nu'} \to I^0 \to I^1 \to ...\to I^n \to 0
+\end{align}
+be an injective resolution for $V_{\emptyset, \lambda'_0, \mu', \nu'}$. We have the corresponding cochain complex with $V_{\lambda_1, \lambda_0, \mu, \nu}$:
+\begin{align}\label{cochain V}
+    0 \to  \Hom (V_{\lambda_1, \lambda_0, \mu, \nu}, I^0) \to \Hom (V_{\lambda_1, \lambda_0, \mu, \nu}, I^1) \to ... \to \Hom (V_{\lambda_1, \lambda_0, \mu, \nu}, I^n) \to 0.
+\end{align}
+
+% On the other hand, let us apply the functor $\mathfrak{r}$ and then take the corresponding sequence with $V_{\lambda_1, \lambda_0, \mu, \nu}$:
+% \begin{align}\label{cochain rV}
+%     0 \to  \Hom (V_{\lambda_1, \lambda_0, \mu, \nu}, \mathfrak{r}(I^0)) \to \Hom (V_{\lambda_1, \lambda_0, \mu, \nu}, \mathfrak{r}(I^1)) \to ... \to \Hom (V_{\lambda_1, \lambda_0, \mu, \nu}, \mathfrak{r}(I^n)) \to 0.
+% \end{align}
+
+% We will show that if $\lambda_1 = \emptyset$, then 
+% this sequence is indeed the same cochain complex as \eqref{cochain V}.
+
+\begin{cor}\label{Hom RV}
+    For the reduction functor $\mathfrak{r}$ as defined above, we have
+    \begin{align*}
+        \Hom(V_{\emptyset, \lambda_0, \mu, \nu}, I^n) \cong \Hom(V_{\emptyset, \lambda_0, \mu, \nu}, \mathfrak{r}I^n).
+    \end{align*}
+\end{cor}
+
+\begin{proof}
+    This follows immediately from the definition of Torsion theory. As $\Hom(V_{\emptyset, \lambda_0, \mu, \nu}, \_)$ is left-exact, the exact sequence from the Extension Axiom
+    \begin{align*}
+        0 \longrightarrow \mathfrak{r}(I^n) \longrightarrow I^n \longrightarrow I^n/\mathfrak{r}(I^n) \longrightarrow 0
+    \end{align*}
+    gives rise to the exact sequence:
+    \begin{align*}
+        0 \longrightarrow \Hom(V_{\emptyset, \lambda_0, \mu, \nu},\mathfrak{r}(I^n)) \longrightarrow \Hom(V_{\emptyset, \lambda_0, \mu, \nu}, I^n) \longrightarrow \Hom(V_{\emptyset, \lambda_0, \mu, \nu}, I^n/\mathfrak{r}(I^n)).
+    \end{align*}
+    Since $\Hom(V_{\emptyset, \lambda_0, \mu, \nu}, I^n/\mathfrak{r}(I^n)) = 0$ due to the Orthogonality Axiom, we obtain 
+    \begin{align*}
+        \Hom(V_{\emptyset, \lambda_0, \mu, \nu},\mathfrak{r}(I^n)) \cong \Hom(V_{\emptyset, \lambda_0, \mu, \nu}, I^n).    
+    \end{align*}
+\end{proof}
+
+Hence, we have an immediate corollary that transfers the Ext-groups of simple objects of the form $V_{\emptyset, \lambda_0, \mu, \nu}$ in $\T{1}$ to those in $\mathcal{T}_1$.
+
+\begin{cor}
+    \begin{align}\label{Ext RV}
+        \Ext{i}{\T{1}}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}} \cong \Ext{i}{\mathcal{T}_1}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}}.
+    \end{align}
+\end{cor}
+
+We are now equipped to reduce the Ext-groups $\Ext{i}{\mathcal{T}_1}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}}$ to the Ext-groups $\Ext{i}{\T{0}}{W_{\lambda_0, \mu, \nu}}{W_{\lambda'_0, \mu', \nu'}}$. To do so, we utilize a result on ordered categories.
+
+\begin{prop}\label{ordered category}
+    Let $\mathcal{C}$ and $\mathcal{C}'$ be two ordered finite length tensor categories of finite type with the property that a bijection between their classes of simple objects 
+    \begin{align}
+        \alpha: \mathcal{S}_{\mathcal{C}} \longrightarrow \mathcal{S}_{\mathcal{C}'}
+    \end{align}
+    is given and is compatible with the socle filtrations of the injective hulls of simple modules in the sense that $\alpha$ commutes with passing to each layer. Then 
+    \begin{align}
+        \dim \Ext{k}{\mathcal{C}}{A}{B} = \dim \Ext{k}{\mathcal{C}'}{\alpha(A)}{\alpha(B)}.
+    \end{align}
+\end{prop}
+\begin{proof}
+    Let $B$ be an arbitrary object in $\mathcal{C}$ and let 
+    \begin{equation}
+        0 \to B \to I^1 \to ... \to I^n \to 0
+    \end{equation}
+    be a finite length minimal injective resolution of $B$ and 
+    \begin{equation}
+        0 \to \Hom (A, I^0) \to ... \to \Hom (A, I^n) \to 0.
+    \end{equation}
+    Since $\alpha$ is compatible with socle filtrations, we have $\Hom (A, I^k) = \Hom (\alpha(A), \alpha(I^k))$. Thus  
+    \begin{equation}
+        0 \to \Hom (\alpha(A), \alpha(I^0)) \to ... \to \Hom (\alpha(A), \alpha(I^n)) \to 0
+    \end{equation}
+    is the cochain complex for $\alpha(B)$, and $\dim \Ext{k}{\mathcal{C}}{A}{B} = \dim \Ext{k}{\mathcal{C}'}{\alpha(A)}{\alpha(B)}$.
+\end{proof}
+
+First and foremost, we note that all simple objects in the category $\mathcal{T}_1$ are (isomorphic to) $V_{\emptyset, \lambda_0, \mu, \nu}$, and hence we define the map $\alpha$ between simple objects:
+\begin{align*}
+    \alpha \colon \mathcal{S}_{\mathcal{T}_1} &\longrightarrow \mathcal{S}_{\T{0}}, \\
+    V_{\emptyset, \lambda_0, \mu, \nu} &\longmapsto W_{\lambda_0, \mu, \nu}.
+\end{align*}
+
+Since each of these simple objects are mutually non-isomorphic for different choices of $\lambda_0, \mu, \nu$, we can see that $\alpha$ is a bijection. Next, we need to check its compatibility with the socle filtration of the indecomposable injectives.
+
+In \cite{cp17}, we recall the underlying set $I$ of the poset indexing the objects $X_i \in \T{t}$ consists of all finite tuples 
+\begin{align*}
+    (n_{t}, ..., n_{0}, n, m)
+\end{align*} 
+of nonnegative integers where each $n_{s} = \left\lvert \lambda_s \right\rvert $. A partial order on $I$ is defined by setting
+    \begin{equation}\label{order}
+        (n_{t}, ..., n_{0}, n, m) \preceq (n'_{t}, ..., n'_{0}, n', m')
+    \end{equation}
+    if and only if the following conditions hold:
+    \begin{enumerate}[label=\textbf{C.\arabic*}]
+        \item If $k$ is the largest index with $n_k \neq n'_k$, then $n_k \geq n'_k$;
+        \item $m \leq m'$ and $n \leq n'$;
+        \item $n_t + ... + n_0 + n - m = n'_t + ... + n'_0 + n' - m'$.
+    \end{enumerate}
+
+
+\begin{prop}
+    The partial order in $\mathcal{T}_1$ induced by the order \eqref{order} in $\T{1}$ is the same as the order \eqref{order} in $\T{0}$.
+\end{prop}
+
+\begin{proof}
+    We only need to check that the two sets of conditions in \eqref{order} for the two orders in $\mathcal{T}_1$ and $\T{0}$ are the same.
+
+    The conditions in \eqref{order} in $\mathcal{T}_1$ become
+    \begin{enumerate}[label=\textbf{D.\arabic*}]
+        \item $n_0 \geq n'_0$ (as both $n_1= n'_1 =0$),
+        \item $m \leq m'$ and $n \leq n'$,
+        \item $n_0 + n - m = n'_0 + n' - m'$,
+    \end{enumerate}
+    which are identical to the conditions \eqref{order} of the order on the underlying poset of $\T{0}$.
+\end{proof}
+
+Lastly, we need to check the following
+
+\begin{prop}\label{soc rV W}
+    \begin{align}
+        \left[ \socl{y}{\mathfrak{r}(\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'})} \colon V_{\emptyset, \lambda_0, \mu, \nu}  \right] = 
+        \left[ \socl{y}{\tilde{W}_{\lambda'_0, \mu', \nu'}} \colon W_{\lambda_0, \mu, \nu}  \right].
+    \end{align}
+\end{prop}
+
+\begin{proof}
+    We prove that both sides of the equation above equal $ \left[ \socl{y}{\tilde{V}_{\emptyset, \lambda'_0, \mu', \nu'}} \colon V_{\emptyset, \lambda_0, \mu, \nu}  \right] $. First, we need to show that
+    \begin{align}\label{soc r}
+        \left[ \socl{y}{\mathfrak{r}(\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'})} \colon V_{\emptyset, \lambda_0, \mu, \nu}  \right] 
+        = \left[ \socl{y}{\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'}} \colon V_{\emptyset, \lambda_0, \mu, \nu}  \right].
+    \end{align}
+
+    To do so, we will show that $\mathfrak{r}(\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'})$ preserves all simple subquotients of the form $V_{\emptyset, \eta_0, \xi, \zeta}$. Note that $\mathfrak{r}(\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'}) = 
+    (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda_0} \otimes (V^{\ast}_{\aleph_1})_\mu \otimes V_\nu $ and consider the filtration 
+    \begin{align}\label{filtration}
+        (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda'_0} \otimes (V^{\ast}_{\aleph_1})_{\mu'} \otimes V_{\nu'} 
+        \subset (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda'_0} \otimes (V^{\ast})_{\mu'} \otimes V_{\nu'}
+        \subset (V^{\ast}/V_{\ast})_{\lambda'_0} \otimes (V^{\ast})_{\mu'} \otimes V_{\nu'}.
+        % = \tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'}
+    \end{align}
+
+    The first quotient defined by the filtration \eqref{filtration} is of the form $ (V^{\ast}_{\aleph_1}/V_{\ast})_{\lambda'_0} \otimes (V^{\ast}/V^{\ast}_{\aleph_1})_{\mu'} \otimes V_{\nu'}$ and hence has no subquotients of the form $V_{\emptyset, \eta_0, \xi, \zeta}$. Likewise, the second quotient defined by \eqref{filtration} is of the form $ (V^{\ast}/V^{\ast}_{\aleph_1})_{\lambda'_0} \otimes (V^\ast)_{\mu'} \otimes V_{\nu'}$ and has no subquotients of the form $V_{\emptyset, \eta_0, \xi, \zeta}$. Therefore, all subquotients $V_{\emptyset, \eta_0, \xi, \zeta}$ of $\tilde{V}_{\emptyset, \lambda'_0, \mu', \nu'}$ are preserved in $\mathfrak{r}(\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'})$, and Equation\eqref{soc r} follows.
+
+    The equation 
+    \begin{align}
+        \left[ \socl{y}{\tilde{ V}_{\emptyset, \lambda'_0, \mu', \nu'}} \colon V_{\emptyset, \lambda_0, \mu, \nu}  \right] = 
+        \left[ \socl{y}{\tilde{W}_{\lambda'_0, \mu', \nu'}} \colon W_{\lambda_0, \mu, \nu}  \right].
+    \end{align}
+    was proven already in Lemma \ref{socle 1}, which completes the proof.
+\end{proof}
+
+These propositions together with the Proposition \ref{ordered category} yield immediately a corollary, which gives us the desired Theorem \ref{result1}.
+\begin{cor}
+    \begin{align}
+        \Ext{i}{\mathcal{T}_1}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}} =\Ext{i}{\T{0}}{W_{\lambda_0, \mu, \nu}}{W_{\lambda'_0, \mu', \nu'}}.
+    \end{align}
+    \qed
+\end{cor}
+
+% \begin{align*}
+%     \Ext{i}{\T{1}}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda'_0, \mu', \nu'}} = 
+%     \Ext{i}{\T{0}}{W_{\lambda_0, \mu, \nu}}{W_{\emptyset, \mu', \nu'}}.
+% \end{align*}
+
+\begin{rmk}
+    Note that this result does not completely characterize all nonzero Ext-groups between arbitrary simple objects $V_{\lambda_1, \lambda_0, \mu, \nu}$ with $V_{\emptyset, \lambda'_0, \mu', \nu'}$ as it only indicates what happens when $\lambda_1 = \emptyset$. One might think that all the indecomposable injectives appearing in the injective resolution \ref{resolution_case1} have the $\tilde{V}_{\emptyset, \eta_0, \xi, \zeta}$. But this is not true in general, as shown in the following example. 
+\end{rmk}
+
+\begin{exmp}
+    \begin{align*}
+        & 0 \rightarrow 
+        V_{ \emptyset, (1), (1), (1) }\rightarrow
+        \tilde{V}_{ \emptyset, (1), (1), (1) }
+        \rightarrow
+        \tilde{V}_{ (1), \emptyset, (1), (1) }\,\oplus\,\tilde{V}_{ \emptyset, (1), \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, (2), \emptyset, (1) }\,\oplus\,\tilde{V}_{ \emptyset, (1,\,1), \emptyset, (1) } \\ &
+        \rightarrow
+        \tilde{V}_{ (1), \emptyset, \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ (1), (1), \emptyset, (1) }
+        \rightarrow 0.
+    \end{align*}
+    
+    Thus, we have $\Ext{1}{\T{1}}{{V}_{ (1), \emptyset, (1), (1) }}{V_{ \emptyset, (1), (1), (1) }} = \mathbb{K}$.
+\end{exmp}
+
+\section{Second result}
+
+In this section, we will extend the first result from the case where the first two diagrams are empty to the case where they are nonempty but equal, i.e. $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda'_0, \mu', \nu'}}$. We start by looking at an example to get some intuition.
+
+\begin{exmp}
+    We have the resolution for $V_{ \emptyset, \ (1), \ (1), \ \emptyset }$:
+    \begin{align*}
+        & 0 \to 
+        V_{ \emptyset, (1), (1), \emptyset }\to
+        \tilde{V}_{ \emptyset, (1), (1), \emptyset } 
+        \to
+        \tilde{V}_{ (1), \emptyset, (1), \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, (2), \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, (1,\,1), \emptyset, \emptyset } 
+        \to
+        \tilde{V}_{ (1), (1), \emptyset, \emptyset }
+        \to 0.
+    \end{align*}
+    And the resolution for $V_{ (1,\,1), (1), (1), \emptyset }$:
+    \begin{align*}
+        & 0 \to 
+        V_{ (1,\,1), (1), (1), \emptyset }\to
+        \tilde{V}_{ (1,\,1), (1), (1), \emptyset }
+        \\ &
+        \to
+        \tilde{V}_{ (2,\,1), \emptyset, (1), \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \emptyset, (1), \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), (2), \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), (1,\,1), \emptyset, \emptyset }
+        \\ &
+        \to
+        \tilde{V}_{ (2,\,1), (1), \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), (1), \emptyset, \emptyset }
+        \to 0.
+    \end{align*}
+    Thus, we notice that
+    \begin{align*}
+        \Ext{0}{\T{1}}{V_{ (1,\,1), (1), (1), \emptyset }}{V_{ (1,\,1), (1), (1), \emptyset }} &\cong \Ext{0}{\T{1}}{V_{ \emptyset, (1), (1), \emptyset }}{V_{ \emptyset, (1), (1), \emptyset }} \\ 
+        &\cong \Ext{0}{\T{0}}{W_{ (1), (1), \emptyset }}{W_{ (1), (1), \emptyset }},  \\
+        \Ext{1}{\T{1}}{V_{ (1,\,1), (2), \emptyset, \emptyset }}{V_{ (1,\,1), (1), (1), \emptyset }} &\cong \Ext{1}{\T{1}}{V_{ \emptyset, (2), \emptyset, \emptyset }}{V_{ \emptyset, (1), (1), \emptyset }} \\
+        &\cong \Ext{1}{\T{0}}{W_{ (2), \emptyset, \emptyset }}{W_{(1), (1), \emptyset }}.
+    \end{align*}
+\end{exmp}
+
+More precisely, we will show the following Theorem.
+\begin{thm}\label{result2}
+    \begin{align}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda_0', \mu', \nu'}} &\cong \Ext{i}{\T{1}}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda_0', \mu', \nu'}} \\
+        &\cong  \Ext{i}{\T{0}}{W_{\lambda_0, \mu, \nu}}{W_{\emptyset\mu', \nu'}}.
+    \end{align}
+\end{thm}
+
+\begin{proof}
+    To this end, let $I^\ast$ be an injective resolution for $V_{\emptyset, \lambda'_0, \mu', \nu'}$:
+    \begin{align*}
+        0 \to V_{\emptyset, \lambda'_0, \mu', \nu'} \to I^0 \to I^1 \to ...\to I^n \to 0.
+    \end{align*}
+    Tensor each term of $I^*$ with $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1}$  and note that since $\tilde{V}_{\lambda_1, \lambda'_0, \mu', \nu'} = (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes \tilde{V}_{\emptyset, \lambda'_0, \mu', \nu'} $, we have an exact sequence
+    \begin{align*}
+        0 \to V_{\emptyset, \lambda'_0, \mu', \nu'} \to (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I^0 \to (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I^1 \to ...\to (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I^n \to 0.
+    \end{align*}
+
+    Lemma \ref{injective} in the previous chapter showed that each $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I^n$ is injective, and we thus have an injective resolution of $V_{\lambda_1, \lambda'_0, \mu', \nu'}$. Since $\tilde{V}_{\lambda_1, \lambda'_0, \mu', \nu'} = (V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes \tilde{V}_{\emptyset, \lambda'_0, \mu', \nu'}$, we observe that if $\tilde{V}_{\emptyset, \lambda'_0, \mu', \nu'}$ is a submodule of $I^k$, then $\tilde{V}_{\lambda_1, \lambda'_0, \mu', \nu'}$ is a submodule of $(V^\ast/V^\ast_{\aleph_1})_{\lambda_1} \otimes I^k$. 
+
+    \begin{align*}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda_0', \mu', \nu'}} &\cong \Ext{i}{\T{1}}{V_{\emptyset, \lambda_0, \mu, \nu}}{V_{\emptyset, \lambda_0', \mu', \nu'}}.
+    \end{align*}
+\end{proof}
+
+\section{Third result}
+
+Similarly to the first section, in this section, we will compute $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}}$ by reducing to results in the category $\T{0}$. We first look at an example. 
+
+\begin{exmp}\label{third res ex 1}
+    Consider the injective resolution for $V_{ (1), \ (1,\,1), \ \emptyset, \emptyset }$:
+    \begin{align*}
+        0 \to 
+        V_{ (1), (1,\,1), \emptyset, \emptyset }\to
+        \tilde{V}_{ (1), (1,\,1), \emptyset, \emptyset }
+        \to
+        \tilde{V}_{ (2), (1), \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), (1), \emptyset, \emptyset }
+        \to
+        \tilde{V}_{ (3), \emptyset, \emptyset, \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \emptyset, \emptyset, \emptyset }  
+        \to 0. 
+    \end{align*}
+    Thus, the nonzero Ext-groups are:
+    \begin{align*}
+        &\Ext{0}{}{V_{ (1), (1,\,1), \emptyset, \emptyset}}{V_{ (1), (1,\,1), \emptyset, \emptyset }} = \mathbb{K}, \\
+        &\Ext{1}{}{V_{(2), (1), \emptyset, \emptyset }}{V_{ (1), (1,\,1), \emptyset, \emptyset }} = \mathbb{K}, 
+        \quad  
+        \Ext{1}{}{V_{(1,\,1), (1), \emptyset, \emptyset}}{V_{ (1), (1,\,1), \emptyset, \emptyset }} = \mathbb{K},\\
+        &\Ext{2}{}{V_{(3), \emptyset, \emptyset, \emptyset }}{V_{ (1), (1,\,1), \emptyset, \emptyset }} = \mathbb{K}, 
+        \quad 
+        \Ext{2}{}{V_{(2,\,1), \emptyset, \emptyset, \emptyset }}{V_{ (1), (1,\,1), \emptyset,\emptyset }} = \mathbb{K}.
+    \end{align*}
+\end{exmp}
+
+Our goal of this section is to establish the following theorem.
+
+\begin{thm}\label{result3}
+    \begin{align}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} \cong
+        \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}}.
+    \end{align}
+\end{thm}
+
+Our main startegy goes as follows: We first define a torsion class $\mathcal{T}_2$ in $\T{1}$ and then reduce the Ext-groups of simple objects in $\T{1}$ to those of $\mathcal{T}_2$. We then define another torsion class $\mathcal{T}_3$ in $\T{0}$ and reduce the Ext-groups of simple objects in $\T{0}$ to those of $\mathcal{T}_3$. Lastly, we show that the Ext-groups in $\mathcal{T}_2$ and $\mathcal{T}_3$ are isomorphic.
+
+Let $\mathcal{T}_2$ be the strictly full subcategory of $\T{1}$ whose objects $Y$ have socle filtrations with simple subquotients of the form $V_{\eta_1, \eta_0, \emptyset, \emptyset}$. For each object $X$, let $X_t$ be the maximal subobject of $X$ which is an object of $\mathcal{T}_2$. 
+We will show that $\mathcal{T}_2$ is a torsion class. 
+
+\begin{lem}\label{image}
+    \begin{align}
+        (V_{\lambda_1, \lambda_0, \emptyset, \emptyset})_t &= V_{\lambda_1, \lambda_0, \emptyset, \emptyset},\\
+        (V_{\lambda_1, \lambda_0, \mu, \nu})_t &=  0 \quad \text{ if } \mu \neq \emptyset \text{ or }\nu \neq \emptyset,\\
+        (\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset})_t &=  \tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}, \text{ and }\\
+        (\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t &=  0 \quad \text{ if } \mu \neq \emptyset  \text{ or } \nu \neq \emptyset.
+    \end{align}
+\end{lem}
+
+\begin{proof}
+    The first and second equations are obvious since $V_{\lambda_1, \lambda_0, \emptyset, \emptyset} \in \mathcal{T}_2$ and  $V_{\lambda_1, \lambda_0, \mu, \nu} \in \mathcal{F}_2$ for $\mu \neq \emptyset$ or $\nu \neq \emptyset$. The third equation follows from the assertion that all simple subquotients in the socle filtration of the indecomposable injectives of $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ are of the form $V_{\eta_1, \eta_0, \emptyset, \emptyset}$, which was proven in Lemma \ref{socle 2} in the last chapter. For the last equation, note that $\soc{}{\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}}$ is simple object ${V}_{\lambda_1, \lambda_0, \mu, \nu}$ with $\mu \neq \emptyset$ or $\nu \neq \emptyset$. Thus, all subobjects of $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$ have ${V}_{\lambda_1, \lambda_0, \mu, \nu}$ as a subobject, hence $(\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu})_t = 0$ in this case.
+\end{proof}
+
+\begin{prop}
+    The category $\mathcal{T}_2$ defined above is a torsion class. 
+\end{prop}
+
+\begin{proof}
+    Let $\mathcal{F}_2$ be the strictly full subcategory whose objects admit socle filtrations with subquotients of the form $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\xi \neq \emptyset$ and $\zeta \neq \emptyset$. 
+    % There is no nontrivial module homomorphism between two nonisomorphic simple objects. 
+    The simple subquotients in the filtration of $T \in \mathcal{T}_2$ and $F \in \mathcal{F}_2$ are of different form: $V_{\eta_1, \eta_0, \emptyset, \emptyset}$ and $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\xi \neq \emptyset$ or  $\zeta \neq \emptyset$ respectively. Therefore, the Orthogonality Axiom follows.
+
+    We now check the Extension axiom: for an object $X$ of $\T{1}$, fix an embedding of $X$ into an injective module $I$. Let $I_t$ be the maximal subobject of $I$ such that $I_t \in \mathcal{T}_2$. It immediately follows from Lemma \ref*{image} that $\tilde{V}_{\lambda_1, \lambda_0, \mu, \emptyset}/ (\tilde{V}_{\lambda_1, \lambda_0, \mu, \emptyset})_t \in \mathcal{F}_2$. And since $I/I_t$ can be written as direct sum of quotients of indecomposable injective $\tilde{V}_{\lambda_1, \lambda_0, \mu, \emptyset}/ (\tilde{V}_{\lambda_1, \lambda_0, \mu, \emptyset})_t$, $I/I_t$ has only subquotients of the form $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\xi \neq \emptyset$ and $\zeta \neq \emptyset$. Thus $I/I_t \in \mathcal{T}_2$. For $X_t := X \cap I_t$, by the second isomorphism theorem $X+I_t$ is a submodule of $I$ and $X/X_t \cong (X+I_t)/I_t$. By the third isomorphism theorem $(X+I_t)/I_t$ is a submodule of $I/I_t$, hence we infer that all subquotients of $X/X_t$ have the form $V_{\eta_1, \eta_0, \xi, \zeta}$ with $\xi \neq \emptyset$ and $\zeta \neq \emptyset$. In other words, $X/X_t \in \mathcal{F}_1$ and we have the short exact sequence: 
+    \begin{align*}
+        0 \to X_t \to X \to X/X_t \to 0.
+    \end{align*}
+    Thus, the Extension Axiom is satisfied and $\mathcal{T}_2$ is a torsion class.
+\end{proof}
+
+Analogously, following Proposition \ref{dickson 2}, we define the functor $\mathfrak{s}: \T{1} \to \T{1}$ by the correspondence $X \to X_t$ as above. Lemma \ref*{image} can be reformulated in terms of $\mathfrak{s}$.
+
+\begin{rmk}
+    We note that the functor $\mathfrak{s}$ is actually nicer than the previous functor $\mathfrak{r}$ in the previous section. The reason is that it sends simple objects and indecomposable injectives either to themselves or to $0$, depending on the last two diagrams.
+\end{rmk}
+
+Due to this nice property, we immediately get 
+\begin{align*}
+    \left[ \socl{q}{\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}} \colon V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset }  \right] = \left[ \socl{q}{\mathfrak{s}(\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset})} \colon \mathfrak{s}(V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset } ) \right].
+\end{align*}
+
+Following the same steps, we build a finite injective resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$
+\begin{align}
+    0 \to V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset} \to I^0 \to I^1 \to ...\to I^n \to 0
+\end{align}
+with the corresponding cochain complex for $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$:
+\begin{align}\label{eq: cochain}
+    0 \to  \Hom (V_{\lambda_1, \lambda_0, \emptyset, \emptyset}, I^0) \to \Hom (V_{\lambda_1, \lambda_0, \mu, \emptyset}, I^1) \to ... \to \Hom (V_{\lambda_1, \lambda_0, \mu, \emptyset}, I^n).
+\end{align}
+
+Similarly to Section 1, we note that the sequence obtained by the functor $\mathfrak{s}$ is in fact the same cochain complex \eqref{eq: cochain} due to the following corollary.
+
+\begin{cor}
+    For the reduction functor $\mathfrak{s}$ defined above, we have
+    \begin{align*}
+        \Hom(V_{\lambda_1, \lambda_0, \emptyset, \emptyset}, I^n) \cong \Hom(V_{\lambda_1, \lambda_0, \emptyset, \emptyset}, \mathfrak{s}I^n).
+    \end{align*}
+\end{cor}
+
+\begin{proof}
+    The proof is analogous to the proof of Corollary \ref{Hom RV} so we will not repeat it here.
+\end{proof}
+
+Therefore, we have also the following.
+
+\begin{cor}
+    \begin{align}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset'}} 
+        \cong 
+        \Ext{i}{\mathcal{T}_2}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset'}}.
+    \end{align}
+    \qed
+\end{cor}
+
+Unlike Section 1, note that we have to define another torsion category $\mathcal{T}_3$ in $\T{0}$ to apply the Proposition \ref{ordered category} concerning ordered categories.
+
+Let $\mathcal{T}_3$ be the strictly full subcategory of $\T{0}$ whose objects $Y$ admits the socle filtrations with simple subquotients of the form $W_{\lambda_0, \mu, \emptyset}$. For each object $X$, let $X_t$ be the maximal subobject of $X$ which is an object of $\mathcal{T}_3$. 
+We will show that $\mathcal{T}_3$ is a torsion class. 
+
+\begin{prop}
+    \begin{align}
+        (W_{\lambda_0, \mu, \emptyset})_t &= W_{\lambda_0, \mu, \emptyset},\\
+        (\tilde{W}_{\lambda_0, \mu, \emptyset})_t &=  \tilde{W}_{\lambda_0, \mu, \emptyset},\\
+        (W_{\lambda_0, \mu, \nu})_t &=  0 \quad \text{ if } \nu \neq \emptyset, \text{ and }\\
+        (\tilde{W}_{\lambda_0, \mu, \emptyset})_t &=  0 \quad \text{ if } \nu \neq \emptyset.
+    \end{align}
+\end{prop}
+
+\begin{proof}
+    % The first and third equations are obvious since $V_{\lambda_1, \lambda_0, \emptyset, \emptyset} \in \mathcal{T}_2$ and  $V_{\lambda_1, \lambda_0, \mu, \nu} \in \mathcal{F}_2$ for $\mu \neq \emptyset$ or $\nu \neq \emptyset$. The second equation follows from the proposition that all simple subquotients in the socle filtration of the indecomposable injectives of $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ are of the form ${V}_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$, which was proven at \ref{socle 2} in the last chapter. For the last equation, note that since $\soc{1}{\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}}$ is simple object ${V}_{\lambda_1, \lambda_0, \mu, \nu}$ with $\mu \neq \emptyset$ or $\nu \neq \emptyset$. Thus, all subobject of $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$ contains ${V}_{\lambda_1, \lambda_0, \mu, \nu}$, hence $\mathfrak{s}(\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}) = 0$ in this case.
+    The proof again is analogous to the proof of Lemma \ref{image}, together with Lemma \ref{socle 4} showing that all simple subquotients in the socle filtration of the indecomposable injectives $\tilde{W}_{\lambda_0, \mu, \emptyset}$ are of the form ${W}_{\lambda'_1, \lambda'_0, \emptyset}$.
+\end{proof}
+
+\begin{prop}
+    The category $\mathcal{T}_3$ defined above is a torsion class. 
+\end{prop}
+
+\begin{proof}
+    Let $\mathcal{F}_3$ be the strictly full subcategory whose objects admit socle filtrations with subquotients of the form $W_{\lambda_0, \mu, \nu}$ with $\nu \neq \emptyset$. The proof is then analogous to the case of $\mathcal{T}_2$.
+    % The Orthonality axiom is obvious since there is no nontrivial module homomorphism between two nonisomorphic simple objects $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ and  $V_{\lambda'_1, \lambda'_0, \mu', \nu'}$ for $\mu' \neq \emptyset$ or $\nu \neq \emptyset$. 
+    
+    % We now check the Extension axiom: for each object $X$ of $\T{1}$, embed $X$ into an injective module $I$. Let $I_t$ be the maximal subobject of $I$ such that $I_t \in \mathcal{T}_2$, so $I/I_t$ contains only subquotients of the form $V_{\lambda_1, \lambda_0, \mu, \nu}$ with with $\mu \neq \emptyset$ or $\nu \neq \emptyset$ thus $I/I_t \in \mathcal{T}_2$. Let $X_t = X \cap I_t$, by second isomorphism theorem $X+I_t$ is a submodule of $I$ and the quotient module $X/X_t \cong (X+I_t)/I_t$. By third isomorphism theorem $(X+I_t)/I_t$ is a submodule of $I/I_t$, hence $X/X_t$ admit filtrations with only subquotients of the form $V_{\lambda_1, \lambda_0, \mu, \emptyset}$ with with $\mu \neq \emptyset$  or $\nu \neq \emptyset$. In other words, $X/X_t \in \mathcal{F}_1$ and we have the short exact sequence: 
+    % \begin{align*}
+    %     0 \to X_t \to X \to X/X_t \to 0.
+    % \end{align*}
+    % Thus, extension axiom is statisfied and $\mathcal{T}_2$ is a torsion class.
+\end{proof}
+
+The functor $\mathfrak{t}: \T{0} \to \T{0}$ is defined by the correspondence $X \to X_t$ as above. Analogously, we get
+\begin{cor}
+    \begin{align}
+        \Ext{i}{\T{0}}{W_{\lambda_0, \mu, \emptyset}}{W_{\lambda'_0, \mu', \emptyset}} 
+        \cong 
+        \Ext{i}{\mathcal{T}_3}{W_{\lambda_0, \mu, \emptyset}}{W_{\lambda'_0, \mu', \emptyset}}.
+    \end{align}
+    \qed
+\end{cor}
+
+To reduce the Ext-groups $\Ext{i}{\mathcal{T}_2}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset'}}$ to the Ext-groups $\Ext{i}{\mathcal{T}_3}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset'}}$, we can follow the same steps as above. To do so, we utilize again Proposition \ref{ordered category} with the following map:
+
+\begin{align*}
+    \beta \colon \mathcal{S}_{\mathcal{T}_2} &\longrightarrow \mathcal{S}_{\mathcal{T}_3}, \\
+    V_{\lambda_1, \lambda_0, \emptyset, \emptyset} &\longmapsto W_{\lambda_1, \lambda_0, \emptyset}.
+\end{align*}
+
+Since each of these simple objects are mutually non-isomorphic for different choices of $\lambda_1, \lambda_0$, we easily see that $\beta$ is a bijection. Next, we need to check its compatibility with the socle filtration of the indecomposable injectives.
+
+\begin{prop}
+    The partial order in $\mathcal{T}_2$ induced by the partial order \eqref{order} in $\T{1}$ is the same as the partial order in $\mathcal{T}_3$ induced by the partial order \eqref{order} in $\T{0}$.
+\end{prop}
+
+\begin{proof}
+    We only need to check that the two sets of conditions \eqref{order} for the two orders in $\mathcal{T}_2$ and $\mathcal{T}_3$ are the same. We use the same notatuon that $n_1 = \left\lvert \lambda_1 \right\rvert $, $n_0 = \left\lvert \lambda_0 \right\rvert $.
+
+    The set of inequalities \eqref{order} in $\mathcal{T}_2$ becomes:
+    \begin{enumerate}[label=\textbf{E.\arabic*}]
+        \item If $k$ is the largest index with $n_k \neq n'_k$, then $n_k \geq n'_k$;
+        \item $n_1 + n_0 = n'_1 + n'_0$;
+    \end{enumerate}
+    If $k = 0$, then $n_1 = n'_1$, thus $n_0 = n'0$. If $k=1$, then $n_1 \geq n'_1$, then the second condition adds another condition that $n_0 \leq n'_0$. Thus, we have 
+    \begin{enumerate}[label=\textbf{F.\arabic*}]
+        \item $n_1 \geq n'_1$;
+        \item $n_0 \leq n_0'$;
+        \item $n_1 + n_0 = n'_1 + n'_0$;
+    \end{enumerate}
+    which is identical to the order of the underlying poset of $\mathcal{T}_3$ induced by $\T{0}$.
+\end{proof}
+
+Since $\mathfrak{s}(\tilde{V}_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}) = \tilde{V}_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$ and $\mathfrak{t}(\tilde{W}_{\lambda'_1, \lambda'_0, \emptyset}) = \tilde{W}_{\lambda'_1, \lambda'_0, \emptyset}$, Lemma \ref{socle 4} gives us the final piece from Proposition \ref{ordered category} on ordered categories.
+
+\begin{prop}\label{result 3 prop}
+    \begin{align*}
+        \left[ \socl{y}{\mathfrak{s}(\tilde{V}_{\lambda'_1, \lambda'_0, \emptyset, \emptyset})} \colon V_{\lambda_1, \lambda_0, \emptyset, \emptyset}  \right]
+        = \left[ \socl{y}{\mathfrak{t}(\tilde{W}_{\lambda'_1, \lambda'_0, \emptyset})} \colon W_{\lambda_1, \lambda_0, \emptyset}  \right].
+    \end{align*}
+\end{prop}
+
+These propositions, together with the Proposition \ref{ordered category}, yield an immediate corollary, which gives us the desired equation \eqref{result3}.
+\begin{cor}
+    \begin{align}
+        \Ext{i}{\mathcal{T}_2}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} \cong \Ext{i}{\mathcal{T}_3}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}}.
+    \end{align}
+    \qed
+\end{cor}
+
+With that, we have successfully shown the third result from Theorem \ref{result3}: 
+\begin{align*}
+    \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} \cong
+    \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}}.
+\end{align*}
+
+\begin{rmk}
+    Note that unlike the first result, Theorem \ref{result3} completely characterizes all the nonzero Ext-groups of simple objects of the form $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ in $\T{1}$. This is because, as we can see in Example \ref{third res ex 1}, there are no indecomposable injectives of the form $\tilde{V}_{\lambda'_1, \lambda'_0, \mu, \nu}$ with $\mu \neq \emptyset$ or $\nu \neq \emptyset$  in the injective resolution of $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$.
+\end{rmk}
+
+\begin{thm}\label{second result 2}
+    \begin{align}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} = 0 \quad \text{ for } \mu \neq \emptyset \text{ or } \nu \neq \emptyset.
+    \end{align}
+\end{thm}
+
+\begin{proof}
+    We will show that the indecomposable injectives that appear in the injective resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$ all have the form $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ by induction on the injective dimension.
+
+    \textbf{Base case:} $k = 0$. Since $I^0 = \tilde{V}_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$, the statement holds for $k=0$.
+
+    \textbf{Induction step:} Suppose the statement is true for $k$.  Let $M = \coker \  d^{k-1}$ where $d^{k-1}: I^{k-1} \to I^{k}$. By induction hypothesis, the indecomposable injectives in $I^{k-1}$ and $I^{k}$ are both of the form $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$. Moreover, by Lemma \ref{socle 2}, we note that all simple subquotients of $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ (hence of $M = \coker \  d^{k-1}$ and of $I^{k+1}$) are of the form ${V}_{\eta_1, \eta_0, \emptyset, \emptyset}$. Thus, the statement holds for $k+1$.
+
+    Therefore, there are no indecomposable injectives of the form $\tilde{V}_{\lambda_1, \lambda_0, \mu, \nu}$ with $\mu \neq \emptyset$ or $\nu \neq \emptyset$ in the injective resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$. Since the Ext-groups of simple objects are independent of the choice of the resolution, we have 
+    \begin{align*}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} = 0 \quad \text{ for } \mu \neq \emptyset \text{ or } \nu \neq \emptyset.
+    \end{align*}
+\end{proof}
+
+Putting everything together, we have 
+
+\begin{align}
+    \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} \cong
+    \begin{cases}
+        & \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}} \text{ if } \mu = \emptyset, \nu = \emptyset, \\
+        & 0 \text{ otherwise }.
+    \end{cases}
+\end{align}
+
+
+\section{Fourth result}
+
+In this section, we will expand the previous result to the case where the last diagrams are the same, i.e. we will show that:
+
+\begin{thm}\label{result 4}
+    \begin{align}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}} \cong
+        \begin{cases}
+             \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}} &\text{ if } \mu = \emptyset, \nu = \nu', \\
+             0 & \text{ otherwise }.
+        \end{cases}
+    \end{align}
+\end{thm}
+
+\begin{proof}
+    This proof follows the proof of \ref{result2}. Namely, we take the injective resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$ and tensor each term with $(V)_{\mu'}$ (Lemma \ref{injective} then shows that each term is again injective) to get the injective resolution of $\tilde{V}_{\lambda'_1, \lambda'_0, \emptyset, \nu'}$. Moreover, note that only indecomposable injectives of the form $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ appear in resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}$, thus only indecomposable injectives of the form $\tilde{V}_{\lambda_1, \lambda_0, \emptyset, \mu'}$ appear in resolution of $V_{\lambda'_1, \lambda'_0, \emptyset, \mu'}$. Consequently,
+    \begin{align*}
+        \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}} \cong
+        \begin{cases}
+            & \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{W_{\lambda'_1, \lambda'_0, \emptyset}} \text{ if } \mu = \emptyset, \nu = \nu', \\
+            & 0 \text{ otherwise }.
+        \end{cases}
+    \end{align*}
+\end{proof}
+
+\begin{exmp}
+    \begin{align*}
+        &0 \to 
+        V_{ \emptyset, (1,\,1), \emptyset, (1,\,1) }\to
+        \tilde{V}_{ \emptyset, (1,\,1), \emptyset, (1,\,1) }
+        \to
+        \tilde{V}_{ (1), (1), \emptyset, (1,\,1) }
+        \to
+        \tilde{V}_{ (2), \emptyset, \emptyset, (1,\,1) }
+        \to 0.
+    \end{align*}
+
+    Thus, all the nonzero Ext-groups are:
+    \begin{align*}
+        &\Ext{0}{}{V_{ \emptyset, (1,\,1), \emptyset, (1,\,1) }}{V_{ \emptyset, (1,\,1), \emptyset, (1,\,1) }} \cong \mathbb{K}, \\
+        &\Ext{1}{}{ V_{(1), (1), \emptyset, (1,\,1)}}{V_{ \emptyset, (1,\,1), \emptyset, (1,\,1) }} \cong \mathbb{K},
+        \\
+        &\Ext{2}{}{ V_{(2), \emptyset, \emptyset, (1,\,1)}}{V_{ \emptyset, (1,\,1), \emptyset, (1,\,1)}} \cong \mathbb{K}.
+    \end{align*}
+\end{exmp}
+% \section{Fifth result}
+% In this section, we likewise extends the Fourth result \ref{result4} to the case where the the third position $\mu$ are the same. In other words:
+
+% \begin{thm}\label{result 5}
+%     \begin{align}
+%         \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda'_0, \mu, \nu'}} \cong
+%         \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}}
+%     \end{align}
+% \end{thm}
+
+% \begin{proof}
+%     The proof goes similarly as \ref{result 2} or \ref{result 4}.
+% \end{proof}
+% \begin{exmp}
+%     \begin{align*}
+%         & 0 \to 
+%         V_{ \emptyset, \ (1), \ (1,\,1), \ (1) }\to
+%         \tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ (1) }
+%         \to
+%         \tilde{V}_{ (1), \ \emptyset, \ (1,\,1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ (1) } \\
+%         & \to
+%         \tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) } \\
+%         & \to
+%         \tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }
+%         \to 0.
+%     \end{align*}
+% \end{exmp}
+
+% \begin{rmk}
+%     Note that unlike the last section, this result is very limited and only explains very little part of the resolution. The reason for this is 
+% \end{rmk}
+% not complete, i.e. this result does not characterize all the nonzero Ext-groups .
+% And hence, it is still an open problem for us.
+\chapter{Conjectures}
+
+During the course of this bachelor project/thesis, I have written a numerical Python program that extends {Abhik Pal}'s program \cite[]{pal} to calculate the Ext-groups of simple objects in $\T{1}$. The program outputs the injective resolution of an arbitrary simple object $V_{\lambda_1, \lambda_0, \mu, \nu}$ as in the Appendix. This allows to calculate any Ext-group $\Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda_0, \mu, \nu}}$. In this chapter, we collect some conjectures (verified by that program). 
+
+
+% \section{First conjecture}
+% This first conjecture extends from the previous result. In particular, we expect that:
+
+% \begin{conj}
+%     For the case when $\lambda_1$ is nonzero:
+%     \begin{align}\label{conjecture 1}
+%         \Ext{i}{}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda_1, \lambda_0', \mu', \nu'}} \cong 
+%             \Ext{i}{}{W_{\lambda_0, \mu, \nu}}{W_{\emptyset\mu', \nu'}}
+%     \end{align}
+% \end{conj}
+
+% The proof will exactly follows the same method, however, we need a stronger version of Propostion \ref{Hom RV} and the corresponding corrolary \ref{Ext RV} for this case. 
+
+% \begin{exmp}
+%     We have the resolution for $V_{ \emptyset, \ (1), \ (1), \ \emptyset }$:
+%     \begin{align*}
+%         & 0 \to 
+%         V_{ \emptyset, \ (1), \ (1), \ \emptyset }\to
+%         \tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset } \\ &
+%         \to
+%         \tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+%         \to
+%         \tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }
+%         \to 0
+%     \end{align*}
+%     And the resolution for $V_{ (1,\,1), \ (1), \ (1), \ \emptyset }$:
+
+%     \begin{align*}
+%         & 0 \to 
+%         V_{ (1,\,1), \ (1), \ (1), \ \emptyset }\to
+%         \tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }
+%         \\ &
+%         \to
+%         \tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }
+%         \\ &
+%         \to
+%         \tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+%         \to 0
+%     \end{align*}
+
+%     Thus, we notice that:
+%     \begin{align*}
+%         \Ext{0}{\T{1}}{V_{ (1,\,1), (1), (1), \emptyset }}{V_{ (1,\,1), (1), (1), \emptyset }} &\cong \Ext{0}{\T{1}}{V_{ \emptyset, (1), (1), \emptyset }}{V_{ \emptyset, (1), (1), \emptyset }} \\ 
+%         &\cong \Ext{0}{\T{0}}{W_{ (1), (1), \emptyset }}{W_{ (1), (1), \emptyset }}  \\
+%         \Ext{1}{\T{1}}{V_{ (1,\,1), (2), \emptyset, \emptyset }}{V_{ (1,\,1), (1), (1), \emptyset }} &\cong \Ext{1}{\T{1}}{V_{ \emptyset, (2), \emptyset, \emptyset }}{V_{ \emptyset, (1), (1), \emptyset }} \\
+%         &\cong \Ext{1}{\T{0}}{W_{ (2), \emptyset, \emptyset }}{W_{(1), (1), \emptyset }}  
+%     \end{align*}
+% \end{exmp}
+
+% However, notice that this conjecture does not tell us the whole injective resolutions or all the non-zero Ext-groups of simple object and $V_{ (1,\,1), \ (1), \ (1), \ \emptyset }$ since there are some indecomposable injectives that appear in the resolution has the form $V_{ \lambda_1, \ (1), \ (1), \ \emptyset }$ where $ \lambda_1 \neq (1,\,1)$ (e.g. $\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }$, hence 
+% \begin{align*}
+%     \Ext{1}{\T{1}}{V_{(2,\,1), \ \emptyset, \ (1), \ \emptyset }}{V_{ (1,\,1), (1), (1), \emptyset }} = \mathbb{K}).
+% \end{align*}
+
+% Thus the Ext-groups $\Ext{i}{}{V_{\lambda_1, \lambda_0, \mu, \nu}}{V_{\lambda'_1, \lambda_0', \mu', \nu'}}$ in the case $\lambda_1 \neq \lambda'_1$ are still an open-problem for us. 
+
+
+
+% \section{Second conjecture}
+% This section conjecture concerns the case where the last two diagrams are empty, i.e. $V_{\lambda_1, \lambda_0, \emptyset, \emptyset} \in \T{1}$. 
+
+% \begin{conj}
+%     \begin{align}\label{conjecture 2}
+%         \Ext{i}{\T{1}}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} =  \Ext{i}{\T{0}}{W_{\lambda_1, \lambda_0, \emptyset}}{V_{\lambda'_1, \lambda'_0,\emptyset}}
+%     \end{align}
+% \end{conj}
+
+% If we have shown this conjecture, then recall the corrolary \ref{Ext soc} in \cite{cp19}, we have an immediate corrolary
+% \begin{cor}
+%     \begin{align}
+%         \dim \Ext{q}{}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}} = \text{multiplicity of }{W_{\lambda_1, (\lambda_0)^\perp, \emptyset}} \text{ in } \socl{q+1}{\tilde{W}_{\lambda'_1, (\lambda'_0)^{\perp}, \emptyset}}
+%     \end{align}
+% \end{cor}
+
+% %completeness...
+
+% \begin{exmp} We have the injective resolution for $V_{ (2), \ (1), \ \emptyset, \ \emptyset }$:
+%     \begin{align*}
+%         0 \to 
+%         V_{ (2), \ (1), \ \emptyset, \ \emptyset }\to
+%         \tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }
+%         \to
+%         \tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+%         \to 0.
+%     \end{align*}
+
+%     And recall the resolution for  $W_{ (2), \ (1), \ \emptyset} \in \T{0}$:
+%     \begin{align*}
+%         0 \to 
+%         W_{ (2), \ (1), \ \emptyset}\to
+%         \tilde{W}_{ (2), \ (1), \ \emptyset}
+%         \to
+%         \tilde{W}_{ (3), \ \emptyset, \ \emptyset}\,\oplus\,\tilde{W}_{ (2,\,1), \ \emptyset, \ \emptyset}
+%         \to 0.
+%     \end{align*}
+
+%     Thus, we have: 
+%     \begin{align*}
+%         \Ext{0}{\T{1}}{V_{ (2), \ (1), \ \emptyset, \ \emptyset }}{V_{ (2), \ (1), \ \emptyset, \ \emptyset } } 
+%         &\cong \Ext{0}{\T{0}}{W_{ (2), \ (1), \ \emptyset}}{W_{ (2), \ (1), \ \emptyset}}, \\
+%         \Ext{1}{\T{1}}{V_{ (3), \ \emptyset, \ \emptyset, \ \emptyset }}{V_{ (2), \ (1), \ \emptyset, \ \emptyset }  }
+%         &\cong \Ext{1}{\T{0}}{W_{ (3), \ \emptyset, \ \emptyset}}{W_{ (2), \ (1), \ \emptyset}}, \\
+%         \Ext{1}{\T{1}}{V_{ (2,1), \ (1), \ \emptyset, \ \emptyset }}{V_{ (2), \ (1), \ \emptyset, \ \emptyset}}
+%         &\cong \Ext{1}{\T{0}}{W_{ (2,1), \ (1), \ \emptyset}}{W_{ (2), \ (1), \ \emptyset}}.
+%     \end{align*}
+% \end{exmp}
+
+% Note that unlike the last conjecture, in this case, we expect that all the indecomposable injectives $\tilde{V}_{\lambda'_1, \lambda'_0, \mu', \nu'}$ that appears in the resolution of $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$ has $\mu' = \nu' = \emptyset$. Therfore, we would know all the non-zero Ext-groups of simple object and $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$.
+
+
+% \section{Third conjecture}
+% With the understanding of the case of $V_{\lambda_1, \lambda_0, \emptyset, \emptyset}$, we now want to extend it to the case of $V_{\lambda_1, \lambda_0, \emptyset, \nu}$. We expect that: 
+
+% \begin{conj}
+%     \begin{align}\label{conjecture 3}
+%         \Ext{i}{}{V_{\lambda_1, \lambda_0, \emptyset, \nu}}{V_{\lambda'_1, \lambda'_0, \emptyset, \nu'}} \cong \Ext{i}{}{V_{\lambda_1, \lambda_0, \emptyset, \emptyset}}{V_{\lambda'_1, \lambda'_0, \emptyset, \emptyset}}
+%     \end{align}
+% \end{conj}
+
+% Likewise, for this case, we expect all the indecomposable injectives $\tilde{V}_{\lambda'_1, \lambda'_0, \mu', \nu'}$ that appears in the resolution of $V_{\lambda_1, \lambda_0, \emptyset, \nu}$ has $\mu' = \emptyset$ and $\nu' = \nu$. Therfore, we would know all the non-zero Ext-groups of simple object and $V_{\lambda_1, \lambda_0, \emptyset, \nu}$.
+% \pagebreak
+
+\section{Injective dimension conjecture}
+In this conjecture, we consider another aspect of the Ext-groups of simple objects, that is its injective dimension. Recall that the injective dimension of a simple object $V_{\lambda_1, \lambda_0, \mu, \nu} \in \T{1}$ is the minimal length of a finite injective resolution of $V_{\lambda_1, \lambda_0, \mu, \nu}$. It is also characterized as the largest integer $n$ such that there exists a module $A$ such that $\Ext{n}{\T{1}}{A}{V_{\lambda_1, \lambda_0, \mu, \nu}}$ is nonzero. 
+% Here, we have a conjecture that the injective dimension of $V_{\lambda_1, \lambda_0, \mu, \nu}$ equals the sum of the lengths of the middle diagrams, i.e. $\left\lvert\lambda_0 \right\rvert + \left\lvert\mu \right\rvert$.
+
+% computer algebra system SageMath [19] to program a socle filtration
+% calculator which we have made available at [11].
+
+\begin{conj}\label{injective dimension 1}
+    The injective dimension of $V_{\lambda_1, \lambda_0, \mu, \nu}$ is the sum of the lengths of the middle diagrams (leaving the first and last diagrams out), i.e.  $\left\lvert\lambda_0 \right\rvert + \left\lvert\mu \right\rvert$.
+\end{conj}
+
+\begin{exmp}
+    The injective resolution for $V_{ \emptyset, \ (2), \ (1), \ \emptyset }$ is 
+    \begin{align*}
+        & 0 \to 
+        V_{ \emptyset, \ (2), \ (1), \ \emptyset }\to
+        \tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }
+        \to
+        \tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+        \to 
+        \tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+        \to
+        \tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+        \to 0.
+    \end{align*}
+
+    It is of length 3, and thus the injective dimension $id(V_{ \emptyset, \ (2), \ (1), \ \emptyset })$ equals $\left\lvert (2) \right\rvert + \left\lvert (1) \right\rvert$. 
+
+    We also have the injective resolution of  $V_{ (1,\,1,\,1), \ (1), \ (1), \ (2)}$:
+    \begin{align*} 
+        & 0 \to 
+        V_{ (1,\,1,\,1),(1),(1),(2) }\to
+        \tilde{V}_{ (1,\,1,\,1),(1),(1),(2) } \\ &
+        \to
+        \tilde{V}_{ (1,\,1,\,1,\,1),\emptyset,(1),(2) }\,\oplus\,\tilde{V}_{ (2,\,1,\,1),\emptyset,(1),(2) }\,\oplus\,\tilde{V}_{ (1,\,1,\,1),(1),\emptyset,(1) }\,\oplus\,\tilde{V}_{ (1,\,1,\,1),(2),\emptyset,(2) }\,\oplus\,\tilde{V}_{ (1,\,1,\,1),(1,\,1),\emptyset,(2) } \\&
+        \to
+        \tilde{V}_{ (1,\,1,\,1,\,1),\emptyset,\emptyset,(1) }\,\oplus\,\tilde{V}_{ (1,\,1,\,1,\,1),(1),\emptyset,(2) }\,\oplus\,\tilde{V}_{ (2,\,1,\,1),\emptyset,\emptyset,(1) }\,\oplus\,\tilde{V}_{ (2,\,1,\,1),(1),\emptyset,(2) }
+        \to 0.
+     \end{align*}
+
+     We notice that with the large first and last diagrams, the injective resolution becomes complicated with several indecomposable injectives in each term. However, the length of the resolution and thus the injective dimension is still $2 =\left\lvert (1) \right\rvert + \left\lvert (1) \right\rvert$.
+\end{exmp}
+
+We also expect that a generalization of this conjecture is true in all other categories $\T{t}$. 
+\begin{conj}\label{injective dimension 2}
+    The injective dimension of a simple module $V_{\lambda_t, \lambda_{t-1}, ..., \lambda_0, \mu, \nu}$ in $\T{t}$ equals the sum of lengths of the middle diagrams $\left\lvert \lambda_{t-1} \right\rvert + ... + \left\lvert \lambda_0 \right\rvert + \left\lvert \mu \right\rvert$.
+\end{conj}
+
+Note that this conjecture indeed holds for the category $\T{0}$, as proven in the following corollary. We first recall the following proposition about the Loewy length of an indecomposable injective in $\T{0}$.
+\begin{prop}[\cite{s18}*{Theorem 2, Section 5} ]\label{socle length}
+    The Loewy length of $\tilde{W}_{\lambda, \mu, \nu}$ in $\T{0}$ equals $\left\lvert \mu \right\rvert  + 1$.
+\end{prop}
+
+\begin{cor}
+    The injective dimension of $W_{\lambda, \mu, \nu}$ in $\T{0}$ equals the length of the middle diagram $\left\lvert \mu \right\rvert$.
+\end{cor}
+
+\begin{proof}
+    Due to Corollary \ref{Ext soc}, we conclude that the injective dimension of $W_{\lambda, \mu, \nu}$ equals the Loewy length of $W_{\lambda, (\mu)^\perp, \nu}$ minus $1$. By Theorem \ref{socle length}, this Loewy length is equal to $(\left\lvert (\mu)^\perp \right\rvert  + 1) - 1 = \left\lvert (\mu)^\perp \right\rvert = \left\lvert \mu \right\rvert$.
+\end{proof}
+
+
+% \pagebreak
+\section{Symmetry conjecture}.
+
+For the case $V_{\emptyset, \lambda_0, \mu, \emptyset}$, we noticed a symmetry relation with regards to interchanging the permutations $\lambda_0$ and $\mu$. In particular, we have a conjecture that:
+
+\begin{conj}
+    Let $n = |\lambda_0| + |\mu|$. Then
+
+    \begin{align*}
+        \Ext{i}{}{V_{\lambda_1, \lambda_0, \mu, \emptyset}}{ V_{\emptyset, \lambda'_0, \mu', \emptyset}} = \Ext{n-i}{}{V_{\mu^\perp,  (\lambda_0)^\perp, (\lambda_1)^\perp, \emptyset}}{V_{\emptyset, \mu', \lambda'_0, \emptyset}}.
+    \end{align*}
+\end{conj}
+
+\begin{exmp}
+    Here are the injective resolutions for $V_{ \emptyset, \ (2), \ (1), \ \emptyset }$ and $V_{ \emptyset, \ (1), \ (2), \ \emptyset }$:
+    \begin{align*}
+        & 0 \to 
+        V_{ \emptyset, \ (2), \ (1), \ \emptyset }\to
+        \tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }
+        \to
+        \tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+        \to 
+        \tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+        \to
+        \tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+        \to 0 \\
+       & 0 \to 
+        V_{ \emptyset, \ (1), \ (2), \ \emptyset }\to
+        \tilde{V}_{ \emptyset, \ (1), \ (2), \ \emptyset }
+        \to
+        \tilde{V}_{ (1), \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset } \\ &
+        \to
+        \tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+        \to
+        \tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+        \to 0
+    \end{align*}
+    We notice that both resolutions have length 3. Then we have the following symmetry relation:
+    \begin{align*}
+        \Ext{0}{}{V_{\emptyset, \ (2), \ (1), \ \emptyset}}{V_{ \emptyset, \ (2), \ (1), \ \emptyset }} & \cong 
+        \Ext{3}{}{V_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }}, \\ 
+        \Ext{1}{}{V_{(1), \ (1), \ (1), \ \emptyset }}{V_{\emptyset, \ (2), \ (1), \ \emptyset }} 
+        & \cong 
+        \Ext{2}{}{V_{ (1), \ (1), \ (1), \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }},\\ 
+        \Ext{1}{}{V_{\emptyset, \ (3), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (2), \ (1), \ \emptyset }} 
+        & \cong 
+        \Ext{2}{}{V_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }},\\
+        \Ext{1}{}{V_{\emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (2), \ (1), \ \emptyset }} 
+        & \cong 
+        \Ext{2}{}{V_{\emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }},\\
+        \Ext{2}{}{V_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }}{V_{\emptyset, \ (2), \ (1), \ \emptyset }} 
+        & \cong 
+        \Ext{1}{}{V_{(1), \ \emptyset, \ (2), \ \emptyset , \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }},\\
+        \Ext{2}{}{V_{ (1), \ (2), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (2), \ (1), \ \emptyset }} 
+        & \cong 
+        \Ext{1}{}{V_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }},\\
+        \Ext{2}{}{V_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }}{V_{\emptyset, \ (2), \ (1), \ \emptyset }} 
+        & \cong 
+        \Ext{1}{}{V_{ \emptyset, \ (2), \ (1), \ \emptyset }}{V_{\emptyset, \ (1), \ (2), \ \emptyset }},\\
+        \Ext{3}{}{V_{(1,\,1), \ (1), \ \emptyset, \ \emptyset }}{V_{ \emptyset, \ (2), \ (1), \ \emptyset }} & \cong 
+        \Ext{0}{}{V_{\emptyset, \ (1), \ (2), \ \emptyset }} {V_{\emptyset, \ (1), \ (2), \ \emptyset }}.
+    \end{align*}
+\end{exmp}
+
+
+\appendix
+% \input{a00-socle-program.tex}
+\chapter*{Appendix}  \label{chap:Appendix}
+\allowdisplaybreaks
+\section{$ |\lambda_1| + |\lambda_0| + |\mu| + |\nu| = 2$}
+
+$\quad$
+
+\begin{align*} &
+0 \to 
+V_{ (1), \ (1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1), \ \emptyset }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }
+\to 0.
+\end{align*}
+
+$\quad$
+
+\section{$ |\lambda_1| + |\lambda_0| + |\mu| + |\nu| = 3$}
+
+$\quad$
+
+\begin{align*} &
+0 \to 
+V_{ (2), \ (1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0\\
+&
+0 \to 
+V_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ \emptyset, \ (1), \ \emptyset }\to
+\tilde{V}_{ (2), \ \emptyset, \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (2), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ (1), \ \emptyset }\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (2), \ \emptyset }\to
+\tilde{V}_{ (1), \ \emptyset, \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1), \ (1) }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ (1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+\to 
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ \emptyset, \ (1) }\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (2), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1), \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ \emptyset, \ (2) }\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (2) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ \emptyset, \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1,\,1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (3), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (3), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (2), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset } 
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (2), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2), \ (1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ (1) } \\ &
+\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ (1) } \\ &
+\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1), \ (2) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (2) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1), \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1,\,1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1,\,1) }
+\to 0.
+\end{align*}
+
+$\quad$
+
+\pagebreak
+\section{$ |\lambda_1| + |\lambda_0| + |\mu| + |\nu| = 4$}
+
+$\quad$
+
+\begin{align*} &
+0 \to 
+V_{ (3), \ (1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (4), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset } 
+\to
+\tilde{V}_{ (2,\,2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (3), \ \emptyset, \ (1), \ \emptyset }\to
+\tilde{V}_{ (3), \ \emptyset, \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1,\,1), \ \emptyset, \ (1), \ \emptyset }\to
+\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ (2), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (4), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,2), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ (1), \ (1), \ \emptyset }\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (3), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ (1), \ (1), \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }
+\\ &
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ (1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ (1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ \emptyset, \ (2), \ \emptyset }\to
+\tilde{V}_{ (2), \ \emptyset, \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ \emptyset, \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ (2), \ \emptyset, \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ \emptyset, \ (2), \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ \emptyset, \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (2), \ \emptyset, \ (1), \ (1) }\to
+\tilde{V}_{ (2), \ \emptyset, \ (1), \ (1) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1,\,1), \ \emptyset, \ (1), \ (1) }\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ (1) }
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (3), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,2 \tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (4), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (2), \ (1), \ \emptyset }\to
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to 
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1,\,1), \ (1), \ \emptyset }\to
+\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }
+\to \\ &
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (2), \ \emptyset, \ (1) }\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1,\,1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ (2), \ \emptyset }\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ (1), \ (1) }\to
+\tilde{V}_{ (1), \ (1), \ (1), \ (1) } \\ &
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) } \\ &
+\to 
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) } 
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ \emptyset, \ (2) }\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (2) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ (2) }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ (1), \ \emptyset, \ (1,\,1) }\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1,\,1) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ (1,\,1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (3), \ \emptyset }\to
+\tilde{V}_{ (1), \ \emptyset, \ (3), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset } 
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset } 
+\to
+\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (2,\,1), \ \emptyset }\to
+\tilde{V}_{ (1), \ \emptyset, \ (2,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1,\,1,\,1), \ \emptyset }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1,\,1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (2), \ (1) }\to
+\tilde{V}_{ (1), \ \emptyset, \ (2), \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1), \ (1) } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1,\,1), \ (1) }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1,\,1), \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1), \ (1) } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1), \ (2) }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ (2) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ (1), \ \emptyset, \ (1), \ (1,\,1) }\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ (1,\,1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (4), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (4), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2,\,2), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset } 
+\to
+\tilde{V}_{ (3,\,1), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (4), \ \emptyset, \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (3), \ (1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (4), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset } \\ &
+\to 
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,2 \tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2,\,1), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (3), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (3), \ (1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (3), \ \emptyset, \ (1) }\to
+\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1,\,1,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2,\,1), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }
+\to
+\tilde{V}_{ (3), \ \emptyset, \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ (2), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2), \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (4), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1,\,1), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ (1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset } \\ &
+\to
+\tilde{V}_{ (2), \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (2), \ (2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ (1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ (2), \ (1), \ (1) }
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1,\,1), \ (1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ (1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ (1) }
+\to
+\tilde{V}_{ (1), \ (1), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ (1) } \\ &
+\to
+\tilde{V}_{ (2), \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) } 
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (2), \ (1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ \emptyset, \ (2) }\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (2) }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (2) }
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (2), \ \emptyset, \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (1,\,1) }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1,\,1) }
+\to
+\tilde{V}_{ (1,\,1), \ \emptyset, \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ \emptyset, \ (2) }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (2) }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (2) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1,\,1) }
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1,\,1) }
+\to
+\tilde{V}_{ (2), \ \emptyset, \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (3), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1), \ (3), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (3), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (2,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1), \ (2,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (2,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }\,\oplus\,2 \tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (2,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1,\,1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1,\,1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1,\,1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (1), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ (1), \ (2), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (4), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }
+\to
+\tilde{V}_{ (1), \ (3), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (2), \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ (2), \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (2), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ (1) }\\ &
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ (1) }\\ &
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1,\,1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1,\,1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ (1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1,\,1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ (1) } \\ &
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (1), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) }\\ &
+\to
+\tilde{V}_{ (1), \ (1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ (1), \ (2), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1), \ (2) }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ (2) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ (2) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (2) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (2) }\\ &
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ (1), \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ (1,\,1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ (1), \ (1,\,1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (1,\,1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1,\,1) }\\ &
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ (1), \ (1), \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ \emptyset, \ (3) }\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (3) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (3) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ \emptyset, \ (2,\,1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (2,\,1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (2,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ (1), \ \emptyset, \ (1,\,1,\,1) }\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1,\,1,\,1) }
+\to
+\tilde{V}_{ (1), \ \emptyset, \ \emptyset, \ (1,\,1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (4), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (4), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (3), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset }\\
+&
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (3,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (3,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (3), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (2,\,1), \ \emptyset }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (2), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1,\,1), \ \emptyset }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (2,\,1,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2,\,2), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2,\,2), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (2,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (2,\,2), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2,\,1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2,\,1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (2,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1,\,1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ \emptyset, \ (2), \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1,\,1), \ \emptyset } \\ &
+\to
+\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (3,\,1), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1,\,1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (1,\,1,\,1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (2), \ (1,\,1), \ \emptyset }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (3), \ (1), \ \emptyset }
+\to
+\tilde{V}_{ \emptyset, \ (4), \ \emptyset, \ \emptyset }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (3), \ (1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (3), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (2), \ (1) }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1,\,1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2,\,1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2,\,1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (2), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ (1) } \\ &
+\to
+2 \tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ (1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2,\,1), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1,\,1), \ (1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1,\,1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1,\,1), \ (1) }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (1), \ (1), \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ (1), \ (1) }
+\to
+\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (3), \ \emptyset, \ (1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2), \ (2) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2), \ (2) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ (2) }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (2), \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (2), \ (1,\,1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ (1,\,1) }\\ &
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1,\,1), \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1), \ (2) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1), \ (2) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ (2) }\\ &
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ \emptyset }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (2) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1,\,1), \ (1,\,1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1,\,1), \ (1,\,1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ (1), \ (1,\,1) }\\ &
+\to
+\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (2), \ \emptyset, \ (1,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1), \ (3) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (3) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ (2) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (3) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1), \ (2,\,1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (2,\,1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ (2) }\,\oplus\,\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ (1,\,1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (2,\,1) }
+\to 0.
+\\ &
+0 \to 
+V_{ \emptyset, \ \emptyset, \ (1), \ (1,\,1,\,1) }\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ (1), \ (1,\,1,\,1) }
+\to
+\tilde{V}_{ \emptyset, \ \emptyset, \ \emptyset, \ (1,\,1) }\,\oplus\,\tilde{V}_{ \emptyset, \ (1), \ \emptyset, \ (1,\,1,\,1) }
+\to 0.
+\end{align*}
+
+\backmatter
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+\end{document}

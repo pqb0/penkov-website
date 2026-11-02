@@ -1,0 +1,2006 @@
+%++++++++++++++++++++++++++++++++++++++++
+% Don't modify this section unless you know what you're doing!
+\documentclass[letterpaper,11pt]{article}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{setspace}
+\usepackage[enableskew]{youngtab}
+\usepackage{tikz-cd}
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1.3in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=red,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\comment}[1]{}
+\newcommand{\sectionbreak}{\clearpage}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+%++++++++++++++++++++++++++++++++++++++++
+
+
+\begin{document}
+	
+	\title{On the socle filtration of indecomposable injective objects of the category $\mathbb{T}^3_{\mathfrak{gl}^M}$ \\
+	Bachelor thesis \\
+	Jacobs University Bremen}
+	\author{Anton Shemyakov \\
+	Thesis supervisor: Prof. Ivan Penkov}
+	\maketitle
+	
+	\begin{abstract} The Mackey Lie algebra $\mathfrak{gl}^M$ consists of infinite matrices, each column and row of which are finite. The category $\mathbb{T}^3_{\mathfrak{gl}^M}$ is an abelian tensor category of representations over the Lie algebra $\mathfrak{gl}^M$, closed under taking submodules, and it is the minimal such category containing the natural $\mathfrak{gl}^M$-module $V$ and its algebraic dual $V^*$. The main object of our study are the socle filtrations of injective hulls of simple modules in $\mathbb{T}^3_{\mathfrak{gl}^M}$.These filtrations are known to be finite and exhaustive. Moreover, the simple modules of $\mathbb{T}^3_{\mathfrak{gl}^M}$ are parametrized by three partitions $\lambda, \mu, \nu$, which suggests a combinatorial approach. \cite{mackey} gives a combinatorial formula for the multiplicities of simple constituents of the above injective hulls. Based on this formula we prove two results. Let $\cdot '$ indicate  partition conjugation. Our first result states that the socle filtration of the injective object $I_{\lambda, \mu, \nu}$ coincides with the socle filtration of the object $I_{\lambda', \mu', \nu'}$ up to partition conjugation. Our second result claims that the length of the socle filtration of $I_{\lambda, \mu, \nu}$ equals $|\mu| + 1$ where $|\cdot|$ stands for the degree of a partition.
+	\end{abstract}
+	
+	\tableofcontents
+	
+	\section{Prerequisites}
+	
+	In this section we recall the definitions of some important concepts that are used throughout the paper.
+	
+	The definitions of a Lie algebra and a module over Lie algebra are standard and one can find them for example in the classical book \cite{humphreys}.
+	
+	\begin{definition}[Tensor or monoidal category according to \cite{wiki-tensor}]
+		 A monoidal category is a category $\boldsymbol{C}$ equipped with a monoidal structure which consists of:
+		\begin{itemize}
+			\item a bifunctor $\otimes : \boldsymbol{C} \times \boldsymbol{C} \rightarrow \boldsymbol{C}$ called tensor product,
+			\item an object $I$, called the identity object or the unit object,
+			\item three natural transformations which correspond to certain coherence conditions:
+				\begin{itemize}
+					\item associativity of tensor product: for objects $A,B,C$ there is a natural isomorphism $\alpha_{A,B,C}:(A\otimes B)\otimes C \cong A \otimes (B \otimes C)$ called associator.
+					\item $I$ is the left and right identity of the tensor product: there are two natural isomorphisms $\lambda$ and $\rho$ called left and right unitor. The components of $\lambda$ and $\rho$ are $\lambda_A: I\otimes A \cong A$ and $\rho_A: A\otimes I \cong A$.
+				\end{itemize}
+		\end{itemize}
+		In addition it is assumed that:
+		\begin{itemize}
+			\item the following pentagon diagram commutes for all $A, B, C, D$ in $\boldsymbol{C}$
+							
+			$\begin{tikzcd}
+				((A\otimes B) \otimes C) \otimes D \ar[r, "\alpha_{A,B,C}\otimes 1_D"] \ar[d, "\alpha_{A \otimes B,C, D}"] & (A \otimes (B \otimes C)) \otimes D \ar[r, "\alpha_{A,B \otimes C,D}"] & A \otimes ((B \otimes C) \otimes D) \ar[d, "1_A \otimes \alpha_{B,C,D}"] \\
+				(A \otimes B) \otimes (C \otimes D) \ar[rr, "\alpha_{A,B,C \otimes D}"] & & A\otimes (B \otimes (C \otimes D))
+			\end{tikzcd}$
+		
+			\item the following triangle diagram commutes for all $A, B$ in $\boldsymbol{C}$
+			
+			$\begin{tikzcd}
+				(A \otimes I) \otimes B \ar[rr, "\alpha_{A,I,B}"] \ar[dr, "\rho_A \otimes 1_B"] & & A \otimes (I \otimes B) \ar[ld, "1_A \otimes \lambda_B"] \\
+				  & A \otimes B
+			\end{tikzcd}$
+		\end{itemize}
+
+	\end{definition}
+
+	Let us recall some concepts of category theory.
+	A \textit{zero object} of a category $\boldsymbol{C}$ is an object with precisely one map to and from each object. We denote a zero object as $O$.
+	
+	Given a pair of objects $A$ and $B$ in a category $\boldsymbol{C}$, we say that the object $P$ is a \textit{product} of $A$ and $B$ if there exist maps $P \xrightarrow{p_1} A$ and $P \xrightarrow{p_2} B$ such that for any pair of maps $X \rightarrow A$ and $X \rightarrow B$ there is a unique $X \rightarrow P$ that the following diagram commutes:
+	\begin{center}
+		$\begin{tikzcd}
+		& A \\
+		X \arrow[ru] \arrow[r] \arrow[rd] & P \arrow[u,"p_1", pos=0.5, swap] \arrow[d, "p_2"] \\
+		& B
+		\end{tikzcd}$
+		
+		\textit{Diagram 1}
+	\end{center}
+
+	\textit{Sum} is dual to product. In other words, for given objects $A$, $B$ we say that $S$ is their sum if there exist maps $A \xrightarrow{u_1} S$ and $B \xrightarrow{u_2} S$ such that for every pair of maps $A \rightarrow X$ and $B \rightarrow X$ there is a unique map $S \rightarrow X$ that the  diagram dual to Diagram 1 commutes.
+	
+	For two maps $A \xrightarrow{x} B$ and $A \xrightarrow{y} B$ we say that the map $K \rightarrow A$ is a \textit{difference kernel} of $x$ and $y$ if 
+	\begin{itemize}
+		\item $K \rightarrow A \xrightarrow{x} B = K \rightarrow A \xrightarrow{y} B$,
+		\item for all $X \rightarrow A$ such that $K \rightarrow A \xrightarrow{x} B = K \rightarrow A \xrightarrow{y} B$ there is a unique $K \rightarrow X$ such that the following diagram commutes:
+		\begin{center}
+			$\begin{tikzcd}
+			& X \ar[rd] \ar[ld] \\
+			K \ar[rr] & & A
+			\end{tikzcd}$
+		\end{center}
+	\end{itemize}
+
+	A \textit{difference cokernel} is the notion dual to a difference kernel.
+
+	Suppose $\boldsymbol{C}$ has a zero object. Then we define the \textit{zero map} $A \xrightarrow{0} B$ to be the unique map $A \rightarrow O \rightarrow B$. The \textit{kernel} of $A \xrightarrow{x} B$ is defined as a difference kernel of $A \xrightarrow{0} B$ and $A \xrightarrow{x} B$. The \textit{cokernel} of $A \xrightarrow{x} B$ is defined as a difference cokernel of $A \xrightarrow{0} B$ and $A \xrightarrow{x} B$.
+		
+	We say that a morphism $f:B \rightarrow C$ is a \textit{monomorphism} if, for any given morphisms $g_1, g_2: A \rightarrow B$, the equality $f \circ g_1 = f \circ g_2$ implies $g_1=g_2$. We say that a morphism $f: A \rightarrow B$ is an \textit{epimorphism} if, for any given morphisms $g_1, g_2 : B \rightarrow C$, the equality $g_1 \circ f = g_2 \circ f$ implies $g_1 = g_2$.
+		
+	\begin{definition}[Abelian category according to \cite{abelian}]
+		 A category $\boldsymbol{C}$ is abelian if
+		\begin{itemize}
+			\item $\boldsymbol{C}$ has a zero object,
+			\item for every pair of objects there is a product and a sum,
+			\item every morphism has a kernel and a cokernel,
+			\item every monomorphism is a kernel of a morphism and every epimorphism is a cokernel of a morphism.
+		\end{itemize}
+	\end{definition}
+	
+	\begin{definition}[Lie algebra $\mathfrak{gl}(\infty)$]
+		We define the Lie algebra $\mathfrak{gl}(\infty)$ as the matrix Lie algebra which consists of all infinite matrices $\{a_{i,j}\} \colon i,j \in \mathbb{N}$ over $\mathbb{C}$ that contain only finitely many nonzero entries.
+	\end{definition}
+	
+	\begin{definition}[Injective object]
+		An object $Q$ in a category $\boldsymbol{C}$ is said to be injective if for every monomorphism $f:X \rightarrow Y$ and every morphism $g: X \rightarrow Q$ there exists a morphism $h:Y \rightarrow Q$ extending $g$ to $Y$, i.e. such that $h \circ f = g$. 
+		
+		\centering
+		\begin{tikzcd}
+			X \arrow[r,hook,"f"] \arrow[d, "g"] & Y \arrow[dl, "h", dashrightarrow] \\
+			Q
+		\end{tikzcd}
+	\end{definition}
+	
+	\begin{definition}[Socle]
+		For a module $M$ we define the socle of $M$ as the sum of all its simple submodules. We denote the socle of $M$ as $soc M$.
+	\end{definition}
+	
+	A module is semisimple if it coincides with its socle. An important tool to study nonsemisimple modules is the socle filtration.
+	
+	\begin{definition}[Socle filtration]
+		We define $soc^i M$ iteratively as $soc^0 M = 0$, $soc^1 M = soc M$ and $soc^i M := \pi^{-1}_i (soc(M/soc^{i-1}M)$ where $\pi_i$ is the projection from $M$ to $M/soc^i M$. As a result we obtain the socle filtration of $M$: 
+		$$0 \subseteq soc^1 M \subseteq soc^2 M \subseteq ... \subseteq M$$
+	\end{definition}
+	
+	The \textit{i-th level of the socle filtration} of $M$ is defined as $\underline{soc}^i M:=soc^i M/soc^{i-1}M$.
+	
+	\begin{definition}[Partition]
+		A partition $\lambda$ of nonnegative integer $n$ is a collection $\lambda = (\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_k > 0)$ where all $\lambda_i$ are positive integers and $\sum_{i}^{}\lambda_i=n$.
+	\end{definition}
+	
+	We represent partitions by Young diagrams. 
+	\begin{definition}[Young diagram]
+		The Young diagram $T$ of a partition $\alpha=(a_1, ..., a_n)$ is a table whose i-th row contains $a_i$ cells. 
+		
+		{
+			\centering{\yng(3,3,1)} \newline
+			Young diagram $T$ for $\alpha = (3,3,1)$ \newline\par
+		}
+		
+		For two partitions $\alpha=(a_1, ..., a_n), \beta=(b_1, ..., b_n)$ such that $a_i \ge b_i$  $\forall i$, we define the skew Young diagram of shape $\alpha, \beta$ as the set theoretic difference of Young diagrams of $\alpha$ and $\beta$.
+		
+		{
+			\centering{\young(::\hfil\hfil,:\hfil\hfil,\hfil\hfil)} \newline
+			Skew Young diagram $T'$ of shape $\alpha = (4,3,2), \beta=(2,1)$ \newline\par
+		}
+	\end{definition}
+	
+	\begin{definition}[Partition conjugation]
+		For a partition $\alpha$ we say that the partition $\alpha'$ is conjugate to $\alpha$ if the Young diagram of $\alpha$ coincides with the transposed Young diagram of $\alpha'$. For a partition $\alpha$ we denote its conjugate by $\alpha'$.
+		
+		{
+			\centering{\yng(3,3,1) \yng(3,2,2)} \newline
+			Young diagrams for $\alpha = (3,3,1)$ and $\alpha'=(3,2,2)$ \newline\par
+		}
+	\end{definition}
+	
+	\begin{definition}[Partition concatenation]
+		For partitions $\alpha=(a_1, ..., a_n), \beta=(b_1, ..., b_n)$ we define their concatenation as $\alpha + \beta = (a_1, ..., a_n, b_1, ..., b_n)$.
+	\end{definition}
+	
+	\begin{definition}[Skew Young tableau]
+		For a skew Young diagram $T$ we define a skew Young tableau $T'$ by assigning a positive integer to every cell of $T$. We name this integer the filling number of the cell. We say that a skew Young tableau is semistandard if the filling numbers do not decrease along each row and increase along each column.
+		
+		{
+			\centering{\young(::11,:12,23)} \newline
+			A semistandard skew Young tableau of shape $\alpha = (4,3,2), \beta=(2,1)$ \newline\par
+		}
+	\end{definition}
+	
+	\begin{definition}[Lattice word]
+		We say that a sequence $a_1, a_2, ..., a_n$ of positive integers is a lattice word if for any $m \le n$ any number $i$ occurs in the sequence $a_1, a_2, ..., a_m$ at least as often as the number $i+1$.
+	\end{definition}
+	
+	\begin{definition}[Littlewood-Richardson tableau]
+		Fix three partitions $\alpha, \beta = (b_1, ..., b_n), \gamma$. We say that $T$ is a Littlewood-Richardson tableau for $\alpha, \beta, \gamma$ if the following holds:
+		\begin{itemize}
+			\item $T$ is a semistandard skew Young tableaux of shape $\alpha, \gamma$.
+			\item $T$ has exactly $b_i$ entries that are equal to $i$.
+			\item The sequence obtained by concatenating the filling numbers of the reversed rows of $T$ from top to bottom is a lattice word.
+		\end{itemize}
+		We define the Littlewood-Richardson coefficient $N_{\alpha, \beta}^\gamma$ as the number of different Littlewood-Richardson tableaux for partitions $\alpha, \beta, \gamma$.
+		
+		{
+			\centering{\young(::11,:12,23)} \newline
+			A Littlewood-Richardson tableau for $\alpha = (2,1), \beta=(3,2,1), \gamma=(4,3,2)$ \newline\par
+		}
+	\end{definition}
+	
+	\section{Background}
+
+	This section provides some background concerning the objects which we are investigating and presents a number of statements motivating our research.
+
+	The paper \cite{introduction1} introduces a class of infinite-dimensional matrix Lie algebras $\mathfrak{gl}^M$ called \textit{Mackey Lie algebras}, which consist of infinite matrices over $\mathbb{C}$ with the property that every row and every column contains only finitely many nonzero elements. Note that this does not necessarily mean that every matrix has finitely many nonzero entries. 
+	
+	Consider two modules $V$ and $V_*$ over the Lie algebra $\mathfrak{gl}^M$: they consist respectively of all infinite finitary \footnote{An infinite sequence is \textit{finitary} if it has finitely many nonzero entries.} columns and all infinite finitary rows of $\mathfrak{gl}^M$. The action of $\mathfrak{gl}^M$ on $V$ is given by $g \cdot c = gc$ for $ g \in \mathfrak{gl}^M, c \in V$, and the action of $\mathfrak{gl}^M$ on $V_*$ is given by $g \cdot r = -rg$ for $ r \in V_*$. It is easy to see that the modules $V$ and $V_*$ are simple. This follows from the observation that for any given nonzero finitary column (respectively row) $c$ and every other finitary column (respectively row) $c'$ there is $g \in \mathfrak{gl}^M$ that maps $c'$ to $c$. 
+	
+	The third module we consider is $V^*$ - the algebraic dual space of $V$ (the space of homomorphisms from $V$ to  $\mathbb{C}$). This module is not simple as $V_*$ is a submodule of $V^*$. The latter holds because the action of $\mathfrak{gl}^M$ on $V^*$ is given by the same formula as for $V_*$: $g \cdot r = -rg$, and $V_*$ contains only finitary rows while $V^*$ contains all rows. In addition $V_*$ is the only proper nonzero submodule of $V^*$. 
+	This follows from the following two facts: 
+	\begin{itemize}
+		\item $V^*/V_*$ is a simple $\mathfrak{gl}^M$-module (see \cite{mackey}).
+		\item The exact sequence $0 \rightarrow V_* \rightarrow V^* \rightarrow V^*/V_* \rightarrow 0$ does not split as the subalgebra $\mathfrak{gl}(\infty)$ of $\mathfrak{gl}^M$ maps $V^*$ to $V_*$ when acting on $V^*$, while the space of  $\mathfrak{gl}(\infty)$-invariants in $V^*$ equals zero.
+	\end{itemize}
+	Consequently $socV^* = V_*$.
+	
+	Now we introduce the category $\mathbb{T}^3_{\mathfrak{gl}^M}$. Its objects are $\mathfrak{gl}^M$-modules isomorphic to subquotients of finite direct sums of the form $\underset{n,m,p}{\oplus} V^{\otimes n}\otimes (V^*)^{\otimes m} \otimes (V_*)^{\otimes p}$ for $ n,m,p \in \mathbb{N}$. The morphisms of  $\mathbb{T}^3_{\mathfrak{gl}^M}$ are morphisms of the $\mathfrak{gl}^M$-modules. The category $\mathbb{T}^3_{\mathfrak{gl}^M}$ is a tensor category with respect to the usual tensor product $\otimes$ and it is the minimal abelian tensor category which is closed under taking submodules and contains $V$ and $V^*$.
+	
+	It is important to determine what are the simple modules in $\mathbb{T}^3_{\mathfrak{gl}^M}$. 
+	We define $(\cdot)_\lambda$ to be the Schur functor (see for example \cite{fulton-harris}) associated with a partition $\lambda$. From \cite{introduction3} we know that $V_\mu \otimes (V_*)_\nu$ is indecomposable and has a simple socle, so this justifies the definition of the following simple module: $V_{\mu, \nu} := soc(V_\mu \otimes (V_*)_\nu)$. Moreover by \cite{mackey} all simple objects in $\mathbb{T}^3_{\mathfrak{gl}^M}$ are (up to isomorphism) tensor products $V_{\lambda, \mu, \nu} := (V^*/V_*)_\lambda \otimes  V_{\mu, \nu}$ and they are mutually nonisomorphic for different ordered triples of partitions $(\lambda, \mu, \nu)$. This means that we can parametrize all simple objects by three partitions.
+	
+	It is known that every indecomposable injective object of $\mathbb{T}^3_{\mathfrak{gl}^M}$ is isomorphic to a direct summand of $(V^*/V_*)^{\otimes m} \otimes (V^*) ^{\otimes n} \otimes (V)^{\otimes p}$ for fixed $m,n,p$. More precisely, it is a result in \cite{mackey} that indecomposable injectives in  $\mathbb{T}^3_{\mathfrak{gl}^M}$ are up to isomorphism $I_{\lambda, \mu, \nu} := (V^*/V_*)_\lambda \otimes (V^*)_\mu \otimes V_\nu$. 
+		
+	The study of injective objects is crucial for understanding the structure of the category  $\mathbb{T}^3_{\mathfrak{gl}^M}$. We are going to investigate the socle filtrations of the objects $I_{\lambda, \mu, \nu}$.  Note that the socle filtration of a general $\mathfrak{gl}^M$-module may be infinite or it may not be exhaustive in the sense that the union of $\underline{soc}^i$ may not be equal to $M$. However, the socle filtration of $I_{\lambda, \mu, \nu}$ is finite and  exhaustive, and it turns out to be a powerful instrument for understanding $\mathbb{T}^3_{\mathfrak{gl}^M}$.
+	
+	The formula for the explicit computation of $\underline{soc}^k(I_{\lambda, \mu, \nu})$ is given by 
+	\begin{equation}\label{main}
+	\underline{soc}^k(I_{\lambda, \mu, \nu}) \simeq \underset{l+r=k-1}{\bigoplus} \underset{|\alpha| = l}{\bigoplus} \underset{|\delta| = r}{\bigoplus} \,\, \underset{\zeta, \gamma ,\phi, \beta}{\bigoplus} N_{\lambda, \alpha}^\zeta N_{\alpha, \beta}^\mu N_{\gamma, \delta}^\beta N_{\phi, \delta}^\nu V_{\zeta, \gamma, \phi},
+	\end{equation} where $N_{\alpha, \beta}^\gamma$ is the Littlewood-Richardson coefficient and $V_{\zeta, \gamma, \phi}$ is the corresponding simple object of $\mathbb{T}^3_{\mathfrak{gl}^M}$ \cite{mackey}. The socle filtration is finite so it makes sense to define the \textit{Loewy length} of $I_{\lambda, \mu, \nu}$ as the length of the socle filtration of $I_{\lambda, \mu, \nu}$. And finally it is convenient to denote the multiplicity of $V_{\alpha, \beta, \gamma}$ in the $k$-th layer of socle filtration of the object $I_{\lambda, \mu, \nu}$ as $[\underline{soc}^k(I_{\lambda, \mu, \nu}):V_{\alpha, \beta, \gamma}]$
+
+	The somewhat obscure formula \eqref{main} is the entry point of our research. The idea is to study the algebraic properties of $\mathbb{T}^3_{\mathfrak{gl}^M}$ from a combinatorial point of view. The main difficulty for understanding the formula is the summation over all possible partitions. Therefore, as a first step we wrote a computer program to calculate the layers of the socle filtration. The program goes through all partitions until the corresponding Littlewood-Richardson coefficients equal to 0, something a human can hardly do. It produced tables of socle filtrations which turned out to be very helpful. First, these tables confirmed our conjecture stating that by conjugating all three partitions of $I_{\lambda, \mu, \nu}$ every object $V_{\zeta, \gamma, \phi}$ in every layer of the socle filtration of $I_{\lambda ', \mu', \nu'}$ gets conjugated to $V_{\zeta', \gamma', \phi'}$. This conjecture was proven as Theorem 1. In addition, the tables helped us see the pattern for the length of socle filtrations and eventually to prove Theorem 2.
+	
+	\section{Properties of Littlewood-Richardson coefficients}
+
+	This section contains several properties of Littlewood-Richardson coefficients that are essential for the proof of main results.
+	
+	\begin{lemma}
+		Let $N_{\alpha, \beta}^\gamma$ be a Littlewood-Richardson coefficient for partitions $\alpha, \beta, \gamma$. Then $N_{\alpha, \beta}^\gamma \not = 0$ implies $|\gamma|=|\alpha| + |\beta|$.
+	\end{lemma}
+	\begin{proof}
+		From the definition of Littlewood-Richardson tableau for $\alpha, \beta, \gamma$ it follows that the number of its cells is $|\gamma| - |\alpha|$ and that the tableau contains $|\beta|$ entries. This means that if such a tableau exists then $|\gamma| - |\alpha| = |\beta|$, i.e. $|\gamma|=|\alpha| + |\beta|$.
+	\end{proof}
+
+	\begin{lemma}
+		Suppose $\alpha, \beta, \gamma$ are partitions and $\alpha', \beta', \gamma'$ are their conjugates. Then $$N_{\alpha, \beta}^\gamma = N_{\alpha', \beta'}^{\gamma'}.$$
+	\end{lemma}
+	The proof of this fact see for example in \cite{conjugate}.
+
+	\begin{definition}[Standard filling]
+	Consider a skew Young diagram $D$ for partitions $\alpha, \beta$. We say that a Young tableau $T$ is the standard filling of $D$ if $D$ and $T$ have the same shape and the filling number in every cell equals the number of the cell in its column.
+	\end{definition}
+
+{
+	\centering{\young(:::11,1112,222,3)} \newline
+	The standard filling of the skew Young diagram for $\alpha = (5,3), \beta=(5,4,1)$ \newline\par
+}
+
+	
+	Now, let us prove several useful properties of standard fillings.
+	
+	\begin{proposition}
+		The standard filling of a skew Young diagram is always a semistandard skew Young tableau, i.e. the entries weakly increase along each row and strictly increase down each column.
+	\end{proposition}
+	\begin{proof}
+		Let $T$ be the skew Young tableau obtained as the standard filling of a skew Young diagram $D$.
+		First, we notice that the filling numbers strictly increase down the columns by construction. 
+		
+		Now suppose there is a row $i$ and two cells $D_{i, j}, D_{i, j + 1}$ with filling numbers $T_{i, j},T_{i, j + 1}$ satisfying $T_{i, j} > T_{i, j + 1}$. By the definition of standard filling this means that the cell $D_{i, j}$ has more cells above it than $D_{i, j + 1}$. However this is impossible by the construction of skew Young diagram. This contradiction shows that $T$ is indeed a semistandard Young tableau.
+	\end{proof}
+
+	\begin{proposition}
+		The sequence obtained by concatenating the reversed rows of a standard filling of a skew Young diagram $D$ is a lattice word.
+	\end{proposition}
+	\begin{proof}
+		In this proof we say that a prefix of a sequence $a_1, a_2, ..., a_n$ is a sequence $a_1, a_2, ..., a_m$ for some $m \le n$.
+		
+		We need to show that, for the sequence of concatenated reversed rows $A$ every prefix contains the number $i$ at least as many times as the number $i+1$. But this is an easy consequence of the fact that the filling number of the cell $D_{i,j}$ is preceded in $A$ by the filling numbers of all cells above $D_{i,j}$. Then, by the construction of standard filling, the number $i+1$ appears in any prefix of $A$ at most as many times as the number $i$. Therefore the sequence obtained by concatenating the reversed rows of a standard filling is a lattice word.
+	\end{proof}
+
+	Keeping the properties of a standard filling in mind, we get back to the properties of Littlewood-Richardson coefficients.
+
+	\begin{lemma}
+		Suppose $\alpha, \beta$ are two partitions. Then $N_{\alpha, \beta}^{\alpha + \beta} \not = 0$.
+	\end{lemma}
+	\begin{proof}
+		Recall that a Littlewood-Richardson coefficient is defined as the number of Littlewood-Richardson tableaux of a certain kind, and consider the skew Young diagram $D$ of shape $\alpha + \beta$, $\alpha$. Let us prove that the standard filling $T$ of $D$ is a Littlewood-Richardson tableau, thus proving that at least one such tableau exists. Then $N_{\alpha, \beta}^{\alpha + \beta} \geq 1$ will follow. 
+		
+		Let $\beta = (b_1, b_2, ..., b_n)$. It suffices to show three things: $T$ is a semistandard skew Young tableau, the sequence obtained by concatenating its reversed rows is a lattice word, and the tableau has exactly $b_i$ entries that are equal to $i$.
+		
+		The first two statements were proved as Propositions 1 and 2, so we only need to show that  the filling number $i$ is assigned to $b_i$ cells of $D$. Consider the Young diagram of the partition $\alpha + \beta$, each row of which comes from $\alpha$ or $\beta$. Next consider the row  corresponding to the filling number $b_i$ (it arises from $\beta$) and fill every box in it with numbers $i$. Leave the rows corresponding to $\alpha$ empty. Denote this tableau as $T'$.
+		
+		Now we need to show that the filling numbers in $T'$ are in one to one correspondence with the filling numbers in $T$. By the definition of skew Young diagram, every column of $T$ contains as many numbers as the same column of $T'$. But the entries in any column of $T$ and $T'$ take all values from $1$ to $m$ for a certain integer $m$. These two observations imply that the numbers appearing in $T$ are the same as the numbers in $T'$. Since the number $i$ is written in exactly $b_i$ cells of $T'$, the same applies for $T$.
+		
+		{
+			\centering{\young(11111,\hfil\hfil\hfil\hfil\hfil,2222,\hfil\hfil\hfil,3)} \newline
+			Tableau $T'$ for $\alpha = (5,3), \beta=(5,4,1)$ \newline\par
+		}
+		Thus it was shown that there is at least one tableau for $\alpha, \beta, \alpha + \beta$, which concludes the proof.
+	\end{proof}
+	
+	\section{Symmetry of socle filtration with respect to partition conjugation} \label{sec-struct}
+	
+	\begin{theorem}
+		Let $\underline{soc}^k(I_{\lambda, \mu, \nu})$ be isomorphic to $\bigoplus m_i V_{\zeta_i, \gamma_i, \phi_i}$. Then $\underline{soc}^k(I_{\lambda', \mu', \nu'})$ is isomorphic to $\bigoplus m_i V_{\zeta_i', \gamma_i', \phi_i'}$. 
+		In other words, $[\underline{soc}^k(I_{\lambda, \mu, \nu}):V_{\alpha, \beta, \gamma}]=[\underline{soc}^k(I_{\lambda', \mu', \nu'}):V_{\alpha', \beta', \gamma'}]$.
+	\end{theorem}
+	\begin{proof}
+		As we stated in Section 2:
+		
+			\begin{equation*}
+			\underline{soc}^k(I_{\lambda, \mu, \nu}) \simeq \underset{l+r=k-1}{\bigoplus} \underset{|\alpha| = l}{\bigoplus} \underset{|\delta| = r}{\bigoplus} \,\, \underset{\zeta, \gamma ,\phi, \beta}{\bigoplus} N_{\lambda, \alpha}^\zeta N_{\alpha, \beta}^\mu N_{\gamma, \delta}^\beta N_{\phi, \delta}^\nu V_{\zeta, \gamma, \phi}
+			\end{equation*}
+			where the summation is taken over all possible partitions.
+			
+			Fix $i$ and set $m:=m_i, \zeta := \zeta_i, \gamma := \gamma_i, \phi:=\phi_i$. Let $m'$ be the multiplicity of $V_{\zeta', \gamma', \phi'}$ in $\underline{soc}^k(I_{\lambda', \mu', \nu'})$. We show now that $m' \ge m$.  
+			
+			Formula \eqref{main} implies that there exists a set $(\alpha_j, \delta_j, \beta_j)$ such that $|\alpha_j|+|\delta_j|=k-1$ for all $j$ and 
+			\begin{equation*}
+				\sum_{j}^{}N_{\lambda, \alpha_j}^\zeta N_{\alpha_j, \beta_j}^\mu N_{\gamma, \delta_j}^{\beta_j} N_{\phi, \delta_j}^\nu=m.
+			\end{equation*}
+			Then Lemma 2 shows that 
+			\begin{equation*}
+				\sum_{j}^{}N_{\lambda', \alpha'_j}^{\zeta'} N_{\alpha'_j, \beta'_j}^{\mu'} N_{\gamma', \delta_j'}^{\beta'_j} N_{\phi', \delta'_j}^{\nu'}=m.
+			\end{equation*}
+			Therefore $m' \ge m$.
+			
+			For every partition $\alpha$ the equality $(\alpha')'=\alpha$ holds, so we  can apply the same argument to $\underline{soc}^k(I_{\lambda', \mu', \nu'})$  and conclude that $[\underline{soc}^k(I_{\lambda, \mu, \nu}):V_{\alpha, \beta, \gamma}] \ge [\underline{soc}^k(I_{\lambda', \mu', \nu'}):V_{\alpha', \beta', \gamma'}]$.
+			These two inequalities prove the theorem.
+	\end{proof}
+	\begin{conjecture}
+		Theorem 1 can be considered as combinatorial evidence for the following conjecture: there exists a tensor functor of autoequivalence $(\cdot)':\mathbb{T}^3_{\mathfrak{gl}^M} \rightarrow \mathbb{T}^3_{\mathfrak{gl}^M}$ such that $(V_{\alpha, \beta, \gamma})' \simeq V_{\alpha', \beta', \gamma'}$.
+	\end{conjecture}
+	This conjecture is inspired by Serganova's functor of tensor autoequivalence on the category $\mathbb{T}_{\mathfrak{gl}( \infty )}$, see \cite{serganova}. It is very likely that the functor of Conjecture 1 can be constructed in a way similar to Serganova's functor by passing to a Lie superalgebra analogue of the Mackey Lie algebra $\mathfrak{gl}^M$.
+	
+	\section{Length of socle filtration}\label{sec-bound}
+		
+	\begin{proposition}
+		If $V_{\zeta, \gamma, \phi} \subset \underline{soc}^k(I_{\lambda, \mu, \nu})$ then $|\gamma| = |\mu| - k + 1$.
+	\end{proposition}
+	\begin{proof}
+		From formula \eqref{main} for $\underline{soc}^k(I_{\lambda, \mu, \nu})$ we conclude that if $\underline{soc}^k(I_{\lambda, \mu, \nu})$ is not zero then for every $V_{\zeta, \gamma, \phi}$ there is a set of triples $(\beta, \delta, \alpha)$ such that $N_{\gamma, \delta}^{\beta} \not = 0$ and  $N_{\alpha, \beta}^\mu \not = 0$. Then by Lemma 1 it follows that $|\beta| = |\gamma| + |\delta|$ and $|\mu| = |\alpha| + |\beta| = |\alpha| + |\gamma| + |\delta|$. But $|\alpha|$ and $|\delta|$ satisfy $|\alpha| + |\delta| = k-1$, so $|\mu| = k-1 + |\gamma|$, or equivalently $|\gamma| = |\mu| - k + 1$.
+	\end{proof}
+		
+	Now with the help of Proposition 3 we can prove the following theorem:
+		
+	\begin{theorem}
+			The Loewy length of $I_{\lambda, \mu, \nu}$ is equal to $|\mu| + 1$.
+	\end{theorem}
+	
+	\begin{proof}
+		Let us show that $\underline{soc}^{|\mu| + 1}(I_{\lambda, \mu, \nu})$ contains $V_{\lambda + \mu, (\emptyset), \nu}$ as a submodule, and is therefore nonzero. It suffices to prove that there are $\alpha, \delta, \beta$ such that 
+		\begin{equation*}
+			N_{\lambda, \alpha}^{\lambda + \mu} N_{\alpha, \beta}^\mu N_{(\emptyset), \delta}^\beta N_{\nu, \delta}^\nu \not = 0
+		\end{equation*}
+		and $|\alpha| + |\delta| = |\mu|$. Set $\alpha := \mu, \delta:=(\emptyset), \beta:=(\emptyset)$. Then $N_{\mu, (\emptyset)}^\mu = N_{(\emptyset), (\emptyset)}^{(\emptyset)} = N_{\nu, (\emptyset)}^\nu = 1$ and thus 
+		\begin{equation*}
+			N_{\lambda, \mu}^{\lambda + \mu} N_{\mu, (\emptyset)}^\mu N_{(\emptyset), (\emptyset)}^{(\emptyset)} N_{\nu, (\emptyset)}^\nu = N_{\lambda, \mu}^{\lambda + \mu}
+		\end{equation*}
+		is nonzero by Lemma 3.
+		
+		Now we know that $\underline{soc}^{|\mu| + 1}(I_{\lambda, \mu, \nu})$ is nonzero, and according to Proposition 3,
+		\begin{equation*}
+			\underline{soc}^{|\mu| + 2}(I_{\lambda, \mu, \nu}) = 0,
+		\end{equation*}
+		which finishes the proof of the theorem.
+	\end{proof}
+	\section{Appendix}
+	This appendix contains the socle filtration tables for indecomposable injective objects. Socle filtrations of $I_{\alpha, \beta, \gamma}$ are sorted by $|\alpha| + |\beta| + |\gamma|$. The i-th level of a table, counted from bottom to top, represents $\underline{soc}^k(I_{\lambda, \mu, \nu})$. The tables were generated with a program based on formula \eqref{main}.
+		
+	\begin{spacing}{1.5}
+		$|\alpha| + |\beta| + |\gamma|=0$:
+	\end{spacing}
+	
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}
+	
+	\begin{spacing}{1.5}
+		$|\alpha| + |\beta| + |\gamma|=1$:
+	\end{spacing}
+
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}
+	\newline	
+
+	\begin{spacing}{1.0}
+		$|\alpha| + |\beta| + |\gamma|=2$:
+	\end{spacing}
+
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}
+	\newline
+
+	\begin{spacing}{1.0}
+		$|\alpha| + |\beta| + |\gamma|=3$:
+	\end{spacing}
+
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$$\bigoplus$$V_{(1)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$$\bigoplus$$V_{(1)(\emptyset)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$$\bigoplus$$V_{(1)(1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$$\bigoplus$$V_{(1)(1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(2,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(3)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1)(1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}
+
+	\begin{spacing}{1.5}
+		$|\alpha| + |\beta| + |\gamma|=4$:
+	\end{spacing}
+
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(3,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(4)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1)}$$\bigoplus$$V_{(1)(\emptyset)(1,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1)}$$\bigoplus$$V_{(\emptyset)(\emptyset)(2)}$$\bigoplus$$V_{(1)(\emptyset)(2,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2)}$$\bigoplus$$V_{(1)(\emptyset)(3)}$\\
+		\hline
+		$V_{(\emptyset)(1)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1)}$$\bigoplus$$V_{(1)(1)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1)(\emptyset)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1)}$$\bigoplus$$V_{(1)(1)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1)}$$\bigoplus$$V_{(1)(1)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(2)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1)}$$\bigoplus$$V_{(1)(1)(2)}$\\
+		\hline
+		$V_{(\emptyset)(2)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1)(1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(\emptyset)}$$\bigoplus$$V_{(1)(1,1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(1)}$\\
+		\hline
+		2$V_{(1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1)(1)(1)}$$\bigoplus$$V_{(2)(1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(\emptyset)}$$\bigoplus$$V_{(\emptyset)(2)(\emptyset)}$$\bigoplus$$V_{(1)(1,1)(1)}$$\bigoplus$$V_{(1)(2)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2)(\emptyset)}$$\bigoplus$$V_{(1)(2)(1)}$\\
+		\hline
+		$V_{(\emptyset)(3)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(2,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(2,2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1)(\emptyset)}$$\bigoplus$$V_{(3)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2)(1,1)(\emptyset)}$$\bigoplus$$V_{(2)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,1)(\emptyset)}$$\bigoplus$$V_{(1)(3)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(3,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1)(3)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(4)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1)(\emptyset)(1,1)}$$\bigoplus$$V_{(2)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(1)(1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1)(\emptyset)(2)}$$\bigoplus$$V_{(2)(\emptyset)(2)}$\\
+		\hline
+		$V_{(1)(1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1)(1)(1)}$$\bigoplus$$V_{(2)(1)(1)}$\\
+		\hline
+		$V_{(1)(1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(1)}$$\bigoplus$$V_{(3)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1)(1)(1)}$$\bigoplus$$V_{(2)(1)(1)}$\\
+		\hline
+		$V_{(1)(2)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$$\bigoplus$2$V_{(2,1)(1)(\emptyset)}$$\bigoplus$$V_{(3)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2)(1,1)(\emptyset)}$$\bigoplus$$V_{(2)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1)(\emptyset)}$$\bigoplus$$V_{(3)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1)(3)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(1)}$$\bigoplus$$V_{(3)(\emptyset)(1)}$\\
+		\hline
+		$V_{(2)(1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1)(\emptyset)}$$\bigoplus$$V_{(3)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1)(\emptyset)}$$\bigoplus$$V_{(3)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}
+	
+	\begin{spacing}{1.5}
+		$|\alpha| + |\beta| + |\gamma|=5$:
+	\end{spacing}
+
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1,1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(3,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(3,2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(4,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(5)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1,1)}$$\bigoplus$$V_{(1)(\emptyset)(1,1,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1,1,1)}$$\bigoplus$$V_{(\emptyset)(\emptyset)(2,1)}$$\bigoplus$$V_{(1)(\emptyset)(2,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(2,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,1)}$$\bigoplus$$V_{(1)(\emptyset)(2,2)}$\\
+		\hline
+		$V_{(\emptyset)(1)(2,2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(2,1)}$$\bigoplus$$V_{(\emptyset)(\emptyset)(3)}$$\bigoplus$$V_{(1)(\emptyset)(3,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(3,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(3)}$$\bigoplus$$V_{(1)(\emptyset)(4)}$\\
+		\hline
+		$V_{(\emptyset)(1)(4)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$$\bigoplus$$V_{(1)(\emptyset)(1,1)}$$\bigoplus$$V_{(1,1)(\emptyset)(1,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1)}$$\bigoplus$$V_{(1)(1)(1,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$$\bigoplus$$V_{(1)(\emptyset)(1,1)}$$\bigoplus$$V_{(1)(\emptyset)(2)}$$\bigoplus$$V_{(1,1)(\emptyset)(2,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1)}$$\bigoplus$$V_{(\emptyset)(1)(2)}$$\bigoplus$$V_{(1)(1)(2,1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(2)}$$\bigoplus$$V_{(1,1)(\emptyset)(3)}$\\
+		\hline
+		$V_{(\emptyset)(1)(2)}$$\bigoplus$$V_{(1)(1)(3)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1,1)}$$\bigoplus$$V_{(2)(\emptyset)(1,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1)}$$\bigoplus$$V_{(1)(1)(1,1,1)}$\\
+		\hline
+		$V_{(\emptyset)(2)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$$\bigoplus$$V_{(1)(\emptyset)(1,1)}$$\bigoplus$$V_{(1)(\emptyset)(2)}$$\bigoplus$$V_{(2)(\emptyset)(2,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(1,1)}$$\bigoplus$$V_{(\emptyset)(1)(2)}$$\bigoplus$$V_{(1)(1)(2,1)}$\\
+		\hline
+		$V_{(\emptyset)(2)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(\emptyset)(\emptyset)(1)}$$\bigoplus$$V_{(1)(\emptyset)(2)}$$\bigoplus$$V_{(2)(\emptyset)(3)}$\\
+		\hline
+		$V_{(\emptyset)(1)(2)}$$\bigoplus$$V_{(1)(1)(3)}$\\
+		\hline
+		$V_{(\emptyset)(2)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$$\bigoplus$$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1)}$$\bigoplus$$V_{(1)(1,1)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(2)}$\\
+		\hline
+		$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1)}$$\bigoplus$$V_{(1)(1,1)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$$\bigoplus$2$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(1,1)}$$\bigoplus$$V_{(2)(1)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1)}$$\bigoplus$$V_{(\emptyset)(2)(1)}$$\bigoplus$$V_{(1)(1,1)(1,1)}$$\bigoplus$$V_{(1)(2)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(2,1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$$\bigoplus$2$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(2)}$$\bigoplus$$V_{(2)(1)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1,1)(1)}$$\bigoplus$$V_{(\emptyset)(2)(1)}$$\bigoplus$$V_{(1)(1,1)(2)}$$\bigoplus$$V_{(1)(2)(2)}$\\
+		\hline
+		$V_{(\emptyset)(2,1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(3)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(1)(1)(1)}$$\bigoplus$$V_{(2)(1)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(2)(1)}$$\bigoplus$$V_{(1)(2)(1,1)}$\\
+		\hline
+		$V_{(\emptyset)(3)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(3)(\emptyset)(2)}$\\
+		\hline
+		$V_{(\emptyset)(1)(\emptyset)}$$\bigoplus$$V_{(1)(1)(1)}$$\bigoplus$$V_{(2)(1)(2)}$\\
+		\hline
+		$V_{(\emptyset)(2)(1)}$$\bigoplus$$V_{(1)(2)(2)}$\\
+		\hline
+		$V_{(\emptyset)(3)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(1)(1)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(1,1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(1)(1,1,1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$\\
+		\hline
+		2$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(1)(1)}$$\bigoplus$$V_{(2,1)(1)(1)}$\\
+		\hline
+		2$V_{(1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2)(\emptyset)}$$\bigoplus$$V_{(1,1)(1,1)(1)}$$\bigoplus$$V_{(1,1)(2)(1)}$$\bigoplus$$V_{(2)(1,1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(\emptyset)(2,1)(\emptyset)}$$\bigoplus$$V_{(1)(1,1,1)(1)}$$\bigoplus$$V_{(1)(2,1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2,1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(1)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2)(\emptyset)}$$\bigoplus$$V_{(1,1)(1,1)(1)}$$\bigoplus$$V_{(2)(2)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2,1)(\emptyset)}$$\bigoplus$$V_{(1)(2,1)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2,2)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$2$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(1)}$$\bigoplus$$V_{(3)(1)(1)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$$\bigoplus$2$V_{(1)(2)(\emptyset)}$$\bigoplus$$V_{(1,1)(2)(1)}$$\bigoplus$$V_{(2)(1,1)(1)}$$\bigoplus$$V_{(2)(2)(1)}$\\
+		\hline
+		$V_{(\emptyset)(2,1)(\emptyset)}$$\bigoplus$$V_{(\emptyset)(3)(\emptyset)}$$\bigoplus$$V_{(1)(2,1)(1)}$$\bigoplus$$V_{(1)(3)(1)}$\\
+		\hline
+		$V_{(\emptyset)(3,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4)(\emptyset)(1)}$\\
+		\hline
+		$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(3)(1)(1)}$\\
+		\hline
+		$V_{(1)(2)(\emptyset)}$$\bigoplus$$V_{(2)(2)(1)}$\\
+		\hline
+		$V_{(\emptyset)(3)(\emptyset)}$$\bigoplus$$V_{(1)(3)(1)}$\\
+		\hline
+		$V_{(\emptyset)(4)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1,1,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(1,1,1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(1,1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1,1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2,1,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(2,1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2,2)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(2,2,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(3)(\emptyset)}$$\bigoplus$$V_{(2)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,1,1)(\emptyset)}$$\bigoplus$$V_{(1)(3,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(3,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(3)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,2)(\emptyset)}$$\bigoplus$$V_{(1)(3,1)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(3,2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(1,1)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(3)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(3)(\emptyset)}$\\
+		\hline
+		$V_{(1)(3,1)(\emptyset)}$$\bigoplus$$V_{(1)(4)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(4,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(5)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(2)(3)(\emptyset)}$\\
+		\hline
+		$V_{(1)(4)(\emptyset)}$\\
+		\hline
+		$V_{(\emptyset)(5)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1,1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(2,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(2,2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(3,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(4)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1,1)}$$\bigoplus$$V_{(1,1)(\emptyset)(1,1,1)}$$\bigoplus$$V_{(2)(\emptyset)(1,1,1)}$\\
+		\hline
+		$V_{(1)(1)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(1,1)}$$\bigoplus$$V_{(1)(\emptyset)(2)}$$\bigoplus$$V_{(1,1)(\emptyset)(2,1)}$$\bigoplus$$V_{(2)(\emptyset)(2,1)}$\\
+		\hline
+		$V_{(1)(1)(2,1)}$\\
+		\hline
+	\end{tabular},
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(2)}$$\bigoplus$$V_{(1,1)(\emptyset)(3)}$$\bigoplus$$V_{(2)(\emptyset)(3)}$\\
+		\hline
+		$V_{(1)(1)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(1,1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(1,1)}$$\bigoplus$$V_{(2)(1)(1,1)}$\\
+		\hline
+		$V_{(1)(1,1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(2)}$$\bigoplus$$V_{(2,1)(\emptyset)(2)}$\\
+		\hline
+		$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(2)}$$\bigoplus$$V_{(2)(1)(2)}$\\
+		\hline
+		$V_{(1)(1,1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1,1)}$$\bigoplus$$V_{(3)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(1,1)}$$\bigoplus$$V_{(2)(1)(1,1)}$\\
+		\hline
+		$V_{(1)(2)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(2)}$$\bigoplus$$V_{(3)(\emptyset)(2)}$\\
+		\hline
+		$V_{(1)(1)(1)}$$\bigoplus$$V_{(1,1)(1)(2)}$$\bigoplus$$V_{(2)(1)(2)}$\\
+		\hline
+		$V_{(1)(2)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(1)(1)}$$\bigoplus$$V_{(2,1)(1)(1)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(1,1)(1)}$$\bigoplus$$V_{(2)(1,1)(1)}$\\
+		\hline
+		$V_{(1)(1,1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$2$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,2)(\emptyset)(1)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$\\
+		\hline
+		2$V_{(1,1)(1)(\emptyset)}$$\bigoplus$2$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(1)(1)}$$\bigoplus$2$V_{(2,1)(1)(1)}$$\bigoplus$$V_{(3)(1)(1)}$\\
+		\hline
+		$V_{(1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1)(2)(\emptyset)}$$\bigoplus$$V_{(1,1)(1,1)(1)}$$\bigoplus$$V_{(1,1)(2)(1)}$$\bigoplus$$V_{(2)(1,1)(1)}$$\bigoplus$$V_{(2)(2)(1)}$\\
+		\hline
+		$V_{(1)(2,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$$\bigoplus$$V_{(4)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(1)}$$\bigoplus$$V_{(3)(1)(1)}$\\
+		\hline
+		$V_{(1)(2)(\emptyset)}$$\bigoplus$$V_{(1,1)(2)(1)}$$\bigoplus$$V_{(2)(2)(1)}$\\
+		\hline
+		$V_{(1)(3)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(2)(1,1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(1,1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$2$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(2)(\emptyset)}$$\bigoplus$2$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(1,1,1)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$\\
+		\hline
+		$V_{(1)(2,2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$2$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(2)(\emptyset)}$$\bigoplus$2$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(3)(1,1)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2,1)(\emptyset)}$$\bigoplus$$V_{(1,1)(3)(\emptyset)}$$\bigoplus$$V_{(2)(2,1)(\emptyset)}$$\bigoplus$$V_{(2)(3)(\emptyset)}$\\
+		\hline
+		$V_{(1)(3,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(5)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(3)(\emptyset)}$$\bigoplus$$V_{(2)(3)(\emptyset)}$\\
+		\hline
+		$V_{(1)(4)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(1,1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(2,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(3)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(1,1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(1,1)(1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1)(\emptyset)(1)}$$\bigoplus$$V_{(1,1,1)(\emptyset)(2)}$$\bigoplus$$V_{(2,1)(\emptyset)(2)}$\\
+		\hline
+		$V_{(1,1)(1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(1,1)}$$\bigoplus$$V_{(3)(\emptyset)(1,1)}$\\
+		\hline
+		$V_{(2)(1)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2)(\emptyset)(1)}$$\bigoplus$$V_{(2,1)(\emptyset)(2)}$$\bigoplus$$V_{(3)(\emptyset)(2)}$\\
+		\hline
+		$V_{(2)(1)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,2)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(1)(1)}$$\bigoplus$$V_{(2,1)(1)(1)}$\\
+		\hline
+		$V_{(1,1)(1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1)(1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(1)(1)}$$\bigoplus$$V_{(2,1)(1)(1)}$\\
+		\hline
+		$V_{(1,1)(2)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(1)}$$\bigoplus$$V_{(3)(1)(1)}$\\
+		\hline
+		$V_{(2)(1,1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2)(\emptyset)(1)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$$\bigoplus$$V_{(4)(\emptyset)(1)}$\\
+		\hline
+		$V_{(2)(1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1)(1)}$$\bigoplus$$V_{(3)(1)(1)}$\\
+		\hline
+		$V_{(2)(2)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$2$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(1,1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(2,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(2)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$\\
+		\hline
+		$V_{(1,1)(3)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(3)(1,1)(\emptyset)}$\\
+		\hline
+		$V_{(2)(1,1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$2$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1,1)(\emptyset)}$$\bigoplus$$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(1,1)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(2)(2,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(5)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(2)(\emptyset)}$$\bigoplus$$V_{(3)(2)(\emptyset)}$\\
+		\hline
+		$V_{(2)(3)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(1,1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(2)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(1,1,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(1,1,1)(1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(\emptyset)(1)}$$\bigoplus$$V_{(2,2)(\emptyset)(1)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$\\
+		\hline
+		$V_{(2,1)(1)(1)}$\\
+		\hline
+	\end{tabular},
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1)(\emptyset)(1)}$$\bigoplus$$V_{(4)(\emptyset)(1)}$\\
+		\hline
+		$V_{(3)(1)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,1,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$$\bigoplus$$V_{(2,2)(1)(\emptyset)}$$\bigoplus$$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+		$V_{(2,1)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(3)(1,1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(5)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3,1)(1)(\emptyset)}$$\bigoplus$$V_{(4)(1)(\emptyset)}$\\
+		\hline
+		$V_{(3)(2)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4)(\emptyset)(1)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(1,1,1,1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,1,1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(2,2)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\newline 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(3,2)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(3,1)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4,1)(\emptyset)(\emptyset)}$$\bigoplus$$V_{(5)(\emptyset)(\emptyset)}$\\
+		\hline
+		$V_{(4)(1)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(1,1,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,1,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(2,2,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,1,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(3,2)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(4,1)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}, 
+	\begin{tabular}{| c |}
+		\hline
+		$V_{(5)(\emptyset)(\emptyset)}$\\
+		\hline
+	\end{tabular}
+	
+	
+	\section{References}
+	{\footnotesize
+		\bibliography{cites}
+		\bibliographystyle{alpha}}
+
+	\newpage
+
+\end{document}

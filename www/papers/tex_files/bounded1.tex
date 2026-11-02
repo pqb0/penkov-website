@@ -1,0 +1,977 @@
+\documentclass[12pt]{amsart}
+\usepackage{TheBigPreamble}
+
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+
+\theoremstyle{plain} % for future references
+\theorembodyfont{\sl}
+
+\newtheorem{theorem}[definition]{Theorem}
+%\newtheorem{example}[definition]{Example}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{amplification}[definition]{Amplification}
+\newtheorem{criterion}[definition]{Criterion}
+\newtheorem{algorithm}[definition]{Algorithm}
+\newtheorem{claim}[definition]{Claim} %\renewcommand{\theclaim}{}
+%\newtheorem{conjecture}[definition]{Conjecture}
+
+\newcommand{\Ker}{\mathrm{ker}}
+\newcommand{\End}{\mathrm{End}}
+\renewcommand{\Re}{\mathrm{Re }}
+\newcommand{\im}{\mathrm{im }}
+\newcommand{\ann}{\mathrm{Ann}}
+\newcommand{\Ann}{\mathrm{Ann}}
+\newcommand{\ad}{\mathrm{ad}}
+\renewcommand{\hom}{\mathrm{Hom}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\Lie}{\mathrm{Lie}}
+\newcommand{\rk}{\mathrm{rk }}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\res}{\mathrm{Res}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\ind}{\mathrm{Ind}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\GL}{{GL}}
+\newcommand{\id}{\mathrm{id}}
+\renewcommand{\sl}{\mathrm{sl}}
+\newcommand{\gl}{\mathrm{gl}}
+\renewcommand{\sp}{\mathrm{sp}}
+\newcommand{\so}{\mathrm{so}}
+\newcommand{\sign}{\mathrm{sign}}
+\renewcommand{\span}{\mathrm{span}}
+
+\newcommand {\ZZ} {\mathbb {Z}}
+\newcommand {\CC} {\mathbb {C}}
+\newcommand {\EE} {\mathbf {E}}
+\newcommand {\RR} {\mathbb {R}}
+\newcommand {\PP} {\mathbb {P}}
+\newcommand {\HH} {\mathcal {H}}
+\newcommand {\NN} {\mathbb {N}}
+\renewcommand{\ss}{\mathfrak{s}}
+\newcommand{\kk}{\mathfrak{k}}
+\renewcommand{\aa}{\mathfrak{a}}
+\newcommand{\hh}{\mathfrak{h}}
+\renewcommand{\gg}{\mathfrak{g}}
+\newcommand{\bb}{\mathfrak{b}}
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand {\BB} {\mathfrak {B}}
+\newcommand {\DD} {\mathscr {D}}
+\newcommand {\OO} {\mathscr {O}}
+\newcommand {\MM} {\mathscr {M}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\epsilon}
+\newcommand{\del}{\partial}
+\renewcommand{\mod}{\mathrm{mod~}}
+
+\newcommand{\doublebrace}[4]{\left\{\begin{array}{ll}#1 & #2 \\ #3 & #4\end{array}\right.}
+\newcommand{\triplebrace}[6]{\left\{\begin{array}{ll}#1 & #2 \\ #3 & #4\\ #5 & #6\end{array}\right.}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\threehalfs}{\frac{3}{2}}
+%\newcommand {\eqdef} {\stackrel {def}{=}}
+\newcommand {\eqdef} {:=}
+\newcommand {\eqdefrev} {=:}
+
+\newcommand{\refle}[1]{Lemma \ref{#1}}
+\newcommand{\refth}[1]{Theorem \ref{#1}}
+\newcommand{\refcor}[1]{Corollary \ref{#1}}
+\newcommand{\refse}[1]{Section~ \ref{#1}}
+\newcommand{\refsec}[1]{Section~ \ref{#1}}
+\newcommand{\refeq}[1]{(\ref{#1})}
+%\theorembodyfont{\rm}
+%-----------------document specific commands----------------%
+\newcommand {\univ} {U}
+\newcommand {\gkdim} {\mathrm{GKdim }}
+\newcommand {\gkm} {$(\gg,\kk)$-module}
+\newcommand {\kkm} {$(\kk,\kk)$-module}
+\newcommand{\Fou}{\mathrm{Fou}}
+%---------------------------------%
+
+
+\begin{document}
+
+\bibliographystyle{amsplain}
+
+\ifx\useHugeSize\undefined
+\else
+\Huge
+\fi
+
+\relax
+
+\title{On Bounded Generalized Harish-Chandra Modules}
+
+\author{Ivan Penkov}
+\address{
+Jacobs University Bremen \\
+School of Engineering and Science,
+Campus Ring 1,
+28759 Bremen, Germany}
+\email{i.penkov@jacobs-university.de}
+
+\author{Vera Serganova}
+\address{Department of Mathematics, University of California Berkeley, Berkeley
+  CA 94720, USA}
+\email{serganov@math.berkeley.edu}
+
+\subjclass[2000]{Primary 17B10, Secondary 22E46}
+\begin{abstract}
+Let $\gg$ be a complex reductive Lie algebra and $\kk\subset\gg$ be any
+reductive in $\gg$ subalgebra. We call a $(\gg,\kk)$-module $M$
+bounded if the $\kk$-multiplicities of $M$ are uniformly bounded. In
+this paper we initiate a general study of simple bounded
+$(\gg,\kk)$-modules. We prove a strong necessary condition for a subalgebra
+$\kk$ to be bounded (Corollary \ref{cor1.6}), i.e. to admit an 
+infinite-dimensional simple
+bounded $(\gg,\kk)$-module, and then establish a sufficient condition
+for a subalgebra $\kk$ to be bounded (Theorem \ref{thGroups2}). As a
+result we are able to classify the maximal bounded reductive
+subalgebras of $\gg=\sl(n)$. 
+
+\end{abstract}
+\maketitle
+\section{Introduction}
+
+In recent years several constructions of generalized Harish-Chandra
+modules have been given, \cite{PS1}, \cite{PSZ}, \cite{PZ1},
+\cite{PZ2}, \cite{PZ3}, and a classification of such modules with
+generic minimal $\kk$-type has emerged, \cite {PZ2}. 
+Recall that if $\gg$ is a finite-dimensional Lie algebra and
+$\kk\subset\gg$ is a reductive in $\gg$ subalgebra, a $\gg$-module $M$
+is a\emph{ \gkm} if $\kk$ acts finitely on each vector $m\in M$.
+In the present paper we study $\kk$-semisimple $(\gg,\kk)$-modules 
+with bounded $\kk$-multiplicities, or as we call them, \emph{bounded
+  generalized Harish-Chandra modules}; all necessary definitions are
+given in sections 3 and 4 below. 
+
+There are two important cases of generalized Harish-Chandra modules on
+which there is extensive literature: the case when $\kk$ is a
+symmetric subalgebra (Harish-Chandra modules) and the case when $\hh$
+is a Cartan subalgebra (weight modules). In the latter case there is a
+complete description of simple bounded modules, \cite{M}. In the former case several constructions of simple bounded modules are known, but there is still no complete description of all such modules in the literature, see the discussion in \refsec{secOnBounded} below.
+
+Our main interest in this paper is the case when $\kk$ is neither a symmetric nor a Cartan subalgebra, and our first main result is that, if there exists an infinite-dimensional simple bounded \gkm, then $r_\gg\leq b_\kk$, where $b_\kk$ is the dimension of a Borel subalgebra of $\kk$ and $r_\gg$ is the half-dimension of a nilpotent orbit of minimal positive dimension in the adjoint representation of $\gg$. This limits severely the possibilities for $\kk$. Our second main result is an explicit geometric construction of simple bounded generalized Harish-Chandra modules, which in particular gives a sufficient condition for a subalgebra $\kk\subset\gg$ with $r_\gg\leq b_\kk$ to be bounded. As an application we clasify all bounded reductive maximal subalgebras $\kk$ in $\gg=\sl(n)$ and give examples of non-maximal reductive bounded subalgebras of $\sl(n)$. 
+
+\textbf{Acknowledgement.} This paper has been written in close contact
+with Gregg Zuckerman who has supported us on several occasions with
+valuable advice. David Vogan, Jr. has also generously shared his
+knowledge of Harish-Chandra modules with us, and A. Joseph and
+D. Panyushev have pointed out useful references. 
+Additional very helpful comments were made by a referee. 
+Finally, we acknowledge the hospitality and support of the 
+Max-Planck Institute for Mathematics in Bonn.
+
+\section{Notation}
+
+All vector spaces, Lie algebras and algebraic groups are defined over $\CC$. The sign $\otimes$ stands for $\otimes_\CC$. $S_n$ is the symmetric group of order $n$, and $S^\cdot(\cdot)$ and $\Lambda^\cdot(\cdot)$ denote respectively symmetric and exterior algebra. By $\gg$ we denote a finite-dimensional Lie algebra, subject to further conditions; $\univ=\univ(\gg)$ denotes the enveloping algebra of $\gg$, and $Z_\univ$ stands for the center of $\univ$. The filtration $(\CC=\univ(\gg)_0)\subset \univ(\gg)_1\subset\univ(\gg)_2\subset\dots$ is the standard filtration on $\univ =\univ(\gg)$. If $M$ is a $\gg$-module, then
+\[
+\gg [M] \eqdef \left\{ g \in \gg | \dim \span \{ m, g \cdot m, g^2 \cdot m, \dots \} <\infty \,\,\forall m \in M \right\}.
+\]
+It is essential that $\gg [M]$ is in fact a Lie subalgebra of
+$\gg$. As was pointed out by a referee, this is an unpublished result
+of B. Kostant and its proof is presented in [GQS, Thm. 8.1]. 
+This result is also proved by V. Kac \cite{K2} and by S. Fernando \cite{F}. 
+
+If $M'\subset M$ is any subspace of a $\gg$-module $M$, by $\ann M'$ we denote the annihilator of $M'$ in $U(\gg)$. If $\kk$ is a Lie subalgebra of $\gg$, we put $M^\kk \eqdef \left\{m\in M | g\cdot m=0\quad \forall g\in\kk \right\}$. 
+
+If $\sigma$ is an automorphism of $\gg$ and $M$ is a $\gg$-module, $M^\sigma$ stands for the $\gg$-module twisted by $\sigma$. If $\gg$ is a reductive Lie algebra, $(~,~)$ stands for any non-degenerate invariant form on $\gg^*$.
+
+If $X$ is an algebraic variety, $\OO_X$ is the sheaf of regular functions on $X$, $\mathcal T_X$ is the tangent and cotangent bundle on $X$, $\Omega_X$ is the bundle of forms of maximal degree on $X$, and $\DD_X$ denotes the sheaf of linear differential operators on $X$ with coefficients in $\OO_X$.
+
+\section{Preliminary Results}
+
+We start we the following well-known result.
+\begin {lemma}\label{le0}
+Let $\{V_i\}$ be a family of vector spaces whose dimension is bounded by a positive integer $C$, and let $R$ be any associative subalgebra of $\prod_i \End V_i$. Then any simple $R$-module has dimension less than or equal to $C$.
+\end{lemma}
+\begin {proof}
+The Amitsur - Levitzki Theorem, \cite{AL}, yields the equality
+\[
+\sum_{s\in S_{2C}}\sign (s)x_{s(1)}\dots x_{s(2C)}=0
+\]
+for any $x_1,\dots, x_{2C}\in R$. Let $W$ be a simple
+$R$-module. Assume $\dim W \geq C+1$, fix a subspace $W'\subset W$
+with $\dim W'=C+1$, and choose $y_1,\dots, y_{2C}\in \End (W')$, such
+that $\sum_{s\in S_{2C}}\sign (s)y_{s(1)}\dots y_{s(2C)}\neq 0$. By
+the Chevalley-Jacobson density theorem \cite{FA}, 
+there exist $x_1,\dots, x_{2C}\in R$ such that
+\[
+x_i\cdot w = y_i(w)
+\]
+for all $i$ and any $w\in W'$. Hence
+\[
+\sum_{s\in S_{2C}}\sign(s) y_{s(1)}\dots y_{s(2C)}=0.
+\]
+Contradiction.
+\end{proof}
+
+\begin{lemma}
+\label{le1}\myLabel{lm4}\relax  Let $ \kk $ be a semisimple Lie algebra and $ C $ be a positive
+integer. There are finitely many non-isomorphic finite-dimensional
+$ \kk $-modules of dimension less or equal than $ C $.
+\end{lemma}
+\begin{proof}
+Let $ M_{\mu} $ be a simple finite-dimensional $ \kk $-module with highest weight $\mu$ with respect to a fixed Borel subalgebra $\bb_\kk\subset \kk$. Recall
+that
+\begin{equation}
+\dim  M_{\mu}=\Pi_{\alpha\in\Delta_{+}}\frac{\left(\mu+\rho,\alpha\right)}{\left(\alpha,\rho\right)},
+\notag\end{equation}
+where $ \Delta_{+} $ is the set of roots of $\bb_\kk$ and $\rho:=\half\sum_{\alpha\in\Delta_+}\alpha$. If $\displaystyle \frac{\left(\mu+\rho,\alpha\right)}{\left(\alpha,\rho\right)}>C $ at least
+for one $ \alpha $, then $ \dim  M_{\mu}>C $. But the number of all weights $ \mu $ such that $\displaystyle \frac{\left(\mu+\rho,\alpha\right)}{\left(\alpha,\rho\right)}<C $
+for all $ \alpha\in\Delta_{+} $ is finite. Hence the number of modules $ M_{\mu} $ of dimension less or equal
+than $ C $ is finite. Therefore the number of all finite-dimensional $ \kk $-modules
+with dimension less or equal than $ C $ is finite.
+\end{proof}
+
+In what follows, $\kk \subset \gg$ will denote a reductive in $\gg$ subalgebra. By definition, the latter means that $\gg$ is a semisimple $\kk$-module. For the purpose of this paper, we call a $\gg$-module $M$ a \emph{$(\gg,\kk)$-module} if $\kk\subset \gg[M]$ and $M$ is a semisimple $\kk$-module. For any $(\gg,\kk)$-module $M$,
+\[
+M=\bigoplus_{r\in R_{\kk}}V^r\otimes M^r,
+\]
+where $R_{\kk}$ is the set of isomorphism classes of simple finite-dimensional $\kk$-modules, $V^r$ denotes a representative of $r\in
+R_\kk$, and $M^r\eqdef \hom_{\kk}(V^r,M)$. We set $$\supp_{\kk}M:=\{V^r\in R_{\kk}|M^r\neq0\}.$$
+In addition, note that each $M^r$ has
+a natural structure of a $\univ(\gg)^{\kk}$ - module. The following is
+a well-known statement [Dix, Prop. 9.1.6], whose proof we present for the convenience of the reader.
+
+\begin{lemma} \label{le2}
+If $M$ is a simple $(\gg,\kk)$-module, then $M^r$ is a simple $\univ(\gg)^{\kk}$ - module for each $r$.
+\end{lemma}
+\begin {proof}
+Let $0\neq w$, $w'\in M^r$. By the density theorem (\cite{FA}), for any $v\in V^r$ there exists $x\in\univ(\gg)$ such that $x\cdot (v\otimes w)=v\otimes w'$. If $t\in\kk$, then $xt\cdot(v\otimes w)=t\cdot v\otimes w'=tx\cdot(v\otimes w)$, hence $[\kk,x]\subset \ann(V^r\otimes w)$. Since $\ann(V^r\otimes w)$ is $\kk$-invariant under the adjoint action, and since $\univ(\gg)$ is a semisimple $\kk$ -module, we can write $x=y+z$ with $z\in \ann(V^r\otimes w)$ and $y\in \univ(\gg)^\kk$. Therefore $y\cdot w=w'$, i.e. $M^r$ is a simple $\univ(\gg)^\kk$ - module.
+\end{proof}
+
+\begin {lemma}\label {le3}
+Let $M$ be a \gkm~ such that $\supp_{\kk}M$ is a finite set.
+\begin{itemize}
+\item[(a)] Then $\gg[M]+\gg^\kk=\gg$.
+\item[(b)] If in addition $\gg$ is simple and $M$ is finitely generated, then $M$ is finite-dimensional.
+\end{itemize}
+\end{lemma}
+\begin {proof}
+(a)Let $\gg=\bigoplus_i \gg_i$ be a decomposition of $\gg$ into a sum
+of simple $\kk$-modules. It suffices to prove that
+$\gg_i\subset\gg[M]$ for every non-trivial $\kk$-module
+$\gg_i$. Assuming that the Borel subalgebra $\bb_\kk\subset \kk$ is
+fixed, let $x_i$ be a $\bb_\kk$- singular vector of
+$\gg_i$, i.e. let $x_i$ be a generator of a one-dimensional
+$\bb_\kk$-submodule of $M$. For any $\bb_\kk$ - singular vector $m\in M$, $x_i^l\cdot m$
+is a $\bb_\kk$ - singular vector for any $l\in \NN$. If $\gg_i$ is not
+a trivial $\kk$-module, all non-zero vectors of the form $x_i^l\cdot
+m$ generate pairwise non-isomorphic simple $\kk$-submodules of
+$M$. Hence, $x_i^l\cdot m =0$ for large $l$ whenever $\gg_i$ is
+non-trivial. Since $M$ is generated as a $\kk$-module by
+$\bb_\kk$-singular vectors, we have $x_i\in\gg[M]$, and moreover $\gg_i\subset\gg[M]$ as $\kk\subset\gg[M]$.
+
+(b) Note that the subalgebra $\tilde{\gg}$ generated by all non-trivial $\kk$-submodules $\gg_i$ is an ideal in $\gg$. On the other hand, by (a), $\tilde{\gg}\subset \gg[M]$. The simplicity of $\gg$ yields now  $\gg=\gg[M]$. Hence $M$ is finite-dimensional as it is finitely generated.
+\end{proof}
+
+\section{First results on bounded modules and bounded subalgebras}\label{secFirstResults}
+
+Recall that a \gkm~ $M$ has \emph{finite type} if $M^r$ is
+  finite-dimensional for all $r\in R_\kk$, and that
+a \gkm~ of finite type is a \emph{generalized
+  Harish-Chandra module} according to the definition in \cite{PZ1} and
+\cite{PSZ}. Any \gkm~ $M$ of finite type is also automatically a
+  $(\gg,\kk')$-module of finite type for any intermediate subalgebra
+  $\kk'$, $\kk\subset\kk'\subset\gg[M]$. Moreover, the condition that 
+$M$ is of finite type implies 
+\begin{equation}\label{cent}
+\kk+\gg^\kk\subset \gg[M].
+\end{equation} 
+If $\gg$ is reductive, then for any proper reductive in $\gg$
+  subalgebra $\kk$,
+ there exist infinite-dimensional simple $(\gg,\kk)$-modules of finite 
+type over $\kk$. A stronger statement is proved in \cite{PZ2}. 
+A \gkm~ is \emph{bounded} if, for some positive integer $C_M$, $\dim
+  M^r<C_M$ 
+for all $r\in R_\kk$, and is \emph{multiplicity-free} if $\dim M^r\leq
+  1$ for 
+all $r\in R_\kk$.
+
+\begin {theorem}\label{th4}
+Let $\gg=\bigoplus \gg_i$, where $\gg_i$ are simple Lie algebras, let $\kk\subset\gg$ be a reductive in $\gg$ subalgebra, and let $M$ be a simple bounded \gkm. Then $\gg^\kk=\bigoplus_i\gg_i^\kk$, and $\gg_i\subset \gg[M]$ whenever $\gg_i^\kk$ is not abelian. Furthermore, $M\simeq M'\otimes M''$ for some simple finite-dimensional $\gg'\eqdef\displaystyle \bigoplus_{\gg_i\subset\gg[M]}\gg_i$-module $M'$ and some simple bounded $(\gg'',\kk'')$-module $M''$, where $\gg''\eqdef\displaystyle \bigoplus_{\gg_i\nsubseteq\gg[M]}\gg_i$ and $\kk''\eqdef \kk\cap \gg''$.
+\end{theorem}
+\begin {proof}
+The equality $\gg^\kk = \bigoplus_i\gg_i^\kk$ follows directly from
+the definition of $\gg^\kk$. In addition, each subalgebra $\gg_i^\kk$
+is reductive in $\gg_i$, hence $\ss_i\eqdef[\gg_i^\kk, \gg_i^\kk]$ is
+semisimple. Set 
+$\ss\eqdef\bigoplus_i \ss_i$. Consider the decomposition
+\[
+M=\bigoplus_{r\in \supp_{\kk}M}V^r\otimes M^r.
+\]
+Since the dimensions of $M^r$ are bounded, Lemmas \ref{le1} and
+\ref{le2} imply that  
+at most finitely many simple $\ss$-modules $M^r$ are non-isomorphic. Hence, $M$ considered as a $(\gg,\ss)$-module satisfies the condition of  \refle{le3}. Thus $\gg[M] +\gg^\ss=\gg$. Note that the trivial $\ss$-submodule $\gg^\ss$ of $\gg$ has a unique $\ss$-submodule complement $\aa$. Moreover, $\aa\subset\gg[M]$ by \refle{le3}. In addition, as we already noted in the proof of \refle{le3} (b), the subalgebra of $\gg$ generated by $\aa$ is an ideal in $\gg$. Since $\ss\subset \aa$, we have $\bigoplus_{\ss_i\neq 0}\gg_i\subset \gg[M]$, i.e. we have proved that $\gg_i\subset\gg[M]$ whenever $\gg_i^\kk$ is not abelian.
+
+We prove next that $M=M'\otimes M''$. Since $\gg'\subset \gg[M]$, there is a simple finite-dimensional $\gg'$-submodule $M'$ of $M$. Set $M''\eqdef \hom_{\gg'}(M',M)$. Clearly $M''$ is a $\gg''$-module, and there is a non-zero homomorphism of $\gg$-modules
+\[
+\Phi:M'\otimes M''\to M,
+\]
+\[
+\Phi(m'\otimes \phi)\eqdef \phi(m'), \quad m'\in M'.
+\]
+Since $M$ is simple, $\Phi$ is surjective. To prove that $\Phi$ is
+injective, note that $M$ is semisimple as a $\gg'$-module. Hence, by
+the density theorem, every non-zero submodule of $M$ contains a
+non-zero vector $m'\otimes \phi$ for some $m'\in M'$ and $\phi\in M''$.  
+This implies $\ker\Phi =0$.
+
+The irreducibility of $M$ now
+yields the irreducibility of $M''$. To see that $M''$ is a bounded
+$(\gg'',\kk'')$-module it suffices to notice that $M$ is a bounded
+$(\gg,\gg'\oplus \kk'')$-module as $\kk \subset\gg'\oplus \kk'' $ and
+that the multiplicity of $M'\otimes V^{r''}$ in $M$ equals the
+multiplicity of $ V^{r''}$ in $M''$ for any $r''\in R_{\kk''}$.
+\end{proof}
+
+In the rest of this section and in Sections \ref{secAconstruction} and \ref{secOnBounded} below, $\gg$ is a reductive Lie algebra unless further restrictions are explicitly stated. We call $\kk$ a \emph{bounded subalgebra} of $\gg$ if there exists an
+infinite-dimensional bounded simple $(\gg,\kk)$-module. \refth{th4}
+suggests
+also the following stronger notion: a bounded subalgebra $\kk$ of
+$\gg$ is \emph{strictly bounded}, if there exists an
+infinite-dimensional bounded simple $(\gg,\kk)$-module $M$ such that
+$\gg[M]$ contains no simple ideal of $\gg$. Clearly, if $\gg$ is
+simple, a subalgebra $\kk$ is bounded if and only if it is strictly bounded.
+
+
+\begin{corollary}\label{corcen}
+If  $\kk$ is a strictly bounded subalgebra of a reductive Lie algebra $\gg$, then $\gg^\kk\subset\gg$ is an abelian subalgebra.
+\end{corollary}
+
+\begin{theorem}\label{th5}
+Let $C$ be a positive integer and $M$ be a simple bounded \gkm~ with $\dim M^r < C$ for all $r\in R_\kk$. Let $N$ be a simple \gkm~ with $\ann N =\ann M$. Then $N$ is also bounded and $\dim N^r<C$ for all $r\in R_\kk$.
+\end{theorem}
+\begin{proof}
+Set $\univ_M\eqdef \univ(\gg) / \ann M$ and $Z_M\eqdef (\univ_M)^{\kk}$. The \gkm~ $M$ determines an injective algebra homomorphism
+\[
+Z_M\to \prod_{r\in R_\kk}\End(M^r),
+\]
+and $\dim M^r <C$ for all $r$. By \refle{le2}, $N^r$ is a simple $Z_M$-module for any $r$. Therefore, $\dim N^r<C$ by \refle{le0}.
+\end{proof}
+
+Recall that, for any simple $\gg$-module $M$, its \emph{Gelfand-Kirillov dimension} $\gkdim M\in \ZZ_{\geq 0}$ is defined by the formula
+
+\[
+\gkdim M = \overline{\lim_{n\to \infty}}\frac{\log \dim \left(\univ(\gg)_n\cdot  v\right)}{\log n}
+\]
+for any non-zero $v\in M$, \cite{KL} [p. 91]. Recall also that the \emph{associated variety} $X_M$ of $\Ann M$ is the nil-variety in $\gg^*$ of the associated graded ideal in $S^{\cdot}(\gg)$ of $\ann M$. We next prove an explicit bound for $\dim X_M$ by $\dim \kk+\rk \kk$ for any simple bounded $(\gg,\kk)$-module $M$. For this purpose we will use the inequality
+\[
+\gkdim M \geq \frac{\dim X_M}{2},
+\]
+due to O. Gabber and A. Joseph, see \cite{KL} [p. 135].
+
+\begin {theorem}\label {th6}
+Let $M$ be a simple bounded $(\gg,\kk)$-module. Then
+\begin{equation}\label{eqGK}
+\gkdim M\leq b_\kk,
+\end{equation}
+where $\displaystyle b_\kk\eqdef \frac {\dim \kk+\rk \kk}{2}$.
+\end{theorem}
+\begin {proof}
+Fix a Cartan subalgebra $\hh_\kk \subset \kk$ and a Borel subalgebra $\bb_\kk\subset \kk$ with $\hh_\kk\subset \bb_\kk$. Note that $b_\kk = \dim \bb_\kk$. Fix also $r\in R_\kk$ with $M^r\neq 0$ and let $\mu_0\in \hh_\kk^*$ be the $\bb_\kk$ -highest weight of $V^r$. Set
+\[
+M_n\eqdef \univ(\gg)_n\cdot V^r
+\]
+for $n\in\ZZ_{\geq0}$. It suffices to prove that there exists a polynomial $f(n)$ of degree $b_\kk$ such that $\dim M_n\leq f(n)$.
+
+Let $\nu_1, \dots, \nu_s$ be the $\bb_\kk$-highest weights of all simple $\kk$-submodules of $\gg$. Put $\nu\eqdef\sum_i \nu_i$. Then, if $V_\mu$ is the simple finite-dimensional $\kk$-module with $\bb_\kk$- highest weight $\mu$, $\hom_\kk (V_\mu,M_n)\neq 0$ implies
+\begin{equation}
+\label {neq1}
+\mu\leq n\nu+\mu_0
+\end{equation}
+where $\leq$ is the partial order on $\hh_\kk^*$ determined by $\bb_\kk$. The cardinality of the set of all integral  $\bb_\kk$-dominant weights $\mu$ satisfying \refeq{neq1} is bounded by some polynomial $g(n)$ of degree $\rk \kk$. Weyl's dimension formula implies that the dimension of $V_\mu$ is bounded by a polynomial $h(n)$ of degree equal to the number of roots of $\bb_\kk$. If $\dim M^r <C$, then
+\[
+\dim M_n \leq C h(n)g(n).
+\]
+\end{proof}
+ 
+In the particular case when $\kk=\hh$ is a Cartan subalgebra of $\gg$ and $M$ is a simple bounded $(\gg,\hh)$-module, A. Joseph \cite{J}[4.8] proved that \refeq{eqGK} is an equality, i.e. $2\rk \hh=\dim X_M$.
+
+\begin {corollary}\label {cor1.5}
+Let $M$ be a bounded simple \gkm. Then
+\[
+\frac{\dim X_M}{2}\leq b_{\kk}.
+\]
+\end {corollary}
+
+In the remainder of the paper $G$ will be a fixed reductive algebraic
+group with Lie algebra $\gg$.
+Denote by $r_\gg$ the half-dimension
+of a nilpotent orbit of minimal positive dimension in $\gg$.
+If $\gg$ is simple, such an orbit is unique. It coincides with the orbit of a highest vector in the adjoint representation, and
+\[
+r_\gg=\left\{\begin{array}{ll}
+\rk\gg=n &  \text{~for~} \gg=\sl(n+1),\sp(2n) \\
+2n-2& \text{~for~} \gg=\so(2n+1)\\
+2n-3& \text{~for~} \gg=\so(2n)\\
+3& \text{~for~} \gg=G_2\\
+8& \text{~for~} \gg=F_4\\
+11& \text{~for~}\gg=E_6 \\
+17& \text{~for~}\gg=E_7 \\
+29& \text{~for~}\gg=E_8{}. \\
+\end{array}\right.
+\]
+
+\begin {corollary}\label{cor1.6}
+If $\kk$ is a bounded subalgebra, then
+\begin{equation}\label{eq42}
+r_\gg\leq b_\kk.
+\end{equation}
+If $\gg=\gg_1\oplus...\oplus \gg_s$ is a sum of simple ideals and
+$\kk\subset\gg$ is strictly bounded, then
+\begin{equation}\label{eq42'}
+r_{\gg_1}+...+r_{\gg_s}\leq b_\kk.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Let $M$ be a infinite-dimensional simple bounded
+$(\gg,\kk)$-module. Then $X_M$ is the closure of a nilpotent $G$-orbit
+in  $\gg$ \cite{J1}. 
+Since $M$ is infinite-dimensional, the dimension of $X_M$ is
+positive. 
+Hence $\frac{\dim X_M}{2} \geq r_{\gg}$, and \refeq{eq42} follows from
+\refcor{cor1.5}. If $\kk$ is strictly bounded, then there exists a simple bounded
+$(\gg,\kk)$-module $M$ such that $\gg[M]$ does not contain $\gg_i$ for
+all $i=1,...,s$. This implies that $X_M\cap\gg_i\neq 0$ for all
+$i=1,...,s$ as $X_M \cap\gg_i=0$ forces $\gg_i\subset \gg[M]$. 
+Hence $\frac{\dim X_M}{2} \geq r_{\gg_1}+...+r_{\gg_s}$.
+\end{proof}
+\begin {example}\label{ex47}
+\refcor{cor1.6} implies that if $\kk\simeq\sl(2)$ is a strictly bounded
+subalgebra of a semisimple Lie algebra $\gg$, then there are only the 
+following three choices for $\gg$:
+\begin{equation}\label{eq43}
+\gg \simeq \sl(2)\oplus\sl(2),\quad \gg \simeq \sl(3),\quad \gg \simeq\sp(4).
+\end{equation}
+In the forthcoming paper [PS2] we show that, up to conjugation, there are five possible embeddings $\sl(2)\hookrightarrow\gg$ (with $\gg$ in \refeq{eq43}) whose image is a bounded subalgebra; in [PS2] we describe in detail all simple bounded $\left( \mathfrak g, \sl(2) \right) $-modules.
+\end {example}
+\begin{example}
+This example shows that the inequality $r_\gg\leq b_\kk$ together with
+the requirement that $\gg^\kk$ is abelian are not sufficient for a
+reductive in $\gg$ subalgebra $\kk$ to be bounded. 
+
+Consider a chain of subalgebras $\kk\subset\gg'\subset\gg$ where
+$\kk\simeq\so(n)$,  $\gg'\simeq\sl(n)$ and  $\gg\simeq\sl(n+1)$. Fix
+Borel subalgebras  $\bb_\kk\subset \kk$,  $\bb'\subset \gg'$ such that
+$\bb_\kk\subset \bb'$. As a $\gg'$-module $\gg$ has the decomposition
+$\gg=\gg'\oplus V\oplus V^*\oplus \CC$, where $V$ and $V^*$ stand for
+the natural and conatural representation of $\gg'$ respectively. 
+Therefore we can
+fix $\bb'$- singular vectors 
+$x\in V$, $y\in V^*$. Set $z=[x,y]$.
+Then it is easy to check that $[x,z]=[y,z]=0$.
+
+Let $M$ be an infinite-dimensional simple bounded
+$(\gg,\kk)$-module. Then $\gg[M]\neq \gg$, while
+the trivial $\gg'$-submodule of $\gg$ belongs to  $\gg[M]$ by (\ref{cent}).
+Since $\kk\oplus\CC,x,y$ generate $\gg$, either $x$ or $y$ does not
+lie in 
+$\gg[M]$. Without loss of generality assume that $x\notin \gg[M]$.
+
+
+We show now that $z\in \gg[M]$. Assume the contrary. Then for any
+$\bb_\kk$-singular vector $m\in M$ the set $\{x^a z^b\cdot
+m\}_{a,b\in\ZZ_{\geq 0}}$ is a
+linearly independent set of $\bb_\kk$-singular vectors in $M$. Since the
+$\kk$-weights of $x$ and $z$ are $\omega_1$ and $2\omega_1$
+respectively ($\omega_1$ being the first fundamental weight), the
+weight of the vector $x^a z^b\cdot m$ is $\mu+(a+2b)\omega_1$, where
+$\mu$ is the weight of $m$. Hence the mutiplicity in $M$ of the simple
+$\kk$-module $V^{\mu+n\omega_1}$ (of highest weight $\mu+n\omega_1$)
+grows linearly in $n$. This contradicts the boundness of $M$.
+
+Since $\kk$ and $z$ generate $\gg'$ we obtain that $\gg'\subset\gg[M]$. 
+Consider now a $\bb'$-singular vector $v\in M$ of weight $\nu$. Then
+$x^n\cdot v$ is a $\bb'$-singular vector for any $n\in\ZZ_{\geq 0}$.
+Hence $\hom_{\gg'}((V')^{\nu+n\omega'_1}, M)\neq 0$, where 
+$(V')^{\nu+n\omega'_1}$ is the simple $\gg'$-module of highest weight
+${\nu+n\omega'_1}$ ($\omega'_1$ now denoting the first fundamental
+weight of $\gg'$).
+
+We claim that this implies that $M$ is a $(\gg,\kk)$-module of
+infinite type. Indeed, for any positive $n$ $S^n(V)$ is a simple
+$\gg'$-module and
+\[
+0\neq\hom_{\gg'}(S^n (V)\otimes (V')^{\nu},(V')^{\nu+n\omega'_1})=
+\hom_{\gg'}(S^n(V),((V')^{\nu})^*\otimes (V')^{\nu+n\omega'_1}).
+\]
+However, for any even $n$ $S^n( V)$ contains a trivial $\kk$-constituent. Therefore
+\[
+0\neq ((V')^{\nu})^*\otimes (V')^{\nu+n\omega'_1})^{\kk}=
+\hom_{\kk}((V')^{\nu}, (V')^{\nu+n\omega'_1})
+\]
+for all even $n$. Since $(V')^\nu$ has finitely many simple $\kk$-constituents, there
+is a simple $\kk$-constituent $V^r$ of  $(V')^\nu$ such that
+$\hom_{\kk}(V^r, (V')^{\nu+n\omega'_1})\neq 0$ for infinitely many
+$n$. 
+This yields $\dim M^r = \infty$. Contradiction.
+
+
+
+
+
+
+%Let $\gg=\sl(n+1)$ and $\kk=\so(n)\subset\gg$ for $n\geq 5$, where the natural $\sl(n+1)$-module decomposes as a $\kk$-module as $V\oplus\CC$, $V$ being the natural $\so(n)$-module. Then $r_\gg=n$ and $b_\kk=\frac{n(n-1)}{4}+\half\left[\frac{n}{2}\right]$, hence $r_\gg\leq b_\kk$. In addition, $\dim\gg^\kk=1$, therefore $\gg^\kk$ is abelian. We will show that nevertheless $\kk$ is not a bounded subalgebra of $\gg$.
+
+
+
+
+
+%Note first that as a $\kk$-module $\gg$ contains two copies of $V$
+%which are $\gg^\kk$-eigenspaces with opposite eigenvalues, therefore
+%we can fix an element $t\in\gg^\kk$ such that its corresponding eigenvalues are $\pm$1. This allows us to fix non-zero $\bb_\kk$- singular vectors $x,y\in\gg$ with $[t,x]=x$, $[t,y]=-y$. Then it is easy to check that $[x,z]=[y,z]=[t,z]=0$.
+
+%Let $M$ be an infinite-dimensional simple bounded
+%$(\gg,\kk)$-module. We claim that $\gg[M]$ contains $\span\{x,z\}$ or $\span\{y,z\}$. Indeed, let $m$ be a $\bb_\kk$-singular vector in $M$ of $\kk$-weight $\eta$. If $y,z\notin \gg[M]$, all vectors of the form $(z^ay^b)\cdot m$ for $a,b\in\ZZ_{\geq 0}$ are linearly independent $\bb_\kk$-singular vectors in $M$. Then if the weight of $y$ is $\kappa$, the weight of $z$ is equals $2\kappa$ and the multiplicity of the weight $n\kappa+\eta$ in $\span\{(z^ay^b)\cdot m\}_{a,b\in\ZZ_{\geq 0}}$ is at least $\left[\frac{n}{2}\right]$. Since all vectors of $\span\{(z^ay^b)\cdot m\}_{a,b\in\ZZ_{\geq 0}}$ are $\bb_\kk$-singular, $M$ has unbounded $\kk$-multiplicities, and we have a contradiction. This implies $y\in\gg[M]$ or $z\in\gg[M]$.
+
+%Arguing in the same way, we obtain $x\in\gg[M]$ or $z\in\gg[M]$. If $x,y\in\gg[M]$, then $z=[x,y]\in\gg[M]$. If $z\in\gg[M]$, but $x,y\notin\gg[M]$, we repeat the above argument for the pair $(x,y)$ instead of $(x,z)$ under the assumption that $m$ is $\bb_\kk$-singular vector with $z\cdot m =0$. Then all vectors $\{(x^ay^b)\cdot m\}_{a,b\in\ZZ_{\geq 0}}$ for $a,b\in\ZZ_{\geq 0}$ are linearly independent $\bb_\kk$-singular vectors and $M$ has unbounded $\kk$-multiplicities, which is a contradiction.
+
+%Without loss of generality we can therefore assume that
+%$x,z\in\gg[M]$. The subalgebra $\pp\subset\gg$ generated by $\kk,
+%x,z,t$ is a maximal parabolic subalgebra whose semisimple part $\gg'$ is isomorphic to $\sl(n)$. Note also that $\gg'\cdot V=V$. Let
+%$M_\mu$ be a finite-dimensional $\gg'$ submodule of $M$ with highest
+%weight $\mu$ and highest weight vector $0\neq m\in M_\mu$ with respect
+%to a fixed Borel subalgebra $\bb'\subset\gg'$. Then $y^n\cdot m$ is a
+%$\bb'$-singular vector for any $n$, and $y^n\cdot m\neq 0$ for any $n$ since $y\notin \gg[M]$. This shows that for any $n$ the multiplicity of $M_{\mu+n\eps}$ in $M$ is non-zero, where $\eps$ is the $\bb'$-highest weight of the $\gg'$-module $V$.
+
+\end{example}
+
+We conclude this section by a brief discussion of the action of the
+translation functor on bounded $(\gg,\kk)$-modules. For any
+$\xi\in\hh^*$, denote by $U^{\chi(\xi)}$ the quotient of $U(\gg)$ by
+the two sided ideal generated by the kernel of the character
+$\chi(\xi):Z_{\univ}\to\CC$ via which $Z_{\univ}$ acts on the Verma
+module with $\bb$-highest weight $\xi-\rho$. 
+Let now
+$\xi,\eta\in\hh^*$ be two weights 
+whose difference $\eta-\xi$ is a $\gg$-integral
+weight. 
+There is a unique simple finite-dimensional $\gg$-module $E$ such that
+$\eta-\xi$ is its extremal weight. 
+The following functor is known as translation functor  
+\cite{BJ},\cite{Z}
+\begin{eqnarray*}
+T_\xi^\eta:U^{\chi(\xi)}-\mod&\to& U^{\chi(\eta)}-\mod,\\
+M&\mapsto&U^{\chi(\eta)}\otimes_{U(\gg)}(M\otimes E).\\
+%T_\eta^\xi:U^{\chi(\eta)}-\mod&\to& U^{\chi(\xi)}-\mod,\\
+%M&\mapsto&U^{\chi(\xi)}\otimes_{U(\gg)}(M\otimes E^*)\\
+\end{eqnarray*}
+It is clear that the image of a bounded 
+$(\gg,\kk)$-module under any translation functor is a 
+bounded $(\gg,\kk)$-module.
+
+Under the additional condition $\xi$ and $\eta$ have the same
+stabilizer in the Weyl group $W_\gg$ and 
+$(\xi,\check\alpha)\in\ZZ_{\geq 0}\iff (\eta,\check\alpha)\in\ZZ_{\geq
+  0}$ and $(\xi,\check\alpha)\in\ZZ_{\leq 0}\iff
+(\eta,\check\alpha)\in\ZZ_{\leq 0}$ for any root $\alpha$ of $\bb$
+(as usual, $\check\alpha=\frac{2\alpha}{(\alpha,\alpha)}$), the functors
+$T_\xi^\eta$ and $T_\eta^\xi$
+are known to be mutually inverse equivalences of categories
+\cite{BG}. 
+This implies in particular that if $\BB_\kk^{\chi(\xi)}$ (respectively, $\BB_\kk^{\chi(\eta)}$) is the full subcategory of $U^{\chi(\xi)}-\mod$ (resp., of $U^{\chi(\eta)}-\mod$) whose objects are bounded generalized $(\gg,\kk)$-modules, $T_\xi^\eta$ and $T_\eta^\xi$ induce mutually inverse equivalences of the categories $\BB_\kk^{\chi(\xi)}$ and $\BB_\kk^{\chi(\eta)}$.
+
+\section{A construction of bounded $(\gg,\kk)$-modules}\label{secAconstruction}
+
+Let $\DD^\xi$ be the sheaf of twisted differential operators on $G/B$ as introduced in \cite{BB}. Recall that if $( \xi,\check\alpha)\neq 0$ for any $\alpha\in\Delta$, then $\Gamma(G/B,\DD^\xi)=\univ^{\chi(\xi)}$. Furthermore, if $( \xi,\check\alpha)\notin\ZZ_{\leq 0}$ for any root $\alpha$ of $\bb=\mathrm{Lie} B$, then the functors
+\[
+\Gamma:\quad \DD^\xi-\mod \leadsto \univ^{\chi(\xi)}-\mod,
+\]
+\[
+\DD^\xi\otimes_{\univ^\chi}\cdot:\quad \univ^{\chi(\xi)}-\mod \leadsto \DD^\chi-\mod
+\]
+are mutually inverse equivalences of categories. Here $\DD^\xi-\mod$ denotes the category of sheaves of left $\DD^\xi$-modules on $G/B$ which are quasicoherent as sheaves of $\OO=\OO_{G/B}$-modules, \cite{BB}.
+
+\newcommand{\funcT}{T_\xi^{\eta}}
+
+Note that if $\xi,\eta\in \hh^*$ satisfy $(\xi,\check\alpha)\notin \ZZ_{\leq 0}$, $(\eta,\check\alpha)\notin \ZZ_{\leq 0}$ for any root $\alpha$ of $\bb$, and $\xi-\eta$ is a $\gg$-integral weight, then the translation functor
+\[
+\funcT: \univ^{\chi(\eta)}-\mod\leadsto \univ^{\chi(\xi)}-\mod
+\]
+coincides with the composition $\Gamma\circ\left(\OO(\xi-\eta)\otimes_\OO\cdot\right)\circ\left(\DD^\eta\otimes_{\univ^\eta}\cdot\right)$, where $\OO(\xi-\eta)$ stands for the invertible sheaf on $G/B$ on whose geometric fibre at the point $B\in G/B$ the Lie algebra $\bb$ acts via the weight $w_m(\xi-\eta)$, $w_m$ being the element of maximal length in the Weyl group $W_\gg$. This yields a geometric description of the translation functor $T_\xi^\eta$.
+
+%\begin{proposition}
+%For any $M\in\BB^{\chi(\eta)}$, $\funcT(M)\in\BB^{\chi(\xi)}$.
+%\end{proposition}
+%\begin{proof}
+%Since we can represent the weight $\xi-\eta$ as the sum of a $\bb$-dominant and $\bb$-antidominant $\gg$-integral weights, it is enough to prove the statement under the assumption that $\xi-\eta$ itself is $\bb$-dominant or $\bb$-antidominant. If $\xi-\eta$ is $\bb$-dominant, then the line bundle $\OO(\xi-\eta)$ is a submodule of the trivial bundle $V\otimes\OO$ on $G/B$, where $V$ is the finite-dimensional $\gg$-module with $\bb$-highest weight $\xi-\eta$. Hence $\funcT(M)$ is a $\gg$-submodule of $V\otimes M$. Since $V\otimes M$ is a bounded \gkm, $\funcT(M)$ is also a bounded \gkm, and therefore $\funcT(M)\in\BB^{\chi(\zeta)}$. If $\xi-\eta$ is $\bb$-antidominant, then, by a similar argument, $\funcT(M)$ is a quotient of $V\otimes M$, hence again $\funcT(M)\in\BB^{\chi(\xi)}$
+%\end{proof}
+
+We need one more basic $\DD$-module construction. For any parabolic
+subgroup $P\subset G$ there is a well-known ring homomorphism
+$U(\gg)\to \Gamma(G/P,\DD_{G/P})$ which extends the obvious
+homomorphism $\gg\to \Gamma(G/P,\mathcal {T}_{G/P})$. Therefore the
+functor
+\[
+\Gamma: \DD_{G/P}-\mod \to \Gamma(G/P,\DD_{G/P})-\mod
+\]
+can be considered as a functor into $U(\gg)$-mod.
+
+Let $Z$ be a smooth closed subvariety of $G/P$, and let $(\DD_{G/P}-\mod)^Z$ be the full subcategory of $\DD_{G/P}$-mod with objects $\DD_{G/P}$-modules supported on $Z$ as sheaves. Furthermore, denote by $\DD_{X\leftarrow Z}$ the $(\DD_{G/P},\DD_Z)$-bimodule $((\DD_{G/P}\otimes_{\OO_{G/P}}\Omega^*_{G/P})_{|_Z})\otimes_{\OO_Z}\Omega_Z$. A well-known theorem of Kashiwara \cite{K} claims that the functor
+\[
+i_\bigstar:\DD_{Z}-\mod \leadsto (\DD_{G/P}-\mod)^Z
+\]
+\[
+\mathcal F \mapsto \DD_{X\leftarrow Z}\otimes_{\DD_{Z}}\mathcal F
+\]
+is an equivalence of categories. In addition, it is easy to see that
+$i^{-1}i_\bigstar\OO_Z$ has 
+ a natural $\OO_{Z}$-module filtration with successive quotients
+\begin{equation}\label{filt}
+\Lambda^{max}(\mathcal {N})\otimes_{\OO_{Z}}S^i(\mathcal {N}),
+\end{equation}  
+where $\mathcal N$ denotes the normal bundle of $Z$ in $G/P$ and
+$\Lambda^{max}$ 
+stands for maximal exterior power. 
+
+
+Let $K$ be a reductive algebraic group and $B_{K}$
+be a Borel subgroup of $K$. A $K$-module $V$ is called \emph
+{spherical} when $B_{K}$ has an open orbit in $V$. If $V$ is spherical then any  rational 
+$B_K$-invariant on $V$ is
+constant and therefore any two $\bb_\kk$-singular vectors in
+$S^\cdot(V)^*$ have
+different weights. Thus, the symmetric algebra $S^\cdot(V)$ is a 
+multiplicity-free $K$-module \cite{VK} [Thm.2]. 
+ 
+
+In the sequel we assume that $K$ is a reductive proper subgroup of our fixed reductive algebraic group $G$, $\kk=\Lie K$, and let $P\subset G$ be a proper parabolic subgroup such that $Q:=K\cap P$ is a parabolic subgroup in $K$. There is a closed immersion
+\[
+i:K\cdot P=K/Q\hookrightarrow G/P.
+\]
+Since $P$ is $Q$-stable,  $Q$ acts in the fiber $\mathcal{N}_P\simeq \gg / (\kk + \mathfrak {p})$ at the point $P$ of the normal bundle $\mathcal{N}$ of $K/Q$ in $G/P$. Let $Q_0$ denote a reductive part of $Q$.
+
+The following result is one of the key observations in this paper.
+
+\begin{theorem}\label{thGroups2} Let $G,P,K,Q$ be as above.
+If $\mathcal N_P$ is a non-zero spherical $Q_0$-module, then 
+$\Gamma(G/P,i_\bigstar \OO_{K/Q})$ is an infinite-dimensional multiplicity-free $(\gg,\kk)$-module.
+\end{theorem}
+
+\begin{proof}
+By (\ref{filt}) $i^{-1}i_\bigstar\OO_{K/Q}$ has a natural $\OO_{K/Q}$-module filtration with successive quotients
+\[
+\Lambda^{max}(\mathcal {N})\otimes_{\OO_{K/Q}}S^i(\mathcal {N}).
+\]
+ Moreover, $i^{-1}i_\bigstar\OO_{K/Q}$ is $K$-equivariant, and at the point $P$, the above filtration induces a $Q$-module filtration and thus also a $Q_0$-module filtration of the fiber $(i^{-1}i_\bigstar\OO_{K/Q})_P$ with successive quotients
+\begin{equation}\label{eqGroups1}
+\Lambda^{max}(\mathcal N_P)\otimes_\CC S^i(\mathcal N_P).
+\end{equation}
+\refth{thGroups2} implies that the direct sum of all modules
+\refeq{eqGroups1} for $i\geq 0$ is a multiplicity-free
+$Q_0$-module. 
+
+According to the Bott-Borel-Weil Theorem the global
+sections of an irreducible $K$-bundle induced from a simple
+$Q_0$-module $E$, whenever non-zero, form a simple $K$-module with the
+same highest weight as $E$. Therefore the $K$-module $\Gamma(K/Q,$
+$\bigoplus_{i\geq 0}(\Lambda^{max}(\mathcal
+N)\otimes_{\OO_{K/Q}}S^i(\mathcal N)))$ is a multiplicity-free
+$K$-module. Since $K$ is reductive,
+$\Gamma(G/P,i_\bigstar\OO_{K/Q})$ is a semisimple
+$K$-module. Moreover, $\Gamma(G/P,i_\bigstar\OO_{K/Q})$ has an obvious
+$K$-module filtration induced by  the $\OO_{K/Q}$-module filtration on
+$i^{-1}i_\bigstar\OO_{K/Q}$.  The associated graded of this
+filtaration is clearly a submodule of
+$\Gamma(K/Q,\bigoplus_{i\geq 0}(\Lambda^{max}(\mathcal
+N)\otimes_{\OO_{K/Q}}S^i(\mathcal N)))$. Hence
+$\Gamma(G/Q,i_\bigstar\OO_{K/Q})$, being isomorphic as a $K$-module
+to this associated graded, is itself $K$-multiplicity-free.
+The fact that $\Gamma(G/Q,i_\bigstar\OO_{K/Q})$ is
+infinite-dimensional follows from our assumption that $\mathcal N_P$
+is not zero.\end{proof}
+
+We would like to point out that it is relatively straightforward to generalize \refth{thGroups2} to the case when $\OO_{K/Q}$ is replaced by a $K$-equivariant line bundle on $K/Q$. This more general theorem should play an important role in a future study of bounded $(\gg,\kk)$-modules with central characters different from that of a trivial $\gg$-module. In the subsequent paper [PS2] we will discuss this construction in a special case.
+
+\section{On Bounded Subalgebras}\label{secOnBounded}
+
+\refth{thGroups2} leads to the following results about bounded subalgebras.
+
+\begin{corollary}\label{corGroups3}
+Let $K\subset G\subset GL(V)$ be a chain of reductive algebraic
+groups, $\kk=\Lie K$, and let $V'\subset V$ be a 1-dimensional space whose
+stabilizers in $G$ and $K$ are parabolic subgroups $P\subset G$ and
+$Q\subset K$. Then, if $(V')^*\otimes(\gg\cdot V'/\kk\cdot V')$ is a
+non-zero
+spherical $Q_0$-module, $\kk$ is a bounded subalgebra of $\gg$.
+\end{corollary}
+\begin{proof}
+We identify $G/P$ with the $G$-orbit of $V'$ in $\PP(V)$. Then $K/Q$
+is identified with the $K$-orbit of $V'$ in $\PP(V)$. Moreover
+$(\mathcal T_{G/P})_{V'}=(V')^*\otimes\gg \cdot V', (\mathcal
+T_{K/Q})_{V'}=(V')^*\otimes\kk\cdot V'$, and hence $\mathcal {N}_P$
+is identified with
+$((\mathcal T_{G/P})_{V'}/(\mathcal T_{K/Q})_{V'})=
+(V')^*\otimes(\gg \cdot V'/\kk \cdot V')$.
+Therefore the claim follows from \refth{thGroups2} (which in addition
+yields an infinite-dimensional
+ multiplicity-free $(\gg,\kk)$-module).
+\end{proof}
+
+\begin{corollary}\label{corGroups4}
+Let $K$ be a reductive subgroup in $GL(\tilde V)$ such that  $\tilde V$ is a spherical $K$-module. Then $\kk=\Lie K$ is a bounded subalgebra of $\gl(\tilde V\oplus\CC)$, where $\kk$ is embedded in $\gl(\tilde V\oplus\CC)$ via the composition $\text{Lie}K\subset\gl(\tilde V)\subset\gl(\tilde V\oplus\CC)$.
+\end{corollary}
+\begin{proof}
+One sets $V:=\tilde V\oplus \CC$ and applies \refcor{corGroups3} to the chain $K\subset G:=GL(V)$ with the choice of $V'$ as the fixed one dimensional subspace $\CC\subset V$. Then $(V')^*\otimes(\gg\cdot V'/\kk \cdot V')=\tilde V$ as $\gg\cdot V'=V$, $\kk\cdot V'=V'$.
+\end{proof}
+
+All faithful simple spherical modules of reductive Lie groups are listed
+in \cite{K1} [Thm. 3]. This list provides via \refcor{corGroups4} a
+lot of examples of bounded subalgebras of $\gl(n)$.
+
+Before we proceed to applications of \refcor{corGroups3}, let us
+briefly discuss what is known in the cases when $\kk$ is a symmetric
+or a Cartan subalgebra of $\gg$. In the first case, there is the
+celebrated classification of Harish-Chandra modules, pioneered by
+R. Langlands \cite{L}, see also \cite{V1}, \cite{KV} and the references therein. In addition, bounded Harish-Chandra modules have been studied in detail in many cases, and the corresponding very interesting results are somewhat scattered throughout the literature. It is an important fact that every symmetric subalgebra of a semisimple Lie algebra is bounded, and this follows from a combination of published and unpublished results, communicated to us by D. Vogan, Jr. and G. Zuckerman.
+
+More precisely, if the pair $(\gg,\kk)$ is Hermitian, i. e. if $\kk$ is contained in a proper maximal parabolic subalgebra, any simple highest weight Harish-Chandra module is bounded. This follows from results of W. Schmid, \cite{Sch}. If $\gg$ is simply laced, then (published and unpublished) results of D. Vogan, Jr. imply that any symmetric subalgebra $\kk\subset\gg$ is bounded. In all remaining cases, the boundedness of a symmetric subalgebra follows from the existence of a simple ladder module (this is a special type of multiplicity-free $(\gg,\kk)$-module), or a bounded degenerate principal series module, or a bounded Zuckerman derived functor module. The corresponding results can be found in \cite{V1}, \cite{V3}, \cite{BS}, \cite{GW}, \cite{Str}, and \cite{EPWW}. A systematic study of bounded Harish-Chandra modules would be very desirable but is not part of this paper.
+
+In the case when $\kk=\hh$ is a Cartan subalgebra of $\gg$ the simple bounded $(\gg,\kk)$-modules have played a quite visible role in the literature on weight modules. Here it is easy to check that, if $\gg$ is simple, \refeq{eq42} is satisfied only for $\gg\simeq\sl(m),\sp(n)$. This observation, due to A. Joseph \cite{J}[5.6], easily implies S. Fernando's result that a Cartan subalgebra is a bounded subalgebra of a simple Lie algebra $\gg$ if and only if $\gg\simeq\sl(m),\sp(n)$. Furthermore, the works of S. Fernando, O. Mathieu and others, see \cite{M}, \cite{F} and the references therein, have lead to an explicit description of all simple bounded $(\gg,\hh)$-modules for $\gg=\sl(m),\sp(n)$, see \cite{M} for comprehensive results.
+
+We now proceed to direct applications of \refcor{corGroups3}: we classify all bounded reductive subalgebras $\kk\subset \sl(n)$ which are maximal as subalgebras, and give examples of bounded non-maximal subalgebras of $\sl(n)$.
+
+\begin{theorem}\label{th51}
+Let $\gg=\sl(n)$. A proper reductive in $\gg$ subalgebra $\kk$ which is maximal as a subalgebra of $\gg$ is bounded if and only if it satisfies the inequality \refeq{eq42}, i.e. iff $b_\kk\geq n-1$.
+\end{theorem}
+
+We need the following preparatory statements. For a simple Lie algebra
+$\kk$ we denote by $\omega_{1},...,\omega_{\rk \kk}$ the fundamental
+weights of $\kk$, where for the enumeration of simple roots we follow
+the convention of \cite{OV}. Furthermore, in what follows we denote by
+$V_{\lambda}$ the simple finite-dimensional $\kk$-module with highest
+weight $\lambda$.
+
+\begin{lemma}\label{thA}
+Let $\kk$ be a simple Lie algebra and $V$ be a simple $\kk$ module. Assume that
+\begin{equation}\label{eqdim}
+\dim V -1 \leq \frac{\dim\kk +\rk \kk}{2}.
+\end{equation}
+Then $V$ is trivial, or we have the following possibilities for $\kk$ and $V$:
+\begin{itemize}
+\item[(1)] $\kk = \sl(m)$, $V=V_{\omega_1}$, $V_{\omega_{m-1}}$, $V_{\omega_2}$, $V_{\omega_{m-2}}$, $V_{2\omega_1}$, $V_{2\omega_{m-1}}$,
+\item[(2)] $\kk=\so(m)$ or $\sp(m)$, $V=V_{\omega _{1}}$,
+\item[(3)] $\kk=\so(m)$, $5\leq m\leq 10$ or $m=11$, $V=V_{\omega_{(m-1)/2}}$ for odd $m$, $V=V_{\omega_{m/2}}$ and $V=V_{\omega_{m/2-1}}$ for even $m$,
+\item[(4)] $\kk= G_2$, $V=V_{\omega_1}$,
+\item[(5)] $\kk=F_4$, $V=V_{\omega_1}$,
+\item[(6)] $\kk = E_6$, $V=V_{\omega_1}$ or $V_{\omega_6}$,
+\item[(7)] $\kk=E_7$, $V=V_{\omega_1}$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+We start with the observation that $(\lambda, \alpha_i)=k\in\ZZ_{\geq 0}$ implies $\dim V_\lambda > \dim V_{k\omega_i}$. This follows immediately from Weyl's dimension formula. Therefore it suffices to find all fundamental representations for which the inequality \refeq{eqdim} holds.
+
+Let $\kk=\sl(m)$. The dimensions of the fundamental representations are $\binom{m}{k}$ for $k=1,\dots, m-1$. The condition
+\[
+\binom{m}{k}\leq \frac{m(m+1)}{2}=\half (\dim\kk+\rk \kk)+1
+\]
+is equivalent to \refeq{eqdim} and implies $k=1,2,m-2, m-1$. Obviously, $\dim V_{2\omega_{m-2}}=\dim V_{2\omega_2}$ is greater than $\frac{m(m+1)}{2}$. On the other hand, $\dim V_{2\omega_1}=\dim V_{2\omega_{m-1}}=\frac{m(m+1)}{2}$. Hence (1).
+
+Let $\kk=\so(m)$, $m=2p$. We may assume $m\geq 8$. The inequality \refeq{eqdim} is equivalent to
+\[
+\dim V\leq p^2 +1.
+\]
+The dimensions of the fundamental representations are $\binom {m}{k}$ for $k\leq p-2$ and $2^{p-1}$. It is not hard to check that for an arbitrary $p$ the inequality holds only for $V_{\omega_1}$; moreover it holds for $V_{\omega_{p-1}}$, $V_{\omega_p}$ if $p=4,5,6$.
+
+Let $\kk=\so(m)$, $m=2p+1$. The inequality \refeq{eqdim} is equivalent to
+\[
+\dim V \leq p^2+p+1,
+\]
+and holds for $V_{\omega_1}$ for any $p$, and for $V_{\omega_p}$ if $p\leq 4$.
+
+Let $\kk=\sp(m),m=2p$. Assume $p\geq 3$.
+The inequality is the same as in the previous case, but
+\[
+\dim V_{\omega_k}=\binom{2p}{k}-\binom{2p}{k-2}.
+\]
+One can check that here the inequality holds only for $k=1$. This proves (2) and (3).
+
+The cases (4)-(7) can be checked using the tables in \cite{OV}.
+\end{proof}
+\begin{lemma}\label{le52}
+Let $\kk$ and $V$ be as in \refle{thA}. The following is a complete list of pairs $\kk,V$ such that $V$ has no non-degenerate $\kk$-invariant bilinear form:
+\item[(1)] $\kk=\sl(m)$, $V=V_{\omega_1}$, $V_{\omega_{m-1}}$, $V_{\omega_2}$ $(m\geq 5)$, $V_{\omega_{m-2}}$, $(m\geq 5)$, $V_{2 \omega_1}$, $V_{2\omega_{m-1}}$;
+\item[(2)] $\kk=\so(10)$, $V=V_{\omega_4}$ or $V_{\omega_5}$;
+\item[(3)] $\kk=E_6$, $V=V_{\omega_1}$ or $V_{\omega_6}$.
+\end{lemma}
+\begin{proof}
+If $V$ is not self-dual, the Dynkin diagram of $\kk$ admits an involutive automorphism which does not preserve the highest weight. Moreover, in the case of $\so(2p)$, $p$ must be odd. These conditions reduce the list of representations in \refle{thA} to the list in the Lemma.
+\end{proof}
+
+
+\textbf{{Proof of \refth{th51}}} According to E. Dynkin's
+classification \cite{D} [Ch.1.], if $\kk\subset\gg=\sl(n)$ is a reductive in $\gg$ subalgebra which is maximal as a subalgebra of $\gg$, one of the following alternatives holds:
+\begin{itemize}
+\item[(i)]$\kk$ is simple, the natural $\sl(n)$-module $V$ is a simple $\kk$-module with no non-degenerate invariant bilinear form, or $\kk=\so(n)$ and $\sp(n)$.
+\item[(ii)]$\kk\simeq\sl(r)\oplus\sl(s)$ with $rs=n$, and $V\simeq S_r\otimes S_s$, where $S_r$ and $S_s$ are respectively the natural modules of $\sl(r)$ and $\sl(s)$.
+\end{itemize}
+
+If (i) holds, then $\kk\simeq\so(n),\sp(n)$ or $\kk$ is among the Lie algebras listed in \refle{le52}, where $\gg$ is identified with $\sl(V)$. Consider first the case $\kk\simeq\sp(n)$, $n=2p$. To show that $\kk$ is bounded in $\gg$, we apply \refth{thGroups2} with $G/P$ being the Grassmannian of p-dimensional subspaces in $\CC^{n}$ and $K/Q$ being the Grassmannian of Lagrangian subspaces in $\CC^{n}$. Then $Q_0\simeq GL(p)$ and $\mathcal N_P$ is the exterior square of the natural representation. The $Q_0$-module $\mathcal N_P$ is spherical, \cite{K1}.
+
+We now consider the remaining cases of (i), which can all be settled using \refcor{corGroups3}. Note that, if $\kk$ is embedded into $\sl(n)$ via a simple $\kk$-module or via its dual, the corresponding embeddings are conjugate by an automorphism of $\sl(n)$,
+hence it suffices to consider only one such embedding. The list of
+\refle{le52} reduces therefore to the following cases, in which all
+$Q_0$-modules are spherical, \cite{K1}:
+
+-$\kk=\sl(k)$, $V=V_{\omega_2}$, $Q_0\simeq SL(2)\times GL(k-2)$ and
+$(V')^*\otimes(V/\kk\cdot V')$ is isomorphic to the tensor product
+of the exterior square of the natural representation with the determinant representation of $GL(k-2)$, the
+action of $SL(2)$ being trivial;
+
+-$\kk=\sl(k)$, $V=V_{2\omega_1}$, $Q_0\simeq GL(k-1)$ and
+$(V')^*\otimes(V/\kk\cdot V')$ is isomorphic to the tensor product
+of the symmetric square of the natural representation with the determinant representation of $GL(k-1)$;
+
+-$\kk=\so(10)$, $V=V_{\omega_4}$, $Q_0\simeq GL(5)$ and
+$(V')^*\otimes(V/\kk\cdot V')$ is isomorphic to the tensor product of
+the natural representation of $GL(5)$ with the
+determinant representation of $GL(5)$; the case $V=V_{\omega_5}$ can
+be reduced to the case $V=V_{\omega_4}$ by dualization; 
+
+-$\kk=E_6$, $V=V_{\omega_1}$, then
+$Q_0\simeq SO(10)\times \CC^*$ and
+$(V')^*\otimes(V/\kk\cdot V')$ is isomorphic to the natural 10-dimensional representation of $SO(10)$, and the action of the center
+of $Q_0$ is not trivial.
+
+The only remaining case in (i) is when $\kk=\so(n)$, $Q_0\simeq SO(n-2)\times\CC^*$ and $(V')^*\otimes(V/\kk\cdot V')$ is a one-dimensional non-trivial, hence spherical, $Q_0$-module.
+
+If (ii) holds, then $\kk\simeq\sl(r)\oplus\sl(s)$ for some $rs$ with
+$rs=n$, and we claim that in this case all pairs $r,s$ with $rs=n$
+yield a bounded subalgebra $\kk$. To see this, fix $V'$ of the form
+$S'_r\otimes S'_s$ for some 1-dimensional spaces $S_r'\subset S_r,
+S'_s\subset S_s$.
+Then $Q_0$ is isomorphic to $GL(S_r/S_r')\times GL(S_s/S_s')$ and
+$\gg\cdot V'/\kk\cdot V'=V/\kk\cdot V'\simeq (S_r/S_r')\otimes(S_s/S_s')$. Since the action of $GL(r-1)\times GL(s-1)$ on $V'$ is given by
+ the inverse of the determinant, $(V')^*\otimes (V/\kk\cdot V')$ is isomorphic as a
+ $GL(r-1)\times GL(s-1)$-module to $S_{r-1}\boxtimes S_{s-1}$
+ twisted by the determinant. This representation is spherical, \cite {K1}.
+\qed
+
+We give now three more examples of bounded subalgebras of $\sl(n)$
+which are not maximal in the class of reductive subalgebras of $\sl(n)$.
+
+(i) Let $\kk\simeq \sl(k+1)$, $k\geq 2$. The $\kk$-module
+$V:=V_{\omega_1}\oplus V_{\omega_k}$ defines an embedding $\kk\subset \gg=\sl(V)$, and \refcor{corGroups3} implies that $\kk$ is a bounded
+subalgebra of $\gg$. Indeed, choose $V'$ to be a 1-dimensional
+subspace $V'\subset V_{\omega_1}$ and note that the conditions of
+\refcor{corGroups3} are satisfied. In this case $Q_0\simeq GL(k)$ and
+$(V')^*\otimes(V/\kk\cdot V')$ is isomorphic to 
+$\Lambda^{k}(S_{k})\otimes  (\Lambda^{k}(S_{k})\oplus S_{k}^*)$, $S_k$ being the natural $Q_0$-module. A straightforward calculation shows that this representation is spherical.
+
+(ii) Consider the embedding $\kk=\so(7)\subset\gg=\sl(8)$, where the
+ natural $\sl(8)$-module restricts to the 8-dimensional spinor
+ representation of $\so(7)$. \refcor{corGroups3} implies that $\kk$ is
+ a bounded subalgebra of $\gg$. Here $V=\CC^8$, $G=SL(V)$, $K=Spin(7)$
+ and $V'$ is a $B_K$-stable line, where $B_K$ is a fixed Borel
+ subgroup of $K$. Then $\gg\cdot V'=V$ and $\dim \kk\cdot V'=7$, hence
+ $\dim (\gg\cdot V'/\kk\cdot V')=1$. Since $Q_0$ acts non-trivially on
+ $(V')^*\otimes(V/\kk\cdot V')$, the latter $Q_0$-module is spherical.
+
+(iii) Let $\kk=G_2\subset\gg=\sl(7)$. Then again, \refcor{corGroups3}
+ implies that $\kk$ is a bounded subalgebra. The argument is similar
+ to the argument in
+(ii) as $\dim \gg\cdot V/\kk\cdot V'=1$.
+
+We conclude the paper by the following conjecture which is supported by all the empirical evidence available to us.
+\begin{conjecture}\label{conj}
+\textit{Let $\kk\subset\gg$ be a reductive in $\gg$ subalgebra. Then $\kk$ is bounded if and only if there exists a simple infinite-dimensional multiplicity-free $(\gg,\kk)$-module.}
+\end{conjecture}
+If $\gg=\sl(n)$ and $\kk$ is a maximal proper subalgebra, 
+then the claim of the conjecture follows from the proof of
+Theorem \ref{th51} (which is in turn based on Corollary \ref{corGroups3} and
+Corollary \ref{corGroups4}). 
+
+Note added in proof. While the present paper has been under review, A. Petukhov
+has posted on the arXiv a proof of the above conjecture for  $\gg=\sl(n)$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{20}
+\bibitem[AL]{AL} A. Amitsur, J. Levitzki, Minimal identities for algebras, Proc. AMS \textbf{1} (1950), 449--463.
+\bibitem[BB]{BB} A. Beilinson, J. Bernstein, Localisation de $\gg$-modules, C. R. Acad. Sci., Paris, S´er. I Math. \textbf{292} (1981), no. 1, 15--18.
+\bibitem[BG]{BG} J. Bernstein, S. Gelfand, Tensor products of finite and infinite-dimensional representations of semi-simple Lie algebras, Compositio Math. \textbf{41} (1980), 245--285.
+\bibitem[BJ]{BJ}  W. Borho, J. C. Jantzen, Ueber primitive Ideale in
+  der Einhuellenden einer halbeinfacher Lie-Algebra. Invent. Math.
+39 (1977), 1--53. 
+\bibitem[BS]{BS} M. W. Baldoni Silva, D. Barbasch, The unitary spectrum of
+  real rank one groups, Invent. Math. \textbf{72}, (1983) 27--55.
+\bibitem[D]{D} E. B. Dynkin, The maximal subgroups of the classical groups, Trudy Moscov. Mat. Obsh. \textbf{1} (1952), 39-166. English translation in Amer. Math. Soc. Transl. Series \textbf{2}, Vol.6 (1957), 245--378.
+\bibitem[Dix]{Dix} J. Dixmier, Enveloping algebras, North-Nolland Math. Library, 14, North Holland, Amsterdam, 1977.
+\bibitem[EPWW]{EPWW} T. J. Enright, R. Parthasarathy, N. Wallach, J. Wolf, Unitary derived functor modules with small spectrum, Acta Math. \textbf{154} (2006), 105--136.
+\bibitem[F]{F} S. L. Fernando, Lie algebra modules with finite-dimensional weight spaces. I, Trans. Amer. Math. Soc. \textbf{322} (1990), 757--781.
+\bibitem[Fa]{FA} C. Faith, Algebra II, Ring Theory, Grundlehren der Matematischen Wissenschaften, Springer-Verlag, 1976.
+\bibitem[GN]{GN} I. M. Gelfand, M. A. Naimark, Unitary representations of the Lorentz group, Izvestiya Akad. Nauk SSSR, Ser. Mat. \textbf{11} (1947), 411--504.
+\bibitem[GQS]{GQS} V. Guillemin, D. Quillen, S. Sternberg, The integrability of characteristics, Comm. Pure Appl. Math. 23 (1970), 39-77.
+%\bibitem[GP]{GP} I. M. Gelfand, V. A. Ponomarev, The classification of
+% indecomposable infinitesimal representations of the Lorentz group,
+% Dokl. Acad. Nauk USSR 176 (1967), 502-505.
+\bibitem[GW]{GW} B. Gross, N. Wallach, A distinguished family of
+  unitary representations for the exceptional groups of real rank
+  4. Lie theory and geometry, Progr. Math. 123, Birkhauser
+  Boston, Boston, MA, 1994, pp. 289-304.
+\bibitem[HC]{HC} Harish-Chandra, Infinite irreducible representations of the Lorentz group, Proc. Roy. Soc. London, Ser. A \textbf{189} (1947), 372--401.
+%\bibitem[H]{H} A. van den Hombergh, Harish-Chandra modules and
+ % representations of step algebras, Thesis Nijmegen University (1976).
+\bibitem[J1]{J1} A. Joseph, On the associated
+variety of a primitive ideal. J. Algebra 93 (1985), no. 2, 509-523.
+\bibitem[J]{J} A. Joseph, Some ring theoretic techniques and open
+  problems in enveloping algebras, Noncommutative Rings, (Berkeley,
+  Calif., 1989),  MSRI Publ. 24, Springer Verlag, New York, 1992.
+\bibitem[K]{K} M. Kashiwara, B-functions and holonomic systems. Rationality of roots of B-functions. Invent. Math. \textbf{38} (1976/77), 33--53.
+\bibitem[K1]{K1} V. G. Kac, Some remarks on nilpotent of orbits, J. Algebra \textbf{64} (1980), 190--213.
+\bibitem[K2]{K2} V. G. Kac, Constructing groups associated to infinite-dimensional Lie algebras, In: Infinite-dimensional groups with applications (Berkeley, Calif., 1984), MSRI Publ. 4, Springer-Verlag, New York, 1985.
+\bibitem[KL]{KL} G.R. Krause, T.H. Lenagan, Growth of algebras and Gelfand-Kirillov dimension, Pitman, Boston-London-Melbourne, 1985.
+\bibitem[KV]{KV} A. W. Knapp, D. Vogan, Jr., Cohomological induction and unitary representations, Princeton University Press, Princeton, NJ, 1995.
+\bibitem[L]{L} R.P. Langlands,
+On the classification of irreducible representations of real algebraic 
+groups, mimeographed
+notes, Institute for Advanced Study (1973).
+\bibitem[M]{M} O. Mathieu, Classification of irreducible weight
+  modules, Ann. Fourier \textbf{50} (2000),  537--592.
+\bibitem[OV]{OV} A. Onishchik, E. Vinberg, Lie groups and algebraic
+  groups. Springer series in Soviet mathematics. Springer-Verlag,
+  Berlin, 1990.
+\bibitem[PS1]{PS1} I. Penkov, V. Serganova, Generalized Harish-Chandra modules, Moscow Math. J. \textbf{2} (2002), 753--767.
+\bibitem[PS2]{PS2} I. Penkov, V. Serganova, Bounded simple $\left(\mathfrak g, \sl(2)\right)$-modules for $\rk\mathfrak g =2$, Journ. Lie Theory 20 (2010), 581-615.
+\bibitem[PSZ]{PSZ} I. Penkov, V. Serganova, G. Zuckerman, On the existence of \gkm s of finite type, Duke Math. J. \textbf{125} (2004), 329-349.
+\bibitem[PZ1]{PZ1} I. Penkov, G. Zuckerman, Generalized Harish-Chandra modules: a new direction of the structure theory of representations, Acta Applic. Math. \textbf{81} (2004), 311--326.
+\bibitem[PZ2]{PZ2} I. Penkov, G. Zuckerman, Generalized Harish-Chandra modules with generic minimal $\kk$-type, Asian J. of Math. \textbf{8} (2004), 795-812.
+\bibitem[PZ3]{PZ3} I. Penkov, G. Zuckerman, A construction of generalized Harish-Chandra  modules with arbitrary minimal $\kk$-type, Canad. Math. Bull. 50 (2007), 603-609.
+\bibitem[Sch]{Sch}W. Schmid, Die Randwerte holomorpher Funktionen auf
+  hermitesch symmetrischen Raeumen (German),
+  Invent. Math. \textbf{116}(1969/1970), 61--80.
+\bibitem[Str]{Str} R.S. Strichartz, Harmonic analysis on  hyperboloids,
+J. Fuct. Analysis \textbf{12}(1973), 341--383.
+\bibitem[V1]{V1} D. Vogan, Jr., Singular unitary representations. In: Lecture Notes in Mathematics 880, Springer-Verlag, 1981.
+\bibitem[V3]{V3} D. Vogan, Jr., The unitary dual of
+  $G_2$, Invent. Math. \textbf{116} (1994), 677--791.
+\bibitem[VK]{VK} E.B. Vinberg, B.N. Kimelfield, Homogeneous domains on flag manifolds and spherical subgroups of semi-simple Lie groups, Func. Anal. i Pril. \textbf{12} (1978), 12--19.
+\bibitem[Z]{Z} G. Zuckerman, Tensor product of finite- and infinite-dimensional representations of semisimple Lie
+  groups, Ann. Math. \textbf{106}(1977), 295--308.
+
+
+\end{thebibliography}
+
+\end{document}

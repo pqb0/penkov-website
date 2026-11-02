@@ -1,0 +1,155 @@
+
+
+<?php
+
+# IMPORTANT VARIABLES, DIFFERENT FOR EACH PAGE
+	$ptr		= "./"; 		# pointer to the root directory
+	$pagetitle 	= "Welcome to <page name here>"; # title displayed below the banner
+	$menu_level	= "home";		# name of the menu position to be marked
+	$submenu_level	= "";			# name of submenu to be marked, "" (empty string) for item from main menu
+
+# include html formatting, banner and left menu
+	include($ptr."include/latin-header.inc");
+     include($ptr."include/latin-menu.inc");
+
+?>
+
+<table border="0" width="100%">
+<tr>
+
+	<td width="80%" valign="top" style="padding-top: 0px;padding-left: 200px;padding-right: 200px;">
+ 
+
+	
+	
+	<br>
+	
+	<table border=0 cellpadding=0 cellspacing=0 width="100%"><tr><td valign=middle>
+
+
+<br>
+<br>
+
+<font size=2 face="Arial" color="#000000" style="font-size:10pt">
+<b>Papers of I. Penkov available in electronic format:</b>
+<P>
+<ul>
+<li>
+30. Generalized Harish-Chandra modules, Moscow Math.
+Journal 2 (2002), 753-767 (with V. Serganova).
+<a href="./papers/generalized_hc_penkov_serganova.pdf">download</a>
+</li>
+<li>
+34. Finite rank vector bundles on inductive limits of grassmannians, IMRN 2003, no. 34, 1871-1887 (with J. Donin).
+<a href="./papers/ind_limit_grassman_donin_penkov.pdf">download</a>
+</li>
+<li>
+35. Classically semisimple locally finite Lie superalgebras, Forum Math. 16 (2004), 431-446.
+<a href="./papers/clas_semisimple_penkov.pdf">download</a>
+</li>
+<li>
+36. On the existence of (g,k)-modules of finite type, Duke Math. Journal 125 (2004), 329-349 (with V. Serganova and G. Zuckerman).
+<a href="./papers/PSZ.pdf">download</a>
+</li>
+<li>
+39. Ind-varieties of generalized flags as homogeneous spaces for classical ind-groups, IMRN 2004, no. 55, 2935-2953 (with I. Dimitrov).
+<a href="./papers/Ind_Varieties_dimitrov_penkov.pdf">download</a>
+</li>
+<LI>
+40. Borel subalgebras of <IMG WIDTH="54" HEIGHT="37" ALIGN="MIDDLE" BORDER="0" SRC="img84.png"
+ALT="$gl(\infty)$">, Resenhas IME-USP 6 (2004),111-119 (with I. Dimitrov).
+<a href="./papers/borel_subalg_dimitrov_penkov.pdf">download</a>
+</LI>
+<li>
+41. Generalized Harish-Chandra modules with generic minimal k-type, Asian Journal of Mathematics 8(2004), 795-812 (with G. Zuckerman)
+<a href="./papers/Penkov_Zuckerman_Gen_HCM.pdf">download</a>
+</li>
+<li>
+42. A construction of generalized Harish-Chandra modules with arbitrary minimal k-type, Canad. Math. Bull. 50 (2007), 603-609 (with G. Zuckerman).
+<a href="./papers/penkov_zuckerman_canbul.pdf">download</a>
+</li>
+<li>
+43. Cartan subalgebras of root-reductive Lie algebras, Journ. of Algebra, 308(2007), 583-611 (with E. Dan-Cohen and N. Snyder).
+<a href="./papers/dps.pdf">download</a>
+</li>
+<li>
+44. A construction of generalized Harish-Chandra modules for locally reductive Lie algebras, Transformation Groups 13 (2008), 799-817  (with G. Zuckerman).
+<a href="./papers/Construction_Generalized_HC_modules.pdf">download</a>
+</li>
+
+<li>
+45. Locally semisimple and maximal subalgebras of the finitary Lie algebras gl(\infty), sl(\infty), so(\infty), and sp(\infty), Journal of Algebra 322 (2009), 2069–2081 (with I. Dimitrov)
+<a href="./papers/Locally_semisimple.pdf">download</a>
+</li>
+
+<li>
+46. Parabolic and Levi subalgebras of finitary Lie algebras, IMRN, International Mathematics Research Notices, Article ID rnp169,
+doi:10.1093/imrn/rnp169 (with E. Dan-Cohen) <a href="./papers/finitary040209.pdf">download</a>
+</li>
+
+<li>
+47. Parabolic Subgroups of Real Direct Limit Lie Groups, Contemporary Mathematics 499, AMS 2009 (with E. Dan-Cohen and J. A. Wolf) <a href="./papers/realparabolics20081231.pdf">download</a>
+</li>
+
+<li>
+48. Rank 2 vector bundles on ind-grassmannians, Manin Festschrift,in Progress in Mathematics 270, Birkhaeuser Boston, 2009, pp. 555-572 (with A. S. Tikhomirov).
+<a href="./papers/triviality_of_vbdls_Springer.pdf">download</a>
+</li>
+
+<li>
+49. Bounded simple (g; sl(2))-modules for rkg = 2, Journal of Lie Theory 20 (2010), 581-615 (with V. Serganova).   <a href="./papers/rk2.pdf"> download</a>
+</li>
+
+<li>
+50. Tensor representations of infinite-dimensional root-reductive Lie algebras, in Developments and Trends in Infinite-Dimensional Lie Theory, Progress in Mathematics 288, Birkh\"auser, 2011, pp. 127-150 (with K. Styrkas).
+<a href="./papers/tensor_arxiv_non_springer_version.pdf">download</a>
+</li>
+
+<li>
+51. On bounded generalized Harish-Chandra modules, Annales de l'Institut Fourier, <b>62</b>(2012), 477-496  (with V. Serganova).
+<a href="./papers/bounded1.pdf">download</a>
+</li>
+
+<li>
+52. Triviality of vector bundles on twisted ind-Grassmannians, Mat. Sbornik 202:1 (2011) 1-39 (with A. S. Tikhomirov). <a href="./papers/twisted_vbdls.pdf">download</a>
+</li>
+
+<li>
+53. A Bott-Borel Weil theorem for diagonal ind-groups, Canadian Journal of Mathematics, doi:10.4153/CJM-2011-032-6 (with I. Dimitrov). <a href="./papers/DP_Diagonal.pdf"> download</a>
+
+</li>
+
+<li>
+54. Categories of integrable  $sl(\infty)$-, $o(\infty)$-, $sp(\infty)$-modules, in "Representation Theory and Mathematical Physics", Contemporary Mathematics 557, AMS 2011, 335-357 (with V. Serganova). <a href="./papers/serganova_last.pdf"> download</a>
+</li>
+
+<li>
+55. Levi components of parabolic subalgebras of finitary Lie algebras, arXiv:1008.0311v1, in "Representation Theory and Mathematical Physics", Contemporary Mathematics 557, AMS 2011, 129-149 (with Elizabeth Dan-Cohen). <a href="./papers/Dan-Cohen--Penkov.pdf"> download</a>
+</li>
+
+<li>
+56. A Koszul category of representations of finitary Lie algebras, preprint 2011, arXiv:1105.3407 (with Elizabeth Dan-Cohen and Vera Serganova). <a href="./papers/koszulity-16may.pdf"> download</a>
+</li>
+
+<li>
+57. On the structure of the fundamental series of generalized Harish-Chandra modules, Asian Journal of Mathematics 16 (2012), p.489-514 (with Gregg Zuckerman). <a href="./papers/gk_mod.pdf"> download</a>
+</li>
+
+<li>
+58. On Ideals in the enveloping algebra of a locally simple Lie algebra, preprint 2012, arXiv:1210.0466 (with Alexey Petukhov). <a href="./papers/USL2014.pdf"> download </a>
+</li>
+
+<li>
+59. Linear Ind-Grassmannians, Pure and Applied Math. Quarterly (to appear), arXiv:1310.8054 (with Alexander Tikhomirov). <a href="./papers/Ind-grassmannians.pdf">download</a>
+</li>
+
+<li>
+60. Algebraic methods in the theory of generalized Harish-Chandra modules, preprint 2013, arXiv:1310.8058 (with Gregg Zuckerman). <a href="./papers/template_gen_hc_r.pdf"> download</a>
+</li>
+
+<li>
+61. Tensor representations of Mackey Lie algebras and their dense subalgebras, preprint 2013, arXiv:1311.5217 (with Vera Serganova). <a href="./papers/template_Mackey_Lie.pdf"> download</a>
+</li>
+
+<li>
+62. On the Barth
