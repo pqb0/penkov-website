@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+*.sql
+*.sqlite
+*.sqlite3
+*.bak
+*.log
+*.pem
+*.key
+vendor/
+node_modules/

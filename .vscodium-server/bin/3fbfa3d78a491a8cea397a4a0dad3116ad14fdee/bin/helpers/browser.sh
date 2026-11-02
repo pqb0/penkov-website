@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+#
+# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+ROOT="$(dirname "$(dirname "$(dirname "$(readlink -f "$0")")")")"
+
+APP_NAME="codium"
+VERSION="1.96.4"
+COMMIT="3fbfa3d78a491a8cea397a4a0dad3116ad14fdee"
+EXEC_NAME="codium"
+CLI_SCRIPT="$ROOT/out/server-cli.js"
+"$ROOT/node" "$CLI_SCRIPT" "$APP_NAME" "$VERSION" "$COMMIT" "$EXEC_NAME" "--openExternal" "$@"
